@@ -6,8 +6,10 @@
    [CLHS-5]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="type-class-dict.html"><LINK
 REL="NEXT"
 TITLE="Iteration
    [CLHS-6]"
-HREF="iteration.html"></HEAD
+HREF="iteration.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="type-class-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="iteration.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,33 +99,47 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="data"
->Data and Control Flow
+NAME="data">Chapter 5. Data and Control Flow
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-5.html"
 TARGET="_top"
 >[CLHS-5]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="flow-dict"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>5.1. <A
+HREF="data.html#flow-dict"
 >The Data and Control Flow Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_data__w_dictionary.html"
 TARGET="_top"
 >[CLHS-5.3]</A
 ></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="flow-dict">5.1. The Data and Control Flow Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_data__w_dictionary.html"
+TARGET="_top"
+>[CLHS-5.3]</A
 ></H1
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_destructuring-bind.html"
 TARGET="_top"
 ><TT
@@ -118,13 +147,11 @@ CLASS="function"
 >DESTRUCTURING-BIND</TT
 ></A
 >. </B
-></B
 >does not perform full error checking.</P
 ></DIV
 ><DIV
 CLASS="formalpara"
 ><P
-><B
 ><B
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_prog1cm_prog2.html"
@@ -213,7 +240,6 @@ CLASS="function"
 >MULTIPLE-VALUE-SETQ</TT
 ></A
 >. </B
-></B
 >are implemented as special operators and, as
  such, are rather efficient.</P
 ></DIV
@@ -222,13 +248,12 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="fcase"
->Macro <TT
+NAME="fcase">5.1.1. Macro <TT
 CLASS="function"
 >EXT:FCASE</TT
-></A
 ></H2
 ><P
+ALIGN="justify"
 >This macro allows specifying the test for <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_casecm_ccasecm_ecase.html"
 TARGET="_top"
@@ -281,17 +306,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="eq"
->Function <A
+NAME="eq">5.1.2. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >EQ</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
 TARGET="_top"
@@ -353,8 +377,9 @@ CLASS="command"
 >
  implementations.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(let ((x y)) (eq x x))</TT
 > always
  returns <A
@@ -376,19 +401,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="sym-fun"
->Function <A
+NAME="sym-fun">5.1.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >SYMBOL-FUNCTION</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -451,17 +475,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="setf"
->Macro <A
+NAME="setf">5.1.4. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >SETF</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >Additional places:
 <P
 ></P
@@ -479,8 +502,9 @@ CLASS="function"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -510,7 +534,7 @@ CLASS="replaceable"
 >
     and
    <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -540,7 +564,7 @@ CLASS="replaceable"
 >
    are equivalent to
    <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -573,8 +597,9 @@ CLASS="function"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >&#13;   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -620,8 +645,9 @@ CLASS="function"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >&#13;   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -672,8 +698,9 @@ CLASS="function"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >&#13;   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -726,8 +753,9 @@ CLASS="function"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >&#13;   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -764,8 +792,9 @@ CLASS="function"
 >:</DT
 ><DD
 ><P
+ALIGN="justify"
 >&#13;   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -805,8 +834,9 @@ CLASS="function"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >&#13;   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -836,7 +866,7 @@ CLASS="replaceable"
 >
     is equivalent to
    <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_values-list.html"
 TARGET="_top"
@@ -877,6 +907,7 @@ CLASS="replaceable"
 ></DIV
 ></P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -897,8 +928,9 @@ HREF="lalist.html"
 >s are supported, but the
  corresponding keywords must appear literally in the program text.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_get-setf-expansion.html"
 TARGET="_top"
@@ -926,7 +958,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, <TT
-CLASS="literal"
+CLASS="sexp"
 >(EXT:GET-SETF-METHOD <TT
 CLASS="replaceable"
 ><I
@@ -947,7 +979,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, and <TT
-CLASS="literal"
+CLASS="sexp"
 >(EXT:GET-SETF-METHOD-MULTIPLE-VALUE <TT
 CLASS="replaceable"
 ><I
@@ -1015,11 +1047,13 @@ CLASS="function"
 >.  If this is
  done, even local macros will be interpreted as places correctly.</P
 ><P
+ALIGN="justify"
 >Attempts to modify read-only data will signal an error.  Program
  text and quoted constants loaded from files are considered read-only
  data.  This check is only performed for strings, not for conses, other
  kinds of arrays, and user-defined data types.</P
 ><P
+ALIGN="justify"
 >See also the <A
 HREF="macros3.html#letf"
 ><TT
@@ -1039,19 +1073,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="func"
->Special Operator <A
+NAME="func">5.1.5. Special Operator <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_function.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >FUNCTION</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_function.html"
 TARGET="_top"
@@ -1083,8 +1116,9 @@ CLASS="function"
 >, if it
  exists, otherwise the global function definition.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_special-operator-p.html"
 TARGET="_top"
@@ -1121,7 +1155,7 @@ CLASS="constant"
 >T</TT
 ></A
 >, then <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
 TARGET="_top"
@@ -1143,17 +1177,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="def-sym-mac"
->Macro <A
+NAME="def-sym-mac">5.1.6. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >DEFINE-SYMBOL-MACRO</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
@@ -1186,7 +1219,7 @@ CLASS="function"
 ></A
 >, which have local scope):
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
@@ -1208,12 +1241,13 @@ CLASS="replaceable"
 >)</TT
 >.</P
 ><P
->The function <I
+ALIGN="justify"
+>The function <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >EXT:SYMBOL-MACRO-EXPAND</TT
-></I
+></B
 >
  tests for a <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
@@ -1236,7 +1270,7 @@ CLASS="classname"
 >SYMBOL-MACRO</TT
 ></A
 >, <TT
-CLASS="literal"
+CLASS="sexp"
 >(EXT:SYMBOL-MACRO-EXPAND
  <TT
 CLASS="replaceable"
@@ -1261,6 +1295,7 @@ CLASS="constant"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >Calling <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_boundp.html"
 TARGET="_top"
@@ -1285,6 +1320,7 @@ CLASS="constant"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >Calling <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-value.html"
 TARGET="_top"
@@ -1324,6 +1360,7 @@ CLASS="function"
 ></A
 > on the expansion.</P
 ><P
+ALIGN="justify"
 >Calling <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_makunbound.html"
 TARGET="_top"
@@ -1353,22 +1390,19 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="lambda"
->Macro <A
+NAME="lambda">5.1.7. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >LAMBDA</TT
 ></A
-></A
 ></H2
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Constant <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_lambda_ist-keywords.html"
 TARGET="_top"
 ><TT
@@ -1376,9 +1410,8 @@ CLASS="constant"
 >LAMBDA-LIST-KEYWORDS</TT
 ></A
 >. </B
-></B
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -1443,17 +1476,12 @@ CLASS="literal"
 ><DIV
 CLASS="table"
 ><A
-NAME="values-limits-table"
-></A
-><P
+NAME="values-limits-table"><P
 ><B
->Table 1. Platform dependent</B
+>Table 5-1. Function call limits (platform dependent)</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1566,8 +1594,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="defun"
->Macros <A
+NAME="defun">5.1.8. Macros <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_defun.html"
 TARGET="_top"
 ><TT
@@ -1581,9 +1608,9 @@ TARGET="_top"
 CLASS="function"
 >DEFMACRO</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_defun.html"
 TARGET="_top"
@@ -1599,13 +1626,16 @@ CLASS="function"
 >DEFMACRO</TT
 ></A
 > are allowed in non-toplevel positions. As
- an example, consider the old ([<SPAN
+ an example, consider the old (<A
+HREF="references.html#CLtL1"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLtL1"
 >CLtL1</A
 ></SPAN
->]) definition of <A
+>]</A
+>) definition of <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_gensym.html"
 TARGET="_top"
 ><TT
@@ -1649,6 +1679,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1660,7 +1691,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="type-class-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1668,6 +1700,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1676,7 +1709,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="iteration.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1696,6 +1730,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1711,6 +1746,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -5,8 +5,10 @@
 >Deviations from ANSI CL standard</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="classes.html"><LINK
 REL="NEXT"
 TITLE="Standard Metaclasses
   [CLHS-4.3.1.1]"
-HREF="metaclasses.html"></HEAD
+HREF="metaclasses.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,13 +73,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="classes.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Types and Classes
+>Chapter 4. Types and Classes
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
 TARGET="_top"
@@ -78,7 +92,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="metaclasses.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -90,8 +105,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="clos-diff"
->Deviations from [<SPAN
+NAME="clos-diff">4.3. Deviations from <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
@@ -103,8 +119,7 @@ HREF="references.html#ansi-cl"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
 TARGET="_top"
 ><TT
@@ -112,7 +127,6 @@ CLASS="function"
 >DEFCLASS</TT
 ></A
 >. </B
-></B
 >It <I
 CLASS="emphasis"
 >is</I
@@ -128,6 +142,7 @@ CLASS="function"
  </P
 ></DIV
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
 TARGET="_top"
@@ -171,6 +186,7 @@ CLASS="function"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >When <A
 HREF="http://www.lisp.org/HyperSpec/Body/locfun_call-next-method.html"
 TARGET="_top"
@@ -183,12 +199,13 @@ CLASS="function"
  original arguments is enforced by the implementation only in
  interpreted code.</P
 ><P
->There is a generic function <I
+ALIGN="justify"
+>There is a generic function <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >CLOS:NO-PRIMARY-METHOD</TT
-></I
+></B
 >
  (similar to <A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_no-_cable-method.html"
@@ -208,19 +225,20 @@ CLASS="classname"
 > is invoked and
  no primary method on that generic function is applicable.</P
 ><P
-><I
+ALIGN="justify"
+><B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >clos:generic-flet</TT
-></I
+></B
 > and
- <I
+ <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >clos:generic-labels</TT
-></I
+></B
 > are
  implemented as macros, not as special operators.  They are not imported
  into the packages <A
@@ -237,13 +255,16 @@ TARGET="_top"
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
 ></A
-> because of the [<SPAN
+> because of the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] issue
+>]</A
+> issue
  <A
 HREF="http://www.lisp.org/HyperSpec/Issues/iss181.html"
 TARGET="_top"
@@ -251,6 +272,7 @@ TARGET="_top"
 >.
  </P
 ><P
+ALIGN="justify"
 >The function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_ensure-ge_ric-function.html"
 TARGET="_top"
@@ -260,6 +282,7 @@ CLASS="function"
 ></A
 > is not implemented.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_add-method.html"
 TARGET="_top"
@@ -270,6 +293,7 @@ CLASS="function"
 > can put methods into other generic functions
  than the one the method came from.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_print-object.html"
 TARGET="_top"
@@ -310,6 +334,7 @@ CLASS="classname"
 ></A
 >s, due to the performance concerns.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
 TARGET="_top"
@@ -317,19 +342,23 @@ TARGET="_top"
 CLASS="function"
 >DOCUMENTATION</TT
 ></A
-> still has the [<SPAN
+> still has the <A
+HREF="references.html#CLtL1"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLtL1"
 >CLtL1</A
 ></SPAN
->] implementation.</P
+>]</A
+> implementation.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -341,7 +370,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="classes.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -349,6 +379,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -357,7 +388,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="metaclasses.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -377,6 +409,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="types-classes.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -392,6 +425,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

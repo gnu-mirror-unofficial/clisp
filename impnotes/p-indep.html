@@ -5,8 +5,10 @@
 >Extensions-1: Platform independent Extensions</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions"
 HREF="extensions.html"><LINK
 REL="NEXT"
 TITLE="Extensions-1.2. Quitting CLISP"
-HREF="quit.html"></HEAD
+HREF="quit.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,7 +70,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="extensions.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -70,7 +84,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="quit.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -81,24 +96,99 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="p-indep"
->Extensions-1: Platform independent Extensions</A
-></H1
+NAME="p-indep">Chapter 29. Extensions-1: Platform independent Extensions</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>29.1. <A
+HREF="p-indep.html#image"
+>Extensions-1.1. Saving an Image</A
+></DT
+><DT
+>29.2. <A
+HREF="quit.html"
+>Extensions-1.2. Quitting <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>29.3. <A
+HREF="i18n.html"
+>Extensions-1.3. Internationalization</A
+></DT
+><DT
+>29.4. <A
+HREF="encoding.html"
+>Extensions-1.4. Encodings</A
+></DT
+><DT
+>29.5. <A
+HREF="clos-stream.html"
+>Extensions-1.5. Defining new kinds of Streams</A
+></DT
+><DT
+>29.6. <A
+HREF="weak.html"
+>Extensions-1.6. Weak Pointers</A
+></DT
+><DT
+>29.7. <A
+HREF="final.html"
+>Extensions-1.7. Finalization</A
+></DT
+><DT
+>29.8. <A
+HREF="prompt.html"
+>Extensions-1.8. The Prompt</A
+></DT
+><DT
+>29.9. <A
+HREF="ansi.html"
+>Extensions-1.9. Maximum ANSI CL compliance</A
+></DT
+><DT
+>29.10. <A
+HREF="macros3.html"
+>Extensions-1.10. Additional Fancy Macros</A
+></DT
+><DT
+>29.11. <A
+HREF="customize.html"
+>Extensions-1.11. Customizing <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> behavior.</A
+></DT
+></DL
+></DIV
 ><DIV
 CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="image"
->Extensions-1.1. Saving an Image</A
-></H1
+NAME="image">29.1. Extensions-1.1. Saving an Image</H1
 ><P
+ALIGN="justify"
 >The function
   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->ext:saveinitmem</TT
+>EXT:SAVEINITMEM</TT
 >
     <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
@@ -120,7 +210,7 @@ TARGET="_top"
 CLASS="literal"
 >&#38;KEY</TT
 ></A
-> :quiet :init-function :locked-packages)</TT
+> :QUIET :INIT-FUNCTION :LOCKED-PACKAGES :START-PACKAGE)</TT
 >
 saves the running <A
 HREF="http://clisp.cons.org"
@@ -138,11 +228,30 @@ CLASS="replaceable"
 extension <TT
 CLASS="filename"
 >#P".mem"</TT
-> is recommended.
-If the <TT
+> is recommended (when <TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+> does not have an
+extension, <TT
+CLASS="filename"
+>#P".mem"</TT
+> extension is automatically added).
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
 CLASS="constant"
->:quiet</TT
-> argument is not <A
+>:QUIET</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>If this argument is not <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -150,40 +259,116 @@ CLASS="constant"
 >NIL</TT
 ></A
 >, the startup
-banner and the good-bye message will be suppressed.
-The <TT
+   banner and the good-bye message will be suppressed.
+   </P
+></DD
+><DT
+><TT
 CLASS="constant"
->:init-function</TT
-> argument specifies a function
-that will be executed at startup of the saved image.
-When <TT
-CLASS="replaceable"
-><I
->filename</I
-></TT
-> does not have an extension,
-<TT
-CLASS="filename"
->#P".mem"</TT
-> extension is automatically used.
-The <TT
+>:INIT-FUNCTION</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This argument specifies a function that will be
+   executed at startup of the saved image, before entering the standard
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-1.html"
+TARGET="_top"
+>read-eval-print loop</A
+>, thus, if you want to avoid the <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-1.html"
+TARGET="_top"
+>read-eval-print loop</A
+>, you have to call
+   <A
+HREF="quit.html"
+><TT
+CLASS="function"
+>EXT:EXIT</TT
+></A
+> at the end
+   of the init function yourself.</P
+></DD
+><DT
+><TT
 CLASS="constant"
->:locked-packages</TT
-> argument specifies the
-packages to lock before saving the image; this is convenient for
-application delivery, when you do not want your user to mess up your
-product.  This argument defaults to <A
+>:LOCKED-PACKAGES</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This argument specifies the packages to lock before
+   saving the image; this is convenient for application delivery, when
+   you do not want your users to mess up your product.
+   This argument defaults to <A
 HREF="packages.html#pack-lock"
 ><TT
 CLASS="varname"
 >CUSTOM:*SYSTEM-PACKAGE-LIST*</TT
 ></A
 >.
-The starting package of the new image is the one in which you were when
-you invoked <TT
-CLASS="function"
->ext:saveinitmem</TT
+   </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:START-PACKAGE</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This argument specifies the starting value of
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stpackagest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PACKAGE*</TT
+></A
+> in the image being saved, and defaults to the current
+   value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stpackagest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PACKAGE*</TT
+></A
 >.</P
+></DD
+></DL
+></DIV
+>
+You can use this memory image with the
+<A
+HREF="clisp.html#opt-lang"
+TARGET="_top"
+><TT
+CLASS="option"
+>-M</TT
+></A
+>
+option.  On <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems, you may compress it with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+>
+<A
+HREF="http://www.gzip.org/"
+TARGET="_top"
+><B
+CLASS="command"
+>gzip</B
+></A
+>
+to save disk space.</P
 ></DIV
 ></DIV
 ><DIV
@@ -191,6 +376,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -202,7 +388,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="extensions.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -210,6 +397,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -218,7 +406,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="quit.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -233,6 +422,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="extensions.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -250,6 +440,45 @@ CLASS="command"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

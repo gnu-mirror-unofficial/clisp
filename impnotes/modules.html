@@ -5,8 +5,10 @@
 >Extensions-2.2. External Modules</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-2: Platform specific Extensions"
 HREF="platform.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.3. The Foreign Function Call Facility"
-HREF="dffi.html"></HEAD
+HREF="dffi.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="platform.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="dffi.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,20 +97,19 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="modules"
->Extensions-2.2. External Modules</A
-></H1
+NAME="modules">30.2. Extensions-2.2. External Modules</H1
 ><FONT
 COLOR="RED"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms only.</FONT
 ><P
+ALIGN="justify"
 ><A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -117,6 +131,7 @@ CLASS="command"
 >clisp-link</B
 >.</P
 ><P
+ALIGN="justify"
 >A module is a piece of external code which defines extra Lisp
  objects, symbols and functions.  A module name must consist of the
  characters <TT
@@ -149,6 +164,7 @@ CLASS="QUOTE"
 > is reserved.  Normally a module name is derived
  from the corresponding file name.</P
 ><P
+ALIGN="justify"
 ><B
 CLASS="command"
 >clisp-link</B
@@ -158,6 +174,7 @@ CLASS="command"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
 >modules.d</TT
@@ -165,6 +182,7 @@ CLASS="filename"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
 >modules.c</TT
@@ -172,6 +190,7 @@ CLASS="filename"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
 >clisp.h</TT
@@ -182,16 +201,21 @@ CLASS="filename"
 <B
 CLASS="command"
 >clisp-link</B
-> expects to find these files in a subdirectory
-<TT
+> expects to find these files in a
+subdirectory <TT
 CLASS="filename"
 >linkkit/</TT
-> of the current directory. This can be overridden
-by the environment variable <TT
+> of the current directory.
+This can be overridden by the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+> <TT
 CLASS="envar"
 >CLISP_LINKKIT</TT
 >.</P
 ><P
+ALIGN="justify"
 ><B
 CLASS="command"
 >clisp-link</B
@@ -202,12 +226,19 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> linking sets and
+> <A
+HREF="modules.html"
+>linking set</A
+>s and
  on module sets.</P
 ><P
->A <I
+ALIGN="justify"
+>A <B
 CLASS="emphasis"
->linking set</I
+><A
+HREF="modules.html"
+>linking set</A
+></B
 > is a directory
  containing:</P
 ><P
@@ -222,6 +253,7 @@ CLASS="filename"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >some <B
 CLASS="command"
 >/bin/sh</B
@@ -239,6 +271,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
@@ -256,6 +289,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >flags for the <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
@@ -273,6 +307,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >flags for the <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
@@ -290,6 +325,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >libraries to use when linking
    </P
 ></DD
@@ -300,6 +336,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >additional X window system libraries to use
    </P
 ></DD
@@ -310,6 +347,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the ranlib command
    </P
 ></DD
@@ -320,6 +358,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the list of files needed when linking
    </P
 ></DD
@@ -334,7 +373,11 @@ CLASS="filename"
 ></DT
 ><DD
 ><P
->the list of modules contained in this linking set
+ALIGN="justify"
+>the list of modules contained in this <A
+HREF="modules.html"
+>linking set</A
+>
   </P
 ></DD
 ><DT
@@ -344,7 +387,11 @@ CLASS="filename"
 ></DT
 ><DD
 ><P
->the compiled list of modules contained in this linking set
+ALIGN="justify"
+>the compiled list of modules contained in this <A
+HREF="modules.html"
+>linking set</A
+>
   </P
 ></DD
 ><DT
@@ -354,6 +401,7 @@ CLASS="filename"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >listed in <TT
 CLASS="filename"
 >makevars</TT
@@ -367,6 +415,7 @@ CLASS="filename"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the executable</P
 ></DD
 ><DT
@@ -379,6 +428,7 @@ CLASS="filename"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the <A
 HREF="p-indep.html#image"
 >memory image</A
@@ -387,6 +437,7 @@ HREF="p-indep.html#image"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >To run a <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -394,7 +445,10 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> contained in some linking set
+> contained in some <A
+HREF="modules.html"
+>linking set</A
+>
  <TT
 CLASS="filename"
 >dir</TT
@@ -415,9 +469,10 @@ CLASS="replaceable"
 >/lispinit.mem</B
 ></P
 ><P
->A <I
+ALIGN="justify"
+>A <B
 CLASS="emphasis"
->module set</I
+>module set</B
 > is a directory
 containing:</P
 ><P
@@ -432,6 +487,7 @@ CLASS="command"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >some <B
 CLASS="command"
 >/bin/sh</B
@@ -460,6 +516,7 @@ CLASS="envar"
 >and any other files</DT
 ><DD
 ><P
+ALIGN="justify"
 >needed by <B
 CLASS="command"
 >link.sh</B
@@ -469,6 +526,7 @@ CLASS="command"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >Note that in <B
 CLASS="command"
 >link.sh</B
@@ -489,8 +547,12 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the space-separated list of files that
-  belong to the module set and will belong to every new linking set.
+  belong to the module set and will belong to every new <A
+HREF="modules.html"
+>linking set</A
+>.
  </P
 ></DD
 ><DT
@@ -500,6 +562,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the space-separated list of files or
   <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
@@ -516,7 +579,10 @@ CLASS="command"
 >C</B
 ></A
 >
-  compiler when linking the lisp.run belonging to a new linking set.
+  compiler when linking the lisp.run belonging to a new <A
+HREF="modules.html"
+>linking set</A
+>.
  </P
 ></DD
 ><DT
@@ -526,6 +592,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the space-separated list of the module names
   belonging to the module set.  Normally, every <TT
 CLASS="filename"
@@ -541,6 +608,7 @@ CLASS="envar"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the space-separated list of Lisp files to load
   before building the <A
 HREF="p-indep.html#image"
@@ -548,7 +616,10 @@ HREF="p-indep.html#image"
 CLASS="filename"
 >#P"lispinit.mem"</TT
 ></A
-> belonging to a new linking set.
+> belonging to a new <A
+HREF="modules.html"
+>linking set</A
+>.
  </P
 ></DD
 ><DT
@@ -558,8 +629,9 @@ CLASS="envar"
 > (optional)</DT
 ><DD
 ><P
->the space-separated list of Lisp files to load into
-  an intermediate <A
+ALIGN="justify"
+>the space-separated list of Lisp files to load
+  into an intermediate <A
 HREF="p-indep.html#image"
 ><TT
 CLASS="filename"
@@ -572,16 +644,32 @@ CLASS="filename"
 >#P"lispinit.mem"</TT
 ></A
 >
-  belonging to a new linking set.  This variable is usually used for
-  defining Lisp packages which must be present when the new <TT
+  belonging to a new <A
+HREF="modules.html"
+>linking set</A
+>.
+  This variable is usually used for defining Lisp packages which must be
+  present when the new <TT
 CLASS="filename"
 >#P".c"</TT
->
-  files are initialized.</P
+> files are initialized.  E.g., the
+  <A
+HREF="dffi.html#def-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-IN</TT
+></A
+> functions must reside in already defined packages;
+  see <A
+HREF="dffi.html#ex-call-in"
+>the call-in example</A
+>.
+ </P
 ></DD
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >The command <B
 CLASS="command"
 >clisp-link create-module-set
@@ -612,6 +700,7 @@ CLASS="replaceable"
 > etc.  The files are
  expected to be modules of their own.</P
 ><P
+ALIGN="justify"
 >The command <B
 CLASS="command"
 >clisp-link add-module-set
@@ -633,8 +722,11 @@ CLASS="replaceable"
 >destination-dir</I
 ></TT
 ></B
-> combines a linking
- set in <TT
+> combines a
+ <A
+HREF="modules.html"
+>linking set</A
+> in <TT
 CLASS="replaceable"
 ><I
 >source-dir</I
@@ -645,7 +737,10 @@ CLASS="replaceable"
 ><I
 >module-dir</I
 ></TT
-> to a new linking set, in a
+> to a new <A
+HREF="modules.html"
+>linking set</A
+>, in a
  directory <TT
 CLASS="replaceable"
 ><I
@@ -654,6 +749,7 @@ CLASS="replaceable"
 > which is newly
  created.</P
 ><P
+ALIGN="justify"
 >The command <B
 CLASS="command"
 >clisp-link run <TT
@@ -668,8 +764,11 @@ CLASS="replaceable"
 >module-dir</I
 ></TT
 > ...</B
-> runs the linking
- set in <TT
+> runs the <A
+HREF="modules.html"
+>linking set</A
+>
+ in <TT
 CLASS="replaceable"
 ><I
 >source-dir</I
@@ -694,7 +793,10 @@ CLASS="option"
 >--with-dynamic-modules</TT
 >, the loading will be performed
  through dynamic loading.  Otherwise - this is much slower - a temporary
- linking set will be created and deleted afterwards.  Note that dynamic
+ <A
+HREF="modules.html"
+>linking set</A
+> will be created and deleted afterwards.  Note that dynamic
  loading does not work on all operating systems, and that
  <TT
 CLASS="option"
@@ -706,10 +808,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="mod-set-example"
->Example</A
-></H2
+NAME="mod-set-example">30.2.1. Example</H2
 ><P
+ALIGN="justify"
 >To link in the <A
 HREF="dffi.html"
 ><SPAN
@@ -725,6 +826,7 @@ CLASS="QUOTE"
 TYPE="1"
 ><LI
 ><P
+ALIGN="justify"
 >Create a new module set:
 
 <TABLE
@@ -829,6 +931,7 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Compile <TT
 CLASS="filename"
 >linux.lisp</TT
@@ -859,7 +962,11 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
->Create a new linking set:
+ALIGN="justify"
+>Create a new <A
+HREF="modules.html"
+>linking set</A
+>:
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -876,6 +983,7 @@ CLASS="programlisting"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Run and try it:
 
 <TABLE
@@ -899,10 +1007,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="included-modules"
->Modules included in the distribution.</A
-></H2
+NAME="included-modules">30.2.2. Modules included in the distribution.</H2
 ><P
+ALIGN="justify"
 >The following modules come with the distribution of
 <A
 HREF="http://clisp.cons.org"
@@ -921,6 +1028,7 @@ CLASS="variablelist"
 >bindings</DT
 ><DD
 ><P
+ALIGN="justify"
 >Call the operating system functions from <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -935,14 +1043,17 @@ CLASS="command"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >AmigaOS</P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Linux/libc5</P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Linux/libc6</P
 ></LI
 ></UL
@@ -952,6 +1063,7 @@ CLASS="command"
 >CLX</DT
 ><DD
 ><P
+ALIGN="justify"
 >Call Xlib functions from <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -966,6 +1078,7 @@ CLASS="command"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >mit-clx, from MIT
      <A
 HREF="ftp://ftp.x.org/R5contrib/CLX.R5.02.tar.Z"
@@ -976,12 +1089,14 @@ TARGET="_top"
 ></LI
 ><LI
 ><P
->new-clx, by <A
+ALIGN="justify"
+>new-clx, by
+      <A
 HREF="http://www.uni-karlsruhe.de/~unk6/"
 TARGET="_top"
 >Gilbert Baumann</A
 >
-    <A
+      <A
 HREF="mailto:unk6@rz.uni-karlsruhe.de"
 TARGET="_top"
 >&#60;unk6@rz.uni-karlsruhe.de&#62;</A
@@ -992,10 +1107,42 @@ TARGET="_top"
 ></P
 ></DD
 ><DT
+>oracle</DT
+><DD
+><P
+ALIGN="justify"
+>Access
+    <A
+HREF="http://www.oracle.com/"
+TARGET="_top"
+>Oracle</A
+> from <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>;
+    by <A
+HREF="http://www.alma.com/staff/hin"
+TARGET="_top"
+>John Hinsdale</A
+>
+    <A
+HREF="mailto:hin@alma.com"
+TARGET="_top"
+>&#60;hin@alma.com&#62;</A
+>.
+  </P
+></DD
+><DT
 >postgresql632, postgresql642</DT
 ><DD
 ><P
->Access <A
+ALIGN="justify"
+>Access
+    <A
 HREF="http://www.PostgreSQL.org/"
 TARGET="_top"
 >PostgreSQL</A
@@ -1013,6 +1160,7 @@ CLASS="command"
 >queens</DT
 ><DD
 ><P
+ALIGN="justify"
 >Compute the number of solutions to the n-queens
    problem on a n*n checkboard.
   </P
@@ -1024,6 +1172,7 @@ HREF="modules.html#regexp"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >The <A
 HREF="regexp.html"
 TARGET="_top"
@@ -1040,6 +1189,7 @@ TARGET="_top"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Shell globbing</P
 ></DD
 ></DL
@@ -1049,8 +1199,7 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="regexp"
-><A
+NAME="regexp">30.2.2.1. <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -1063,9 +1212,9 @@ HREF="modules.html#regexp"
 CLASS="QUOTE"
 >"REGEXP"</SPAN
 ></A
-> module</A
-></H3
+> module</H3
 ><P
+ALIGN="justify"
 >The <A
 HREF="modules.html#regexp"
 ><SPAN
@@ -1093,16 +1242,20 @@ CLASS="command"
 ></A
 > system facilities.
 The syntax of these regular expressions is described in many places,
-such as your local <TT
-CLASS="function"
->regexp(5)</TT
+such as your local <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/regex.h.html"
+TARGET="_top"
+><TT
+CLASS="filename"
+>regex.h</TT
+></A
 > manual and <A
-HREF="http://www.gnu.org/software/emacs/emacs.html"
+HREF="http://www.gnu.org/software/emacs/"
 TARGET="_top"
 >Emacs</A
->
-info pages.</P
+> info pages.</P
 ><P
+ALIGN="justify"
 >The <A
 HREF="modules.html#regexp"
 ><SPAN
@@ -1208,9 +1361,8 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="re-match"
-><TT
-CLASS="literal"
+NAME="re-match"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-match"
 ><TT
@@ -1245,10 +1397,10 @@ CLASS="constant"
 CLASS="constant"
 >:CASE-SENSITIVE</TT
 > t))</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >This macro returns as first value a <TT
 CLASS="classname"
 >REGEXP::REGMATCH_T</TT
@@ -1323,7 +1475,7 @@ CLASS="constant"
 >NIL</TT
 ></A
 >, only <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_subseq.html"
 TARGET="_top"
@@ -1352,11 +1504,9 @@ CLASS="replaceable"
   <DIV
 CLASS="example"
 ><A
-NAME="AEN18154"
-></A
-><P
+NAME="ex-re-match"><P
 ><B
->Example 1. <A
+>Example 30-1. <A
 HREF="modules.html#re-match"
 ><TT
 CLASS="function"
@@ -1380,7 +1530,7 @@ CLASS="function"
 ></A
 > "quick" "The quick brown fox jumped quickly.")
      <TT
-CLASS="literal"
+CLASS="sexp"
 >#S(<TT
 CLASS="classname"
 >REGEXP::REGMATCH_T</TT
@@ -1394,7 +1544,7 @@ CLASS="function"
 ></A
 > "quick" "The quick brown fox jumped quickly." :start 8)
      <TT
-CLASS="literal"
+CLASS="sexp"
 >#S(<TT
 CLASS="classname"
 >REGEXP::REGMATCH_T</TT
@@ -1423,21 +1573,21 @@ CLASS="function"
 ></A
 > "\\([a-z]*\\)[0-9]*\\(bar\\)" "foo12bar")
      <TT
-CLASS="literal"
+CLASS="sexp"
 >#S(<TT
 CLASS="classname"
 >REGEXP::REGMATCH_T</TT
 > :RM_SO 0 :RM_EO 8) ;</TT
 >
      <TT
-CLASS="literal"
+CLASS="sexp"
 >#S(<TT
 CLASS="classname"
 >REGEXP::REGMATCH_T</TT
 > :RM_SO 0 :RM_EO 3) ;</TT
 >
      <TT
-CLASS="literal"
+CLASS="sexp"
 >#S(<TT
 CLASS="classname"
 >REGEXP::REGMATCH_T</TT
@@ -1453,9 +1603,8 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="re-match-start"
-><TT
-CLASS="literal"
+NAME="re-match-start"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-match-start"
 ><TT
@@ -1468,10 +1617,10 @@ CLASS="replaceable"
 >match</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Extracts the start index of <TT
 CLASS="replaceable"
 ><I
@@ -1482,9 +1631,8 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><A
-NAME="re-match-end"
-><TT
-CLASS="literal"
+NAME="re-match-end"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-match-end"
 ><TT
@@ -1497,10 +1645,10 @@ CLASS="replaceable"
 >match</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Extracts the end index of <TT
 CLASS="replaceable"
 ><I
@@ -1511,9 +1659,8 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><A
-NAME="re-match-string"
-><TT
-CLASS="literal"
+NAME="re-match-string"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-match-string"
 ><TT
@@ -1531,10 +1678,10 @@ CLASS="replaceable"
 >match</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Extracts the substring of <TT
 CLASS="replaceable"
 ><I
@@ -1569,7 +1716,7 @@ CLASS="function"
 ></A
 > or
   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
 TARGET="_top"
@@ -1597,9 +1744,8 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="re-regexp-quote"
-><TT
-CLASS="literal"
+NAME="re-regexp-quote"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-quote"
 ><TT
@@ -1612,10 +1758,10 @@ CLASS="replaceable"
 >string</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >This function returns a regular expression string
   that matches exactly <TT
 CLASS="replaceable"
@@ -1628,11 +1774,9 @@ CLASS="replaceable"
   <DIV
 CLASS="example"
 ><A
-NAME="AEN18229"
-></A
-><P
+NAME="ex-re-quote"><P
 ><B
->Example 2. <A
+>Example 30-2. <A
 HREF="modules.html#re-regexp-quote"
 ><TT
 CLASS="function"
@@ -1670,9 +1814,8 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="re-regexp-compile"
-><TT
-CLASS="literal"
+NAME="re-regexp-compile"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-compile"
 ><TT
@@ -1698,10 +1841,10 @@ CLASS="replaceable"
 >case-sensitive</I
 ></TT
 > t))</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Compile the regular expression <TT
 CLASS="replaceable"
 ><I
@@ -1718,9 +1861,8 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="re-regexp-exec"
-><TT
-CLASS="literal"
+NAME="re-regexp-exec"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-exec"
 ><TT
@@ -1752,10 +1894,10 @@ CLASS="constant"
 CLASS="constant"
 >:END</TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Execute the <TT
 CLASS="replaceable"
 ><I
@@ -1776,13 +1918,14 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 >Negative <TT
 CLASS="replaceable"
 ><I
 >end</I
 ></TT
 > means <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_pl.html"
 TARGET="_top"
@@ -1813,9 +1956,8 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><A
-NAME="re-regexp-split"
-><TT
-CLASS="literal"
+NAME="re-regexp-split"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-split"
 ><TT
@@ -1850,10 +1992,10 @@ CLASS="constant"
 CLASS="constant"
 >:CASE-SENSITIVE</TT
 > t))</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return a list of substrings of <TT
 CLASS="replaceable"
 ><I
@@ -1882,9 +2024,8 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="re-with-loop-split"
-><TT
-CLASS="literal"
+NAME="re-with-loop-split"><TT
+CLASS="sexp"
 >(<A
 HREF="modules.html#re-with-loop-split"
 ><TT
@@ -1937,10 +2078,10 @@ CLASS="replaceable"
 >body</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Read lines from <TT
 CLASS="replaceable"
 ><I
@@ -1969,6 +2110,7 @@ CLASS="replaceable"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >The following code computes the number of people who use a
  particular shell:
 <TABLE
@@ -2012,7 +2154,8 @@ CLASS="function"
 ></TABLE
 ></P
 ><P
->The same is done by the following <A
+ALIGN="justify"
+>For comparison, the same can be done by the following <A
 HREF="http://www.perl.com"
 TARGET="_top"
 ><B
@@ -2060,6 +2203,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -2071,7 +2215,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="platform.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -2079,6 +2224,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -2087,7 +2233,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="dffi.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -2102,6 +2249,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -2112,6 +2260,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -6,8 +6,10 @@
    [CLHS-12.1]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="numbers.html"><LINK
 REL="NEXT"
 TITLE="The Numbers Dictionary
    [CLHS-12.2]"
-HREF="num-dict.html"></HEAD
+HREF="num-dict.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="numbers.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Numbers
+>Chapter 12. Numbers
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-12.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="num-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,28 +106,25 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="num-concepts"
->Number Concepts
+NAME="num-concepts">12.2. Number Concepts
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1.html"
 TARGET="_top"
 >[CLHS-12.1]</A
-></A
 ></H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="byte-type"
->Byte Operations on Integers
+NAME="byte-type">12.2.1. Byte Operations on Integers
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-1-3-2.html"
 TARGET="_top"
 >[CLHS-12.1.1.3.2]</A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >Byte specifiers are objects of built-in type <A
 HREF="num-concepts.html#byte-type"
 ><SPAN
@@ -134,15 +146,14 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-subst"
->Rule of Float Substitutability
+NAME="float-subst">12.2.2. Rule of Float Substitutability
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-3-3.html"
 TARGET="_top"
 >[CLHS-12.1.3.3]</A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >When a mathematical function may return an exact (rational) or
  inexact (floating-point) result, it always returns the exact result.</P
 ></DIV
@@ -151,15 +162,14 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-comp"
->Floating-point Computations
+NAME="float-comp">12.2.3. Floating-point Computations
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-4.html"
 TARGET="_top"
 >[CLHS-12.1.4]</A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >There are four floating point types: <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
 TARGET="_top"
@@ -193,17 +203,12 @@ CLASS="classname"
 ><DIV
 CLASS="table"
 ><A
-NAME="floating-types-table"
-></A
-><P
+NAME="floating-types-table"><P
 ><B
->Table 1. floating point types</B
+>Table 12-1. floating point types</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -286,7 +291,11 @@ VALIGN="MIDDLE"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->IEEE format</TD
+><A
+HREF="http://grouper.ieee.org/groups/754/"
+TARGET="_top"
+>IEEE 754</A
+></TD
 ></TR
 ><TR
 ><TD
@@ -315,7 +324,11 @@ VALIGN="MIDDLE"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->IEEE format</TD
+><A
+HREF="http://grouper.ieee.org/groups/754/"
+TARGET="_top"
+>IEEE 754</A
+></TD
 ></TR
 ><TR
 ><TD
@@ -351,8 +364,17 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
->The single and double float formats are those of the IEEE standard
- (1981), except that <A
+ALIGN="justify"
+>The single and double float formats are those of the <A
+HREF="http://grouper.ieee.org/groups/754/"
+TARGET="_top"
+>IEEE 754</A
+>
+ <SPAN
+CLASS="QUOTE"
+>"Standard for Binary Floating-Point Arithmetic"</SPAN
+>,
+ except that <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -362,22 +384,16 @@ CLASS="command"
 > does not support features like
  <TT
 CLASS="literal"
->+0</TT
+>±0</TT
 >, <TT
 CLASS="literal"
->-0</TT
->, <TT
-CLASS="literal"
->+inf</TT
+>±inf</TT
 >,
  <TT
 CLASS="literal"
->-inf</TT
->, gradual underflow, <TT
-CLASS="literal"
 >NaN</TT
->,
- etc. (<A
+>, gradual underflow, etc.
+ (<A
 HREF="http://www.lisp.org"
 TARGET="_top"
 ><B
@@ -397,12 +413,17 @@ CLASS="varname"
 CLASS="constant"
 >:IEEE-FLOATING-POINT</TT
 > keyword.</P
+><DIV
+CLASS="formalpara"
 ><P
+><A
+NAME="lfd"><B
+>Arbitrary Precision Floats. </B
 >Long floats have variable mantissa length, which is a
  multiple of 16 (or 32, depending on the word size of the processor).
  The default length used when long floats are read is given by the place
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="num-concepts.html#lfd"
 ><TT
@@ -411,7 +432,7 @@ CLASS="function"
 ></A
 >)</TT
 >.  It can be set by <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -438,7 +459,7 @@ CLASS="replaceable"
 >n</I
 ></TT
 > is a positive integer.  E.g., <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -454,21 +475,21 @@ CLASS="function"
 ></A
 >) 3322)</TT
 > sets the default precision
- of long floats to 1000 decimal digits.</P
+ of long floats to about 1000 decimal digits.</P
+></DIV
 ><DIV
 CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="flocont"
->Rule of Float Precision Contagion
+NAME="flocont">12.2.3.1. Rule of Float Precision Contagion
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-4-4.html"
 TARGET="_top"
 >[CLHS-12.1.4.4]</A
-></A
 ></H3
 ><P
+ALIGN="justify"
 >The floating point contagion is controlled by the variable
  <A
 HREF="num-concepts.html#flocont"
@@ -484,13 +505,16 @@ CLASS="constant"
 >NIL</TT
 ></A
 >, contagion is done as per the
- [<SPAN
+ <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->]: <A
+>]</A
+>: <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
 TARGET="_top"
 ><TT
@@ -529,6 +553,7 @@ CLASS="variablelist"
 >Rationale:</DT
 ><DD
 ><P
+ALIGN="justify"
 >See it pragmatically: save what you can and let
   others worry about the rest.</P
 ></DD
@@ -536,6 +561,7 @@ CLASS="variablelist"
 >Brief:</DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org"
 TARGET="_top"
@@ -553,15 +579,16 @@ CLASS="command"
 >Detailed:</DT
 ><DD
 ><P
->A float is an approximation of a real number.  One
-  can think of it as a random variable with the mean equal to itself and
-  standard deviation equal to half the last significant digit.  E.g.,
-  <TT
+ALIGN="justify"
+>A computer float is an approximation of a real number.
+  One can think of it as a random variable with the mean equal to
+  itself and standard deviation equal to half the last significant digit.
+  E.g., <TT
 CLASS="literal"
 >1.5</TT
 > is actually <TT
 CLASS="literal"
->1.5+-0.05</TT
+>1.5±0.05</TT
 >.
   Consider adding <TT
 CLASS="literal"
@@ -570,17 +597,20 @@ CLASS="literal"
 CLASS="literal"
 >1.75</TT
 >.
-  [<SPAN
+  <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] requires that <TT
-CLASS="literal"
+>]</A
+> requires that <TT
+CLASS="sexp"
 >(+ 1.5 1.75)</TT
 >
-  return <TT
+  returns <TT
 CLASS="literal"
 >3.25</TT
 >, while traditional <A
@@ -597,33 +627,33 @@ CLASS="literal"
 >.  The implied random variables are:
   <TT
 CLASS="literal"
->3.25+-0.005</TT
+>3.25±0.005</TT
 > and <TT
 CLASS="literal"
->3.3+-0.05</TT
->.  Note
-  that the traditional <A
+>3.3±0.05</TT
+>.
+  Note that the traditional <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
-> way <I
+> way <B
 CLASS="emphasis"
->does</I
+>does</B
 >
-  lie about the mean: the mean <I
+  lie about the mean: the mean <B
 CLASS="emphasis"
->is</I
+>is</B
 >
   <TT
 CLASS="literal"
 >3.25</TT
 > and nothing else, while the standard way
-  <I
+  <B
 CLASS="emphasis"
->could</I
+>could</B
 > be lying about the deviation
   (accuracy): if the implied accuracy of <TT
 CLASS="literal"
@@ -638,13 +668,16 @@ CLASS="command"
 >Common Lisp</B
 ></A
 > has no way of knowing the
-  actual accuracy, [<SPAN
+  actual accuracy, <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] (and all the other standard engineering
+>]</A
+> (and all the other standard engineering
   programming languages, like <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
@@ -661,10 +694,11 @@ CLASS="command"
 >Experience:</DT
 ><DD
 ><P
+ALIGN="justify"
 > Rounding errors accumulate, and if a computation
   is conducted with insufficient precision, an outright incorrect
-  result can be returned.  (E.g.,
-  <TT
+  result can be returned.
+  (E.g., <TT
 CLASS="literal"
 >E(x<SUP
 >2</SUP
@@ -672,20 +706,21 @@ CLASS="literal"
   E(x)<SUP
 >2</SUP
 ></TT
-> can be negative!)  The user
-  should not mix floats of different precision (that's what <A
+> can be negative!)
+  The user should not mix floats of different precision (that's what
+  <A
 HREF="num-concepts.html#warn-fpc"
 ><TT
 CLASS="varname"
 >CUSTOM:*WARN-ON-FLOATING-POINT-CONTAGION*</TT
 ></A
-> is
-  for), but one should not be penalized for this too harshly.
-  </P
+> is for), but one should not be penalized for this too
+  harshly.</P
 ></DD
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >When <A
 HREF="num-concepts.html#flocont"
 ><TT
@@ -761,6 +796,7 @@ CLASS="variablelist"
 >Rationale:</DT
 ><DD
 ><P
+ALIGN="justify"
 > See it mathematically.  Add intervals:
   <TT
 CLASS="literal"
@@ -783,6 +819,7 @@ CLASS="literal"
 >Brief:</DT
 ><DD
 ><P
+ALIGN="justify"
 >Do not suggest accuracy of a result by giving it a
   precision that is greater than its accuracy.
   </P
@@ -791,8 +828,9 @@ CLASS="literal"
 >Example:</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(- (+ 1.7 <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
 TARGET="_top"
@@ -827,6 +865,7 @@ CLASS="literal"
 >Experience:</DT
 ><DD
 ><P
+ALIGN="justify"
 >If in a computation using thousands of short floats,
   a long float (like <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
@@ -847,16 +886,15 @@ CLASS="constant"
 ><DIV
 CLASS="formalpara"
 ><P
-><B
-><B
 ><A
+NAME="warn-fpc"><B
+>Variable <A
 HREF="num-concepts.html#warn-fpc"
 ><TT
 CLASS="varname"
 >CUSTOM:*WARN-ON-FLOATING-POINT-CONTAGION*</TT
 ></A
 >. </B
-></B
 >If the variable <A
 HREF="num-concepts.html#warn-fpc"
 ><TT
@@ -881,19 +919,25 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="complex-comp"
->Complex Computations
+NAME="complex-comp">12.2.4. Complex Computations
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-5.html"
 TARGET="_top"
 >[CLHS-12.1.5]</A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >Complex numbers can have a real part and an imaginary part of
  different types. For example, <TT
-CLASS="literal"
->(sqrt
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sqrtcm_isqrt.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SQRT</TT
+></A
+>
  -9.0)</TT
 > evaluates to the number <TT
 CLASS="literal"
@@ -908,8 +952,9 @@ CLASS="literal"
 >0.0</TT
 > (which would mean "approximately 0").</P
 ><P
+ALIGN="justify"
 >The type specifier for this is <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -934,7 +979,7 @@ CLASS="classname"
 ></A
 >)</TT
 >, and <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -952,8 +997,9 @@ CLASS="varname"
 >)</TT
 > in general.</P
 ><P
+ALIGN="justify"
 >The type specifier <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -969,7 +1015,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 > is equivalent to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -995,16 +1041,15 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="complex-rational"
->Rule of
+NAME="complex-rational">12.2.5. Rule of
    Canonical Representation for Complex Rationals
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-5-3.html"
 TARGET="_top"
 >[CLHS-12.1.5.3]</A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >Complex numbers can have a real part and an imaginary part of
  different types.  If the imaginary part is <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
@@ -1020,9 +1065,10 @@ CLASS="literal"
 >, the number is automatically converted to a real
  number.</P
 ><P
+ALIGN="justify"
 >This has the advantage that
    <TT
-CLASS="literal"
+CLASS="sexp"
 >(let ((x (sqrt -9.0))) (* x x))</TT
 >
  - instead of evaluating to <TT
@@ -1061,6 +1107,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1072,7 +1119,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="numbers.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1080,6 +1128,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1088,7 +1137,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="num-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1108,6 +1158,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="numbers.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1123,6 +1174,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

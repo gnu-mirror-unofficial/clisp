@@ -5,8 +5,10 @@
 >Additional read dispatch macros</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -20,7 +22,10 @@ TITLE="Reader
 HREF="reader.html"><LINK
 REL="NEXT"
 TITLE="Function READTABLE-CASE"
-HREF="rt-case.html"></HEAD
+HREF="rt-case.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -31,6 +36,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -50,7 +56,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -59,13 +72,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="reader.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Reader
+>Chapter 23. Reader
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
 TARGET="_top"
@@ -77,7 +91,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="rt-case.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -89,14 +104,13 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="read-dispatch-ext"
->Additional read dispatch macros</A
-></H1
+NAME="read-dispatch-ext">23.2. Additional read dispatch macros</H1
 ><P
 ></P
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 ><SPAN
 CLASS="keysym"
 >#Y</SPAN
@@ -112,6 +126,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
 >#""</TT
@@ -120,7 +135,7 @@ CLASS="filename"
 CLASS="filename"
 >#"test.lisp"</TT
 > is the value of <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname.html"
 TARGET="_top"
@@ -139,28 +154,29 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
    platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >As in all strings, backslashes must be written twice
   here: <TT
 CLASS="filename"
@@ -172,13 +188,14 @@ CLASS="filename"
 >Platform dependent: <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 > As in all strings, backslashes must be written twice
   here: <TT
 CLASS="filename"
@@ -196,6 +213,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -207,7 +225,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="reader.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -215,6 +234,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -223,7 +243,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="rt-case.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -243,6 +264,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="reader.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -260,6 +282,45 @@ CLASS="function"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

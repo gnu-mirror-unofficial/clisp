@@ -3,11 +3,13 @@
 ><HEAD
 ><TITLE
 >The Streams Dictionary
-   [CLHS-21.2.]</TITLE
+   [CLHS-21.2]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="terminal.html"><LINK
 REL="NEXT"
 TITLE="Printer
    [CLHS-22]"
-HREF="printer.html"></HEAD
+HREF="printer.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,13 +73,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="terminal.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Streams
+>Chapter 21. Streams
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-21.html"
 TARGET="_top"
@@ -78,7 +92,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="printer.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -90,30 +105,27 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="stream-dict"
->The Streams Dictionary
+NAME="stream-dict">21.3. The Streams Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_streams_dictionary.html"
 TARGET="_top"
->[CLHS-21.2.]</A
-></A
+>[CLHS-21.2]</A
 ></H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="stream-eltype"
->Function <A
+NAME="stream-eltype">21.3.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
 TARGET="_top"
@@ -195,6 +207,7 @@ CLASS="function"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >both equivalent to <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
 TARGET="_top"
@@ -227,6 +240,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >both equivalent to <TT
 CLASS="literal"
 >(<A
@@ -268,6 +282,7 @@ CLASS="replaceable"
 ></UL
 ></P
 ><P
+ALIGN="justify"
 >Note that you cannot change <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
 TARGET="_top"
@@ -291,8 +306,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="bin-input"
->Binary input, <A
+NAME="bin-input">21.3.2. Binary input, <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
 TARGET="_top"
 ><TT
@@ -312,11 +326,11 @@ HREF="stream-dict.html#bin-input"
 CLASS="function"
 >EXT:READ-FLOAT</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The function <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#bin-input"
 ><TT
@@ -403,7 +417,11 @@ CLASS="replaceable"
 ><I
 >element-type</I
 ></TT
-> should be a type equivalent to <TT
+> should be <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#type_equivalent"
+TARGET="_top"
+>type equivalent</A
+> to <TT
 CLASS="literal"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
@@ -426,8 +444,9 @@ CLASS="replaceable"
 ></TT
 > is a multiple of 8.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#bin-input"
 ><TT
@@ -447,7 +466,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 > is like <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
 TARGET="_top"
@@ -505,44 +524,9 @@ CLASS="replaceable"
 >
  instead of 1.</P
 ><P
-><A
-HREF="stream-dict.html#endianness"
-><TT
-CLASS="replaceable"
-><I
->ENDIANNESS</I
-></TT
-></A
-> can be <TT
-CLASS="constant"
->:little</TT
->
- or <TT
-CLASS="constant"
->:big</TT
->.  The default is
- <TT
-CLASS="constant"
->:little</TT
->, which corresponds to the <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READ-BYTE</TT
-></A
->
- behavior in <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
->.</P
-><P
+ALIGN="justify"
 >Together with <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -562,8 +546,9 @@ CLASS="function"
 >, this function permits mixed
  character/binary input from a stream.</P
 ><P
+ALIGN="justify"
 >The function <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#bin-input"
 ><TT
@@ -608,7 +593,12 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >
- reads a floating-point number in IEEE binary representation from <TT
+ reads a floating-point number in <A
+HREF="http://grouper.ieee.org/groups/754/"
+TARGET="_top"
+>IEEE 754</A
+>
+ binary representation from <TT
 CLASS="replaceable"
 ><I
 >stream</I
@@ -650,7 +640,11 @@ CLASS="replaceable"
 ><I
 >element-type</I
 ></TT
-> should be a type equivalent to
+> should be <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#type_equivalent"
+TARGET="_top"
+>type equivalent</A
+> to
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
 TARGET="_top"
@@ -666,14 +660,55 @@ CLASS="classname"
 >DOUBLE-FLOAT</TT
 ></A
 >.</P
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="endianness"><B
+>Endianness. </B
+><A
+HREF="stream-dict.html#endianness"
+><TT
+CLASS="replaceable"
+><I
+>ENDIANNESS</I
+></TT
+></A
+> can be <TT
+CLASS="constant"
+>:LITTLE</TT
+>
+ or <TT
+CLASS="constant"
+>:BIG</TT
+>.  The default is
+ <TT
+CLASS="constant"
+>:LITTLE</TT
+>, which corresponds to the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>
+ behavior in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="bin-output"
->Binary output, <A
+NAME="bin-output">21.3.3. Binary output, <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-byte.html"
 TARGET="_top"
 ><TT
@@ -693,11 +728,11 @@ HREF="stream-dict.html#bin-output"
 CLASS="function"
 >EXT:WRITE-FLOAT</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The function <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#bin-output"
 ><TT
@@ -779,7 +814,11 @@ CLASS="replaceable"
 ><I
 >element-type</I
 ></TT
-> should be a type equivalent to <TT
+> should be <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#type_equivalent"
+TARGET="_top"
+>type equivalent</A
+> to <TT
 CLASS="literal"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
@@ -802,8 +841,9 @@ CLASS="replaceable"
 ></TT
 > is a multiple of 8.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#bin-output"
 ><TT
@@ -828,7 +868,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 > is like <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-byte.html"
 TARGET="_top"
@@ -891,8 +931,9 @@ CLASS="replaceable"
 >
  instead of 1.</P
 ><P
+ALIGN="justify"
 >Together with <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -919,8 +960,9 @@ CLASS="classname"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >The function <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#bin-output"
 ><TT
@@ -961,7 +1003,12 @@ CLASS="replaceable"
 ></A
 >)</TT
 >
- writes a floating-point number in IEEE binary representation to <TT
+ writes a floating-point number in <A
+HREF="http://grouper.ieee.org/groups/754/"
+TARGET="_top"
+>IEEE 754</A
+>
+ binary representation to <TT
 CLASS="replaceable"
 ><I
 >stream</I
@@ -1003,7 +1050,11 @@ CLASS="replaceable"
 ><I
 >element-type</I
 ></TT
-> should be a type equivalent to
+> should be <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#type_equivalent"
+TARGET="_top"
+>type equivalent</A
+> to
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
 TARGET="_top"
@@ -1025,17 +1076,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="read-seq"
->Function <A
+NAME="read-seq">21.3.4. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >READ-SEQUENCE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >In addition to <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
 TARGET="_top"
@@ -1052,8 +1102,7 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="rd-by-seq"
-><A
+NAME="rd-by-seq"><A
 HREF="stream-dict.html#rd-by-seq"
 ><TT
 CLASS="function"
@@ -1067,12 +1116,12 @@ TARGET="_top"
 CLASS="function"
 >READ-BYTE</TT
 ></A
-> operations:</A
-></DT
+> operations:</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#rd-by-seq"
 ><TT
@@ -1153,6 +1202,7 @@ CLASS="replaceable"
 ></TT
 > reached its end).</P
 ><P
+ALIGN="justify"
 >This function is especially efficient if <TT
 CLASS="replaceable"
 ><I
@@ -1220,8 +1270,7 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="rd-ch-seq"
-><A
+NAME="rd-ch-seq"><A
 HREF="stream-dict.html#rd-ch-seq"
 ><TT
 CLASS="function"
@@ -1235,12 +1284,12 @@ TARGET="_top"
 CLASS="function"
 >READ-CHAR</TT
 ></A
-> operations:</A
-></DT
+> operations:</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#rd-ch-seq"
 ><TT
@@ -1314,6 +1363,7 @@ CLASS="replaceable"
 ></TT
 > reached its end).</P
 ><P
+ALIGN="justify"
 >This function is especially efficient if <TT
 CLASS="replaceable"
 ><I
@@ -1373,17 +1423,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="write-seq"
->Function <A
+NAME="write-seq">21.3.5. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-sequence.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >WRITE-SEQUENCE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >In addition to <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-sequence.html"
 TARGET="_top"
@@ -1400,8 +1449,7 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="wr-by-seq"
-><A
+NAME="wr-by-seq"><A
 HREF="stream-dict.html#wr-by-seq"
 ><TT
 CLASS="function"
@@ -1415,12 +1463,12 @@ TARGET="_top"
 CLASS="function"
 >WRITE-BYTE</TT
 ></A
-> operations:</A
-></DT
+> operations:</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#wr-by-seq"
 ><TT
@@ -1480,6 +1528,7 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 >This function is especially efficient if <TT
 CLASS="replaceable"
 ><I
@@ -1547,8 +1596,7 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="wr-ch-seq"
-><A
+NAME="wr-ch-seq"><A
 HREF="stream-dict.html#wr-ch-seq"
 ><TT
 CLASS="function"
@@ -1562,12 +1610,12 @@ TARGET="_top"
 CLASS="function"
 >WRITE-CHAR</TT
 ></A
-> operations:</A
-></DT
+> operations:</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="stream-dict.html#wr-ch-seq"
 ><TT
@@ -1620,6 +1668,7 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 >This function is especially efficient if <TT
 CLASS="replaceable"
 ><I
@@ -1678,14 +1727,12 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="file-pos"
->Function <A
+NAME="file-pos">21.3.6. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_file-position.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >FILE-POSITION</TT
-></A
 ></A
 ></H2
 ><P
@@ -1697,28 +1744,29 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
     platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_file-position.html"
 TARGET="_top"
@@ -1752,17 +1800,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="open"
->Function  <A
+NAME="open">21.3.7. Function  <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >OPEN</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
 TARGET="_top"
@@ -1772,6 +1819,7 @@ CLASS="function"
 ></A
 > cannot handle files of size &#8805; 4 GB.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
 TARGET="_top"
@@ -1820,17 +1868,16 @@ HREF="socket.html"
 ><DL
 ><DT
 ><A
-NAME="eltype"
-><A
+NAME="eltype"><A
 HREF="stream-dict.html#eltype"
 ><TT
 CLASS="constant"
 >:ELEMENT-TYPE</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >types equivalent to <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
 TARGET="_top"
@@ -1839,7 +1886,7 @@ CLASS="classname"
 >CHARACTER</TT
 ></A
 > or
-   <TT
+    <TT
 CLASS="literal"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
@@ -1869,28 +1916,81 @@ CLASS="replaceable"
 >n</I
 ></TT
 >)</TT
->; if the
-   stream is to be unbuffered, <TT
+>; if the stream is to be
+    unbuffered, <TT
 CLASS="replaceable"
 ><I
 >n</I
 ></TT
-> must be a multiple of 8.
+> must be a multiple of 8.</P
+><P
+ALIGN="justify"
+>If <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is not a multiple of 8, <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> will use the
+    specified number of bits for i/o, and write the file length
+    (as a number of <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-bit bytes) in the preamble.</P
+><P
+ALIGN="justify"
+>This is done to ensure the input/output consistency.
+    Suppose you open a file with <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> of <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 3)</TT
+> and write 7 bytes
+    (i.e., 21 bit) there.
+    The underlying OS can do input/output only in whole 8-bit bytes.
+    Thus the OS will report the size of the file as 3 (8-bit) bytes.
+    Without the preamble <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> will have no way to know how many
+    3-bit bytes to read from this file - 6, 7 or 8.
    </P
 ></DD
 ><DT
 ><A
-NAME="extfmt"
-><A
+NAME="extfmt"><A
 HREF="stream-dict.html#extfmt"
 ><TT
 CLASS="constant"
 >:EXTERNAL-FORMAT</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="encoding.html"
 ><TT
@@ -1919,10 +2019,11 @@ CLASS="classname"
 >STRING</TT
 ></A
 >s (denoting <A
-HREF="encoding.html#iconv"
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
 ><TT
 CLASS="function"
->iconv()</TT
+>iconv</TT
 ></A
 >-based
    encodings), the symbol <TT
@@ -1952,17 +2053,16 @@ CLASS="varname"
 ></DD
 ><DT
 ><A
-NAME="buffered"
-><A
+NAME="buffered"><A
 HREF="stream-dict.html#buffered"
 ><TT
 CLASS="constant"
 >:BUFFERED</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1986,6 +2086,7 @@ CLASS="constant"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >for functions that create <A
 HREF="socket.html"
 ><TT
@@ -2011,6 +2112,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >for functions that <A
 HREF="stream-dict.html#open"
 >open</A
@@ -2024,6 +2126,45 @@ CLASS="constant"
 ></LI
 ></UL
 >
+  Note that some files, notably those on the <TT
+CLASS="filename"
+>/proc</TT
+>
+  filesystem (on <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems), are actually, despite their innocuous
+  appearance, special files, so you might need to supply an explicit
+  <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> argument for them.  Actually, <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> detects that
+  the file is a <TT
+CLASS="filename"
+>/proc</TT
+> file, so that one is covered,
+  but there are probably more strange beasts there!
 </P
 ></DD
 ></DL
@@ -2034,17 +2175,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="close"
->Function <A
+NAME="close">21.3.8. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >CLOSE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
 TARGET="_top"
@@ -2056,23 +2196,57 @@ CLASS="function"
 CLASS="constant"
 >:ABORT</TT
 > argument.</P
+><P
+ALIGN="justify"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_get-outpu_tream-string.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GET-OUTPUT-STREAM-STRING</TT
+></A
+> returns the same value after
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+> as it would before it.</P
+><P
+ALIGN="justify"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+> on already closed stream does nothing and returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+></P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="broadcast-stream"
->Class <A
+NAME="broadcast-stream">21.3.9. Class <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_broadcast-stream.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >BROADCAST-STREAM</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_input-str_put-stream-p.html"
 TARGET="_top"
@@ -2101,6 +2275,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -2112,7 +2287,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="terminal.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -2120,6 +2296,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -2128,7 +2305,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="printer.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -2143,6 +2321,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="streams.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -2158,6 +2337,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

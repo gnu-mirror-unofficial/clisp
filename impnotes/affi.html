@@ -5,8 +5,10 @@
 >Extensions-2.4. The Amiga Foreign Function Call Facility</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-2.3. The Foreign Function Call Facility"
 HREF="dffi.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.5. ARexx"
-HREF="rexx.html"></HEAD
+HREF="rexx.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="dffi.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="rexx.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,26 +97,22 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="affi"
->Extensions-2.4. The Amiga Foreign Function Call Facility</A
-></H1
+NAME="affi">30.4. Extensions-2.4. The Amiga Foreign Function Call Facility</H1
 ><FONT
 COLOR="RED"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</FONT
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
 >Another Foreign Function Interface. </B
-></B
 >All symbols relating to the simple foreign function interface are
  exported from the package <A
 HREF="affi.html"
@@ -111,7 +122,7 @@ CLASS="QUOTE"
 ></A
 >. To use them,
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_use-package.html"
 TARGET="_top"
@@ -127,10 +138,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-design"
->Design issues</A
-></H2
+NAME="affi-design">30.4.1. Design issues</H2
 ><P
+ALIGN="justify"
 ><A
 HREF="affi.html"
 ><SPAN
@@ -157,6 +167,7 @@ HREF="p-indep.html#image"
 >s can be created, provided that the function libraries are
 opened at run-time.</P
 ><P
+ALIGN="justify"
 >Therefore, <A
 HREF="affi.html"
 ><SPAN
@@ -175,6 +186,7 @@ CLASS="command"
 types or classes.  Foreign functions are not first-class objects (you
 can define a lambda yourself), name spaces are separate.</P
 ><P
+ALIGN="justify"
 >The <A
 HREF="affi.html"
 ><SPAN
@@ -194,10 +206,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-overview"
->Overview</A
-></H2
+NAME="affi-overview">30.4.2. Overview</H2
 ><P
+ALIGN="justify"
 >These are the <A
 HREF="affi.html"
 ><SPAN
@@ -206,8 +217,9 @@ CLASS="QUOTE"
 ></A
 > forms:</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(declare-library-base
  <TT
 CLASS="replaceable"
@@ -223,8 +235,9 @@ CLASS="replaceable"
 >)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(require-library-functions
  <TT
 CLASS="replaceable"
@@ -240,8 +253,9 @@ CLASS="replaceable"
 >}*)])</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(open-library
  <TT
 CLASS="replaceable"
@@ -251,8 +265,9 @@ CLASS="replaceable"
 >)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(clos-library
  <TT
 CLASS="replaceable"
@@ -262,8 +277,9 @@ CLASS="replaceable"
 >)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(with-open-library
  (<TT
 CLASS="replaceable"
@@ -285,8 +301,9 @@ CLASS="replaceable"
 >}*)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(defflibfun
  <TT
 CLASS="replaceable"
@@ -325,8 +342,9 @@ CLASS="replaceable"
 >}*)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(declare-library-function
  <TT
 CLASS="replaceable"
@@ -348,8 +366,9 @@ CLASS="replaceable"
 >}*)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(flibcall <TT
 CLASS="replaceable"
 ><I
@@ -364,8 +383,9 @@ CLASS="replaceable"
 >}*)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(mlibcall <TT
 CLASS="replaceable"
 ><I
@@ -380,8 +400,9 @@ CLASS="replaceable"
 >}*)</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(mem-read <TT
 CLASS="replaceable"
 ><I
@@ -402,8 +423,9 @@ CLASS="replaceable"
 >])</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(mem-write <TT
 CLASS="replaceable"
 ><I
@@ -428,8 +450,9 @@ CLASS="replaceable"
 >])</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(mem-write-vector
  <TT
 CLASS="replaceable"
@@ -450,8 +473,9 @@ CLASS="replaceable"
 >])</TT
 ></P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(nzero-pointer-p <TT
 CLASS="replaceable"
 ><I
@@ -460,6 +484,7 @@ CLASS="replaceable"
 >)</TT
 ></P
 ><P
+ALIGN="justify"
 >Except for <TT
 CLASS="function"
 >with-open-library</TT
@@ -473,6 +498,7 @@ CLASS="function"
 >mlibcall</TT
 >, all of the above are functions.</P
 ><P
+ALIGN="justify"
 >A library contains a collection of functions.  The library is
 referred to by a symbol referred as library-base at the <A
 HREF="affi.html"
@@ -507,6 +533,7 @@ CLASS="QUOTE"
 > package. The function returns the
 library-base.</P
 ><P
+ALIGN="justify"
 >A library may be opened by <TT
 CLASS="function"
 >open-library</TT
@@ -522,6 +549,7 @@ CLASS="function"
  automatically close the library for you, thus it is much safer to
  use.</P
 ><P
+ALIGN="justify"
 >A function is contained in a library.  Every function is referred
 to by a symbol.  A function is defined through
 <TT
@@ -558,6 +586,7 @@ CLASS="QUOTE"
 > and imported into the
 current package.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >flibcall</TT
@@ -574,12 +603,14 @@ inline the call, not requiring the foreign function to be defined again
 at load or execution time. The use of this macro is advertised wherever
 possible.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >mem-read</TT
 > reads an arbitrary address (with
 offset for structure references) and returns the given type.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >mem-write</TT
@@ -614,6 +645,7 @@ CLASS="classname"
 > 8))</TT
 > into memory.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >nzero-pointer-p</TT
@@ -646,16 +678,15 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-libs"
->Foreign Libraries</A
-></H2
+NAME="affi-libs">30.4.3. Foreign Libraries</H2
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >declare-library-base</TT
 > ought to be wrapped in an
 <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
 TARGET="_top"
@@ -668,6 +699,7 @@ CLASS="function"
 form and come before any function is referenced, because the library
 base symbol must be known.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >open-library</TT
@@ -700,6 +732,7 @@ you to specify the library by name, provided that its base has been
 declared.  It is recommended to use this macro and to reference the
 library by name.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -726,17 +759,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-types"
->(Foreign) <A
+NAME="affi-types">30.4.4. (Foreign) <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
 CLASS="command"
 >C</B
 ></A
-> types</A
-></H2
+> types</H2
 ><P
+ALIGN="justify"
 >The following foreign <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
@@ -769,11 +801,9 @@ classes.</P
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN19871"
-></A
-><P
+NAME="affi-types-tab"><P
 ><B
->Table 6. foreign <A
+>Table 30-6. foreign <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
@@ -790,9 +820,6 @@ CLASS="QUOTE"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1256,6 +1283,7 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Objects of type <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
 TARGET="_top"
@@ -1280,9 +1308,13 @@ string or unsigned byte vector. These are not <TT
 CLASS="constant"
 >NULL</TT
 >-terminated!
-This is useful for functions like like <TT
+This is useful for functions like like <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+TARGET="_top"
+><TT
 CLASS="function"
->read()</TT
+>READ</TT
+></A
 > which
 do not need an array at a constant address longer than the dynamic
 extent of the call (it is dangerous to define callback functions with
@@ -1320,6 +1352,7 @@ CLASS="constant"
 >:IO</TT
 > type is specified.</P
 ><P
+ALIGN="justify"
 >See also <A
 HREF="encoding.html#foreign-enc"
 ><TT
@@ -1328,6 +1361,7 @@ CLASS="varname"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >To meet the design goals, predefined types and objects were
 used. As such, pointers were represented as integers. Now that there is
 the <TT
@@ -1348,10 +1382,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-functions"
->Foreign functions</A
-></H2
+NAME="affi-functions">30.4.5. Foreign functions</H2
 ><P
+ALIGN="justify"
 >Foreign Functions are declared either through
 <TT
 CLASS="function"
@@ -1370,6 +1403,7 @@ CLASS="QUOTE"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >defflibfun</TT
@@ -1381,6 +1415,7 @@ CLASS="function"
 > requires the library name
 and computes the mask from the declaration of the arguments.</P
 ><P
+ALIGN="justify"
 >The value of mask is implementation-dependent. On the Amiga, it is
 an integer whose hexadecimal value is the reverse of the function
 argument register numbers, where d0 has number <TT
@@ -1400,6 +1435,7 @@ CLASS="constant"
 > mask is reserved for
 stack-based calls (unimplemented).</P
 ><P
+ALIGN="justify"
 >The <A
 HREF="affi.html"
 ><SPAN
@@ -1491,8 +1527,9 @@ CLASS="function"
 > for resource-tracking on
 the output side.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(declare-library-function <TT
 CLASS="replaceable"
 ><I
@@ -1528,17 +1565,12 @@ CLASS="replaceable"
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN20080"
-></A
-><P
+NAME="affi-dec-lib-fun-opt-bnf"><P
 ><B
->Table 7. </B
+>Table 30-7. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -1550,7 +1582,7 @@ VALIGN="MIDDLE"
 ALIGN="LEFT"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(:offset
     <TT
 CLASS="replaceable"
@@ -1571,7 +1603,7 @@ VALIGN="MIDDLE"
 ALIGN="LEFT"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ARGUMENTS</TT
@@ -1613,7 +1645,7 @@ VALIGN="MIDDLE"
 ALIGN="LEFT"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(:return-type
     <TT
 CLASS="replaceable"
@@ -1644,6 +1676,7 @@ CLASS="replaceable"
 > ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
 CLASS="constant"
 >:d0</TT
@@ -1676,6 +1709,7 @@ CLASS="function"
 >mlibcall</TT
 >.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >mlibcall</TT
@@ -1689,12 +1723,11 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-memory-access"
->Memory access</A
-></H2
+NAME="affi-memory-access">30.4.6. Memory access</H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(affi:mem-read <TT
 CLASS="replaceable"
 ><I
@@ -1785,8 +1818,9 @@ CLASS="function"
 >affi:mem-read</TT
 >.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(affi:mem-write
 <TT
 CLASS="replaceable"
@@ -1842,8 +1876,9 @@ CLASS="type"
 >*</SPAN
 >), but not vectors to the specified memory address.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(affi:mem-write-vector
 <TT
 CLASS="replaceable"
@@ -1894,10 +1929,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-func-def"
->Function Definition Files</A
-></H2
+NAME="affi-func-def">30.4.7. Function Definition Files</H2
 ><P
+ALIGN="justify"
 ><TT
 CLASS="function"
 >affi:require-library-functions</TT
@@ -1925,6 +1959,7 @@ HREF="affi.html#affi-ex-1-predefined"
 >example 1</A
 > below.</P
 ><P
+ALIGN="justify"
 >As <TT
 CLASS="function"
 >affi:require-library-functions</TT
@@ -1937,6 +1972,7 @@ HREF="affi.html#affi-ex-4-sample"
 >example 4</A
 > below.</P
 ><P
+ALIGN="justify"
 >The file <TT
 CLASS="filename"
 >read-fd.lisp</TT
@@ -1999,10 +2035,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-hints"
->Hints</A
-></H2
+NAME="affi-hints">30.4.8. Hints</H2
 ><P
+ALIGN="justify"
 >By using appropriate <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
 TARGET="_top"
@@ -2029,6 +2064,7 @@ HREF="affi.html#affi-ex-1-predefined"
 >example 1</A
 > below.</P
 ><P
+ALIGN="justify"
 >Do not rely on <A
 HREF="final.html"
 ><TT
@@ -2057,10 +2093,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-caveats"
->Caveats</A
-></H2
+NAME="affi-caveats">30.4.9. Caveats</H2
 ><P
+ALIGN="justify"
 >You can consider the library bases being symbols in need of being
 imported from the package <A
 HREF="affi.html"
@@ -2105,22 +2140,19 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-examples"
->Examples</A
-></H2
+NAME="affi-examples">30.4.10. Examples</H2
 ><FONT
 COLOR="RED"
 >NB: These examples are somewhat specific to the Amiga.</FONT
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-1-predefined"
-></A
-><P
+NAME="affi-ex-1-predefined"><P
 ><B
->Example 8. Using a predefined library function file</B
+>Example 30-8. Using a predefined library function file</B
 ></P
 ><P
+ALIGN="justify"
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2171,11 +2203,9 @@ Compiled, it will have inlined the library function calls.
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-2-flibcall"
-></A
-><P
+NAME="affi-ex-2-flibcall"><P
 ><B
->Example 9. Using flibcall</B
+>Example 30-9. Using flibcall</B
 ></P
 ><TABLE
 BORDER="0"
@@ -2221,11 +2251,9 @@ CLASS="function"
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-3-dynamic"
-></A
-><P
+NAME="affi-ex-3-dynamic"><P
 ><B
->Example 10. Be fully dynamic, defining library bases ourselves</B
+>Example 30-10. Be fully dynamic, defining library bases ourselves</B
 ></P
 ><TABLE
 BORDER="0"
@@ -2270,11 +2298,9 @@ CLASS="function"
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-4-sample"
-></A
-><P
+NAME="affi-ex-4-sample"><P
 ><B
->Example 11. Some sample function definitions</B
+>Example 30-11. Some sample function definitions</B
 ></P
 ><TABLE
 BORDER="0"
@@ -2320,6 +2346,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -2331,7 +2358,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="dffi.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -2339,6 +2367,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -2347,7 +2376,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="rexx.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -2362,6 +2392,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -2372,6 +2403,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

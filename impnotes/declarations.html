@@ -6,8 +6,10 @@
   [CLHS-3.3]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="compilation.html"><LINK
 REL="NEXT"
 TITLE="Lambda Lists
    [CLHS-3.4]"
-HREF="lalist.html"></HEAD
+HREF="lalist.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="compilation.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Evaluation and Compilation
+>Chapter 3. Evaluation and Compilation
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-3.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="lalist.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,18 +106,17 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="declarations"
->Declarations
+NAME="declarations">3.3. Declarations
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-3.html"
 TARGET="_top"
 >[CLHS-3.3]</A
-></A
 ></H1
 ><P
+ALIGN="justify"
 >The declarations
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/dec_type.html"
 TARGET="_top"
@@ -123,7 +137,7 @@ CLASS="replaceable"
 > ...)</TT
 >,
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/dec_ftype.html"
 TARGET="_top"
@@ -145,7 +159,7 @@ CLASS="replaceable"
 > ...)</TT
 >,
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/dec_optimize.html"
 TARGET="_top"
@@ -168,14 +182,18 @@ CLASS="replaceable"
 >
    are ignored by the interpreter and the compiler.</P
 ><P
->The [<SPAN
+ALIGN="justify"
+>The <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] declaration <TT
-CLASS="literal"
+>]</A
+> declaration <TT
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/dec_optimize.html"
 TARGET="_top"
@@ -187,14 +205,18 @@ CLASS="literal"
  (debug ...))</TT
 > is legal.</P
 ><P
->The [<SPAN
+ALIGN="justify"
+>The <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] declaration <TT
-CLASS="literal"
+>]</A
+> declaration <TT
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/dec_ignorecm_ignorable.html"
 TARGET="_top"
@@ -223,12 +245,11 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="compile-decl"
->Additional declarations</A
-></H2
+NAME="compile-decl">3.3.1. Additional declarations</H2
 ><P
+ALIGN="justify"
 >The declaration <TT
-CLASS="literal"
+CLASS="sexp"
 >(compile)</TT
 > has the
  effect that the current form is compiled prior to execution.
@@ -252,7 +273,7 @@ CLASS="function"
 HREF="http://www.lisp.org/HyperSpec/Body/sym_declare.html"
 TARGET="_top"
 ><TT
-CLASS="literal"
+CLASS="function"
 >DECLARE</TT
 ></A
 > (compile)) <TT
@@ -268,6 +289,7 @@ CLASS="replaceable"
 >
 executes a compiled version of form.</P
 ><P
+ALIGN="justify"
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -295,7 +317,7 @@ CLASS="function"
 HREF="http://www.lisp.org/HyperSpec/Body/sym_declare.html"
 TARGET="_top"
 ><TT
-CLASS="literal"
+CLASS="function"
 >DECLARE</TT
 ></A
 > (compile)) (<A
@@ -340,8 +362,9 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 >The type assertion <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_the.html"
 TARGET="_top"
@@ -376,6 +399,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -387,7 +411,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="compilation.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -395,6 +420,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -403,7 +429,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="lalist.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -423,6 +450,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="eval.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -438,6 +466,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

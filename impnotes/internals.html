@@ -5,18 +5,22 @@
 >Internals of the CLISP Implementation</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
 REL="PREVIOUS"
-TITLE="X3J13 Issue Index
-   [CLHS-ic]"
-HREF="issues.html"><LINK
+TITLE="Extensions-2.13. Other"
+HREF="other.html"><LINK
 REL="NEXT"
 TITLE="Overview of CLISP's Garbage Collection"
-HREF="gc.html"></HEAD
+HREF="gc.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="part"
 BGCOLOR="#FFFFFF"
@@ -27,6 +31,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -46,7 +51,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -54,8 +66,9 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="issues.html"
->&#60;&#60;&#60; Previous</A
+HREF="other.html"
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -68,7 +81,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="gc.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -78,13 +92,11 @@ WIDTH="100%"></DIV
 ><DIV
 CLASS="PART"
 ><A
-NAME="internals"
-></A
-><DIV
+NAME="internals"><DIV
 CLASS="TITLEPAGE"
 ><H1
 CLASS="title"
->II. Internals of the <A
+>III. Internals of the <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -100,7 +112,7 @@ CLASS="TOC"
 >Table of Contents</B
 ></DT
 ><DT
-><A
+>31. <A
 HREF="gc.html"
 >Overview of <A
 HREF="http://clisp.cons.org"
@@ -112,7 +124,19 @@ CLASS="command"
 >'s Garbage Collection</A
 ></DT
 ><DT
-><A
+>32. <A
+HREF="extend.html"
+>Extending <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</A
+></DT
+><DT
+>33. <A
 HREF="bytecode.html"
 >The <A
 HREF="http://clisp.cons.org"
@@ -132,6 +156,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -142,8 +167,9 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="issues.html"
->&#60;&#60;&#60; Previous</A
+HREF="other.html"
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -151,6 +177,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -159,7 +186,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="gc.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -167,12 +195,7 @@ HREF="gc.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->X3J13 Issue Index
-   <A
-HREF="http://www.lisp.org/HyperSpec/Issues/Issues-Categorized.html"
-TARGET="_top"
->[CLHS-ic]</A
-></TD
+>Extensions-2.13. Other</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -193,6 +216,45 @@ CLASS="command"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

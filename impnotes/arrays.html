@@ -6,8 +6,10 @@
    [CLHS-15]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="conses.html"><LINK
 REL="NEXT"
 TITLE="The Arrays Dictionary
    [CLHS-15.2]"
-HREF="array-dict.html"></HEAD
+HREF="array-dict.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="conses.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="array-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,20 +99,46 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="arrays"
->Arrays
+NAME="arrays">Chapter 15. Arrays
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-15.html"
 TARGET="_top"
 >[CLHS-15]</A
-></A
 ></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>15.1. <A
+HREF="arrays.html#array-elts"
+>Array Elements
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_15-1-1.html"
+TARGET="_top"
+>[CLHS-15.1.1]</A
+></A
+></DT
+><DT
+>15.2. <A
+HREF="array-dict.html"
+>The Arrays Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_arrays_dictionary.html"
+TARGET="_top"
+>[CLHS-15.2]</A
+></A
+></DT
+></DL
+></DIV
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-array.html"
 TARGET="_top"
 ><TT
@@ -105,7 +146,6 @@ CLASS="function"
 >MAKE-ARRAY</TT
 ></A
 >. </B
-></B
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-array.html"
 TARGET="_top"
@@ -196,28 +236,21 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="array-elts"
->Array Elements
+NAME="array-elts">15.1. Array Elements
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_15-1-1.html"
 TARGET="_top"
 >[CLHS-15.1.1]</A
-></A
 ></H1
 ><DIV
 CLASS="table"
 ><A
-NAME="array-limit-table"
-></A
-><P
+NAME="array-limit-table"><P
 ><B
->Table 1. Platform dependent</B
+>Table 15-1. Array limits (platform dependent)</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -332,13 +365,17 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
->Note that these constants are not fixnums, contrary to the [<SPAN
+ALIGN="justify"
+>Note that these constants are not fixnums, contrary to the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->]
+>]</A
+>
  Issue <A
 HREF="http://www.lisp.org/HyperSpec/Issues/iss014.html"
 TARGET="_top"
@@ -351,6 +388,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -362,7 +400,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="conses.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -370,6 +409,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -378,7 +418,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="array-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -398,6 +439,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -413,6 +455,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

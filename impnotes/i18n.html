@@ -5,8 +5,10 @@
 >Extensions-1.3. Internationalization</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-1.2. Quitting CLISP"
 HREF="quit.html"><LINK
 REL="NEXT"
 TITLE="Extensions-1.4. Encodings"
-HREF="encoding.html"></HEAD
+HREF="encoding.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="quit.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-1: Platform independent Extensions</TD
+>Chapter 29. Extensions-1: Platform independent Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="encoding.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,17 +97,17 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="i18n"
->Extensions-1.3. Internationalization</A
-></H1
+NAME="i18n">29.3. Extensions-1.3. Internationalization</H1
 ><P
->Internationalization means to prepare a program so that it can
+ALIGN="justify"
+>"Internationalization" means to prepare a program so that it can
 use multiple national languages and national cultural conventions
 without requiring further source code changes.  Localization means
 providing the data - mostly textual translations - necessary for an
 internationalized program to work in a particular language and with
 particular cultural conventions.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -101,7 +116,7 @@ CLASS="command"
 >CLISP</B
 ></A
 > is internationalized, and is localized for the languages
-English, German, French, Spanish and Dutch.
+English, German, French, Spanish, Dutch and Russian.
 <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -124,8 +139,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="ggettext"
->The <A
+NAME="ggettext">29.3.1. The <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
@@ -133,9 +147,9 @@ TARGET="_top"
 HREF="http://www.gnu.org/software/gettext/gettext.html"
 TARGET="_top"
 >gettext</A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.gnu.org"
 TARGET="_top"
@@ -164,6 +178,7 @@ through message catalogs. It is also a set of tools which makes the
 translation maintenance easy for the translator and the program
 maintainer.</P
 ><P
+ALIGN="justify"
 >The <A
 HREF="http://www.gnu.org"
 TARGET="_top"
@@ -207,9 +222,8 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="gettext"
-><TT
-CLASS="literal"
+NAME="gettext"><TT
+CLASS="sexp"
 >(<A
 HREF="i18n.html#gettext"
 ><TT
@@ -246,10 +260,10 @@ CLASS="replaceable"
 ></TT
 ></A
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns the translation of the message <TT
 CLASS="replaceable"
 ><I
@@ -278,14 +292,20 @@ CLASS="replaceable"
 ><I
 >MSGID</I
 ></TT
-> should be an ASCII string, and is normally the English message.
+> should be an <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> string, and is normally the English message.
   </P
 ></DD
 ><DT
 ><A
-NAME="ngettext"
-><TT
-CLASS="literal"
+NAME="ngettext"><TT
+CLASS="sexp"
 >(<A
 HREF="i18n.html#ngettext"
 ><TT
@@ -333,10 +353,10 @@ CLASS="replaceable"
 ></TT
 ></A
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns the plural form of the translation for of
    <TT
 CLASS="replaceable"
@@ -376,7 +396,14 @@ CLASS="replaceable"
 >msgid_plural</I
 ></TT
 >
-   should be ASCII strings, and are normally the English singular and
+   should be <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> strings, and are normally the English singular and
    English plural variant of the message, respectively.
    </P
 ></DD
@@ -387,10 +414,9 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="domain"
->Domain</A
-></H3
+NAME="domain">29.3.1.1. Domain</H3
 ><P
+ALIGN="justify"
 >The <A
 HREF="i18n.html#domain"
 ><TT
@@ -430,9 +456,20 @@ CLASS="replaceable"
 ></A
 > allows several Lisp programs running in the same
 image to request translations independently of each other.</P
+><DIV
+CLASS="formalpara"
 ><P
+><A
+NAME="textdomain"><B
+>Function <A
+HREF="i18n.html#textdomain"
 ><TT
-CLASS="literal"
+CLASS="function"
+>I18N:TEXTDOMAIN</TT
+></A
+>. </B
+><TT
+CLASS="sexp"
 >(<A
 HREF="i18n.html#textdomain"
 ><TT
@@ -480,7 +517,7 @@ CLASS="function"
 ></A
 >able.
 <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -510,7 +547,7 @@ HREF="p-indep.html#image"
 >memory image</A
 >.
 The use of <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -536,17 +573,28 @@ CLASS="replaceable"
 ></TT
 ></A
 >.</P
+></DIV
+><DIV
+CLASS="formalpara"
 ><P
+><A
+NAME="textdomaindir"><B
+>Function <A
+HREF="i18n.html#textdomaindir"
 ><TT
-CLASS="literal"
+CLASS="function"
+>I18N:TEXTDOMAINDIR</TT
+></A
+>. </B
+><TT
+CLASS="sexp"
 >(<A
 HREF="i18n.html#textdomaindir"
 ><TT
 CLASS="function"
 >I18N:TEXTDOMAINDIR</TT
 ></A
->
-<A
+> <A
 HREF="i18n.html#domain"
 ><TT
 CLASS="replaceable"
@@ -555,12 +603,13 @@ CLASS="replaceable"
 ></TT
 ></A
 >)</TT
-> is a place that returns the base
-directory, called <TT
+>
+is a place that returns the base directory, called
+<TT
 CLASS="filename"
 >TEXTDOMAINDIR</TT
-> above, where the
-message catalogs for the given <A
+> above, where the message
+catalogs for the given <A
 HREF="i18n.html#domain"
 ><TT
 CLASS="replaceable"
@@ -578,7 +627,7 @@ CLASS="function"
 ></A
 >able.
 <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -605,15 +654,15 @@ HREF="p-indep.html#image"
 >memory image</A
 >.</P
 ></DIV
+></DIV
 ><DIV
 CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="category"
->Category</A
-></H3
+NAME="category">29.3.1.2. Category</H3
 ><P
+ALIGN="justify"
 >The <A
 HREF="i18n.html#category"
 ><TT
@@ -686,20 +735,17 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="i18n-example"
->Example</A
-></H3
+NAME="i18n-example">29.3.1.3. Example</H3
 ><P
+ALIGN="justify"
 >A non-internationalized program simulating a restaurant dialogue
 might look as follows.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN15689"
-></A
-><P
+NAME="i18n-non-i"><P
 ><B
->Example 1. prog.lisp</B
+>Example 29-1. prog.lisp</B
 ></P
 ><TABLE
 BORDER="0"
@@ -722,6 +768,7 @@ CLASS="programlisting"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >After being internationalized, all strings are wrapped in
 <A
 HREF="i18n.html#gettext"
@@ -747,11 +794,9 @@ the current directory.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN15699"
-></A
-><P
+NAME="i18n-i"><P
 ><B
->Example 2. prog.lisp</B
+>Example 29-2. prog.lisp</B
 ></P
 ><TABLE
 BORDER="0"
@@ -778,6 +823,7 @@ CLASS="programlisting"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >For ease of reading, it is customary to define an abbreviation
 for the <A
 HREF="i18n.html#gettext"
@@ -789,11 +835,9 @@ CLASS="function"
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN15705"
-></A
-><P
+NAME="i18n-i-abbrev"><P
 ><B
->Example 3. prog.lisp</B
+>Example 29-3. prog.lisp</B
 ></P
 ><TABLE
 BORDER="0"
@@ -820,6 +864,7 @@ CLASS="programlisting"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Now the program's maintainer creates a message catalog template
 through the command
 
@@ -840,15 +885,14 @@ CLASS="screen"
 
 Note: xgettext version 0.11 or higher is required here.</P
 ><P
+ALIGN="justify"
 >The message catalog template looks roughly like this.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN15711"
-></A
-><P
+NAME="i18n-pot"><P
 ><B
->Example 4. prog.pot</B
+>Example 29-4. prog.pot</B
 ></P
 ><TABLE
 BORDER="0"
@@ -871,15 +915,14 @@ msgstr[1] ""
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Then a French translator creates a French message catalog</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN15715"
-></A
-><P
+NAME="i18n-fr-po"><P
 ><B
->Example 5. prog.fr.po</B
+>Example 29-5. prog.fr.po</B
 ></P
 ><TABLE
 BORDER="0"
@@ -908,8 +951,10 @@ msgstr[1] "%d morceaux de gateau"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >and sends it to the program's maintainer.</P
 ><P
+ALIGN="justify"
 >The program's maintainer compiles the catalog as follows:
 
 <TABLE
@@ -928,6 +973,7 @@ bash$ msgfmt -o ./fr/LC_MESSAGES/prog.mo prog.fr.po
 ></TABLE
 ></P
 ><P
+ALIGN="justify"
 >When a user in a french locale then runs the program
 
 <TABLE
@@ -970,10 +1016,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="language"
->The Language</A
-></H2
+NAME="language">29.3.2. The Language</H2
 ><P
+ALIGN="justify"
 >Warning: The facilities described in this section will work
 only for the languages for which <A
 HREF="http://clisp.cons.org"
@@ -985,6 +1030,7 @@ CLASS="command"
 > itself is already
 localized.</P
 ><P
+ALIGN="justify"
 >The language <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -1031,7 +1077,15 @@ CLASS="constant"
 ><TT
 CLASS="constant"
 >NEDERLANDS</TT
-> (i.e. Dutch)</TD
+> (i.e., Dutch)</TD
+></TR
+><TR
+><TD
+><TT
+CLASS="constant"
+>&#1056;&#1059;&#1057;&#1057;&#1050;&#1048;&#1049;</TT
+>
+  (i.e. Russian)</TD
 ></TR
 ></TBODY
 ></TABLE
@@ -1039,6 +1093,7 @@ CLASS="constant"
 ></P
 ></P
 ><P
+ALIGN="justify"
 >This is controlled by the <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
@@ -1046,12 +1101,12 @@ TARGET="_top"
 CLASS="classname"
 >SYMBOL-MACRO</TT
 ></A
-> <I
+> <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
 >CUSTOM:*CURRENT-LANGUAGE*</TT
-></I
+></B
 >,
  which can be set at run time as well as using <A
 HREF="clisp.html#opt-lang"
@@ -1088,15 +1143,16 @@ CLASS="function"
 ></A
 > is the new locale directory.</P
 ><P
->More languages can be defined through the macro <I
+ALIGN="justify"
+>More languages can be defined through the macro <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >I18N:DEFLANGUAGE</TT
-></I
+></B
 >:
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >I18N:DEFLANGUAGE</TT
@@ -1119,7 +1175,7 @@ TARGET="_top"
 >gettext</A
 > and
  <A
-HREF="http://www.gnu.org/software/emacs/emacs.html"
+HREF="http://www.gnu.org/software/emacs/"
 TARGET="_top"
 >Emacs</A
 > (or <A
@@ -1128,16 +1184,17 @@ TARGET="_top"
 >XEmacs</A
 >) po-mode.</P
 ><P
+ALIGN="justify"
 >This works only for strings.  For arbitrary language-dependent
- Lisp objects, you define one through the macro <I
+ Lisp objects, you define one through the macro <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >I18N:DEFINTERNATIONAL</TT
-></I
+></B
 >:
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >I18N:DEFINTERNATIONAL</TT
@@ -1169,15 +1226,15 @@ CLASS="constant"
 ></A
 >))</TT
 > and add
- language-dependent values through the macro <I
+ language-dependent values through the macro <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >I18N:DEFLOCALIZED</TT
-></I
+></B
 >:
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >I18N:DEFLOCALIZED</TT
@@ -1200,16 +1257,17 @@ CLASS="replaceable"
 >)</TT
 ></P
 ><P
+ALIGN="justify"
 >(One such form for each language.  Languages without an assigned
  value will be treated like the default-language.)  You can then access
- the localized value by calling <I
+ the localized value by calling <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >I18N:LOCALIZED</TT
-></I
+></B
 >: <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >I18N:LOCALIZED</TT
@@ -1240,6 +1298,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1251,7 +1310,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="quit.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1259,6 +1319,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1267,7 +1328,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="encoding.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1289,6 +1351,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="p-indep.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1299,6 +1362,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

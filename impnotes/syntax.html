@@ -6,8 +6,10 @@
    [CLHS-2]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="cl-symb.html"><LINK
 REL="NEXT"
 TITLE="Valid Patterns for Tokens
   [CLHS-2.3.5]"
-HREF="valid-patterns.html"></HEAD
+HREF="valid-patterns.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="cl-symb.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="valid-patterns.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,28 +99,84 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="syntax"
->Syntax
+NAME="syntax">Chapter 2. Syntax
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-2.html"
 TARGET="_top"
 >[CLHS-2]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="tokens"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>2.1. <A
+HREF="syntax.html#tokens"
 >Symbols as Tokens
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-4.html"
 TARGET="_top"
 >[CLHS-2.3.4]</A
 ></A
+></DT
+><DT
+>2.2. <A
+HREF="valid-patterns.html"
+>Valid Patterns for Tokens
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-5.html"
+TARGET="_top"
+>[CLHS-2.3.5]</A
+></A
+></DT
+><DT
+>2.3. <A
+HREF="double-quote.html"
+>Double-Quote
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-5.html"
+TARGET="_top"
+>[CLHS-2.4.5]</A
+></A
+></DT
+><DT
+>2.4. <A
+HREF="backquote.html"
+>Backquote
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-6.html"
+TARGET="_top"
+>[CLHS-2.4.6]</A
+></A
+></DT
+><DT
+>2.5. <A
+HREF="sharpsign.html"
+>Sharpsign
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-8.html"
+TARGET="_top"
+>[CLHS-2.4.8]</A
+></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="tokens">2.1. Symbols as Tokens
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-4.html"
+TARGET="_top"
+>[CLHS-2.3.4]</A
 ></H1
 ><P
+ALIGN="justify"
 >A "reserved token", i.e., a <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#token"
 TARGET="_top"
@@ -114,6 +185,7 @@ TARGET="_top"
  syntax but cannot be interpreted as a number, is interpreted as symbol
  when being read.</P
 ><P
+ALIGN="justify"
 >When creating a symbol from a token, no character attributes are
  removed.</P
 ></DIV
@@ -123,6 +195,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -134,7 +207,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="cl-symb.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -142,6 +216,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -150,7 +225,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="valid-patterns.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -177,6 +253,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -192,6 +269,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

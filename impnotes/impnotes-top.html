@@ -5,17 +5,22 @@
 >Implementation Notes for GNU CLISP.</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="NEXT"
-TITLE="[CLISP icon]"
+TITLE="Overview"
 HREF="preface.html"><META
 NAME="KEYWORD"
 CONTENT="Lisp"><META
 NAME="KEYWORD"
 CONTENT="Common Lisp"><META
 NAME="KEYWORD"
-CONTENT="CLISP"></HEAD
+CONTENT="CLISP"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="book"
 BGCOLOR="#FFFFFF"
@@ -26,15 +31,12 @@ ALINK="#0000FF"
 ><DIV
 CLASS="BOOK"
 ><A
-NAME="impnotes-top"
-></A
-><DIV
+NAME="impnotes-top"><DIV
 CLASS="TITLEPAGE"
 ><H1
 CLASS="title"
 ><A
-NAME="impnotes-top"
->Implementation Notes for <A
+NAME="AEN9">Implementation Notes for <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
@@ -45,29 +47,98 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</A
-></H1
-><H3
-CLASS="author"
-><A
-NAME="AEN16"
+>.</H1
+><H2
+CLASS="subtitle"
+>These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
 ></A
-></H3
+> version 2.30.</H2
+><SPAN
+CLASS="date"
+>Last modified: 2002-09-13<BR></SPAN
 ><H3
 CLASS="author"
 ><A
-NAME="AEN22"
->Dr. Bruno Haible</A
-></H3
+NAME="bruno">Dr. Bruno Haible</H3
 ><H3
 CLASS="author"
 ><A
-NAME="AEN26"
->Dr. Sam Steingold</A
-></H3
+NAME="sds">Dr. Sam Steingold</H3
+><DIV
+CLASS="authorblurb"
+><P
+ALIGN="justify"
+>Bugs in both these notes and <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> itself
+     should be reported to the mailing list
+     <TT
+CLASS="email"
+>&#60;<A
+HREF="mailto:clisp-list@sf.net"
+>clisp-list@sf.net</A
+>&#62;</TT
+>.</P
+></DIV
+><IMG
+ALIGN="center"
+SRC="clisp.png"
+ALT=""><P
+CLASS="copyright"
+>Copyright &copy; 1992-2002 by Bruno Haible</P
+><P
+CLASS="copyright"
+>Copyright &copy; 1998-2002 by Sam Steingold</P
+><DIV
+CLASS="legalnotice"
 ><A
-HREF="ln7.html"
->Legal Notice</A
+NAME="legalese"><P
+></P
+><P
+ALIGN="justify"
+>These notes are covered by the <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/copyleft/fdl.html"
+TARGET="_top"
+>GFDL</A
+>:</P
+><P
+ALIGN="justify"
+>Permission is granted to copy, distribute and/or modify this
+   document under the terms of the GNU Free Documentation License
+   (<A
+HREF="http://www.gnu.org/copyleft/fdl.html"
+TARGET="_top"
+>GFDL</A
+>), Version 1.1 or any later version published by the <A
+HREF="http://www.fsf.org"
+TARGET="_top"
+>Free Software Foundation (FSF)</A
+>;
+   with no Invariant Sections,
+   with Front-Cover Text being this section, and
+   with no Back-Cover Texts.
+   A copy of the license is included in the section entitled
+   <A
+HREF="gfdl.html"
+>"GNU Free Documentation License."</A
+></P
+><P
+></P
+></DIV
 ><HR></DIV
 ><DIV
 CLASS="TOC"
@@ -79,30 +150,26 @@ CLASS="TOC"
 ><DT
 ><A
 HREF="preface.html"
-><SPAN
-CLASS="inlinemediaobject"
-><IMG
-SRC="clisp.png"
-ALT="[CLISP icon]"
-></IMG
-></SPAN
-></A
+>Overview</A
 ></DT
 ><DT
 >I. <A
 HREF="clhs-chapters.html"
->Chapters or the [<SPAN
+>Chapters or the <A
+HREF="references.html#CLHS"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLHS"
 >Common Lisp HyperSpec</A
 ></SPAN
 >]</A
+></A
 ></DT
 ><DD
 ><DL
 ><DT
-><A
+>1. <A
 HREF="intro.html"
 >Introduction
   <A
@@ -114,7 +181,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>1.1. <A
 HREF="intro.html#spec-symb"
 >Special Symbols
   <A
@@ -124,7 +191,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>1.2. <A
 HREF="error-terms.html"
 >Error Terminology
   <A
@@ -134,7 +201,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>1.3. <A
 HREF="class-prec.html"
 >Class Precedence Lists
   <A
@@ -144,7 +211,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>1.4. <A
 HREF="cl-symb.html"
 >Symbols in the Package <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
@@ -163,7 +230,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>2. <A
 HREF="syntax.html"
 >Syntax
    <A
@@ -175,7 +242,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>2.1. <A
 HREF="syntax.html#tokens"
 >Symbols as Tokens
   <A
@@ -185,7 +252,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>2.2. <A
 HREF="valid-patterns.html"
 >Valid Patterns for Tokens
   <A
@@ -195,7 +262,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>2.3. <A
 HREF="double-quote.html"
 >Double-Quote
   <A
@@ -205,7 +272,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>2.4. <A
 HREF="backquote.html"
 >Backquote
   <A
@@ -215,7 +282,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>2.5. <A
 HREF="sharpsign.html"
 >Sharpsign
   <A
@@ -227,7 +294,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>3. <A
 HREF="eval.html"
 >Evaluation and Compilation
    <A
@@ -239,7 +306,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>3.1. <A
 HREF="eval.html#evaluation"
 >Evaluation
   <A
@@ -249,7 +316,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>3.2. <A
 HREF="compilation.html"
 >Compilation
   <A
@@ -259,7 +326,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>3.3. <A
 HREF="declarations.html"
 >Declarations
   <A
@@ -269,7 +336,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>3.4. <A
 HREF="lalist.html"
 >Lambda Lists
    <A
@@ -279,11 +346,11 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>3.5. <A
 HREF="eval-comp.html"
 >The Evaluation and Compilation Dictionary
   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-8.html"
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_evalu_n_dictionary.html"
 TARGET="_top"
 >[CLHS-3.8]</A
 ></A
@@ -291,7 +358,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>4. <A
 HREF="types-classes.html"
 >Types and Classes
    <A
@@ -303,7 +370,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>4.1. <A
 HREF="types-classes.html#types"
 >Types
   <A
@@ -313,7 +380,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>4.2. <A
 HREF="classes.html"
 >Classes
   <A
@@ -323,18 +390,21 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>4.3. <A
 HREF="clos-diff.html"
->Deviations from [<SPAN
+>Deviations from <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
 >]</A
+></A
 ></DT
 ><DT
-><A
+>4.4. <A
 HREF="metaclasses.html"
 >Standard Metaclasses
   <A
@@ -344,7 +414,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>4.5. <A
 HREF="def-class.html"
 >Defining Classes
   <A
@@ -354,7 +424,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>4.6. <A
 HREF="redef-class.html"
 >Redefining Classes
   <A
@@ -364,7 +434,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>4.7. <A
 HREF="type-class-int.html"
 >Integrating Types and Classes
   <A
@@ -374,7 +444,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>4.8. <A
 HREF="type-class-dict.html"
 >The Types and Classes Dictionary
   <A
@@ -386,7 +456,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>5. <A
 HREF="data.html"
 >Data and Control Flow
    <A
@@ -398,7 +468,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>5.1. <A
 HREF="data.html#flow-dict"
 >The Data and Control Flow Dictionary
    <A
@@ -410,7 +480,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>6. <A
 HREF="iteration.html"
 >Iteration
    <A
@@ -420,7 +490,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>7. <A
 HREF="objects.html"
 >Objects
    <A
@@ -430,7 +500,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>8. <A
 HREF="structures.html"
 >Structures
    <A
@@ -440,7 +510,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>9. <A
 HREF="conditions.html"
 >Conditions
    <A
@@ -452,7 +522,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>9.1. <A
 HREF="conditions.html#cond-nl"
 >Embedded Newlines in Condition Reports
    <A
@@ -462,19 +532,19 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>9.2. <A
 HREF="cond-dict.html"
 >The Conditions Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_condi_s_dictionary.html"
 TARGET="_top"
->[CLHS-9.2.]</A
+>[CLHS-9.2]</A
 ></A
 ></DT
 ></DL
 ></DD
 ><DT
-><A
+>10. <A
 HREF="symbols.html"
 >Symbols
    <A
@@ -484,7 +554,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>11. <A
 HREF="packages.html"
 >Packages
    <A
@@ -496,7 +566,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>11.1. <A
 HREF="packages.html#pack-lock"
 >Constraints on the COMMON-LISP Package for
  Conforming Programs - package locking
@@ -507,7 +577,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>11.2. <A
 HREF="clupack.html"
 >The COMMON-LISP-USER Package
    <A
@@ -517,7 +587,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>11.3. <A
 HREF="imppack.html"
 >Implementation-Defined Packages
    <A
@@ -527,19 +597,19 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>11.4. <A
 HREF="pack-dict.html"
 >The Packages Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_packa_s_dictionary.html"
 TARGET="_top"
->[CLHS-11.2.]</A
+>[CLHS-11.2]</A
 ></A
 ></DT
 ></DL
 ></DD
 ><DT
-><A
+>12. <A
 HREF="numbers.html"
 >Numbers
    <A
@@ -551,12 +621,12 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>12.1. <A
 HREF="numbers.html#num-types"
 >Numeric Types</A
 ></DT
 ><DT
-><A
+>12.2. <A
 HREF="num-concepts.html"
 >Number Concepts
    <A
@@ -566,7 +636,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>12.3. <A
 HREF="num-dict.html"
 >The Numbers Dictionary
    <A
@@ -578,7 +648,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>13. <A
 HREF="characters.html"
 >Characters
    <A
@@ -590,12 +660,12 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>13.1. <A
 HREF="characters.html#input-char"
 >Attributes</A
 ></DT
 ><DT
-><A
+>13.2. <A
 HREF="char-script.html"
 >Character Scripts
    <A
@@ -605,7 +675,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.3. <A
 HREF="char-attrib.html"
 >Character Attributes
    <A
@@ -615,7 +685,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.4. <A
 HREF="graph-char.html"
 >Graphic Characters
    <A
@@ -625,7 +695,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.5. <A
 HREF="alpha-char.html"
 >Alphabetic Characters
    <A
@@ -635,7 +705,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.6. <A
 HREF="char-ext.html"
 >Case of Implementation-Defined Characters
    <A
@@ -645,7 +715,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.7. <A
 HREF="num-char.html"
 >Numeric Characters
    <A
@@ -655,7 +725,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.8. <A
 HREF="char-ord.html"
 >Ordering of Characters
    <A
@@ -665,7 +735,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.9. <A
 HREF="clhs-newline.html"
 >Treatment of Newline during Input and Output
    <A
@@ -675,7 +745,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.10. <A
 HREF="char-int.html"
 >Character Encodings
    <A
@@ -685,7 +755,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.11. <A
 HREF="script-ext.html"
 >Documentation
    of Implementation-Defined Scripts
@@ -696,7 +766,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.12. <A
 HREF="char-dict.html"
 >The Characters Dictionary
    <A
@@ -706,24 +776,24 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13.13. <A
 HREF="char-width.html"
 >Functions on characters</A
 ></DT
 ><DT
-><A
+>13.14. <A
 HREF="char-platform-dep.html"
->platform-dependent characters</A
+>Platform-Dependent Characters</A
 ></DT
 ><DT
-><A
+>13.15. <A
 HREF="char-bits.html"
 >Obsolete Constants</A
 ></DT
 ></DL
 ></DD
 ><DT
-><A
+>14. <A
 HREF="conses.html"
 >Conses
    <A
@@ -735,7 +805,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>14.1. <A
 HREF="conses.html#cons-dict"
 >The Conses Dictionary
    <A
@@ -747,7 +817,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>15. <A
 HREF="arrays.html"
 >Arrays
    <A
@@ -759,7 +829,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>15.1. <A
 HREF="arrays.html#array-elts"
 >Array Elements
    <A
@@ -769,7 +839,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>15.2. <A
 HREF="array-dict.html"
 >The Arrays Dictionary
    <A
@@ -781,7 +851,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>16. <A
 HREF="strings.html"
 >Strings
    <A
@@ -793,7 +863,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>16.1. <A
 HREF="strings.html#string-dict"
 >The Strings Dictionary
    <A
@@ -805,7 +875,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>17. <A
 HREF="sequences.html"
 >Sequences
    <A
@@ -817,19 +887,19 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>17.1. <A
 HREF="sequences.html#seq-dict"
 >The Sequences Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_seque_s_dictionary.html"
 TARGET="_top"
->[CLHS-17.3.]</A
+>[CLHS-17.3]</A
 ></A
 ></DT
 ></DL
 ></DD
 ><DT
-><A
+>18. <A
 HREF="hash.html"
 >Hash Tables
    <A
@@ -841,19 +911,19 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>18.1. <A
 HREF="hash.html#hash-dict"
 >The Hash Tables Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_hash__s_dictionary.html"
 TARGET="_top"
->[CLHS-18.2.]</A
+>[CLHS-18.2]</A
 ></A
 ></DT
 ></DL
 ></DD
 ><DT
-><A
+>19. <A
 HREF="filenames.html"
 >Filenames
    <A
@@ -865,7 +935,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>19.1. <A
 HREF="filenames.html#path-components"
 >Pathname Components
    <A
@@ -875,12 +945,12 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>19.2. <A
 HREF="path-external-notation.html"
 >External notation.</A
 ></DT
 ><DT
-><A
+>19.3. <A
 HREF="log-path.html"
 >Logical Pathnames
    <A
@@ -890,7 +960,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>19.4. <A
 HREF="filename-dict.html"
 >The Filenames Dictionary
    <A
@@ -902,7 +972,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>20. <A
 HREF="files.html"
 >Files
    <A
@@ -914,7 +984,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>20.1. <A
 HREF="files.html#file-dict"
 >The Files Dictionary
    <A
@@ -926,7 +996,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>21. <A
 HREF="streams.html"
 >Streams
    <A
@@ -938,34 +1008,34 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>21.1. <A
 HREF="streams.html#streams-interactive"
 >Interactive Streams
-   <A
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_21-1-1-1-3.html"
 TARGET="_top"
 >[CLHS-21.1.1.1.3]</A
 ></A
 ></DT
 ><DT
-><A
+>21.2. <A
 HREF="terminal.html"
 >Terminal interaction.</A
 ></DT
 ><DT
-><A
+>21.3. <A
 HREF="stream-dict.html"
 >The Streams Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_streams_dictionary.html"
 TARGET="_top"
->[CLHS-21.2.]</A
+>[CLHS-21.2]</A
 ></A
 ></DT
 ></DL
 ></DD
 ><DT
-><A
+>22. <A
 HREF="printer.html"
 >Printer
    <A
@@ -977,7 +1047,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>22.1. <A
 HREF="printer.html#multi-rep"
 >Multiple Possible Textual Representations
    <A
@@ -987,7 +1057,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>22.2. <A
 HREF="print-vector.html"
 >Printing Other Vectors
    <A
@@ -997,7 +1067,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>22.3. <A
 HREF="print-array.html"
 >Printing Other Arrays
    <A
@@ -1007,7 +1077,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>22.4. <A
 HREF="clpp.html"
 >The Lisp Pretty Printer
    <A
@@ -1017,7 +1087,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>22.5. <A
 HREF="print-dict.html"
 >The Printer Dictionary
    <A
@@ -1029,7 +1099,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>23. <A
 HREF="reader.html"
 >Reader
    <A
@@ -1041,17 +1111,17 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>23.1. <A
 HREF="reader.html#chario"
 >characters</A
 ></DT
 ><DT
-><A
+>23.2. <A
 HREF="read-dispatch-ext.html"
 >Additional read dispatch macros</A
 ></DT
 ><DT
-><A
+>23.3. <A
 HREF="rt-case.html"
 >Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
@@ -1063,7 +1133,7 @@ CLASS="function"
 ></A
 ></DT
 ><DT
-><A
+>23.4. <A
 HREF="listen.html"
 >Functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
@@ -1082,7 +1152,7 @@ CLASS="function"
 ></A
 ></DT
 ><DT
-><A
+>23.5. <A
 HREF="read-byte.html"
 >Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
@@ -1096,7 +1166,7 @@ CLASS="function"
 ></DL
 ></DD
 ><DT
-><A
+>24. <A
 HREF="system.html"
 >System Construction
    <A
@@ -1108,7 +1178,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>24.1. <A
 HREF="system.html#system-dict"
 >The System Construction Dictionary
    <A
@@ -1120,7 +1190,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>25. <A
 HREF="environment.html"
 >Environment
    <A
@@ -1132,7 +1202,7 @@ TARGET="_top"
 ><DD
 ><DL
 ><DT
-><A
+>25.1. <A
 HREF="environment.html#debugger"
 >Debugging Utilities
    <A
@@ -1142,7 +1212,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>25.2. <A
 HREF="environment-dict.html"
 >The Environment Dictionary
    <A
@@ -1154,7 +1224,7 @@ TARGET="_top"
 ></DL
 ></DD
 ><DT
-><A
+>26. <A
 HREF="glossary.html"
 >Glossary
    <A
@@ -1164,7 +1234,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>27. <A
 HREF="appendix.html"
 >Appendix
    <A
@@ -1174,7 +1244,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>28. <A
 HREF="issues.html"
 >X3J13 Issue Index
    <A
@@ -1187,6 +1257,182 @@ TARGET="_top"
 ></DD
 ><DT
 >II. <A
+HREF="extensions.html"
+>Extensions</A
+></DT
+><DD
+><DL
+><DT
+>29. <A
+HREF="p-indep.html"
+>Extensions-1: Platform independent Extensions</A
+></DT
+><DD
+><DL
+><DT
+>29.1. <A
+HREF="p-indep.html#image"
+>Extensions-1.1. Saving an Image</A
+></DT
+><DT
+>29.2. <A
+HREF="quit.html"
+>Extensions-1.2. Quitting <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>29.3. <A
+HREF="i18n.html"
+>Extensions-1.3. Internationalization</A
+></DT
+><DT
+>29.4. <A
+HREF="encoding.html"
+>Extensions-1.4. Encodings</A
+></DT
+><DT
+>29.5. <A
+HREF="clos-stream.html"
+>Extensions-1.5. Defining new kinds of Streams</A
+></DT
+><DT
+>29.6. <A
+HREF="weak.html"
+>Extensions-1.6. Weak Pointers</A
+></DT
+><DT
+>29.7. <A
+HREF="final.html"
+>Extensions-1.7. Finalization</A
+></DT
+><DT
+>29.8. <A
+HREF="prompt.html"
+>Extensions-1.8. The Prompt</A
+></DT
+><DT
+>29.9. <A
+HREF="ansi.html"
+>Extensions-1.9. Maximum ANSI CL compliance</A
+></DT
+><DT
+>29.10. <A
+HREF="macros3.html"
+>Extensions-1.10. Additional Fancy Macros</A
+></DT
+><DT
+>29.11. <A
+HREF="customize.html"
+>Extensions-1.11. Customizing <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> behavior.</A
+></DT
+></DL
+></DD
+><DT
+>30. <A
+HREF="platform.html"
+>Extensions-2: Platform specific Extensions</A
+></DT
+><DD
+><DL
+><DT
+>30.1. <A
+HREF="platform.html#screen"
+>Extensions-2.1. Random Screen Access</A
+></DT
+><DT
+>30.2. <A
+HREF="modules.html"
+>Extensions-2.2. External Modules</A
+></DT
+><DT
+>30.3. <A
+HREF="dffi.html"
+>Extensions-2.3. The Foreign Function Call Facility</A
+></DT
+><DT
+>30.4. <A
+HREF="affi.html"
+>Extensions-2.4. The Amiga Foreign Function Call Facility</A
+></DT
+><DT
+>30.5. <A
+HREF="rexx.html"
+>Extensions-2.5. ARexx</A
+></DT
+><DT
+>30.6. <A
+HREF="socket.html"
+>Extensions-2.6. Socket Streams</A
+></DT
+><DT
+>30.7. <A
+HREF="syscalls.html"
+>Extensions-2.7. System Calls</A
+></DT
+><DT
+>30.8. <A
+HREF="quickstart.html"
+>Extensions-2.8. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>30.9. <A
+HREF="app-dev.html"
+>Extensions-2.9. Application delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>30.10. <A
+HREF="shell.html"
+>Extensions-2.10. Shell, Pipes and Printing</A
+></DT
+><DT
+>30.11. <A
+HREF="dir-key.html"
+>Extensions-2.11. Directory Access</A
+></DT
+><DT
+>30.12. <A
+HREF="getenv.html"
+>Extensions-2.12. Operating System
+  Environment.</A
+></DT
+><DT
+>30.13. <A
+HREF="other.html"
+>Extensions-2.13. Other</A
+></DT
+></DL
+></DD
+></DL
+></DD
+><DT
+>III. <A
 HREF="internals.html"
 >Internals of the <A
 HREF="http://clisp.cons.org"
@@ -1200,7 +1446,7 @@ CLASS="command"
 ><DD
 ><DL
 ><DT
-><A
+>31. <A
 HREF="gc.html"
 >Overview of <A
 HREF="http://clisp.cons.org"
@@ -1214,12 +1460,12 @@ CLASS="command"
 ><DD
 ><DL
 ><DT
-><A
+>31.1. <A
 HREF="gc.html#internals-intro"
 >Introduction</A
 ></DT
 ><DT
-><A
+>31.2. <A
 HREF="lisp-obj-in-c.html"
 >Lisp objects in <A
 HREF="http://clisp.cons.org"
@@ -1231,12 +1477,12 @@ CLASS="command"
 ></A
 ></DT
 ><DT
-><A
+>31.3. <A
 HREF="memory-models.html"
 >Memory Models</A
 ></DT
 ><DT
-><A
+>31.4. <A
 HREF="gc-safety.html"
 >The burden of <A
 HREF="gc.html"
@@ -1251,14 +1497,45 @@ CLASS="command"
 ></A
 ></DT
 ><DT
-><A
+>31.5. <A
 HREF="foreign-pointers.html"
 >Foreign Pointers</A
 ></DT
 ></DL
 ></DD
 ><DT
-><A
+>32. <A
+HREF="extend.html"
+>Extending <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</A
+></DT
+><DD
+><DL
+><DT
+>32.1. <A
+HREF="extend.html#add-fun"
+>Adding a built-in function.</A
+></DT
+><DT
+>32.2. <A
+HREF="add-var.html"
+>Adding a built-in variable.</A
+></DT
+><DT
+>32.3. <A
+HREF="recompile.html"
+>Recompilation.</A
+></DT
+></DL
+></DD
+><DT
+>33. <A
 HREF="bytecode.html"
 >The <A
 HREF="http://clisp.cons.org"
@@ -1272,27 +1549,27 @@ CLASS="command"
 ><DD
 ><DL
 ><DT
-><A
+>33.1. <A
 HREF="bytecode.html#byte-intro"
 >Introduction</A
 ></DT
 ><DT
-><A
+>33.2. <A
 HREF="vm.html"
 >The virtual machine</A
 ></DT
 ><DT
-><A
+>33.3. <A
 HREF="comp-fun.html"
 >The structure of compiled functions</A
 ></DT
 ><DT
-><A
+>33.4. <A
 HREF="intr-struct.html"
 >The general structure of the instructions</A
 ></DT
 ><DT
-><A
+>33.5. <A
 HREF="intr-set.html"
 >The instruction set</A
 ></DT
@@ -1301,240 +1578,70 @@ HREF="intr-set.html"
 ></DL
 ></DD
 ><DT
->III. <A
-HREF="extensions.html"
->Extensions</A
-></DT
-><DD
-><DL
-><DT
-><A
-HREF="p-indep.html"
->Extensions-1: Platform independent Extensions</A
-></DT
-><DD
-><DL
-><DT
-><A
-HREF="p-indep.html#image"
->Extensions-1.1. Saving an Image</A
-></DT
-><DT
-><A
-HREF="quit.html"
->Extensions-1.2. Quitting <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-></A
-></DT
-><DT
-><A
-HREF="i18n.html"
->Extensions-1.3. Internationalization</A
-></DT
-><DT
-><A
-HREF="encoding.html"
->Extensions-1.4. Encodings</A
-></DT
-><DT
-><A
-HREF="clos-stream.html"
->Extensions-1.5. Defining new kinds of Streams</A
-></DT
-><DT
-><A
-HREF="weak.html"
->Extensions-1.6. Weak Pointers</A
-></DT
-><DT
-><A
-HREF="final.html"
->Extensions-1.7. Finalization</A
-></DT
-><DT
-><A
-HREF="prompt.html"
->Extensions-1.8. The Prompt</A
-></DT
-><DT
-><A
-HREF="ansi.html"
->Extensions-1.9. Maximum ANSI CL compliance</A
-></DT
-><DT
-><A
-HREF="macros3.html"
->Extensions-1.10. Additional Fancy Macros</A
-></DT
-><DT
-><A
-HREF="customize.html"
->Extensions-1.11. Customizing <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> behavior.</A
-></DT
-></DL
-></DD
-><DT
-><A
-HREF="platform.html"
->Extensions-2: Platform specific Extensions</A
-></DT
-><DD
-><DL
-><DT
-><A
-HREF="platform.html#screen"
->Extensions-2.1. Random Screen Access</A
-></DT
-><DT
-><A
-HREF="modules.html"
->Extensions-2.2. External Modules</A
-></DT
-><DT
-><A
-HREF="dffi.html"
->Extensions-2.3. The Foreign Function Call Facility</A
-></DT
-><DT
-><A
-HREF="affi.html"
->Extensions-2.4. The Amiga Foreign Function Call Facility</A
-></DT
-><DT
-><A
-HREF="rexx.html"
->Extensions-2.5. ARexx</A
-></DT
-><DT
-><A
-HREF="socket.html"
->Extensions-2.6. Socket Streams</A
-></DT
-><DT
-><A
-HREF="syscalls.html"
->Extensions-2.7. System Calls</A
-></DT
-><DT
-><A
-HREF="quickstart.html"
->Extensions-2.8. Quickstarting delivery with <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-></A
-></DT
-><DT
-><A
-HREF="app-dev.html"
->Extensions-2.9. Application delivery with <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-></A
-></DT
-><DT
-><A
-HREF="shell.html"
->Extensions-2.10. Shell, Pipes and Printing</A
-></DT
-><DT
-><A
-HREF="dir-key.html"
->Extensions-2.11. Directory Access</A
-></DT
-><DT
-><A
-HREF="other.html"
->Extensions-2.12. Other</A
-></DT
-></DL
-></DD
-></DL
-></DD
-><DT
-><A
+>A. <A
 HREF="gfdl.html"
 >GNU Free Documentation License</A
 ></DT
 ><DD
 ><DL
 ><DT
->0. <A
-HREF="gfdl.html#AEN21610"
+>A.1. <A
+HREF="gfdl.html#gfdl-0"
 >PREAMBLE</A
 ></DT
 ><DT
->1. <A
-HREF="x21615.html"
+>A.2. <A
+HREF="gfdl-1.html"
 >APPLICABILITY AND DEFINITIONS</A
 ></DT
 ><DT
->2. <A
-HREF="x21625.html"
+>A.3. <A
+HREF="gfdl-2.html"
 >VERBATIM COPYING</A
 ></DT
 ><DT
->3. <A
-HREF="x21629.html"
+>A.4. <A
+HREF="gfdl-3.html"
 >COPYING IN QUANTITY</A
 ></DT
 ><DT
->4. <A
-HREF="x21635.html"
+>A.5. <A
+HREF="gfdl-4.html"
 >MODIFICATIONS</A
 ></DT
 ><DT
->5. <A
-HREF="x21671.html"
+>A.6. <A
+HREF="gfdl-5.html"
 >COMBINING DOCUMENTS</A
 ></DT
 ><DT
->6. <A
-HREF="x21676.html"
+>A.7. <A
+HREF="gfdl-6.html"
 >COLLECTIONS OF DOCUMENTS</A
 ></DT
 ><DT
->7. <A
-HREF="x21680.html"
+>A.8. <A
+HREF="gfdl-7.html"
 >AGGREGATION WITH INDEPENDENT WORKS</A
 ></DT
 ><DT
->8. <A
-HREF="x21684.html"
+>A.9. <A
+HREF="gfdl-8.html"
 >TRANSLATION</A
 ></DT
 ><DT
->9. <A
-HREF="x21687.html"
+>A.10. <A
+HREF="gfdl-9.html"
 >TERMINATION</A
 ></DT
 ><DT
->10. <A
-HREF="x21690.html"
+>A.11. <A
+HREF="gfdl-10.html"
 >FUTURE REVISIONS OF THIS LICENSE</A
 ></DT
 ><DT
-><A
-HREF="x21695.html"
+>A.12. <A
+HREF="gfdl-11.html"
 >How to use this License for your documents</A
 ></DT
 ></DL
@@ -1552,6 +1659,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1573,7 +1681,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="preface.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1591,17 +1700,49 @@ VALIGN="top"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
-><SPAN
-CLASS="inlinemediaobject"
-><IMG
-SRC="clisp.png"
-ALT="[CLISP icon]"
-></IMG
-></SPAN
-></TD
+>Overview</TD
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

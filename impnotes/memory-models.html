@@ -5,8 +5,10 @@
 >Memory Models</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Lisp objects in CLISP"
 HREF="lisp-obj-in-c.html"><LINK
 REL="NEXT"
 TITLE="The burden of garbage-collection upon the rest of CLISP"
-HREF="gc-safety.html"></HEAD
+HREF="gc-safety.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,13 +70,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="lisp-obj-in-c.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Overview of <A
+>Chapter 31. Overview of <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -77,7 +91,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="gc-safety.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -89,10 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="memory-models"
->Memory Models</A
-></H1
+NAME="memory-models">31.3. Memory Models</H1
 ><P
+ALIGN="justify"
 >There are 6 memory models. Which one is used, depends on the
 operating system and is determined at build time.</P
 ><P
@@ -108,6 +122,7 @@ CLASS="variablelist"
 >SPVW_MIXED_BLOCKS_OPPOSITE</DT
 ><DD
 ><P
+ALIGN="justify"
 >The heap consists of one block of fixed length
   (allocated at startup).
   The variable-length objects are allocated from the left, the 2-pointer
@@ -138,6 +153,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Simple management.
     </P
 ></DD
@@ -145,6 +161,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >No fragmentation at all.
     </P
 ></DD
@@ -152,6 +169,7 @@ CLASS="variablelist"
 >(-)</DT
 ><DD
 ><P
+ALIGN="justify"
 >The total heap size is limited.
     </P
 ></DD
@@ -164,6 +182,7 @@ CLASS="variablelist"
 >SPVW_MIXED_BLOCKS_OPPOSITE &#38; TRIVIALMAP_MEMORY</DT
 ><DD
 ><P
+ALIGN="justify"
 >The heap consists of two big blocks, one for
   variable-length objects and one for 2-pointer objects.
   The former one has a hole to the right and is extensible to the right,
@@ -182,6 +201,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Total heap size grows depending on the
      application's needs.</P
 ></DD
@@ -189,6 +209,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >No fragmentation at all.
     </P
 ></DD
@@ -196,6 +217,7 @@ CLASS="variablelist"
 >(*)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Works only when SINGLEMAP_MEMORY is
      possible as well.</P
 ></DD
@@ -208,6 +230,7 @@ CLASS="variablelist"
 >SPVW_MIXED_BLOCKS_STAGGERED &#38; TRIVIALMAP_MEMORY</DT
 ><DD
 ><P
+ALIGN="justify"
 >The heap consists of two big blocks, one for
   variable-length objects and one for 2-pointer objects.
   Both have a hole to the right, but are extensible to the right.
@@ -224,6 +247,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Total heap size grows depending on the
      application's needs.</P
 ></DD
@@ -231,6 +255,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >No fragmentation at all.
     </P
 ></DD
@@ -238,6 +263,7 @@ CLASS="variablelist"
 >(*)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Works only when SINGLEMAP_MEMORY is
      possible as well.</P
 ></DD
@@ -250,6 +276,7 @@ CLASS="variablelist"
 >SPVW_MIXED_PAGES</DT
 ><DD
 ><P
+ALIGN="justify"
 >The heap consists of many small pages (usually around 8 KB).
   There are two kinds of pages: one for 2-pointer objects, one for
   variable-length objects.
@@ -278,6 +305,7 @@ CLASS="variablelist"
 >(-)</DT
 ><DD
 ><P
+ALIGN="justify"
 >every allocation requires AVL tree operations,
      thus slower</P
 ></DD
@@ -285,6 +313,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Total heap size grows depending on the
      application's needs.</P
 ></DD
@@ -292,6 +321,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Works on operating systems which do not provide
      large contiguous areas.</P
 ></DD
@@ -304,6 +334,7 @@ CLASS="variablelist"
 >SPVW_PURE_PAGES</DT
 ><DD
 ><P
+ALIGN="justify"
 >Just like SPVW_MIXED_PAGES, except that every page
   contains data of only a single type tag, i.e. there is a Heap for
   every type tag.
@@ -320,6 +351,7 @@ CLASS="variablelist"
 >(-)</DT
 ><DD
 ><P
+ALIGN="justify"
 >every allocation requires AVL tree operations,
      thus slower</P
 ></DD
@@ -327,6 +359,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Total heap size grows depending on the
      application's needs.</P
 ></DD
@@ -334,6 +367,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Works on operating systems which do not provide
      large contiguous areas.</P
 ></DD
@@ -341,6 +375,7 @@ CLASS="variablelist"
 >(-)</DT
 ><DD
 ><P
+ALIGN="justify"
 >More fragmentation because objects of different
     type never fit into the same page.</P
 ></DD
@@ -352,6 +387,7 @@ CLASS="variablelist"
 >SPVW_PURE_BLOCKS</DT
 ><DD
 ><P
+ALIGN="justify"
 >There is a big block of storage for each type tag.
   Each of these blocks has its data to the left and the hole to the
   right, but these blocks are extensible to the right (because there is
@@ -373,6 +409,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Total heap size grows depending on the
      application's needs.</P
 ></DD
@@ -380,6 +417,7 @@ CLASS="variablelist"
 >(+)</DT
 ><DD
 ><P
+ALIGN="justify"
 >No 16 MB total size limit.
     </P
 ></DD
@@ -387,6 +425,7 @@ CLASS="variablelist"
 >(*)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Works only in combination with SINGLEMAP_MEMORY.
     </P
 ></DD
@@ -398,27 +437,24 @@ CLASS="variablelist"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >In page based memory models, an object larger than a page is the
 only object carried by its pages.
 There are no small objects in pages belonging to a big object.</P
 ><P
+ALIGN="justify"
 >The following combinations of memory model and mmap tricks are
 possible:</P
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN12379"
-></A
-><P
+NAME="mem-models-comb-typecodes"><P
 ><B
->Table 1. With TYPECODES (the number indicates the order
+>Table 31-1. With TYPECODES (the number indicates the order
   in which the respective models have been developed:</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -585,17 +621,12 @@ VALIGN="MIDDLE"
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN12426"
-></A
-><P
+NAME="mem-models-comb-no-typecodes"><P
 ><B
->Table 2. With no TYPECODES</B
+>Table 31-2. With no TYPECODES</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -681,6 +712,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -692,7 +724,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="lisp-obj-in-c.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -700,6 +733,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -708,7 +742,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="gc-safety.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -730,6 +765,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="gc.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -750,6 +786,45 @@ CLASS="command"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Functions on characters</TITLE
+>Recompilation.</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
@@ -13,16 +13,14 @@ REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
 REL="UP"
-TITLE="Characters
-   [CLHS-13]"
-HREF="characters.html"><LINK
+TITLE="Extending CLISP."
+HREF="extend.html"><LINK
 REL="PREVIOUS"
-TITLE="The Characters Dictionary
-   [CLHS-13.2]"
-HREF="char-dict.html"><LINK
+TITLE="Adding a built-in variable."
+HREF="add-var.html"><LINK
 REL="NEXT"
-TITLE="Platform-Dependent Characters"
-HREF="char-platform-dep.html"><LINK
+TITLE="The CLISP bytecode specification"
+HREF="bytecode.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -71,7 +69,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="char-dict.html"
+HREF="add-var.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -79,18 +77,20 @@ ACCESSKEY="P"
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Chapter 13. Characters
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
+>Chapter 32. Extending <A
+HREF="http://clisp.cons.org"
 TARGET="_top"
->[CLHS-13]</A
-></TD
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="char-platform-dep.html"
+HREF="bytecode.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -104,46 +104,122 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="char-width">13.13. Functions on characters</H1
-><DIV
-CLASS="formalpara"
+NAME="recompile">32.3. Recompilation.</H1
 ><P
-><B
->Function
-  <TT
-CLASS="sexp"
->(<A
-HREF="char-width.html"
-><TT
-CLASS="function"
->EXT:CHAR-WIDTH</TT
-></A
-> <TT
-CLASS="replaceable"
+ALIGN="justify"
 ><I
->char</I
-></TT
->)</TT
->. </B
->returns the number of screen columns occupied by <TT
-CLASS="replaceable"
-><I
->char</I
-></TT
->.
- This is 0 for non-spacing characters
-  (such as control characters and many combining characters),
- 2 for double-width East Asian characters,
- and 1 for all other characters.
- See also function <A
-HREF="strings.html#string-width"
+CLASS="emphasis"
+>Any</I
+> that makes <B
+CLASS="command"
+>make</B
+>
+ remake <TT
+CLASS="filename"
+>#P"lisp.run"</TT
+>, will make it recompile all
+ <TT
+CLASS="filename"
+>#P".lisp"</TT
+> files and re-dump <A
+HREF="p-indep.html#image"
 ><TT
-CLASS="function"
->EXT:STRING-WIDTH</TT
+CLASS="filename"
+>#P"lispinit.mem"</TT
 ></A
+>, which may be time-consuming.
+ This is not always necessary, depending on what kind of change you
+ introduced.</P
+><P
+ALIGN="justify"
+>On the other hand, if you change any of the following files:
+ <P
+></P
+><TABLE
+BORDER="0"
+><TBODY
+><TR
+><TD
+><TT
+CLASS="filename"
+>#P"constobj.d"</TT
+></TD
+></TR
+><TR
+><TD
+><TT
+CLASS="filename"
+>#P"constsym.d"</TT
+></TD
+></TR
+><TR
+><TD
+><TT
+CLASS="filename"
+>#P"fsubr.d"</TT
+></TD
+></TR
+><TR
+><TD
+><TT
+CLASS="filename"
+>#P"subr.d"</TT
+></TD
+></TR
+><TR
+><TD
+><TT
+CLASS="filename"
+>#P"subrkw.d"</TT
+></TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+>
+ your <A
+HREF="p-indep.html#image"
+><TT
+CLASS="filename"
+>#P"lispinit.mem"</TT
+></A
+> will <I
+CLASS="emphasis"
+>have</I
+> to be re-dumped.</P
+><P
+ALIGN="justify"
+>If you change the signature of any system function in the FUNTAB
+ array in file <TT
+CLASS="filename"
+>#P"eval.d"</TT
+>, all the <TT
+CLASS="filename"
+>#P".fas"</TT
+> files
+ will become obsolete and will need to be recompiled.
+ You will need to add a note to that effect to
+ the <TT
+CLASS="filename"
+>#P"NEWS"</TT
+> file
+ and augment the object <TT
+CLASS="literal"
+>version</TT
+> in
+ file <TT
+CLASS="filename"
+>#P"constsym.d"</TT
 >.
-</P
-></DIV
+ Then you will need to remove all the <TT
+CLASS="filename"
+>#P".fas"</TT
+> files in your build
+ directory with <B
+CLASS="command"
+>make clean</B
+>.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -161,7 +237,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="char-dict.html"
+HREF="add-var.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -179,7 +255,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="char-platform-dep.html"
+HREF="bytecode.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -189,18 +265,13 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->The Characters Dictionary
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_the_chara_s_dictionary.html"
-TARGET="_top"
->[CLHS-13.2]</A
-></TD
+>Adding a built-in variable.</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="characters.html"
+HREF="extend.html"
 ACCESSKEY="U"
 >Up</A
 ></TD
@@ -208,7 +279,14 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Platform-Dependent Characters</TD
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</TD
 ></TR
 ></TABLE
 ></DIV

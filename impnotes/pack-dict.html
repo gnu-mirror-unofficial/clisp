@@ -3,11 +3,13 @@
 ><HEAD
 ><TITLE
 >The Packages Dictionary
-   [CLHS-11.2.]</TITLE
+   [CLHS-11.2]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="imppack.html"><LINK
 REL="NEXT"
 TITLE="Numbers
    [CLHS-12]"
-HREF="numbers.html"></HEAD
+HREF="numbers.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="imppack.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Packages
+>Chapter 11. Packages
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-11.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="numbers.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,30 +106,27 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="pack-dict"
->The Packages Dictionary
+NAME="pack-dict">11.4. The Packages Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_packa_s_dictionary.html"
 TARGET="_top"
->[CLHS-11.2.]</A
-></A
+>[CLHS-11.2]</A
 ></H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="make-pack"
->Function <A
+NAME="make-pack">11.4.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-package.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >MAKE-PACKAGE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >For <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-package.html"
 TARGET="_top"
@@ -127,7 +139,7 @@ CLASS="constant"
 >:USE</TT
 > argument is
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
@@ -139,6 +151,7 @@ CLASS="QUOTE"
 >.
 </P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-package.html"
 TARGET="_top"
@@ -173,7 +186,7 @@ CLASS="constant"
  creating them in this package.
  The package names are still subject to
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
 TARGET="_top"
@@ -196,18 +209,17 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="re-export"
->Function <A
+NAME="re-export">11.4.1.1. Function <A
 HREF="pack-dict.html#re-export"
 ><TT
 CLASS="function"
 >EXT:RE-EXPORT</TT
 ></A
-></A
 ></H3
 ><P
+ALIGN="justify"
 >The function <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="pack-dict.html#re-export"
 ><TT
@@ -255,6 +267,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -266,7 +279,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="imppack.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -274,6 +288,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -282,7 +297,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="numbers.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -302,6 +318,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="packages.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -317,6 +334,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

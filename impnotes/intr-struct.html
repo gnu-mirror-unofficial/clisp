@@ -5,8 +5,10 @@
 >The general structure of the instructions</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="The structure of compiled functions"
 HREF="comp-fun.html"><LINK
 REL="NEXT"
 TITLE="The instruction set"
-HREF="intr-set.html"></HEAD
+HREF="intr-set.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,13 +70,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="comp-fun.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->The <A
+>Chapter 33. The <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -77,7 +91,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="intr-set.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -89,20 +104,21 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="intr-struct"
->The general structure of the instructions</A
-></H1
+NAME="intr-struct">33.4. The general structure of the instructions</H1
 ><P
+ALIGN="justify"
 >All instructions consist of one byte, denoting the opcode, and
 some number of operands.</P
 ><P
+ALIGN="justify"
 >The conversion from a byte (in the range 0..255) to the opcode is
 performed by lookup in the table contained in the file
 <TT
 CLASS="filename"
->bytecode.d</TT
+>#P"bytecode.d"</TT
 >.</P
 ><P
+ALIGN="justify"
 >There are the following types of operands, denoted by different
 letters:
 <P
@@ -134,6 +150,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >A (nonnegative) numeric operand.
    The next byte is read.
    If its bit 7 is zero, then the bits 6..0 give the value (7 bits).
@@ -150,6 +167,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >A (nonnegative) 1-byte operand.
    The next byte is read and is the value.
   </P
@@ -163,6 +181,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >A label operand.
    A signed numeric operand is read: The next byte is read.
    If its bit 7 is zero, then the bits 6..0 give the value
@@ -185,6 +204,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -196,7 +216,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="comp-fun.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -204,6 +225,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -212,7 +234,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="intr-set.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -227,6 +250,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="bytecode.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -237,6 +261,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

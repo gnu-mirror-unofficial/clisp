@@ -6,8 +6,10 @@
    [CLHS-9]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -20,8 +22,11 @@ TITLE="Structures
 HREF="structures.html"><LINK
 REL="NEXT"
 TITLE="The Conditions Dictionary
-   [CLHS-9.2.]"
-HREF="cond-dict.html"></HEAD
+   [CLHS-9.2]"
+HREF="cond-dict.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="structures.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="cond-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,15 +99,43 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="conditions"
->Conditions
+NAME="conditions">Chapter 9. Conditions
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-9.html"
 TARGET="_top"
 >[CLHS-9]</A
-></A
 ></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>9.1. <A
+HREF="conditions.html#cond-nl"
+>Embedded Newlines in Condition Reports
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_9-1-3-1-3.html"
+TARGET="_top"
+>[CLHS-9.1.3.1.3]</A
+></A
+></DT
+><DT
+>9.2. <A
+HREF="cond-dict.html"
+>The Conditions Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_condi_s_dictionary.html"
+TARGET="_top"
+>[CLHS-9.2]</A
+></A
+></DT
+></DL
+></DIV
 ><P
+ALIGN="justify"
 >When an error occurred, you are in a break loop. You can evaluate
  forms as usual. The <B
 CLASS="command"
@@ -107,14 +150,12 @@ HREF="environment.html#debugger"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Macro <TT
 CLASS="function"
 >EXT:MUFFLE-CERRORS</TT
 >. </B
-></B
 >The macro <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >EXT:MUFFLE-CERRORS</TT
@@ -145,14 +186,12 @@ CLASS="function"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Macro <TT
 CLASS="function"
 >EXT:APPEASE-CERRORS</TT
 >. </B
-></B
 >The macro <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >EXT:APPEASE-CERRORS</TT
@@ -183,14 +222,12 @@ CLASS="function"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Macro <TT
 CLASS="function"
 >EXT:EXIT-ON-ERROR</TT
 >. </B
-></B
 >The macro <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >EXT:EXIT-ON-ERROR</TT
@@ -228,12 +265,10 @@ CLASS="command"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Macro <TT
 CLASS="function"
 >EXT:WITH-RESTARTS</TT
 >. </B
-></B
 >The macro <TT
 CLASS="function"
 >EXT:WITH-RESTARTS</TT
@@ -249,7 +284,7 @@ CLASS="function"
  clauses instead of before them, and the restarts created are not
  implicitly associated to any condition.
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >EXT:WITH-RESTARTS</TT
@@ -265,7 +300,7 @@ CLASS="replaceable"
 >}*)</TT
 > is
  therefore equivalent to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
 TARGET="_top"
@@ -298,15 +333,14 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="cond-nl"
->Embedded Newlines in Condition Reports
+NAME="cond-nl">9.1. Embedded Newlines in Condition Reports
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_9-1-3-1-3.html"
 TARGET="_top"
 >[CLHS-9.1.3.1.3]</A
-></A
 ></H1
 ><P
+ALIGN="justify"
 >The error message prefix for the first line is "*** - ". There is
  no prefix for subsequent error lines. The aesthetics of condition
  reports containing an object, which requires newlines when pretty
@@ -318,6 +352,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -329,7 +364,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="structures.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -337,6 +373,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -345,7 +382,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="cond-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -365,6 +403,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -375,11 +414,50 @@ VALIGN="top"
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_condi_s_dictionary.html"
 TARGET="_top"
->[CLHS-9.2.]</A
+>[CLHS-9.2]</A
 ></TD
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

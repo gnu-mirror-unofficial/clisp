@@ -6,8 +6,10 @@
    [CLHS-15.2]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="arrays.html"><LINK
 REL="NEXT"
 TITLE="Strings
    [CLHS-16]"
-HREF="strings.html"></HEAD
+HREF="strings.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="arrays.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Arrays
+>Chapter 15. Arrays
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-15.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="strings.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,20 +106,17 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="array-dict"
->The Arrays Dictionary
+NAME="array-dict">15.2. The Arrays Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_arrays_dictionary.html"
 TARGET="_top"
 >[CLHS-15.2]</A
-></A
 ></H1
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_adjust-array.html"
 TARGET="_top"
 ><TT
@@ -112,7 +124,6 @@ CLASS="function"
 >ADJUST-ARRAY</TT
 ></A
 > for displaced arrays. </B
-></B
 >An array to which another array is displaced should not be shrunk
  (using <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_adjust-array.html"
@@ -138,6 +149,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -149,7 +161,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="arrays.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -157,6 +170,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -165,7 +179,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="strings.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -185,6 +200,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="arrays.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -200,6 +216,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

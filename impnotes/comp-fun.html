@@ -5,8 +5,10 @@
 >The structure of compiled functions</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="The virtual machine"
 HREF="vm.html"><LINK
 REL="NEXT"
 TITLE="The general structure of the instructions"
-HREF="intr-struct.html"></HEAD
+HREF="intr-struct.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,13 +70,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="vm.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->The <A
+>Chapter 33. The <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -77,7 +91,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="intr-struct.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -89,10 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="comp-fun"
->The structure of compiled functions</A
-></H1
+NAME="comp-fun">33.3. The structure of compiled functions</H1
 ><P
+ALIGN="justify"
 >A compiled function consists of two objects: The function itself,
 containing the references to all <A
 HREF="http://clisp.cons.org"
@@ -105,10 +119,12 @@ CLASS="command"
 and a byte vector containing only immediate data, including the bytecode
 proper.</P
 ><P
+ALIGN="justify"
 >Typically, the byte vector is about twice as large as the function
 vector.  The separation thus helps the garbage collector (since the byte
 vector does not need to be scanned for pointers).</P
 ><P
+ALIGN="justify"
 >A function looks like this
  (cf. the <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
@@ -130,9 +146,10 @@ CLASS="variablelist"
 >name</DT
 ><DD
 ><P
+ALIGN="justify"
 >This is the name of the function, normally a symbol
    or a list of the form <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -160,6 +177,7 @@ CLASS="literal"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >This is the byte vector. It is a
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-bit-vector.html"
@@ -179,11 +197,11 @@ CLASS="command"
    which contains immediate data -- note that <TT
 CLASS="literal"
 >(<A
-HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-array.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
->SIMPLE-VECTOR</TT
+>SIMPLE-ARRAY</TT
 ></A
 > (<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
@@ -207,6 +225,7 @@ CLASS="literal"
 >[]</DT
 ><DD
 ><P
+ALIGN="justify"
 >The remaining fields in the function object are
    references to other <A
 HREF="http://clisp.cons.org"
@@ -231,6 +250,7 @@ CLASS="command"
 ></DIV
 ></P
 ><P
+ALIGN="justify"
 >There is actually one exception to the immutability rule: When a
 generic function's dispatch code is installed, the <A
 HREF="comp-fun.html"
@@ -247,6 +267,7 @@ CLASS="literal"
 ></A
 > fields are destructively modified.</P
 ><P
+ALIGN="justify"
 >Some of the <A
 HREF="comp-fun.html"
 ><TT
@@ -264,6 +285,7 @@ CLASS="variablelist"
 >name</DT
 ><DD
 ><P
+ALIGN="justify"
 >see above</P
 ></DD
 ><DT
@@ -276,6 +298,7 @@ CLASS="literal"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >see above</P
 ></DD
 ><DT
@@ -288,6 +311,7 @@ CLASS="literal"
 >*</DT
 ><DD
 ><P
+ALIGN="justify"
 >At most one object, representing the closed-up
    variables, representing the variables of the lexical environment in
    which this function was defined.  It is a <A
@@ -299,7 +323,7 @@ CLASS="classname"
 ></A
 >, which
    looks like this: <TT
-CLASS="literal"
+CLASS="sexp"
 >#(<TT
 CLASS="replaceable"
 ><I
@@ -373,6 +397,7 @@ CLASS="literal"
 >*</DT
 ><DD
 ><P
+ALIGN="justify"
 >Objects representing closed-up <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
 TARGET="_top"
@@ -428,6 +453,7 @@ CLASS="literal"
 >*</DT
 ><DD
 ><P
+ALIGN="justify"
 >Objects representing closed-up <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
 TARGET="_top"
@@ -513,6 +539,7 @@ CLASS="literal"
 >*</DT
 ><DD
 ><P
+ALIGN="justify"
 >If the function was defined with a <A
 HREF="lalist.html"
 >lambda list</A
@@ -538,6 +565,7 @@ CLASS="literal"
 >*</DT
 ><DD
 ><P
+ALIGN="justify"
 >Other objects needed by the function's bytecode.
   </P
 ></DD
@@ -546,6 +574,7 @@ CLASS="literal"
 >
 </P
 ><P
+ALIGN="justify"
 >If <A
 HREF="comp-fun.html"
 ><TT
@@ -574,6 +603,7 @@ blocks or tags defined in compile code outside of the function.
 In particular, it is the case if the function is defined in a null
 lexical environment.</P
 ><P
+ALIGN="justify"
 >If some <A
 HREF="comp-fun.html"
 ><TT
@@ -631,8 +661,9 @@ CLASS="constant"
 ></A
 > values by the definitive ones.</P
 ><P
+ALIGN="justify"
 >The list <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="comp-fun.html"
 ><TT
@@ -658,6 +689,7 @@ CLASS="function"
 ></A
 >.)</P
 ><P
+ALIGN="justify"
 >The <A
 HREF="comp-fun.html"
 ><TT
@@ -688,6 +720,7 @@ CLASS="literal"
 > (2 bytes)</DT
 ><DD
 ><P
+ALIGN="justify"
 >The 1st part of the maximal <A
 HREF="vm.html"
 ><TT
@@ -704,6 +737,7 @@ CLASS="literal"
 > (2 bytes)</DT
 ><DD
 ><P
+ALIGN="justify"
 >The <A
 HREF="vm.html"
 ><TT
@@ -746,6 +780,7 @@ CLASS="literal"
 > (2 bytes)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Number of required parameters.
   </P
 ></DD
@@ -756,6 +791,7 @@ CLASS="literal"
 > (2 bytes)</DT
 ><DD
 ><P
+ALIGN="justify"
 >Number of optional parameters.
   </P
 ></DD
@@ -777,6 +813,7 @@ CLASS="variablelist"
 >bit 0</DT
 ><DD
 ><P
+ALIGN="justify"
 >set if the function has an <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -791,6 +828,7 @@ CLASS="literal"
 >bit 7</DT
 ><DD
 ><P
+ALIGN="justify"
 >set if the function has <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -805,6 +843,7 @@ CLASS="literal"
 >bit 6</DT
 ><DD
 ><P
+ALIGN="justify"
 >set if the function has <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -819,6 +858,7 @@ CLASS="literal"
 >bit 4</DT
 ><DD
 ><P
+ALIGN="justify"
 >set if the function is a generic function
     </P
 ></DD
@@ -826,6 +866,7 @@ CLASS="literal"
 >bit 3</DT
 ><DD
 ><P
+ALIGN="justify"
 >set if the function is a generic function and its
      effective method shall be returned (instead of being executed)
     </P
@@ -840,6 +881,7 @@ CLASS="literal"
 > (1 byte)</DT
 ><DD
 ><P
+ALIGN="justify"
 >An abbreviation code depending on
     <A
 HREF="comp-fun.html"
@@ -875,6 +917,7 @@ CLASS="literal"
 >)</DT
 ><DD
 ><P
+ALIGN="justify"
 >The number of <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -900,6 +943,7 @@ CLASS="literal"
 >)</DT
 ><DD
 ><P
+ALIGN="justify"
 >The offset of the <A
 HREF="comp-fun.html"
 ><TT
@@ -916,6 +960,7 @@ CLASS="literal"
 >* (any number of bytes)</DT
 ><DD
 ><P
+ALIGN="justify"
 >The bytecode instructions.
    </P
 ></DD
@@ -928,6 +973,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -939,7 +985,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="vm.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -947,6 +994,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -955,7 +1003,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="intr-struct.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -970,6 +1019,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="bytecode.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -980,6 +1030,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

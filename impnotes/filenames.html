@@ -6,8 +6,10 @@
    [CLHS-19]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -20,7 +22,10 @@ TITLE="Hash Tables
 HREF="hash.html"><LINK
 REL="NEXT"
 TITLE="External notation."
-HREF="path-external-notation.html"></HEAD
+HREF="path-external-notation.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -31,6 +36,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -50,7 +56,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -59,7 +72,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="hash.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -72,7 +86,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="path-external-notation.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -83,15 +98,58 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="filenames"
->Filenames
+NAME="filenames">Chapter 19. Filenames
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
 TARGET="_top"
 >[CLHS-19]</A
-></A
 ></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>19.1. <A
+HREF="filenames.html#path-components"
+>Pathname Components
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-1.html"
+TARGET="_top"
+>[CLHS-19.2.1]</A
+></A
+></DT
+><DT
+>19.2. <A
+HREF="path-external-notation.html"
+>External notation.</A
+></DT
+><DT
+>19.3. <A
+HREF="log-path.html"
+>Logical Pathnames
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-3.html"
+TARGET="_top"
+>[CLHS-19.3]</A
+></A
+></DT
+><DT
+>19.4. <A
+HREF="filename-dict.html"
+>The Filenames Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_filen_s_dictionary.html"
+TARGET="_top"
+>[CLHS-19.4]</A
+></A
+></DT
+></DL
+></DIV
 ><P
+ALIGN="justify"
 >For most operations, pathnames denoting files and pathnames
  denoting directories cannot be used interchangeably.</P
 ><P
@@ -103,42 +161,42 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >For example, <TT
 CLASS="filename"
->#p"FOO/BAR"</TT
+>#P"foo/bar"</TT
 > denotes
  the file <TT
 CLASS="filename"
->BAR</TT
-> in the directory
+>#P"bar"</TT
+> in the directory <TT
+CLASS="filename"
+>#P"foo"</TT
+>,
+ while <TT
+CLASS="filename"
+>#P"foo/bar/"</TT
+> denotes the subdirectory
  <TT
 CLASS="filename"
->FOO</TT
->, while <TT
+>#P"bar"</TT
+> of the directory <TT
 CLASS="filename"
->#p"FOO/BAR/"</TT
->
- denotes the subdirectory <TT
-CLASS="filename"
->BAR</TT
-> of the directory
- <TT
-CLASS="filename"
->FOO</TT
+>#P"foo"</TT
 >.
 </P
 ></DD
@@ -146,50 +204,50 @@ CLASS="filename"
 >Platform dependent: <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
    platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >For example, <TT
 CLASS="filename"
->#p"FOO\\BAR"</TT
+>#P"foo\\bar"</TT
 >
  denotes the file <TT
 CLASS="filename"
->BAR</TT
-> in the directory
+>#P"bar"</TT
+> in the directory <TT
+CLASS="filename"
+>#P"foo"</TT
+>,
+ while <TT
+CLASS="filename"
+>#P"foo\\bar\\"</TT
+> denotes the subdirectory
  <TT
 CLASS="filename"
->FOO</TT
->, while <TT
+>#P"bar"</TT
+> of the directory <TT
 CLASS="filename"
->#p"FOO\\BAR\\"</TT
->
- denotes the subdirectory <TT
-CLASS="filename"
->BAR</TT
-> of the directory
- <TT
-CLASS="filename"
->FOO</TT
+>#P"foo"</TT
 >.
 </P
 ></DD
@@ -197,77 +255,202 @@ CLASS="filename"
 >Platform dependent: <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >For example, <TT
 CLASS="filename"
->#p"FOO.BAR"</TT
+>#P"foo.bar"</TT
 > denotes
  the file <TT
 CLASS="filename"
->FOO</TT
-> in the directory
+>#P"foo"</TT
+> in the directory <TT
+CLASS="filename"
+>#P"bar"</TT
+>,
+ while <TT
+CLASS="filename"
+>#P"foo.bar."</TT
+> denotes the subdirectory
  <TT
 CLASS="filename"
->BAR</TT
->, while <TT
+>#P"bar"</TT
+> of the directory <TT
 CLASS="filename"
->#p"FOO.BAR."</TT
->
- denotes the subdirectory <TT
-CLASS="filename"
->BAR</TT
-> of the directory
- <TT
-CLASS="filename"
->FOO</TT
+>#P"foo"</TT
 >.
 </P
+></DD
+><DT
+><A
+NAME="device-prefix">Platform dependent: <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> and
+  <A
+HREF="http://cygwin.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Cygwin</B
+></A
+> platforms only.</DT
+><DD
+><P
+ALIGN="justify"
+>User variable <B
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>CUSTOM:*DEVICE-PREFIX*</TT
+></B
+> controls translation
+  between <A
+HREF="http://cygwin.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Cygwin</B
+></A
+> pathnames
+  (e.g., <TT
+CLASS="filename"
+>#P"/cygdrive/c/gnu/clisp/"</TT
+>) and native
+  <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> pathnames (e.g., <TT
+CLASS="filename"
+>#P"C:\\gnu\\clisp\\"</TT
+>)
+  When it is set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, no translations occur and the <A
+HREF="http://cygwin.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Cygwin</B
+></A
+> port
+  will not understand the native paths and the native <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> port will
+  not understand the <A
+HREF="http://cygwin.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Cygwin</B
+></A
+> paths.
+  When its value is a string, it is used by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+> to
+  translate into the appropriate platform-specific representation,
+  so that on <A
+HREF="http://cygwin.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Cygwin</B
+></A
+>,
+  <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+> "c:/gnu/clisp/")</TT
+>
+  returns <TT
+CLASS="sexp"
+>#P"/cygdrive/c/gnu/clisp/"</TT
+>,
+  while on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>
+  <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+> "/cygdrive/c/gnu/clisp/")</TT
+>
+  returns <TT
+CLASS="sexp"
+>#P"C:/gnu/clisp/"</TT
+>.
+  The initial value is <TT
+CLASS="literal"
+>"cygdrive"</TT
+>, you should edit
+  <TT
+CLASS="filename"
+>#P"config.lisp"</TT
+> to change it.</P
 ></DD
 ></DL
 ></DIV
 ><P
->This is especially important for the functions <A
+ALIGN="justify"
+>This is especially important for the
+ <A
 HREF="files.html#dir"
-><TT
-CLASS="function"
->directory</TT
->,
- <TT
-CLASS="function"
->ext:dir</TT
->, <TT
-CLASS="function"
->ext:cd</TT
->,
- <TT
-CLASS="function"
->ext:make-dir</TT
->,
- <TT
-CLASS="function"
->ext:delete-dir</TT
-></A
+>directory-handling functions</A
 >.</P
 ><DIV
 CLASS="table"
 ><A
-NAME="min-filename-syntax-table"
-></A
-><P
+NAME="min-filename-syntax-table"><P
 ><B
->Table 1. The minimum filename syntax that may be used portably</B
+>Table 19-1. The minimum filename syntax that may be used portably</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -288,7 +471,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->xxx</TT
+>"xxx"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -306,7 +489,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->xxx.yy</TT
+>"xxx.yy"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -330,7 +513,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->.yy</TT
+>".yy"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -347,6 +530,7 @@ CLASS="replaceable"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Hereby <TT
 CLASS="replaceable"
 ><I
@@ -370,15 +554,14 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="path-components"
->Pathname Components
+NAME="path-components">19.1. Pathname Components
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-1.html"
 TARGET="_top"
 >[CLHS-19.2.1]</A
-></A
 ></H1
 ><P
+ALIGN="justify"
 >When a pathname is to be fully specified (no wildcards), that
  means that no <TT
 CLASS="constant"
@@ -417,9 +600,9 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
@@ -441,6 +624,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -459,6 +643,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -487,13 +672,11 @@ CLASS="replaceable"
 ><DIV
 CLASS="table"
 ><A
-NAME="amiga-dir-table"
-></A
-><P
+NAME="amiga-dir-table"><P
 ><B
->Table 2. <TT
-CLASS="literal"
->(<TT
+>Table 19-2. <TT
+CLASS="sexp"
+>Directory = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -509,9 +692,6 @@ CLASS="replaceable"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -565,10 +745,10 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >()</TT
 > | <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="replaceable"
 ><I
@@ -635,11 +815,11 @@ CLASS="classname"
 >,
    may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -671,10 +851,10 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > instead of <TT
 CLASS="filename"
->subdir/</TT
+>"subdir/"</TT
 ></TD
 ></TR
 ></TBODY
@@ -690,6 +870,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -707,11 +888,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -726,6 +907,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -743,11 +925,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -762,6 +944,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -781,6 +964,7 @@ CLASS="constant"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >Constraint: <TT
 CLASS="replaceable"
 ><I
@@ -804,34 +988,31 @@ CLASS="constant"
 ></A
 >.  If the device is specified, the pathname must be absolute!</P
 ><P
+ALIGN="justify"
 >An <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > filename is <A
 HREF="filenames.html#name-type-split"
 >split into name and type</A
 >.</P
 ><P
->Case is ignored in the strings on comparison.  No case conversions
- are performed.</P
+ALIGN="justify"
+>Case is ignored in the strings on comparison.
+  No case conversions are performed.</P
 ><DIV
 CLASS="table"
 ><A
-NAME="pathnames-externally-amiga"
-></A
-><P
+NAME="pathnames-externally-amiga"><P
 ><B
->Table 3. filename notations</B
+>Table 19-3. filename notations</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -844,7 +1025,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->dev:sub1.typ/sub2.typ/name.typ</TT
+>"dev:sub1.typ/sub2.typ/name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -857,7 +1038,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->    sub1.typ/sub2.typ/name.typ</TT
+>    "sub1.typ/sub2.typ/name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -870,7 +1051,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->                      name.typ</TT
+>                      "name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -883,7 +1064,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->    sub1.typ/**/sub3.typ/x*.lisp</TT
+>    "sub1.typ/**/sub3.typ/x*.lisp"</TT
 ></TD
 ></TR
 ><TR
@@ -912,6 +1093,7 @@ CLASS="variablelist"
 >ch ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >any character except ':','/' and '*','?'
    </P
 ></DD
@@ -919,27 +1101,24 @@ CLASS="variablelist"
 >name ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >{ch}+</P
 ></DD
 ><DT
 >device ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >[ &#60;empty&#62; | ':' | name ':' ]
     <DIV
 CLASS="table"
 ><A
-NAME="AEN5509"
-></A
-><P
+NAME="amiga-dev"><P
 ><B
->Table 4. </B
+>Table 19-4. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -984,21 +1163,17 @@ VALIGN="MIDDLE"
 >subdir ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >[ &#60;empty&#62; | name ]
     <DIV
 CLASS="table"
 ><A
-NAME="AEN5526"
-></A
-><P
+NAME="amifa-subdir"><P
 ><B
->Table 5. </B
+>Table 19-5. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -1020,6 +1195,7 @@ VALIGN="MIDDLE"
 >pathname ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >device { subdir '/' }* name
    </P
 ></DD
@@ -1028,17 +1204,12 @@ VALIGN="MIDDLE"
 ><DIV
 CLASS="table"
 ><A
-NAME="amiga-path-examples-table"
-></A
-><P
+NAME="amiga-path-examples-table"><P
 ><B
->Table 6. Examples</B
+>Table 19-6. Examples</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1067,7 +1238,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->'c:foo'</TT
+>"c:foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1078,7 +1249,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device-&#62;foo</TT
+>"device-&#62;foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1086,13 +1257,12 @@ VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
 >"c"</TT
->
-        (<TT
+> (<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="filename"
->"foo"</TT
+>#P"foo"</TT
 >)</TD
 ></TR
 ><TR
@@ -1101,7 +1271,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->'c:foo/'</TT
+>"c:foo/"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1112,7 +1282,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device-&#62;foo</TT
+>"device-&#62;foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1120,13 +1290,12 @@ VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
 >"c"</TT
->
-        (<TT
+> (<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="filename"
->"foo"</TT
+>#P"foo"</TT
 >)</TD
 ></TR
 ><TR
@@ -1135,7 +1304,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->'c:foo/bar'</TT
+>"c:foo/bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1146,7 +1315,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device-&#62;foo-&#62;bar</TT
+>"device-&#62;foo-&#62;bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1154,13 +1323,15 @@ VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
 >"c"</TT
->
-        (<TT
+> (<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="filename"
->"foo" "bar"</TT
+>#P"foo"</TT
+> <TT
+CLASS="filename"
+>#P"bar"</TT
 >)</TD
 ></TR
 ><TR
@@ -1169,7 +1340,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->'c:/foo'</TT
+>"c:/foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1180,7 +1351,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device-&#62;up-&#62;foo</TT
+>"device-&#62;up-&#62;foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1189,7 +1360,7 @@ VALIGN="MIDDLE"
 CLASS="filename"
 >"c"</TT
 >
-        (<TT
+          (<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
@@ -1197,9 +1368,8 @@ CLASS="constant"
 >:PARENT</TT
 > <TT
 CLASS="filename"
->"foo"</TT
->)
-        </TD
+>#P"foo"</TT
+>)</TD
 ></TR
 ><TR
 ><TD
@@ -1207,7 +1377,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->'c:'</TT
+>"c:"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1218,7 +1388,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device</TT
+>"device"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1237,7 +1407,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->:foo</TT
+>":foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1248,7 +1418,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device-&#62;root-&#62;foo</TT
+>"device-&#62;root-&#62;foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1265,7 +1435,7 @@ CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="filename"
->"foo"</TT
+>#P"foo"</TT
 >)</TD
 ></TR
 ><TR
@@ -1274,7 +1444,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1285,7 +1455,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device-&#62;foo</TT
+>"device-&#62;foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1302,7 +1472,7 @@ CLASS="constant"
 >:RELATIVE</TT
 > <TT
 CLASS="filename"
->"foo"</TT
+>#P"foo"</TT
 >)</TD
 ></TR
 ><TR
@@ -1311,7 +1481,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->'/foo'</TT
+>"/foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1322,48 +1492,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device-&#62;up-&#62;foo</TT
-></TD
-><TD
-ALIGN="CENTER"
-VALIGN="MIDDLE"
-><A
-HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
-TARGET="_top"
-><TT
-CLASS="constant"
->NIL</TT
-></A
-> (<TT
-CLASS="constant"
->:RELATIVE</TT
-> <TT
-CLASS="constant"
->:PARENT</TT
-> <TT
-CLASS="filename"
->"foo"</TT
->)
-   </TD
-></TR
-><TR
-><TD
-ALIGN="CENTER"
-VALIGN="MIDDLE"
-><TT
-CLASS="filename"
->'//foo/bar'</TT
-></TD
-><TD
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->current</TD
-><TD
-ALIGN="CENTER"
-VALIGN="MIDDLE"
-><TT
-CLASS="filename"
->device-&#62;up-&#62;up-&#62;foo-&#62;bar</TT
+>"device-&#62;up-&#62;foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1382,12 +1511,8 @@ CLASS="constant"
 CLASS="constant"
 >:PARENT</TT
 > <TT
-CLASS="constant"
->:PARENT</TT
-> <TT
 CLASS="filename"
->"foo"
-               "bar"</TT
+>#P"foo"</TT
 >)</TD
 ></TR
 ><TR
@@ -1396,7 +1521,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->\</TT
+>"//foo/bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1407,7 +1532,54 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->device</TT
+>"device-&#62;up-&#62;up-&#62;foo-&#62;bar"</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (<TT
+CLASS="constant"
+>:RELATIVE</TT
+> <TT
+CLASS="constant"
+>:PARENT</TT
+> <TT
+CLASS="constant"
+>:PARENT</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+>
+                 <TT
+CLASS="filename"
+>#P"bar"</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>"\"</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>"device"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -1428,41 +1600,43 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Appending a <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > to a path string that is non-empty and
  does not end with <TT
 CLASS="filename"
->:</TT
+>":"</TT
 > or <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > does not change its
  meaning.  This <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > must be appended before another non-empty
  component can be appended.  But appending a <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > to a path
  string that is empty or ends with <TT
 CLASS="filename"
->:</TT
+>":"</TT
 > or <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > means
  going up to the parent directory!</P
 ><P
+ALIGN="justify"
 >We interpret any path string that is empty or ends with
  <TT
 CLASS="filename"
->:</TT
+>":"</TT
 > or <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > as pathname of a directory (with both
  <TT
 CLASS="replaceable"
@@ -1494,9 +1668,9 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms only.</DT
 ><DD
@@ -1518,6 +1692,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1536,6 +1711,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1556,13 +1732,11 @@ CLASS="replaceable"
 ><DIV
 CLASS="table"
 ><A
-NAME="unix-dir-table"
-></A
-><P
+NAME="unix-dir-table"><P
 ><B
->Table 7. <TT
-CLASS="literal"
->(<TT
+>Table 19-7. <TT
+CLASS="sexp"
+>Directory = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -1578,9 +1752,6 @@ CLASS="replaceable"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1634,10 +1805,10 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >()</TT
 > | <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="replaceable"
 ><I
@@ -1704,11 +1875,11 @@ CLASS="classname"
 >,
    may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -1731,6 +1902,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1748,11 +1920,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -1767,6 +1939,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1784,11 +1957,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -1803,6 +1976,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1822,12 +1996,13 @@ CLASS="constant"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >A <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > filename is <A
 HREF="filenames.html#name-type-split"
@@ -1836,17 +2011,12 @@ HREF="filenames.html#name-type-split"
 ><DIV
 CLASS="table"
 ><A
-NAME="unix-filename-table"
-></A
-><P
+NAME="unix-filename-table"><P
 ><B
->Table 8. filename notations</B
+>Table 19-8. filename notations</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -1859,7 +2029,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >&#13;  <TT
 CLASS="filename"
->server:sub1.typ/sub2.typ/name.typ</TT
+>"server:sub1.typ/sub2.typ/name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -1872,7 +2042,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >&#13;  <TT
 CLASS="filename"
->       sub1.typ/sub2.typ/name.typ</TT
+>       "sub1.typ/sub2.typ/name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -1885,7 +2055,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >&#13;  <TT
 CLASS="filename"
->                         name.typ</TT
+>                         "name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -1898,7 +2068,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >&#13;  <TT
 CLASS="filename"
->       sub1.typ/**/sub3.typ/x*.lisp</TT
+>       "sub1.typ/**/sub3.typ/x*.lisp"</TT
 ></TD
 ></TR
 ><TR
@@ -1926,9 +2096,9 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 > platforms only.</DT
 ><DD
@@ -1950,6 +2120,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1968,6 +2139,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1998,13 +2170,11 @@ CLASS="replaceable"
 ><DIV
 CLASS="table"
 ><A
-NAME="os2-dir-table"
-></A
-><P
+NAME="os2-dir-table"><P
 ><B
->Table 9. <TT
-CLASS="literal"
->(<TT
+>Table 19-9. <TT
+CLASS="sexp"
+>Directory = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -2020,9 +2190,6 @@ CLASS="replaceable"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -2076,10 +2243,10 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >()</TT
 > | <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="replaceable"
 ><I
@@ -2146,11 +2313,11 @@ CLASS="classname"
 >,
    may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -2173,6 +2340,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2190,11 +2358,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -2209,6 +2377,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2226,11 +2395,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -2245,6 +2414,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2264,12 +2434,13 @@ CLASS="constant"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >An <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 > filename is <A
 HREF="filenames.html#name-type-split"
@@ -2278,17 +2449,12 @@ HREF="filenames.html#name-type-split"
 ><DIV
 CLASS="table"
 ><A
-NAME="os2-filename-table"
-></A
-><P
+NAME="os2-filename-table"><P
 ><B
->Table 10. filename notations</B
+>Table 19-10. filename notations</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -2301,7 +2467,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->A:\sub1.typ\sub2.typ\name.typ</TT
+>"A:\sub1.typ\sub2.typ\name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -2314,7 +2480,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->  \sub1.typ\sub2.typ\name.typ</TT
+>  "\sub1.typ\sub2.typ\name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -2327,7 +2493,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->                     name.typ</TT
+>                     "name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -2340,7 +2506,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->*:\sub1.typ\**\sub3.typ\x*.lisp</TT
+>"*:\sub1.typ\**\sub3.typ\x*.lisp"</TT
 ></TD
 ></TR
 ><TR
@@ -2357,14 +2523,22 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Instead of <TT
 CLASS="filename"
->\</TT
+>"\"</TT
 > one may use <TT
 CLASS="filename"
->/</TT
->, as usual for DOS
- calls.</P
+>"/"</TT
+>, as usual for
+ <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>DOS</B
+></A
+> calls.</P
 ></DD
 ></DL
 ></DIV
@@ -2377,9 +2551,9 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.</DT
 ><DD
@@ -2401,6 +2575,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2416,7 +2591,7 @@ CLASS="classname"
 >SIMPLE-STRING</TT
 ></A
 >, wildcard characters may
-   occur but don't act as wildcards</P
+   occur but do not act as wildcards</P
 ></DD
 ><DT
 ><TT
@@ -2427,6 +2602,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2457,13 +2633,11 @@ CLASS="replaceable"
 ><DIV
 CLASS="table"
 ><A
-NAME="win32-dir-table"
-></A
-><P
+NAME="win32-dir-table"><P
 ><B
->Table 11. <TT
-CLASS="literal"
->(<TT
+>Table 19-11. <TT
+CLASS="sexp"
+>Directory = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -2479,9 +2653,6 @@ CLASS="replaceable"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -2535,10 +2706,10 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >()</TT
 > | <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="replaceable"
 ><I
@@ -2605,11 +2776,11 @@ CLASS="classname"
 >,
    may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -2632,6 +2803,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2649,11 +2821,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -2668,6 +2840,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2685,11 +2858,11 @@ CLASS="classname"
 >,
   may contain wildcard characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > and
   <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > (may also be specified as <TT
 CLASS="constant"
 >:WILD</TT
@@ -2704,6 +2877,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -2723,6 +2897,7 @@ CLASS="constant"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >If <TT
 CLASS="replaceable"
 ><I
@@ -2749,12 +2924,13 @@ CLASS="constant"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >A <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > filename is <A
 HREF="filenames.html#name-type-split"
@@ -2763,17 +2939,12 @@ HREF="filenames.html#name-type-split"
 ><DIV
 CLASS="table"
 ><A
-NAME="win32-filename-table"
-></A
-><P
+NAME="win32-filename-table"><P
 ><B
->Table 12. filename notations</B
+>Table 19-12. filename notations</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -2786,7 +2957,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->A:\sub1.typ\sub2.typ\name.typ</TT
+>"A:\sub1.typ\sub2.typ\name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -2799,7 +2970,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->  \sub1.typ\sub2.typ\name.typ</TT
+>  "\sub1.typ\sub2.typ\name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -2812,7 +2983,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->                     name.typ</TT
+>                     "name.typ"</TT
 ></TD
 ></TR
 ><TR
@@ -2825,7 +2996,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->*:\sub1.typ\**\sub3.typ\x*.lisp</TT
+>"*:\sub1.typ\**\sub3.typ\x*.lisp"</TT
 ></TD
 ></TR
 ><TR
@@ -2842,15 +3013,17 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Instead of <TT
 CLASS="filename"
->\</TT
+>"\"</TT
 > one may use <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 >, as usual for DOS
  calls.</P
 ><P
+ALIGN="justify"
 >If <TT
 CLASS="replaceable"
 ><I
@@ -2878,7 +3051,7 @@ CLASS="replaceable"
 CLASS="constant"
 >:ABSOLUTE</TT
 >, <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
 TARGET="_top"
@@ -2918,47 +3091,54 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
     platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The wildcard characters: <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > matches any
  sequence of characters, <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > matches any one character.
  </P
 ></DD
 ></DL
 ></DIV
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="name-type-split"><B
+>Name/type namestring split. </B
 ><P
 ></P
 ><DIV
@@ -2968,44 +3148,46 @@ CLASS="variablelist"
 >Platform dependent:  <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
    platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >A filename is split into name and type according to the
  following rule: <P
 ></P
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >if there is no <TT
 CLASS="filename"
->.</TT
+>"."</TT
 > in the filename, then the
    <TT
 CLASS="replaceable"
@@ -3028,9 +3210,10 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >if there is a <TT
 CLASS="filename"
->.</TT
+>"."</TT
 >, then <TT
 CLASS="replaceable"
 ><I
@@ -3044,9 +3227,95 @@ CLASS="replaceable"
 ></TT
 > the part after the last dot.</P
 ></LI
+><LI
+><P
+ALIGN="justify"
+>if the only <TT
+CLASS="filename"
+>"."</TT
+> is the first character, then
+   the behavior depends on the value of the user variable
+   <B
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>CUSTOM:*PARSE-NAMESTRING-DOT-FILE*</TT
+></B
+>
+   which can be either
+   <P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="constant"
+>:TYPE</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>, everything after the <TT
+CLASS="filename"
+>"."</TT
+>
+     is the <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>; or</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:NAME</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>, everything is the
+     <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></P
+></DD
+></DL
+></DIV
+>
+   </P
+></LI
 ></UL
 ></P
 ><P
+ALIGN="justify"
 >Due to this name/type splitting rule, there are pathnames that
  cannot result from <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
@@ -3073,7 +3342,7 @@ CLASS="function"
 ></A
 > must be used.  Example:
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-pathname.html"
 TARGET="_top"
@@ -3081,11 +3350,16 @@ TARGET="_top"
 CLASS="function"
 >MAKE-PATHNAME</TT
 ></A
-> :name ".profile")</TT
+> <TT
+CLASS="constant"
+>:NAME</TT
+> "foo.bar")</TT
 >.
  </P
 ></DD
 ></DL
+></DIV
+></P
 ></DIV
 ><P
 ></P
@@ -3096,17 +3370,19 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >RISC OS provides several file systems as standard
   (ADFS, IDEFS, NetFS, RamFS, NetPrint) and support for extra file
   systems (DOSFS, ResourceFS and DeviceFS).</P
 ><P
+ALIGN="justify"
 >A module called FileSwitch is at the center of all file system
  operation in RISC OS.  FileSwitch provides a common core of functions
  used by all file systems.  It only provides the parts of these services
@@ -3115,6 +3391,7 @@ CLASS="emphasis"
  actual file systems.  FileSwitch keeps track of active file systems and
  switches between them as necessary.</P
 ><P
+ALIGN="justify"
 >One of the file system modules that RISC OS provides is
  FileCore.  It takes the normal calls that FileSwitch sends to a file
  system module, and converts them to a simpler set of calls to modules
@@ -3123,6 +3400,7 @@ CLASS="emphasis"
  FileCore to build file system modules imposes a more rigid structure on
  it, as more of the file system is predefined.</P
 ><P
+ALIGN="justify"
 >As well as standard file systems, FileSwitch supports image
  file systems.  These provide facilities for RISC OS to handle media in
  foreign formats, and to support `image files' (or partitions) in those
@@ -3138,6 +3416,7 @@ CLASS="variablelist"
 >Terminology</DT
 ><DD
 ><P
+ALIGN="justify"
 >A pathname may include a file system name, a special
   field, a media name (e.g., a disc name), directory name(s), and the
   name of the object itself; each of these parts of a pathname is known
@@ -3147,6 +3426,7 @@ CLASS="variablelist"
 >Filenames</DT
 ><DD
 ><P
+ALIGN="justify"
 >Filename `elements' may be up to ten characters in
   length on FileCore-based file systems and on NetFS.  These characters
   may be digits or letters.  FileSwitch makes no distinction between
@@ -3163,114 +3443,124 @@ CLASS="variablelist"
 ><DT
 ><TT
 CLASS="filename"
->.</TT
+>"."</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Separates directory specifications, e.g.,
    <TT
 CLASS="filename"
->$.fred</TT
+>"$.fred"</TT
 ></P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->:</TT
+>":"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Introduces a drive or disc specification, e.g.,
    <TT
 CLASS="filename"
->:0</TT
+>":0"</TT
 >, <TT
 CLASS="filename"
->:bigdisc</TT
+>":bigdisc"</TT
 >.  It also
    marks the end of a file system name, e.g.,
    <TT
 CLASS="filename"
->adfs:</TT
+>"adfs:"</TT
 ></P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->*</TT
+>"*"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Acts as a `wildcard' to match zero or more
    characters.</P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->#</TT
+>"#"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Acts as a `wildcard' to match any single
    character.</P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->$</TT
+>"$"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the name of the root directory of the disc.
    </P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->&#38;</TT
+>"&#38;"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the user root directory (URD)
    </P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->@</TT
+>"@"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the currently selected directory (CSD)
    </P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->^</TT
+>"^"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the `parent' directory
    </P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->%</TT
+>"%"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the currently selected library (CSL)
    </P
 ></DD
 ><DT
 ><TT
 CLASS="filename"
->\</TT
+>"\"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the previously selected directory (PSD)
    </P
 ></DD
@@ -3281,40 +3571,42 @@ CLASS="filename"
 >Directories</DT
 ><DD
 ><P
+ALIGN="justify"
 >The root directory, <TT
 CLASS="filename"
->$</TT
->, forms
-  the top of the directory hierarchy of the media which contains the
-  CSD.  <TT
+>"$"</TT
+>, forms the top of
+  the directory hierarchy of the media which contains the CSD.
+  <TT
 CLASS="filename"
->$</TT
-> does not have a parent directory, trying
-  to access its parent will just access <TT
+>"$"</TT
+> does not have a parent directory, trying to access its
+  parent will just access <TT
 CLASS="filename"
->$</TT
->.  Each
-  directory name is separated by a <TT
+>"$"</TT
+>.  Each directory name is separated
+  by a <TT
 CLASS="filename"
->.</TT
-> character.
-  For example:</P
+>"."</TT
+> character.  For example:</P
 ><P
 ></P
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
->$.Documents.Memos</TT
+>"$.Documents.Memos"</TT
 >
    </P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
->%.cc</TT
+>"%.cc"</TT
 ></P
 ></LI
 ></UL
@@ -3323,38 +3615,40 @@ CLASS="filename"
 >File Systems</DT
 ><DD
 ><P
+ALIGN="justify"
 >Files may also be accessed on file systems other
   than the current one by prefixing the filename with a file system
-  specification.  A file system name may appear between
-  <TT
+  specification.  A file system name may appear between <TT
 CLASS="filename"
->-</TT
-> characters, or suffixed by a
-  <TT
+>"-"</TT
+>
+  characters, or suffixed by a <TT
 CLASS="filename"
->:</TT
->, though the latter is advised since
-  <TT
+>":"</TT
+>, though the latter is
+  advised since <TT
 CLASS="filename"
->-</TT
-> can also be used to introduce a parameter on a
-  command line, or as part of a file name.  For example:</P
+>"-"</TT
+> can also be used to introduce a parameter on
+  a command line, or as part of a file name.  For example:</P
 ><P
 ></P
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
->-net-$.SystemMesg</TT
+>"-net-$.SystemMesg"</TT
 >
    </P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
->adfs:%.aasm</TT
+>"adfs:%.aasm"</TT
 ></P
 ></LI
 ></UL
@@ -3363,51 +3657,57 @@ CLASS="filename"
 >Special Fields</DT
 ><DD
 ><P
+ALIGN="justify"
 >Special fields are used to supply more information
   to the file system than you can using standard path names; for example
   NetFS and NetPrint use them to specify server addresses or names. They
   are introduced by a <TT
 CLASS="filename"
->#</TT
-> character; a variety of
-  syntaxes are possible:</P
+>"#"</TT
+> character; a variety of syntaxes are
+  possible:</P
 ><P
 ></P
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
->  net#MJHardy::disc1.mike</TT
+>  "net#MJHardy::disc1.mike"</TT
 >
    </P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
->     #MJHardy::disc1.mike</TT
+>     "#MJHardy::disc1.mike"</TT
 >
    </P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
-> -net#MJHardy-:disc1.mike</TT
+> "-net#MJHardy-:disc1.mike"</TT
 >
    </P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="filename"
->    -#MJHardy-:disc1.mike</TT
+>    "-#MJHardy-:disc1.mike"</TT
 >
    </P
 ></LI
 ></UL
 ><P
+ALIGN="justify"
 >The special fields here are all MJHardy, and give the name of
   the fileserver to use.  Special fields may use any character except for
   control characters, double quote '"', solidus '|' and space.  If
@@ -3417,31 +3717,27 @@ CLASS="filename"
 ><DT
 ><TT
 CLASS="filename"
->File$Path</TT
+>"File$Path"</TT
 > and
   <TT
 CLASS="filename"
->Run$Path</TT
+>"Run$Path"</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >These two special variables control exactly where a
   file will be looked for, according to the operation being performed on
   it.</P
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN6273"
-></A
-><P
+NAME="acorn-path-vars"><P
 ><B
->Table 13. </B
+>Table 19-13. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -3480,11 +3776,12 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >The contents of each variable should expand to a list or
   prefixes, separated by commas.  When a read operation is performed
   then the prefixes in <TT
 CLASS="filename"
->File$Path</TT
+>"File$Path"</TT
 > are used in the
   order in which they are listed. The first object that matches is used,
   whether it be a file or directory.  Similarly any execute operation
@@ -3492,17 +3789,18 @@ CLASS="filename"
   the pathname does not contain an explicit file system reference, e.g.,
   executing <TT
 CLASS="filename"
->adfs:file</TT
+>"adfs:file"</TT
 > will not use
   <TT
 CLASS="filename"
->Run$Path</TT
+>"Run$Path"</TT
 >.</P
 ></DD
 ><DT
 >Other path variables</DT
 ><DD
 ><P
+ALIGN="justify"
 >You can set up other path variables and use them as
   pseudo file systems.  For example if you typed:
   <P
@@ -3517,21 +3815,22 @@ CLASS="userinput"
   you could then refer to the pseudo file system as
   <TT
 CLASS="filename"
->Source:</TT
+>"Source:"</TT
 > or (less preferable) as
   <TT
 CLASS="filename"
->-Source-</TT
+>"-Source-"</TT
 >.  These path variables work in the same
   was as <TT
 CLASS="filename"
->File$Path</TT
+>"File$Path"</TT
 > and
   <TT
 CLASS="filename"
->Run$Path</TT
+>"Run$Path"</TT
 >.</P
 ><P
+ALIGN="justify"
 >NOTE: Path variables are not implemented in this version of
  <A
 HREF="http://clisp.cons.org"
@@ -3545,26 +3844,24 @@ CLASS="command"
 ></DD
 ><DT
 ><A
-NAME="pathnames-externally-acorn"
->from Lisp-string
-  notation to internal representation</A
-></DT
+NAME="pathnames-externally-acorn">from Lisp-string
+  notation to internal representation</DT
 ><DD
 ><P
+ALIGN="justify"
 ><I
 CLASS="emphasis"
 >No</I
 > swapping.
    <TT
 CLASS="filename"
->foo.lisp</TT
-> means file type
-   <TT
+>#P"foo.lisp"</TT
+> means file type <TT
 CLASS="filename"
 >#P".lisp"</TT
 > and file name <TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 >.
    This is pseudo-BNF:</P
 ><P
@@ -3576,6 +3873,7 @@ CLASS="variablelist"
 >legal character ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >any ISO latin-1 graphic character &#8805; ' ' except
     '.' ':' '*' '#' '$' '&#38;' '@' '^' '%' '\' '?'
     </P
@@ -3584,6 +3882,7 @@ CLASS="variablelist"
 >extended legal character ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >any ISO latin-1 graphic character &#8805; ' ' except
     ':' '"' '|'
     </P
@@ -3592,6 +3891,7 @@ CLASS="variablelist"
 >legal-wild char ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >legal char | '*' | '#' | '?'
     </P
 ></DD
@@ -3599,6 +3899,7 @@ CLASS="variablelist"
 >host ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 > '-' { extended legal char except '-' }+ '-'
     | { extended legal char except '-' } { extended legal char }* ':' | empty
     </P
@@ -3607,6 +3908,7 @@ CLASS="variablelist"
 >device ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 > ':' { legal char }+ '.' | empty
     </P
 ></DD
@@ -3614,22 +3916,18 @@ CLASS="variablelist"
 >directory ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 > { '$' | '&#38;' | '@' | '%' | '\' } '.'
     { subdirectory }* | { subdirectory }+ | empty
     <DIV
 CLASS="table"
 ><A
-NAME="AEN6337"
-></A
-><P
+NAME="acorn-directory"><P
 ><B
->Table 14. </B
+>Table 19-14. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -3734,21 +4032,17 @@ CLASS="constant"
 >subdirectory ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >{ '^' | { legal-wild char }+ } '.'
    <DIV
 CLASS="table"
 ><A
-NAME="AEN6374"
-></A
-><P
+NAME="acorn-subdirectory"><P
 ><B
->Table 15. </B
+>Table 19-15. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -3773,6 +4067,7 @@ CLASS="constant"
 >filename ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >{ { legal-wild char }+ | empty }
    </P
 ></DD
@@ -3780,6 +4075,7 @@ CLASS="constant"
 >filetype ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >{ '.' { legal-wild char }+ | empty }
    </P
 ></DD
@@ -3787,6 +4083,7 @@ CLASS="constant"
 >pathname ::==</DT
 ><DD
 ><P
+ALIGN="justify"
 >host device directory filename filetype
    </P
 ></DD
@@ -3795,17 +4092,12 @@ CLASS="constant"
 ><DIV
 CLASS="table"
 ><A
-NAME="acorn-path-example-table"
-></A
-><P
+NAME="acorn-path-example-table"><P
 ><B
->Table 16. Examples</B
+>Table 19-16. Examples</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -3842,14 +4134,14 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->-net-$.SystemMesg</TT
+>"-net-$.SystemMesg"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net</TT
+>"net"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -3866,7 +4158,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -3880,7 +4172,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->SystemMesg</TT
+>"SystemMesg"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -3900,27 +4192,27 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net#MJHardy::disc1.mike</TT
+>"net#MJHardy::disc1.mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net#MJHardy</TT
+>"net#MJHardy"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -3934,7 +4226,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->mike</TT
+>"mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -3954,27 +4246,27 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->#MJHardy::disc1.mike</TT
+>"#MJHardy::disc1.mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->#MJHardy</TT
+>"#MJHardy"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -3988,7 +4280,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->mike</TT
+>"mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4008,27 +4300,27 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->-net#MJHardy-:disc1.mike</TT
+>"-net#MJHardy-:disc1.mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net#MJHardy</TT
+>"net#MJHardy"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -4042,7 +4334,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->mike</TT
+>"mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4062,27 +4354,27 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->-#MJHardy-:disc1.mike</TT
+>"-#MJHardy-:disc1.mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->#MJHardy</TT
+>"#MJHardy"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -4096,7 +4388,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->mike</TT
+>"mike"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4116,7 +4408,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->@.foo</TT
+>"@.foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4144,7 +4436,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -4158,7 +4450,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4178,7 +4470,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4206,7 +4498,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
@@ -4217,7 +4509,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4237,7 +4529,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->^.</TT
+>"^."</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4265,7 +4557,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
@@ -4303,7 +4595,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->@.^.</TT
+>"@.^."</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4331,7 +4623,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -4373,7 +4665,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo.bar</TT
+>"foo.bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4401,7 +4693,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
@@ -4412,14 +4704,14 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ></TR
 ><TR
@@ -4428,7 +4720,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo.bar.baz</TT
+>"foo.bar.baz"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4456,25 +4748,28 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
-> "foo")</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->baz</TT
+>"baz"</TT
 ></TD
 ></TR
 ><TR
@@ -4483,7 +4778,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo.bar.</TT
+>"foo.bar."</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4511,11 +4806,17 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
-> "foo" "bar")</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+> <TT
+CLASS="filename"
+>#P"bar"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4546,7 +4847,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo.@.</TT
+>"foo.@."</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4577,6 +4878,7 @@ VALIGN="MIDDLE"
 >From internal representation to RISCOS string</DT
 ><DD
 ><P
+ALIGN="justify"
 >with swapping <I
 CLASS="emphasis"
 >only</I
@@ -4585,17 +4887,12 @@ CLASS="emphasis"
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN6624"
-></A
-><P
+NAME="acorn-name-type-swap"><P
 ><B
->Table 17. </B
+>Table 19-17. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4632,20 +4929,20 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net</TT
+>"net"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -4659,7 +4956,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4677,7 +4974,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net::disc1.$.foo</TT
+>"net::disc1.$.foo"</TT
 ></TD
 ></TR
 ><TR
@@ -4686,48 +4983,52 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net#MJ</TT
+>"net#MJ"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="constant"
 >:ROOT</TT
-> "foo")</TT
+>
+          <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->baz</TT
+>"baz"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->net#MJ::disc1.$.foo.baz.bar</TT
+>"net#MJ::disc1.$.foo.baz.bar"</TT
 ></TD
 ></TR
 ><TR
@@ -4736,28 +5037,34 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->adfs</TT
+>"adfs"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->4</TT
+>"4"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="constant"
 >:ROOT</TT
-> "foo"
-        "bar")</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+>
+          <TT
+CLASS="filename"
+>#P"bar"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4786,7 +5093,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->adfs::4.$.foo.bar</TT
+>"adfs::4.$.foo.bar"</TT
 ></TD
 ></TR
 ><TR
@@ -4806,27 +5113,31 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="constant"
 >:ROOT</TT
-> "foo")</TT
+>
+          <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -4844,7 +5155,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->:disc1.$.foo.bar</TT
+>":disc1.$.foo.bar"</TT
 ></TD
 ></TR
 ><TR
@@ -4864,13 +5175,13 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -4923,13 +5234,13 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
@@ -4962,7 +5273,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->:disc1.</TT
+>":disc1."</TT
 ></TD
 ></TR
 ><TR
@@ -4982,7 +5293,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->disc1</TT
+>"disc1"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5022,7 +5333,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->:disc1.</TT
+>":disc1."</TT
 ></TD
 ></TR
 ><TR
@@ -5052,7 +5363,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -5066,7 +5377,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5084,7 +5395,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->$.foo</TT
+>"$.foo"</TT
 ></TD
 ></TR
 ><TR
@@ -5114,7 +5425,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -5128,7 +5439,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5146,7 +5457,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->@.foo</TT
+>"@.foo"</TT
 ></TD
 ></TR
 ><TR
@@ -5176,7 +5487,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
@@ -5187,21 +5498,21 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar.foo</TT
+>"bar.foo"</TT
 ></TD
 ></TR
 ><TR
@@ -5231,32 +5542,35 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
-> "foo")</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->baz</TT
+>"baz"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo.baz.bar</TT
+>"foo.baz.bar"</TT
 ></TD
 ></TR
 ><TR
@@ -5286,7 +5600,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
@@ -5300,7 +5614,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5318,7 +5632,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->%.bar</TT
+>"%.bar"</TT
 ></TD
 ></TR
 ><TR
@@ -5348,21 +5662,25 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:ABSOLUTE</TT
 > <TT
 CLASS="constant"
 >:LIBRARY</TT
-> "foo")</TT
+>
+          <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5380,7 +5698,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->%.foo.bar</TT
+>"%.foo.bar"</TT
 ></TD
 ></TR
 ><TR
@@ -5410,7 +5728,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
@@ -5421,21 +5739,21 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo</TT
+>#P"foo"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar.foo</TT
+>"bar.foo"</TT
 ></TD
 ></TR
 ><TR
@@ -5465,18 +5783,21 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
-> "foo")</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5494,7 +5815,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->foo.bar</TT
+>"foo.bar"</TT
 ></TD
 ></TR
 ><TR
@@ -5524,11 +5845,14 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="constant"
 >:RELATIVE</TT
-> "foo")</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5546,7 +5870,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->bar</TT
+>#P"bar"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -5557,6 +5881,7 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >That is, the RISCOS string is the flattening-concatenation
  of</P
 ><TABLE
@@ -5610,6 +5935,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -5636,6 +5962,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -5664,13 +5991,11 @@ CLASS="replaceable"
 ><DIV
 CLASS="table"
 ><A
-NAME="acorn-dir-table"
-></A
-><P
+NAME="acorn-dir-table"><P
 ><B
->Table 18. <TT
-CLASS="literal"
->(<TT
+>Table 19-18. <TT
+CLASS="sexp"
+>Directory = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -5686,9 +6011,6 @@ CLASS="replaceable"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -5775,10 +6097,10 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >()</TT
 > | <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="replaceable"
 ><I
@@ -5834,13 +6156,13 @@ CLASS="classname"
 >, may contain wildcard characters
    <TT
 CLASS="filename"
->?</TT
->,<TT
+>"?"</TT
+>, <TT
 CLASS="filename"
->#</TT
+>"#"</TT
 > and <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 ></TD
 ></TR
 ></TBODY
@@ -5856,6 +6178,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
 TARGET="_top"
@@ -5873,19 +6196,18 @@ CLASS="constant"
 >, may contain wildcard
  characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 >,<TT
 CLASS="filename"
->#</TT
-> and
- <TT
+>"#"</TT
+> and <TT
 CLASS="filename"
->*</TT
-> (may also be specified as <TT
+>"*"</TT
+> (may also be
+ specified as <TT
 CLASS="constant"
 >:WILD</TT
->)
- </P
+>)</P
 ></DD
 ><DT
 ><TT
@@ -5896,6 +6218,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -5913,19 +6236,18 @@ CLASS="classname"
 >, may contain wildcard
  characters <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 >,<TT
 CLASS="filename"
->#</TT
-> and
- <TT
+>"#"</TT
+> and <TT
 CLASS="filename"
->*</TT
-> (may also be specified as <TT
+>"*"</TT
+> (may also be
+ specified as <TT
 CLASS="constant"
 >:WILD</TT
->)
- </P
+>)</P
 ></DD
 ><DT
 ><TT
@@ -5936,6 +6258,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >always <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -5955,6 +6278,7 @@ CLASS="constant"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >Constraint: <TT
 CLASS="replaceable"
 ><I
@@ -5983,19 +6307,20 @@ CLASS="constant"
 >:ROOT</TT
 >.</P
 ><P
+ALIGN="justify"
 >The wildcard characters: <TT
 CLASS="filename"
->*</TT
-> matches any
- sequence of characters, <TT
+>"*"</TT
+> matches any sequence of
+ characters, <TT
 CLASS="filename"
->'#'</TT
-> or
- <TT
+>"#"</TT
+> or <TT
 CLASS="filename"
->?</TT
+>"?"</TT
 > matches any one character.</P
 ><P
+ALIGN="justify"
 >Due to the name/type swapping rule, there are pathnames that
  cannot result from <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
@@ -6020,7 +6345,7 @@ CLASS="function"
 >MAKE-PATHNAME</TT
 ></A
 > must be used.  Example: <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-pathname.html"
 TARGET="_top"
@@ -6028,7 +6353,10 @@ TARGET="_top"
 CLASS="function"
 >MAKE-PATHNAME</TT
 ></A
-> :directory "!Clisp." :name
+> :directory "!Clisp." <TT
+CLASS="constant"
+>:NAME</TT
+>
  "README")</TT
 >.</P
 ></DD
@@ -6044,6 +6372,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -6055,7 +6384,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="hash.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -6063,6 +6393,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -6071,7 +6402,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="path-external-notation.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -6091,6 +6423,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -6101,6 +6434,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -6,8 +6,10 @@
   [CLHS-1.9]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="class-prec.html"><LINK
 REL="NEXT"
 TITLE="Syntax
    [CLHS-2]"
-HREF="syntax.html"></HEAD
+HREF="syntax.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="class-prec.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Introduction
+>Chapter 1. Introduction
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-1.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="syntax.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,8 +106,7 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="cl-symb"
->Symbols in the Package <A
+NAME="cl-symb">1.4. Symbols in the Package <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
 ><SPAN
@@ -104,9 +118,9 @@ CLASS="QUOTE"
 HREF="http://www.lisp.org/HyperSpec/Body/sec_1-9.html"
 TARGET="_top"
 >[CLHS-1.9]</A
-></A
 ></H1
 ><P
+ALIGN="justify"
 >The 11 symbols missing from the <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
@@ -115,13 +129,16 @@ CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
 ></A
 > package
- (out of 978 specified by the [<SPAN
+ (out of 978 specified by the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->]):</P
+>]</A
+>):</P
 ><P
 ></P
 ><TABLE
@@ -246,6 +263,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -257,7 +275,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="class-prec.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -265,6 +284,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -273,7 +293,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="syntax.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -293,6 +314,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="intro.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -308,6 +330,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

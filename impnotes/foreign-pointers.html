@@ -5,8 +5,10 @@
 >Foreign Pointers</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -17,8 +19,11 @@ REL="PREVIOUS"
 TITLE="The burden of garbage-collection upon the rest of CLISP"
 HREF="gc-safety.html"><LINK
 REL="NEXT"
-TITLE="The CLISP bytecode specification"
-HREF="bytecode.html"></HEAD
+TITLE="Extending CLISP."
+HREF="extend.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,13 +70,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="gc-safety.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Overview of <A
+>Chapter 31. Overview of <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -76,8 +90,9 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="bytecode.html"
->Next &#62;&#62;&#62;</A
+HREF="extend.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -89,10 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="foreign-pointers"
->Foreign Pointers</A
-></H1
+NAME="foreign-pointers">31.5. Foreign Pointers</H1
 ><P
+ALIGN="justify"
 >Pointers to <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
@@ -100,9 +114,13 @@ TARGET="_top"
 CLASS="command"
 >C</B
 ></A
-> functions and to <TT
+> functions and to <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/malloc.html"
+TARGET="_top"
+><TT
 CLASS="function"
->malloc()</TT
+>malloc</TT
+></A
 >ed data can be
 hidden in <A
 HREF="http://clisp.cons.org"
@@ -133,6 +151,7 @@ CLASS="command"
 > function in a shared library satisfies the
 same requirements.</P
 ><P
+ALIGN="justify"
 >If another pointer is to be viewed as a <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -162,6 +181,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -173,7 +193,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="gc-safety.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -181,6 +202,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -188,8 +210,9 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="bytecode.html"
->Next &#62;&#62;&#62;</A
+HREF="extend.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -214,23 +237,63 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="gc.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->The <A
+>Extending <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
-> bytecode specification</TD
+>.</TD
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

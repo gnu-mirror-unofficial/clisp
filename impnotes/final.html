@@ -5,8 +5,10 @@
 >Extensions-1.7. Finalization</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-1.6. Weak Pointers"
 HREF="weak.html"><LINK
 REL="NEXT"
 TITLE="Extensions-1.8. The Prompt"
-HREF="prompt.html"></HEAD
+HREF="prompt.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="weak.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-1: Platform independent Extensions</TD
+>Chapter 29. Extensions-1: Platform independent Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="prompt.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,59 +97,12 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="final"
->Extensions-1.7. Finalization</A
-></H1
+NAME="final">29.7. Extensions-1.7. Finalization</H1
 ><P
->Calling <TT
-CLASS="literal"
->(<A
-HREF="final.html"
-><TT
-CLASS="function"
->EXT:FINALIZE</TT
-></A
-> <TT
-CLASS="replaceable"
-><I
->object</I
-></TT
->
+ALIGN="justify"
+>Calling
  <TT
-CLASS="replaceable"
-><I
->function</I
-></TT
->)</TT
-> has the effect that when the specified object is
- being <A
-HREF="gc.html"
->garbage-collect</A
->ed, <TT
-CLASS="literal"
->(<A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
-TARGET="_top"
-><TT
-CLASS="function"
->FUNCALL</TT
-></A
-> <TT
-CLASS="replaceable"
-><I
->function</I
-></TT
->
- <TT
-CLASS="replaceable"
-><I
->object</I
-></TT
->)</TT
-> will be executed.</P
-><P
->Calling <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="final.html"
 ><TT
@@ -151,28 +119,14 @@ CLASS="replaceable"
 ><I
 >function</I
 ></TT
->
- <TT
-CLASS="replaceable"
-><I
->guardian</I
-></TT
 >)</TT
-> has a similar effect,
- but only as long as the "guardian" has not been <A
-HREF="gc.html"
->garbage-collect</A
->ed: When <TT
-CLASS="replaceable"
-><I
->object</I
-></TT
 >
- is being <A
+ has the effect that when the specified object is being <A
 HREF="gc.html"
 >garbage-collect</A
->ed, <TT
-CLASS="literal"
+>ed,
+ <TT
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
 TARGET="_top"
@@ -190,15 +144,80 @@ CLASS="replaceable"
 ><I
 >object</I
 ></TT
+>)</TT
 >
+ will be executed.</P
+><P
+ALIGN="justify"
+>Calling
  <TT
+CLASS="sexp"
+>(<A
+HREF="final.html"
+><TT
+CLASS="function"
+>EXT:FINALIZE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>
+                       <TT
 CLASS="replaceable"
 ><I
 >guardian</I
 ></TT
 >)</TT
-> will be executed.  If
- the guardian is <A
+>
+ has a similar effect, but only as long as the "guardian" has not been
+ <A
+HREF="gc.html"
+>garbage-collect</A
+>ed: when <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> is being <A
+HREF="gc.html"
+>garbage-collect</A
+>ed,
+ <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>
+                       <TT
+CLASS="replaceable"
+><I
+>guardian</I
+></TT
+>)</TT
+>
+ will be executed.
+ If the guardian is <A
 HREF="gc.html"
 >garbage-collect</A
 >ed before <TT
@@ -208,6 +227,7 @@ CLASS="replaceable"
 ></TT
 > is, nothing happens.</P
 ><P
+ALIGN="justify"
 >Note: The time when <SPAN
 CLASS="QUOTE"
 >"the <TT
@@ -220,14 +240,16 @@ HREF="gc.html"
 >garbage-collect</A
 >ed"</SPAN
 >
- is not defined deterministically.  (Actually, it might possibly never
- occur.)  It denotes a moment at which no references to <TT
+ is not defined deterministically.
+ (Actually, it might possibly never occur.)
+ It denotes a moment at which no references to <TT
 CLASS="replaceable"
 ><I
 >object</I
 ></TT
 > exist
- from other Lisp objects.  When the <TT
+ from other Lisp objects.
+ When the <TT
 CLASS="replaceable"
 ><I
 >function</I
@@ -237,15 +259,16 @@ CLASS="replaceable"
 ><I
 >object</I
 ></TT
-> (and
- possibly <TT
+>
+ (and possibly <TT
 CLASS="replaceable"
 ><I
 >guardian</I
 ></TT
->) enter the "arena of live
- Lisp objects" again.</P
+>)
+ enter the "arena of live Lisp objects" again.</P
 ><P
+ALIGN="justify"
 >No finalization request will be executed more than once.</P
 ></DIV
 ><DIV
@@ -253,6 +276,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -264,7 +288,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="weak.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -272,6 +297,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -280,7 +306,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="prompt.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -295,6 +322,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="p-indep.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -305,6 +333,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

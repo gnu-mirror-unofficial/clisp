@@ -5,8 +5,10 @@
 >Extensions-1.4. Encodings</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-1.3. Internationalization"
 HREF="i18n.html"><LINK
 REL="NEXT"
 TITLE="Extensions-1.5. Defining new kinds of Streams"
-HREF="clos-stream.html"></HEAD
+HREF="clos-stream.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="i18n.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-1: Platform independent Extensions</TD
+>Chapter 29. Extensions-1: Platform independent Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="clos-stream.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,18 +97,15 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="encoding"
->Extensions-1.4. Encodings</A
-></H1
+NAME="encoding">29.4. Extensions-1.4. Encodings</H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="encodings-intro"
->Introduction</A
-></H2
+NAME="encodings-intro">29.4.1. Introduction</H2
 ><P
+ALIGN="justify"
 >An <I
 CLASS="emphasis"
 >encoding</I
@@ -129,6 +141,7 @@ CLASS="classname"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >An <A
 HREF="encoding.html"
 ><TT
@@ -148,6 +161,7 @@ HREF="encoding.html#charset"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >This denotes both the set of characters that
    can be represented and passed through the I/O channel, and the way
    these characters translate into raw bytes.  In this context, for
@@ -162,6 +176,7 @@ HREF="encoding.html#newline"
 > mode</DT
 ><DD
 ><P
+ALIGN="justify"
 >This denotes the way newline characters are
    represented.</P
 ></DD
@@ -174,9 +189,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="charset"
->Character Sets</A
-></H2
+NAME="charset">29.4.2. Character Sets</H2
 ><P
 ></P
 ><DIV
@@ -191,19 +204,20 @@ CLASS="command"
 >CLISP</B
 ></A
 > built
-  <I
+  <B
 CLASS="emphasis"
->without</I
+>without</B
 > compile-time flag <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >.</DT
 ><DD
 ><P
+ALIGN="justify"
 >Only one character set is understood: the platform's
  native (8-bit) character set.  See <A
 HREF="characters.html"
@@ -213,8 +227,7 @@ HREF="characters.html"
 ></DD
 ><DT
 ><A
-NAME="charset-symbols"
->Platform dependent:
+NAME="charset-symbols">Platform dependent:
   Only in <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -222,20 +235,20 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> built <I
+> built <B
 CLASS="emphasis"
->with</I
+>with</B
 > compile-time flag <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
->.</A
-></DT
+>.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The following character sets are supported, as values
  of the corresponding (constant) symbol in the <A
 HREF="encoding.html"
@@ -249,9 +262,8 @@ CLASS="QUOTE"
 ><UL
 ><LI
 ><A
-NAME="charset-UCS-2"
-></A
-><P
+NAME="charset-UCS-2"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >UCS-2</TT
@@ -263,21 +275,20 @@ CLASS="literal"
 CLASS="literal"
 >UNICODE-16-BIG-ENDIAN</TT
 >,
-   the 16-bit <A
+   the 16-bit basic multilingual plane of the <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
-> character set. Every character is represented
-   as two bytes.</P
+> character set.
+   Every character is represented as two bytes.</P
 ></LI
 ><LI
 ><A
-NAME="charset-UNICODE-16-LITTLE-ENDIAN"
-></A
-><P
+NAME="charset-UNICODE-16-LITTLE-ENDIAN"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >UNICODE-16-LITTLE-ENDIAN</TT
@@ -286,9 +297,8 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-UCS-4"
-></A
-><P
+NAME="charset-UCS-4"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >UCS-4</TT
@@ -300,37 +310,20 @@ CLASS="literal"
 CLASS="literal"
 >UNICODE-32-BIG-ENDIAN</TT
 >,
-   the 32-bit <A
+   the 21-bit <A
 HREF="http://www.unicode.org/"
-TARGET="_top"
-><I
-CLASS="emphasis"
->UNICODE</I
-></A
-> character set. Every character is represented as
-   four bytes. Note that <A
-HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
-CLASS="command"
->CLISP</B
-></A
-> understands only those characters which
-   are already contained in the 16-bit <A
-HREF="http://www.unicode.org/"
-TARGET="_top"
-><I
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
-> character set.
-   </P
+> character set. Every character is represented as
+   four bytes.</P
 ></LI
 ><LI
 ><A
-NAME="charset-UNICODE-32-LITTLE-ENDIAN"
-></A
-><P
+NAME="charset-UNICODE-32-LITTLE-ENDIAN"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >UNICODE-32-LITTLE-ENDIAN</TT
@@ -339,86 +332,140 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-UTF-8"
-></A
-><P
+NAME="charset-UTF-8"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >UTF-8</TT
 >,
-      the 16-bit <A
+      the 21-bit <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
-> character set. Every character is represented
-      as one to three bytes. ASCII characters represent themselves and need
-      one byte per character. Most Latin/Greek/Cyrillic/Hebrew characters
-      need two bytes per character, and the remaining characters need three
-      bytes per character. This is therefore, in general, the most
-      space-efficient encoding of all of Unicode-16.
-    </P
+> character set.
+      Every character is represented as one to four bytes.
+      <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> characters represent themselves and need one byte per character.
+      Most Latin/Greek/Cyrillic/Hebrew characters need two bytes per
+      character. Most other characters need three bytes per character,
+      and the rarely used remaining characters need four bytes per
+      character. This is therefore, in general, the most space-efficient
+      encoding of all of Unicode.</P
 ></LI
 ><LI
 ><A
-NAME="charset-UTF-16"
-></A
-><P
+NAME="charset-UTF-16"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >UTF-16</TT
 >,
-      the 16-bit <A
+      the 21-bit <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
-> character set. Every character is represented
-      as two bytes.</P
+> character set. Every character in the 16-bit
+      basic multilingual plane is represented as two bytes, and the
+      rarely used remaining characters need four bytes per character.
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-UTF-7"
-></A
-><P
+NAME="charset-UTF-7"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >UTF-7</TT
 >,
-      the 16-bit <A
+      the 21-bit <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 > character set. This is a stateful 7-bit encoding.
-      Not all ASCII characters represent themselves.
-    </P
+      Not all <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> characters represent themselves.
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-JAVA"
-></A
-><P
+NAME="charset-JAVA"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >JAVA</TT
 >,
-      the 16-bit <A
+      the 21-bit <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 > character set.
-      ASCII characters represent themselves and need one byte per character.
-      All other characters are represented
+      <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> characters represent themselves and need one byte per character.
+      All other characters of the basic multilingual plane are represented
       by <TT
 CLASS="literal"
 >\u<TT
@@ -434,14 +481,36 @@ CLASS="replaceable"
 >nnnn</I
 ></TT
 > a hexadecimal number)
-      and need 6 bytes per character. While this encoding is very comfortable
-      for editing Unicode files using only ASCII aware tools and editors, it
+      and need 6 bytes per character. The remaining characters are represented
+      by <TT
+CLASS="literal"
+>\u<TT
+CLASS="replaceable"
+><I
+>xxxx</I
+></TT
+>\u<TT
+CLASS="replaceable"
+><I
+>yyyy</I
+></TT
+></TT
+>
+      and need 12 bytes per character. While this encoding is very comfortable
+      for editing Unicode files using only <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+>-aware tools and editors, it
       cannot faithfully represent all <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 > text. Only text which
       does not contain <TT
@@ -453,304 +522,328 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-ASCII"
-></A
-><P
+NAME="charset-ASCII"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ASCII</TT
 >,
       the well-known US-centric 7-bit character set (American Standard
-      Code for Information Interchange).
-    </P
+      Code for Information Interchange - <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+>).</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-1"
-></A
-><P
+NAME="charset-ISO-8859-1"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-1</TT
 >,
-      an extension of the ASCII character set, suitable for the
-      Afrikaans, Albanian, Basque, Breton, Catalan, Cornish, Danish, Dutch,
-      English, Faeroese, Finnish, French, Frisian, Galician, German,
-      Greenlandic, Icelandic, Irish, Italian, Latin, Luxemburgish, Norwegian,
-      Portuguese, Raeto-Romanic, Scottish, Spanish, and Swedish languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Afrikaans, Albanian, Basque, Breton, Catalan,
+      Cornish, Danish, Dutch, English, Faeroese, Finnish, French,
+      Frisian, Galician, German, Greenlandic, Icelandic, Irish, Italian,
+      Latin, Luxemburgish, Norwegian, Portuguese, Raeto-Romanic,
+      Scottish, Spanish, and Swedish languages.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-2"
-></A
-><P
+NAME="charset-ISO-8859-2"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-2</TT
 >,
-      an extension of the ASCII character set, suitable for the Croatian,
-      Czech, German, Hungarian, Polish, Slovak, Slovenian, and Sorbian
-      languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Croatian, Czech, German, Hungarian, Polish,
+      Slovak, Slovenian, and Sorbian languages. </P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-3"
-></A
-><P
+NAME="charset-ISO-8859-3"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-3</TT
 >,
-      an extension of the ASCII character set, suitable for the
-      Esperanto and Maltese languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Esperanto and Maltese languages.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-4"
-></A
-><P
+NAME="charset-ISO-8859-4"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-4</TT
 >,
-      an extension of the ASCII character set, suitable for the
-      Estonian, Latvian, Lithuanian and Sami (Lappish) languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Estonian, Latvian, Lithuanian and Sami (Lappish)
+      languages.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-5"
-></A
-><P
+NAME="charset-ISO-8859-5"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-5</TT
 >,
-      an extension of the ASCII character set, suitable for the Bulgarian,
-      Byelorussian, Macedonian, Russian, Serbian, and Ukrainian languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Bulgarian, Byelorussian, Macedonian, Russian,
+      Serbian, and Ukrainian languages.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-6"
-></A
-><P
+NAME="charset-ISO-8859-6"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-6</TT
 >,
-      suitable for the Arabic language.
-    </P
+      suitable for the Arabic language.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-7"
-></A
-><P
+NAME="charset-ISO-8859-7"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-7</TT
 >,
-      an extension of the ASCII character set, suitable for the Greek
-      language.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Greek language.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-8"
-></A
-><P
+NAME="charset-ISO-8859-8"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-8</TT
 >,
-      an extension of the ASCII character set, suitable for the Hebrew
-      language (without punctuation).
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Hebrew language (without punctuation).
+  </P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-9"
-></A
-><P
+NAME="charset-ISO-8859-9"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-9</TT
 >,
-      an extension of the ASCII character set, suitable for the Turkish
-      language.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Turkish language.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-10"
-></A
-><P
+NAME="charset-ISO-8859-10"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-10</TT
 >,
-      an extension of the ASCII character set, suitable for the Estonian,
-      Icelandic, Inuit (Greenlandic), Latvian, Lithuanian, and Sami (Lappish)
-      languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Estonian, Icelandic, Inuit (Greenlandic), Latvian,
+      Lithuanian, and Sami (Lappish) languages.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-13"
-></A
-><P
+NAME="charset-ISO-8859-13"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-13</TT
 >,
-      an extension of the ASCII character set, suitable for the Estonian,
-      Latvian, Lithuanian, Polish and Sami (Lappish) languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Estonian, Latvian, Lithuanian, Polish and Sami
+      (Lappish) languages.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-14"
-></A
-><P
+NAME="charset-ISO-8859-14"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-14</TT
 >,
-      an extension of the ASCII character set, suitable for Irish Gaelic,
-      Manx Gaelic, Scottish Gaelic, and Welsh languages.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Irish Gaelic, Manx Gaelic, Scottish Gaelic, and
+      Welsh languages.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-15"
-></A
-><P
+NAME="charset-ISO-8859-15"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-15</TT
 >,
-      an extension of the ASCII character set, suitable for the ISO-8859-1
-      languages, with improvements for French, Finnish and the Euro.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the ISO-8859-1 languages, with improvements for
+      French, Finnish and the Euro.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-16"
-></A
-><P
+NAME="charset-ISO-8859-16"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-8859-16</TT
 >
-      an extension of the ASCII character set, suitable for the Rumanian
-      language.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Rumanian language.</P
 ></LI
 ><LI
 ><A
-NAME="charset-KOI8-R"
-></A
-><P
+NAME="charset-KOI8-R"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >KOI8-R</TT
 >,
-      an extension of the ASCII character set,
-      a popular character set for the Russian language.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Russian language (very popular, especially on the
+      internet).</P
 ></LI
 ><LI
 ><A
-NAME="charset-KOI8-U"
-></A
-><P
+NAME="charset-KOI8-U"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >KOI8-U</TT
 >,
-      an extension of the ASCII character set,
-      a popular character set for the Ukrainian language.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Ukrainian language (very popular, especially on the
+      internet).</P
 ></LI
 ><LI
 ><A
-NAME="charset-KOI8-RU"
-></A
-><P
+NAME="charset-KOI8-RU"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >KOI8-RU</TT
 >,
-      an extension of the ASCII character set, suitable for Russian
-      (this is the standard Russian encoding on the Internet)
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Russian language. This character set is only available on
+                           platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >JIS_X0201</TT
 >,
-      a character set for the Japanese language.
-    </P
+      a character set for the Japanese language.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ARABIC"
-></A
-><P
+NAME="charset-MAC-ARABIC"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-ARABIC</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-CENTRAL-EUROPE"
-></A
-><P
+NAME="charset-MAC-CENTRAL-EUROPE"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-CENTRAL-EUROPE</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-CROATIAN"
-></A
-><P
+NAME="charset-MAC-CROATIAN"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-CROATIAN</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-CYRILLIC"
-></A
-><P
+NAME="charset-MAC-CYRILLIC"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-CYRILLIC</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-DINGBAT"
-></A
-><P
+NAME="charset-MAC-DINGBAT"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-DINGBAT</TT
@@ -760,45 +853,47 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-GREEK"
-></A
-><P
+NAME="charset-MAC-GREEK"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-GREEK</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-HEBREW"
-></A
-><P
+NAME="charset-MAC-HEBREW"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-HEBREW</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ICELAND"
-></A
-><P
+NAME="charset-MAC-ICELAND"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-ICELAND</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ROMAN"
-></A
-><P
+NAME="charset-MAC-ROMAN"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-ROMAN</TT
@@ -807,86 +902,90 @@ CLASS="literal"
 CLASS="literal"
 >MACINTOSH</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ROMANIA"
-></A
-><P
+NAME="charset-MAC-ROMANIA"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-ROMANIA</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-SYMBOL"
-></A
-><P
+NAME="charset-MAC-SYMBOL"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-SYMBOL</TT
 >,
-      a platform specific character set.
-    </P
+      a platform specific character set.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-THAI"
-></A
-><P
+NAME="charset-MAC-THAI"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-THAI</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-TURKISH"
-></A
-><P
+NAME="charset-MAC-TURKISH"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-TURKISH</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-UKRAINE"
-></A
-><P
+NAME="charset-MAC-UKRAINE"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MAC-UKRAINE</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP437"
-></A
-><P
+NAME="charset-CP437"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP437</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP437-IBM"
-></A
-><P
+NAME="charset-CP437-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP437-IBM</TT
@@ -899,113 +998,117 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP737"
-></A
-><P
+NAME="charset-CP737"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP737</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Greek language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Greek language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP775"
-></A
-><P
+NAME="charset-CP775"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP775</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for some Baltic languages.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for some Baltic languages.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP850"
-></A
-><P
+NAME="charset-CP850"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP850</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP852"
-></A
-><P
+NAME="charset-CP852"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP852</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP852-IBM"
-></A
-><P
+NAME="charset-CP852-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP852-IBM</TT
 >,
-   an IBM variant of <TT
+    an IBM variant of <TT
 CLASS="literal"
 >CP852</TT
->.
-    </P
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP855"
-></A
-><P
+NAME="charset-CP855"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP855</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Russian language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Russian language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP857"
-></A
-><P
+NAME="charset-CP857"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP857</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Turkish language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Turkish language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP860"
-></A
-><P
+NAME="charset-CP860"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP860</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Portuguese language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Portuguese language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP860-IBM"
-></A
-><P
+NAME="charset-CP860-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP860-IBM</TT
@@ -1018,22 +1121,22 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP861"
-></A
-><P
+NAME="charset-CP861"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP861</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Icelandic language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Icelandic language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP861-IBM"
-></A
-><P
+NAME="charset-CP861-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP861-IBM</TT
@@ -1046,22 +1149,22 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP862"
-></A
-><P
+NAME="charset-CP862"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP862</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Hebrew language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Hebrew language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP862-IBM"
-></A
-><P
+NAME="charset-CP862-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP862-IBM</TT
@@ -1074,21 +1177,21 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP863"
-></A
-><P
+NAME="charset-CP863"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP863</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP863-IBM"
-></A
-><P
+NAME="charset-CP863-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP863-IBM</TT
@@ -1101,9 +1204,8 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP864"
-></A
-><P
+NAME="charset-CP864"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP864</TT
@@ -1113,9 +1215,8 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP864-IBM"
-></A
-><P
+NAME="charset-CP864-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP864-IBM</TT
@@ -1128,22 +1229,22 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP865"
-></A
-><P
+NAME="charset-CP865"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP865</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for some Nordic languages.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for some Nordic languages.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP865-IBM"
-></A
-><P
+NAME="charset-CP865-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP865-IBM</TT
@@ -1156,35 +1257,36 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP866"
-></A
-><P
+NAME="charset-CP866"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP866</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Russian language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Russian language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP869"
-></A
-><P
+NAME="charset-CP869"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP869</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Greek language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Greek language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP869-IBM"
-></A
-><P
+NAME="charset-CP869-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP869-IBM</TT
@@ -1197,22 +1299,22 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP874"
-></A
-><P
+NAME="charset-CP874"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP874</TT
 >, a DOS oldie,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Thai language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Thai language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-CP874-IBM"
-></A
-><P
+NAME="charset-CP874-IBM"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP874-IBM</TT
@@ -1225,9 +1327,8 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1250"
-></A
-><P
+NAME="charset-WINDOWS-1250"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1250</TT
@@ -1236,15 +1337,16 @@ CLASS="literal"
 CLASS="literal"
 >CP1250</TT
 >,
-      a platform specific extension of the ASCII character set,
-      heavily incompatible with ISO-8859-2.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, heavily incompatible with ISO-8859-2.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1251"
-></A
-><P
+NAME="charset-WINDOWS-1251"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1251</TT
@@ -1253,16 +1355,17 @@ CLASS="literal"
 CLASS="literal"
 >CP1251</TT
 >,
-      a platform specific extension of the ASCII character set,
-      heavily incompatible with ISO-8859-5,
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, heavily incompatible with ISO-8859-5,
       meant to be suitable for the Russian language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1252"
-></A
-><P
+NAME="charset-WINDOWS-1252"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1252</TT
@@ -1276,9 +1379,8 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1253"
-></A
-><P
+NAME="charset-WINDOWS-1253"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1253</TT
@@ -1287,16 +1389,17 @@ CLASS="literal"
 CLASS="literal"
 >CP1253</TT
 >,
-      a platform specific extension of the ASCII character set,
-      gratuitously incompatible with ISO-8859-7,
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, gratuitously incompatible with ISO-8859-7,
       meant to be suitable for the Greek language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1254"
-></A
-><P
+NAME="charset-WINDOWS-1254"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1254</TT
@@ -1310,9 +1413,8 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1255"
-></A
-><P
+NAME="charset-WINDOWS-1255"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1255</TT
@@ -1321,16 +1423,34 @@ CLASS="literal"
 CLASS="literal"
 >CP1255</TT
 >,
-      a platform specific extension of the ASCII character set,
-      gratuitously incompatible with ISO-8859-8,
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, gratuitously incompatible with ISO-8859-8,
       suitable for the Hebrew language.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1256"
-></A
-><P
+NAME="charset-WINDOWS-1256"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1256</TT
@@ -1339,15 +1459,16 @@ CLASS="literal"
 CLASS="literal"
 >CP1256</TT
 >,
-      a platform specific extension of the ASCII character set,
-      meant to be suitable for the Arabic language.
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Arabic language.
     </P
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1257"
-></A
-><P
+NAME="charset-WINDOWS-1257"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1257</TT
@@ -1356,14 +1477,15 @@ CLASS="literal"
 CLASS="literal"
 >CP1257</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1258"
-></A
-><P
+NAME="charset-WINDOWS-1258"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >WINDOWS-1258</TT
@@ -1372,62 +1494,115 @@ CLASS="literal"
 CLASS="literal"
 >CP1258</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, meant to be suitable for the Vietnamese language.
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-HP-ROMAN8"
-></A
-><P
+NAME="charset-HP-ROMAN8"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >HP-ROMAN8</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-NEXTSTEP"
-></A
-><P
+NAME="charset-NEXTSTEP"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >NEXTSTEP</TT
 >,
-      a platform specific extension of the ASCII character set.
-    </P
+      a platform specific extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-JP"
-></A
-><P
+NAME="charset-EUC-JP"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >EUC-JP</TT
 >,
       a multibyte character set for the Japanese language.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-SHIFT-JIS"
-></A
-><P
+NAME="charset-SHIFT-JIS"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >SHIFT-JIS</TT
 >,
       a multibyte character set for the Japanese language.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP932"
-></A
-><P
+NAME="charset-CP932"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP932</TT
@@ -1436,85 +1611,181 @@ CLASS="literal"
 CLASS="literal"
 >SHIFT-JIS</TT
 >.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-JP"
-></A
-><P
+NAME="charset-ISO-2022-JP"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-2022-JP</TT
 >,
       a stateful 7-bit multibyte character set for the Japanese language.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-JP-2"
-></A
-><P
+NAME="charset-ISO-2022-JP-2"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-2022-JP-2</TT
 >,
       a stateful 7-bit multibyte character set for the Japanese language.
-    </P
+      This character set is only available on platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> 2.3
+      or newer or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-JP-1"
-></A
-><P
+NAME="charset-ISO-2022-JP-1"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-2022-JP-1</TT
 >,
       a stateful 7-bit multibyte character set for the Japanese language.
-    </P
+      This character set is only available on
+                           platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-CN"
-></A
-><P
+NAME="charset-EUC-CN"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >EUC-CN</TT
 >,
       a multibyte character set for simplified Chinese.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-HZ"
-></A
-><P
+NAME="charset-HZ"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >HZ</TT
 >,
       a stateful 7-bit multibyte character set for simplified Chinese.
-    </P
+      This character set is only available on
+                           platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-GBK"
-></A
-><P
+NAME="charset-GBK"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >GBK</TT
 >,
       a multibyte character set for Chinese,
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP936"
-></A
-><P
+NAME="charset-CP936"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP936</TT
@@ -1523,49 +1794,113 @@ CLASS="literal"
 CLASS="literal"
 >GBK</TT
 >.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-GB18030"
-></A
-><P
+NAME="charset-GB18030"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >GB18030</TT
 >,
       a multibyte character set for Chinese,
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-TW"
-></A
-><P
+NAME="charset-EUC-TW"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >EUC-TW</TT
 >,
       a multibyte character set for traditional Chinese.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-BIG5"
-></A
-><P
+NAME="charset-BIG5"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >BIG5</TT
 >,
       a multibyte character set for traditional Chinese.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP950"
-></A
-><P
+NAME="charset-CP950"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP950</TT
@@ -1574,61 +1909,141 @@ CLASS="literal"
 CLASS="literal"
 >BIG5</TT
 >.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-BIG5HKSCS"
-></A
-><P
+NAME="charset-BIG5-HKSCS"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
->BIG5HKSCS</TT
+>BIG5-HKSCS</TT
 >,
       a multibyte character set for traditional Chinese.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-CN"
-></A
-><P
+NAME="charset-ISO-2022-CN"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-2022-CN</TT
 >,
       a stateful 7-bit multibyte character set for Chinese.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-CN-EXT"
-></A
-><P
+NAME="charset-ISO-2022-CN-EXT"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-2022-CN-EXT</TT
 >,
       a stateful 7-bit multibyte character set for Chinese.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-KR"
-></A
-><P
+NAME="charset-EUC-KR"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >EUC-KR</TT
 >,
       a multibyte character set for Korean.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP949"
-></A
-><P
+NAME="charset-CP949"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP949</TT
@@ -1637,115 +2052,319 @@ CLASS="literal"
 CLASS="literal"
 >EUC-KR</TT
 >.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-KR"
-></A
-><P
+NAME="charset-ISO-2022-KR"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ISO-2022-KR</TT
 >,
       a stateful 7-bit multibyte character set for Korean.
-    </P
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-ARMSCII-8"
+NAME="charset-JOHAB"><P
+ALIGN="justify"
+><TT
+CLASS="literal"
+>JOHAB</TT
+>,
+      a multibyte character set for Korean used mostly on <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>DOS</B
 ></A
-><P
+>.
+      This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
+></LI
+><LI
+><A
+NAME="charset-ARMSCII-8"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >ARMSCII-8</TT
 >,
-      an extension of the ASCII character set, suitable for Armenian.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Armenian. This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-GEORGIAN-ACADEMY"
-></A
-><P
+NAME="charset-GEORGIAN-ACADEMY"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >GEORGIAN-ACADEMY</TT
 >,
-      an extension of the ASCII character set, suitable for Georgian.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Georgian. This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-GEORGIAN-PS"
-></A
-><P
+NAME="charset-GEORGIAN-PS"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >GEORGIAN-PS</TT
 >,
-      an extension of the ASCII character set, suitable for Georgian.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Georgian. This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-TIS-620"
-></A
-><P
+NAME="charset-TIS-620"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >TIS-620</TT
 >,
-      an extension of the ASCII character set, suitable for Thai.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Thai. This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-MULELAO-1"
-></A
-><P
+NAME="charset-MULELAO-1"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >MULELAO-1</TT
 >,
-      an extension of the ASCII character set, suitable for Laotian.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Laotian. This character set is only available on
+                           platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-CP1133"
-></A
-><P
+NAME="charset-CP1133"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >CP1133</TT
 >,
-      an extension of the ASCII character set, suitable for Laotian.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Laotian. This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-VISCII"
-></A
-><P
+NAME="charset-VISCII"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >VISCII</TT
 >,
-      an extension of the ASCII character set, suitable for Vietnamese.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Vietnamese. This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ><LI
 ><A
-NAME="charset-TCVN"
-></A
-><P
+NAME="charset-TCVN"><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >TCVN</TT
 >,
-      an extension of the ASCII character set, suitable for Vietnamese.
-    </P
+      an extension of the <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>, suitable for the Vietnamese. This character set is only available on
+                                 platforms with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>.</P
 ></LI
 ></UL
 >
@@ -1758,53 +2377,60 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="iconv"
->[<A
-HREF="http://clisp.cons.org"
+NAME="iconv">Platform dependent: Only on <A
+HREF="http://www.gnu.org"
 TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> comes with it own implementation
-   of <A
-HREF="encoding.html#iconv"
-><TT
-CLASS="function"
->iconv()</TT
-></A
->, so the following is more or less obsolete now.]
-    (Platform dependent: Only on <A
+>GNU</A
+> systems
+     with <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> 2.2 or better and other systems (<A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
-> systems having the <A
+> and <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>)
+     on which the <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+> <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
 CLASS="command"
 >C</B
 ></A
->
-     library function <A
-HREF="encoding.html#iconv"
-><TT
-CLASS="function"
->iconv()</TT
-></A
->).</A
-></DT
+> library has been installed</DT
 ><DD
 ><P
+ALIGN="justify"
 >The character sets provided by the library function
  <A
-HREF="encoding.html#iconv"
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
 ><TT
 CLASS="function"
->iconv()</TT
+>iconv</TT
 ></A
 > can also be used as encodings.  To create such an encoding,
  call <A
@@ -1813,241 +2439,146 @@ HREF="encoding.html#make-encoding"
 CLASS="function"
 >EXT:MAKE-ENCODING</TT
 ></A
-> with the character set name (a string) as
+> with the character set name (a string) as the
  <TT
 CLASS="constant"
->:charset</TT
+>:CHARSET</TT
 > argument.</P
 ><P
+ALIGN="justify"
 >These encodings are not assigned to global variables, since
  there is no portable way to get the list of all character sets
  supported by <A
-HREF="encoding.html#iconv"
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
 ><TT
 CLASS="function"
->iconv()</TT
+>iconv</TT
 ></A
 >.</P
 ><P
+ALIGN="justify"
 >On <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
-> systems (such as GNU/Linux and GNU/Hurd), you get
- this list by calling the <I
-CLASS="emphasis"
->program</I
->
- iconv: <B
-CLASS="command"
->iconv --list</B
->.
- <A
+> systems (such as GNU/Linux and GNU/Hurd) and on
+ systems with <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
-> glibc-2.1 supports in particular, among others:</P
-><P
-></P
-><UL
-><LI
-><A
-NAME="charset-EUC-JP-gnu"
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+> you get this list by calling the
+ <I
+CLASS="emphasis"
+>program</I
+> <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/iconv.html"
+TARGET="_top"
+><B
+CLASS="command"
+>iconv</B
 ></A
+>: <B
+CLASS="command"
+>iconv -l</B
+>.
+ </P
 ><P
-><TT
-CLASS="literal"
->EUC-JP</TT
-> and
-  <TT
-CLASS="literal"
->SHIFT-JIS</TT
->, for the Japanese language,</P
-></LI
-><LI
-><A
-NAME="charset-EUC-CN-gnu"
-></A
-><P
-><TT
-CLASS="literal"
->EUC-CN</TT
->,
-  <TT
-CLASS="literal"
->EUC-TW</TT
->, <TT
-CLASS="literal"
->BIG5</TT
-> and
-  <TT
-CLASS="literal"
->GB</TT
->, for the Chinese language,</P
-></LI
-><LI
-><A
-NAME="charset-EUC-KR-gnu"
-></A
-><P
-><TT
-CLASS="literal"
->EUC-KR</TT
-> and
-  <TT
-CLASS="literal"
->ISO-2022-KR</TT
->, for the Korean language.</P
-></LI
-></UL
-><P
->HP-UX systems support in particular, among others:</P
-><P
-></P
-><UL
-><LI
-><A
-NAME="charset-eucJP"
-></A
-><P
-><TT
-CLASS="literal"
->eucJP</TT
-> and
-  <TT
-CLASS="literal"
->sjis</TT
->, for the Japanese language,</P
-></LI
-><LI
-><A
-NAME="charset-eucTW"
-></A
-><P
-><TT
-CLASS="literal"
->eucTW</TT
->,
-  <TT
-CLASS="literal"
->big5</TT
-> and <TT
-CLASS="literal"
->chinese-gb</TT
->,
-  for the Chinese language,</P
-></LI
-><LI
-><A
-NAME="charset-eucKR"
-></A
-><P
-><TT
-CLASS="literal"
->eucKR</TT
->,
-  for the Korean language.</P
-></LI
-></UL
-><P
->AIX 4.2 systems support in particular, among others:</P
-><P
-></P
-><UL
-><LI
-><A
-NAME="charset-IBM-eucJP"
-></A
-><P
-><TT
-CLASS="literal"
->IBM-eucJP</TT
->,
-  for the Japanese language,</P
-></LI
-><LI
-><A
-NAME="charset-IBM-eucTW"
-></A
-><P
-><TT
-CLASS="literal"
->IBM-eucTW</TT
->,
-  for the Chinese language,</P
-></LI
-><LI
-><A
-NAME="charset-IBM-eucKR"
-></A
-><P
-><TT
-CLASS="literal"
->IBM-eucKR</TT
->,
-  for the Korean language.</P
-></LI
-></UL
-><P
->On Solaris systems, you can forget about <A
-HREF="encoding.html#iconv"
-><TT
-CLASS="function"
->iconv()</TT
-></A
->-based
- encodings, because all the possible encodings are already
- <A
+ALIGN="justify"
+>When an encoding is available both as a <A
 HREF="encoding.html#charset-symbols"
 >built-in</A
->.  (Solaris knows about Japanese, Chinese and Korean
- encodings, but can convert them only to/from UTF-8, not to/from UCS-2,
- which is the <A
+> and
+ through <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>iconv</TT
+></A
+>, the <A
+HREF="encoding.html#charset-symbols"
+>built-in</A
+> is used, because it is more
+ efficient and available across all platforms.</P
+><P
+ALIGN="justify"
+>The reason we use only <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+> 2.2 or <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+> is
+ that the other <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>iconv</TT
+></A
+> implementations are broken in various ways and
+ we do not want deal with random <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
->'s internal encoding.)</P
-><P
->On IRIX systems, you can forget about <A
-HREF="encoding.html#iconv"
+> crashes caused by those bugs.
+ If your system supplies an <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
 ><TT
 CLASS="function"
->iconv()</TT
+>iconv</TT
 ></A
->-based encodings
- as well, because all the interesting possible encodings are already
+> implementation which passes the
  <A
-HREF="encoding.html#charset-symbols"
->built-in</A
->.</P
-><P
->On OSF/1 systems, <A
-HREF="encoding.html#iconv"
-><TT
-CLASS="function"
->iconv()</TT
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libiconv/"
+TARGET="_top"
+>libiconv</A
+>'s test suite, please report that to
+ <TT
+CLASS="email"
+>&#60;<A
+HREF="mailto:clisp-list@sf.net"
+>clisp-list@sf.net</A
+>&#62;</TT
+> and a future <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
 ></A
->-based encodings are not usable at
- all.</P
-><P
->When an encoding is available as a <A
-HREF="encoding.html#charset-symbols"
->built-in</A
-> and through
+> version will use
  <A
-HREF="encoding.html#iconv"
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
 ><TT
 CLASS="function"
->iconv()</TT
+>iconv</TT
 ></A
->, the <A
-HREF="encoding.html#charset-symbols"
->built-in</A
-> is preferred, because it is more efficient
- and available across platforms.</P
+> on your system.</P
 ></DD
 ></DL
 ></DIV
@@ -2063,24 +2594,17 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="newline"
->Line Terminators</A
-></H2
+NAME="newline">29.4.3. Line Terminators</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="newline-table"
-></A
-><P
+NAME="newline-table"><P
 ><B
->Table 1. The line terminator mode
+>Table 29-1. The line terminator mode
   can be one of the following three keywords</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -2106,7 +2630,14 @@ CLASS="constant"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->Newline is represented by the ASCII
+>Newline is represented by the <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+>
      <SPAN
 CLASS="keycode"
 >LF</SPAN
@@ -2126,7 +2657,14 @@ CLASS="constant"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->Newline is represented by the ASCII
+>Newline is represented by the <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+>
      <SPAN
 CLASS="keycode"
 >CR</SPAN
@@ -2146,11 +2684,25 @@ CLASS="constant"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->Newline is represented by the ASCII
+>Newline is represented by the <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+>
      <SPAN
 CLASS="keycode"
 >CR</SPAN
-> followed by the ASCII <SPAN
+> followed by the <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> <SPAN
 CLASS="keycode"
 >LF</SPAN
 >.</TD
@@ -2159,6 +2711,7 @@ CLASS="keycode"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Windows programs typically use the <TT
 CLASS="constant"
 >:DOS</TT
@@ -2172,6 +2725,7 @@ CLASS="constant"
 >:MAC</TT
 > line terminators.</P
 ><P
+ALIGN="justify"
 >The line terminator mode is relevant only for output (writing to a
  <A
 HREF="stream-dict.html#open"
@@ -2206,6 +2760,7 @@ CLASS="function"
 ></A
 >).</P
 ><P
+ALIGN="justify"
 >See also <A
 HREF="clhs-newline.html"
 >13.1.8 Treatment of Newline
@@ -2217,19 +2772,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="make-encoding"
->Function <A
+NAME="make-encoding">29.4.4. Function <A
 HREF="encoding.html#make-encoding"
 ><TT
 CLASS="function"
 >EXT:MAKE-ENCODING</TT
 ></A
-></A
-></H2
+>.</H2
 ><P
+ALIGN="justify"
 >The function
   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="encoding.html#make-encoding"
 ><TT
@@ -2275,6 +2829,7 @@ CLASS="constant"
 >:DOS</TT
 >.</P
 ><P
+ALIGN="justify"
 >The <TT
 CLASS="constant"
 >:input-error-action</TT
@@ -2290,9 +2845,9 @@ CLASS="constant"
  character to be used instead.  The <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 > character
  <SPAN
@@ -2301,6 +2856,7 @@ CLASS="keysym"
 > is typically used to indicate an error in the
  input sequence.</P
 ><P
+ALIGN="justify"
 >The <TT
 CLASS="constant"
 >:output-error-action</TT
@@ -2316,9 +2872,9 @@ CLASS="constant"
  be used instead, or a character to be used instead.  The <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >
  character <SPAN
@@ -2327,6 +2883,7 @@ CLASS="keysym"
 > can be used here only if it is
  encodable in the character set.</P
 ><P
+ALIGN="justify"
 >Encodings are types.  As such, they represent the set of
  characters encodable in the character set.  In this context, the way
  characters are translated into raw bytes is ignored, and the line
@@ -2346,7 +2903,74 @@ CLASS="function"
 ></A
 > can be used
  on encodings.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="enc-charset">29.4.5. Function <A
+HREF="encoding.html#enc-charset"
+><TT
+CLASS="function"
+>EXT:ENCODING-CHARSET</TT
+></A
+>.</H2
 ><P
+ALIGN="justify"
+>The function <TT
+CLASS="sexp"
+>(<A
+HREF="encoding.html#enc-charset"
+><TT
+CLASS="function"
+>EXT:ENCODING-CHARSET</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>encoding</I
+></TT
+>)</TT
+>
+ returns the charset of the <TT
+CLASS="replaceable"
+><I
+>encoding</I
+></TT
+>, as a symbol or a string.
+ Note that <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_string.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STRING</TT
+></A
+> (<A
+HREF="encoding.html#enc-charset"
+><TT
+CLASS="function"
+>EXT:ENCODING-CHARSET</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>encoding</I
+></TT
+>))</TT
+> is not necessarily a valid MIME name.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="enc-dflt">29.4.6. Default encodings.</H2
+><P
+ALIGN="justify"
 >Besides every <A
 HREF="stream-dict.html#open"
 >file</A
@@ -2374,16 +2998,15 @@ CLASS="classname"
 ><DIV
 CLASS="formalpara"
 ><P
-><B
-><B
 ><A
+NAME="def-file-enc"><B
+>Macro <A
 HREF="encoding.html#def-file-enc"
 ><TT
 CLASS="varname"
 >CUSTOM:*DEFAULT-FILE-ENCODING*</TT
 ></A
 >. </B
-></B
 >The <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
@@ -2430,19 +3053,20 @@ CLASS="command"
 >CLISP</B
 ></A
 > built
-  <I
+  <B
 CLASS="emphasis"
->with</I
+>with</B
 > compile-time flag <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The following are <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
@@ -2458,17 +3082,16 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="path-enc"
-><A
+NAME="path-enc"><A
 HREF="encoding.html#path-enc"
 ><TT
 CLASS="varname"
 >CUSTOM:*PATHNAME-ENCODING*</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the encoding used for pathnames in the file
  system. Normally, this is a 1:1 encoding.  Its <A
 HREF="encoding.html#newline"
@@ -2478,17 +3101,16 @@ HREF="encoding.html#newline"
 ></DD
 ><DT
 ><A
-NAME="term-enc"
-><A
+NAME="term-enc"><A
 HREF="encoding.html#term-enc"
 ><TT
 CLASS="varname"
 >CUSTOM:*TERMINAL-ENCODING*</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the encoding used for communication with the
   terminal, in particular by <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
@@ -2502,20 +3124,22 @@ CLASS="varname"
 ></DD
 ><DT
 ><A
-NAME="misc-enc"
-><A
+NAME="misc-enc"><A
 HREF="encoding.html#misc-enc"
 ><TT
 CLASS="varname"
 >CUSTOM:*MISC-ENCODING*</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
->is the encoding used for access to environment
- variables, command line options, and the like.
- Its <A
+ALIGN="justify"
+>is the encoding used for access to <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>s,
+ command line options, and the like.  Its <A
 HREF="encoding.html#newline"
 >line terminator</A
 > mode is ignored.
@@ -2523,17 +3147,16 @@ HREF="encoding.html#newline"
 ></DD
 ><DT
 ><A
-NAME="foreign-enc"
-><A
+NAME="foreign-enc"><A
 HREF="encoding.html#foreign-enc"
 ><TT
 CLASS="varname"
 >CUSTOM:*FOREIGN-ENCODING*</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >is the encoding for characters and strings passed
  through the <A
 HREF="dffi.html"
@@ -2552,6 +3175,7 @@ CLASS="QUOTE"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >The default encoding objects are initialized as described in the
  <A
 HREF="http://clisp.cons.org"
@@ -2571,10 +3195,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="string-byte"
->Converting between strings and byte vectors</A
-></H2
+NAME="string-byte">29.4.7. Converting between strings and byte vectors</H2
 ><P
+ALIGN="justify"
 >Encodings can also be used to convert directly between strings and
 their corresponding byte vector representation according to that encoding.
 </P
@@ -2585,7 +3208,7 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >&#13; (<TT
 CLASS="function"
 >EXT:CONVERT-STRING-FROM-BYTES</TT
@@ -2618,6 +3241,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >converts the subsequence of
   <TT
 CLASS="replaceable"
@@ -2645,7 +3269,7 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >&#13; (<TT
 CLASS="function"
 >EXT:CONVERT-STRING-TO-BYTES</TT
@@ -2677,6 +3301,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >converts the subsequence of <TT
 CLASS="replaceable"
 ><I
@@ -2728,6 +3353,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -2739,7 +3365,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="i18n.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -2747,6 +3374,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -2755,7 +3383,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="clos-stream.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -2770,6 +3399,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="p-indep.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -2780,6 +3410,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extending CLISP.</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Internals of the CLISP Implementation"
+HREF="internals.html"><LINK
+REL="PREVIOUS"
+TITLE="Foreign Pointers"
+HREF="foreign-pointers.html"><LINK
+REL="NEXT"
+TITLE="Adding a built-in variable."
+HREF="add-var.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="foreign-pointers.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="add-var.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="extend">Chapter 32. Extending <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</H1
+><TABLE
+BORDER="0"
+WIDTH="100%"
+CELLSPACING="0"
+CELLPADDING="0"
+CLASS="EPIGRAPH"
+><TR
+><TD
+WIDTH="45%"
+>&nbsp;</TD
+><TD
+WIDTH="45%"
+ALIGN="LEFT"
+VALIGN="TOP"
+><I
+><P
+ALIGN="justify"
+><A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> is a <I
+CLASS="emphasis"
+>programmable</I
+>
+  programming language</P
+></I
+></TD
+></TR
+><TR
+><TD
+WIDTH="45%"
+>&nbsp;</TD
+><TD
+WIDTH="45%"
+ALIGN="RIGHT"
+VALIGN="TOP"
+><I
+><SPAN
+CLASS="attribution"
+><A
+HREF="http://www.franz.com/~jkf/"
+TARGET="_top"
+>John
+  Foderaro</A
+></SPAN
+></I
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>32.1. <A
+HREF="extend.html#add-fun"
+>Adding a built-in function.</A
+></DT
+><DT
+>32.2. <A
+HREF="add-var.html"
+>Adding a built-in variable.</A
+></DT
+><DT
+>32.3. <A
+HREF="recompile.html"
+>Recompilation.</A
+></DT
+></DL
+></DIV
+><P
+ALIGN="justify"
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> can be easily extended the same way any other <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+>
+ implementation can: create a lisp file with your variables, functions,
+ macros, etc.; <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> it into a running <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>, and save the
+ <A
+HREF="p-indep.html#image"
+>memory image</A
+>.</P
+><P
+ALIGN="justify"
+>This method does not work when you need to use some functionality
+ not available in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>, e.g., you want to call a <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function.
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> comes with an <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> which allows you to access <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+ libraries in an easy way.</P
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="add-fun">32.1. Adding a built-in function.</H1
+><P
+ALIGN="justify"
+>In the rare cases when you really need to modify <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+ internals and add a truly built-in function, you should read the
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> sources for inspiration and enlightenment, choose a file where
+ your brand new built-in function should go to, and then ...
+ <P
+></P
+><UL
+><LI
+><P
+ALIGN="justify"
+>add the <TT
+CLASS="function"
+>LISPFUN</TT
+>
+    form and the implementation there;</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>add the <TT
+CLASS="function"
+>LISPFUN</TT
+> header to
+    file <TT
+CLASS="filename"
+>#P"subr.d"</TT
+>;</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>declare the function name in file
+    <TT
+CLASS="filename"
+>#P"constsym.d"</TT
+> in the appropriate package
+    (probably <A
+HREF="imppack.html#ext-pac"
+><SPAN
+CLASS="QUOTE"
+>"EXT"</SPAN
+></A
+>, if there is no specific package);
+  </P
+></LI
+><LI
+><P
+ALIGN="justify"
+>if your function accepts keyword arguments,
+    then an appropriate pair of forms must be added
+    to <TT
+CLASS="filename"
+>#P"subrkw.d"</TT
+> and you must make sure that the
+    keyword symbols are declared in <TT
+CLASS="filename"
+>#P"constsym.d"</TT
+>;
+  </P
+></LI
+><LI
+><P
+ALIGN="justify"
+>export your function name from the appropriate
+    package in file <TT
+CLASS="filename"
+>#P"init.lisp"</TT
+>;</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>when you are done, you should run <B
+CLASS="command"
+>make
+     check-sources</B
+> in your build directory: this will check
+    that the definitions (source files) and the declarations
+    (<TT
+CLASS="filename"
+>#P"subr.d"</TT
+>, <TT
+CLASS="filename"
+>#P"subrkw.d"</TT
+>
+    and <TT
+CLASS="filename"
+>#P"fsubr.d"</TT
+>) are in sync.</P
+></LI
+></UL
+></P
+><DIV
+CLASS="warning"
+><P
+></P
+><TABLE
+CLASS="warning"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+ALIGN="justify"
+>Be very careful with the <I
+CLASS="emphasis"
+>GC-unsafe</I
+>
+  functions!  Always remember about <A
+HREF="gc-safety.html"
+>GC-safety</A
+>!</P
+></TD
+></TR
+></TABLE
+></DIV
+><P
+ALIGN="justify"
+>These instructions are intentionally terse - you are encouraged
+ to use <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> instead of adding built-ins directly.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="foreign-pointers.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="add-var.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Foreign Pointers</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="internals.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Adding a built-in variable.</TD
+></TR
+></TABLE
+></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
+></BODY
+></HTML
+>

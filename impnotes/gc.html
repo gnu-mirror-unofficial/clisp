@@ -5,8 +5,10 @@
 >Overview of CLISP's Garbage Collection</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Internals of the CLISP Implementation"
 HREF="internals.html"><LINK
 REL="NEXT"
 TITLE="Lisp objects in CLISP"
-HREF="lisp-obj-in-c.html"></HEAD
+HREF="lisp-obj-in-c.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,7 +70,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="internals.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -70,7 +84,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="lisp-obj-in-c.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -81,16 +96,65 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="gc"
->Overview of <A
+NAME="gc">Chapter 31. Overview of <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
->'s Garbage Collection</A
-></H1
+>'s Garbage Collection</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>31.1. <A
+HREF="gc.html#internals-intro"
+>Introduction</A
+></DT
+><DT
+>31.2. <A
+HREF="lisp-obj-in-c.html"
+>Lisp objects in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>31.3. <A
+HREF="memory-models.html"
+>Memory Models</A
+></DT
+><DT
+>31.4. <A
+HREF="gc-safety.html"
+>The burden of <A
+HREF="gc.html"
+>garbage-collect</A
+>ion upon the rest of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>31.5. <A
+HREF="foreign-pointers.html"
+>Foreign Pointers</A
+></DT
+></DL
+></DIV
 ><FONT
 COLOR="RED"
 >These are internals, which are of interest only to the
@@ -116,13 +180,16 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="internals-intro"
->Introduction</A
-></H1
+NAME="internals-intro">31.1. Introduction</H1
 ><P
->Knowing that most <TT
+ALIGN="justify"
+>Knowing that most <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/malloc.html"
+TARGET="_top"
+><TT
 CLASS="function"
->malloc()</TT
+>malloc</TT
+></A
 > implementations are buggy and/or slow,
 and because <A
 HREF="http://clisp.cons.org"
@@ -139,9 +206,10 @@ CLASS="command"
 >CLISP</B
 ></A
 > has its
-own memory management subsystem in files <TT
+own memory management subsystem in
+files <TT
 CLASS="filename"
->spvw*.d</TT
+>#P"spvw*.d"</TT
 >.</P
 ></DIV
 ></DIV
@@ -150,6 +218,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -161,7 +230,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="internals.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -169,6 +239,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -177,7 +248,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="lisp-obj-in-c.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -199,6 +271,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="internals.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -216,6 +289,45 @@ CLASS="command"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

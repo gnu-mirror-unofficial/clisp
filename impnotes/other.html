@@ -2,11 +2,13 @@
 <HTML
 ><HEAD
 ><TITLE
->Extensions-2.12. Other</TITLE
+>Extensions-2.13. Other</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -14,11 +16,15 @@ REL="UP"
 TITLE="Extensions-2: Platform specific Extensions"
 HREF="platform.html"><LINK
 REL="PREVIOUS"
-TITLE="Extensions-2.11. Directory Access"
-HREF="dir-key.html"><LINK
+TITLE="Extensions-2.12. Operating System
+  Environment."
+HREF="getenv.html"><LINK
 REL="NEXT"
-TITLE="GNU Free Documentation License"
-HREF="gfdl.html"></HEAD
+TITLE="Internals of the CLISP Implementation"
+HREF="internals.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +35,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +55,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -56,21 +70,23 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="dir-key.html"
->&#60;&#60;&#60; Previous</A
+HREF="getenv.html"
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="gfdl.html"
->Next &#62;&#62;&#62;</A
+HREF="internals.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,9 +98,7 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="other"
->Extensions-2.12. Other</A
-></H1
+NAME="other">30.13. Extensions-2.13. Other</H1
 ><P
 ></P
 ><DIV
@@ -94,13 +108,14 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >To have <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
 TARGET="_top"
@@ -187,6 +202,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -197,8 +213,9 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="dir-key.html"
->&#60;&#60;&#60; Previous</A
+HREF="getenv.html"
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -206,6 +223,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -213,8 +231,9 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="gfdl.html"
->Next &#62;&#62;&#62;</A
+HREF="internals.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -222,23 +241,71 @@ HREF="gfdl.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Extensions-2.11. Directory Access</TD
+>Extensions-2.12. Operating System
+  Environment.</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->GNU Free Documentation License</TD
+>Internals of the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> Implementation</TD
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -5,8 +5,10 @@
 >Extensions-1.9. Maximum ANSI CL compliance</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-1.8. The Prompt"
 HREF="prompt.html"><LINK
 REL="NEXT"
 TITLE="Extensions-1.10. Additional Fancy Macros"
-HREF="macros3.html"></HEAD
+HREF="macros3.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="prompt.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-1: Platform independent Extensions</TD
+>Chapter 29. Extensions-1: Platform independent Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="macros3.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,19 +97,21 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="ansi"
->Extensions-1.9. Maximum ANSI CL compliance</A
-></H1
+NAME="ansi">29.9. Extensions-1.9. Maximum ANSI CL compliance</H1
 ><P
->Some [<SPAN
+ALIGN="justify"
+>Some <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] features are turned off by default for backwards
+>]</A
+> features are turned off by default for backwards
  compatibility.
- They can be switched on, all at once by setting the <A
+ They can be switched on, all at once, by setting the <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
 ><TT
@@ -135,6 +152,7 @@ CLASS="constant"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="print-dict.html#pathprint"
 ><TT
@@ -152,6 +170,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="type-class-dict.html#fixnum-char-ansi"
 ><TT
@@ -169,6 +188,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="sequences.html#count-ansi"
 ><TT
@@ -186,6 +206,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="filename-dict.html#pathmerge"
 ><TT
@@ -203,6 +224,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="filename-dict.html#parsename"
 ><TT
@@ -220,6 +242,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="num-concepts.html#flocont"
 ><TT
@@ -237,7 +260,8 @@ CLASS="constant"
 ></LI
 ></UL
 ><P
->Please note that if you run <A
+ALIGN="justify"
+>Note that if you run <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -251,8 +275,8 @@ TARGET="_top"
 CLASS="option"
 >-ansi</TT
 ></A
-> switch or
- set the <A
+> switch or set
+ the <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
 ><TT
@@ -272,26 +296,27 @@ TARGET="_top"
 CLASS="constant"
 >T</TT
 ></A
-> and save <A
+> and then save <A
 HREF="p-indep.html#image"
 >memory image</A
->, then all
- subsequent invocations of <A
+>,
+ then all subsequent invocations of <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
-> with this image will be as if with
- <A
+> with this image
+ will be as if with <A
 HREF="clisp.html#opt-ansi"
 TARGET="_top"
 ><TT
 CLASS="option"
 >-ansi</TT
 ></A
-> (regardless whether you actually supply the <A
+>
+ (regardless whether you actually supply the <A
 HREF="clisp.html#opt-ansi"
 TARGET="_top"
 ><TT
@@ -319,8 +344,8 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
->,
- or invoke <A
+>, or invoke
+ <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -334,13 +359,14 @@ TARGET="_top"
 CLASS="option"
 >-traditional</TT
 ></A
-> switch,
- reversing the above settings, i.e.,</P
+> switch, reversing the above
+ settings, i.e.,</P
 ><P
 ></P
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="print-dict.html#pathprint"
 ><TT
@@ -358,6 +384,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="type-class-dict.html#fixnum-char-ansi"
 ><TT
@@ -375,6 +402,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="sequences.html#count-ansi"
 ><TT
@@ -392,6 +420,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="filename-dict.html#pathmerge"
 ><TT
@@ -409,6 +438,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="filename-dict.html#parsename"
 ><TT
@@ -426,6 +456,7 @@ CLASS="constant"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Setting <A
 HREF="num-concepts.html#flocont"
 ><TT
@@ -448,6 +479,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -459,7 +491,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="prompt.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -467,6 +500,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -475,7 +509,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="macros3.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -490,6 +525,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="p-indep.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -500,6 +536,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -6,8 +6,10 @@
    [CLHS-4]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="eval-comp.html"><LINK
 REL="NEXT"
 TITLE="Classes
   [CLHS-4.3]"
-HREF="classes.html"></HEAD
+HREF="classes.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="eval-comp.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="classes.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,41 +99,129 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="types-classes"
->Types and Classes
+NAME="types-classes">Chapter 4. Types and Classes
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
 TARGET="_top"
 >[CLHS-4]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="types"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>4.1. <A
+HREF="types-classes.html#types"
 >Types
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2.html"
 TARGET="_top"
 >[CLHS-4.2]</A
 ></A
+></DT
+><DT
+>4.2. <A
+HREF="classes.html"
+>Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3.html"
+TARGET="_top"
+>[CLHS-4.3]</A
+></A
+></DT
+><DT
+>4.3. <A
+HREF="clos-diff.html"
+>Deviations from <A
+HREF="references.html#ansi-cl"
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+></A
+></DT
+><DT
+>4.4. <A
+HREF="metaclasses.html"
+>Standard Metaclasses
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-1-1.html"
+TARGET="_top"
+>[CLHS-4.3.1.1]</A
+></A
+></DT
+><DT
+>4.5. <A
+HREF="def-class.html"
+>Defining Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-2.html"
+TARGET="_top"
+>[CLHS-4.3.2]</A
+></A
+></DT
+><DT
+>4.6. <A
+HREF="redef-class.html"
+>Redefining Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-6.html"
+TARGET="_top"
+>[CLHS-4.3.6]</A
+></A
+></DT
+><DT
+>4.7. <A
+HREF="type-class-int.html"
+>Integrating Types and Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-7.html"
+TARGET="_top"
+>[CLHS-4.3.7]</A
+></A
+></DT
+><DT
+>4.8. <A
+HREF="type-class-dict.html"
+>The Types and Classes Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_types_s_dictionary.html"
+TARGET="_top"
+>[CLHS-4.4]</A
+></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="types">4.1. Types
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2.html"
+TARGET="_top"
+>[CLHS-4.2]</A
 ></H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="type-spec"
->Type Specifiers
+NAME="type-spec">4.1.1. Type Specifiers
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2-3.html"
 TARGET="_top"
 >[CLHS-4.2.3]</A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The general form of the <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -127,7 +230,7 @@ CLASS="classname"
 >COMPLEX</TT
 ></A
 > type specifier is <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -149,7 +252,7 @@ CLASS="replaceable"
 >)</TT
 >.  The type
  specifier <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -165,7 +268,7 @@ CLASS="replaceable"
 >)</TT
 > is
  equivalent to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -187,14 +290,18 @@ CLASS="replaceable"
 >)</TT
 >.</P
 ><P
->The [<SPAN
+ALIGN="justify"
+>The <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] type specifier <TT
-CLASS="literal"
+>]</A
+> type specifier <TT
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
 TARGET="_top"
@@ -228,6 +335,7 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_deftype.html"
 TARGET="_top"
@@ -269,14 +377,14 @@ CLASS="literal"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
-CLASS="literal"
+>Function
+  <TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->ext:type-expand</TT
+>EXT:TYPE-EXPAND</TT
 >
- <TT
+   <TT
 CLASS="replaceable"
 ><I
 >typespec</I
@@ -289,14 +397,13 @@ CLASS="literal"
 >&#38;OPTIONAL</TT
 ></A
 >
- <TT
+   <TT
 CLASS="replaceable"
 ><I
 >once-p</I
 ></TT
 >)</TT
 >. </B
-></B
 >If <TT
 CLASS="replaceable"
 ><I
@@ -357,6 +464,7 @@ CLASS="function"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
 TARGET="_top"
@@ -368,6 +476,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
 TARGET="_top"
@@ -382,8 +491,7 @@ TARGET="_top"
 CLASS="classname"
 >NULL</TT
 ></A
->,
-  <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_boolean.html"
 TARGET="_top"
 ><TT
@@ -394,6 +502,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
 TARGET="_top"
@@ -456,6 +565,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
 TARGET="_top"
@@ -474,6 +584,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >(<A
@@ -520,6 +631,7 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >(<A
@@ -563,6 +675,7 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >(<A
@@ -599,6 +712,7 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >(<A
@@ -635,6 +749,7 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="literal"
 >(<A
@@ -671,6 +786,7 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
 TARGET="_top"
@@ -678,8 +794,7 @@ TARGET="_top"
 CLASS="classname"
 >FUNCTION</TT
 ></A
->,
-  <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_compiled-function.html"
 TARGET="_top"
 ><TT
@@ -690,6 +805,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
 TARGET="_top"
@@ -704,23 +820,22 @@ TARGET="_top"
 CLASS="classname"
 >FILE-STREAM</TT
 ></A
->,
-  <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_synonym-stream.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >SYNONYM-STREAM</TT
 ></A
->, <A
+>,
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_broadcast-stream.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >BROADCAST-STREAM</TT
 ></A
->,
-  <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_concatenated-stream.html"
 TARGET="_top"
 ><TT
@@ -753,6 +868,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_package.html"
 TARGET="_top"
@@ -774,15 +890,15 @@ TARGET="_top"
 CLASS="classname"
 >READTABLE</TT
 ></A
->,
-  <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >PATHNAME</TT
 ></A
->, <A
+>,
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_logical-pathname.html"
 TARGET="_top"
 ><TT
@@ -796,8 +912,7 @@ TARGET="_top"
 CLASS="classname"
 >RANDOM-STATE</TT
 ></A
->,
-  <A
+>, <A
 HREF="num-concepts.html#byte-type"
 ><SPAN
 CLASS="type"
@@ -807,6 +922,7 @@ CLASS="type"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="classname"
 >special-operator</TT
@@ -846,6 +962,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><A
 HREF="weak.html"
 ><TT
@@ -874,6 +991,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 ><TT
 CLASS="classname"
 >address</TT
@@ -882,6 +1000,7 @@ CLASS="classname"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >any other symbol (structure types or <B
 CLASS="command"
 >CLOS</B
@@ -890,6 +1009,7 @@ CLASS="command"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >a class (<B
 CLASS="command"
 >CLOS</B
@@ -905,6 +1025,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -916,7 +1037,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="eval-comp.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -924,6 +1046,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -932,7 +1055,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="classes.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -942,7 +1066,7 @@ ALIGN="left"
 VALIGN="top"
 >The Evaluation and Compilation Dictionary
   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-8.html"
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_evalu_n_dictionary.html"
 TARGET="_top"
 >[CLHS-3.8]</A
 ></TD
@@ -952,6 +1076,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -967,6 +1092,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

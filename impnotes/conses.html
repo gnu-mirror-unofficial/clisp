@@ -6,8 +6,10 @@
    [CLHS-14]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -20,7 +22,10 @@ HREF="char-bits.html"><LINK
 REL="NEXT"
 TITLE="Arrays
    [CLHS-15]"
-HREF="arrays.html"></HEAD
+HREF="arrays.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -31,6 +36,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -50,7 +56,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -59,7 +72,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="char-bits.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -72,7 +86,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="arrays.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -83,34 +98,48 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="conses"
->Conses
+NAME="conses">Chapter 14. Conses
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-14.html"
 TARGET="_top"
 >[CLHS-14]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="cons-dict"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>14.1. <A
+HREF="conses.html#cons-dict"
 >The Conses Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_conses_dictionary.html"
 TARGET="_top"
 >[CLHS-14.2]</A
 ></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="cons-dict">14.1. The Conses Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_conses_dictionary.html"
+TARGET="_top"
+>[CLHS-14.2]</A
 ></H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="map-func"
->Functions <A
+NAME="map-func">14.1.1. Functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
 TARGET="_top"
 ><TT
@@ -138,23 +167,21 @@ TARGET="_top"
 CLASS="function"
 >MAPCON</TT
 ></A
->, ...</A
-></H2
+>, ...</H2
 ><DIV
 CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="mapcap"
->Function <A
+NAME="mapcap">14.1.1.1. Function <A
 HREF="conses.html#mapcap"
 ><TT
 CLASS="function"
 >EXT:MAPCAP</TT
 ></A
-></A
 ></H3
 ><P
+ALIGN="justify"
 >The function <A
 HREF="conses.html#mapcap"
 ><TT
@@ -185,8 +212,9 @@ CLASS="function"
 ></A
 >:</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="conses.html#mapcap"
 ><TT
@@ -215,7 +243,7 @@ CLASS="replaceable"
 >)</TT
 > ==
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_apply.html"
 TARGET="_top"
@@ -260,6 +288,7 @@ CLASS="replaceable"
 >))</TT
 ></P
 ><P
+ALIGN="justify"
 >(Actually a bit more efficient that this would have been.)</P
 ></DIV
 ><DIV
@@ -267,16 +296,15 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="maplap"
->Function <A
+NAME="maplap">14.1.1.2. Function <A
 HREF="conses.html#mapcap"
 ><TT
 CLASS="function"
 >EXT:MAPLAP</TT
 ></A
-></A
 ></H3
 ><P
+ALIGN="justify"
 >The function <A
 HREF="conses.html#mapcap"
 ><TT
@@ -307,8 +335,9 @@ CLASS="function"
 ></A
 >:</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="conses.html#mapcap"
 ><TT
@@ -337,7 +366,7 @@ CLASS="replaceable"
 >)</TT
 > ==
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_apply.html"
 TARGET="_top"
@@ -382,6 +411,7 @@ CLASS="replaceable"
 >))</TT
 ></P
 ><P
+ALIGN="justify"
 >(Actually a bit more efficient that this would have been.)</P
 ></DIV
 ></DIV
@@ -392,6 +422,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -403,7 +434,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="char-bits.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -411,6 +443,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -419,7 +452,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="arrays.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -434,6 +468,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -449,6 +484,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

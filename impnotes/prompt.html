@@ -5,8 +5,10 @@
 >Extensions-1.8. The Prompt</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-1.7. Finalization"
 HREF="final.html"><LINK
 REL="NEXT"
 TITLE="Extensions-1.9. Maximum ANSI CL compliance"
-HREF="ansi.html"></HEAD
+HREF="ansi.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="final.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-1: Platform independent Extensions</TD
+>Chapter 29. Extensions-1: Platform independent Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="ansi.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,27 +97,26 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="prompt"
->Extensions-1.8. The Prompt</A
-></H1
+NAME="prompt">29.8. Extensions-1.8. The Prompt</H1
 ><P
->The variable <I
+ALIGN="justify"
+>The variable <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
->custom:*prompt*</TT
-></I
-> controls the
- appearance of the prompt.  When its value is a function, it is called
- and its value is printed with <A
+>CUSTOM:*PROMPT*</TT
+></B
+> controls
+ the appearance of the prompt.  When its value is a function, it is
+ called and its value is printed with <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >PRINC</TT
 ></A
->.  Otherwise, the value itself is
- printed with <A
+>.  Otherwise, the value
+ itself is printed with <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
 TARGET="_top"
 ><TT
@@ -112,11 +126,11 @@ CLASS="function"
 >.  The default value of
  <TT
 CLASS="varname"
->custom:*prompt*</TT
+>CUSTOM:*PROMPT*</TT
 > prints
  <TT
 CLASS="prompt"
->"package[nn]&#62; "</TT
+>"package[n]&#62; "</TT
 > where
  <TT
 CLASS="replaceable"
@@ -141,22 +155,31 @@ CLASS="constant"
 ></A
 > (it is assumed that in
  the latter case you would want to keep in mind that your current
- package is something weird); and <TT
+ package is something weird);
+ and <TT
 CLASS="replaceable"
 ><I
->nn</I
+>n</I
 ></TT
-> is the
- ordinal number of the current prompt (hopefully, it will remain
- finite).  To help you in constructing your own fancy prompts, two
- functions are provided: <I
-CLASS="emphasis"
-><TT
+> is the ordinal number of the current prompt
+ (hopefully, it will remain finite).
+ To help you in constructing your own fancy prompts, two
+ functions and one variable are provided:
+ <P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>function
+    <TT
 CLASS="function"
->ext:prompt-new-package</TT
-></I
->,
- returning <A
+>EXT:PROMPT-NEW-PACKAGE</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>returns <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stpackagest.html"
 TARGET="_top"
 ><TT
@@ -170,34 +193,48 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
-> if the current package is the same as
- it was initially; and <I
-CLASS="emphasis"
-><TT
+> if the current
+     package is the same as it was initially
+  </P
+></DD
+><DT
+>function
+    <TT
 CLASS="function"
->ext:package-short-name</TT
-></I
->
- taking one argument, a package, and returning its shortest name or
- nickname.  Also, a variable <I
-CLASS="emphasis"
-><TT
+>EXT:PACKAGE-SHORT-NAME</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>takes one argument, a package, and returns its
+     shortest name or nickname</P
+></DD
+><DT
+>variable <TT
 CLASS="varname"
->ext:*command-index*</TT
-></I
->
- contains the current prompt number, it is your responsibility to
- increment it
- (this variable is bound to 0 before saving the <A
+>EXT:*COMMAND-INDEX*</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>contains the current prompt number;
+     it is your responsibility to increment it
+     (this variable is bound to 0 before saving the <A
 HREF="p-indep.html#image"
 >memory image</A
->).</P
+>).
+  </P
+></DD
+></DL
+></DIV
+></P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -209,7 +246,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="final.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -217,6 +255,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -225,7 +264,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="ansi.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -240,6 +280,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="p-indep.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -250,6 +291,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

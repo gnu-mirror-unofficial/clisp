@@ -6,8 +6,10 @@
    [CLHS-11]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="symbols.html"><LINK
 REL="NEXT"
 TITLE="The COMMON-LISP-USER Package
    [CLHS-11.1.2.2]"
-HREF="clupack.html"></HEAD
+HREF="clupack.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="symbols.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="clupack.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,27 +99,78 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="packages"
->Packages
+NAME="packages">Chapter 11. Packages
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-11.html"
 TARGET="_top"
 >[CLHS-11]</A
-></A
 ></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>11.1. <A
+HREF="packages.html#pack-lock"
+>Constraints on the COMMON-LISP Package for
+ Conforming Programs - package locking
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
+TARGET="_top"
+>[CLHS-11.1.2.1.2]</A
+></A
+></DT
+><DT
+>11.2. <A
+HREF="clupack.html"
+>The COMMON-LISP-USER Package
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+>[CLHS-11.1.2.2]</A
+></A
+></DT
+><DT
+>11.3. <A
+HREF="imppack.html"
+>Implementation-Defined Packages
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-4.html"
+TARGET="_top"
+>[CLHS-11.1.2.4]</A
+></A
+></DT
+><DT
+>11.4. <A
+HREF="pack-dict.html"
+>The Packages Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_packa_s_dictionary.html"
+TARGET="_top"
+>[CLHS-11.2]</A
+></A
+></DT
+></DL
+></DIV
 ><P
 ></P
 ><DIV
 CLASS="variablelist"
 ><P
 ><B
->The [<SPAN
+>The <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] packages present in <A
+>]</A
+> packages present in <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -125,20 +191,21 @@ CLASS="QUOTE"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >with the nicknames
-   <I
+   <B
 CLASS="emphasis"
 ><TT
 CLASS="constant"
 >"CL"</TT
-></I
+></B
 > and
-   <I
+   <B
 CLASS="emphasis"
 ><TT
 CLASS="constant"
 >"LISP"</TT
-></I
+></B
 >
   </P
 ></DD
@@ -153,20 +220,21 @@ CLASS="QUOTE"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >with the nicknames
-   <I
+   <B
 CLASS="emphasis"
 ><TT
 CLASS="constant"
 >"CL-USER"</TT
-></I
+></B
 > and
-   <I
+   <B
 CLASS="emphasis"
 ><TT
 CLASS="constant"
 >"USER"</TT
-></I
+></B
 >
   </P
 ></DD
@@ -181,19 +249,21 @@ CLASS="QUOTE"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >with the nickname
-   <I
+   <B
 CLASS="emphasis"
 ><TT
 CLASS="constant"
 >""</TT
-></I
+></B
 >
   </P
 ></DD
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >The package <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
@@ -209,40 +279,39 @@ CLASS="function"
 >EXPORT</TT
 ></A
 >s only those symbols
- from the [<SPAN
+ from the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] that are actually implemented.</P
+>]</A
+> that are actually implemented.</P
 ><DIV
 CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="pack-lock"
->Constraints on the COMMON-LISP Package for
+NAME="pack-lock">11.1. Constraints on the COMMON-LISP Package for
  Conforming Programs - package locking
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
 TARGET="_top"
 >[CLHS-11.1.2.1.2]</A
-></A
 ></H1
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Function <A
 HREF="packages.html#pack-lock"
 ><TT
 CLASS="function"
 >EXT:PACKAGE-LOCK</TT
 ></A
 >. </B
-></B
 >Packages can be <SPAN
 CLASS="QUOTE"
 >"locked"</SPAN
@@ -251,7 +320,7 @@ When a package is locked, attempts to change its symbol table or
 redefine functions which its symbols name result in a continuable error
 (continuing overrides locking for this operation).
 Function <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="packages.html#pack-lock"
 ><TT
@@ -268,7 +337,7 @@ CLASS="replaceable"
 > returns the
 generalized boolean indicating whether the package is locked.
 A package (or list thereof) can be locked using <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -311,9 +380,18 @@ HREF="packages.html#pack-lock"
 CLASS="varname"
 >CUSTOM:*SYSTEM-PACKAGE-LIST*</TT
 ></A
->).
-If you want to evaluate some forms with certain packages unlocked, you
-can use <TT
+>).</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+>Macro <TT
+CLASS="function"
+>EXT:WITHOUT-PACKAGE-LOCK</TT
+>. </B
+>If you want to evaluate some forms with certain packages unlocked,
+ you can use <TT
 CLASS="function"
 >EXT:WITHOUT-PACKAGE-LOCK</TT
 >:
@@ -332,17 +410,92 @@ CLASS="programlisting"
 ></TR
 ></TABLE
 >
+or
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(without-package-lock ("LISP") (trace read-line))
+</PRE
+></TD
+></TR
+></TABLE
+>
 <TT
-CLASS="literal"
+CLASS="sexp"
 >(without-package-lock () ...)</TT
-> unlocks
-all packages in <A
+>
+temporarily unlocks all packages in <A
 HREF="packages.html#pack-lock"
 ><TT
 CLASS="varname"
 >CUSTOM:*SYSTEM-PACKAGE-LIST*</TT
 ></A
 >.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+>Discussion - see also
+  <A
+HREF="http://groups.google.com/groups?hl=en&lr=&ie=UTF-8&selm=3C3E7F57.7F80395%40pacbell.net"
+TARGET="_top"
+>the USENET posting</A
+> by
+<A
+HREF="mailto:haflich@pacbell.net"
+TARGET="_top"
+>Steven M. Haflich</A
+>. </B
+>This should prevent you from accidentally hosing yourself with
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (defstruct instance ...)
+</PRE
+></TD
+></TR
+></TABLE
+>
+and allow enforcing modularity.
+Note that you will also get the continuable error when you try to
+assign (with <A
+HREF="http://www.lisp.org/HyperSpec/Body/spefor_setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETQ</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_psetq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PSETQ</TT
+></A
+>, etc.) a value to an internal special
+variable living in a locked package and not accessible in your current
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stpackagest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PACKAGE*</TT
+></A
+>, but only in the interpreted code and during compilation.
+There is no check for package locks in compiled code because of the
+performance considerations.
+</P
 ></DIV
 ></DIV
 ></DIV
@@ -351,6 +504,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -362,7 +516,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="symbols.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -370,6 +525,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -378,7 +534,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="clupack.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -398,6 +555,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -413,6 +571,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

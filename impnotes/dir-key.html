@@ -5,8 +5,10 @@
 >Extensions-2.11. Directory Access</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -17,8 +19,12 @@ REL="PREVIOUS"
 TITLE="Extensions-2.10. Shell, Pipes and Printing"
 HREF="shell.html"><LINK
 REL="NEXT"
-TITLE="Extensions-2.12. Other"
-HREF="other.html"></HEAD
+TITLE="Extensions-2.12. Operating System
+  Environment."
+HREF="getenv.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +35,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +55,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +71,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="shell.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="other.html"
->Next &#62;&#62;&#62;</A
+HREF="getenv.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,10 +98,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="dir-key"
->Extensions-2.11. Directory Access</A
-></H1
+NAME="dir-key">30.11. Extensions-2.11. Directory Access</H1
 ><P
+ALIGN="justify"
 >When <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -119,12 +134,13 @@ CLASS="variablelist"
 >:win32</DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > registry access
   </P
@@ -133,6 +149,7 @@ CLASS="emphasis"
 >:gnome</DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://developer.gnome.org/doc/API/libgnome/gnome-gnome-config.html"
 TARGET="_top"
@@ -144,6 +161,7 @@ TARGET="_top"
 >:ldap</DT
 ><DD
 ><P
+ALIGN="justify"
 >LDAP interface via
    <A
 HREF="http://www.openldap.org"
@@ -155,6 +173,7 @@ TARGET="_top"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >The following functions and macros are exported (please note that
 these features are experimental and the API may be modified in the
 future).</P
@@ -165,9 +184,8 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="dir-key-open"
-><TT
-CLASS="literal"
+NAME="dir-key-open"><TT
+CLASS="sexp"
 >(<A
 HREF="dir-key.html#dir-key-open"
 ><TT
@@ -203,10 +221,10 @@ CLASS="constant"
 CLASS="constant"
 >:IF-DOES-NOT-EXIST</TT
 ></TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Open the directory key under <TT
 CLASS="replaceable"
 ><I
@@ -236,9 +254,8 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="dir-key-close"
-><TT
-CLASS="literal"
+NAME="dir-key-close"><TT
+CLASS="sexp"
 >(<A
 HREF="dir-key.html#dir-key-close"
 ><TT
@@ -251,10 +268,10 @@ CLASS="replaceable"
 >dkey</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Close the directory key.  The preferred way is to
    use the <A
 HREF="dir-key.html#with-dir-key-open"
@@ -266,9 +283,8 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="with-dir-key-open"
-><TT
-CLASS="literal"
+NAME="with-dir-key-open"><TT
+CLASS="sexp"
 >(<A
 HREF="dir-key.html#with-dir-key-open"
 ><TT
@@ -316,10 +332,10 @@ CLASS="replaceable"
 >body</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Open the directory key (by calling <A
 HREF="dir-key.html#dir-key-open"
 ><TT
@@ -364,7 +380,7 @@ CLASS="function"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-TYPE</TT
@@ -377,6 +393,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return the <A
 HREF="dir-key.html#dir-key-type"
 >directory key type</A
@@ -385,7 +402,7 @@ HREF="dir-key.html#dir-key-type"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-PATH</TT
@@ -399,6 +416,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return the path of this directory key, which is the
    <TT
 CLASS="replaceable"
@@ -439,7 +457,7 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-DIRECTION</TT
@@ -452,6 +470,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >One of <TT
 CLASS="constant"
 >:INPUT</TT
@@ -467,7 +486,7 @@ CLASS="constant"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-CLOSED-P</TT
@@ -480,13 +499,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Check whether the key has been closed.
    It is not an error to close a closed key.
    </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-SUBKEY-DELETE</TT
@@ -504,7 +524,7 @@ CLASS="replaceable"
 >)</TT
 >
    <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-VALUE-DELETE</TT
@@ -523,12 +543,13 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Delete the specified subkey or attribute.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-SUBKEY</TT
@@ -540,7 +561,7 @@ CLASS="replaceable"
 >)</TT
 >
   <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-ATTRIBUTES</TT
@@ -554,12 +575,13 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return the list of the subkeys or attributes.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-VALUE</TT
@@ -591,6 +613,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return the value of the specified attribute,
    similar to <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_gethash.html"
@@ -618,7 +641,7 @@ CLASS="function"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >LDAP:DIR-KEY-INFO</TT
@@ -631,15 +654,15 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return some information about the directory key.
    This is highly platform-dependent and will probably be removed or
    replaced or modified in the future.</P
 ></DD
 ><DT
 ><A
-NAME="with-dir-key-search"
-><TT
-CLASS="literal"
+NAME="with-dir-key-search"><TT
+CLASS="sexp"
 >(<A
 HREF="dir-key.html#with-dir-key-search"
 ><TT
@@ -692,10 +715,10 @@ CLASS="replaceable"
 >body</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >This is the main way to iterate over the subtree
    under the key <TT
 CLASS="replaceable"
@@ -709,6 +732,7 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="replaceable"
 ><I
@@ -732,6 +756,7 @@ CLASS="function"
 > to a macro, each call of which returns
     the next subkey.</P
 ><P
+ALIGN="justify"
 ><TT
 CLASS="replaceable"
 ><I
@@ -748,6 +773,7 @@ CLASS="constant"
 >, to a macro, each call of which returns two
    values - the next attribute and its value.</P
 ><P
+ALIGN="justify"
 >The <TT
 CLASS="constant"
 >:scope</TT
@@ -765,6 +791,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >iterate over the key itself
      </P
 ></DD
@@ -775,6 +802,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >iterate over the children of the key
      </P
 ></DD
@@ -785,6 +813,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >iterate over the subtree
      </P
 ></DD
@@ -792,6 +821,7 @@ CLASS="constant"
 ></DIV
 ></P
 ><P
+ALIGN="justify"
 ><A
 HREF="dir-key.html#with-dir-key-search"
 ><TT
@@ -825,6 +855,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -836,7 +867,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="shell.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -844,6 +876,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -851,8 +884,9 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="other.html"
->Next &#62;&#62;&#62;</A
+HREF="getenv.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -867,16 +901,57 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Extensions-2.12. Other</TD
+>Extensions-2.12. Operating System
+  Environment.</TD
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

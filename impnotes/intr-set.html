@@ -5,8 +5,10 @@
 >The instruction set</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -17,8 +19,11 @@ REL="PREVIOUS"
 TITLE="The general structure of the instructions"
 HREF="intr-struct.html"><LINK
 REL="NEXT"
-TITLE="Extensions"
-HREF="extensions.html"></HEAD
+TITLE="GNU Free Documentation License"
+HREF="gfdl.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,13 +70,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="intr-struct.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->The <A
+>Chapter 33. The <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -76,8 +90,9 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="extensions.html"
->Next &#62;&#62;&#62;</A
+HREF="gfdl.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -89,31 +104,22 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="intr-set"
->The instruction set</A
-></H1
+NAME="intr-set">33.5. The instruction set</H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-const"
->Instructions for constants</A
-></H2
+NAME="instr-const">33.5.1. Instructions for constants</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN12947"
-></A
-><P
+NAME="instr-const-tab"><P
 ><B
->Table 1. Instructions for constants</B
+>Table 33-1. Instructions for constants</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -137,7 +143,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -187,7 +193,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(PUSH-NIL <TT
 CLASS="replaceable"
 ><I
@@ -246,7 +252,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
@@ -296,7 +302,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST <TT
 CLASS="replaceable"
 ><I
@@ -351,23 +357,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-lex-var"
->Instructions for lexical variables</A
-></H2
+NAME="instr-lex-var">33.5.2. Instructions for lexical variables</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN13018"
-></A
-><P
+NAME="instr-lex-var-tab"><P
 ><B
->Table 2. Instructions for lexical variables</B
+>Table 33-2. Instructions for lexical variables</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -391,7 +390,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -437,7 +436,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADI <TT
 CLASS="replaceable"
 ><I
@@ -528,7 +527,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADC <TT
 CLASS="replaceable"
 ><I
@@ -592,7 +591,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADV <TT
 CLASS="replaceable"
 ><I
@@ -685,7 +684,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADIC <TT
 CLASS="replaceable"
 ><I
@@ -794,7 +793,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(STORE <TT
 CLASS="replaceable"
 ><I
@@ -840,7 +839,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(STOREI <TT
 CLASS="replaceable"
 ><I
@@ -931,7 +930,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(STOREC <TT
 CLASS="replaceable"
 ><I
@@ -990,7 +989,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(STOREV <TT
 CLASS="replaceable"
 ><I
@@ -1083,7 +1082,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(STOREIC <TT
 CLASS="replaceable"
 ><I
@@ -1196,23 +1195,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-dyn-var"
->Instructions for dynamic variables</A
-></H2
+NAME="instr-dyn-var">33.5.3. Instructions for dynamic variables</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN13242"
-></A
-><P
+NAME="instr-dyn-var-tab"><P
 ><B
->Table 3. Instructions for dynamic variables</B
+>Table 33-3. Instructions for dynamic variables</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1236,7 +1228,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(GETVALUE
              <TT
 CLASS="replaceable"
@@ -1283,7 +1275,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SETVALUE
              <TT
 CLASS="replaceable"
@@ -1330,7 +1322,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(BIND
              <TT
 CLASS="replaceable"
@@ -1379,7 +1371,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNBIND1)</TT
 ></TD
 ><TD
@@ -1409,7 +1401,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNBIND
              <TT
 CLASS="replaceable"
@@ -1468,7 +1460,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(PROGV)</TT
 ></TD
 ><TD
@@ -1527,23 +1519,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-stack"
->Instructions for stack operations</A
-></H2
+NAME="instr-stack">33.5.4. Instructions for stack operations</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN13331"
-></A
-><P
+NAME="instr-stack-tab"><P
 ><B
->Table 4. Instructions for stack operations</B
+>Table 33-4. Instructions for stack operations</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1567,7 +1552,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(PUSH)</TT
 ></TD
 ><TD
@@ -1603,7 +1588,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(POP)</TT
 ></TD
 ><TD
@@ -1644,7 +1629,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SKIP <TT
 CLASS="replaceable"
 ><I
@@ -1701,7 +1686,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SKIPI <TT
 CLASS="replaceable"
 ><I
@@ -1811,7 +1796,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SKIPSP <TT
 CLASS="replaceable"
 ><I
@@ -1895,23 +1880,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-jump"
->Instructions for control flow, jumps</A
-></H2
+NAME="instr-jump">33.5.5. Instructions for control flow, jumps</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN13436"
-></A
-><P
+NAME="instr-jump-tab"><P
 ><B
->Table 5. Instructions for control flow, jumps</B
+>Table 33-5. Instructions for control flow, jumps</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1935,7 +1913,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SKIP&#38;RET <TT
 CLASS="replaceable"
 ><I
@@ -1981,7 +1959,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SKIP&#38;RETGF <TT
 CLASS="replaceable"
 ><I
@@ -2146,7 +2124,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMP <TT
 CLASS="replaceable"
 ><I
@@ -2178,7 +2156,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIF <TT
 CLASS="replaceable"
 ><I
@@ -2229,7 +2207,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFNOT <TT
 CLASS="replaceable"
 ><I
@@ -2280,7 +2258,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIF1 <TT
 CLASS="replaceable"
 ><I
@@ -2339,7 +2317,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFNOT1 <TT
 CLASS="replaceable"
 ><I
@@ -2398,7 +2376,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFATOM <TT
 CLASS="replaceable"
 ><I
@@ -2443,7 +2421,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFCONSP <TT
 CLASS="replaceable"
 ><I
@@ -2488,7 +2466,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFEQ <TT
 CLASS="replaceable"
 ><I
@@ -2546,7 +2524,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFNOTEQ <TT
 CLASS="replaceable"
 ><I
@@ -2605,7 +2583,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFEQTO <TT
 CLASS="replaceable"
 ><I
@@ -2668,7 +2646,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFNOTEQTO <TT
 CLASS="replaceable"
 ><I
@@ -2732,7 +2710,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPHASH <TT
 CLASS="replaceable"
 ><I
@@ -2812,7 +2790,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPHASHV <TT
 CLASS="replaceable"
 ><I
@@ -2900,7 +2878,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JSR <TT
 CLASS="replaceable"
 ><I
@@ -2929,12 +2907,12 @@ CLASS="replaceable"
 ></TT
 >, with values undefined.
              When a <TT
-CLASS="literal"
+CLASS="sexp"
 >(RET)</TT
 > is encountered,
              program execution is resumed at the instruction after
              <TT
-CLASS="literal"
+CLASS="sexp"
 >(JSR <TT
 CLASS="replaceable"
 ><I
@@ -2948,7 +2926,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPTAIL <TT
 CLASS="replaceable"
 ><I
@@ -2979,7 +2957,14 @@ CLASS="replaceable"
 ><I
 >n</I
 ></TT
-> &#62;= <TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eqcm_sleq__lteqcm_gteq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>&#62;=</TT
+></A
+> <TT
 CLASS="replaceable"
 ><I
 >m</I
@@ -3078,25 +3063,17 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-env"
->Instructions for lexical environment,
-   creation of closures</A
-></H2
+NAME="instr-env">33.5.6. Instructions for lexical environment,
+   creation of closures</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN13750"
-></A
-><P
+NAME="instr-env-tab"><P
 ><B
->Table 6. Instructions for lexical environment,
-   creation of closures</B
+>Table 33-6. Instructions for lexical environment, creation of closures</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -3120,7 +3097,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(VENV)</TT
 ></TD
 ><TD
@@ -3161,7 +3138,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(MAKE-VECTOR1&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -3225,7 +3202,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(COPY-CLOSURE <TT
 CLASS="replaceable"
 ><I
@@ -3342,23 +3319,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-funcall"
->Instructions for function calls</A
-></H2
+NAME="instr-funcall">33.5.7. Instructions for function calls</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN13818"
-></A
-><P
+NAME="instr-funcall-tab"><P
 ><B
->Table 7. Instructions for function calls</B
+>Table 33-7. Instructions for function calls</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -3382,7 +3352,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL <TT
 CLASS="replaceable"
 ><I
@@ -3456,7 +3426,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL0 <TT
 CLASS="replaceable"
 ><I
@@ -3490,7 +3460,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL1 <TT
 CLASS="replaceable"
 ><I
@@ -3536,7 +3506,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL2 <TT
 CLASS="replaceable"
 ><I
@@ -3589,7 +3559,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1 <TT
 CLASS="replaceable"
 ><I
@@ -3657,7 +3627,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2 <TT
 CLASS="replaceable"
 ><I
@@ -3725,7 +3695,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR <TT
 CLASS="replaceable"
 ><I
@@ -3785,7 +3755,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLC)</TT
 ></TD
 ><TD
@@ -3842,7 +3812,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLCKEY)</TT
 ></TD
 ><TD
@@ -3906,7 +3876,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(FUNCALL <TT
 CLASS="replaceable"
 ><I
@@ -3970,7 +3940,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(APPLY <TT
 CLASS="replaceable"
 ><I
@@ -4046,25 +4016,17 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-optkey"
->Instructions for optional
-  and keyword parameters</A
-></H2
+NAME="instr-optkey">33.5.8. Instructions for optional
+  and keyword parameters</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14006"
-></A
-><P
+NAME="instr-optkey-tab"><P
 ><B
->Table 8. Instructions for optional
-  and keyword parameters</B
+>Table 33-8. Instructions for optional and keyword parameters</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4088,7 +4050,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(PUSH-UNBOUND <TT
 CLASS="replaceable"
 ><I
@@ -4139,7 +4101,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNLIST <TT
 CLASS="replaceable"
 ><I
@@ -4259,7 +4221,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNLIST* <TT
 CLASS="replaceable"
 ><I
@@ -4395,7 +4357,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JMPIFBOUNDP <TT
 CLASS="replaceable"
 ><I
@@ -4471,7 +4433,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(BOUNDP <TT
 CLASS="replaceable"
 ><I
@@ -4562,7 +4524,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNBOUND-&#62;NIL <TT
 CLASS="replaceable"
 ><I
@@ -4629,23 +4591,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-mulval"
->Instructions for multiple values</A
-></H2
+NAME="instr-mulval">33.5.9. Instructions for multiple values</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14162"
-></A
-><P
+NAME="instr-mulval-tab"><P
 ><B
->Table 9. Instructions for multiple values</B
+>Table 33-9. Instructions for multiple values</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4669,7 +4624,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(VALUES0)</TT
 ></TD
 ><TD
@@ -4705,7 +4660,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(VALUES1)</TT
 ></TD
 ><TD
@@ -4728,7 +4683,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="vm.html"
 ><TT
@@ -4796,7 +4751,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(MV-TO-<A
 HREF="vm.html"
 ><TT
@@ -4858,7 +4813,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(NV-TO-<A
 HREF="vm.html"
 ><TT
@@ -4928,7 +4883,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(MV-TO-LIST)</TT
 ></TD
 ><TD
@@ -4957,7 +4912,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LIST-TO-MV)</TT
 ></TD
 ><TD
@@ -4988,7 +4943,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(MVCALLP)</TT
 ></TD
 ><TD
@@ -5036,7 +4991,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(MVCALL)</TT
 ></TD
 ><TD
@@ -5086,8 +5041,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-block"
->Instructions for
+NAME="instr-block">33.5.10. Instructions for
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
 TARGET="_top"
@@ -5102,16 +5056,13 @@ TARGET="_top"
 CLASS="function"
 >RETURN-FROM</TT
 ></A
-></A
 ></H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14298"
-></A
-><P
+NAME="instr-block-tab"><P
 ><B
->Table 10. Instructions for <A
+>Table 33-10. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
 TARGET="_top"
 ><TT
@@ -5129,9 +5080,6 @@ CLASS="function"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -5155,7 +5103,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(BLOCK-OPEN <TT
 CLASS="replaceable"
 ><I
@@ -5253,7 +5201,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(BLOCK-CLOSE)</TT
 ></TD
 ><TD
@@ -5314,7 +5262,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(RETURN-FROM <TT
 CLASS="replaceable"
 ><I
@@ -5394,7 +5342,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(RETURN-FROM-I <TT
 CLASS="replaceable"
 ><I
@@ -5523,8 +5471,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-tagbody"
->Instructions for <A
+NAME="instr-tagbody">33.5.11. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
 TARGET="_top"
 ><TT
@@ -5538,16 +5485,13 @@ TARGET="_top"
 CLASS="function"
 >GO</TT
 ></A
-></A
 ></H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14413"
-></A
-><P
+NAME="instr-tagbody-tab"><P
 ><B
->Table 11. Instructions for <A
+>Table 33-11. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
 TARGET="_top"
 ><TT
@@ -5565,9 +5509,6 @@ CLASS="function"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -5591,7 +5532,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(TAGBODY-OPEN <TT
 CLASS="replaceable"
 ><I
@@ -5737,7 +5678,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(TAGBODY-CLOSE-NIL)</TT
 ></TD
 ><TD
@@ -5817,7 +5758,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(TAGBODY-CLOSE)</TT
 ></TD
 ><TD
@@ -5870,7 +5811,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(GO <TT
 CLASS="replaceable"
 ><I
@@ -5953,7 +5894,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(GO-I <TT
 CLASS="replaceable"
 ><I
@@ -6086,8 +6027,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-catch"
->Instructions for <A
+NAME="instr-catch">33.5.12. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
 TARGET="_top"
 ><TT
@@ -6101,16 +6041,13 @@ TARGET="_top"
 CLASS="function"
 >THROW</TT
 ></A
-></A
 ></H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14559"
-></A
-><P
+NAME="instr-catch-tab"><P
 ><B
->Table 12. Instructions for <A
+>Table 33-12. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
 TARGET="_top"
 ><TT
@@ -6128,9 +6065,6 @@ CLASS="function"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -6154,7 +6088,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CATCH-OPEN <TT
 CLASS="replaceable"
 ><I
@@ -6229,7 +6163,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CATCH-CLOSE)</TT
 ></TD
 ><TD
@@ -6285,7 +6219,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(THROW)</TT
 ></TD
 ><TD
@@ -6345,24 +6279,20 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-unwind"
->Instructions for <A
+NAME="instr-unwind">33.5.13. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >UNWIND-PROTECT</TT
 ></A
-></A
 ></H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14629"
-></A
-><P
+NAME="instr-unwind-tab"><P
 ><B
->Table 13. Instructions for <A
+>Table 33-13. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
 TARGET="_top"
 ><TT
@@ -6373,9 +6303,6 @@ CLASS="function"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -6399,7 +6326,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNWIND-PROTECT-OPEN
              <TT
 CLASS="replaceable"
@@ -6469,7 +6396,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNWIND-PROTECT-NORMAL-EXIT)</TT
 ></TD
 ><TD
@@ -6571,7 +6498,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNWIND-PROTECT-CLOSE)</TT
 ></TD
 ><TD
@@ -6624,7 +6551,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(UNWIND-PROTECT-CLEANUP)</TT
 ></TD
 ><TD
@@ -6741,24 +6668,20 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-handler"
->Instructions for <A
+NAME="instr-handler">33.5.14. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_handler-bind.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >HANDLER-BIND</TT
 ></A
-></A
 ></H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14742"
-></A
-><P
+NAME="instr-handler-tab"><P
 ><B
->Table 14. Instructions for <A
+>Table 33-14. Instructions for <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_handler-bind.html"
 TARGET="_top"
 ><TT
@@ -6769,9 +6692,6 @@ CLASS="function"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -6795,7 +6715,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(HANDLER-OPEN <TT
 CLASS="replaceable"
 ><I
@@ -6849,7 +6769,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(HANDLER-BEGIN&#38;PUSH)</TT
 ></TD
 ><TD
@@ -6903,24 +6823,17 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-inline"
->Instructions for some inlined
-  functions</A
-></H2
+NAME="instr-inline">33.5.15. Instructions for some inlined
+  functions</H2
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14785"
-></A
-><P
+NAME="instr-inline-tab"><P
 ><B
->Table 15. Instructions for some inlined functions</B
+>Table 33-15. Instructions for some inlined functions</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -6944,7 +6857,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(NOT)</TT
 ></TD
 ><TD
@@ -6979,7 +6892,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(EQ)</TT
 ></TD
 ><TD
@@ -7021,7 +6934,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CAR)</TT
 ></TD
 ><TD
@@ -7070,7 +6983,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CDR)</TT
 ></TD
 ><TD
@@ -7119,7 +7032,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONS)</TT
 ></TD
 ><TD
@@ -7168,7 +7081,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SYMBOL-FUNCTION)</TT
 ></TD
 ><TD
@@ -7218,7 +7131,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SVREF)</TT
 ></TD
 ><TD
@@ -7274,7 +7187,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(SVSET)</TT
 ></TD
 ><TD
@@ -7367,7 +7280,7 @@ CLASS="varname"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LIST <TT
 CLASS="replaceable"
 ><I
@@ -7379,7 +7292,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >Inlined call to <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst_list.html"
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst.html"
 TARGET="_top"
 ><TT
 CLASS="function"
@@ -7396,7 +7309,7 @@ CLASS="varname"
 >value1</TT
 ></A
 > := <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst_list.html"
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst.html"
 TARGET="_top"
 ><TT
 CLASS="function"
@@ -7444,7 +7357,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LIST* <TT
 CLASS="replaceable"
 ><I
@@ -7532,32 +7445,26 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-combo"
->Combined instructions</A
-></H2
+NAME="instr-combo">33.5.16. Combined instructions</H2
 ><P
+ALIGN="justify"
 >The most frequent short sequences of instructions have an
 equivalent combined instruction.  They are only present for space and
 speed optimization. The only exception is
 <TT
-CLASS="literal"
+CLASS="sexp"
 >FUNCALL&#38;SKIP&#38;RETGF</TT
 >, which is needed for
 generic functions.</P
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN14970"
-></A
-><P
+NAME="instr-combo-tab"><P
 ><B
->Table 16. Combined instructions</B
+>Table 33-16. Combined instructions</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -7577,14 +7484,14 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(NIL&#38;PUSH)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(NIL) (PUSH)</TT
 ></TD
 ></TR
@@ -7593,14 +7500,14 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(T&#38;PUSH)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(T) (PUSH)</TT
 ></TD
 ></TR
@@ -7609,7 +7516,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7621,7 +7528,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST <TT
 CLASS="replaceable"
 ><I
@@ -7635,7 +7542,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7647,7 +7554,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -7661,7 +7568,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADI&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7687,7 +7594,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADI <TT
 CLASS="replaceable"
 ><I
@@ -7715,7 +7622,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADC&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7732,7 +7639,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADC <TT
 CLASS="replaceable"
 ><I
@@ -7751,7 +7658,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADV&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7768,7 +7675,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOADV <TT
 CLASS="replaceable"
 ><I
@@ -7787,7 +7694,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(POP&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -7799,7 +7706,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(POP) (STORE <TT
 CLASS="replaceable"
 ><I
@@ -7813,7 +7720,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(GETVALUE&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7825,7 +7732,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(GETVALUE <TT
 CLASS="replaceable"
 ><I
@@ -7839,7 +7746,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JSR&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7851,7 +7758,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(JSR <TT
 CLASS="replaceable"
 ><I
@@ -7865,7 +7772,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(COPY-CLOSURE&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7882,7 +7789,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(COPY-CLOSURE <TT
 CLASS="replaceable"
 ><I
@@ -7901,7 +7808,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7918,7 +7825,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL <TT
 CLASS="replaceable"
 ><I
@@ -7937,7 +7844,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL1&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7949,7 +7856,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL1 <TT
 CLASS="replaceable"
 ><I
@@ -7963,7 +7870,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL2&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -7975,7 +7882,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL2 <TT
 CLASS="replaceable"
 ><I
@@ -7989,7 +7896,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -8001,7 +7908,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1 <TT
 CLASS="replaceable"
 ><I
@@ -8015,7 +7922,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -8027,7 +7934,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2 <TT
 CLASS="replaceable"
 ><I
@@ -8041,7 +7948,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -8058,7 +7965,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR <TT
 CLASS="replaceable"
 ><I
@@ -8077,14 +7984,14 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLC&#38;PUSH)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLC) (PUSH)</TT
 ></TD
 ></TR
@@ -8093,14 +8000,14 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLCKEY&#38;PUSH)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLCKEY) (PUSH)</TT
 ></TD
 ></TR
@@ -8109,7 +8016,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(FUNCALL&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -8121,7 +8028,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(FUNCALL <TT
 CLASS="replaceable"
 ><I
@@ -8135,7 +8042,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(APPLY&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -8147,7 +8054,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(APPLY <TT
 CLASS="replaceable"
 ><I
@@ -8161,14 +8068,14 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CAR&#38;PUSH)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CAR) (PUSH)</TT
 ></TD
 ></TR
@@ -8177,14 +8084,14 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CDR&#38;PUSH)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CDR) (PUSH)</TT
 ></TD
 ></TR
@@ -8193,14 +8100,14 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONS&#38;PUSH)</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONS) (PUSH)</TT
 ></TD
 ></TR
@@ -8209,7 +8116,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LIST&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -8221,7 +8128,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LIST <TT
 CLASS="replaceable"
 ><I
@@ -8235,7 +8142,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LIST*&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -8247,7 +8154,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LIST* <TT
 CLASS="replaceable"
 ><I
@@ -8261,7 +8168,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(NIL&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8273,7 +8180,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(NIL) (STORE <TT
 CLASS="replaceable"
 ><I
@@ -8287,7 +8194,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(T&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8299,7 +8206,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(T) (STORE <TT
 CLASS="replaceable"
 ><I
@@ -8313,7 +8220,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;STOREC <TT
 CLASS="replaceable"
 ><I
@@ -8335,7 +8242,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -8359,7 +8266,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8376,7 +8283,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1 <TT
 CLASS="replaceable"
 ><I
@@ -8395,7 +8302,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8412,7 +8319,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2 <TT
 CLASS="replaceable"
 ><I
@@ -8431,7 +8338,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8453,7 +8360,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR <TT
 CLASS="replaceable"
 ><I
@@ -8477,7 +8384,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;CDR&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8489,7 +8396,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -8508,7 +8415,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;CONS&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8520,7 +8427,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -8539,7 +8446,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;INC&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8551,7 +8458,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -8570,7 +8477,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;DEC&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8582,7 +8489,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -8601,7 +8508,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;CAR&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -8618,7 +8525,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -8637,7 +8544,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL1&#38;JMPIF <TT
 CLASS="replaceable"
 ><I
@@ -8654,7 +8561,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL1 <TT
 CLASS="replaceable"
 ><I
@@ -8673,7 +8580,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL1&#38;JMPIFNOT <TT
 CLASS="replaceable"
 ><I
@@ -8690,7 +8597,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL1 <TT
 CLASS="replaceable"
 ><I
@@ -8709,7 +8616,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL2&#38;JMPIF <TT
 CLASS="replaceable"
 ><I
@@ -8726,7 +8633,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL2 <TT
 CLASS="replaceable"
 ><I
@@ -8745,7 +8652,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL2&#38;JMPIFNOT <TT
 CLASS="replaceable"
 ><I
@@ -8762,7 +8669,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALL2 <TT
 CLASS="replaceable"
 ><I
@@ -8781,7 +8688,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1&#38;JMPIF <TT
 CLASS="replaceable"
 ><I
@@ -8798,7 +8705,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1 <TT
 CLASS="replaceable"
 ><I
@@ -8817,7 +8724,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1&#38;JMPIFNOT <TT
 CLASS="replaceable"
 ><I
@@ -8834,7 +8741,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS1 <TT
 CLASS="replaceable"
 ><I
@@ -8853,7 +8760,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2&#38;JMPIF <TT
 CLASS="replaceable"
 ><I
@@ -8870,7 +8777,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2 <TT
 CLASS="replaceable"
 ><I
@@ -8889,7 +8796,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2&#38;JMPIFNOT <TT
 CLASS="replaceable"
 ><I
@@ -8906,7 +8813,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLS2 <TT
 CLASS="replaceable"
 ><I
@@ -8925,7 +8832,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR&#38;JMPIF <TT
 CLASS="replaceable"
 ><I
@@ -8947,7 +8854,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR <TT
 CLASS="replaceable"
 ><I
@@ -8971,7 +8878,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR&#38;JMPIFNOT <TT
 CLASS="replaceable"
 ><I
@@ -8993,7 +8900,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CALLSR <TT
 CLASS="replaceable"
 ><I
@@ -9017,7 +8924,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;JMPIF <TT
 CLASS="replaceable"
 ><I
@@ -9034,7 +8941,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -9053,7 +8960,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;JMPIFNOT <TT
 CLASS="replaceable"
 ><I
@@ -9070,7 +8977,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -9089,7 +8996,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;CAR&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -9101,7 +9008,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -9115,7 +9022,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;CDR&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -9127,7 +9034,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -9141,7 +9048,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;INC&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -9153,7 +9060,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -9167,7 +9074,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;DEC&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -9179,7 +9086,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -9193,7 +9100,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST&#38;SYMBOL-FUNCTION <TT
 CLASS="replaceable"
 ><I
@@ -9205,7 +9112,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST <TT
 CLASS="replaceable"
 ><I
@@ -9219,7 +9126,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST&#38;SYMBOL-FUNCTION&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -9231,7 +9138,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST <TT
 CLASS="replaceable"
 ><I
@@ -9245,7 +9152,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST&#38;SYMBOL-FUNCTION&#38;STORE <TT
 CLASS="replaceable"
 ><I
@@ -9262,7 +9169,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST <TT
 CLASS="replaceable"
 ><I
@@ -9281,7 +9188,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(APPLY&#38;SKIP&#38;RET <TT
 CLASS="replaceable"
 ><I
@@ -9298,7 +9205,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(APPLY <TT
 CLASS="replaceable"
 ><I
@@ -9317,7 +9224,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(FUNCALL&#38;SKIP&#38;RETGF <TT
 CLASS="replaceable"
 ><I
@@ -9334,7 +9241,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(FUNCALL <TT
 CLASS="replaceable"
 ><I
@@ -9357,26 +9264,20 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="instr-shortcut"
->Shortcut instructions</A
-></H2
+NAME="instr-shortcut">33.5.17. Shortcut instructions</H2
 ><P
+ALIGN="justify"
 >There are special one-byte instructions (without explicit
 operands) for the following frequent instructions:</P
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN15443"
-></A
-><P
+NAME="instr-shortcut-tab"><P
 ><B
->Table 17. Shortcut instructions</B
+>Table 33-17. Shortcut instructions</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -9396,7 +9297,7 @@ VALIGN="MIDDLE"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD <TT
 CLASS="replaceable"
 ><I
@@ -9419,7 +9320,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(LOAD&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -9442,7 +9343,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST <TT
 CLASS="replaceable"
 ><I
@@ -9465,7 +9366,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(CONST&#38;PUSH <TT
 CLASS="replaceable"
 ><I
@@ -9488,7 +9389,7 @@ CLASS="replaceable"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(STORE <TT
 CLASS="replaceable"
 ><I
@@ -9516,6 +9417,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -9527,7 +9429,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="intr-struct.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -9535,6 +9438,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -9542,8 +9446,9 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="extensions.html"
->Next &#62;&#62;&#62;</A
+HREF="gfdl.html"
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -9558,16 +9463,56 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="bytecode.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Extensions</TD
+>GNU Free Documentation License</TD
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

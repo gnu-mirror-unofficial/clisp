@@ -5,8 +5,10 @@
 >Extensions-2.8. Quickstarting delivery with CLISP</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-2.7. System Calls"
 HREF="syscalls.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.9. Application delivery with CLISP"
-HREF="app-dev.html"></HEAD
+HREF="app-dev.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="syscalls.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="app-dev.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,17 +97,16 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="quickstart"
->Extensions-2.8. Quickstarting delivery with <A
+NAME="quickstart">30.8. Extensions-2.8. Quickstarting delivery with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
-></A
 ></H1
 ><P
+ALIGN="justify"
 >This section describes four ways to turn <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -109,9 +123,17 @@ CLASS="command"
 CLASS="variablelist"
 ><DL
 ><DT
->UNIX</DT
+><A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+></DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -134,6 +156,7 @@ TARGET="_top"
 >, or Windows.</DT
 ><DD
 ><P
+ALIGN="justify"
 >Files created with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -167,6 +190,7 @@ CLASS="option"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Associate the extensions <TT
 CLASS="filename"
 >#P".fas"</TT
@@ -189,13 +213,14 @@ CLASS="command"
 ><A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Files created with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -225,6 +250,7 @@ CLASS="function"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >These four techniques apply to a single <TT
 CLASS="filename"
 >#P".lisp"</TT
@@ -239,11 +265,15 @@ CLASS="filename"
 CLASS="filename"
 >#P".fas"</TT
 > files,
- you can simply concatenate them (using <B
+ you can simply concatenate them (using <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/cat.html"
+TARGET="_top"
+><B
 CLASS="command"
 >cat</B
->(1))
- into one file; the techniques then apply to that concatenated file.</P
+></A
+>) into one file;
+ the techniques then apply to that concatenated file.</P
 ><P
 ></P
 ><DIV
@@ -253,13 +283,14 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >On Unix, a text file (<TT
 CLASS="filename"
 >#P".fas"</TT
@@ -291,10 +322,14 @@ CLASS="replaceable"
 ></TR
 ></TABLE
 >
- and using <B
+ and using <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/chmod.html"
+TARGET="_top"
+><B
 CLASS="command"
 >chmod</B
->(1) to make the script executable.
+></A
+> to make the script executable.
  <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -309,6 +344,7 @@ CLASS="command"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >The <TT
 CLASS="replaceable"
 ><I
@@ -349,6 +385,7 @@ CLASS="command"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >The <TT
 CLASS="replaceable"
 ><I
@@ -401,6 +438,7 @@ CLASS="command"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >On some platforms, the first line which specifies the
  interpreter is limited in length:
    <P
@@ -408,14 +446,17 @@ CLASS="command"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >max. 32 characters on SunOS 4,</P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >max. 80 characters on HP-UX,</P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >max. 127 characters on Linux.</P
 ></LI
 ></UL
@@ -427,6 +468,7 @@ CLASS="command"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >On Solaris and HP-UX, only the first
  <TT
 CLASS="replaceable"
@@ -484,6 +526,7 @@ CLASS="replaceable"
 ></LI
 ></UL
 ><P
+ALIGN="justify"
 >The script should contain Lisp forms, except in the
  <TT
 CLASS="literal"
@@ -497,12 +540,12 @@ CLASS="function"
 >LOAD</TT
 ></A
 >.
- Before it is loaded, the variable <I
+ Before it is loaded, the variable <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
 >ext:*args*</TT
-></I
+></B
 > is bound to a
  list of strings, representing the arguments given to the Lisp script.
  <A
@@ -554,6 +597,7 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 >Another, quite inferior, alternative is to put the following into
  a file:</P
 ><TABLE
@@ -575,6 +619,7 @@ EOF
 ></TR
 ></TABLE
 ><P
+ALIGN="justify"
 >The problem with this approach is that the return values of each form
 will be printed to the standard output.  Another problem is that no user
 input will be available.</P
@@ -583,13 +628,14 @@ input will be available.</P
 >Platform dependent: <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >There are two different ways to make <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -604,6 +650,7 @@ CLASS="command"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >Associate the <TT
 CLASS="filename"
 >#P".mem"</TT
@@ -616,6 +663,7 @@ CLASS="command"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Associate the <TT
 CLASS="filename"
 >#P".fas"</TT
@@ -645,6 +693,7 @@ CLASS="command"
 ></LI
 ></UL
 ><P
+ALIGN="justify"
 >Then clicking on the compiled lisp file (with <TT
 CLASS="filename"
 >#P".fas"</TT
@@ -669,6 +718,7 @@ HREF="p-indep.html#image"
 >memory image</A
 >.</P
 ><P
+ALIGN="justify"
 >Note that <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -707,13 +757,14 @@ CLASS="command"
 >Platform dependent: <A
 HREF="http://www.linux.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Linux</I
+>Linux</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >You have to build your kernel with
  <TT
 CLASS="option"
@@ -752,6 +803,7 @@ bash# echo ":CLISP:E::lisp::/usr/bin/clisp:" &#62;&#62; /proc/sys/fs/binfmt_misc
 ></TABLE
 ></P
 ><P
+ALIGN="justify"
 >Then you can do the following:
 <TABLE
 BORDER="0"
@@ -781,6 +833,7 @@ bash$
 ></TABLE
 ></P
 ><P
+ALIGN="justify"
 >Please read
  <TT
 CLASS="filename"
@@ -792,13 +845,14 @@ CLASS="filename"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >Using a Workbench project file, the <A
 HREF="p-indep.html#image"
 >memory image</A
@@ -810,10 +864,12 @@ HREF="p-indep.html#image"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >Using IconEdit, create a project icon.</P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Set the tool to <TT
 CLASS="filename"
 >lisp:lisp.run</TT
@@ -822,6 +878,7 @@ CLASS="filename"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Define a tooltype named
   <TT
 CLASS="replaceable"
@@ -848,6 +905,7 @@ CLASS="token"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Alternatively, you may want to have a function
   <TT
 CLASS="function"
@@ -866,6 +924,7 @@ CLASS="option"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >You might want to add more <A
 HREF="clisp.html"
 TARGET="_top"
@@ -912,6 +971,7 @@ HREF="p-indep.html#image"
 >memory image</A
 >.</P
 ><P
+ALIGN="justify"
 >You might want to add a tooltype named
  <TT
 CLASS="replaceable"
@@ -944,6 +1004,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -955,7 +1016,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="syscalls.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -963,6 +1025,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -971,7 +1034,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="app-dev.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -986,6 +1050,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1003,6 +1068,45 @@ CLASS="command"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

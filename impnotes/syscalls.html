@@ -5,8 +5,10 @@
 >Extensions-2.7. System Calls</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-2.6. Socket Streams"
 HREF="socket.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.8. Quickstarting delivery with CLISP"
-HREF="quickstart.html"></HEAD
+HREF="quickstart.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="socket.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="quickstart.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,10 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="syscalls"
->Extensions-2.7. System Calls</A
-></H1
+NAME="syscalls">30.7. Extensions-2.7. System Calls</H1
 ><P
+ALIGN="justify"
 >When <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -112,10 +126,10 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:resolve-host-ipaddr</TT
+>POSIX:RESOLVE-HOST-IPADDR</TT
 >
     <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
@@ -133,6 +147,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Returns the <SPAN
 CLASS="type"
 >hostent</SPAN
@@ -165,19 +180,41 @@ CLASS="constant"
    <TT
 CLASS="filename"
 >/etc/hosts</TT
-> file on a UNIX system or
+> file on a <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> system or
    <TT
 CLASS="filename"
 >${windir}/system32/etc/hosts</TT
 > on a Win32 system).
+   This is an interface to <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/gethostbyname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>gethostbyname</TT
+></A
+>/<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/gethostbyaddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>gethostbyaddr</TT
+></A
+>.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:file-stat</TT
+>POSIX:FILE-STAT</TT
 > <TT
 CLASS="replaceable"
 ><I
@@ -200,13 +237,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return the stat struct.  <TT
 CLASS="replaceable"
 ><I
 >pathname</I
 ></TT
-> can
-   be a <A
+> can be a
+   <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
 TARGET="_top"
 ><TT
@@ -227,59 +265,78 @@ TARGET="_top"
 CLASS="classname"
 >STRING</TT
 ></A
-> or a
-   <A
+> or a <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_number.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >NUMBER</TT
 ></A
-> (on a <A
+>
+   (on a <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
-> system, meaning file descriptor).  The
-   first slot of the struct returned is the string or the number on which
-   <TT
+> system, meaning file descriptor).
+   The first slot of the struct returned is the string or the number on
+   which <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/stat.html"
+TARGET="_top"
+><TT
 CLASS="function"
->stat(2)</TT
->/<TT
+>stat</TT
+></A
+>/<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/fstat.html"
+TARGET="_top"
+><TT
 CLASS="function"
->fstat(2)</TT
->/<TT
+>fstat</TT
+></A
+>/<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/lstat.html"
+TARGET="_top"
+><TT
 CLASS="function"
->lstat(2)</TT
->
-   was called.  The other 13 slots are numbers, members of the stat
-   struct: device, inode, protection, number of hard links, owner's UID,
-   owner's GID, device type, total size (bytes), blocksize for
-   filesystem I/O, number of blocks allocated, atime, mtime, ctime (as
-   the number of seconds since 1900-01-01).  If the system does not
-   support a particular field (e.g., Win32 does not have hard links),
-   <A
+>lstat</TT
+></A
+> was called.  The other 13 slots are
+   numbers, members of the stat struct: device, inode, protection,
+   number of hard links, owner's UID, owner's GID, device type, total
+   size (bytes), blocksize for filesystem I/O, number of blocks
+   allocated, atime, mtime, ctime (as the number of seconds since
+   1900-01-01).  If the system does not support a particular field
+   (e.g., Win32 does not have hard links), <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
-> (or the default, like 1 for the number of hard links for Win32
-   or DOS) is returned.
+> (or the default, like 1
+   for the number of hard links for Win32 or DOS) is returned.
    </P
 ><P
->[UNIX systems only at this time, patches are welcome.]
+ALIGN="justify"
+>[<A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems only at this time, patches are welcome.]
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:user-data</TT
+>POSIX:USER-DATA</TT
 >
     <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
@@ -297,9 +354,13 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
->Return the passwd struct (name, encoded password,
-   UID, GID, full name, home directory, shell).  When
-   <TT
+ALIGN="justify"
+>Return the <SPAN
+CLASS="type"
+>passwd</SPAN
+> struct (name, encoded
+   password, UID, GID, full name, home directory, shell).
+   When <TT
 CLASS="replaceable"
 ><I
 >user</I
@@ -311,8 +372,8 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
->, return all users.  When
-   <TT
+>, return all users.
+   When <TT
 CLASS="replaceable"
 ><I
 >user</I
@@ -321,9 +382,9 @@ CLASS="replaceable"
 CLASS="constant"
 >:DEFAULT</TT
 > or
-   not supplied, return the information about the current user.  If the
-   system does not support a particular field (e.g., Win32 does not have
-   a concept of a shell), <A
+   not supplied, return the information about the current user.
+   If the system does not support a particular field (e.g., Win32 does
+   not have a concept of a shell), <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -337,106 +398,130 @@ CLASS="filename"
 > for DOS) is returned.
    </P
 ><P
->[UNIX systems only at this time, patches are welcome.]
+ALIGN="justify"
+>[<A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems only at this time, patches are welcome.]
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:sysinfo</TT
+>POSIX:SYSINFO</TT
 >)</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return a struct describing the OS, derived from
-   <TT
+   <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/uname.html"
+TARGET="_top"
+><TT
 CLASS="function"
->uname(2)</TT
-> and <TT
+>uname</TT
+></A
+> and <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/sysconf.html"
+TARGET="_top"
+><TT
 CLASS="function"
->sysconf(3)</TT
->.
-  </P
+>sysconf</TT
+></A
+>.</P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:resource-usage-limits</TT
+>POSIX:RESOURCE-USAGE-LIMITS</TT
 >)</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return 3 structs describing the resources usage and
-    limits, derived from <TT
+    limits, derived from <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/getrlimit.html"
+TARGET="_top"
+><TT
 CLASS="function"
->getrlimit(2)</TT
-> and
-    <TT
+>getrlimit</TT
+></A
+> and <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/getrusage.html"
+TARGET="_top"
+><TT
 CLASS="function"
->getrusage(3)</TT
+>getrusage</TT
+></A
 >.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:erf</TT
-> <TT
+>POSIX:ERF</TT
+>
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:erfc</TT
-> <TT
+>POSIX:ERFC</TT
+>
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:j0</TT
-> <TT
+>POSIX:J0</TT
+>
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:j1</TT
-> <TT
+>POSIX:J1</TT
+>
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:jn</TT
+>POSIX:JN</TT
 >
-                         <TT
+       <TT
 CLASS="replaceable"
 ><I
 >integer</I
@@ -447,38 +532,37 @@ CLASS="replaceable"
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:y0</TT
-> <TT
+>POSIX:Y0</TT
+>
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:y1</TT
-> <TT
+>POSIX:Y1</TT
+>
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:yn</TT
+>POSIX:YN</TT
 >
-                         <TT
+       <TT
 CLASS="replaceable"
 ><I
 >integer</I
@@ -489,26 +573,25 @@ CLASS="replaceable"
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:gamma</TT
-> <TT
+>POSIX:GAMMA</TT
+>
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
 ></TT
 >)</TT
->
-   <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->posix:lgamma</TT
+>POSIX:LGAMMA</TT
 >
-                         <TT
+       <TT
 CLASS="replaceable"
 ><I
 >real</I
@@ -517,6 +600,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Compute the error functions, Bessel functions and
    Gamma.  These functions are required by the POSIX standard and should
    be available in libm.so.  Please note that these functions do not
@@ -524,8 +608,292 @@ CLASS="replaceable"
    computations at the double float level.
   </P
 ><P
->[UNIX systems only at this time, patches are welcome.]
+ALIGN="justify"
+>[<A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems only at this time, patches are welcome.]
  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:STREAM-LOCK</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+            <TT
+CLASS="replaceable"
+><I
+>lock-p</I
+></TT
+>
+            <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> (:BLOCK <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>) (:SHARED <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>))</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This is an interface to the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/flockfile.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>flock</TT
+></A
+> system call.
+   It sets or removes a discretionary file lock for the file associated
+   with <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>, depending on <TT
+CLASS="replaceable"
+><I
+>lock-p</I
+></TT
+>.
+   When <TT
+CLASS="replaceable"
+><I
+>block</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the call is non-blocking,
+   and when the file is already locked, it signals an error.
+   When <TT
+CLASS="replaceable"
+><I
+>shared</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+   then lock can be shared between several callers.
+   Several processes can set a <TT
+CLASS="replaceable"
+><I
+>shared</I
+></TT
+> lock,
+   but only one can set an <I
+CLASS="emphasis"
+>exclusive</I
+> (i.e.,
+   non-<TT
+CLASS="replaceable"
+><I
+>shared</I
+></TT
+>) lock.
+  </P
+><P
+ALIGN="justify"
+>[<A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems only at this time, patches are welcome.]
+ </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:COPY-FILE</TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>source-path</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>destination-path</I
+></TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :METHOD :PRESERVE :IF-EXISTS :IF-DOES-NOT-EXIST)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This is an interface to the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/symlink.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>symlink</TT
+></A
+>
+    (when <TT
+CLASS="replaceable"
+><I
+>method</I
+></TT
+> is <TT
+CLASS="constant"
+>:SYMLINK</TT
+>),
+    <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/link.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>link</TT
+></A
+> (when it is <TT
+CLASS="constant"
+>:HARDLINK</TT
+>), and <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/rename.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>rename</TT
+></A
+>
+    (when it is <TT
+CLASS="constant"
+>:RENAME</TT
+>) system calls, as well as,
+    you guessed it, a generic file copy utility
+    (when <TT
+CLASS="replaceable"
+><I
+>method</I
+></TT
+> is <TT
+CLASS="constant"
+>:COPY</TT
+>).
+   </P
+><P
+ALIGN="justify"
+>Both <TT
+CLASS="replaceable"
+><I
+>source-path</I
+></TT
+> and
+    <TT
+CLASS="replaceable"
+><I
+>destination-path</I
+></TT
+> may be wild.
+ </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:DUPLICATE-HANDLE</TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>fd1</I
+></TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>fd2</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This is an interface to the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/dup.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>dup/dup2</TT
+></A
+> system calls on
+   <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems and to <TT
+CLASS="function"
+>DuplicateHandle</TT
+> system
+   call on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>.</P
 ></DD
 ></DL
 ></DIV
@@ -535,6 +903,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -546,7 +915,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="socket.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -554,6 +924,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -562,7 +933,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="quickstart.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -577,6 +949,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -594,6 +967,45 @@ CLASS="command"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -6,8 +6,10 @@
    [CLHS-22.4]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="clpp.html"><LINK
 REL="NEXT"
 TITLE="Reader
    [CLHS-23]"
-HREF="reader.html"></HEAD
+HREF="reader.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="clpp.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Printer
+>Chapter 22. Printer
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-22.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="reader.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,20 +106,17 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="print-dict"
->The Printer Dictionary
+NAME="print-dict">22.5. The Printer Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_printer_dictionary.html"
 TARGET="_top"
 >[CLHS-22.4]</A
-></A
 ></H1
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
 TARGET="_top"
 ><TT
@@ -119,7 +131,6 @@ CLASS="function"
 >WRITE-TO-STRING</TT
 ></A
 >. </B
-></B
 >The functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
 TARGET="_top"
@@ -152,17 +163,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="format"
->Function <A
+NAME="format">22.5.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >FORMAT</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -201,7 +211,7 @@ CLASS="varname"
 ></A
 >.
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -222,7 +232,7 @@ CLASS="replaceable"
 >)</TT
 > is
  equivalent to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
 TARGET="_top"
@@ -247,6 +257,7 @@ CLASS="replaceable"
 >)</TT
 >.</P
 ><P
+ALIGN="justify"
 >The <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -254,12 +265,12 @@ TARGET="_top"
 CLASS="function"
 >FORMAT</TT
 ></A
-> instruction <I
+> instruction <B
 CLASS="emphasis"
 ><TT
 CLASS="literal"
 >~!</TT
-></I
+></B
 > is similar to
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-5-4.html"
@@ -279,8 +290,9 @@ CLASS="QUOTE"
 > package,
  you might not need to specify the package.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -306,7 +318,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 > is equivalent to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
 TARGET="_top"
@@ -351,6 +363,7 @@ CLASS="replaceable"
 >)</TT
 >.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -407,6 +420,7 @@ CLASS="replaceable"
 ></TT
 >.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -424,6 +438,7 @@ CLASS="literal"
 > does not output the character itself, only the
  instruction how to type the character.</P
 ><P
+ALIGN="justify"
 >For <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -470,6 +485,7 @@ CLASS="varname"
 >
  is true.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
 TARGET="_top"
@@ -492,10 +508,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="pathprint"
->pathnames</A
-></H2
+NAME="pathprint">22.5.2. pathnames</H2
 ><P
+ALIGN="justify"
 >Pathnames are printed as follows: If <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-escapest.html"
 TARGET="_top"
@@ -515,13 +530,16 @@ CLASS="constant"
  <TT
 CLASS="filename"
 >#P""</TT
-> syntax, as per [<SPAN
+> syntax, as per <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] Issue <A
+>]</A
+> Issue <A
 HREF="http://www.lisp.org/HyperSpec/Issues/iss276.html"
 TARGET="_top"
 >PRINT-READABLY-BEHAVIOR:CLARIFY</A
@@ -545,13 +563,16 @@ TARGET="_top"
 CLASS="varname"
 >*PRINT-READABLY*</TT
 ></A
-> is true), while being mandated by the [<SPAN
+> is true), while being mandated by the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->].
+>]</A
+>.
  Therefore, in this case, <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -607,10 +628,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="print-misc"
->Miscellaneous Issues</A
-></H2
+NAME="print-misc">22.5.3. Miscellaneous Issues</H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-casest.html"
 TARGET="_top"
@@ -625,17 +645,18 @@ CLASS="computeroutput"
 >
  objects.</P
 ><P
->In the absence of <I
+ALIGN="justify"
+>In the absence of <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >sys::write-float-decimal</TT
-></I
+></B
 >,
  floating point numbers are output in radix 2.  This function is defined
  in <TT
 CLASS="filename"
->floatpri.lisp</TT
+>"floatpri.lisp"</TT
 > and is not available if you run
  <A
 HREF="http://clisp.cons.org"
@@ -649,6 +670,7 @@ HREF="p-indep.html#image"
 >memory image</A
 > (which you should never do anyway!)</P
 ><P
+ALIGN="justify"
 >If <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
 TARGET="_top"
@@ -675,42 +697,43 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >,
    <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-prettyst.html"
 TARGET="_top"
@@ -743,13 +766,14 @@ CLASS="filename"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-prettyst.html"
 TARGET="_top"
@@ -782,6 +806,7 @@ CLASS="filename"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-arrayst.html"
 TARGET="_top"
@@ -804,6 +829,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -815,7 +841,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="clpp.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -823,6 +850,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -831,7 +859,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="reader.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -851,6 +880,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="printer.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -866,6 +896,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -6,8 +6,10 @@
    [CLHS-19.4]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="log-path.html"><LINK
 REL="NEXT"
 TITLE="Files
    [CLHS-20]"
-HREF="files.html"></HEAD
+HREF="files.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="log-path.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Filenames
+>Chapter 19. Filenames
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="files.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,15 +106,65 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="filename-dict"
->The Filenames Dictionary
+NAME="filename-dict">19.4. The Filenames Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_filen_s_dictionary.html"
 TARGET="_top"
 >[CLHS-19.4]</A
-></A
 ></H1
+><DIV
+CLASS="formalpara"
 ><P
+><B
+>Pathname Designators. </B
+>When <A
+HREF="filename-dict.html#parsename"
+><TT
+CLASS="varname"
+>CUSTOM:*PARSE-NAMESTRING-ANSI*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+> is also treated as a
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#pathname_designator"
+TARGET="_top"
+>pathname
+   designator</A
+>, namely its <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_symbol-name.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-NAME</TT
+></A
+> is converted to the
+  operating system's preferred pathname case.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PATHNAME</TT
+></A
+>. </B
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname.html"
 TARGET="_top"
@@ -108,7 +173,19 @@ CLASS="function"
 >PATHNAME</TT
 ></A
 > always returns a physical pathname.</P
+></DIV
+><DIV
+CLASS="formalpara"
 ><P
+><B
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname-match-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PATHNAME-MATCH-P</TT
+></A
+>. </B
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname-match-p.html"
 TARGET="_top"
@@ -117,8 +194,23 @@ CLASS="function"
 >PATHNAME-MATCH-P</TT
 ></A
 > does not interpret missing components as
- wild.</P
+  wild.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="translate-pathname">19.4.1. Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_translate-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRANSLATE-PATHNAME</TT
+></A
+></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_translate-pathname.html"
 TARGET="_top"
@@ -127,7 +219,7 @@ CLASS="function"
 >TRANSLATE-PATHNAME</TT
 ></A
 > has two additional keywords: <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_translate-pathname.html"
 TARGET="_top"
@@ -169,6 +261,7 @@ CLASS="constant"
 >)</TT
 ></P
 ><P
+ALIGN="justify"
 >If <TT
 CLASS="constant"
 >:ALL</TT
@@ -181,7 +274,7 @@ CLASS="constant"
 ></A
 >, a list of all resulting
  pathnames, corresponding to all matches of <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname-match-p.html"
 TARGET="_top"
@@ -225,24 +318,24 @@ CLASS="replaceable"
 >source</I
 ></TT
 >.</P
+></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="parsename"
->Function <A
+NAME="parsename">19.4.2. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >PARSE-NAMESTRING</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
 TARGET="_top"
@@ -344,36 +437,57 @@ CLASS="function"
 ></A
 > can be used.</P
 ><P
->The ANSI-mandated behavior of recognizing logical pathnames when
-the <TT
+ALIGN="justify"
+>The <A
+HREF="references.html#ansi-cl"
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+> behavior of recognizing logical pathnames when
+ the <TT
 CLASS="replaceable"
 ><I
 >string</I
 ></TT
 > begins with some alphanumeric characters followed by a
-colon (<SPAN
+ colon (<SPAN
 CLASS="keysym"
 >#\:</SPAN
->) is very confusing (cf.
-<TT
-CLASS="literal"
+>) can be very confusing
+ (cf. <TT
+CLASS="filename"
 >"c:/autoexec.bat"</TT
->, <TT
-CLASS="literal"
+>,
+ <TT
+CLASS="filename"
 >"home:.clisprc"</TT
->
-and <TT
-CLASS="literal"
+> and
+ <TT
+CLASS="filename"
 >"prep:/pub/gnu"</TT
->) and therefore disabled by default.
-To enable the ANSI standard behavior, you should set <A
+>)
+ and therefore is disabled by default.
+ To enable the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+> behavior, you should set <A
 HREF="filename-dict.html#parsename"
 ><TT
 CLASS="varname"
 >CUSTOM:*PARSE-NAMESTRING-ANSI*</TT
 ></A
 > to
-non-<A
+ non-<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -387,19 +501,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="pathmerge"
->Function <A
+NAME="pathmerge">19.4.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -426,8 +539,8 @@ CLASS="replaceable"
 ><I
 >default-pathname</I
 ></TT
-> is a logical pathname.  To
- construct a logical pathname from a string, the function
+> is a logical pathname.
+ To construct a logical pathname from a string, the function
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_logical-pathname.html"
 TARGET="_top"
@@ -437,6 +550,7 @@ CLASS="function"
 ></A
 > can be used.</P
 ><P
+ALIGN="justify"
 >When both <TT
 CLASS="replaceable"
 ><I
@@ -471,7 +585,7 @@ CLASS="command"
 ></A
 > retains its traditional behavior:
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -479,16 +593,17 @@ TARGET="_top"
 CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
-> #p"x/" #p"y/")</TT
+> #P"x/" #P"y/")</TT
 >
  evaluates to <TT
 CLASS="filename"
->#p"x/"</TT
+>#P"x/"</TT
 ></P
 ><P
-><I
+ALIGN="justify"
+><B
 CLASS="emphasis"
->Rationale</I
+>Rationale</B
 >: <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -496,10 +611,10 @@ TARGET="_top"
 CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
-> is used to
- specify default components for pathnames, so there is some analogy
- between <TT
-CLASS="literal"
+> is
+ used to specify default components for pathnames, so there is some
+ analogy between <TT
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -508,20 +623,22 @@ CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
 > a b)</TT
-> and
- <TT
-CLASS="literal"
+>
+ and <TT
+CLASS="sexp"
 >(or a b)</TT
->.  Obviously putting in the same
- default a second time should do the same as putting it in once:
+>.  Obviously putting in the
+ same default a second time should do the same as putting it in once:
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(or a b b)</TT
-> is the same as <TT
-CLASS="literal"
+> is the same as
+ <TT
+CLASS="sexp"
 >(or a b)</TT
->, so <TT
-CLASS="literal"
+>, so
+ <TT
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -538,8 +655,9 @@ CLASS="function"
 ></A
 > a b) b)</TT
 >
- should be the same as <TT
-CLASS="literal"
+ should be the same as
+ <TT
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -547,10 +665,10 @@ TARGET="_top"
 CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
-> a
- b)</TT
+> a b)</TT
 >.</P
 ><P
+ALIGN="justify"
 >(This question actually matters because in <A
 HREF="http://www.lisp.org"
 TARGET="_top"
@@ -568,8 +686,9 @@ CLASS="QUOTE"
 >"pathnames with defaults not yet applied"</SPAN
 >.)</P
 ><P
+ALIGN="justify"
 >Now, <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -585,9 +704,9 @@ CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
 >
- '#p"x/" '#p"y/") '#p"y/")</TT
+ #P"x/" #P"y/") #P"y/")</TT
 > and <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -595,7 +714,7 @@ TARGET="_top"
 CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
-> '#p"x/" '#p"y/")</TT
+> #P"x/" #P"y/")</TT
 > are <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_equal.html"
 TARGET="_top"
@@ -625,13 +744,16 @@ CLASS="constant"
 >NIL</TT
 ></A
 >), but not in implementations that
- strictly follow the [<SPAN
+ strictly follow the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] spec.  In fact, the above twice-default =
+>]</A
+> spec.  In fact, the above twice-default =
  once-default rule holds for all pathnames in <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -641,7 +763,8 @@ CLASS="command"
 ></A
 >.</P
 ><P
->When <A
+ALIGN="justify"
+>Reversely, when <A
 HREF="filename-dict.html#pathmerge"
 ><TT
 CLASS="varname"
@@ -654,16 +777,19 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
->, the normal
- [<SPAN
+>,
+ the normal <A
+HREF="references.html#ansi-cl"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
->] behavior is exhibited:
+>]</A
+> behavior is exhibited:
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
@@ -671,18 +797,22 @@ TARGET="_top"
 CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
-> #p"x/" #p"y/")</TT
+> #P"x/" #P"y/")</TT
 >
-  evaluates to <TT
+ evaluates to <TT
 CLASS="filename"
->#p"y/x/"</TT
-></P
+>#P"y/x/"</TT
+>.</P
 ><P
->The rationale is that <SPAN
+ALIGN="justify"
+><B
+CLASS="emphasis"
+>Rationale</B
+>: <SPAN
 CLASS="QUOTE"
 >"merge"</SPAN
-> is
- <I
+>
+is <I
 CLASS="emphasis"
 >merge</I
 > and not <I
@@ -695,17 +825,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="load-lpt"
->Function <A
+NAME="load-lpt">19.4.4. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load-logi_translations.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >LOAD-LOGICAL-PATHNAME-TRANSLATIONS</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >When the <TT
 CLASS="replaceable"
 ><I
@@ -726,7 +855,12 @@ is not a defined logical host yet, we proceed as follows:
 TYPE="1"
 ><LI
 ><P
->If both environment variables
+ALIGN="justify"
+>If both <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>s
   <TT
 CLASS="envar"
 >LOGICAL_HOST_<TT
@@ -744,8 +878,8 @@ CLASS="replaceable"
 >host</I
 ></TT
 >_TO</TT
-> exist, then they define the
-  map of the <TT
+> exist, then their values
+  define the map of the <TT
 CLASS="replaceable"
 ><I
 >host</I
@@ -754,7 +888,12 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
->If the environment variable
+ALIGN="justify"
+>If the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>
   <TT
 CLASS="envar"
 >LOGICAL_HOST_<TT
@@ -765,7 +904,7 @@ CLASS="replaceable"
 ></TT
 > exists, its value is read from,
   and the result is passed to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -786,6 +925,7 @@ CLASS="function"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Variable <A
 HREF="filename-dict.html#load-lpt"
 ><TT
@@ -884,6 +1024,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -895,7 +1036,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="log-path.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -903,6 +1045,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -911,7 +1054,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="files.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -931,6 +1075,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="filenames.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -946,6 +1091,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

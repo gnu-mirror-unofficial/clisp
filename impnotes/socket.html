@@ -5,8 +5,10 @@
 >Extensions-2.6. Socket Streams</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-2.5. ARexx"
 HREF="rexx.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.7. System Calls"
-HREF="syscalls.html"></HEAD
+HREF="syscalls.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="rexx.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="syscalls.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,24 +97,22 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="socket"
->Extensions-2.6. Socket Streams</A
-></H1
+NAME="socket">30.6. Extensions-2.6. Socket Streams</H1
 ><FONT
 COLOR="RED"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.</FONT
 ><P
@@ -109,9 +122,8 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="sose"
-><TT
-CLASS="literal"
+NAME="sose"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#sose"
 ><TT
@@ -132,10 +144,10 @@ CLASS="replaceable"
 >port-or-socket</I
 ></TT
 >])</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >This function creates a socket, binds a port to the
    socket, and then listens for connect attempts.  The server exists to
    watch for client connect attempts.  The optional argument is either a
@@ -158,9 +170,8 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="sose-close"
-><TT
-CLASS="literal"
+NAME="sose-close"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#sose-close"
 ><TT
@@ -174,18 +185,17 @@ CLASS="replaceable"
 >socket-server</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Closes down the server socket.
   </P
 ></DD
 ><DT
 ><A
-NAME="sose-port"
-><TT
-CLASS="literal"
+NAME="sose-port"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#sose-port"
 ><TT
@@ -199,10 +209,10 @@ CLASS="replaceable"
 >socket-server</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Returns the port which was bound using
    <A
 HREF="socket.html#sose"
@@ -214,9 +224,8 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="so-wait"
-><TT
-CLASS="literal"
+NAME="so-wait"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#so-wait"
 ><TT
@@ -237,7 +246,7 @@ CLASS="literal"
 >&#38;OPTIONAL</TT
 ></A
 > <A
-HREF="socket.html#timeout"
+HREF="socket.html#timeout-opt"
 >[<TT
 CLASS="replaceable"
 ><I
@@ -250,10 +259,10 @@ CLASS="replaceable"
 ></TT
 >]]</A
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Wait for a fixed time for a connection
    on the <TT
 CLASS="replaceable"
@@ -278,9 +287,8 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="so-accept"
-><TT
-CLASS="literal"
+NAME="so-accept"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#so-accept"
 ><TT
@@ -288,7 +296,7 @@ CLASS="function"
 >SOCKET:SOCKET-ACCEPT</TT
 ></A
 >
-          <TT
+                 <TT
 CLASS="replaceable"
 ><I
 >socket-server</I
@@ -318,19 +326,50 @@ HREF="stream-dict.html#buffered"
 CLASS="constant"
 >:BUFFERED</TT
 ></A
->)</TT
+>
+                 <A
+HREF="socket.html#timeout-k"
+><TT
+CLASS="constant"
+>seconds</TT
 ></A
+>)</TT
 ></DT
 ><DD
 ><P
->Creates the server-side two-way stream for the connection.
+ALIGN="justify"
+>Creates the server-side two-way
+   stream for the connection.
+   Waits for an attempt to connect to the server for no more than
+   <A
+HREF="socket.html#timeout-k"
+><TT
+CLASS="constant"
+>seconds</TT
+></A
+> seconds (which may be a non-negative real number or a
+   list <TT
+CLASS="sexp"
+>(sec usec)</TT
+> or a pair
+   <TT
+CLASS="sexp"
+>(sec . usec)</TT
+>).
+   Signals an <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_error.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ERROR</TT
+></A
+> if no connection is made in that time.
   </P
 ></DD
 ><DT
 ><A
-NAME="so-connect"
-><TT
-CLASS="literal"
+NAME="so-connect"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#so-connect"
 ><TT
@@ -381,26 +420,46 @@ HREF="stream-dict.html#buffered"
 CLASS="constant"
 >:BUFFERED</TT
 ></A
->)</TT
+> <A
+HREF="socket.html#timeout-k"
+><TT
+CLASS="constant"
+>seconds</TT
 ></A
+>)</TT
 ></DT
 ><DD
 ><P
->Attempts to create a client-side two-way <A
+ALIGN="justify"
+>Attempts to create a client-side two-way
+   <A
 HREF="socket.html"
 ><TT
 CLASS="classname"
 >SOCKET:SOCKET-STREAM</TT
 ></A
->.
-   Blocks until the server accepts the connections.
+>.  Blocks until the server accepts the connection, for
+   no more than <A
+HREF="socket.html#timeout-k"
+><TT
+CLASS="constant"
+>seconds</TT
+></A
+> seconds.  If it is 0, returns immediately
+   and (probably) blocks on the next i/o operation (you can use
+   <A
+HREF="socket.html#so-status"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STATUS</TT
+></A
+> to check whether it will actually block).
   </P
 ></DD
 ><DT
 ><A
-NAME="so-status"
-><TT
-CLASS="literal"
+NAME="so-status"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#so-status"
 ><TT
@@ -422,7 +481,7 @@ CLASS="literal"
 >&#38;OPTIONAL</TT
 ></A
 > <A
-HREF="socket.html#timeout"
+HREF="socket.html#timeout-opt"
 >[<TT
 CLASS="replaceable"
 ><I
@@ -435,10 +494,10 @@ CLASS="replaceable"
 ></TT
 >]]</A
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Checks whether it is possible to read from or write
    to a <A
 HREF="socket.html"
@@ -453,10 +512,14 @@ HREF="socket.html"
 CLASS="classname"
 >SOCKET:SOCKET-SERVER</TT
 ></A
-> without blocking.  (For the cognoscenti:
-   this is the interface to <TT
+> without blocking.
+   (For the cognoscenti: this is the interface to <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/select.html"
+TARGET="_top"
+><TT
 CLASS="function"
->select(2)</TT
+>select</TT
+></A
 >).
    This is similar to <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
@@ -510,6 +573,7 @@ CLASS="classname"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Returns <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
@@ -545,7 +609,7 @@ CLASS="classname"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="socket.html"
 ><TT
@@ -562,6 +626,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >Return the appropriate keyword (<TT
 CLASS="constant"
 >:INPUT</TT
@@ -601,6 +666,7 @@ CLASS="constant"
 >a list of the above</DT
 ><DD
 ><P
+ALIGN="justify"
 >Return a list of values, one for each element of the
       argument list (a la <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
@@ -614,6 +680,7 @@ CLASS="function"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >The optional arguments specify the timeout. <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -645,6 +712,7 @@ CLASS="function"
    not block) to become available (or a connection to become
    possible).</P
 ><P
+ALIGN="justify"
 >For each <A
 HREF="socket.html"
 ><TT
@@ -678,6 +746,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >when no information is available or no operation
       is possible</P
 ></DD
@@ -688,6 +757,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >when an i/o operation will cause an error
      </P
 ></DD
@@ -698,6 +768,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >when you can only read from the stream
      </P
 ></DD
@@ -708,6 +779,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >when you can only write to the stream
      </P
 ></DD
@@ -718,6 +790,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >when you can both read from and write to the stream
      </P
 ></DD
@@ -726,9 +799,8 @@ CLASS="constant"
 ></DD
 ><DT
 ><A
-NAME="sost-hopo"
-><TT
-CLASS="literal"
+NAME="sost-hopo"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#sost-hopo"
 ><TT
@@ -741,9 +813,8 @@ CLASS="replaceable"
 >socket-stream</I
 ></TT
 >)</TT
->,
-         <TT
-CLASS="literal"
+><BR><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#sost-hopo"
 ><TT
@@ -756,10 +827,10 @@ CLASS="replaceable"
 >socket-stream</I
 ></TT
 >)</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >These two functions return information about the
    <A
 HREF="socket.html"
@@ -785,9 +856,8 @@ CLASS="constant"
 ></DD
 ><DT
 ><A
-NAME="service-port"
-><TT
-CLASS="literal"
+NAME="service-port"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#service-port"
 ><TT
@@ -814,10 +884,10 @@ CLASS="replaceable"
 >protocol</I
 ></TT
 > "tcp"))</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >A convenience function for looking up a port given
    the service name.  It returns the servent struct as multiple values
    (name, list of aliases, port, protocol) for the given
@@ -861,9 +931,8 @@ CLASS="constant"
 ></DD
 ><DT
 ><A
-NAME="sost-peer"
-><TT
-CLASS="literal"
+NAME="sost-peer"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#sost-peer"
 ><TT
@@ -882,14 +951,15 @@ CLASS="replaceable"
 >do-not-resolve-p</I
 ></TT
 >])</TT
-></A
 ></DT
 ><DD
 ><P
->Given a stream, this function returns the name of
-   the host on the opposite side of the connection and its port number;
-   the server-side can use this to see who connected.</P
+ALIGN="justify"
+>Given a socket stream, this function returns the
+   name of the host on the opposite side of the connection and its port
+   number; the server-side can use this to see who connected.</P
 ><P
+ALIGN="justify"
 >When the optional second argument is non-<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -907,9 +977,8 @@ CLASS="acronym"
 ></DD
 ><DT
 ><A
-NAME="sost-local"
-><TT
-CLASS="literal"
+NAME="sost-local"><TT
+CLASS="sexp"
 >(<A
 HREF="socket.html#sost-local"
 ><TT
@@ -928,10 +997,10 @@ CLASS="replaceable"
 >do-not-resolve-p</I
 ></TT
 >])</TT
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >The dual to <A
 HREF="socket.html#sost-peer"
 ><TT
@@ -956,13 +1025,209 @@ CLASS="function"
    asks the OS (and thus returns the correct trusted values) while the
    other two are just accessors to the internal data structure, and
    basically return the arguments given to the function which created
-   the <A
+   the <TT
+CLASS="replaceable"
+><I
+>socket-stream</I
+></TT
+>.</P
+></DD
+><DT
+><A
+NAME="sost-shut"><TT
+CLASS="sexp"
+>(<A
+HREF="socket.html#sost-shut"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-SHUTDOWN</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>socket-stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>direction</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Some Internet protocols, such as HTTP, provide for
+   closing the connection in one direction using <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/shutdown.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>shutdown</TT
+></A
+>.
+   This function provides an interface to this <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> system call.
+   <TT
+CLASS="replaceable"
+><I
+>direction</I
+></TT
+> can be <TT
+CLASS="constant"
+>:INPUT</TT
+> or <TT
+CLASS="constant"
+>:OUTPUT</TT
+>.
+   Note that you should still call <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+> after you are done with your
+   <TT
+CLASS="replaceable"
+><I
+>socket-stream</I
+></TT
+>; this is best accomplished by using <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_with-open-stream.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WITH-OPEN-STREAM</TT
+></A
+>.</P
+><P
+ALIGN="justify"
+>All <A
 HREF="socket.html"
 ><TT
 CLASS="classname"
 >SOCKET:SOCKET-STREAM</TT
 ></A
->.</P
+>s are <TT
+CLASS="constant"
+>:IO</TT
+> streams (i.e., both
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_input-str_put-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INPUT-STREAM-P</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_input-str_put-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OUTPUT-STREAM-P</TT
+></A
+> return <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> for them).
+   <A
+HREF="socket.html#sost-shut"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-SHUTDOWN</TT
+></A
+> <I
+CLASS="emphasis"
+>breaks</I
+> this:
+   the invariant is that whenever
+   <P
+></P
+><UL
+><LI
+><P
+ALIGN="justify"
+>a stream is open
+    (i.e., <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN-STREAM-P</TT
+></A
+> returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>) and</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>a stream is an <TT
+CLASS="constant"
+>:INPUT</TT
+> stream
+    (i.e., <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_input-str_put-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INPUT-STREAM-P</TT
+></A
+> returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>)</P
+></LI
+></UL
+>
+   the stream can be read from (e.g., with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>).
+   This is not the case for a <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+> which was shut down in
+   the <TT
+CLASS="constant"
+>:INPUT</TT
+> direction: it is still open (for output) but it cannot
+   be read from.</P
 ></DD
 ></DL
 ></DIV
@@ -972,6 +1237,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -983,7 +1249,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="rexx.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -991,6 +1258,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -999,7 +1267,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="syscalls.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1014,6 +1283,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1024,6 +1294,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

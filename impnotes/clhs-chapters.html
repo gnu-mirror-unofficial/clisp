@@ -5,18 +5,23 @@
 >Chapters or the Common Lisp HyperSpec</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
 REL="PREVIOUS"
-TITLE="[CLISP icon]"
+TITLE="Overview"
 HREF="preface.html"><LINK
 REL="NEXT"
 TITLE="Introduction
   [CLHS-1]"
-HREF="intro.html"></HEAD
+HREF="intro.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="part"
 BGCOLOR="#FFFFFF"
@@ -27,6 +32,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -46,7 +52,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -55,7 +68,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="preface.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -68,7 +82,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="intro.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -78,19 +93,20 @@ WIDTH="100%"></DIV
 ><DIV
 CLASS="PART"
 ><A
-NAME="clhs-chapters"
-></A
-><DIV
+NAME="clhs-chapters"><DIV
 CLASS="TITLEPAGE"
 ><H1
 CLASS="title"
->I. Chapters or the [<SPAN
+>I. Chapters or the <A
+HREF="references.html#CLHS"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLHS"
 >Common Lisp HyperSpec</A
 ></SPAN
->]</H1
+>]</A
+></H1
 ><DIV
 CLASS="TOC"
 ><DL
@@ -99,7 +115,7 @@ CLASS="TOC"
 >Table of Contents</B
 ></DT
 ><DT
-><A
+>1. <A
 HREF="intro.html"
 >Introduction
   <A
@@ -109,7 +125,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>2. <A
 HREF="syntax.html"
 >Syntax
    <A
@@ -119,7 +135,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>3. <A
 HREF="eval.html"
 >Evaluation and Compilation
    <A
@@ -129,7 +145,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>4. <A
 HREF="types-classes.html"
 >Types and Classes
    <A
@@ -139,7 +155,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>5. <A
 HREF="data.html"
 >Data and Control Flow
    <A
@@ -149,7 +165,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>6. <A
 HREF="iteration.html"
 >Iteration
    <A
@@ -159,7 +175,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>7. <A
 HREF="objects.html"
 >Objects
    <A
@@ -169,7 +185,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>8. <A
 HREF="structures.html"
 >Structures
    <A
@@ -179,7 +195,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>9. <A
 HREF="conditions.html"
 >Conditions
    <A
@@ -189,7 +205,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>10. <A
 HREF="symbols.html"
 >Symbols
    <A
@@ -199,7 +215,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>11. <A
 HREF="packages.html"
 >Packages
    <A
@@ -209,7 +225,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>12. <A
 HREF="numbers.html"
 >Numbers
    <A
@@ -219,7 +235,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>13. <A
 HREF="characters.html"
 >Characters
    <A
@@ -229,7 +245,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>14. <A
 HREF="conses.html"
 >Conses
    <A
@@ -239,7 +255,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>15. <A
 HREF="arrays.html"
 >Arrays
    <A
@@ -249,7 +265,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>16. <A
 HREF="strings.html"
 >Strings
    <A
@@ -259,7 +275,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>17. <A
 HREF="sequences.html"
 >Sequences
    <A
@@ -269,7 +285,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>18. <A
 HREF="hash.html"
 >Hash Tables
    <A
@@ -279,7 +295,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>19. <A
 HREF="filenames.html"
 >Filenames
    <A
@@ -289,7 +305,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>20. <A
 HREF="files.html"
 >Files
    <A
@@ -299,7 +315,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>21. <A
 HREF="streams.html"
 >Streams
    <A
@@ -309,7 +325,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>22. <A
 HREF="printer.html"
 >Printer
    <A
@@ -319,7 +335,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>23. <A
 HREF="reader.html"
 >Reader
    <A
@@ -329,7 +345,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>24. <A
 HREF="system.html"
 >System Construction
    <A
@@ -339,7 +355,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>25. <A
 HREF="environment.html"
 >Environment
    <A
@@ -349,7 +365,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>26. <A
 HREF="glossary.html"
 >Glossary
    <A
@@ -359,7 +375,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>27. <A
 HREF="appendix.html"
 >Appendix
    <A
@@ -369,7 +385,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
-><A
+>28. <A
 HREF="issues.html"
 >X3J13 Issue Index
    <A
@@ -387,6 +403,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -398,7 +415,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="preface.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -406,6 +424,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -414,7 +433,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="intro.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -422,14 +442,7 @@ HREF="intro.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
-><SPAN
-CLASS="inlinemediaobject"
-><IMG
-SRC="clisp.png"
-ALT="[CLISP icon]"
-></IMG
-></SPAN
-></TD
+>Overview</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -448,6 +461,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

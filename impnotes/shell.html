@@ -5,8 +5,10 @@
 >Extensions-2.10. Shell, Pipes and Printing</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-2.9. Application delivery with CLISP"
 HREF="app-dev.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.11. Directory Access"
-HREF="dir-key.html"></HEAD
+HREF="dir-key.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,20 +70,22 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="app-dev.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Extensions-2: Platform specific Extensions</TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="dir-key.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -82,17 +97,13 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="shell"
->Extensions-2.10. Shell, Pipes and Printing</A
-></H1
+NAME="shell">30.10. Extensions-2.10. Shell, Pipes and Printing</H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="exec"
->Shell</A
-></H2
+NAME="exec">30.10.1. Shell</H2
 ><P
 ></P
 ><DIV
@@ -102,37 +113,38 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >,
    platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#exec"
 ><TT
@@ -191,15 +203,16 @@ CLASS="replaceable"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#exec"
 ><TT
@@ -225,51 +238,52 @@ CLASS="replaceable"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >,
    <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#exec"
 ><TT
@@ -284,7 +298,7 @@ CLASS="replaceable"
 >])</TT
 >
    calls the operating system's shell. <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#exec"
 ><TT
@@ -294,7 +308,7 @@ CLASS="function"
 >)</TT
 > calls the shell for interactive use.
    <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#exec"
 ><TT
@@ -318,33 +332,32 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><A
-NAME="run-prog"
->Platform dependent: <A
+NAME="run-prog">Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
-   platforms only.</A
-></DT
+   platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The functions <A
 HREF="shell.html#run-prog"
 ><TT
@@ -366,8 +379,9 @@ CLASS="function"
 ></A
 > and the above:</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#run-prog"
 ><TT
@@ -408,16 +422,16 @@ CLASS="command"
 > on <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >/<A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >
    and <B
@@ -426,14 +440,15 @@ CLASS="command"
 > on <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >).</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#run-prog"
 ><TT
@@ -485,6 +500,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the shell command.</P
 ><P
 ></P
@@ -495,15 +511,20 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The shell the command is passed to is the value
-       of the environment variable <TT
+       of the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+> <TT
 CLASS="envar"
 >SHELL</TT
 >, which normally
@@ -541,11 +562,16 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the program.  The directories listed in the
      <TT
 CLASS="envar"
 >PATH</TT
-> environment variable will be searched for it.
+> <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+> will be searched for it.
     </P
 ></DD
 ><DT
@@ -555,6 +581,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >a list of arguments (strings) that are given to the
      program.</P
 ></DD
@@ -565,6 +592,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >where the program's input is to come from: either
      <TT
 CLASS="constant"
@@ -590,6 +618,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >where the program's output is to be sent to: either
      <TT
 CLASS="constant"
@@ -615,6 +644,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >what to do if the <TT
 CLASS="constant"
 >:OUTPUT</TT
@@ -646,6 +676,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >wether to wait for program termination or not
      (this is useful when no i/o to the process is needed).
     </P
@@ -657,6 +688,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >pass <B
 CLASS="command"
 >exec</B
@@ -664,9 +696,9 @@ CLASS="command"
     shell (<A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > only).</P
 ></DD
@@ -677,9 +709,10 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >use a shell to run the command, e.g.,
     <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#run-prog"
 ><TT
@@ -702,22 +735,23 @@ CLASS="command"
     (<A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >/<A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 > only).</P
 ></DD
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >If <TT
 CLASS="constant"
 >:STREAM</TT
@@ -768,9 +802,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="pipe"
->Pipes</A
-></H2
+NAME="pipe">30.10.2. Pipes</H2
 ><P
 ></P
 ><DIV
@@ -780,23 +812,23 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
     platforms only.</DT
@@ -808,7 +840,7 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#pipe"
 ><TT
@@ -850,13 +882,14 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns an input stream that will supply the output
   from the execution of the given operating system command.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#pipe"
 ><TT
@@ -898,13 +931,14 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns an output stream that will pass its output as
    input to the execution of the given operating system command.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="shell.html#pipe"
 ><TT
@@ -946,6 +980,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns three values.  The first value is a
   bidirectional stream that will simultaneously pass its output as input
   to the execution of the given operating system command and supply the
@@ -953,9 +988,11 @@ CLASS="constant"
   the input stream and the output stream that make up the I/O stream,
   respectively.  Note that they must be closed individually.</P
 ><P
+ALIGN="justify"
 >Warning: Improper use of this function can lead to
   deadlocks.  Use it at your own risk!</P
 ><P
+ALIGN="justify"
 >A deadlock occurs if the command and your program either both
   try to read from each other at the same time or both try to write to
   each other at the same time. To avoid deadlocks, it is recommended
@@ -1018,16 +1055,15 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="hardcopy"
->Printing</A
-></H2
+NAME="hardcopy">30.10.3. Printing</H2
 ><P
->The macro <I
+ALIGN="justify"
+>The macro <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >EXT:WITH-OUTPUT-TO-PRINTER</TT
-></I
+></B
 >:
 <TABLE
 BORDER="0"
@@ -1080,6 +1116,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1091,7 +1128,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="app-dev.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1099,6 +1137,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1107,7 +1146,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="dir-key.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1129,6 +1169,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="platform.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1139,6 +1180,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -2,7 +2,8 @@
 <HTML
 ><HEAD
 ><TITLE
->Function READTABLE-CASE</TITLE
+>Extensions-2.12. Operating System
+  Environment.</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
@@ -13,15 +14,14 @@ REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
 REL="UP"
-TITLE="Reader
-   [CLHS-23]"
-HREF="reader.html"><LINK
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
 REL="PREVIOUS"
-TITLE="Additional read dispatch macros"
-HREF="read-dispatch-ext.html"><LINK
+TITLE="Extensions-2.11. Directory Access"
+HREF="dir-key.html"><LINK
 REL="NEXT"
-TITLE="Functions LISTEN, READ-CHAR-NO-HANG"
-HREF="listen.html"><LINK
+TITLE="Extensions-2.13. Other"
+HREF="other.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -70,7 +70,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="read-dispatch-ext.html"
+HREF="dir-key.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -78,18 +78,13 @@ ACCESSKEY="P"
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Chapter 23. Reader
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
-TARGET="_top"
->[CLHS-23]</A
-></TD
+>Chapter 30. Extensions-2: Platform specific Extensions</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="listen.html"
+HREF="other.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -103,71 +98,134 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="rt-case">23.3. Function <A
-HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READTABLE-CASE</TT
-></A
-></H1
+NAME="getenv">30.12. Extensions-2.12. Operating System
+  Environment.</H1
 ><P
 ALIGN="justify"
->When the value of <TT
+>Most modern operating systems support <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>s that associate
+ strings (<SPAN
+CLASS="QUOTE"
+>"variables"</SPAN
+>) with other strings
+ (<SPAN
+CLASS="QUOTE"
+>"values"</SPAN
+>).  These variables are somewhat similar to the
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_special.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>SPECIAL</TT
+></A
+> variables in <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+>: their values are inherited by the
+ processes from their parent process.</P
+><P
+ALIGN="justify"
+>You can access your OS <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>s using the function
+<TT
 CLASS="sexp"
 >(<A
-HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
+HREF="getenv.html"
+><TT
+CLASS="function"
+>EXT:GETENV</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>)</TT
+>,
+where <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> is the name of the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>.
+When <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> is omitted or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, all the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>s and their values
+are returned in an <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_a.html#association_list"
+TARGET="_top"
+>alist</A
+>.</P
+><P
+ALIGN="justify"
+>You can change the value of existing <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>s or create new
+ ones using <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
 ><TT
 CLASS="function"
->READTABLE-CASE</TT
+>SETF</TT
+></A
+> (<A
+HREF="getenv.html"
+><TT
+CLASS="function"
+>EXT:GETENV</TT
 ></A
 >
  <TT
 CLASS="replaceable"
 ><I
->readtable</I
+>string</I
+></TT
+>) <TT
+CLASS="replaceable"
+><I
+>new-value</I
 ></TT
 >)</TT
-> is
- <TT
-CLASS="constant"
->:invert</TT
->, it applies to the package name and the
- symbol name of a symbol separately (not to the entire token at once).
- An alternative to the use of <A
-HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READTABLE-CASE</TT
-></A
-> is the use of the
- <TT
-CLASS="constant"
->:CASE-SENSITIVE</TT
-> option to <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_make-package.html"
-TARGET="_top"
-><TT
-CLASS="function"
->MAKE-PACKAGE</TT
-></A
->,
- <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
-TARGET="_top"
-><TT
-CLASS="function"
->IN-PACKAGE</TT
-></A
-> and <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
-TARGET="_top"
-><TT
-CLASS="function"
->DEFPACKAGE</TT
-></A
 >.</P
 ></DIV
 ><DIV
@@ -186,7 +244,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="read-dispatch-ext.html"
+HREF="dir-key.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -204,7 +262,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="listen.html"
+HREF="other.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -214,13 +272,13 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Additional read dispatch macros</TD
+>Extensions-2.11. Directory Access</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="reader.html"
+HREF="platform.html"
 ACCESSKEY="U"
 >Up</A
 ></TD
@@ -228,21 +286,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Functions <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
-TARGET="_top"
-><TT
-CLASS="function"
->LISTEN</TT
-></A
->, <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READ-CHAR-NO-HANG</TT
-></A
-></TD
+>Extensions-2.13. Other</TD
 ></TR
 ></TABLE
 ></DIV

@@ -6,8 +6,10 @@
    [CLHS-23]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -20,7 +22,10 @@ TITLE="The Printer Dictionary
 HREF="print-dict.html"><LINK
 REL="NEXT"
 TITLE="Additional read dispatch macros"
-HREF="read-dispatch-ext.html"></HEAD
+HREF="read-dispatch-ext.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -31,6 +36,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -50,7 +56,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -59,7 +72,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="print-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -72,7 +86,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="read-dispatch-ext.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -83,31 +98,87 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="reader"
->Reader
+NAME="reader">Chapter 23. Reader
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
 TARGET="_top"
 >[CLHS-23]</A
-></A
 ></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>23.1. <A
+HREF="reader.html#chario"
+>characters</A
+></DT
+><DT
+>23.2. <A
+HREF="read-dispatch-ext.html"
+>Additional read dispatch macros</A
+></DT
+><DT
+>23.3. <A
+HREF="rt-case.html"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READTABLE-CASE</TT
+></A
+></A
+></DT
+><DT
+>23.4. <A
+HREF="listen.html"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR-NO-HANG</TT
+></A
+></A
+></DT
+><DT
+>23.5. <A
+HREF="read-byte.html"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+></A
+></DT
+></DL
+></DIV
 ><P
+ALIGN="justify"
 >This is the list of objects whose external representation cannot
   be meaningfully read in:
 <DIV
 CLASS="table"
 ><A
-NAME="unreadable-objects-table"
-></A
-><P
+NAME="unreadable-objects-table"><P
 ><B
->Table 1. unreadable objects</B
+>Table 23-1. unreadable objects</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -455,23 +526,23 @@ CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >
          platforms only.)</I
@@ -495,16 +566,16 @@ CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.)</I
 >
@@ -533,16 +604,16 @@ CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.)</I
 >
@@ -571,16 +642,16 @@ CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.)</I
 >
@@ -721,10 +792,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="chario"
->characters</A
-></H1
+NAME="chario">23.1. characters</H1
 ><P
+ALIGN="justify"
 ><SPAN
 CLASS="keysym"
 >#\Code</SPAN
@@ -734,7 +804,7 @@ CLASS="keysym"
 >#\Code231</SPAN
 > reads as the character
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_code-char.html"
 TARGET="_top"
@@ -751,6 +821,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -762,7 +833,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="print-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -770,6 +842,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -778,7 +851,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="read-dispatch-ext.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -798,6 +872,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -808,6 +883,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

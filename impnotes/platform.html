@@ -5,8 +5,10 @@
 >Extensions-2: Platform specific Extensions</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -18,7 +20,10 @@ TITLE="Extensions-1.11. Customizing CLISP behavior."
 HREF="customize.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.2. External Modules"
-HREF="modules.html"></HEAD
+HREF="modules.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -57,7 +70,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="customize.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -70,7 +84,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="modules.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -81,53 +96,138 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="platform"
->Extensions-2: Platform specific Extensions</A
-></H1
+NAME="platform">Chapter 30. Extensions-2: Platform specific Extensions</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>30.1. <A
+HREF="platform.html#screen"
+>Extensions-2.1. Random Screen Access</A
+></DT
+><DT
+>30.2. <A
+HREF="modules.html"
+>Extensions-2.2. External Modules</A
+></DT
+><DT
+>30.3. <A
+HREF="dffi.html"
+>Extensions-2.3. The Foreign Function Call Facility</A
+></DT
+><DT
+>30.4. <A
+HREF="affi.html"
+>Extensions-2.4. The Amiga Foreign Function Call Facility</A
+></DT
+><DT
+>30.5. <A
+HREF="rexx.html"
+>Extensions-2.5. ARexx</A
+></DT
+><DT
+>30.6. <A
+HREF="socket.html"
+>Extensions-2.6. Socket Streams</A
+></DT
+><DT
+>30.7. <A
+HREF="syscalls.html"
+>Extensions-2.7. System Calls</A
+></DT
+><DT
+>30.8. <A
+HREF="quickstart.html"
+>Extensions-2.8. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>30.9. <A
+HREF="app-dev.html"
+>Extensions-2.9. Application delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+>30.10. <A
+HREF="shell.html"
+>Extensions-2.10. Shell, Pipes and Printing</A
+></DT
+><DT
+>30.11. <A
+HREF="dir-key.html"
+>Extensions-2.11. Directory Access</A
+></DT
+><DT
+>30.12. <A
+HREF="getenv.html"
+>Extensions-2.12. Operating System
+  Environment.</A
+></DT
+><DT
+>30.13. <A
+HREF="other.html"
+>Extensions-2.13. Other</A
+></DT
+></DL
+></DIV
 ><DIV
 CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="screen"
->Extensions-2.1. Random Screen Access</A
-></H1
+NAME="screen">30.1. Extensions-2.1. Random Screen Access</H1
 ><FONT
 COLOR="RED"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
    platforms only.</FONT
@@ -138,7 +238,7 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:make-window</TT
@@ -146,6 +246,7 @@ CLASS="function"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns a "window stream".  As long as this stream
    is open, the terminal is in cbreak/noecho mode.  <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
@@ -173,7 +274,7 @@ CLASS="varname"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:with-window</TT
@@ -187,12 +288,13 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
->binds <I
+ALIGN="justify"
+>binds <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
 >screen:*window*</TT
-></I
+></B
 > to a
    window stream and executes <TT
 CLASS="replaceable"
@@ -213,7 +315,7 @@ CLASS="varname"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:window-size</TT
@@ -227,6 +329,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns the window's size, as two values:
    height (= y<SUB
 >max</SUB
@@ -238,7 +341,7 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:window-cursor-position</TT
@@ -252,6 +355,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns the position of the cursor in the window,
    as two values: line (&#8805;0, &#8804;y<SUB
 >max</SUB
@@ -263,7 +367,7 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:set-window-cursor-position</TT
@@ -289,12 +393,13 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >sets the position of the cursor in the window.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:clear-window</TT
@@ -308,13 +413,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >clears the window's contents and puts the cursor in
    the upper left corner.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:clear-window-to-eot</TT
@@ -328,13 +434,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >clears the window's contents from the cursor
    position to the end of window.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:clear-window-to-eol</TT
@@ -348,13 +455,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >clears the window's contents from the cursor
    position to the end of line.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:delete-window-line</TT
@@ -368,13 +476,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >removes the cursor's line, moves the lines below it
    up by one line and clears the window's last line.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:insert-window-line</TT
@@ -388,13 +497,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >inserts a line at the cursor's line, moving the
    lines below it down by one line.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:highlight-on</TT
@@ -408,12 +518,13 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >switches highlighted output on.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:highlight-off</TT
@@ -427,12 +538,13 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >switches highlighted output off.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:window-cursor-on</TT
@@ -446,13 +558,14 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >makes the cursor visible, a cursor block in most
    implementations.
   </P
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >screen:window-cursor-off</TT
@@ -466,6 +579,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >makes the cursor invisible, in implementations
    where this is possible.
   </P
@@ -479,6 +593,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -490,7 +605,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="customize.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -498,6 +614,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -506,7 +623,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="modules.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -528,6 +646,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="extensions.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -538,6 +657,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

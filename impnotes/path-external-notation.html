@@ -5,8 +5,10 @@
 >External notation.</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="filenames.html"><LINK
 REL="NEXT"
 TITLE="Logical Pathnames
    [CLHS-19.3]"
-HREF="log-path.html"></HEAD
+HREF="log-path.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,13 +73,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="filenames.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Filenames
+>Chapter 19. Filenames
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
 TARGET="_top"
@@ -78,7 +92,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="log-path.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -90,10 +105,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="path-external-notation"
->External notation.</A
-></H1
+NAME="path-external-notation">19.2. External notation.</H1
 ><P
+ALIGN="justify"
 >External notation of pathnames (cf. <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
 TARGET="_top"
@@ -119,26 +133,21 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 > platforms only.</DT
 ><DD
 ><DIV
 CLASS="table"
 ><A
-NAME="dos-path-external-table"
-></A
-><P
+NAME="dos-path-external-table"><P
 ><B
->Table 19. </B
+>Table 19-19. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -151,7 +160,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >a letter <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 >|<TT
 CLASS="filename"
 >a</TT
@@ -176,11 +185,11 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >each one a subdirectory, <TT
 CLASS="filename"
->\</TT
+>"\"</TT
 > may be replaced by
     <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 ></TD
 ></TR
 ><TR
@@ -197,6 +206,7 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Name and type may be character sequences of any <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
 TARGET="_top"
@@ -207,15 +217,15 @@ CLASS="function"
 >
  (consisting of alphanumeric characters and <TT
 CLASS="filename"
->-</TT
+>"-"</TT
 >,
  <TT
 CLASS="filename"
->_</TT
+>"_"</TT
 >).  They are shortened to 8 (respectively 3)
  characters and converted to upper case.  A single <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 > is
  allowed for <TT
 CLASS="constant"
@@ -226,13 +236,14 @@ CLASS="constant"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >see <A
 HREF="filenames.html#pathnames-externally-amiga"
 >above</A
@@ -243,26 +254,21 @@ HREF="filenames.html#pathnames-externally-amiga"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms only.</DT
 ><DD
 ><DIV
 CLASS="table"
 ><A
-NAME="unix-path-external-table"
-></A
-><P
+NAME="unix-path-external-table"><P
 ><B
->Table 20. </B
+>Table 19-20. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -271,14 +277,14 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >[ <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > ]</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > denotes absolute pathnames</TD
 ></TR
 ><TR
@@ -292,7 +298,7 @@ CLASS="replaceable"
 ></TT
 > <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 > }</TD
 ><TD
 ALIGN="CENTER"
@@ -310,7 +316,7 @@ CLASS="replaceable"
 ></TT
 > [<TT
 CLASS="filename"
->.</TT
+>"."</TT
 > <TT
 CLASS="replaceable"
 ><I
@@ -326,6 +332,7 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Name and type may be character sequences of any <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
 TARGET="_top"
@@ -334,42 +341,44 @@ CLASS="function"
 >LENGTH</TT
 ></A
 >
- (consisting of printing ASCII characters, except <TT
+ (consisting of printing <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> characters, except <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 >).</P
 ></DD
 ><DT
 >Platform dependent: <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.</DT
 ><DD
 ><DIV
 CLASS="table"
 ><A
-NAME="win32-path-external-table"
-></A
-><P
+NAME="win32-path-external-table"><P
 ><B
->Table 21. </B
+>Table 19-21. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><TBODY
 ><TR
@@ -387,7 +396,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >a letter <TT
 CLASS="filename"
->*</TT
+>"*"</TT
 >|<TT
 CLASS="filename"
 >a</TT
@@ -422,11 +431,11 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >each one a subdirectory, <TT
 CLASS="filename"
->\</TT
+>"\"</TT
 > may be
      replaced by <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 ></TD
 ></TR
 ><TR
@@ -453,6 +462,7 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >Name and type may be character sequences of any <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
 TARGET="_top"
@@ -461,29 +471,37 @@ CLASS="function"
 >LENGTH</TT
 ></A
 >
- (consisting of printing ASCII characters, except <TT
+ (consisting of printing <A
+HREF="http://www.cplusplus.com/doc/papers/ascii.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>ASCII</B
+></A
+> characters, except <TT
 CLASS="filename"
->/</TT
+>"/"</TT
 >,
  <TT
 CLASS="filename"
->\</TT
+>"\"</TT
 >, <TT
 CLASS="filename"
->:</TT
+>":"</TT
 >).</P
 ></DD
 ><DT
 >Platform dependent: <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >see <A
 HREF="filenames.html#pathnames-externally-acorn"
 >above</A
@@ -493,6 +511,7 @@ HREF="filenames.html#pathnames-externally-acorn"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_namestrin_h-namestring.html"
 TARGET="_top"
@@ -501,7 +520,7 @@ CLASS="function"
 >NAMESTRING</TT
 ></A
 > has an optional flag argument: <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_namestrin_h-namestring.html"
 TARGET="_top"
@@ -534,28 +553,29 @@ CLASS="variablelist"
 >Platform dependent:  <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >
    platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_user-homedir-pathname.html"
 TARGET="_top"
@@ -570,20 +590,21 @@ CLASS="function"
 >Platform dependent: <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >If you really need that function, you might define it
     like this:
 <TABLE
@@ -594,9 +615,22 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13;(defun user-homedir-pathname (&#38;optional host)
+>&#13;(defun user-homedir-pathname (<A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> host)
   (declare (ignore host))
-  (or (system::getenv "HOME") "\\"))
+  (or (<A
+HREF="getenv.html"
+><TT
+CLASS="function"
+>EXT:GETENV</TT
+></A
+> "HOME") "\\"))
 </PRE
 ></TD
 ></TR
@@ -611,6 +645,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -622,7 +657,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="filenames.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -630,6 +666,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -638,7 +675,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="log-path.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -658,6 +696,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="filenames.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -673,6 +712,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

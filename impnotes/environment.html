@@ -6,8 +6,10 @@
    [CLHS-25]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="system.html"><LINK
 REL="NEXT"
 TITLE="The Environment Dictionary
    [CLHS-25.2]"
-HREF="environment-dict.html"></HEAD
+HREF="environment-dict.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="system.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="environment-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,28 +99,54 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="environment"
->Environment
+NAME="environment">Chapter 25. Environment
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-25.html"
 TARGET="_top"
 >[CLHS-25]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="debugger"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>25.1. <A
+HREF="environment.html#debugger"
 >Debugging Utilities
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-2.html"
 TARGET="_top"
 >[CLHS-25.1.2]</A
 ></A
+></DT
+><DT
+>25.2. <A
+HREF="environment-dict.html"
+>The Environment Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_envir_t_dictionary.html"
+TARGET="_top"
+>[CLHS-25.2]</A
+></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="debugger">25.1. Debugging Utilities
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-2.html"
+TARGET="_top"
+>[CLHS-25.1.2]</A
 ></H1
 ><P
+ALIGN="justify"
 >The debugger may be invoked through the functions
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_invoke-debugger.html"
@@ -174,17 +215,12 @@ TARGET="_top"
 ><DIV
 CLASS="table"
 ><A
-NAME="debugger-main-deb-step"
-></A
-><P
+NAME="debugger-main-deb-step"><P
 ><B
->Table 1. Commands common to the main loop, the debugger and the stepper</B
+>Table 25-1. Commands common to the main loop, the debugger and the stepper</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -229,17 +265,12 @@ VALIGN="MIDDLE"
 ><DIV
 CLASS="table"
 ><A
-NAME="debugger-deb-step"
-></A
-><P
+NAME="debugger-deb-step"><P
 ><B
->Table 2. Commands common to the debugger and the stepper</B
+>Table 25-2. Commands common to the debugger and the stepper</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -306,10 +337,35 @@ TARGET="_top"
 >read-eval-print loop</A
 ></TD
 ></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><B
+CLASS="command"
+>Quit</B
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><B
+CLASS="command"
+>:q</B
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>quit to the top <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-1.html"
+TARGET="_top"
+>read-eval-print loop</A
+></TD
+></TR
 ></TBODY
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >The stack is organized into frames and other stack elements.
  Usually every invocation of an interpreted function and every
  evaluation of an interpreted form corresponds to one stack frame.
@@ -344,6 +400,7 @@ CLASS="function"
 >
  produce special kinds of stack frames.</P
 ><P
+ALIGN="justify"
 >In a break loop there is a current stack frame, which is initially
  the most recent stack frame but can be moved using the debugger commands
  <B
@@ -354,29 +411,26 @@ CLASS="command"
 >Down</B
 >.</P
 ><P
->Evaluation of forms in a break loop occurs in the lexical environment
- of the current stack frame but in the dynamic environment of the
- debugger's caller.  This means that to inspect or modify a lexical
- variable all you have to do is to move to the current stack frame just
- below the frame that corresponds to the form or the function call that
- binds that variable.</P
+ALIGN="justify"
+>Evaluation of forms in a break loop occurs in the lexical
+ environment of the current stack frame but in the dynamic environment
+ of the debugger's caller.  This means that to inspect or modify a
+ lexical variable all you have to do is to move to the current stack
+ frame just below the frame that corresponds to the form or the function
+ call that binds that variable.</P
 ><P
+ALIGN="justify"
 >There is a current "stack mode" which defines in how much
  detail the stack is shown by the stack related debugger commands.</P
 ><DIV
 CLASS="table"
 ><A
-NAME="debugger-deb-step-1"
-></A
-><P
+NAME="debugger-deb-step-1"><P
 ><B
->Table 3. Commands common to the debugger and the stepper</B
+>Table 25-3. Commands common to the debugger and the stepper</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -823,6 +877,7 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >If the current stack frame is an <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_eval.html"
 TARGET="_top"
@@ -842,11 +897,9 @@ CLASS="function"
 ><DIV
 CLASS="table"
 ><A
-NAME="debugger-eval-apply"
-></A
-><P
+NAME="debugger-eval-apply"><P
 ><B
->Table 4. <A
+>Table 25-4. Commands specific to <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_eval.html"
 TARGET="_top"
 ><TT
@@ -860,13 +913,10 @@ TARGET="_top"
 CLASS="function"
 >APPLY</TT
 ></A
->-specific commands</B
+></B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -982,17 +1032,12 @@ VALIGN="MIDDLE"
 ><DIV
 CLASS="table"
 ><A
-NAME="debugger-deb"
-></A
-><P
+NAME="debugger-deb"><P
 ><B
->Table 5. Commands specific to the debugger</B
+>Table 25-5. Commands specific to the debugger</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1037,17 +1082,12 @@ VALIGN="MIDDLE"
 ><DIV
 CLASS="table"
 ><A
-NAME="debugger-step"
-></A
-><P
+NAME="debugger-step"><P
 ><B
->Table 6. Commands specific to the stepper</B
+>Table 25-6. Commands specific to the stepper</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1154,9 +1194,10 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >The stepper is usually used like this: If some form returns a
  strange value or results in an error, call <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_step.html"
 TARGET="_top"
@@ -1201,6 +1242,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1212,7 +1254,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="system.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1220,6 +1263,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1228,7 +1272,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="environment-dict.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1248,6 +1293,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1263,6 +1309,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

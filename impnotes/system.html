@@ -6,8 +6,10 @@
    [CLHS-24]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -20,7 +22,10 @@ HREF="read-byte.html"><LINK
 REL="NEXT"
 TITLE="Environment
    [CLHS-25]"
-HREF="environment.html"></HEAD
+HREF="environment.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -31,6 +36,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -50,7 +56,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -59,7 +72,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="read-byte.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -72,7 +86,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="environment.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -83,28 +98,44 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="system"
->System Construction
+NAME="system">Chapter 24. System Construction
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-24.html"
 TARGET="_top"
 >[CLHS-24]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="system-dict"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>24.1. <A
+HREF="system.html#system-dict"
 >The System Construction Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_syste_n_dictionary.html"
 TARGET="_top"
 >[CLHS-24.2]</A
 ></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="system-dict">24.1. The System Construction Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_syste_n_dictionary.html"
+TARGET="_top"
+>[CLHS-24.2]</A
 ></H1
 ><P
+ALIGN="justify"
 >The compiler can be called not only by the functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_compile.html"
 TARGET="_top"
@@ -130,7 +161,7 @@ CLASS="function"
 >, but also by the declaration <A
 HREF="declarations.html#compile-decl"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(compile)</TT
 ></A
 >.</P
@@ -139,19 +170,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="compilefile"
->Function <A
+NAME="compilefile">24.1.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >COMPILE-FILE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
 TARGET="_top"
@@ -172,8 +202,8 @@ TARGET="_top"
 CLASS="literal"
 >&#38;KEY</TT
 ></A
-> :output-file
-          :listing <TT
+> :OUTPUT-FILE
+          :LISTING <TT
 CLASS="constant"
 >:WARNINGS</TT
 > <TT
@@ -199,16 +229,18 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >should be a pathname/string/symbol.
  </P
 ></DD
 ><DT
 ><TT
 CLASS="constant"
->:output-file</TT
+>:OUTPUT-FILE</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >should be <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -237,10 +269,11 @@ CLASS="constant"
 ><DT
 ><TT
 CLASS="constant"
->:listing</TT
+>:LISTING</TT
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >should be <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -273,6 +306,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >specifies whether warnings should also appear on the
  screen.</P
 ></DD
@@ -283,6 +317,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >specifies whether error messages should also appear
  on the screen.</P
 ></DD
@@ -293,6 +328,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >specifies whether an indication which forms are
  being compiled should appear on the screen.
  </P
@@ -300,12 +336,13 @@ CLASS="constant"
 ></DL
 ></DIV
 ><P
->The variables <I
+ALIGN="justify"
+>The variables <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
->custom:*compile-warnings*</TT
-></I
+>CUSTOM:*COMPILE-WARNINGS*</TT
+></B
 >,
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stcompile_le-verbosest.html"
@@ -340,17 +377,12 @@ CLASS="filename"
 ><DIV
 CLASS="table"
 ><A
-NAME="compile-file-new-files-table"
-></A
-><P
+NAME="compile-file-new-files-table"><P
 ><B
->Table 1. </B
+>Table 24-1. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -383,7 +415,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >only if <TT
 CLASS="constant"
->:output-file</TT
+>:OUTPUT-FILE</TT
 > is not <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -421,7 +453,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >only if <TT
 CLASS="constant"
->:output-file</TT
+>:OUTPUT-FILE</TT
 > is not <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -470,7 +502,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >only if <TT
 CLASS="constant"
->:listing</TT
+>:LISTING</TT
 > is not <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -484,7 +516,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->#p".lis"</TT
+>#P".lis"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -508,7 +540,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >only if <TT
 CLASS="constant"
->:output-file</TT
+>:OUTPUT-FILE</TT
 > is not <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -522,7 +554,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="filename"
->#p".c"</TT
+>#P".c"</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -533,26 +565,78 @@ VALIGN="MIDDLE"
 ></TBODY
 ></TABLE
 ></DIV
+><DIV
+CLASS="warning"
+><P
+></P
+><TABLE
+CLASS="warning"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+ALIGN="justify"
+>If you have two files in the same directory
+- <TT
+CLASS="filename"
+>#P"foo.lisp"</TT
+> and <TT
+CLASS="filename"
+>#P"foo.c"</TT
+>,
+and you compile the first file with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>, the second file will be
+<I
+CLASS="emphasis"
+>clobbered</I
+> if you have any <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> forms in
+the first one!</P
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="compile-file-path"
->Function <A
+NAME="compile-file-path">24.1.2. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file-pathname.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >COMPILE-FILE-PATHNAME</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The default for the <TT
 CLASS="constant"
->:output-file</TT
+>:OUTPUT-FILE</TT
 > argument is
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
@@ -571,17 +655,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="require"
->Function <A
+NAME="require">24.1.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >REQUIRE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
 TARGET="_top"
@@ -593,8 +676,9 @@ CLASS="function"
  pathname or a list of pathnames: files to be loaded if the required
  module is not already loaded.</P
 ><P
+ALIGN="justify"
 >At compile time, <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
 TARGET="_top"
@@ -602,7 +686,10 @@ TARGET="_top"
 CLASS="function"
 >REQUIRE</TT
 ></A
-> "foo")</TT
+> <TT
+CLASS="filename"
+>#P"foo"</TT
+>)</TT
 >
 forms are treated specially:  <A
 HREF="system.html#load-paths"
@@ -610,17 +697,16 @@ HREF="system.html#load-paths"
 CLASS="varname"
 >CUSTOM:*LOAD-PATHS*</TT
 ></A
-> is searched
-for <TT
+> is searched for
+<TT
 CLASS="filename"
->"foo.lisp"</TT
+>#P"foo.lisp"</TT
 > <I
 CLASS="emphasis"
 >and</I
->
-<TT
+> <TT
 CLASS="filename"
->"foo.lib"</TT
+>#P"foo.lib"</TT
 >.
 If the latest such file is a <TT
 CLASS="filename"
@@ -674,11 +760,11 @@ CLASS="function"
 > or to load the required files in the
 makefiles: if you have two files, <TT
 CLASS="filename"
->"foo.lisp"</TT
+>#P"foo.lisp"</TT
 >
 and <TT
 CLASS="filename"
->"bar.lisp"</TT
+>#P"bar.lisp"</TT
 >, and the latter requires the
 former, you can write in your <TT
 CLASS="filename"
@@ -730,7 +816,9 @@ CLASS="programlisting"
 ></TR
 ></TABLE
 >
-Thus, you do not need to <A
+Thus, you do not need to <TT
+CLASS="sexp"
+>(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
 ><TT
@@ -739,28 +827,33 @@ CLASS="function"
 ></A
 > <TT
 CLASS="filename"
->"foo"</TT
+>#P"foo"</TT
+>)</TT
 >
-in order to <A
+in order to <TT
+CLASS="sexp"
+>(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >COMPILE-FILE</TT
 ></A
-> <TT
+>
+ <TT
 CLASS="filename"
->"bar.lisp"</TT
+>#P"bar.lisp"</TT
+>)</TT
 >.
 If memory is tight, and if <TT
 CLASS="filename"
->"foo.lisp"</TT
+>#P"foo.lisp"</TT
 > contains
 only a few inline functions, macros, constants or variables,
 this is a space and time saver.
 If <TT
 CLASS="filename"
->"foo.lisp"</TT
+>#P"foo.lisp"</TT
 > does a lot of initializations or side
 effects when being loaded, this is important as well.
 </P
@@ -770,17 +863,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="loadfile"
->Function <A
+NAME="loadfile">24.1.4. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >LOAD</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
@@ -788,16 +880,21 @@ TARGET="_top"
 CLASS="function"
 >LOAD</TT
 ></A
-> has two additional keywords <TT
+> has three additional keywords <TT
 CLASS="constant"
 >:ECHO</TT
-> and <TT
+>, <TT
 CLASS="constant"
 >:COMPILING</TT
+>, and
+ <TT
+CLASS="constant"
+>:EXTRA-FILE-TYPES</TT
 >.</P
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
@@ -833,6 +930,10 @@ CLASS="constant"
 > <TT
 CLASS="constant"
 >:COMPILING</TT
+>
+ <TT
+CLASS="constant"
+>:EXTRA-FILE-TYPES</TT
 >)</TT
 ></P
 ><P
@@ -854,6 +955,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >causes <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
@@ -893,6 +995,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >causes <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
@@ -932,6 +1035,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >causes the input from the file to be echoed to
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
@@ -942,12 +1046,12 @@ CLASS="varname"
 ></A
 > (normally to the screen).  Should
   there be an error in the file, you can see at one glance where it is.
-  The default is <I
+  The default is <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
->custom:*load-echo*</TT
-></I
+>CUSTOM:*LOAD-ECHO*</TT
+></B
 >, which is
   initially <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
@@ -972,20 +1076,21 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >causes each form read to be compiled on the fly.
   The compiled code is executed at once and - in contrast to <A
 HREF="system.html#compilefile"
 ><TT
 CLASS="function"
->compile-file</TT
+>COMPILE-FILE</TT
 ></A
 > - not
-  written to a file.  The default is <I
+  written to a file.  The default is <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
->custom:*load-compiling*</TT
-></I
+>CUSTOM:*LOAD-COMPILING*</TT
+></B
 >,
   which is initially <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
@@ -994,24 +1099,97 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
->.
-</P
+>.</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:EXTRA-FILE-TYPES</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>Specifies the additional file types considered for
+  loading, in addition to <B
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>CUSTOM:*SOURCE-FILE-TYPES*</TT
+></B
+>
+  (which is initially <TT
+CLASS="sexp"
+>("lisp" "lsp" "cl")</TT
+>)
+  and <B
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>CUSTOM:*COMPILED-FILE-TYPES*</TT
+></B
+>
+  (which is initially <TT
+CLASS="sexp"
+>("fas")</TT
+>).
+  </P
+><P
+ALIGN="justify"
+>When <TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+> does not spefify a unique file
+  (e.g., <TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+> is <TT
+CLASS="filename"
+>#P"foo"</TT
+> and both <TT
+CLASS="filename"
+>#P"foo.lisp"</TT
+>
+  and <TT
+CLASS="filename"
+>#P"foo.fas"</TT
+> are found in the
+  <A
+HREF="system.html#load-paths"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-PATHS*</TT
+></A
+>), then the <I
+CLASS="emphasis"
+>newest</I
+> file is loaded.
+ </P
 ></DD
 ></DL
 ></DIV
 ><DIV
 CLASS="formalpara"
 ><P
-><B
-><B
 ><A
+NAME="load-paths"><B
+>Variable <A
 HREF="system.html#load-paths"
 ><TT
 CLASS="varname"
 >CUSTOM:*LOAD-PATHS*</TT
 ></A
 >. </B
-></B
 >The variable <A
 HREF="system.html#load-paths"
 ><TT
@@ -1057,17 +1235,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="features"
->Variable <A
+NAME="features">24.1.5. Variable <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html"
 TARGET="_top"
 ><TT
 CLASS="varname"
 >*FEATURES*</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The variable <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html"
 TARGET="_top"
@@ -1079,17 +1256,12 @@ CLASS="varname"
 <DIV
 CLASS="table"
 ><A
-NAME="features-table"
-></A
-><P
+NAME="features-table"><P
 ><B
->Table 2. </B
+>Table 24-2. </B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1273,16 +1445,16 @@ CLASS="emphasis"
 >(Platform dependent: many <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms
      only)</I
@@ -1321,9 +1493,9 @@ CLASS="emphasis"
 >(Platform dependent: most <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms
      only)</I
@@ -1461,12 +1633,12 @@ CLASS="replaceable"
 >hardware</I
 ></TT
 > = PC (clone) and
-             <TT
+  <TT
 CLASS="replaceable"
 ><I
 >operating system</I
 ></TT
-> = Win32 (Windows 95/98/NT/Me/2000)</TD
+> = Win32 (Windows 95/98/NT/Me/2000/XP)</TD
 ></TR
 ><TR
 ><TD
@@ -1509,6 +1681,51 @@ CLASS="replaceable"
 ></TT
 > is irrelevant!)</TD
 ></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:CYGWIN</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> is using the <A
+HREF="http://cygwin.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Cygwin</B
+></A
+> <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> compatibility layer on
+  top of <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> (in that case <TT
+CLASS="constant"
+>:UNIX</TT
+> is also present)</TD
+></TR
 ></TBODY
 ></TABLE
 ></DIV
@@ -1521,6 +1738,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1532,7 +1750,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="read-byte.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1540,6 +1759,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1548,7 +1768,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="environment.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1570,6 +1791,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1585,6 +1807,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

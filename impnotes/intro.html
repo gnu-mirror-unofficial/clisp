@@ -6,8 +6,10 @@
   [CLHS-1]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -20,7 +22,10 @@ HREF="clhs-chapters.html"><LINK
 REL="NEXT"
 TITLE="Error Terminology
   [CLHS-1.4.2]"
-HREF="error-terms.html"></HEAD
+HREF="error-terms.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -31,6 +36,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -50,7 +56,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -59,7 +72,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="clhs-chapters.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -72,7 +86,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="error-terms.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -83,34 +98,87 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="intro"
->Introduction
+NAME="intro">Chapter 1. Introduction
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-1.html"
 TARGET="_top"
 >[CLHS-1]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="spec-symb"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>1.1. <A
+HREF="intro.html#spec-symb"
 >Special Symbols
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-1-3.html"
 TARGET="_top"
 >[CLHS-1.4.1.3]</A
 ></A
+></DT
+><DT
+>1.2. <A
+HREF="error-terms.html"
+>Error Terminology
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-2.html"
+TARGET="_top"
+>[CLHS-1.4.2]</A
+></A
+></DT
+><DT
+>1.3. <A
+HREF="class-prec.html"
+>Class Precedence Lists
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-4-5.html"
+TARGET="_top"
+>[CLHS-1.4.4.5]</A
+></A
+></DT
+><DT
+>1.4. <A
+HREF="cl-symb.html"
+>Symbols in the Package <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+>
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-9.html"
+TARGET="_top"
+>[CLHS-1.9]</A
+></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="spec-symb">1.1. Special Symbols
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-1-3.html"
+TARGET="_top"
+>[CLHS-1.4.1.3]</A
 ></H1
 ><P
+ALIGN="justify"
 >The final delimiter of an interactive stream: On <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, the user
  has to type <B
@@ -123,16 +191,16 @@ CLASS="keysym"
  beginning of a line. On <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 > or <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >, the user has to type
  <B
@@ -174,6 +242,7 @@ CLASS="literal"
 > state,
  thus making it available for further input.</P
 ><P
+ALIGN="justify"
 >A newline character can be entered by the user by pressing the
  <B
 CLASS="keycap"
@@ -190,6 +259,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -201,7 +271,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -209,6 +280,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -217,7 +289,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="error-terms.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -225,19 +298,23 @@ HREF="error-terms.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Chapters or the [<SPAN
+>Chapters or the <A
+HREF="references.html#CLHS"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLHS"
 >Common Lisp HyperSpec</A
 ></SPAN
->]</TD
+>]</A
+></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -253,6 +330,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

@@ -5,8 +5,10 @@
 >The CLISP bytecode specification</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -14,11 +16,14 @@ REL="UP"
 TITLE="Internals of the CLISP Implementation"
 HREF="internals.html"><LINK
 REL="PREVIOUS"
-TITLE="Foreign Pointers"
-HREF="foreign-pointers.html"><LINK
+TITLE="Recompilation."
+HREF="recompile.html"><LINK
 REL="NEXT"
 TITLE="The virtual machine"
-HREF="vm.html"></HEAD
+HREF="vm.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -29,6 +34,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,7 +54,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -56,8 +69,9 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="foreign-pointers.html"
->&#60;&#60;&#60; Previous</A
+HREF="recompile.html"
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -70,7 +84,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="vm.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -81,16 +96,48 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="bytecode"
->The <A
+NAME="bytecode">Chapter 33. The <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
-> bytecode specification</A
-></H1
+> bytecode specification</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>33.1. <A
+HREF="bytecode.html#byte-intro"
+>Introduction</A
+></DT
+><DT
+>33.2. <A
+HREF="vm.html"
+>The virtual machine</A
+></DT
+><DT
+>33.3. <A
+HREF="comp-fun.html"
+>The structure of compiled functions</A
+></DT
+><DT
+>33.4. <A
+HREF="intr-struct.html"
+>The general structure of the instructions</A
+></DT
+><DT
+>33.5. <A
+HREF="intr-set.html"
+>The instruction set</A
+></DT
+></DL
+></DIV
 ><FONT
 COLOR="RED"
 >Last modified: 19 September 1998.</FONT
@@ -99,10 +146,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="byte-intro"
->Introduction</A
-></H1
+NAME="byte-intro">33.1. Introduction</H1
 ><P
+ALIGN="justify"
 >The <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -133,6 +179,7 @@ of this approach, compared to native code compilation, are:
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >Bytecode compiled programs are a lot smaller than
   when compiled to native code.  This results in better use of CPU
   caches, and in less virtual memory paging. Users perceive this as good
@@ -140,11 +187,13 @@ of this approach, compared to native code compilation, are:
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Maximum execution speed (throughput in tight loops)
    is limited.</P
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Since no bytecode instructions are provided for
    "unsafe" operations (like unchecked array accesses, or "fast"
    <A
@@ -166,6 +215,7 @@ CLASS="function"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Execution speed of a program can easily be
    understood by looking at the output of the <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
@@ -181,6 +231,7 @@ CLASS="function"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >Needing to do no type inference, the compiler is
    pretty straightforward and fast.  As a consequence, the definition of
    <B
@@ -191,6 +242,7 @@ CLASS="command"
 ></LI
 ><LI
 ><P
+ALIGN="justify"
 >The compiler is independent from the hardware CPU.
    Different backends, one for each hardware CPU, are not needed.  As a
    consequence, the compiler is fairly small (and would have been easily
@@ -208,6 +260,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -218,8 +271,9 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="foreign-pointers.html"
->&#60;&#60;&#60; Previous</A
+HREF="recompile.html"
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -227,6 +281,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -235,7 +290,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="vm.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -243,13 +299,14 @@ HREF="vm.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Foreign Pointers</TD
+>Recompilation.</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
 HREF="internals.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -260,6 +317,45 @@ VALIGN="top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

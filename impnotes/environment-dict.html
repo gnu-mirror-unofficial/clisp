@@ -6,8 +6,10 @@
    [CLHS-25.2]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -22,7 +24,10 @@ HREF="environment.html"><LINK
 REL="NEXT"
 TITLE="Glossary
    [CLHS-26]"
-HREF="glossary.html"></HEAD
+HREF="glossary.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="section"
 BGCOLOR="#FFFFFF"
@@ -33,6 +38,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -52,7 +58,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -61,13 +74,14 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="environment.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Environment
+>Chapter 25. Environment
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-25.html"
 TARGET="_top"
@@ -79,7 +93,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="glossary.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -91,27 +106,23 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="environment-dict"
->The Environment Dictionary
+NAME="environment-dict">25.2. The Environment Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_envir_t_dictionary.html"
 TARGET="_top"
 >[CLHS-25.2]</A
-></A
 ></H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="disassemble"
->Function <A
+NAME="disassemble">25.2.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >DISASSEMBLE</TT
-></A
 ></A
 ></H2
 ><P
@@ -123,13 +134,14 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
 TARGET="_top"
@@ -162,16 +174,15 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="uncompile"
->Function <A
+NAME="uncompile">25.2.2. Function <A
 HREF="environment-dict.html#uncompile"
 ><TT
 CLASS="function"
 >EXT:UNCOMPILE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The function <A
 HREF="environment-dict.html#uncompile"
 ><TT
@@ -186,7 +197,7 @@ CLASS="function"
 >COMPILE</TT
 ></A
 >: <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="environment-dict.html#uncompile"
 ><TT
@@ -213,17 +224,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="documentation"
->Function <A
+NAME="documentation">25.2.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >DOCUMENTATION</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >No on-line documentation is available for the system functions
  (yet).  <A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
@@ -232,34 +242,39 @@ TARGET="_top"
 CLASS="function"
 >DOCUMENTATION</TT
 ></A
-> still has the [<SPAN
+> still has the <A
+HREF="references.html#CLtL1"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLtL1"
 >CLtL1</A
 ></SPAN
->] implementation.</P
+>]</A
+> implementation.</P
 ><DIV
 CLASS="formalpara"
 ><P
-><B
-><B
-><TT
+><A
+NAME="browser"><B
+>Function <TT
 CLASS="function"
->ext:clhs</TT
+>EXT:CLHS</TT
 >. </B
-></B
+><A
+HREF="references.html#CLHS"
 >[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLHS"
 >Common Lisp HyperSpec</A
 ></SPAN
->] access is provided via <TT
-CLASS="literal"
+>]</A
+> access is provided via <TT
+CLASS="sexp"
 >(<TT
 CLASS="function"
->ext:clhs</TT
+>EXT:CLHS</TT
 > <TT
 CLASS="replaceable"
 ><I
@@ -273,9 +288,12 @@ CLASS="literal"
 >&#38;KEY</TT
 ></A
 >
-  <TT
-CLASS="literal"
->:browser</TT
+  <A
+HREF="environment-dict.html#browser"
+><TT
+CLASS="constant"
+>:BROWSER</TT
+></A
 >)</TT
 >
   function, which uses your web browser.
@@ -287,7 +305,7 @@ CLASS="replaceable"
 > should be a valid
   keyword in the <TT
 CLASS="varname"
->custom:*browsers*</TT
+>CUSTOM:*BROWSERS*</TT
 > <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_a.html#association_list"
 TARGET="_top"
@@ -301,19 +319,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="trace"
->Macro <A
+NAME="trace">25.2.4. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >TRACE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
 TARGET="_top"
@@ -340,7 +357,7 @@ CLASS="replaceable"
 ></TT
 > should be either a symbol or
  a list <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="replaceable"
 ><I
@@ -404,6 +421,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >no trace output as long as <TT
 CLASS="replaceable"
 ><I
@@ -424,6 +442,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >invokes the stepper as soon as <TT
 CLASS="replaceable"
 ><I
@@ -444,6 +463,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >evaluates <TT
 CLASS="replaceable"
 ><I
@@ -464,6 +484,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >evaluates <TT
 CLASS="replaceable"
 ><I
@@ -484,6 +505,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >goes into the break loop before calling the
    function if <TT
 CLASS="replaceable"
@@ -504,6 +526,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >goes into the break loop after return from the
    function if <TT
 CLASS="replaceable"
@@ -524,6 +547,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >prints the values of <TT
 CLASS="replaceable"
 ><I
@@ -544,6 +568,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >prints the values of <TT
 CLASS="replaceable"
 ><I
@@ -564,6 +589,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >prints the values of <TT
 CLASS="replaceable"
 ><I
@@ -575,6 +601,7 @@ CLASS="replaceable"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >In all these forms you can access the following variables:
 <P
 ></P
@@ -588,6 +615,7 @@ CLASS="varname"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the function itself
   </P
 ></DD
@@ -598,6 +626,7 @@ CLASS="varname"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the arguments to the function
   </P
 ></DD
@@ -608,22 +637,22 @@ CLASS="varname"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >the function/macro call as form
   </P
 ></DD
 ><DT
 ><A
-NAME="trace-val"
-><A
+NAME="trace-val"><A
 HREF="environment-dict.html#trace-val"
 ><TT
 CLASS="varname"
 >EXT:*TRACE-VALUES*</TT
 ></A
-></A
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >after return from the function: the list of return
   values from the function call</P
 ></DD
@@ -640,6 +669,7 @@ CLASS="function"
 ></A
 >.</P
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
 TARGET="_top"
@@ -655,7 +685,7 @@ CLASS="function"
 >UNTRACE</TT
 ></A
 > are also applicable to functions <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -671,23 +701,60 @@ CLASS="replaceable"
 >)</TT
 > and to macros, but not to
  locally defined functions and macros.</P
+><DIV
+CLASS="formalpara"
+><P
+><B
+>Variable <TT
+CLASS="varname"
+>CUSTOM:*TRACE-INDENT*</TT
+>. </B
+>If you want the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRACE</TT
+></A
+> level to be indicated by the indentation
+in addition to the printed numbers,
+set <TT
+CLASS="varname"
+>CUSTOM:*TRACE-INDENT*</TT
+> to non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+Initially it is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> since many nested traced calls will easily
+exhaust the available line length.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="inspect"
->Function <A
+NAME="inspect">25.2.5. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >INSPECT</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
 TARGET="_top"
@@ -742,6 +809,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >The interaction is conducted via the <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
 TARGET="_top"
@@ -765,6 +833,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >A window in your Web browser (specified by the
    <A
 HREF="environment-dict.html#browser"
@@ -789,6 +858,7 @@ CLASS="classname"
 >, using the HTTP protocol.  You should be
    able to use all the standard browser features.</P
 ><P
+ALIGN="justify"
 >Since <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -812,6 +882,7 @@ CLASS="userinput"
 ></TT
 > link to terminate the session.</P
 ><P
+ALIGN="justify"
 >Please be aware though, that once you terminate an <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
 TARGET="_top"
@@ -846,16 +917,15 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="space"
->Macro <A
+NAME="space">25.2.6. Macro <A
 HREF="environment-dict.html#space"
 ><TT
 CLASS="function"
 >EXT:SPACE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The macro <A
 HREF="environment-dict.html#space"
 ><TT
@@ -870,7 +940,7 @@ CLASS="function"
 >TIME</TT
 ></A
 >: <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="environment-dict.html#space"
 ><TT
@@ -904,17 +974,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="room"
->Function <A
+NAME="room">25.2.7. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_room.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >ROOM</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_room.html"
 TARGET="_top"
@@ -929,12 +998,13 @@ HREF="gc.html"
 >garbage-collect</A
 >ion occurs.</P
 ><P
->The function <I
+ALIGN="justify"
+>The function <B
 CLASS="emphasis"
 ><TT
 CLASS="function"
 >EXT:GC</TT
-></I
+></B
 > starts a
  global <A
 HREF="gc.html"
@@ -954,17 +1024,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="time"
->Macro <A
+NAME="time">25.2.8. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >TIME</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The timing data printed by the macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
 TARGET="_top"
@@ -991,17 +1060,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="ed"
->Function <A
+NAME="ed">25.2.9. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_ed.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >ED</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_ed.html"
 TARGET="_top"
@@ -1010,12 +1078,12 @@ CLASS="function"
 >ED</TT
 ></A
 > calls the external editor specified by the
- variable <I
+ variable <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
 >CUSTOM:*EDITOR*</TT
-></I
+></B
 > (see
  <TT
 CLASS="filename"
@@ -1030,9 +1098,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="clock"
->Clock Time</A
-></H2
+NAME="clock">25.2.10. Clock Time</H2
 ><P
 ></P
 ><DIV
@@ -1042,41 +1108,42 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >, <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >
    platforms only.</DT
 ><DD
 ><P
->The variable <I
+ALIGN="justify"
+>The variable <B
 CLASS="emphasis"
 ><TT
 CLASS="varname"
 >CUSTOM:*DEFAULT-TIME-ZONE*</TT
-></I
+></B
 >
    contains the default time zone used by <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_encode-universal-time.html"
@@ -1100,31 +1167,48 @@ CLASS="function"
 ></DL
 ></DIV
 ><P
+ALIGN="justify"
 >The <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#time_zone"
 TARGET="_top"
 >time
  zone</A
-> in a decoded time must not necessarily be an integer,
- but (as float or rational number) it should be a multiple of
- <TT
+> in a decoded time must not necessarily be an
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>, but (as <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOAT</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_rational.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIONAL</TT
+></A
+> number)
+ it should be a multiple of <TT
 CLASS="literal"
 >1/3600</TT
 >.</P
 ><DIV
 CLASS="table"
 ><A
-NAME="internal-time-units-table"
-></A
-><P
+NAME="internal-time-units-table"><P
 ><B
->Table 7. Platform dependent</B
+>Table 25-7. Platform dependent</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1138,23 +1222,23 @@ VALIGN="MIDDLE"
 ><A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 ></TH
 ><TH
@@ -1163,9 +1247,9 @@ VALIGN="MIDDLE"
 ><A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 ></TH
 ><TH
@@ -1174,9 +1258,9 @@ VALIGN="MIDDLE"
 ><A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 ></TH
 ><TH
@@ -1185,9 +1269,9 @@ VALIGN="MIDDLE"
 ><A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 ></TH
 ></TR
@@ -1226,6 +1310,7 @@ VALIGN="MIDDLE"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_get-internal-run-time.html"
 TARGET="_top"
@@ -1248,9 +1333,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="machine"
->Machine</A
-></H2
+NAME="machine">25.2.11. Machine</H2
 ><P
 ></P
 ><DIV
@@ -1260,20 +1343,21 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_short-sit_ng-site-name.html"
 TARGET="_top"
@@ -1299,35 +1383,36 @@ CLASS="filename"
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >, <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >
     platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_machine-type.html"
 TARGET="_top"
@@ -1379,8 +1464,7 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="apropos"
->Functions <A
+NAME="apropos">25.2.12. Functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_aproposcm_apropos-list.html"
 TARGET="_top"
 ><TT
@@ -1394,9 +1478,9 @@ TARGET="_top"
 CLASS="function"
 >APROPOS-LIST</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >The search performed by <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_aproposcm_apropos-list.html"
 TARGET="_top"
@@ -1419,17 +1503,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="dribble"
->Function <A
+NAME="dribble">25.2.13. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_dribble.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >DRIBBLE</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 >If <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_dribble.html"
 TARGET="_top"
@@ -1446,17 +1529,16 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="version"
->Function <A
+NAME="version">25.2.14. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >LISP-IMPLEMENTATION-VERSION</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html"
 TARGET="_top"
@@ -1505,6 +1587,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1516,7 +1599,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="environment.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1524,6 +1608,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1532,7 +1617,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="glossary.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -1552,6 +1638,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="environment.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -1567,6 +1654,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

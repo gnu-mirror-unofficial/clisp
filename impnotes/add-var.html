@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Functions on characters</TITLE
+>Adding a built-in variable.</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
@@ -13,16 +13,14 @@ REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
 REL="UP"
-TITLE="Characters
-   [CLHS-13]"
-HREF="characters.html"><LINK
+TITLE="Extending CLISP."
+HREF="extend.html"><LINK
 REL="PREVIOUS"
-TITLE="The Characters Dictionary
-   [CLHS-13.2]"
-HREF="char-dict.html"><LINK
+TITLE="Extending CLISP."
+HREF="extend.html"><LINK
 REL="NEXT"
-TITLE="Platform-Dependent Characters"
-HREF="char-platform-dep.html"><LINK
+TITLE="Recompilation."
+HREF="recompile.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -71,7 +69,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="char-dict.html"
+HREF="extend.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -79,18 +77,20 @@ ACCESSKEY="P"
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Chapter 13. Characters
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
+>Chapter 32. Extending <A
+HREF="http://clisp.cons.org"
 TARGET="_top"
->[CLHS-13]</A
-></TD
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="char-platform-dep.html"
+HREF="recompile.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -104,46 +104,66 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="char-width">13.13. Functions on characters</H1
-><DIV
-CLASS="formalpara"
+NAME="add-var">32.2. Adding a built-in variable.</H1
 ><P
+ALIGN="justify"
+>If you must be able to access the variable in the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
 ><B
->Function
-  <TT
-CLASS="sexp"
->(<A
-HREF="char-width.html"
-><TT
-CLASS="function"
->EXT:CHAR-WIDTH</TT
+CLASS="command"
+>C</B
 ></A
-> <TT
-CLASS="replaceable"
-><I
->char</I
-></TT
->)</TT
->. </B
->returns the number of screen columns occupied by <TT
-CLASS="replaceable"
-><I
->char</I
-></TT
->.
- This is 0 for non-spacing characters
-  (such as control characters and many combining characters),
- 2 for double-width East Asian characters,
- and 1 for all other characters.
- See also function <A
-HREF="strings.html#string-width"
-><TT
-CLASS="function"
->EXT:STRING-WIDTH</TT
+> code,
+ follow these steps:
+ <P
+></P
+><UL
+><LI
+><P
+ALIGN="justify"
+>declare the variable name
+    in <TT
+CLASS="filename"
+>#P"constsym.d"</TT
+> in the appropriate package
+    (probably <A
+HREF="customize.html"
+><SPAN
+CLASS="QUOTE"
+>"CUSTOM"</SPAN
 ></A
->.
+>, if there is no specific package);
+  </P
+></LI
+><LI
+><P
+ALIGN="justify"
+>add a <TT
+CLASS="function"
+>define_variable()</TT
+> call
+    in function <TT
+CLASS="function"
+>init_symbol_values()</TT
+>
+    in file <TT
+CLASS="filename"
+>#P"spvw.d"</TT
+>;</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>export your variable name from the appropriate
+    package in file <TT
+CLASS="filename"
+>#P"init.lisp"</TT
+>;
 </P
-></DIV
+></LI
+></UL
+></P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -161,7 +181,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="char-dict.html"
+HREF="extend.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -179,7 +199,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="char-platform-dep.html"
+HREF="recompile.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -189,18 +209,20 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->The Characters Dictionary
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_the_chara_s_dictionary.html"
+>Extending <A
+HREF="http://clisp.cons.org"
 TARGET="_top"
->[CLHS-13.2]</A
-></TD
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="characters.html"
+HREF="extend.html"
 ACCESSKEY="U"
 >Up</A
 ></TD
@@ -208,7 +230,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Platform-Dependent Characters</TD
+>Recompilation.</TD
 ></TR
 ></TABLE
 ></DIV

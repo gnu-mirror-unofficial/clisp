@@ -6,8 +6,10 @@
    [CLHS-20]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="filename-dict.html"><LINK
 REL="NEXT"
 TITLE="Streams
    [CLHS-21]"
-HREF="streams.html"></HEAD
+HREF="streams.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="filename-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="streams.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,33 +99,47 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="files"
->Files
+NAME="files">Chapter 20. Files
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-20.html"
 TARGET="_top"
 >[CLHS-20]</A
-></A
 ></H1
 ><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="file-dict"
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>20.1. <A
+HREF="files.html#file-dict"
 >The Files Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_files_dictionary.html"
 TARGET="_top"
 >[CLHS-20.2]</A
 ></A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="file-dict">20.1. The Files Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_files_dictionary.html"
+TARGET="_top"
+>[CLHS-20.2]</A
 ></H1
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_rename-file.html"
 TARGET="_top"
 ><TT
@@ -118,7 +147,6 @@ CLASS="function"
 >RENAME-FILE</TT
 ></A
 >. </B
-></B
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_rename-file.html"
 TARGET="_top"
@@ -133,8 +161,7 @@ CLASS="function"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_probe-file.html"
 TARGET="_top"
 ><TT
@@ -142,7 +169,6 @@ CLASS="function"
 >PROBE-FILE</TT
 ></A
 >. </B
-></B
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_probe-file.html"
 TARGET="_top"
@@ -171,8 +197,7 @@ CLASS="function"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><A
+>Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_file-author.html"
 TARGET="_top"
 ><TT
@@ -180,7 +205,6 @@ CLASS="function"
 >FILE-AUTHOR</TT
 ></A
 >. </B
-></B
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_file-author.html"
 TARGET="_top"
@@ -234,18 +258,17 @@ CLASS="emphasis"
 ><DIV
 CLASS="formalpara"
 ><P
-><B
-><B
 ><A
+NAME="probe-dir"><B
+>Function <A
 HREF="files.html#probe-dir"
 ><TT
 CLASS="function"
 >EXT:PROBE-DIRECTORY</TT
 ></A
 >. </B
-></B
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="files.html#probe-dir"
 ><TT
@@ -292,19 +315,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="dir"
->Function <A
+NAME="dir">20.1.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >DIRECTORY</TT
 ></A
-></A
 ></H2
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
 TARGET="_top"
@@ -339,18 +361,51 @@ CLASS="literal"
 ><UL
 ><LI
 ><P
+ALIGN="justify"
 >If <TT
 CLASS="replaceable"
 ><I
 >pathname</I
 ></TT
 > contains no name or type component, a
-  list of all matching directories is produced.</P
+  list of all matching directories is produced.
+  E.g., <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+> "/etc/*/")</TT
+> lists
+  all subdirectories in the directory
+  <TT
+CLASS="filename"
+>#P"/etc/"</TT
+>.</P
 ></LI
 ><LI
 ><P
->Otherwise a list of all matching files is
-  returned. If the <TT
+ALIGN="justify"
+>Otherwise a list of all matching files is returned.
+  E.g., <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+> "/etc/*")</TT
+> lists all
+  regular files in the directory <TT
+CLASS="filename"
+>#P"/etc/"</TT
+>.
+  If the <TT
 CLASS="constant"
 >:full</TT
 > argument is non-<A
@@ -361,9 +416,9 @@ CLASS="constant"
 >NIL</TT
 ></A
 >,
-  this contains additional information: for each matching file you get a
+  additional information is returned: for each matching file you get a
   list of at least four elements <TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="replaceable"
 ><I
@@ -393,6 +448,86 @@ CLASS="replaceable"
 ></UL
 >
 
+If you want <I
+CLASS="emphasis"
+>all</I
+> the files <I
+CLASS="emphasis"
+>and</I
+>
+subdirectories in the current directory, you should use
+<TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NCONC</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+> "*/") (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+> "*"))</TT
+>.
+If you want all the files and subdirectories in all the subdirectories
+under the current directory
+(similar to the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/ls.html"
+TARGET="_top"
+><B
+CLASS="command"
+>ls</B
+></A
+> <TT
+CLASS="option"
+>-R</TT
+> <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> command),
+use <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NCONC</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+> "**/")
+ (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+> "**/*"))</TT
+>.
+
 
 <P
 ></P
@@ -403,13 +538,14 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >If the <TT
 CLASS="constant"
 >:circle</TT
@@ -427,22 +563,21 @@ CLASS="constant"
 ></DL
 ></DIV
 >
+
 </P
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Function <TT
 CLASS="function"
->ext:dir</TT
+>EXT:DIR</TT
 >. </B
-></B
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->ext:dir</TT
+>EXT:DIR</TT
 > <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -466,46 +601,74 @@ CLASS="function"
 ></A
 >, but displays the pathnames
  instead of returning them. <TT
-CLASS="literal"
->(ext:dir)</TT
+CLASS="sexp"
+>(EXT:DIR)</TT
 >
  shows the contents of the current directory.</P
 ></DIV
-><P
-></P
 ><DIV
-CLASS="variablelist"
+CLASS="formalpara"
 ><P
-><B
 ><A
+NAME="cd"><B
+>Function <A
 HREF="files.html#cd"
 ><TT
 CLASS="function"
 >EXT:CD</TT
 ></A
-></B
+>. </B
+><TT
+CLASS="sexp"
+>(<A
+HREF="files.html#cd"
+><TT
+CLASS="function"
+>EXT:CD</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>)</TT
+> sets it,
+ <TT
+CLASS="sexp"
+>(<A
+HREF="files.html#cd"
+><TT
+CLASS="function"
+>EXT:CD</TT
+></A
+>)</TT
+> returns it.
+<P
 ></P
+><DIV
+CLASS="variablelist"
 ><DL
 ><DT
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="files.html#cd"
 ><TT
@@ -525,15 +688,16 @@ CLASS="replaceable"
 >Platform dependent: <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 > platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="files.html#cd"
 ><TT
@@ -554,30 +718,31 @@ CLASS="replaceable"
 >Platform dependent: <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >
    platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="files.html#cd"
 ><TT
@@ -596,63 +761,25 @@ CLASS="replaceable"
 ></DD
 ></DL
 ></DIV
-><DIV
-CLASS="formalpara"
-><P
-><B
-><B
-><A
-HREF="files.html#cd"
-><TT
-CLASS="function"
->EXT:CD</TT
-></A
->. </B
-></B
-><TT
-CLASS="literal"
->(<A
-HREF="files.html#cd"
-><TT
-CLASS="function"
->EXT:CD</TT
-></A
-> <TT
-CLASS="replaceable"
-><I
->pathname</I
-></TT
->)</TT
-> sets it, <TT
-CLASS="literal"
->(<A
-HREF="files.html#cd"
-><TT
-CLASS="function"
->EXT:CD</TT
-></A
->)</TT
-> returns it.</P
+></P
 ></DIV
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Function <TT
 CLASS="function"
->ext:default-directory</TT
+>EXT:DEFAULT-DIRECTORY</TT
 >. </B
-></B
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->ext:default-directory</TT
+>EXT:DEFAULT-DIRECTORY</TT
 >)</TT
 > is
  equivalent to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="files.html#cd"
 ><TT
@@ -661,7 +788,7 @@ CLASS="function"
 ></A
 >)</TT
 >.  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
@@ -671,7 +798,7 @@ CLASS="function"
 ></A
 > (<TT
 CLASS="function"
->ext:default-directory</TT
+>EXT:DEFAULT-DIRECTORY</TT
 >)
  <TT
 CLASS="replaceable"
@@ -680,7 +807,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 > is equivalent to <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="files.html#cd"
 ><TT
@@ -700,17 +827,15 @@ CLASS="replaceable"
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Function <TT
 CLASS="function"
->ext:make-dir</TT
+>EXT:MAKE-DIR</TT
 >. </B
-></B
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->ext:make-dir</TT
+>EXT:MAKE-DIR</TT
 >
  <TT
 CLASS="replaceable"
@@ -718,24 +843,22 @@ CLASS="replaceable"
 >directory-pathname</I
 ></TT
 >)</TT
-> creates a new
- subdirectory.</P
+>
+ creates a new subdirectory.</P
 ></DIV
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><B
-><TT
+>Function <TT
 CLASS="function"
->ext:delete-dir</TT
+>EXT:DELETE-DIR</TT
 >. </B
-></B
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
->ext:delete-dir</TT
+>EXT:DELETE-DIR</TT
 >
  <TT
 CLASS="replaceable"
@@ -754,6 +877,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -765,7 +889,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="filename-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -773,6 +898,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -781,7 +907,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="streams.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -801,6 +928,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -816,6 +944,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >

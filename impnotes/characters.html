@@ -6,8 +6,10 @@
    [CLHS-13]</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
 REL="HOME"
 TITLE="Implementation Notes for GNU CLISP."
 HREF="impnotes-top.html"><LINK
@@ -21,7 +23,10 @@ HREF="num-dict.html"><LINK
 REL="NEXT"
 TITLE="Character Scripts
    [CLHS-13.1.2.1]"
-HREF="char-script.html"></HEAD
+HREF="char-script.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
 ><BODY
 CLASS="chapter"
 BGCOLOR="#FFFFFF"
@@ -32,6 +37,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -51,7 +57,14 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.</TH
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.30.</TH
 ></TR
 ><TR
 ><TD
@@ -60,7 +73,8 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="num-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -73,7 +87,8 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="char-script.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -84,17 +99,159 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="characters"
->Characters
+NAME="characters">Chapter 13. Characters
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
 TARGET="_top"
 >[CLHS-13]</A
-></A
 ></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>13.1. <A
+HREF="characters.html#input-char"
+>Attributes</A
+></DT
+><DT
+>13.2. <A
+HREF="char-script.html"
+>Character Scripts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-2-1.html"
+TARGET="_top"
+>[CLHS-13.1.2.1]</A
+></A
+></DT
+><DT
+>13.3. <A
+HREF="char-attrib.html"
+>Character Attributes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-3.html"
+TARGET="_top"
+>[CLHS-13.1.3]</A
+></A
+></DT
+><DT
+>13.4. <A
+HREF="graph-char.html"
+>Graphic Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-1.html"
+TARGET="_top"
+>[CLHS-13.1.4.1]</A
+></A
+></DT
+><DT
+>13.5. <A
+HREF="alpha-char.html"
+>Alphabetic Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-2.html"
+TARGET="_top"
+>[CLHS-13.1.4.2]</A
+></A
+></DT
+><DT
+>13.6. <A
+HREF="char-ext.html"
+>Case of Implementation-Defined Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-3-4.html"
+TARGET="_top"
+>[CLHS-13.1.4.3.4]</A
+></A
+></DT
+><DT
+>13.7. <A
+HREF="num-char.html"
+>Numeric Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-4.html"
+TARGET="_top"
+>[CLHS-13.1.4.4]</A
+></A
+></DT
+><DT
+>13.8. <A
+HREF="char-ord.html"
+>Ordering of Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-6.html"
+TARGET="_top"
+>[CLHS-13.1.6]</A
+></A
+></DT
+><DT
+>13.9. <A
+HREF="clhs-newline.html"
+>Treatment of Newline during Input and Output
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-8.html"
+TARGET="_top"
+>[CLHS-13.1.8]</A
+></A
+></DT
+><DT
+>13.10. <A
+HREF="char-int.html"
+>Character Encodings
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-9.html"
+TARGET="_top"
+>[CLHS-13.1.9]</A
+></A
+></DT
+><DT
+>13.11. <A
+HREF="script-ext.html"
+>Documentation
+   of Implementation-Defined Scripts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-10.html"
+TARGET="_top"
+>[CLHS-13.1.10]</A
+></A
+></DT
+><DT
+>13.12. <A
+HREF="char-dict.html"
+>The Characters Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_chara_s_dictionary.html"
+TARGET="_top"
+>[CLHS-13.2]</A
+></A
+></DT
+><DT
+>13.13. <A
+HREF="char-width.html"
+>Functions on characters</A
+></DT
+><DT
+>13.14. <A
+HREF="char-platform-dep.html"
+>Platform-Dependent Characters</A
+></DT
+><DT
+>13.15. <A
+HREF="char-bits.html"
+>Obsolete Constants</A
+></DT
+></DL
+></DIV
 ><P
->The characters are ordered according to a superset of the ASCII
-encoding.</P
+ALIGN="justify"
+>The characters are ordered according to a superset of the
+ <A
+HREF="encoding.html#charset-ASCII"
+>ASCII character set</A
+>.</P
 ><P
 ></P
 ><DIV
@@ -109,19 +266,20 @@ CLASS="command"
 >CLISP</B
 ></A
 > built
-  <I
+  <B
 CLASS="emphasis"
->with</I
+>with</B
 > the compile-time flag <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >.</DT
 ><DD
 ><P
+ALIGN="justify"
 >More precisely, <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -132,9 +290,9 @@ CLASS="command"
 > uses the 16-bit <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >
  character set (ISO 10646, also known as UCS-2).
@@ -151,16 +309,16 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 > platforms only, and
    only in <A
@@ -170,19 +328,20 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> built <I
+> built <B
 CLASS="emphasis"
->without</I
+>without</B
 > compile-time flag <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >.</DT
 ><DD
 ><P
+ALIGN="justify"
 >More precisely, <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -195,17 +354,12 @@ CLASS="command"
 <DIV
 CLASS="table"
 ><A
-NAME="ibmpc-charset-table"
-></A
-><P
+NAME="ibmpc-charset-table"><P
 ><B
->Table 1. the IBM PC character set (code page 437)</B
+>Table 13-1. the IBM PC character set (code page 437)</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -1434,38 +1588,38 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 > (except <A
 HREF="http://www.next.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->NeXTstep</I
+>NeXTstep</B
 ></A
 >),
    <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >, <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Amiga</I
+>Amiga</B
 ></A
 >, <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 > platforms only, and only in
    <A
@@ -1475,19 +1629,20 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> built <I
+> built <B
 CLASS="emphasis"
->without</I
+>without</B
 > compile-time flag <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >.</DT
 ><DD
 ><P
+ALIGN="justify"
 >More precisely, <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -1500,17 +1655,12 @@ CLASS="command"
 <DIV
 CLASS="table"
 ><A
-NAME="latin-1-table"
-></A
-><P
+NAME="latin-1-table"><P
 ><B
->Table 2. the ISO Latin-1 (ISO 8859-1) character set</B
+>Table 13-2. the ISO Latin-1 (ISO 8859-1) character set</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -2732,9 +2882,9 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.next.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->NeXTstep</I
+>NeXTstep</B
 ></A
 > platforms only, and
  only in <A
@@ -2744,19 +2894,20 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> built <I
+> built <B
 CLASS="emphasis"
->without</I
+>without</B
 > compile-time flag <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNICODE</I
+>UNICODE</B
 ></A
 >.</DT
 ><DD
 ><P
+ALIGN="justify"
 >More precisely, <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -2767,32 +2918,27 @@ CLASS="command"
 > uses the <A
 HREF="http://www.next.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->NeXTstep</I
+>NeXTstep</B
 ></A
 > character set:
 <DIV
 CLASS="table"
 ><A
-NAME="next-charset-table"
-></A
-><P
+NAME="next-charset-table"><P
 ><B
->Table 3. the <A
+>Table 13-3. the <A
 HREF="http://www.next.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->NeXTstep</I
+>NeXTstep</B
 ></A
 > character set</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4008,17 +4154,12 @@ Here ** are control characters, not graphic
 ><DIV
 CLASS="table"
 ><A
-NAME="standard-char-table"
-></A
-><P
+NAME="standard-char-table"><P
 ><B
->Table 4. The following are standard characters:</B
+>Table 13-4. Standard characters:</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4071,17 +4212,12 @@ CLASS="keycode"
 ><DIV
 CLASS="table"
 ><A
-NAME="semi-standard-char-table"
-></A
-><P
+NAME="semi-standard-char-table"><P
 ><B
->Table 5. The following are semi-standard characters:</B
+>Table 13-5. Semi-standard characters:</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4180,6 +4316,7 @@ CLASS="keycode"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 ><SPAN
 CLASS="keysym"
 >#\Newline</SPAN
@@ -4190,17 +4327,12 @@ HREF="encoding.html#newline"
 ><DIV
 CLASS="table"
 ><A
-NAME="extra-named-chars-table"
-></A
-><P
+NAME="extra-named-chars-table"><P
 ><B
->Table 6. Additional Named Characters</B
+>Table 13-6. Additional Named Characters</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4269,11 +4401,9 @@ CLASS="keycode"
 ><DIV
 CLASS="table"
 ><A
-NAME="ctrl-char-table"
-></A
-><P
+NAME="ctrl-char-table"><P
 ><B
->Table 7. Additional syntax for characters with code from
+>Table 13-7. Additional syntax for characters with code from
    <SPAN
 CLASS="keycode"
 >#x00</SPAN
@@ -4284,9 +4414,6 @@ CLASS="keycode"
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4424,6 +4551,7 @@ CLASS="keycode"
 ></TABLE
 ></DIV
 ><P
+ALIGN="justify"
 >See also the section <A
 HREF="reader.html#chario"
 >Character
@@ -4434,17 +4562,19 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="input-char"
->Attributes</A
-></H1
+NAME="input-char">13.1. Attributes</H1
 ><P
->Characters do not have the [<SPAN
+ALIGN="justify"
+>Characters do not have the <A
+HREF="references.html#CLtL1"
+>[<SPAN
 CLASS="citation"
 ><A
 HREF="references.html#CLtL1"
 >CLtL1</A
 ></SPAN
->] font and bits attributes.
+>]</A
+> font and bits attributes.
  For backward compatibility, there is a class <A
 HREF="characters.html#input-char"
 ><TT
@@ -4502,6 +4632,7 @@ CLASS="constant"
 > = 16</DT
 ><DD
 ><P
+ALIGN="justify"
 >The system uses only font 0.
   </P
 ></DD
@@ -4514,17 +4645,12 @@ CLASS="constant"
 ><DIV
 CLASS="table"
 ><A
-NAME="bit-table"
-></A
-><P
+NAME="bit-table"><P
 ><B
->Table 8. The following bits are defined:</B
+>Table 13-8. Character bits</B
 ></P
 ><TABLE
 BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
 CLASS="CALSTABLE"
 ><THEAD
 ><TR
@@ -4621,7 +4747,7 @@ CLASS="constant"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >ext:char-font</TT
@@ -4635,6 +4761,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns the font of a <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
 TARGET="_top"
@@ -4653,7 +4780,7 @@ CLASS="classname"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >ext:char-bits</TT
@@ -4667,6 +4794,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns the bits of a <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
 TARGET="_top"
@@ -4685,7 +4813,7 @@ CLASS="classname"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >ext:make-char</TT
@@ -4710,6 +4838,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns a new <A
 HREF="characters.html#input-char"
 ><TT
@@ -4728,7 +4857,7 @@ CLASS="constant"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >ext:char-bit</TT
@@ -4747,6 +4876,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
@@ -4771,7 +4901,7 @@ CLASS="constant"
 ></DD
 ><DT
 ><TT
-CLASS="literal"
+CLASS="sexp"
 >(<TT
 CLASS="function"
 >ext:set-char-bit</TT
@@ -4795,6 +4925,7 @@ CLASS="replaceable"
 ></DT
 ><DD
 ><P
+ALIGN="justify"
 >returns a new <A
 HREF="characters.html#input-char"
 ><TT
@@ -4821,42 +4952,43 @@ CLASS="variablelist"
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->UNIX</I
+>UNIX</B
 ></A
 >, <A
 HREF="http://www.freedos.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->DOS</I
+>DOS</B
 ></A
 >, <A
 HREF="http://www.os2.org/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->OS/2</I
+>OS/2</B
 ></A
 >, <A
 HREF="http://www.willows.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Win32</I
+>Win32</B
 ></A
 >, <A
 HREF="http://www.acorn.com/"
 TARGET="_top"
-><I
+><B
 CLASS="emphasis"
->Acorn</I
+>Acorn</B
 ></A
 >
    platforms only.</DT
 ><DD
 ><P
+ALIGN="justify"
 >The system itself uses this <A
 HREF="characters.html#input-char"
 ><TT
@@ -4875,7 +5007,7 @@ CLASS="keycap"
 >Shift</B
 > key status on return from
  <TT
-CLASS="literal"
+CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
 TARGET="_top"
@@ -4902,6 +5034,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -4913,7 +5046,8 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="num-dict.html"
->&#60;&#60;&#60; Previous</A
+ACCESSKEY="P"
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -4921,6 +5055,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="impnotes-top.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -4929,7 +5064,8 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="char-script.html"
->Next &#62;&#62;&#62;</A
+ACCESSKEY="N"
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -4949,6 +5085,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="clhs-chapters.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
@@ -4964,6 +5101,45 @@ TARGET="_top"
 ></TR
 ></TABLE
 ></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
 ></BODY
 ></HTML
 >
