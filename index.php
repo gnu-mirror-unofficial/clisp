@@ -113,6 +113,7 @@
    <li><a href="http://freshmeat.net/projects/clisp/">FreshMeat</a></li>
    <li><a href="http://www.opensourcedirectory.org/projects/clisp/"
        >Open Source Directory</a></li>
+   <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
  <dt><strong>Search
    <a href="http://clisp.cons.org"><code>clisp.cons.org</code></a>
