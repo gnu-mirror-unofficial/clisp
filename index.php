@@ -59,7 +59,7 @@
  <dt><strong><a href="clash.html">CLISP as a login shell</a></strong></dt>
   <dd>You can use CLISP instead of
    <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
-   <a href="http://hpcf.nersc.gov/software/os/shells/tcsh/">tcsh</a>!</dd>
+   <a href="http://www.tcsh.org/">tcsh</a>!</dd>
  <dt><strong><a href="resources.html">Common Lisp on the Web</a></strong></dt>
   <dd>information and software</dd>
  <dt><strong><a href="faq.html">CLISP FAQ list</a></strong></dt>
