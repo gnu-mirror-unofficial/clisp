@@ -17,9 +17,9 @@
 <p><a href="http://clisp.cons.org">CLISP</a> project founder
  <a href="http://www.haible.de/bruno/">Bruno Haible</a> was one of the
  finalists for the <a href="http://www.gnu.org/award/2002/2002.html">2002
-  Free Software Award</a>!
- Note that it said <strong><cite>"Bruno Haible (known for his work on
- GNU CLISP)"</cite></strong> !</p>
+  Free Software Award</a>! Note that it said:</p>
+<p class="center"><strong><cite>"Bruno Haible (known for his work on
+ GNU CLISP)"</cite></strong>!</p>
 
 <h2>Now it is your chance to get the next Free Software Award!</h2>
 
@@ -47,7 +47,7 @@ recruit new members, with the following incentives:</p>
 
 <h2 id="tasks">The CLISP tasks</h2>
 
-<h3 id="segfault">Segmentation fauilts</h3>
+<h3 id="segfault">Segmentation faults</h3>
 
 <p>Any hard crash (segmentation fault, bus error etc) is a bug in CLISP.</p>
 
@@ -72,21 +72,20 @@ NIL
 
 *** - handle_fault error2 ! address = 0x1a9b2a84 not in [0x2026a000,0x20342dcc) !
 SIGSEGV cannot be cured. Fault address = 0x1a9b2a84.
-Segmentation fault
- </pre></li>
+Segmentation fault</pre></li>
  <li>SAFETY&lt;=1 builds ==&gt; broken TAB: segfault or SP/program stack
   overflow instead of a completion</li>
  <li>GC should make reallocated objects (strings and instances, see
   <code>reallocate_small_string</code> in <code>spvw_typealloc.d</code>
   and <code>CLOS::%CHANGE-CLASS</code> in <code>record.d</code>) into
   regular objects.  <code>spvw_garcol.d:1.47</code> did that, but this
-  lead to a crash in the testsuite case that now just fails</li>
+  lead to a crash in the test suite case that now just fails</li>
 </ol>
 
 <h3 id="new">New features</h3>
 
 <ol>
- <li>multithreading</li>
+ <li>multi-threading</li>
  <li>native compilation</li>
  <li>compilation to JVM</li>
  <li>making FFI compatible with
