@@ -32,7 +32,7 @@
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.29 (2002-07-25)</th></tr></table>
+<tr><th>Current version:</th><th>2.30 (2002-09-15)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
  <col width="70%"/><col width="30%"/>
@@ -53,11 +53,6 @@
     Lisp"</cite>, available as the
    <a href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
     HyperSpec</a>.</dd>
- <dt><strong><a href="clreadline.html">CLISP's line editing
-   facilities</a></strong></dt>
-  <dd>CLISP uses GNU
-   <a href="http://cnswww.cns.cwru.edu/~chet/readline/rltop.html"
-      >readline</a>.</dd>
  <dt><strong><a href="clash.html">CLISP as a login shell</a></strong></dt>
   <dd>You can use CLISP instead of
    <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
