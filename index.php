@@ -31,14 +31,12 @@
 
 <table align="center" cellspacing="5" border="15">
 <tr><th>Current version:</th><th>2.27 (2001-07-17)</th>
-<!--
 <td><a href="ftp://clisp.cons.org/pub/lisp/clisp/source/latest/"
-       >sources</a></td>
+       >sources/FTP</a></td>
 <td><a href="ftp://clisp.cons.org/pub/lisp/clisp/binaries/latest/"
-       >binaries</a></td>
--->
-<td><a href="ftp://clisp.sourceforge.net/pub/clisp/latest/"
-       >SourceForge</a></td>
+       >binaries/FTP</a></td>
+<td><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
+       >SourceForge downloads/HTTP</a></td>
 </tr></table>
 
 <table width="100%" cellspacing="5" border="5">
@@ -80,11 +78,11 @@
     href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
     >tarball</a>]</li>
    <li><a href="http://sourceforge.net/survey/?group_id=1355">surveys</a></li>
-   <li><a href="https://sourceforge.net/project/showfiles.php?group_id=1355"
+   <li><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
           >files released</a></li>
-   <li><a href="https://sourceforge.net/people/?group_id=1355">help
+   <li><a href="http://sourceforge.net/people/?group_id=1355">help
     wanted</a></li>
-   <li><a href="https://sourceforge.net/pm/?group_id=1355">tasks</a></li>
+   <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
   </ul></dd>
  </dl>
 </td>
