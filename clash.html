@@ -80,7 +80,8 @@ setenv, putenv, getenv, etc.</p>
 
 <h2>NB from SDS</h2>
 
-<p>CLISP has a <code>setf</code>able built-in <code>ext:getenv</code>,
+<p>CLISP has a <code>setf</code>able built-in
+ <a href="impnotes.html#getenv"><code>ext:getenv</code></a>,
 e.g., <code>(setf (ext:getenv "foo") "bar")</code>.</p>
 
 <h1>Step 4: start X</h1>
@@ -140,9 +141,11 @@ Put the following in <code>somefile.lisp</code>:</p>
 
 <p>I heavily modified this macro.</p>
 
-<p>Note that <code>ext:run-program</code> will not execute shell scripts,
-while <code>ext:shell</code> will invoke a shell for each command -
-these are the trade-offs.</p>
+<p>Note that
+ <a href="impnotes.html#run-prog"><code>ext:run-program</code></a>
+ will not execute shell scripts, while
+ <a href="impnotes.html#exec"><code>ext:shell</code></a>
+ will invoke a shell for each command - these are the trade-offs.</p>
 
 <h1>Step 6: set up the readline shortcut</h1>
 
@@ -200,8 +203,8 @@ must do the following:</p>
 
 <ol>
 <li>Dump a memory image from a CLISP with the read macro and any
- convenience stuff loaded, as described in <a
- href="impnotes.html#image">impnotes</a>.</li>
+ convenience stuff loaded, as described in
+ <a href="impnotes.html#image">impnotes</a>.</li>
 <li>Make a backup of <code>/usr/[local]/lib/clisp</code>.
   (wherever yours is installed)</li>
 <li>Rename the "base" directory in <code>/usr/lib/clisp</code>
