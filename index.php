@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<h1>Welcome to <a href="http://clisp.cons.org">CLISP home</a></h1>
+<h1>Welcome to <a href="http://clisp.cons.org">CLISP</a></h1>
 
 <!-- ?php for(reset($headers); $key = key($headers); next($headers))
  { echo "headers[$key] = ".$headers[$key]."<br>\n"; } ?
