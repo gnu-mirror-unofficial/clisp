@@ -30,7 +30,7 @@
 <img src="clisp.gif" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table align="center" cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.26 (2001-05-23)</th>
+<tr><th>Current version:</th><th>2.27 (2001-07-17)</th>
 <td><a href="ftp://clisp.cons.org/pub/lisp/clisp/source/latest/"
        >sources</a></td>
 <td><a href="ftp://clisp.cons.org/pub/lisp/clisp/binaries/latest/"
