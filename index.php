@@ -35,7 +35,7 @@
  Haible was one of the finalists for the 2002 Free Software Awards!</a></p>
 
 <table cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.32 (2003-12-29)</th></tr></table>
+<tr><th>Current version:</th><th>2.33 (2004-03-17)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
  <col width="70%"/><col width="30%"/>
@@ -78,7 +78,9 @@
    <!-- li><a href="http://sourceforge.net/people/?group_id=1355">help
         wanted</a></li -->
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
-   <li><a href="https://sourceforge.net/donate/?group_id=1355">donate</a></li>
+   <li><a href="https://sourceforge.net/donate/?group_id=1355"
+          ><strong>donate</strong></a> -
+    <a href=" http://sourceforge.net/export/html_projdonors.php?group_id=1355&show_comments=1">recent donors</a></li>
   </ul></dd>
  <dt><strong><a href="http://clisp.cons.org">CLISP</a> elsewhere</strong></dt>
   <dd><ul>
@@ -134,8 +136,7 @@
                 >http://clisp.sourceforge.net/</a></li>
     <li><a href="http://www.gnu.org/software/clisp/"
                 >http://www.gnu.org/software/clisp/</a></li></ul></dd>
- <dt><strong>Sources and binaries for various Unix, DOS, OS/2,
-   Windows, Amiga, Acorn, Mac platforms</strong></dt>
+ <dt><strong>Sources and binaries for various platforms</strong></dt>
   <dd><ul>
     <li><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
            >SourceForge downloads/HTTP</a></li>
@@ -161,7 +162,7 @@
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
            >Debian GNU/Linux</a></li>
-    <li><a href="http://atrpms.physik.fu-berlin.de/name/clisp/">Red Hat</a>,
+    <li><a href="http://atrpms.net/name/clisp/">Red Hat</a>,
      <a href="https://bugzilla.fedora.us/show_bug.cgi?id=843">Fedora</a></li>
     <li><a href="http://packages.gentoo.org/packages/?category=dev-lisp;name=clisp">Gentoo Linux</a></li>
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"

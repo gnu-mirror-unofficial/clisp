@@ -55,10 +55,6 @@ members to recruit new members, with the following incentives:</p>
  of those.</p>
 
 <ol>
- <li id="weak-hash">edit the initialization form for
-  <code>*DOCUMENTATION*</code> in <code>src/init.lisp</code> to make it
-  a <strong>weak</strong> hash table, and CLISP will crash during
-  build;<p><br/></p></li>
  <li id="make-list-gc"><pre>
 [6]&gt; (setq z (make-list 10000000) a nil)
 NIL
@@ -77,14 +73,6 @@ NIL
 *** - handle_fault error2 ! address = 0x1a9b2a84 not in [0x2026a000,0x20342dcc) !
 SIGSEGV cannot be cured. Fault address = 0x1a9b2a84.
 Segmentation fault</pre><p><br/></p></li>
- <li id="unrealloc">GC should make reallocated objects (strings and
-  instances, see <code>reallocate_small_string</code>
-  in <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/spvw_typealloc.d"><code>src/spvw_typealloc.d</code></a>
-  and <code>CLOS::%CHANGE-CLASS</code>
-  in <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/record.d"><code>src/record.d</code></a>) into regular objects.
-  <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/spvw_garcol.d?rev=1.47"><code>src/spvw_garcol.d:1.47</code></a>
-  did that, but this lead to a crash (see a test case
-  in <code>tests/strings.tst</code>).<p><br/></p></li>
 </ol>
 
 <h3 id="new">New features</h3>
@@ -100,8 +88,8 @@ Segmentation fault</pre><p><br/></p></li>
  <li>making FFI compatible with
   <a href="http://uffi.med-info.com/">UFFI</a><p><br/></p></li>
  <li>adding GUI, e.g., via
-  <a href="http://www.wxlisp.org/">wxLisp</a><p><br/></p></li>
- <li>adding SSL bindings<p><br/></p></li>
+  <a href="http://sourceforge.net/projects/wxlisp/">wxCL</a><p><br/></p></li>
+ <li>adding <a href="http://www.openssl.org/">SSL</a> bindings<p><br/></p></li>
 </ol>
 
 <hr/>

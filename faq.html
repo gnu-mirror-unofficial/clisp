@@ -59,6 +59,7 @@ more questions (and answers!)</p>
  <li><a href="#help">How do I ask for help?</a></li>
  <li><a href="#mailing-lists">Which mailing lists should I subscribe
    to?</a></li>
+ <li><a href="#rejected">Why is my mail to a mailing list rejected?</a></li>
  <li><a href="#bugs">How do I report bugs?</a></li>
  <li><a href="#contrib">I want to help!</a></li>
 </ol>
@@ -170,8 +171,8 @@ moved it here.</p>
 
 <h4>Using software to promote a political agenda is unprofessional!</h4>
 
-<p>Expressing our opinion is a quite natural thing for us, be it the
-artistic preferences, the political views or the religious beliefs.
+<p>Expressing our opinion is a quite natural thing for us, be it
+artistic preferences, political views or religious beliefs.
 The use of the menorah has its roots somewhere between these areas,
 and we are proud to display it.
 If you are unlucky enough to have lost the freedom to express your
@@ -226,7 +227,7 @@ promotes charitable donations to Uganda.</p>
    as well as for the benefit of the other CLISP users,
    since the mailing lists are publicly archived
    (you are encouraged to search them before asking).
-   Please do <strong>not</strong> <tt>CC</tt> your messages to the
+   Please do <strong>not</strong> <code>CC</code> your messages to the
    individual developers.</dd>
 </dl>
 
@@ -251,6 +252,38 @@ promotes charitable donations to Uganda.</p>
         >&lt;clisp-devel&gt;</a></dt>
  <dd>subscribe to this list if you want to help with CLISP
   developments; CVS commit notes go here (as a daily digest).</dd></dl>
+
+<p><a href="#meta">back to Meta</a></p><hr/>
+
+<h3 id="rejected">Why is my mail to a mailing list rejected?</h3>
+
+<p>CLISP Mailing lists get a lot of spam, so we have to take care to
+ protect our users.  If you get a note that <cite>"your message is held
+  for moderator's approval"</cite>, you can safely <strong>assume that it
+  went to <code>/dev/null</code></strong> and try again,
+ noting the following:</p>
+<dl>
+ <dt><strong><code>clisp-announce</code></strong></dt>
+ <dd>do not mail here without a prior discussion
+  on <code>clisp-devel</code></dd>
+ <dt><strong><code>clisp-devel</code></strong></dt>
+ <dd>subscriber-only, you <em>must</em> post from a
+  <strong>subscribed address</strong>,
+  no exceptions (see <a href="#help">above</a>).</dd>
+ <dt><strong><code>clisp-list</code></strong></dt>
+ <dd>the only open list, so we filter it especially aggressively:
+  <ul><li>no <code>MIME</code> mail
+    (no <code>HTML</code> formatting, no attachments)</li>
+   <li>the list address must be in <code>CC</code> or <code>TO</code>,
+    not <code>BCC</code>.</li>
+   <li>do not mention <cite>"penis"</cite> or <cite>"viagra"</cite> in
+    the <code>Subject</code> line</li></ul></dd>
+</dl>
+
+<p>If you do not like this system, please volunteer to maintain the
+ mailing lists - you will be required to go through all the <cite>"held
+  for moderator's approval"</cite> mail and approve/discard as
+ appropriate at least twice a day.</p>
 
 <p><a href="#meta">back to Meta</a></p><hr/>
 
@@ -285,10 +318,12 @@ head (reasonably recent).</p>
 
 <h2 id="run">Running CLISP</h2>
 <ol>
- <li><a href="#ide">where is the IDE?</a></li>
- <li><a href="#opt">what are the command line arguments?</a></li>
+ <li><a href="#ide">Where is the IDE?</a></li>
+ <li><a href="#opt">What are the command line arguments?</a></li>
  <li><a href="#ext">What CLISP extensions are available?</a></li>
  <li><a href="#rc">Where is the init file on my platform?</a></li>
+ <li><a href="#modules">Where are the modules with which I built CLISP?</a></li>
+ <li><a href="#gui">How do I create a GUI for my CLISP program?</a></li>
 </ol>
 <hr/>
 
@@ -320,7 +355,13 @@ head (reasonably recent).</p>
 
 <h3 id="ext">What CLISP extensions are available?</h3>
 
-<dl><dt><strong>3rd party</strong></dt>
+<dl><dt><strong>Distributed with CLISP</strong></dt>
+<dd>Quite a few modules are
+ <a href="impnotes.html#included-modules">included</a> with
+ CLISP, pass <code>--with-module=...</code> to <code>configure</code>
+ to build them and use the <a href="#modules"><code>full</code></a>
+ linking set.</dd>
+<dt><strong>3rd party</strong></dt>
  <dd>See the <em>incomplete</em> list of
   <a href="resources.html#software">"Common
    Lisp software running in CLISP"</a>.</dd>
@@ -351,6 +392,20 @@ head (reasonably recent).</p>
 <p>Read the file <code>clisp.html#opt-norc</code> in your distribution
  (this is the version of the <a href="clisp.html">user manual</a> for
  your platform).</p>
+
+<p><a href="#run">back to Running</a></p><hr/>
+
+<h3 id="modules">Where are the modules with which I built CLISP?</h3>
+
+<p>In the <code>full</code> linking set.  Run CLISP like this:
+<code>clisp <a href="clisp.html#opt-link-set">-K</a> full</code>.</p>
+
+<p><a href="#run">back to Running</a></p><hr/>
+
+<h3 id="gui">How do I create a GUI for my CLISP program?</h3>
+
+<p>There are many options, see <a href="resources.html#software">"Common
+  Lisp software running in CLISP"</a>.</p>
 
 <p><a href="#run">back to Running</a></p><hr/>
 
