@@ -232,7 +232,7 @@ src="patent_button.png" width="88" height="36" alt="no patents"/></a></p>
 <p>This project is hosted by <a href="http://sourceforge.net"><img
 src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=1" width="88"
 height="31" alt="SourceForge Logo"/></a>, which is, in turn,
-supported by <a href="http://www.valinux.com">VA Linux Systems</a>.</p>
+supported by <a href="http://www.vasoftware.com">VA Software</a>.</p>
 
 <p>This project is <strong>NOT</strong> supported by these or any other
 company or organization.</p>
