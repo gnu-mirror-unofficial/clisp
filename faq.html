@@ -64,7 +64,7 @@ more questions (and answers!)</p>
 <hr/>
 
 <h3 id="gpl">License - why <a href="http://www.gnu.org">GNU</a>
-  <a href="http://www.gnu.org/copyleft/gpl.html">GPL</a>?</h3>
+ <a href="http://www.gnu.org/copyleft/gpl.html">GPL</a>?</h3>
 
 <p><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/doc/Why-CLISP-is-under-GPL">Because CLISP uses GNU readline</a>.</p>
 
@@ -122,7 +122,7 @@ You may ask the original authors for details yourself.
 Both of them are very busy though, so do not expect a prompt reply.</p>
 
 <h4>Shouldn't the logo be changed now due to the current political
-  developments in the Middle East?</h4>
+ developments in the Middle East?</h4>
 
 <p>The CLISP developers, both the original creators and the current
 maintainers, do not subscribe to the mainstream view that blames the
@@ -355,8 +355,9 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</h3>
 
 <h4>Avoiding stack overflow: Generic</h4>
 <ul><li>You will always get a stack overflow when you try to
-  print a circular object (list or structure)
-  and <code>*PRINT-CIRCLE*</code> is <code>NIL</code>.
+  print a circular object (list or structure) and
+  <a href="http://www.lisp.org/HyperSpec/Body/var_stprint-circlest.html"
+     ><code>*PRINT-CIRCLE*</code></a> is <code>NIL</code>.
   Just set <code>*PRINT-CIRCLE*</code> to <code>T</code>.</li>
  <li>You will always get a stack overflow on infinite recursion.</li>
  <li>Some simple functions (like Ackerman's) recurse more than you
