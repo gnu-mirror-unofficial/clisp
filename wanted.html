@@ -50,12 +50,17 @@ members to recruit new members, with the following incentives:</p>
 
 <h3 id="segfault">Segmentation faults</h3>
 
-<p>Any hard crash (segmentation fault, bus error etc) is a bug in CLISP.</p>
+<p>Any hard crash (segmentation fault, bus error etc) is a bug in CLISP.
+ Do <code>make testsuite-all</code> in your make directory to see some
+ of those.</p>
 
 <ol>
- <li id="weak">edit the initialization form for <code>*DOCUMENTATION*</code>
-  in <code>src/init.lisp</code> to make it a <strong>weak</strong> hash
-  table, and CLISP will crash during build;<p><br/></p></li>
+ <li id="weak-hash">edit the initialization form for
+  <code>*DOCUMENTATION*</code> in <code>src/init.lisp</code> to make it
+  a <strong>weak</strong> hash table, and CLISP will crash during
+  build;<p><br/></p></li>
+ <li id="weak-ptr">see <code>tests/weakptr.tst</code></li>
+ <li id="defhash">see <code>tests/defhash.tst</code></li>
  <li id="make-list-gc"><pre>
 [6]&gt; (setq z (make-list 10000000) a nil)
 NIL
@@ -80,8 +85,8 @@ Segmentation fault</pre><p><br/></p></li>
   and <code>CLOS::%CHANGE-CLASS</code>
   in <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/record.d"><code>src/record.d</code></a>) into regular objects.
   <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/spvw_garcol.d?rev=1.47"><code>src/spvw_garcol.d:1.47</code></a>
-  did that, but this lead to a crash in
-  the test suite case that now just fails.<p><br/></p></li>
+  did that, but this lead to a crash (see a test case
+  in <code>tests/strings.tst</code>).<p><br/></p></li>
 </ol>
 
 <h3 id="new">New features</h3>
