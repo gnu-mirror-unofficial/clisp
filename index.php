@@ -288,6 +288,9 @@
  <a href="http://lpf.ai.mit.edu/">
   <img src="http://lpf.ai.mit.edu/Images/liberty.jpg" width="77"
        height="115" alt="League for Programming Freedom"/></a>
+ <a href="http://nosoftwarepatents.com/">
+  <img src="http://nosoftwarepatents.com/banners/90x40_2.jpg" width="90"
+       height="40" alt="Defend the Future!"/></a>
 </p>
 
 <hr/><p>This project is hosted by
