@@ -45,16 +45,16 @@ Wood</a></address>
 
 <h1>Step 1: Compile CLISP</h1>
 
-<p>On Linux, you need to have built your <a
-href="http://clisp.cons.org">CLISP</a> with the
-<code>--with-modules=bindings/linuxlibc6</code> option,
+<p>On Linux, you need to have built your
+ <a href="http://clisp.cons.org">CLISP</a> with the
+<code>--with-modules=bindings/glibc</code> option,
 and you should make sure that you have it compiled with readline.
 See the CLISP build instructions and Makefile.</p>
 
 <h1>Step 2: Make CLISP a valid shell</h1>
 
-<p>Put <code>/usr/bin/clisp</code> in <code>/etc/shells</code> so it
-looks (something like) this:</p>
+<p>Put <code>/usr/bin/clisp</code> (or <code>/usr/local/bin/clisp</code>)
+ in <code>/etc/shells</code> so it looks (something) like this:</p>
 <pre>
 # /etc/shells: valid login shells
 #/bin/ash
