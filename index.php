@@ -182,6 +182,11 @@
    <dd>The goal is to facilitate the distribution of Lisp software
     (and attendant utilities) in an integrated manner,
     much as CTAN does for (La)TeX or CPAN for Perl.</dd>
+  <dt><strong>The Common Lisp Cookbook</strong>
+      [<a href="http://sourceforge.net/projects/cl-cookbook">project</a>
+       <a href="http://cl-cookbook.sourceforge.net">home</a>]</dt>
+   <dd>A collaborative project that aims to provide for Common Lisp
+    something similar to the Perl Cookbook published by O'Reilly.</dd>
  </dl>
  <strong>Other Projects</strong>
  <dl>
