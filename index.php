@@ -183,7 +183,7 @@
  </th></tr></table>
 
 <p class="center"><a href="http://petition.eurolinux.org"><img
-src="patent_button.gif" width="88" height="36" alt="no patents"/></a></p>
+src="patent_button.png" width="88" height="36" alt="no patents"/></a></p>
 
 <hr/>
 <p>This project is hosted by <a href="http://sourceforge.net"><img
