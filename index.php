@@ -207,11 +207,11 @@
 <tr><th colspan="2">Currently active developers:</th></tr>
 <tr><th><a href="http://sf.net/users/haible">Bruno Haible</a></th>
  <td align="center">
-  <a href="http://clisp.cons.org/~haible">http://clisp.cons.org/~haible</a>
+  <a href="http://www.haible.de/bruno/">http://www.haible.de/bruno/</a>
 </td></tr>
 <tr><th><a href="http://sf.net/users/sds">Sam Steingold</a></th>
  <td align="center">
-  <a href="http://clisp.cons.org/~sds">http://clisp.cons.org/~sds</a>
+  <a href="http://www.podval.org/~sds">http://www.podval.org/~sds</a>
 </td></tr>
 <tr><th colspan="2">Please direct all CLISP-related issues to
 <a href="http://lists.sourceforge.net/mailman/listinfo/clisp-list"
