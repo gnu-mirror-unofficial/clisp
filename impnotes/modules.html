@@ -1010,7 +1010,7 @@ HREF="modules.html#linkset"
 CLASS="option"
 >--with-dynamic-modules</TT
 > precludes some efficiency
- optimizations which are on by default.</P
+ optimizations which are enabled by default.</P
 ></DIV
 ><DIV
 CLASS="section"
@@ -1486,9 +1486,161 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
+NAME="module-tools"
+></A
+>30.2.5. Module tools</H2
+><P
+ALIGN="justify"
+>There some tools to facilitate easy module writing.</P
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="modprep"
+></A
+>30.2.5.1. Modprep</H3
+><P
+ALIGN="justify"
+>If your module is written in <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>, you can pre-process your
+ sources with <TT
+CLASS="filename"
+>modprep.lisp</TT
+> in the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+ distribution and define lisp functions with the
+ <TT
+CLASS="function"
+>DEFUN</TT
+> macro:<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;DEFUN(MY-PACKAGE:MY-FUNCTION-NAME, arg1 arg2 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> FOO BAR) {
+  if (!boundp(STACK_0)) STACK_0 = fixnum(0); /* BAR */
+  if (!boundp(STACK_1)) STACK_1 = fixnum(1); /* FOO */
+  pushSTACK(`MY-PACKAGE::SOME-SYMBOL`); /* create a symbol in the package */
+  pushSTACK(`#(:THIS :IS :A :VECTOR)`); /* some vector, created once */
+  pushSTACK(``MY-PACKAGE::MY-FUNCTION-NAME``); /* double '' means FUNCTION */
+  VALUES1(listof(7)); /* cons up a new list and clean up the STACK */
+}</PRE
+></TD
+></TR
+></TABLE
+>
+Then <TT
+CLASS="sexp"
+>(MY-PACKAGE:MY-FUNCTION-NAME 'A 12 :FOO
+ T)</TT
+> will return <TT
+CLASS="sexp"
+>(A 12 T 0
+ MY-PACKAGE::SOME-SYMBOL #(:THIS :IS :A :VECTOR)
+ #'MY-PACKAGE::MY-FUNCTION-NAME)</TT
+>.</P
+><P
+ALIGN="justify"
+>See <TT
+CLASS="filename"
+>modules/syscalls</TT
+> and other included
+ modules for more examples.</P
+></DIV
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="exporting"
+></A
+>30.2.5.2. Exporting</H3
+><P
+ALIGN="justify"
+>If your module uses <A
+HREF="dffi.html"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></STRONG
+></A
+> to interface to a <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> library,
+ you might want to make your module package
+ <A
+HREF="pack-dict.html#make-pack"
+>case-sensitive</A
+> and use
+ <TT
+CLASS="filename"
+>exporting.lisp</TT
+> in the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> distribution to
+ make all <A
+HREF="dffi.html"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></STRONG
+></A
+> forms export the symbols they define.
+ See <TT
+CLASS="filename"
+>modules/netica</TT
+>
+ and <TT
+CLASS="filename"
+>modules/bindings/*</TT
+> for examples.</P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
 NAME="included-modules"
 ></A
->30.2.5. Modules included in the distribution.</H2
+>30.2.6. Modules included in the distribution.</H2
 ><P
 ALIGN="justify"
 >The following modules come with the distribution of
@@ -1612,8 +1764,7 @@ TARGET="_top"
 ><LI
 ><P
 ALIGN="justify"
->new-clx, by
-      Gilbert Baumann
+>new-clx, by Gilbert Baumann
       - faster, with additional features, but not quite complete yet.
     </P
 ></LI
@@ -1637,9 +1788,42 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->; by
-    John Hinsdale.
-  </P
+>;
+    by John Hinsdale.</P
+></DD
+><DT
+>fastcgi</DT
+><DD
+><P
+ALIGN="justify"
+>Access
+    <A
+HREF="http://www.fastcgi.com/"
+TARGET="_top"
+>FastCGI</A
+> from <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>;
+    by John Hinsdale.</P
+></DD
+><DT
+>netica</DT
+><DD
+><P
+ALIGN="justify"
+>Work with Bayesian belief networks and influence
+    diagrams using
+    <A
+HREF="http://norsys.com/netica_c_api.htm"
+TARGET="_top"
+>Netica</A
+>.
+ </P
 ></DD
 ><DT
 >postgresql</DT
@@ -1734,7 +1918,7 @@ CLASS="section"
 ><A
 NAME="dir-key"
 ></A
->30.2.5.1. Directory Access</H3
+>30.2.6.1. Directory Access</H3
 ><P
 ALIGN="justify"
 >This module provides some directory access from lisp,
@@ -2492,7 +2676,7 @@ CLASS="section"
 ><A
 NAME="regexp"
 ></A
->30.2.5.2. <A
+>30.2.6.2. <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -3747,7 +3931,7 @@ CLASS="section"
 ><A
 NAME="syscalls"
 ></A
->30.2.5.3. System Calls</H3
+>30.2.6.3. System Calls</H3
 ><P
 ALIGN="justify"
 >The <A
