@@ -97,11 +97,6 @@
     wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
   </ul></dd>
- <dt><strong>FTP mirrors</strong></dt>
-  <dd><ul>
-   <li><a href="ftp://ftp.ntnu.no/pub/languages/common_lisp/clisp/"
-    >Norway</a></li>
-  </ul></dd>
  <dt><strong><a href="http://clisp.cons.org">CLISP</a> elsewhere</strong></dt>
   <dd><ul>
    <li><a href="http://www.gnu.org">GNU</a>
