@@ -74,10 +74,14 @@ NIL
 *** - handle_fault error2 ! address = 0x1a9b2a84 not in [0x2026a000,0x20342dcc) !
 SIGSEGV cannot be cured. Fault address = 0x1a9b2a84.
 Segmentation fault</pre><p><br/></p></li>
- <li id="completion">SAFETY&lt;=1 builds ==&gt; broken TAB: segfault
-  or SP/program stack overflow instead of a completion
-  (<a href="http://sourceforge.net/mailarchive/message.php?msg_id=3599900"
-      >details</a>)<p><br/></p></li>
+ <li id="completion">
+  <a href="http://article.gmane.org/gmane.lisp.clisp.devel/1791"
+     >SAFETY&lt;=1</a> builds with
+  <a href="http://article.gmane.org/gmane.lisp.clisp.general/1524"
+     >gcc3</a> ==&gt; broken TAB:
+  segfault or SP/program stack overflow (depending on the presence of
+  <a href="http://sourceforge.net/projects/libsigsegv/">libsigsegv</a>)
+  instead of a completion.<p><br/></p></li>
  <li id="unrealloc">GC should make reallocated objects (strings and
   instances, see <code>reallocate_small_string</code>
   in <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/spvw_typealloc.d"><code>src/spvw_typealloc.d</code></a>
