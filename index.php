@@ -101,6 +101,16 @@
     Mirrored at GNU</a></li>
    <li><a href="http://freshmeat.net/projects/clisp/">FreshMeat</a></li>
   </ul></dd>
+ <dt><strong>Search
+   <a href="http://clisp.cons.org"><code>clisp.cons.org</code></a>
+   with <a href="http://www.google.com/search"
+   ><img src="http://www.google.com/logos/Logo_40wht.gif"
+   alt="Google"/></a></strong></dt>
+  <dd><form method="get" action="http://www.google.com/custom"><ins>
+   <input type="text" name="q" size="31" maxlength="255" value=""/>
+   <input type="submit" name="sa" value="Search"/>
+   <input type="hidden" name="sitesearch" value="clisp.cons.org"/>
+   </ins></form></dd>
  </dl>
 </td>
 <td><strong>Related Sourceforge Projects</strong>
