@@ -160,6 +160,7 @@ moved it here.</p>
 <ol>
  <li><a href="#ide">where is the IDE?</a></li>
  <li><a href="#opt">what are the command line arguments?</a></li>
+ <li><a href="#enc-err">invalid byte #x94 in CHARSET:ASCII conversion</a></li>
 </ol>
 <hr/>
 
@@ -181,6 +182,18 @@ moved it here.</p>
 <p><a href="clisp.html">Read The Fine Manual</a>!</p>
 
 <p><a href="#run">back to Running</a></p><hr/>
+
+<h3 id="enc-err">invalid byte #x94 in CHARSET:ASCII conversion</h3>
+
+<p>This means that you are trying to read a non-ASCII character from a
+ stream which has
+ <a href="impnotes.html#charset-ASCII">ASCII</a>
+ <a href="impnotes.html#extfmt">STREAM-EXTERNAL-FORMAT</a>.
+ The default is described in
+ <a href="clisp.html#opt-enc">The Fine Manual</a>.</p>
+
+<p><a href="#run">back to Running</a></p><hr/>
+
 
 <p><a href="#index">index</a></p><hr/>
 
