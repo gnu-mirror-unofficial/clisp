@@ -166,6 +166,7 @@ moved it here.</p>
  <li><a href="#opt">what are the command line arguments?</a></li>
  <li><a href="#enc-err">invalid byte #x94 in CHARSET:ASCII conversion</a></li>
  <li><a href="#rl-tab">Display all 1259 possibilities? (y or n)</a></li>
+ <li><a href="#ext">What CLISP extensions are available?</a></li>
 </ol>
 <hr/>
 
@@ -212,6 +213,33 @@ moved it here.</p>
 
 <p><a href="#run">back to Running</a></p><hr/>
 
+<h3 id="ext">What CLISP extensions are available?</h3>
+
+<dl><dt><strong>3rd party</strong></dt>
+ <dd>See the <em>incomplete</em> list of
+  <a href="resources.html#software">"Common
+   Lisp software running in CLISP"</a>.</dd>
+<dt><strong>DIY</strong> (Do It Yourself)</dt>
+ <dd>See <a href="impnotes.html#modules">"External Modules"</a> for
+  information on how to interface with external <code>C</code> libraries.</dd>
+<dt><strong>HTTP</strong> (really Frequently Asked!)</dt>
+ <dd><ul>
+   <li>CLISP comes with <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/inspect.lisp?rev=HEAD&amp;content-type=text/plain"><code>inspect.lisp</code></a>
+    which implements a rudimentary HTTP server</li>
+   <li><a href="http://clocc.sourceforge.net/clocc/src/donc/http.lisp"
+          >CLOCC/src/donc/</a> has an HTTP server</li>
+   <li><a href="http://clocc.sourceforge.net/clocc/src/cllib/url.lisp"
+          >CLOCC/src/cllib/</a> handles URLs</li>
+   <li><a href="http://www.fractalconcept.com/asp/mod_lisp">mod_lisp</a>
+    hooks lisp into <a href="http://www.apache.org">Apache</a></li>
+ </ul>
+  <p>Both <a href="http://allegroserve.sourceforge.net/">AllegroServe</a>
+  and <a href="http://www.ai.mit.edu/projects/iiip/doc/cl-http/">CL-HTTP</a>
+  require multithreading and do not work with CLISP.</p></dd></dl>
+
+<p></p>
+
+<p><a href="#run">back to Running</a></p><hr/>
 
 <p><a href="#index">index</a></p><hr/>
 
