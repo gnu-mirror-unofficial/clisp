@@ -1,1 +1,2 @@
-clisp.html index.html
+# ln -s $1 $2
+index.php index.html
