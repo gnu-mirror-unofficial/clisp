@@ -31,10 +31,12 @@
 
 <table align="center" cellspacing="5" border="15">
 <tr><th>Current version:</th><th>2.27 (2001-07-17)</th>
+<!--
 <td><a href="ftp://clisp.cons.org/pub/lisp/clisp/source/latest/"
        >sources</a></td>
 <td><a href="ftp://clisp.cons.org/pub/lisp/clisp/binaries/latest/"
        >binaries</a></td>
+-->
 <td><a href="ftp://clisp.sourceforge.net/pub/clisp/latest/"
        >SourceForge</a></td>
 </tr></table>
@@ -151,21 +153,20 @@
  </td></tr>
 </table>
 
-<table align="center" cellpadding="2" border="5">
-<tr><th colspan="3">Currently active developers:</th></tr>
-<tr><th><a
-     href="http://sourceforge.net/developer/index.php?form_dev=5923">Bruno
-     Haible</a></th>
-    <td><a href="mailto:haible@clisp.cons.org">haible@clisp.cons.org</a></td>
-    <td><a
-     href="http://clisp.cons.org/~haible">http://clisp.cons.org/~haible</a>
- </td></tr>
-<tr><th><a
-     href="http://sourceforge.net/developer/index.php?form_dev=5735">Sam
-     Steingold</a></th>
-    <td><a href="mailto:sds@clisp.cons.org">sds@clisp.cons.org</a></td>
-    <td><a href="http://clisp.cons.org/~sds">http://clisp.cons.org/~sds</a>
- </td></tr></table>
+<table align="cener" cellpadding="2" border="5">
+<tr><th colspan="2">Currently active developers:</th></tr>
+<tr><th><a href="http://sf.net/users/haible">Bruno Haible</a></th>
+ <td align="center">
+  <a href="http://clisp.cons.org/~haible">http://clisp.cons.org/~haible</a>
+</td></tr>
+<tr><th><a href="http://sf.net/users/sds">Sam Steingold</a></th>
+ <td align="center">
+  <a href="http://clisp.cons.org/~sds">http://clisp.cons.org/~sds</a>
+</td></tr>
+<tr><th colspan="2">Please direct all CLISP-related issues to
+<a href="http://lists.sourceforge.net/mailman/listinfo/clisp-list"
+ >&lt;clisp-list&gt;</a> and <em>not</em> to the developers.
+ </th></tr></table>
 
 <p class="center"><a href="http://petition.eurolinux.org"><img
 src="patent_button.gif" width="88" height="36" alt="no patents"/></a></p>
