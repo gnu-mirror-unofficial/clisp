@@ -10,6 +10,8 @@
  <meta http-equiv="description" content="CLISP resources"/>
  <link rev="made" href="mailto:clisp-list@lists.sourceforge.net"/>
  <link rel="stylesheet" href="clisp.css" type="text/css"/>
+ <link rel="icon" href="clisp.png" type="image/png"/>
+ <link rel="shortcut icon" href="clisp.png" type="image/png"/>
  <title>CLISP - an ANSI Common Lisp</title>
 </head>
 
@@ -60,7 +62,8 @@
   <dd>command line options for other platforms are very similar</dd>
  <dt><strong><a href="impnotes.html">CLISP Implementation
    Notes</a></strong></dt>
-  <dd>How CLISP implements the ANSI standard X3.226-1994
+  <dd>How CLISP implements the <a href="http://www.ansi.org/">ANSI</a>
+   standard <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+X3%2E226%2D1994">X3.226-1994</a>
    <cite>"Information Technology - Programming Language - Common
    Lisp"</cite>, available as the <a
    href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
