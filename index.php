@@ -31,10 +31,12 @@
 
 <table align="center" cellspacing="5" border="15">
 <tr><th>Current version:</th><th>2.27 (2001-07-17)</th>
-<td><a href="ftp://clisp.cons.org/pub/lisp/clisp/source/latest/"
-       >sources/FTP</a></td>
-<td><a href="ftp://clisp.cons.org/pub/lisp/clisp/binaries/latest/"
-       >binaries/FTP</a></td>
+<td>sources
+ <a href="ftp://cvs2.cons.org/pub/lisp/clisp/source/latest/">FTP</a>/
+ <a href="http://cvs2.cons.org/ftp-area/clisp/source/latest/">HTTP</a></td>
+<td>binaries
+ <a href="ftp://cvs2.cons.org/pub/lisp/clisp/binaries/latest/">FTP</a>/
+ <a href="http://cvs2.cons.org/ftp-area/clisp/binaries/latest/">HTTP</a></td>
 <td><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
        >SourceForge downloads/HTTP</a></td>
 </tr></table>
