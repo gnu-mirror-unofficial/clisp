@@ -62,6 +62,7 @@ more questions (and answers!)</p>
  <li><a href="#rejected">Why is my mail to a mailing list rejected?</a></li>
  <li><a href="#bugs">How do I report bugs?</a></li>
  <li><a href="#contrib">I want to help!</a></li>
+ <li><a href="#debug">How do I debug CLISP?</a></li>
 </ol>
 <hr/>
 
@@ -296,8 +297,6 @@ promotes charitable donations to Uganda.</p>
 
 <p><a href="#meta">back to Meta</a></p><hr/>
 
-<p><a href="#index">top-level index</a></p><hr/>
-
 <h3 id="contrib">I want to help!</h3>
 
 <p>Please read <a href="impnotes/extend.html">"Extending CLISP"</a> and
@@ -314,6 +313,26 @@ promotes charitable donations to Uganda.</p>
 
 <p>The patch must be against the <a href="http://www.cvshome.org">CVS</a>
 head (reasonably recent).</p>
+
+<p><a href="#meta">back to Meta</a></p><hr/>
+
+<h3 id="debug">How do I debug CLISP?</h3>
+
+<p>When debugging the core (base):</p><pre>
+$ ./configure --with-debug --build build-g
+$ cd build-g
+$ gdb lisp.run                            ;; or lisp.exe on windows and cygwin
+(gdb) base
+(gdb) run
+</pre>
+
+<p>When debugging module <code>foo</code>:</p><pre>
+$ ./configure --with-debug --with-module=foo --build build-g
+$ cd build-g
+$ gdb full/lisp.run                       ;; or lisp.exe on windows and cygwin
+(gdb) full
+(gdb) run
+</pre>
 
 <p><a href="#meta">back to Meta</a></p><hr/>
 
@@ -337,7 +356,7 @@ head (reasonably recent).</p>
  (i.e., CLISP running as an Emacs sub-process).
  Some people prefer
  <a href="http://sourceforge.net/projects/ilisp/">ILISP</a> or
- <a href="http://www.common-lisp.net/project/slime/">SLIME</a>
+ <a href="http://common-lisp.net/project/slime/">SLIME</a>
  to the standard Emacs facilities.</p>
 
 <p>See also
@@ -348,7 +367,7 @@ head (reasonably recent).</p>
 
 <p>See also <a href="http://gclisp.sourceforge.net/">GClisp</a>.</p>
 
-<p>See also <a href="http://www.common-lisp.net/project/phemlock/"
+<p>See also <a href="http://common-lisp.net/project/phemlock/"
  >Portable Hemlock</a>.</p>
 
 <p>See also <a href="http://cl-cookbook.sourceforge.net/windows.html">The
