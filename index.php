@@ -131,6 +131,8 @@
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
            >Debian GNU/Linux</a></li>
+    <li><a href="http://atrpms.physik.fu-berlin.de/name/clisp/"
+           >Red Hat Linux</a></li>
     <li><a href="http://www.gentoo.org/packages/dev-lisp/clisp.html"
            >Gentoo Linux</a></li>
    </ul></dd>
