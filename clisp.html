@@ -31,12 +31,12 @@
 
 <hr/>
 
-<h2 id="Name">Name</h2>
+<h2 id="name">Name</h2>
 
 <p><code>CLISP</code> -
    ANSI Common Lisp compiler, debugger and interpreter.</p>
 
-<h2 id="Synopsis">Synopsis</h2>
+<h2 id="synopsis">Synopsis</h2>
 
 <p><code>clisp</code>
   [ <a href="#opt-help"><code>-h</code></a> |
@@ -55,7 +55,7 @@
     <a href="#opt-quiet"><code>--quiet</code></a> |
     <a href="#opt-quiet"><code>--silent</code></a> ]
   [ <a href="#opt-interactive-debug"><code>-interactive-debug</code></a> ]
-  [ <a href="#opt-w"><code>-w</code></a> ]
+  [ <a href="#opt-wait"><code>-w</code></a> ]
   [ <a href="#opt-ilisp"><code>-I</code></a> ]
   [ <a href="#opt-ansi"><code>-ansi</code></a> ]
   [ <a href="#opt-traditional"><code>-traditional</code></a> ]
@@ -71,7 +71,7 @@
   [ <a href="#opt-exec-file"><var>lispfile</var></a>
     [ <a href="#opt-exec-file"><var>argument</var> ...</a> ] ]</p>
 
-<h2 id="Description">Description</h2>
+<h2 id="description">Description</h2>
 
 <p>Invokes the Common Lisp interpreter and compiler.
 Invoked without arguments, executes the read-eval-print loop, in which
@@ -81,7 +81,7 @@ Invoked with <a href="#opt-compile"><code>-c</code></a>, compiles
 the specified lisp files to a bytecode that can be executed
 more efficiently.</p>
 
-<h2 id="Options">Options</h2>
+<h2 id="options">Options</h2>
 
 <dl>
 <dt id="opt-help"><strong><code>-h</code></strong>,
@@ -90,7 +90,7 @@ more efficiently.</p>
 
 <dt id="opt-version"><strong><code>--version</code></strong></dt>
 <dd>Displays the <code>clisp</code> version number, as given by the
- function call <code>(<a href="http://www.lisp.org/Body/fun_lisp-impl_tion-version.html">lisp-implementation-version</a>)</code>.<p/></dd>
+ function call <code>(<a href="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html">lisp-implementation-version</a>)</code>.<p/></dd>
 
 <dt id="opt-license"><strong><code>--license</code></strong></dt>
 <dd>Displays a summary of the licensing information, the
@@ -148,8 +148,8 @@ It is therefore common to specify 10 MB even if only 2 MB are going to be used.
 <dd>Specifies the language <code>clisp</code>
 uses to communicate with the user.
 This may be
-<code>english</code>, <code>deutsch</code>, <code>francais</code>,
-<code>espanol</code>, <code>dutch</code>.
+<code>english</code>, <code>german</code>, <code>french</code>,
+<code>spanish</code>, <code>dutch</code>.
 Other languages may be specified through the environment variable
 <code>LANG</code>,
 provided the corresponding message catalog is installed.
@@ -310,18 +310,18 @@ No <a href="#opt-norc">RC file</a> will be executed.<p/></dd>
 </dl>
 
 
-<h2 id="Reference">Reference</h2>
+<h2 id="reference">Reference</h2>
 
 <p>The language implemented mostly conforms to</p>
-<blockquote title="ANSI-CL" cite="http://www.x3.org/tc_home/j13sd4.htm">
+<blockquote title="ANSI-CL" cite="http://www.ncits.org/tc_home/j13sd4.htm">
  <p>ANSI Common Lisp standard
-    <a href="http://www.x3.org/tc_home/j13sd4.htm">X3.226-1994</a></p>
+    <a href="http://www.ncits.org/tc_home/j13sd4.htm">X3.226-1994</a></p>
 </blockquote>
 
 <p>available online as the</p>
-<blockquote title="CLHS" cite="http://www.lisp.org/HyperSpec/FontMatter/">
+<blockquote title="CLHS" cite="http://www.lisp.org/HyperSpec/FrontMatter/">
  <p>Common Lisp HyperSpec
- (<a href="http://www.lisp.org/HyperSpec/FontMatter/">"CLHS"</a> for short)</p>
+ (<a href="http://www.lisp.org/HyperSpec/FrontMatter/">"CLHS"</a> for short)</p>
 </blockquote>
 
 <p>which supersedes the earlier specifications</p>
@@ -336,7 +336,7 @@ No <a href="#opt-norc">RC file</a> will be executed.<p/></dd>
     Digital Press. 1st edition 1984, 465 pages. ("CLtL1" for short)</p>
 </blockquote>
 
-<h2 id="Use">Use</h2>
+<h2 id="use">Use</h2>
 
 <dl>
 <dt><code>help</code></dt>
@@ -359,7 +359,7 @@ EOF (Ctrl-D)
 <dd>to complete the symbol's name you are just typing.<p/></dd>
 </dl>
 
-<h2 id="Files">Files</h2>
+<h2 id="files">Files</h2>
 
 <dl>
 <dt><code>clisp</code></dt>
@@ -391,14 +391,15 @@ EOF (Ctrl-D)
 </dl>
 
 
-<h2 id="Environment">Environment</h2>
+<h2 id="environment">Environment</h2>
 
 <dl>
  <dt><code>CLISP_LANGUAGE</code></dt>
   <dd>specifies the language <code>clisp</code>
    uses to communicate with the user.
-   The value may be <code>english</code>, <code>deutsch</code>,
-   <code>francais</code> and defaults to <code>english</code>.
+   The value may be <code>english</code>, <code>german</code>,
+   <code>french</code>, <code>spanish</code>, <code>dutch</code>,
+   and defaults to <code>english</code>.
    The <a href="#opt-lang"><code>-L</code></a> option can be used to
    override this environment variable.<p/></dd>
 
@@ -423,13 +424,13 @@ EOF (Ctrl-D)
    The value may begin with a two-letter ISO 639 language code, for example
    <code>en</code>, <code>de</code>, <code>fr</code>.<p/></dd>
 
- <dt><code>HOME</code> and <code>USER</code></dt>
+ <dt><code>HOME</code> and <code>USER</code> (Unix implementation only)</dt>
   <dd>are used for determining the value of the function
-   <code>user-homedir-pathname</code>. (Unix implementation only.)<p/></dd>
+   <code><a href="http://www.lisp.org/HyperSpec/Body/fun_user-homedir-pathname.html">user-homedir-pathname</a></code><p/></dd>
 
  <dt><code>SHELL</code> (Unix implementation only)</dt>
   <dd>is used to find the interactive command interpreter called by
-   <code>(shell)</code>.<p/></dd>
+   <code>(<a href="impnotes.html#shell">shell</a>)</code>.<p/></dd>
 
  <dt><code>TERM</code></dt>
   <dd>determines the screen size recognized by the pretty printer.<p/></dd>
@@ -456,12 +457,11 @@ EOF (Ctrl-D)
 following information:</p>
 
 <ol>
- <li>What is your platform?
-  (<code>"uname -a"</code> on a Unix system)
-  compiler version?  libc (on Linux)?</li>
+ <li>What is your platform (<code>"uname -a"</code> on a Unix system)?
+  Compiler version?  LIBC version (on Linux)?</li>
  <li>Where did you get the sources?  When?
-  (Absolute dates are preferred over the relative ones)</li>
- <li>How did you build <code>clisp</code>? (What command, options etc.)
+  (Absolute dates are preferred over the relative ones).</li>
+ <li>How did you build <code>clisp</code>? (What command, options &amp;c.)
   Please do a clean build (remove your build directory and build
   <code>clisp</code> with <code>"./configure --build build"</code> or at
   least do a <code>"make distclean"</code> before <code>"make"</code>).
@@ -479,7 +479,7 @@ following information:</p>
   messages, as well as detailed instructions on how to reproduce them.</li>
 </ol>
 
-<p>Known bugs, some of which are platform-dependent, include</p>
+<p>Known bugs, some of which may be platform-dependent, include</p>
 <ul>
 <li>Not all extensions from ANSI CL are supported.</li>
 <li>No on-line documentation beyond <code>apropos</code>
