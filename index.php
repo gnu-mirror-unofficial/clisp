@@ -111,7 +111,8 @@
 <td><dl>
  <dt><strong>Home</strong></dt>
   <dd><ul>
-    <li><a href="http://clisp.cons.org/">http://clisp.cons.org/</a></li>
+    <li><a href="http://clisp.cons.org/"
+           ><strong>http://clisp.cons.org/</strong></a> (official)</li>
     <li><a href="http://www.clisp.org/">http://www.clisp.org/</a></li>
     <li><a href="http://clisp.sourceforge.net/"
                 >http://clisp.sourceforge.net/</a></li>
@@ -121,7 +122,7 @@
    Windows, Amiga, Acorn, Mac platforms</strong></dt>
   <dd><ul>
     <li><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
-       >SourceForge downloads/HTTP</a></li>
+           >SourceForge downloads/HTTP</a></li>
     <li><a href="ftp://cvs2.cons.org/pub/lisp/clisp/"
                 >ftp://cvs2.cons.org/pub/lisp/clisp/</a></li>
     <li><a href="http://cvs2.cons.org/ftp-area/clisp/"
@@ -140,12 +141,12 @@
     <li><a href="ftp://tsx-11.mit.edu/pub/linux/packages/lisp/"
            >TSX-11</a> (<strong>very dated!</strong>)</li>
    </ul></dd>
- <dt><strong>Debian packages</strong></dt>
+ <dt><strong>Linux packages</strong></dt>
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
-           >unstable</a> (current)</li>
-    <li><a href="http://packages.debian.org/stable/interpreters/clisp.html"
-           >stable</a> (obsolete)</li>
+           >Debian GNU/Linux</a></li>
+    <li><a href="http://www.gentoo.org/packages/dev-lisp/clisp.html"
+           >Gentoo Linux</a></li>
    </ul></dd>
  <dt><strong>*BSD ports</strong></dt>
   <dd><ul>
