@@ -85,14 +85,36 @@
        <a href="http://www.gnu.org/directory/">Free Software Directory</a>
      - <a href="http://www.gnu.org/directory/clisp.html">CLISP</a> and
        <a href="http://www.gnu.org/search/fsd-search.py?q=lisp">Lisp</a></li>
-   <li><a href="http://freshmeat.net/projects/clisp/">FreshMeat</a></li>
-   <li><a href="http://www.opensourcedirectory.org/projects/clisp/"
-       >Open Source Directory</a></li>
    <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
- <dt><strong>How are <a href="mailto:clisp-list@lists.sourceforge.net">you</a>
-   using CLISP?</strong></dt>
- <dd>Tell us your story!</dd>
+ <dt><strong>Rate CLISP!</strong></dt>
+ <dd><table><tr><td>
+     <form method="post" action="http://freshmeat.net/rate/store/">
+      <fieldset><legend><a href="http://freshmeat.net/projects/clisp/"
+                           >FreshMeat</a></legend>
+       <input type="hidden" name="project_id" value="1341"/>
+       <select name="rating" onchange="submit()">
+        <option value="">--</option><option value="10">10</option>
+        <option value="9">9</option><option value="8">8</option>
+        <option value="7">7</option><option value="6">6</option>
+        <option value="5">5</option><option value="4">4</option>
+        <option value="3">3</option><option value="2">2</option>
+        <option value="1">1</option></select></fieldset></form></td>
+    <td><form method="post" action="http://www.osdir.com/modules.php?op=modload&amp;name=Downloads&amp;file=index">
+      <fieldset><legend><a href="http://www.osdir.com/Downloads-req-viewdownloaddetails-lid-449-ttitle-CLISP.html">OSDir</a></legend>
+       <input type="hidden" name="ratinglid" value="449"/>
+       <input type="hidden" name="ratinguser" value="outside"/>
+       <input type="hidden" name="req" value="addrating"/>
+       <select name="rating" onchange="submit()">
+        <option value="">--</option><option value="10">10</option>
+        <option value="9">9</option><option value="8">8</option>
+        <option value="7">7</option><option value="6">6</option>
+        <option value="5">5</option><option value="4">4</option>
+        <option value="3">3</option><option value="2">2</option>
+        <option value="1">1</option></select></fieldset></form></td>
+ </tr></table></dd>
+ <dt><strong>How are you using CLISP?</strong></dt>
+ <dd><a href="mailto:clisp-list@lists.sourceforge.net?subject='success story'">Tell us your story</a>!</dd>
  </dl></td>
 <td><dl>
  <dt><strong>Home</strong></dt>
@@ -155,9 +177,10 @@
 <tr><th colspan="2">Search</th></tr>
 <tr><td colspan="2">
   <form method="get" action="http://www.google.com/custom">
-   <fieldset><legend><a href="http://www.google.com/search"
-                        ><img src="http://www.google.com/logos/Logo_40wht.gif"
-                              width="128" height="53" alt="Google"/></a></legend>
+   <fieldset>
+    <legend><a href="http://www.google.com/search"
+               ><img src="http://www.google.com/logos/Logo_40wht.gif"
+                     width="128" height="53" alt="Google"/></a></legend>
     <select name="sitesearch">
      <option value="clisp.cons.org">clisp.cons.org</option>
      <option value="cons.org">cons.org</option>
