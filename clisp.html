@@ -136,9 +136,7 @@ symbol-macro <code>*lib-directory*</code>.
  Default is 2 megabytes.
  The argument is constrained above 100 KB.
 -- This version of <code>clisp</code>
-is not likely to actually use the entire <var>memsize</var>
-since garbage collection will periodically reduce the amount of used memory.
-It is therefore common to specify 10 MB even if only 2 MB are going to be used.
+eventually uses the entire <var>memsize</var>.
 <p/></dd>
 
 
@@ -148,11 +146,7 @@ It is therefore common to specify 10 MB even if only 2 MB are going to be used.
 <dd>Specifies the language <code>clisp</code>
 uses to communicate with the user.
 This may be
-<code>english</code>, <code>german</code>, <code>french</code>,
-<code>spanish</code>, <code>dutch</code>.
-Other languages may be specified through the environment variable
-<code>LANG</code>,
-provided the corresponding message catalog is installed.
+<code>english</code>.
 The language may be changed dynamically using the symbol macro
 <a href="impnotes.html#language"><code>*current-language*</code></a>,
 <p/></dd>
@@ -217,8 +211,9 @@ and allow interactive handling of <code>ASSERT</code> and friends.</dd>
  interacts in a way that ILISP can deal with.
  Currently the only effect of this is that unnecessary prompts are not
  suppressed.
- Furthermore, the GNU readline library treats Tab as a
- normal self-inserting character.
+ Furthermore, the GNU readline library treats
+ <a href="#completion">Tab</a> as a normal self-inserting character,
+ so you should always use this option when you invoke CLISP from Emacs.
 <p/></dd>
 
 <dt id="opt-ansi"><strong><code>-ansi</code></strong></dt>
@@ -342,21 +337,37 @@ No <a href="#opt-norc">RC file</a> will be executed.<p/></dd>
 <dt><code>help</code></dt>
 <dd>to get some on-line help.<p/></dd>
 
-<dt><code>(apropos </code><var>name</var><code>)</code></dt>
-<dd>lists the symbols relating to <var>name</var>.<p/></dd>
+<dt><code>(apropos <var>name</var>)</code></dt>
+<dd><a href="impnotes.html#apropos">lists the symbols</a> related
+ to <var>name</var>.<p/></dd>
 
 <dt><code>(exit)</code> or <code>(quit)</code> or <code>(bye)</code></dt>
-<dd>to quit <code>clisp</code>.<p/></dd>
+<dd>to <a href="quit">quit</a> <code>clisp</code>.<p/></dd>
 
 <dt>
 EOF (Ctrl-D)
 </dt><dd>to leave the current read-eval-print loop.<p/></dd>
 
 <dt>arrow keys</dt>
-<dd>for editing and viewing the input history.<p/></dd>
+<dd>for editing and viewing the input history, using
+ <a href="http://cnswww.cns.cwru.edu/~chet/readline/rluserman.html">GNU
+ readline</a>.<p/></dd>
 
-<dt>Tab key</dt>
-<dd>to complete the symbol's name you are just typing.<p/></dd>
+<dt id="completion">Tab key</dt>
+<dd>Context sensitive:
+ <ul><li>If you are in the "function position" (in the first symbol
+   after an opening paren or in the first symbol after
+   a <code>#'</code>), the completion is limited to the symbols that
+   name functions.</li>
+  <li>If you are in the "filename position" (inside a string
+   after <code>#P</code>), the completion is done across file names,
+   <a href="http://www.gnu.org/software/bash/">bash</a>-style.
+  <li>If you have not started typing the next symbol (i.e., you are at
+   a whitespace), the current function or macro is
+   <a href="http://www.lisp.org/HyperSpec/Body/fun_describe.html"
+      >DESCRIBE</a>d.</li>
+  <li>Otherwise, the symbol you are currently typing is completed.</li></ul>
+ <p/></dd>
 </dl>
 
 <h2 id="files">Files</h2>
@@ -399,7 +410,7 @@ EOF (Ctrl-D)
    uses to communicate with the user.
    The value may be <code>english</code>, <code>german</code>,
    <code>french</code>, <code>spanish</code>, <code>dutch</code>,
-   and defaults to <code>english</code>.
+   <code>russian</code>, and defaults to <code>english</code>.
    The <a href="#opt-lang"><code>-L</code></a> option can be used to
    override this environment variable.<p/></dd>
 
