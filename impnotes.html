@@ -30,11 +30,11 @@
 
 <p>Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1 or any
-later version published by the Free Software Foundation; with the
-Invariant Sections being this section [FIXME], with the Front-Cover Texts
-being this section [FIXME], and with the Back-Cover Texts being this
-section [FIXME]. A copy of the license is not yet [FIXME] included in the
-section entitled "GNU Free Documentation License".</p>
+later version published by the Free Software Foundation; with no
+Invariant Sections, with the Front-Cover Text
+being this section, and with no Back-Cover Texts.
+A copy of the license is not included in this text yet (it will be in the
+next version), but is available on the Internet (see above).</p>
 </div>
 </div>
 
@@ -1173,7 +1173,7 @@ target="_top"><b>Common Lisp</b></a> by</p>
 </div>
 </blockquote>
 
-and 
+and
 
 <blockquote class="blockquote">
 <div class="address">Dr&nbsp;Michael&nbsp;Stoll<br>
@@ -1185,13 +1185,13 @@ and
 </div>
 </blockquote>
 
-The current maintainers are 
+The current maintainers are
 
 <blockquote class="blockquote">
 <div class="address">Dr&nbsp;Bruno&nbsp;Haible</div>
 </blockquote>
 
-and 
+and
 
 <blockquote class="blockquote">
 <div class="address">Dr&nbsp;Sam&nbsp;Steingold<br>
@@ -7273,7 +7273,7 @@ code between 32 and 126 (inclusive).</p>
 
 </div>
 
-and the international alphabetic characters from the character set: 
+and the international alphabetic characters from the character set:
 
 <div class="literallayout"><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&Ccedil;&uuml;&eacute;&acirc;&auml;&agrave;&aring;&ccedil;&ecirc;&euml;&egrave;&iuml;&icirc;&igrave;&Auml;&Aring;&Eacute;&aelig;&AElig;&ocirc;&ouml;&ograve;&ucirc;&ugrave;&yuml;&Ouml;&Uuml;&szlig;&aacute;&iacute;&oacute;&uacute;&ntilde;&Ntilde;&ordf;&ordm;&atilde;&otilde;&Oslash;&oslash;&Agrave;&Atilde;&Otilde;&nbsp;etc.<br>
@@ -23259,19 +23259,19 @@ even places with multiple values. Example:</p>
  (letf (((values a b) form)) ...)
 </pre>
 
-is equivalent to 
+is equivalent to
 
 <pre class="programlisting">
  (multiple-value-bind (a b) form ...)
 </pre>
 
-while 
+while
 
 <pre class="programlisting">
 (letf (((first l) 7)) ...)
 </pre>
 
-is approximately equivalent to 
+is approximately equivalent to
 
 <pre class="programlisting">
  (<a href="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
@@ -23863,26 +23863,26 @@ $ clisp-link create-module-set linux /<i><tt>somewhere</tt></i>/bindings/linux.c
 </pre>
 
 Modify the newly created <tt>linux/link.sh</tt> to add <tt>-lm</tt>; to
-the libraries: replace 
+the libraries: replace
 
 <pre class="programlisting">
 NEW_LIBS="$file_list"
 </pre>
 
-with 
+with
 
 <pre class="programlisting">
 NEW_LIBS="$file_list -lm"
 </pre>
 
 Modify the newly created <tt>linux/link.sh</tt> to load <tt>linux.fas</tt>
-before saving the memory image: replace 
+before saving the memory image: replace
 
 <pre class="programlisting">
 TO_LOAD=''
 </pre>
 
-with 
+with
 
 <pre class="programlisting">
 TO_LOAD='/<i><tt>somewhere</tt></i>/bindings/linux.fas'
@@ -24105,7 +24105,7 @@ non-<a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target=
       #S(match :start 27 :end 32)
     (match "quick" "The quick brown fox jumped quickly." :start 8 :end 30)
      NIL
-  
+
 </pre>
 </div>
 
@@ -24169,7 +24169,7 @@ wants a regular expression.</p>
 <pre class="programlisting">
     (regexp-quote "^The cat$")
      "\\^The cat\\$"
-  
+
 </pre>
 </div>
 
@@ -25523,7 +25523,7 @@ struct foo {
 };
 </pre>
 
-corresponds to 
+corresponds to
 
 <pre class="programlisting">
 (def-c-struct foo
@@ -25540,7 +25540,7 @@ struct foo f;
 f.b[7].a
 </pre>
 
-corresponds to 
+corresponds to
 
 <pre class="programlisting">
 (declare (type foo f))
@@ -25571,7 +25571,7 @@ my_struct-&gt;a = 5;
 my_struct = my_struct-&gt;n;
 </pre>
 
-corresponds to 
+corresponds to
 
 <pre class="programlisting">
 (def-c-struct bar
@@ -25611,7 +25611,7 @@ typedef struct {
 extern div_t div (int numer, int denom);
 </pre>
 
-This translates to 
+This translates to
 
 <pre class="programlisting">
 (def-c-struct div_t
@@ -25621,7 +25621,7 @@ This translates to
                     (:return-type div_t))
 </pre>
 
-Sample call from within Lisp: 
+Sample call from within Lisp:
 
 <pre class="programlisting">
 &gt; (div 20 3)
@@ -25659,7 +25659,7 @@ It is possible to call this function from Lisp using the file
 <tt>callcfun.lisp</tt> (do not call it <tt>cfun.lisp</tt> - <a href=
 "http://www.lisp.org/HyperSpec/Body/fun_compile-file.html" target=
 "_top"><tt>COMPILE-FILE</tt></a> would overwrite <tt>cfun.c</tt>) whose
-contents is: 
+contents is:
 
 <pre class="programlisting">
 (<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target=
@@ -25677,7 +25677,7 @@ contents is:
         '#(0 1 2 3 4 5 6 7 8 9)))
 </pre>
 
-Use the module facility: 
+Use the module facility:
 
 <pre class="programlisting">
 $ clisp-link create-module-set cfun callcfun.c
@@ -25746,7 +25746,7 @@ void lispsort_double (int n, double * array) {
 }
 </pre>
 
-This is accompanied by <tt>sort2.lisp</tt>: 
+This is accompanied by <tt>sort2.lisp</tt>:
 
 <pre class="programlisting">
 (use-package "FFI")
@@ -25766,7 +25766,7 @@ This is accompanied by <tt>sort2.lisp</tt>:
   (sort v #'&lt;))
 </pre>
 
-To test this, use the following test file <tt>sorttest.lisp</tt>: 
+To test this, use the following test file <tt>sorttest.lisp</tt>:
 
 <pre class="programlisting">
 (def-call-out sort10
@@ -25777,7 +25777,7 @@ To test this, use the following test file <tt>sorttest.lisp</tt>:
                                  :in-out)))
 </pre>
 
-Now try 
+Now try
 
 <pre class="programlisting">
 $ clisp-link create-module-set sort sort2.c sorttest.c
