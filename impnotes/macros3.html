@@ -1,699 +1,80 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Extensions-1.10. Additional Fancy Macros</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REV="MADE"
-HREF="mailto:clisp-list@sf.net"><LINK
-REL="HOME"
-TITLE="Implementation Notes for GNU CLISP."
-HREF="impnotes-top.html"><LINK
-REL="UP"
-TITLE="Extensions-1: Platform independent Extensions"
-HREF="p-indep.html"><LINK
-REL="PREVIOUS"
-TITLE="Extensions-1.9. Maximum ANSI CL compliance"
-HREF="ansi.html"><LINK
-REL="NEXT"
-TITLE="Extensions-1.11. Customizing CLISP behavior."
-HREF="customize.html"><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="impnotes.css"></HEAD
-><BODY
-CLASS="section"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->Implementation Notes for <A
-HREF="http://www.gnu.org"
-TARGET="_top"
->GNU</A
-> <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
->.: These notes document <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> version 2.31.</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="ansi.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->Chapter 29. Extensions-1: Platform independent Extensions</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="customize.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="macros3"
-></A
->29.10. Extensions-1.10. Additional Fancy Macros</H1
-><P
-ALIGN="justify"
-><A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> comes with some extension macros, mostly defined in the
- file <TT
-CLASS="filename"
->macros3.lisp</TT
-> and loaded from the file
- <TT
-CLASS="filename"
->init.lisp</TT
-> during <B
-CLASS="command"
->make</B
->:</P
-><DIV
-CLASS="formalpara"
-><P
-><A
-NAME="ethe"
-></A
-><B
->Macro <A
-HREF="macros3.html#ethe"
-><TT
-CLASS="function"
->EXT:ETHE</TT
-></A
->. </B
-><TT
-CLASS="sexp"
->(<A
-HREF="macros3.html#ethe"
-><TT
-CLASS="function"
->EXT:ETHE</TT
-></A
-> <TT
-CLASS="replaceable"
-><I
->value-type</I
-></TT
-> <TT
-CLASS="replaceable"
-><I
->form</I
-></TT
->)</TT
->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>29.10. Extensions-1.10. Additional Fancy Macros</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="p-indep.html" title="Chapter 29. Extensions-1: Platform independent Extensions" /><link rel="previous" href="ansi.html" title="29.9. Extensions-1.9. Maximum ANSI CL compliance" /><link rel="next" href="customize.html" title="29.11. Extensions-1.11. Customizing CLISP behavior." /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">29.10. Extensions-1.10. Additional Fancy Macros</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ansi.html">Prev</a> </td><th width="60%" align="center">Chapter 29. Extensions-1: Platform independent Extensions</th><td width="20%" align="right"> <a accesskey="n" href="customize.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="macros3"></a>29.10. Extensions-1.10. Additional Fancy Macros</h2></div></div><div></div></div><p><a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> comes with some extension macros, mostly defined in the
+ file <tt class="filename">macros3.lisp</tt> and loaded from the file
+ <tt class="filename">init.lisp</tt> during <span><b class="command">make</b></span>:</p><p><a id="ethe"></a><b>Macro <a href="macros3.html#ethe"><tt class="function">EXT:ETHE</tt></a>. </b><tt class="sexp">(<a href="macros3.html#ethe"><tt class="function">EXT:ETHE</tt></a> <i class="replaceable"><tt>value-type</tt></i> <i class="replaceable"><tt>form</tt></i>)</tt>
  enforces a type check in both interpreted and compiled code.
- </P
-></DIV
-><DIV
-CLASS="formalpara"
-><P
-><A
-NAME="letf"
-></A
-><B
->Macros <A
-HREF="macros3.html#letf"
-><TT
-CLASS="function"
->EXT:LETF</TT
-></A
-> &#38; <A
-HREF="macros3.html#letf"
-><TT
-CLASS="function"
->EXT:LETF*</TT
-></A
->. </B
->These macros are similar to <A
-HREF="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
-TARGET="_top"
-><TT
-CLASS="function"
->LET</TT
-></A
-> and <A
-HREF="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
-TARGET="_top"
-><TT
-CLASS="function"
->LET*</TT
-></A
->, respectively,
- except that they can bind <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
-TARGET="_top"
->place</A
->s, even <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
-TARGET="_top"
->place</A
->s with <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
-TARGET="_top"
->multiple values</A
->.
+ </p><p><a id="letf"></a><b>Macros <a href="macros3.html#letf"><tt class="function">EXT:LETF</tt></a> &amp; <a href="macros3.html#letf"><tt class="function">EXT:LETF*</tt></a>. </b>These macros are similar to <a href="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html" target="_top"><tt class="function">LET</tt></a> and <a href="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html" target="_top"><tt class="function">LET*</tt></a>, respectively,
+ except that they can bind <a href="http://www.lisp.org/HyperSpec/Body/glo_p.html#place" target="_top">place</a>s, even <a href="http://www.lisp.org/HyperSpec/Body/glo_p.html#place" target="_top">place</a>s with <a href="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values" target="_top">multiple values</a>.
  Example:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13; (letf (((values a b) form)) ...)
-</PRE
-></TD
-></TR
-></TABLE
->
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+ (letf (((values a b) form)) ...)
+</pre></td></tr></table><p>
 
 is equivalent to
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13; (multiple-value-bind (a b) form ...)
-</PRE
-></TD
-></TR
-></TABLE
->
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+ (multiple-value-bind (a b) form ...)
+</pre></td></tr></table><p>
 
 while
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;(letf (((first l) 7)) ...)
-</PRE
-></TD
-></TR
-></TABLE
->
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+(letf (((first l) 7)) ...)
+</pre></td></tr></table><p>
 
 is approximately equivalent to
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13; (<A
-HREF="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
-TARGET="_top"
-><TT
-CLASS="function"
->LET*</TT
-></A
-> ((#:g1 l) (#:g2 (first #:g1)))
-   (<A
-HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
-TARGET="_top"
-><TT
-CLASS="function"
->UNWIND-PROTECT</TT
-></A
-> (<A
-HREF="http://www.lisp.org/HyperSpec/Body/speope_progn.html"
-TARGET="_top"
-><TT
-CLASS="function"
->PROGN</TT
-></A
-> (<A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
-TARGET="_top"
-><TT
-CLASS="function"
->SETF</TT
-></A
-> (first #:g1) 7) ...)
-      (<A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
-TARGET="_top"
-><TT
-CLASS="function"
->SETF</TT
-></A
-> (first #:g1) #:g2)))
-</PRE
-></TD
-></TR
-></TABLE
->
-</P
-></DIV
-><DIV
-CLASS="formalpara"
-><P
-><A
-NAME="with-collect"
-></A
-><B
->Macro <TT
-CLASS="function"
->EXT:WITH-COLLECT</TT
->. </B
->Similar to the <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_loop.html"
-TARGET="_top"
-><TT
-CLASS="function"
->LOOP</TT
-></A
->'s
- <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_6-1-3.html"
-TARGET="_top"
-><TT
-CLASS="constant"
->collect</TT
-></A
->
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+ (<a href="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html" target="_top"><tt class="function">LET*</tt></a> ((#:g1 l) (#:g2 (first #:g1)))
+   (<a href="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html" target="_top"><tt class="function">UNWIND-PROTECT</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/speope_progn.html" target="_top"><tt class="function">PROGN</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a> (first #:g1) 7) ...)
+      (<a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a> (first #:g1) #:g2)))
+</pre></td></tr></table><p>
+</p><p><a id="with-collect"></a><b>Macro <tt class="function">EXT:WITH-COLLECT</tt>. </b>Similar to the <a href="http://www.lisp.org/HyperSpec/Body/mac_loop.html" target="_top"><tt class="function">LOOP</tt></a>'s
+ <a href="http://www.lisp.org/HyperSpec/Body/sec_6-1-3.html" target="_top"><tt class="constant">collect</tt></a>
  construct, except that it is looks more "Lispy" and can appear
- arbitrarily deep.  It defines local macros (with <A
-HREF="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html"
-TARGET="_top"
-><TT
-CLASS="function"
->MACROLET</TT
-></A
->) which
+ arbitrarily deep.  It defines local macros (with <a href="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html" target="_top"><tt class="function">MACROLET</tt></a>) which
  collect objects given to it into lists, which are then returned as
- <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
-TARGET="_top"
->multiple values</A
->.  E.g.,
+ <a href="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values" target="_top">multiple values</a>.  E.g.,
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13; (ext:with-collect (c0 c1)
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+ (ext:with-collect (c0 c1)
    (dotimes (i 10) (if (oddp i) (c0 i) (c1 i))))
-</PRE
-></TD
-></TR
-></TABLE
->
+</pre></td></tr></table><p>
 
-returns two lists <TT
-CLASS="sexp"
->(1 3 5 7 9)</TT
-> and
-<TT
-CLASS="sexp"
->(0 2 4 6 8)</TT
-> as <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
-TARGET="_top"
->multiple values</A
->.
-</P
-></DIV
-><DIV
-CLASS="formalpara"
-><P
-><A
-NAME="with-gensyms"
-></A
-><B
->Macro <TT
-CLASS="function"
->EXT:WITH-GENSYMS</TT
->. </B
->Similar to its namesake from
- <A
-HREF="http://www.paulgraham.com/"
-TARGET="_top"
->Paul Graham</A
->'s book
- <A
-HREF="http://www.paulgraham.com/onlisp.html"
-TARGET="_top"
-><SPAN
-CLASS="QUOTE"
->"On
-  Lisp"</SPAN
-></A
->, this macro is useful for writing other macros:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13; (with-gensyms ("FOO-" bar baz zot) ...)
-</PRE
-></TD
-></TR
-></TABLE
->
+returns two lists <tt class="data">(1 3 5 7 9)</tt> and
+<tt class="data">(0 2 4 6 8)</tt> as <a href="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values" target="_top">multiple values</a>.
+</p><p><a id="with-gensyms"></a><b>Macro <tt class="function">EXT:WITH-GENSYMS</tt>. </b>Similar to its namesake from
+ <a href="http://www.paulgraham.com/" target="_top">Paul Graham</a>'s book
+ <a href="http://www.paulgraham.com/onlisp.html" target="_top">“<span class="quote">On
+  Lisp</span>”</a>, this macro is useful for writing other macros:
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+ (with-gensyms ("FOO-" bar baz zot) ...)
+</pre></td></tr></table><p>
 expands to
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13; (let ((bar (gensym "FOO-BAR-"))
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+ (let ((bar (gensym "FOO-BAR-"))
        (baz (gensym "FOO-BAZ-"))
        (zot (gensym "FOO-ZOT-")))
    ...)
-</PRE
-></TD
-></TR
-></TABLE
->
-</P
-></DIV
-><DIV
-CLASS="formalpara"
-><P
-><A
-NAME="remove-plist"
-></A
-><B
->Function <TT
-CLASS="function"
->EXT:REMOVE-PLIST</TT
->. </B
->Similar to <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
-TARGET="_top"
-><TT
-CLASS="function"
->REMOVE</TT
-></A
-> and <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_remf.html"
-TARGET="_top"
-><TT
-CLASS="function"
->REMF</TT
-></A
->, this function removes some
+</pre></td></tr></table><p>
+</p><p><a id="remove-plist"></a><b>Function <tt class="function">EXT:REMOVE-PLIST</tt>. </b>Similar to <a href="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html" target="_top"><tt class="function">REMOVE</tt></a> and <a href="http://www.lisp.org/HyperSpec/Body/mac_remf.html" target="_top"><tt class="function">REMF</tt></a>, this function removes some
  properties from a property list.  It is non-destructve and thus can be
- used on <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
-TARGET="_top"
-><TT
-CLASS="literal"
->&#38;REST</TT
-></A
-> arguments to remove some keyword parameters, e.g.,
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13; (defmacro with-foo ((<A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
-TARGET="_top"
-><TT
-CLASS="literal"
->&#38;KEY</TT
-></A
-> foo1 foo2) <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
-TARGET="_top"
-><TT
-CLASS="literal"
->&#38;BODY</TT
-></A
-> body)
+ used on <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;REST</tt></a> arguments to remove some keyword parameters, e.g.,
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+ (defmacro with-foo ((<a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a> foo1 foo2) <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html" target="_top"><tt class="literal">&amp;BODY</tt></a> body)
    `(... ,foo1 ... ,foo2 ... ,@body))
- (defmacro with-foo-bar ((<A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
-TARGET="_top"
-><TT
-CLASS="literal"
->&#38;REST</TT
-></A
-> opts <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
-TARGET="_top"
-><TT
-CLASS="literal"
->&#38;KEY</TT
-></A
-> bar1 bar2
-                          <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
-TARGET="_top"
-><TT
-CLASS="literal"
->&#38;ALLOW-OTHER-KEYS</TT
-></A
->)
-                         <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
-TARGET="_top"
-><TT
-CLASS="literal"
->&#38;BODY</TT
-></A
-> body)
+ (defmacro with-foo-bar ((<a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;REST</tt></a> opts <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a> bar1 bar2
+                          <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;ALLOW-OTHER-KEYS</tt></a>)
+                         <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html" target="_top"><tt class="literal">&amp;BODY</tt></a> body)
    `(with-foo (,@(remove-plist opts :bar1 :bar2)
       ... ,bar1 ... ,bar2 ... ,@body)))
  (defun foo-bar ()
    (with-foo-bar (:bar1 1 :foo2 2) ...))
-</PRE
-></TD
-></TR
-></TABLE
->
-here <TT
-CLASS="function"
->WITH-FOO</TT
-> does not receive the
-<TT
-CLASS="literal"
->:BAR1 1</TT
-> argument from <TT
-CLASS="function"
->FOO-BAR</TT
->.
-</P
-></DIV
-><DIV
-CLASS="formalpara"
-><P
-><A
-NAME="html-http-output"
-></A
-><B
->Macros <TT
-CLASS="function"
->EXT:WITH-HTML-OUTPUT</TT
-> and
-                   <TT
-CLASS="function"
->EXT:WITH-HTTP-OUTPUT</TT
->. </B
->Defined in <TT
-CLASS="filename"
->inspect.lisp</TT
->, these macros are useful
- for the rudimentary <A
-HREF="http://www.w3.org/Protocols/"
-TARGET="_top"
-><B
-CLASS="command"
->HTTP</B
-></A
-> server defined there.</P
-></DIV
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="ansi.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="impnotes-top.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="customize.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Extensions-1.9. Maximum ANSI CL compliance</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="p-indep.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Extensions-1.11. Customizing <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> behavior.</TD
-></TR
-></TABLE
-></DIV
-><div
-class="custom-footer"
-><hr
-width="100%"><table
-width="100%"
-><tr
-><td
-align="left"
-><a
-href="http://clisp.cons.org"
-><img
-src="clisp.png"
-width="48"
-height="48"
-alt="[CLISP home]"></a
-></td
-><td
-align="center"
-><a
-href="http://www.gnu.org"
-><img
-src="http://www.gnu.org/graphics/gnubanner.jpg"
-width="468"
-height="60"
-alt="[Come and see what GNU creates for YOU]"></a
-></td
-><td
-align="right"
-><a
-href="http://sourceforge.net"
-><img
-src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
-width="125"
-height="37"
-alt="[SourceForge]"></a
-></td
-></tr
-></table
-></div
-></BODY
-></HTML
->
+</pre></td></tr></table><p>
+here <tt class="function">WITH-FOO</tt> does not receive the
+<tt class="literal">:BAR1 1</tt> argument from <tt class="function">FOO-BAR</tt>.
+</p><p><a id="html-http-output"></a><b>Macros <tt class="function">EXT:WITH-HTML-OUTPUT</tt> and
+                   <tt class="function">EXT:WITH-HTTP-OUTPUT</tt>. </b>Defined in <tt class="filename">inspect.lisp</tt>, these macros are useful
+ for the rudimentary <a href="http://www.w3.org/Protocols/" target="_top"><span><b class="command">HTTP</b></span></a> server defined there.</p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ansi.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="p-indep.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="customize.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">29.9. Extensions-1.9. Maximum ANSI CL compliance </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 29.11. Extensions-1.11. Customizing <span><b class="command">CLISP</b></span> behavior.</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>

@@ -1,367 +1,53 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Treatment of Newline during Input and Output
-   [CLHS-13.1.8]</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REV="MADE"
-HREF="mailto:clisp-list@sf.net"><LINK
-REL="HOME"
-TITLE="Implementation Notes for GNU CLISP."
-HREF="impnotes-top.html"><LINK
-REL="UP"
-TITLE="Characters
-   [CLHS-13]"
-HREF="characters.html"><LINK
-REL="PREVIOUS"
-TITLE="Ordering of Characters
-   [CLHS-13.1.6]"
-HREF="char-ord.html"><LINK
-REL="NEXT"
-TITLE="Character Encodings
-   [CLHS-13.1.9]"
-HREF="char-int.html"><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="impnotes.css"></HEAD
-><BODY
-CLASS="section"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->Implementation Notes for <A
-HREF="http://www.gnu.org"
-TARGET="_top"
->GNU</A
-> <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
->.: These notes document <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> version 2.31.</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="char-ord.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->Chapter 13. Characters
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
-TARGET="_top"
->[CLHS-13]</A
-></TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="char-int.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="section"
-><H1
-CLASS="section"
-><A
-NAME="clhs-newline"
-></A
->13.9. Treatment of Newline during Input and Output
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-8.html"
-TARGET="_top"
->[CLHS-13.1.8]</A
-></H1
-><P
-ALIGN="justify"
->Newlines are written according to the stream's <A
-HREF="encoding.html"
-><TT
-CLASS="classname"
->EXT:ENCODING</TT
-></A
->, see the
- function <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-external-format.html"
-TARGET="_top"
-><TT
-CLASS="function"
->STREAM-EXTERNAL-FORMAT</TT
-></A
-> and the description of <A
-HREF="encoding.html"
-><TT
-CLASS="classname"
->EXT:ENCODING</TT
-></A
->s,
- in particular, <A
-HREF="encoding.html#newline"
->line terminator</A
->s.
- The default behavior is as follows:</P
-><P
-></P
-><DIV
-CLASS="variablelist"
-><DL
-><DT
->Platform dependent: <A
-HREF="http://www.freedos.org/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->DOS</B
-></A
->, <A
-HREF="http://www.os2.org/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->OS/2</B
-></A
->, <A
-HREF="http://www.willows.com/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->Win32</B
-></A
->
-   platforms only.</DT
-><DD
-><P
-ALIGN="justify"
->When writing to a file, <SPAN
-CLASS="keysym"
->#\Newline</SPAN
-> is converted to
- <SPAN
-CLASS="keycode"
->CR</SPAN
->/<SPAN
-CLASS="keycode"
->LF</SPAN
->. (This is the usual convention on <A
-HREF="http://www.freedos.org/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->DOS</B
-></A
->.)
- For example, <SPAN
-CLASS="keysym"
->#\Return</SPAN
->+<SPAN
-CLASS="keysym"
->#\Newline</SPAN
-> is written as <SPAN
-CLASS="keycode"
->CR</SPAN
->/<SPAN
-CLASS="keycode"
->CR</SPAN
->/<SPAN
-CLASS="keycode"
->LF</SPAN
->.
-</P
-></DD
-></DL
-></DIV
-><P
-ALIGN="justify"
->When reading from a file, <SPAN
-CLASS="keycode"
->CR</SPAN
->/<SPAN
-CLASS="keycode"
->LF</SPAN
-> is converted to <SPAN
-CLASS="keysym"
->#\Newline</SPAN
->
- (the usual convention on <A
-HREF="http://www.freedos.org/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->DOS</B
-></A
->), and <SPAN
-CLASS="keycode"
->CR</SPAN
-> not followed by <SPAN
-CLASS="keycode"
->LF</SPAN
-> is
- converted to <SPAN
-CLASS="keysym"
->#\Newline</SPAN
-> as well (the usual conversion on MacOS, also used
- by some programs on <A
-HREF="http://www.willows.com/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->Win32</B
-></A
->).</P
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="char-ord.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="impnotes-top.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="char-int.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Ordering of Characters
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-6.html"
-TARGET="_top"
->[CLHS-13.1.6]</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="characters.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Character Encodings
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-9.html"
-TARGET="_top"
->[CLHS-13.1.9]</A
-></TD
-></TR
-></TABLE
-></DIV
-><div
-class="custom-footer"
-><hr
-width="100%"><table
-width="100%"
-><tr
-><td
-align="left"
-><a
-href="http://clisp.cons.org"
-><img
-src="clisp.png"
-width="48"
-height="48"
-alt="[CLISP home]"></a
-></td
-><td
-align="center"
-><a
-href="http://www.gnu.org"
-><img
-src="http://www.gnu.org/graphics/gnubanner.jpg"
-width="468"
-height="60"
-alt="[Come and see what GNU creates for YOU]"></a
-></td
-><td
-align="right"
-><a
-href="http://sourceforge.net"
-><img
-src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
-width="125"
-height="37"
-alt="[SourceForge]"></a
-></td
-></tr
-></table
-></div
-></BODY
-></HTML
->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>13.9. Treatment of Newline during Input and Output
+   [CLHS-13.1.8]</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="characters.html" title="Chapter 13. Characters&#10;   [CLHS-13]" /><link rel="previous" href="char-ord.html" title="13.8. Ordering of Characters&#10;   [CLHS-13.1.6]" /><link rel="next" href="char-int.html" title="13.10. Character Encodings&#10;   [CLHS-13.1.9]" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">13.9. Treatment of Newline during Input and Output
+   [CLHS-13.1.8]</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="char-ord.html">Prev</a> </td><th width="60%" align="center">Chapter 13. Characters
+   [CLHS-13]</th><td width="20%" align="right"> <a accesskey="n" href="char-int.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="clhs-newline"></a>13.9. Treatment of Newline during Input and Output
+   <a href="http://www.lisp.org/HyperSpec/Body/sec_13-1-8.html" target="_top">[CLHS-13.1.8]</a></h2></div></div><div></div></div><p>Newlines are written according to the stream's <a href="encoding.html" title="29.4. Extensions-1.4. Encodings"><tt class="classname">EXT:ENCODING</tt></a>, see the
+ function <a href="http://www.lisp.org/HyperSpec/Body/fun_stream-external-format.html" target="_top"><tt class="function">STREAM-EXTERNAL-FORMAT</tt></a> and the description of <a href="encoding.html" title="29.4. Extensions-1.4. Encodings"><tt class="classname">EXT:ENCODING</tt></a>s,
+ in particular, <a href="encoding.html#newline" title="29.4.3. Line Terminators">line terminator</a>s.
+ The default behavior is as follows:</p>
+<!--#if defined(WIN32) || (defined(UNIX) && (O_BINARY != 0))--><div class="variablelist"><dl><dt>Platform dependent: <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>
+   platforms only.</dt><dd>When writing to a file, <span class="keysym">#\Newline</span> is converted to
+ <span class="keycode">CR</span>/<span class="keycode">LF</span>. (This is the usual convention on <a href="http://www.freedos.org/" target="_top"><strong>DOS</strong></a>.)
+ For example, <span class="keysym">#\Return</span>+<span class="keysym">#\Newline</span> is written as <span class="keycode">CR</span>/<span class="keycode">CR</span>/<span class="keycode">LF</span>.
+</dd></dl></div>
+<!--#endif-->
+<p>When reading from a file, <span class="keycode">CR</span>/<span class="keycode">LF</span> is converted to <span class="keysym">#\Newline</span>
+ (the usual convention on <a href="http://www.freedos.org/" target="_top"><strong>DOS</strong></a>), and <span class="keycode">CR</span> not followed by <span class="keycode">LF</span> is
+ converted to <span class="keysym">#\Newline</span> as well (the usual conversion on MacOS, also used
+ by some programs on <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>).
+ If you do not want this, i.e., if you really want to distinguish
+ <span class="keycode">LF</span>, <span class="keycode">CR</span> and <span class="keycode">CR</span>/<span class="keycode">LF</span>, you have to resort to
+ binary input (function <a href="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html" target="_top"><tt class="function">READ-BYTE</tt></a>).</p><p><b>Justification. </b><a href="http://www.unicode.org/reports/tr13/tr13-9.html" target="_top">Unicode
+  Newline Guidelines</a> say: “<span class="quote">Even if you know which
+  characters represents NLF on your particular platform, on input and in
+  interpretation, treat CR, LF, CRLF, and NEL the same. Only on output do
+  you need to distinguish between them.</span>”</p><p><b>Rationale. </b>In <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>, <span class="keysym">#\Newline</span> is identical to <span class="keysym">#\Linefeed</span>
+ (which is specifically permitted by [<span class="citation"><a href="references.html#ansi-cl">ANSI CL standard</a></span>] in section
+ <a href="http://www.lisp.org/HyperSpec/Body/sec_13-1-7.html" target="_top">Character
+  Names</a>).
+ Consider a file containing exactly this string:
+ <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_concatenate.html" target="_top"><tt class="function">CONCATENATE</tt></a> 'string "foo" (string <span class="keysym">#\Linefeed</span>)
+  "bar" (string <span class="keysym">#\Return</span>) (string <span class="keysym">#\Linefeed</span>))</tt>
+ Suppose we open it with
+ <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_open.html" target="_top"><tt class="function">OPEN</tt></a> "foo" <a href="stream-dict.html#extfmt"><tt class="constant">:EXTERNAL-FORMAT</tt></a> <tt class="constant">:DOS</tt>)</tt>.
+ What should <a href="http://www.lisp.org/HyperSpec/Body/fun_read-line.html" target="_top"><tt class="function">READ-LINE</tt></a> return?
+ Right now, it returns <tt class="literal">"foo"</tt> (the second <a href="http://www.lisp.org/HyperSpec/Body/fun_read-line.html" target="_top"><tt class="function">READ-LINE</tt></a>
+ returns <tt class="literal">"bar"</tt> and reaches <a href="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file" target="_top"><tt class="literal">end-of-stream</tt></a>).
+ If our i/o were "faithful", <a href="http://www.lisp.org/HyperSpec/Body/fun_read-line.html" target="_top"><tt class="function">READ-LINE</tt></a> would have returned the string
+ <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_concatenate.html" target="_top"><tt class="function">CONCATENATE</tt></a> 'string "foo" (string <span class="keysym">#\Linefeed</span>)
+  "bar")</tt>, i.e., a string with an embedded <span class="keysym">#\Newline</span>
+ between <tt class="literal">"foo"</tt> and <tt class="literal">"bar"</tt> (because
+ a single <span class="keysym">#\Linefeed</span> is not a <span class="keysym">#\Newline</span> in the specified <a href="stream-dict.html#extfmt"><tt class="constant">:EXTERNAL-FORMAT</tt></a>, it will not
+ make <a href="http://www.lisp.org/HyperSpec/Body/fun_read-line.html" target="_top"><tt class="function">READ-LINE</tt></a> return, but it <span class="emphasis"><em>is</em></span> a CLISP <span class="keysym">#\Newline</span>!)
+ Even though the specification for <a href="http://www.lisp.org/HyperSpec/Body/fun_read-line.html" target="_top"><tt class="function">READ-LINE</tt></a> does not explicitly
+ forbids newlines inside the returned string, such behavior would be
+ quite surprising, to say the least.
+ Moreover, this line (with an embedded <span class="keysym">#\Newline</span>) would be written as two
+ lines (when writing to a <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> with <a href="stream-dict.html#extfmt"><tt class="constant">:EXTERNAL-FORMAT</tt></a> of <tt class="constant">:DOS</tt>), because
+ the embedded <span class="keysym">#\Newline</span> would be written as <span class="keycode">CR</span>+<span class="keycode">LF</span>.
+</p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="char-ord.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="characters.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="char-int.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">13.8. Ordering of Characters
+   [CLHS-13.1.6] </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 13.10. Character Encodings
+   [CLHS-13.1.9]</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>

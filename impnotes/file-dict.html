@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>20.1. The Files Dictionary
+   [CLHS-20.2]</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="files.html" title="Chapter 20. Files&#10;   [CLHS-20]" /><link rel="previous" href="files.html" title="Chapter 20. Files&#10;   [CLHS-20]" /><link rel="next" href="streams.html" title="Chapter 21. Streams&#10;   [CLHS-21]" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">20.1. The Files Dictionary
+   [CLHS-20.2]</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="files.html">Prev</a> </td><th width="60%" align="center">Chapter 20. Files
+   [CLHS-20]</th><td width="20%" align="right"> <a accesskey="n" href="streams.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="file-dict"></a>20.1. The Files Dictionary
+   <a href="http://www.lisp.org/HyperSpec/Body/sec_the_files_dictionary.html" target="_top">[CLHS-20.2]</a></h2></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="file-dict.html#dir">20.1.1. Function <tt class="function">DIRECTORY</tt></a></span></dt></dl></div><p><b>Function <a href="http://www.lisp.org/HyperSpec/Body/fun_rename-file.html" target="_top"><tt class="function">RENAME-FILE</tt></a>. </b><a href="http://www.lisp.org/HyperSpec/Body/fun_rename-file.html" target="_top"><tt class="function">RENAME-FILE</tt></a> always returns a non-logical pathname as
+ its first value.</p><p><b>Function <a href="http://www.lisp.org/HyperSpec/Body/fun_probe-file.html" target="_top"><tt class="function">PROBE-FILE</tt></a>. </b><a href="http://www.lisp.org/HyperSpec/Body/fun_probe-file.html" target="_top"><tt class="function">PROBE-FILE</tt></a> cannot be used to check whether a directory exists.
+ Use functions <a href="file-dict.html#probe-dir"><tt class="function">EXT:PROBE-DIRECTORY</tt></a> or <a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> for this.</p><p><b>Function <a href="http://www.lisp.org/HyperSpec/Body/fun_file-author.html" target="_top"><tt class="function">FILE-AUTHOR</tt></a>. </b><a href="http://www.lisp.org/HyperSpec/Body/fun_file-author.html" target="_top"><tt class="function">FILE-AUTHOR</tt></a> always returns <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>, because the operating systems
+ <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> is ported to do not store a file's author in the file system.
+ Some operating systems, such as Unix, have the notion of a file's
+ owner, and some other <a href="http://www.lisp.org" target="_top"><span><b class="command">Common Lisp</b></span></a> implementations return the user name of the
+ file owner.  <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> does not do this, because
+ <span class="emphasis"><em>owner</em></span> and <span class="emphasis"><em>author</em></span> are not the
+ same; in particular, authorship is preserved by copying, while
+ ownership is not.</p><p><a id="probe-dir"></a><b>Function <a href="file-dict.html#probe-dir"><tt class="function">EXT:PROBE-DIRECTORY</tt></a>. </b><tt class="sexp">(<a href="file-dict.html#probe-dir"><tt class="function">EXT:PROBE-DIRECTORY</tt></a> <i class="replaceable"><tt>pathname</tt></i>)</tt> tests
+ whether <i class="replaceable"><tt>pathname</tt></i> exists and is a directory.
+ It will, unlike <a href="http://www.lisp.org/HyperSpec/Body/fun_probe-file.html" target="_top"><tt class="function">PROBE-FILE</tt></a> or <a href="http://www.lisp.org/HyperSpec/Body/fun_truename.html" target="_top"><tt class="function">TRUENAME</tt></a>, not <a href="http://www.lisp.org/HyperSpec/Body/fun_signal.html" target="_top"><tt class="function">SIGNAL</tt></a> an <a href="http://www.lisp.org/HyperSpec/Body/contyp_error.html" target="_top"><tt class="classname">ERROR</tt></a>
+ if the parent directory of <i class="replaceable"><tt>pathname</tt></i> does not exist.</p><p><a id="del-file"></a><b>Function <a href="http://www.lisp.org/HyperSpec/Body/fun_delete-file.html" target="_top"><tt class="function">DELETE-FILE</tt></a>. </b><tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_delete-file.html" target="_top"><tt class="function">DELETE-FILE</tt></a> <i class="replaceable"><tt>pathname</tt></i>)</tt> deletes
+ the pathname <i class="replaceable"><tt>pathname</tt></i>, not its <a href="http://www.lisp.org/HyperSpec/Body/fun_truename.html" target="_top"><tt class="function">TRUENAME</tt></a>, and returns the absolute
+ pathname it actually removed or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> if <i class="replaceable"><tt>pathname</tt></i> did not exist.
+ When <i class="replaceable"><tt>pathname</tt></i> points to a file which is currently open in <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>, an
+ <a href="http://www.lisp.org/HyperSpec/Body/contyp_error.html" target="_top"><tt class="classname">ERROR</tt></a> is <a href="http://www.lisp.org/HyperSpec/Body/fun_signal.html" target="_top"><tt class="function">SIGNAL</tt></a>ed.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="dir"></a>20.1.1. Function <a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a></h3></div></div><div></div></div><p><tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a> <i class="replaceable"><tt>pathname</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
+  :FULL :CIRCLE <tt class="constant">:IF-DOES-NOT-EXIST</tt>)</tt> can run in two modes:
+</p><div class="itemizedlist"><ul type="disc"><li>If <i class="replaceable"><tt>pathname</tt></i> contains no name or type component, a
+  list of all matching directories is produced.
+  E.g., <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> "/etc/*/")</tt> lists
+  all subdirectories in the directory
+  <tt class="filename">#P"/etc/"</tt>.</li><li>Otherwise a list of all matching files is returned.
+  E.g., <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> "/etc/*")</tt> lists all
+  regular files in the directory <tt class="filename">#P"/etc/"</tt>.
+  If the <tt class="constant">:FULL</tt> argument is non-<a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>,
+  additional information is returned: for each matching file you get a
+  list of at least four elements <tt class="data">(<i class="replaceable"><tt>file-pathname</tt></i>
+  <i class="replaceable"><tt>file-truename</tt></i>
+  <i class="replaceable"><tt>file-write-date-as-decoded-time</tt></i>
+  <i class="replaceable"><tt>file-length</tt></i>)</tt>.</li></ul></div><p>
+
+If you want <span class="emphasis"><em>all</em></span> the files <span class="emphasis"><em>and</em></span>
+subdirectories in the current directory, you should use
+<tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_nconc.html" target="_top"><tt class="function">NCONC</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> "*/") (<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> "*"))</tt>.
+If you want all the files and subdirectories in all the subdirectories
+under the current directory
+(similar to the <a href="http://www.opengroup.org/onlinepubs/007904975/utilities/ls.html" target="_top"><span><b class="command">ls</b></span></a> <tt class="option">-R</tt> <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> command),
+use <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_nconc.html" target="_top"><tt class="function">NCONC</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> "**/")
+ (<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> "**/*"))</tt>.
+
+
+<!--#ifdef UNIX-->
+</p><div class="variablelist"><dl><dt>Platform dependent: <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> platforms only.</dt><dd>If the <tt class="constant">:CIRCLE</tt> argument is
+ non-<a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>, the function avoids endless loops that may result from
+ symbolic links.</dd></dl></div><p>
+
+<!--#endif-->
+
+
+The argument <tt class="constant">:IF-DOES-NOT-EXIST</tt> controls the treatment of links
+pointing to non-existent files and can take the following values:
+</p><div class="variablelist"><dl><dt><tt class="constant">:DISCARD</tt> (default)</dt><dd>discard the bad directory entries
+</dd><dt><tt class="constant">:ERROR</tt></dt><dd><a href="http://www.lisp.org/HyperSpec/Body/fun_signal.html" target="_top"><tt class="function">SIGNAL</tt></a> an <a href="http://www.lisp.org/HyperSpec/Body/contyp_error.html" target="_top"><tt class="classname">ERROR</tt></a> on bad directory entries
+   (this corresponds to the default behavior of <a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a> in <a href="http://www.cons.org/cmucl" target="_top"><span><b class="command">CMU CL</b></span></a>)
+</dd><dt><tt class="constant">:KEEP</tt></dt><dd>keep bad directory entries in the returned list
+   (this roughly corresponds to the <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a>
+    ... <tt class="constant">:TRUNAMEP</tt> <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>)</tt> call in <a href="http://www.cons.org/cmucl" target="_top"><span><b class="command">CMU CL</b></span></a>)
+</dd><dt><tt class="constant">:IGNORE</tt></dt><dd>Similar to <tt class="constant">:DISCARD</tt>, but also
+   do not signal an error when a directory is unaccessible (contrary to
+   the [<span class="citation"><a href="references.html#ansi-cl">ANSI CL standard</a></span>] specification).</dd></dl></div><p>
+
+</p><p><b>Function <tt class="function">EXT:DIR</tt>. </b><tt class="sexp">(<tt class="function">EXT:DIR</tt> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a>
+ <i class="replaceable"><tt>pathname</tt></i>)</tt> is like <a href="http://www.lisp.org/HyperSpec/Body/fun_directory.html" target="_top"><tt class="function">DIRECTORY</tt></a>, but displays the pathnames
+ instead of returning them. <tt class="sexp">(EXT:DIR)</tt>
+ shows the contents of the current directory.</p><p><a id="cd"></a><b>Function <a href="file-dict.html#cd"><tt class="function">EXT:CD</tt></a>. </b><tt class="sexp">(<a href="file-dict.html#cd"><tt class="function">EXT:CD</tt></a> <i class="replaceable"><tt>pathname</tt></i>)</tt> sets it,
+ <tt class="sexp">(<a href="file-dict.html#cd"><tt class="function">EXT:CD</tt></a>)</tt> returns it.
+</p><div class="variablelist">
+<!--#if defined(PATHNAME_UNIX)--><dl><dt>Platform dependent: <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> platforms only.</dt><dd><tt class="sexp">(<a href="file-dict.html#cd"><tt class="function">EXT:CD</tt></a> [<i class="replaceable"><tt>pathname</tt></i>])</tt>
+   manages the current directory.</dd>
+<!--#else--><dt>Platform dependent: <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>
+   platforms only.</dt><dd><tt class="sexp">(<a href="file-dict.html#cd"><tt class="function">EXT:CD</tt></a> [<i class="replaceable"><tt>pathname</tt></i>])</tt>
+   manages the current device and the current directory.
+   </dd>
+<!--#endif-->
+</dl></div><p><b>Function <tt class="function">EXT:DEFAULT-DIRECTORY</tt>. </b><tt class="sexp">(<tt class="function">EXT:DEFAULT-DIRECTORY</tt>)</tt> is
+ equivalent to <tt class="sexp">(<a href="file-dict.html#cd"><tt class="function">EXT:CD</tt></a>)</tt>.  <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a> (<tt class="function">EXT:DEFAULT-DIRECTORY</tt>)
+ <i class="replaceable"><tt>pathname</tt></i>)</tt> is equivalent to <tt class="sexp">(<a href="file-dict.html#cd"><tt class="function">EXT:CD</tt></a>
+ <i class="replaceable"><tt>pathname</tt></i>)</tt>, except for the return value.</p><p><b>Function <tt class="function">EXT:MAKE-DIR</tt>. </b><tt class="sexp">(<tt class="function">EXT:MAKE-DIR</tt>
+ <i class="replaceable"><tt>directory-pathname</tt></i>)</tt>
+ creates a new subdirectory.</p><p><b>Function <tt class="function">EXT:DELETE-DIR</tt>. </b><tt class="sexp">(<tt class="function">EXT:DELETE-DIR</tt>
+ <i class="replaceable"><tt>directory-pathname</tt></i>)</tt> removes an
+ (empty) subdirectory.</p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="files.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="files.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="streams.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 20. Files
+   [CLHS-20] </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 21. Streams
+   [CLHS-21]</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>

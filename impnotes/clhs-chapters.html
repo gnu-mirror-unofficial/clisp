@@ -1,507 +1,121 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Chapters or the Common Lisp HyperSpec</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REV="MADE"
-HREF="mailto:clisp-list@sf.net"><LINK
-REL="HOME"
-TITLE="Implementation Notes for GNU CLISP."
-HREF="impnotes-top.html"><LINK
-REL="PREVIOUS"
-TITLE="Overview"
-HREF="preface.html"><LINK
-REL="NEXT"
-TITLE="Introduction
-  [CLHS-1]"
-HREF="intro.html"><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="impnotes.css"></HEAD
-><BODY
-CLASS="part"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->Implementation Notes for <A
-HREF="http://www.gnu.org"
-TARGET="_top"
->GNU</A
-> <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
->.: These notes document <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> version 2.31.</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="preface.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
-></TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="intro.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="PART"
-><A
-NAME="clhs-chapters"
-></A
-><DIV
-CLASS="TITLEPAGE"
-><H1
-CLASS="title"
->I. Chapters or the <A
-HREF="references.html#CLHS"
->[<SPAN
-CLASS="citation"
-><A
-HREF="references.html#CLHS"
->Common Lisp HyperSpec</A
-></SPAN
->]</A
-></H1
-><DIV
-CLASS="TOC"
-><DL
-><DT
-><B
->Table of Contents</B
-></DT
-><DT
->1. <A
-HREF="intro.html"
->Introduction
-  <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-1.html"
-TARGET="_top"
->[CLHS-1]</A
-></A
-></DT
-><DT
->2. <A
-HREF="syntax.html"
->Syntax
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-2.html"
-TARGET="_top"
->[CLHS-2]</A
-></A
-></DT
-><DT
->3. <A
-HREF="eval.html"
->Evaluation and Compilation
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-3.html"
-TARGET="_top"
->[CLHS-3]</A
-></A
-></DT
-><DT
->4. <A
-HREF="types-classes.html"
->Types and Classes
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
-TARGET="_top"
->[CLHS-4]</A
-></A
-></DT
-><DT
->5. <A
-HREF="data.html"
->Data and Control Flow
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-5.html"
-TARGET="_top"
->[CLHS-5]</A
-></A
-></DT
-><DT
->6. <A
-HREF="iteration.html"
->Iteration
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-6.html"
-TARGET="_top"
->[CLHS-6]</A
-></A
-></DT
-><DT
->7. <A
-HREF="objects.html"
->Objects
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-7.html"
-TARGET="_top"
->[CLHS-7]</A
-></A
-></DT
-><DT
->8. <A
-HREF="structures.html"
->Structures
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-8.html"
-TARGET="_top"
->[CLHS-8]</A
-></A
-></DT
-><DT
->9. <A
-HREF="conditions.html"
->Conditions
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-9.html"
-TARGET="_top"
->[CLHS-9]</A
-></A
-></DT
-><DT
->10. <A
-HREF="symbols.html"
->Symbols
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-10.html"
-TARGET="_top"
->[CLHS-10]</A
-></A
-></DT
-><DT
->11. <A
-HREF="packages.html"
->Packages
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-11.html"
-TARGET="_top"
->[CLHS-11]</A
-></A
-></DT
-><DT
->12. <A
-HREF="numbers.html"
->Numbers
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-12.html"
-TARGET="_top"
->[CLHS-12]</A
-></A
-></DT
-><DT
->13. <A
-HREF="characters.html"
->Characters
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
-TARGET="_top"
->[CLHS-13]</A
-></A
-></DT
-><DT
->14. <A
-HREF="conses.html"
->Conses
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-14.html"
-TARGET="_top"
->[CLHS-14]</A
-></A
-></DT
-><DT
->15. <A
-HREF="arrays.html"
->Arrays
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-15.html"
-TARGET="_top"
->[CLHS-15]</A
-></A
-></DT
-><DT
->16. <A
-HREF="strings.html"
->Strings
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-16.html"
-TARGET="_top"
->[CLHS-16]</A
-></A
-></DT
-><DT
->17. <A
-HREF="sequences.html"
->Sequences
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-17.html"
-TARGET="_top"
->[CLHS-17]</A
-></A
-></DT
-><DT
->18. <A
-HREF="hash.html"
->Hash Tables
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-18.html"
-TARGET="_top"
->[CLHS-18]</A
-></A
-></DT
-><DT
->19. <A
-HREF="filenames.html"
->Filenames
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
-TARGET="_top"
->[CLHS-19]</A
-></A
-></DT
-><DT
->20. <A
-HREF="files.html"
->Files
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-20.html"
-TARGET="_top"
->[CLHS-20]</A
-></A
-></DT
-><DT
->21. <A
-HREF="streams.html"
->Streams
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-21.html"
-TARGET="_top"
->[CLHS-21]</A
-></A
-></DT
-><DT
->22. <A
-HREF="printer.html"
->Printer
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-22.html"
-TARGET="_top"
->[CLHS-22]</A
-></A
-></DT
-><DT
->23. <A
-HREF="reader.html"
->Reader
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
-TARGET="_top"
->[CLHS-23]</A
-></A
-></DT
-><DT
->24. <A
-HREF="system.html"
->System Construction
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-24.html"
-TARGET="_top"
->[CLHS-24]</A
-></A
-></DT
-><DT
->25. <A
-HREF="environment.html"
->Environment
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-25.html"
-TARGET="_top"
->[CLHS-25]</A
-></A
-></DT
-><DT
->26. <A
-HREF="glossary.html"
->Glossary
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-26.html"
-TARGET="_top"
->[CLHS-26]</A
-></A
-></DT
-><DT
->27. <A
-HREF="appendix.html"
->Appendix
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-a.html"
-TARGET="_top"
->[CLHS-a]</A
-></A
-></DT
-><DT
->28. <A
-HREF="issues.html"
->X3J13 Issue Index
-   <A
-HREF="http://www.lisp.org/HyperSpec/Issues/Issues-Categorized.html"
-TARGET="_top"
->[CLHS-ic]</A
-></A
-></DT
-></DL
-></DIV
-></DIV
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="preface.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="impnotes-top.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="intro.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Overview</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
->&nbsp;</TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Introduction
-  <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-1.html"
-TARGET="_top"
->[CLHS-1]</A
-></TD
-></TR
-></TABLE
-></DIV
-><div
-class="custom-footer"
-><hr
-width="100%"><table
-width="100%"
-><tr
-><td
-align="left"
-><a
-href="http://clisp.cons.org"
-><img
-src="clisp.png"
-width="48"
-height="48"
-alt="[CLISP home]"></a
-></td
-><td
-align="center"
-><a
-href="http://www.gnu.org"
-><img
-src="http://www.gnu.org/graphics/gnubanner.jpg"
-width="468"
-height="60"
-alt="[Come and see what GNU creates for YOU]"></a
-></td
-><td
-align="right"
-><a
-href="http://sourceforge.net"
-><img
-src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
-width="125"
-height="37"
-alt="[SourceForge]"></a
-></td
-></tr
-></table
-></div
-></BODY
-></HTML
->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Part I. Chapters or the Common Lisp HyperSpec</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="previous" href="preface.html" title="Overview" /><link rel="next" href="intro.html" title="Chapter 1. Introduction&#10;  [CLHS-1]" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Part I. Chapters or the Common Lisp HyperSpec</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="preface.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="intro.html">Next</a></td></tr></table><hr /></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="clhs-chapters"></a>Chapters or the [<span class="citation"><a href="references.html#CLHS">Common Lisp HyperSpec</a></span>]</h1></div></div><div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="intro.html">1. Introduction
+  [CLHS-1]</a></span></dt><dd><dl><dt><span class="section"><a href="spec-symb.html">1.1. Special Symbols
+  [CLHS-1.4.1.3]</a></span></dt><dt><span class="section"><a href="error-terms.html">1.2. Error Terminology
+  [CLHS-1.4.2]</a></span></dt><dt><span class="section"><a href="class-prec.html">1.3. Class Precedence Lists
+  [CLHS-1.4.4.5]</a></span></dt><dt><span class="section"><a href="cl-symb.html">1.4. Symbols in the Package <strong class="package">“<span class="quote">COMMON-LISP</span>”</strong>
+  [CLHS-1.9]</a></span></dt></dl></dd><dt><span class="chapter"><a href="syntax.html">2. Syntax
+   [CLHS-2]</a></span></dt><dd><dl><dt><span class="section"><a href="reader-alg.html">2.1. Reader Algorithm
+   [CLHS-2.2]</a></span></dt><dt><span class="section"><a href="tokens.html">2.2. Symbols as Tokens
+  [CLHS-2.3.4]</a></span></dt><dt><span class="section"><a href="valid-patterns.html">2.3. Valid Patterns for Tokens
+  [CLHS-2.3.5]</a></span></dt><dt><span class="section"><a href="double-quote.html">2.4. Double-Quote
+  [CLHS-2.4.5]</a></span></dt><dt><span class="section"><a href="backquote.html">2.5. Backquote
+  [CLHS-2.4.6]</a></span></dt><dt><span class="section"><a href="sharpsign.html">2.6. Sharpsign
+  [CLHS-2.4.8]</a></span></dt></dl></dd><dt><span class="chapter"><a href="eval.html">3. Evaluation and Compilation
+   [CLHS-3]</a></span></dt><dd><dl><dt><span class="section"><a href="evaluation.html">3.1. Evaluation
+  [CLHS-3.1]</a></span></dt><dd><dl><dt><span class="section"><a href="evaluation.html#eval-environ">3.1.1. Introduction to Environments
+  [CLHS-3.1.1]</a></span></dt></dl></dd><dt><span class="section"><a href="compilation.html">3.2. Compilation
+  [CLHS-3.2]</a></span></dt><dd><dl><dt><span class="section"><a href="compilation.html#compiler-terms">3.2.1. Compiler Terminology
+  [CLHS-3.2.1]</a></span></dt><dt><span class="section"><a href="compilation.html#compiler-macros">3.2.2. Compiler Macros
+  [CLHS-3.2.2.1]</a></span></dt><dt><span class="section"><a href="compilation.html#similarity">3.2.3. Definition of Similarity
+  [CLHS-3.2.4.2.2]</a></span></dt></dl></dd><dt><span class="section"><a href="declarations.html">3.3. Declarations
+  [CLHS-3.3]</a></span></dt><dd><dl><dt><span class="section"><a href="declarations.html#compile-decl">3.3.1. Additional declarations</a></span></dt></dl></dd><dt><span class="section"><a href="lalist.html">3.4. Lambda Lists
+   [CLHS-3.4]</a></span></dt><dd><dl><dt><span class="section"><a href="lalist.html#boa-lalist">3.4.1. Boa Lambda Lists
+  [CLHS-3.4.6]</a></span></dt></dl></dd><dt><span class="section"><a href="eval-comp.html">3.5. The Evaluation and Compilation Dictionary
+  [CLHS-3.8]</a></span></dt><dd><dl><dt><span class="section"><a href="eval-comp.html#spec-decl">3.5.1. Declaration <tt class="literal">SPECIAL</tt></a></span></dt><dt><span class="section"><a href="eval-comp.html#constantp">3.5.2. Function <tt class="function">CONSTANTP</tt>.</a></span></dt><dt><span class="section"><a href="eval-comp.html#eval-when">3.5.3. Macro <tt class="function">EVAL-WHEN</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="types-classes.html">4. Types and Classes
+   [CLHS-4]</a></span></dt><dd><dl><dt><span class="section"><a href="types.html">4.1. Types
+  [CLHS-4.2]</a></span></dt><dd><dl><dt><span class="section"><a href="types.html#type-spec">4.1.1. Type Specifiers
+  [CLHS-4.2.3]</a></span></dt></dl></dd><dt><span class="section"><a href="classes.html">4.2. Classes
+  [CLHS-4.3]</a></span></dt><dt><span class="section"><a href="clos-diff.html">4.3. Deviations from ANSI CL standard</a></span></dt><dt><span class="section"><a href="metaclasses.html">4.4. Standard Metaclasses
+  [CLHS-4.3.1.1]</a></span></dt><dt><span class="section"><a href="def-class.html">4.5. Defining Classes
+  [CLHS-4.3.2]</a></span></dt><dt><span class="section"><a href="redef-class.html">4.6. Redefining Classes
+  [CLHS-4.3.6]</a></span></dt><dt><span class="section"><a href="type-class-dict.html">4.7. The Types and Classes Dictionary
+  [CLHS-4.4]</a></span></dt><dd><dl><dt><span class="section"><a href="type-class-dict.html#fixnum-char-ansi">4.7.1. Function <tt class="function">COERCE</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="data.html">5. Data and Control Flow
+   [CLHS-5]</a></span></dt><dd><dl><dt><span class="section"><a href="flow-dict.html">5.1. The Data and Control Flow Dictionary
+   [CLHS-5.3]</a></span></dt><dd><dl><dt><span class="section"><a href="flow-dict.html#fcase">5.1.1. Macro EXT:FCASE</a></span></dt><dt><span class="section"><a href="flow-dict.html#xor">5.1.2. Function EXT:XOR</a></span></dt><dt><span class="section"><a href="flow-dict.html#eq">5.1.3. Function <tt class="function">EQ</tt></a></span></dt><dt><span class="section"><a href="flow-dict.html#sym-fun">5.1.4. Function <tt class="function">SYMBOL-FUNCTION</tt></a></span></dt><dt><span class="section"><a href="flow-dict.html#setf">5.1.5. Macro <tt class="function">SETF</tt></a></span></dt><dt><span class="section"><a href="flow-dict.html#func">5.1.6. Special Operator <tt class="function">FUNCTION</tt></a></span></dt><dt><span class="section"><a href="flow-dict.html#def-sym-mac">5.1.7. Macro <tt class="function">DEFINE-SYMBOL-MACRO</tt></a></span></dt><dt><span class="section"><a href="flow-dict.html#lambda">5.1.8. Macro <tt class="function">LAMBDA</tt></a></span></dt><dt><span class="section"><a href="flow-dict.html#defun">5.1.9. Macros <tt class="function">DEFUN</tt> &amp; <tt class="function">DEFMACRO</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="iteration.html">6. Iteration
+  [CLHS-6]</a></span></dt><dd><dl><dt><span class="section"><a href="loop.html">6.1. The LOOP Facility
+  [CLHS-6.1]</a></span></dt><dd><dl><dt><span class="section"><a href="loop.html#loop-inter-var-finally">6.1.1. Iteration variables in the loop epilogue.</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="objects.html">7. Objects
+   [CLHS-7]</a></span></dt><dd><dl><dt><span class="section"><a href="std-meth-combo.html">7.1. Standard Method Combination
+  [CLHS-7.6.6.2]</a></span></dt><dt><span class="section"><a href="obj-dict.html">7.2. The Objects Dictionary
+  [CLHS-7.7]</a></span></dt><dd><dl><dt><span class="section"><a href="obj-dict.html#class-proto">7.2.1. Generic function <tt class="function">CLOS:CLASS-PROTOTYPE</tt>.</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="structures.html">8. Structures
+   [CLHS-8]</a></span></dt><dt><span class="chapter"><a href="conditions.html">9. Conditions
+   [CLHS-9]</a></span></dt><dd><dl><dt><span class="section"><a href="cond-nl.html">9.1. Embedded Newlines in Condition Reports
+   [CLHS-9.1.3.1.3]</a></span></dt><dt><span class="section"><a href="cond-dict.html">9.2. The Conditions Dictionary
+   [CLHS-9.2]</a></span></dt></dl></dd><dt><span class="chapter"><a href="symbols.html">10. Symbols
+   [CLHS-10]</a></span></dt><dt><span class="chapter"><a href="packages.html">11. Packages
+   [CLHS-11]</a></span></dt><dd><dl><dt><span class="section"><a href="pack-lock.html">11.1. Constraints on the <strong class="package">“<span class="quote">COMMON-LISP</span>”</strong> Package
+  for Conforming Programs - package locking
+ [CLHS-11.1.2.1.2]</a></span></dt><dt><span class="section"><a href="clupack.html">11.2. The
+  COMMON-LISP-USER Package
+  [CLHS-11.1.2.2]</a></span></dt><dt><span class="section"><a href="imppack.html">11.3. Implementation-Defined Packages
+   [CLHS-11.1.2.4]</a></span></dt><dt><span class="section"><a href="pack-dict.html">11.4. The Packages Dictionary
+   [CLHS-11.2]</a></span></dt><dd><dl><dt><span class="section"><a href="pack-dict.html#make-pack">11.4.1. Function <tt class="function">MAKE-PACKAGE</tt></a></span></dt><dt><span class="section"><a href="pack-dict.html#re-export">11.4.2. Function <tt class="function">EXT:RE-EXPORT</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="numbers.html">12. Numbers
+   [CLHS-12]</a></span></dt><dd><dl><dt><span class="section"><a href="num-types.html">12.1. Numeric Types</a></span></dt><dt><span class="section"><a href="num-concepts.html">12.2. Number Concepts
+   [CLHS-12.1]</a></span></dt><dd><dl><dt><span class="section"><a href="num-concepts.html#byte-type">12.2.1. Byte Operations on Integers
+   [CLHS-12.1.1.3.2]</a></span></dt><dt><span class="section"><a href="num-concepts.html#float-subst">12.2.2. Rule of Float Substitutability
+   [CLHS-12.1.3.3]</a></span></dt><dt><span class="section"><a href="num-concepts.html#float-comp">12.2.3. Floating-point Computations
+   [CLHS-12.1.4]</a></span></dt><dt><span class="section"><a href="num-concepts.html#complex-comp">12.2.4. Complex Computations
+   [CLHS-12.1.5]</a></span></dt><dt><span class="section"><a href="num-concepts.html#complex-rational">12.2.5. Rule of
+   Canonical Representation for Complex Rationals
+   [CLHS-12.1.5.3]</a></span></dt></dl></dd><dt><span class="section"><a href="num-dict.html">12.3. The Numbers Dictionary
+   [CLHS-12.2]</a></span></dt><dd><dl><dt><span class="section"><a href="num-dict.html#int-func-ext">12.3.1. Additional Integer Functions</a></span></dt><dt><span class="section"><a href="num-dict.html#float-notes">12.3.2. Floating Point</a></span></dt><dt><span class="section"><a href="num-dict.html#float-decode">12.3.3. Float Decoding
+  [CLHS]</a></span></dt><dt><span class="section"><a href="num-dict.html#bool-ops">12.3.4. Boolean Operations
+  [CLHS]</a></span></dt><dt><span class="section"><a href="num-dict.html#fixnum-lim">12.3.5. Fixnum Limits
+  [CLHS]</a></span></dt><dt><span class="section"><a href="num-dict.html#float-lim">12.3.6. Float Limits
+  [CLHS]</a></span></dt><dt><span class="section"><a href="num-dict.html#float-invalid-op">12.3.7. Condition <tt class="classname">FLOATING-POINT-INVALID-OPERATION</tt></a></span></dt><dt><span class="section"><a href="num-dict.html#float-inexact">12.3.8. Condition <tt class="classname">FLOATING-POINT-INEXACT</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="characters.html">13. Characters
+   [CLHS-13]</a></span></dt><dd><dl><dt><span class="section"><a href="input-char.html">13.1. Attributes</a></span></dt><dt><span class="section"><a href="char-script.html">13.2. Character Scripts
+   [CLHS-13.1.2.1]</a></span></dt><dt><span class="section"><a href="char-attrib.html">13.3. Character Attributes
+   [CLHS-13.1.3]</a></span></dt><dt><span class="section"><a href="graph-char.html">13.4. Graphic Characters
+   [CLHS-13.1.4.1]</a></span></dt><dt><span class="section"><a href="alpha-char.html">13.5. Alphabetic Characters
+   [CLHS-13.1.4.2]</a></span></dt><dt><span class="section"><a href="char-ext.html">13.6. Case of Implementation-Defined Characters
+   [CLHS-13.1.4.3.4]</a></span></dt><dt><span class="section"><a href="num-char.html">13.7. Numeric Characters
+   [CLHS-13.1.4.4]</a></span></dt><dt><span class="section"><a href="char-ord.html">13.8. Ordering of Characters
+   [CLHS-13.1.6]</a></span></dt><dt><span class="section"><a href="clhs-newline.html">13.9. Treatment of Newline during Input and Output
+   [CLHS-13.1.8]</a></span></dt><dt><span class="section"><a href="char-int.html">13.10. Character Encodings
+   [CLHS-13.1.9]</a></span></dt><dt><span class="section"><a href="script-ext.html">13.11. Documentation
+   of Implementation-Defined Scripts
+   [CLHS-13.1.10]</a></span></dt><dt><span class="section"><a href="char-dict.html">13.12. The Characters Dictionary
+   [CLHS-13.2]</a></span></dt><dt><span class="section"><a href="char-width.html">13.13. Functions on characters</a></span></dt><dt><span class="section"><a href="char-platform-dep.html">13.14. Platform-Dependent Characters</a></span></dt><dt><span class="section"><a href="char-bits.html">13.15. Obsolete Constants</a></span></dt></dl></dd><dt><span class="chapter"><a href="conses.html">14. Conses
+   [CLHS-14]</a></span></dt><dd><dl><dt><span class="section"><a href="cons-dict.html">14.1. The Conses Dictionary
+   [CLHS-14.2]</a></span></dt><dd><dl><dt><span class="section"><a href="cons-dict.html#map-func">14.1.1. Functions <tt class="function">MAPCAR</tt>, <tt class="function">MAPCAN</tt>, <tt class="function">MAPLIST</tt>, <tt class="function">MAPCON</tt>, ...</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="arrays.html">15. Arrays
+   [CLHS-15]</a></span></dt><dd><dl><dt><span class="section"><a href="array-elts.html">15.1. Array Elements
+   [CLHS-15.1.1]</a></span></dt><dt><span class="section"><a href="array-dict.html">15.2. The Arrays Dictionary
+   [CLHS-15.2]</a></span></dt></dl></dd><dt><span class="chapter"><a href="strings.html">16. Strings
+   [CLHS-16]</a></span></dt><dd><dl><dt><span class="section"><a href="string-dict.html">16.1. The Strings Dictionary
+   [CLHS-16.2]</a></span></dt><dd><dl><dt><span class="section"><a href="string-dict.html#string-width">16.1.1. Functions on strings</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="sequences.html">17. Sequences
+   [CLHS-17]</a></span></dt><dd><dl><dt><span class="section"><a href="seq-dict.html">17.1. The Sequences Dictionary
+   [CLHS-17.3]</a></span></dt><dd><dl><dt><span class="section"><a href="seq-dict.html#seq-macro-ext">17.1.1. Additional Macros</a></span></dt><dt><span class="section"><a href="seq-dict.html#nreverse-nreconc">17.1.2. Functions <tt class="function">NREVERSE</tt> &amp; <tt class="function">NRECONC</tt></a></span></dt><dt><span class="section"><a href="seq-dict.html#rem-del">17.1.3. Functions <tt class="function">REMOVE</tt> &amp; <tt class="function">DELETE</tt></a></span></dt><dt><span class="section"><a href="seq-dict.html#sorting">17.1.4. Functions <tt class="function">SORT</tt> &amp; <tt class="function">STABLE-SORT</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="hash.html">18. Hash Tables
+   [CLHS-18]</a></span></dt><dd><dl><dt><span class="section"><a href="hash-dict.html">18.1. The Hash Tables Dictionary
+   [CLHS-18.2]</a></span></dt><dd><dl><dt><span class="section"><a href="hash-dict.html#make-hash">18.1.1. Function <tt class="function">MAKE-HASH-TABLE</tt></a></span></dt><dt><span class="section"><a href="hash-dict.html#defhash">18.1.2. Macro <tt class="function">EXT:DEFINE-HASH-TABLE-TEST</tt></a></span></dt><dt><span class="section"><a href="hash-dict.html#ht-test">18.1.3. Function <tt class="function">HASH-TABLE-TEST</tt></a></span></dt><dt><span class="section"><a href="hash-dict.html#dohash">18.1.4. Macro <tt class="function">EXT:DOHASH</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="filenames.html">19. Filenames
+   [CLHS-19]</a></span></dt><dd><dl><dt><span class="section"><a href="path-components.html">19.1. Pathname Components
+   [CLHS-19.2.1]</a></span></dt><dd><dl><dt><span class="section"><a href="path-components.html#path-dir-canon">19.1.1. Directory canonicalization.</a></span></dt><dt><span class="section"><a href="path-components.html#path-platform-specific">19.1.2. Platform-specific issues.</a></span></dt></dl></dd><dt><span class="section"><a href="unspecific.html">19.2. :UNSPECIFIC as a Component Value
+ [CLHS-19.2.2.2.3]</a></span></dt><dt><span class="section"><a href="path-external-notation.html">19.3. External notation.</a></span></dt><dt><span class="section"><a href="log-path.html">19.4. Logical Pathnames
+   [CLHS-19.3]</a></span></dt><dt><span class="section"><a href="filename-dict.html">19.5. The Filenames Dictionary
+   [CLHS-19.4]</a></span></dt><dd><dl><dt><span class="section"><a href="filename-dict.html#translate-pathname">19.5.1. Function <tt class="function">TRANSLATE-PATHNAME</tt></a></span></dt><dt><span class="section"><a href="filename-dict.html#parsename">19.5.2. Function <tt class="function">PARSE-NAMESTRING</tt></a></span></dt><dt><span class="section"><a href="filename-dict.html#pathmerge">19.5.3. Function <tt class="function">MERGE-PATHNAMES</tt></a></span></dt><dt><span class="section"><a href="filename-dict.html#load-lpt">19.5.4. Function <tt class="function">LOAD-LOGICAL-PATHNAME-TRANSLATIONS</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="files.html">20. Files
+   [CLHS-20]</a></span></dt><dd><dl><dt><span class="section"><a href="file-dict.html">20.1. The Files Dictionary
+   [CLHS-20.2]</a></span></dt><dd><dl><dt><span class="section"><a href="file-dict.html#dir">20.1.1. Function <tt class="function">DIRECTORY</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="streams.html">21. Streams
+   [CLHS-21]</a></span></dt><dd><dl><dt><span class="section"><a href="streams-interactive.html">21.1. Interactive Streams
+ [CLHS-21.1.1.1.3]</a></span></dt><dt><span class="section"><a href="terminal.html">21.2. Terminal interaction.</a></span></dt><dt><span class="section"><a href="stream-dict.html">21.3. The Streams Dictionary
+   [CLHS-21.2]</a></span></dt><dd><dl><dt><span class="section"><a href="stream-dict.html#stream-eltype">21.3.1. Function <tt class="function">STREAM-ELEMENT-TYPE</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#make-stream">21.3.2. Function <tt class="function">EXT:MAKE-STREAM</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#bin-input">21.3.3. Binary input, <tt class="function">READ-BYTE</tt>,
+  <tt class="function">EXT:READ-INTEGER</tt> &amp; <tt class="function">EXT:READ-FLOAT</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#bin-output">21.3.4. Binary output, <tt class="function">WRITE-BYTE</tt>,
+  <tt class="function">EXT:WRITE-INTEGER</tt> &amp; <tt class="function">EXT:WRITE-FLOAT</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#bulk-io">21.3.5. Bulk Input and Output</a></span></dt><dt><span class="section"><a href="stream-dict.html#non-block-io">21.3.6. Non-Blocking Input and Output</a></span></dt><dt><span class="section"><a href="stream-dict.html#file-pos">21.3.7. Function <tt class="function">FILE-POSITION</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#open">21.3.8. Function  <tt class="function">OPEN</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#close">21.3.9. Function <tt class="function">CLOSE</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#open-stream-p">21.3.10. Function <tt class="function">OPEN-STREAM-P</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#broadcast-stream">21.3.11. Class <tt class="classname">BROADCAST-STREAM</tt></a></span></dt><dt><span class="section"><a href="stream-dict.html#stream-buffer">21.3.12. Functions
+  EXT:MAKE-BUFFERED-INPUT-STREAM and
+  EXT:MAKE-BUFFERED-OUTPUT-STREAM</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="printer.html">22. Printer
+   [CLHS-22]</a></span></dt><dd><dl><dt><span class="section"><a href="multi-rep.html">22.1. Multiple Possible Textual Representations
+   [CLHS-22.1.1.1]</a></span></dt><dt><span class="section"><a href="print-vector.html">22.2. Printing Other Vectors
+   [CLHS-22.1.3.7]</a></span></dt><dt><span class="section"><a href="print-array.html">22.3. Printing Other Arrays
+   [CLHS-22.1.3.8]</a></span></dt><dt><span class="section"><a href="clpp.html">22.4. The Lisp Pretty Printer
+   [CLHS-22.2]</a></span></dt><dd><dl><dt><span class="section"><a href="clpp.html#pp-dispatch">22.4.1. Pretty Print Dispatch Table
+   [CLHS-22.2.1.4]</a></span></dt></dl></dd><dt><span class="section"><a href="print-dict.html">22.5. The Printer Dictionary
+   [CLHS-22.4]</a></span></dt><dd><dl><dt><span class="section"><a href="print-dict.html#format">22.5.1. Function <tt class="function">FORMAT</tt></a></span></dt><dt><span class="section"><a href="print-dict.html#pathprint">22.5.2. Pathnames</a></span></dt><dt><span class="section"><a href="print-dict.html#spacecharprint">22.5.3. Characters</a></span></dt><dt><span class="section"><a href="print-dict.html#print-misc">22.5.4. Miscellaneous Issues</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="reader.html">23. Reader
+   [CLHS-23]</a></span></dt><dd><dl><dt><span class="section"><a href="chario.html">23.1. characters</a></span></dt><dt><span class="section"><a href="read-dispatch-ext.html">23.2. Additional read dispatch macros</a></span></dt><dt><span class="section"><a href="rt-case.html">23.3. Function <tt class="function">READTABLE-CASE</tt></a></span></dt></dl></dd><dt><span class="chapter"><a href="system.html">24. System Construction
+   [CLHS-24]</a></span></dt><dd><dl><dt><span class="section"><a href="system-dict.html">24.1. The System Construction Dictionary
+   [CLHS-24.2]</a></span></dt><dd><dl><dt><span class="section"><a href="system-dict.html#compilefile">24.1.1. Function <tt class="function">COMPILE-FILE</tt></a></span></dt><dt><span class="section"><a href="system-dict.html#compile-file-path">24.1.2. Function <tt class="function">COMPILE-FILE-PATHNAME</tt></a></span></dt><dt><span class="section"><a href="system-dict.html#require">24.1.3. Function <tt class="function">REQUIRE</tt></a></span></dt><dt><span class="section"><a href="system-dict.html#loadfile">24.1.4. Function <tt class="function">LOAD</tt></a></span></dt><dt><span class="section"><a href="system-dict.html#features">24.1.5. Variable <tt class="varname">*FEATURES*</tt></a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="environment.html">25. Environment
+   [CLHS-25]</a></span></dt><dd><dl><dt><span class="section"><a href="debugger.html">25.1. Debugging Utilities
+   [CLHS-25.1.2]</a></span></dt><dt><span class="section"><a href="environment-dict.html">25.2. The Environment Dictionary
+   [CLHS-25.2]</a></span></dt><dd><dl><dt><span class="section"><a href="environment-dict.html#disassemble">25.2.1. Function <tt class="function">DISASSEMBLE</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#uncompile">25.2.2. Function <tt class="function">EXT:UNCOMPILE</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#documentation">25.2.3. Function <tt class="function">DOCUMENTATION</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#trace">25.2.4. Macro <tt class="function">TRACE</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#inspect">25.2.5. Function <tt class="function">INSPECT</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#room">25.2.6. Function <tt class="function">ROOM</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#time">25.2.7. Macro <tt class="function">TIME</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#ed">25.2.8. Function <tt class="function">ED</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#clock">25.2.9. Clock Time</a></span></dt><dt><span class="section"><a href="environment-dict.html#machine">25.2.10. Machine</a></span></dt><dt><span class="section"><a href="environment-dict.html#apropos">25.2.11. Functions <tt class="function">APROPOS</tt> &amp; <tt class="function">APROPOS-LIST</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#dribble">25.2.12. Function <tt class="function">DRIBBLE</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#version">25.2.13. Function <tt class="function">LISP-IMPLEMENTATION-VERSION</tt></a></span></dt><dt><span class="section"><a href="environment-dict.html#argv">25.2.14. Function EXT:ARGV</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="glossary.html">26. Glossary
+   [CLHS-26]</a></span></dt><dt><span class="chapter"><a href="appendix.html">27. Appendix
+   [CLHS-a]</a></span></dt><dt><span class="chapter"><a href="issues.html">28. X3J13 Issue Index
+   [CLHS-ic]</a></span></dt></dl></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="preface.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="intro.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Overview </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 1. Introduction
+  [CLHS-1]</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>
