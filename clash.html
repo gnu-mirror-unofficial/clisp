@@ -25,7 +25,8 @@ too.</p>
 
 <h2>DISCLAIMER</h2>
 
-<ul><li><strong>Use at your own risk.</strong></li>
+<ul>
+<li><strong>Use at your own risk.</strong></li>
 <li><strong>Exercise care.</strong></li>
 <li><strong>Backup everything you change on your system.</strong></li>
 <li><strong>If anything goes wrong, do NOT blame us!</strong></li>
@@ -111,7 +112,8 @@ exec fvwm2
 <h2>NB from SDS</h2>
 
 <p>You should be able to run a shell script using the
- CLISP built-in function <code>ext:shell</code>.</p>
+ CLISP built-in function
+ <a href="impnotes.html#exec"><code>ext:shell</code></a>.</p>
 
 <h1>Step 5: set up the reader macro</h1>
 
@@ -185,9 +187,10 @@ do <code>#[/bin/ls -l]</code></p>
 
 <h2>NB from SDS</h2>
 
-<p>There are CLISP built-ins like <code>ext:dir</code> and
- <code>ext:cd</code>, and most other shell built-ins can be implemented
- in CLISP pretty easily.</p>
+<p>There are CLISP built-ins like
+ <a href="impnotes.html#dir"><code>ext:dir</code></a> and
+ <a href="impnotes.html#cd"><code>ext:cd</code></a>, and most other
+ shell built-ins can be implemented in CLISP pretty easily.</p>
 
 <h1>Step 8: Dump a memory image</h1>
 
@@ -199,7 +202,7 @@ must do the following:</p>
  convenience stuff loaded, as described in <a
  href="impnotes.html#image">impnotes</a>.</li>
 <li>Make a backup of <code>/usr/[local]/lib/clisp</code>.
-  (wherever your's is installed)</li>
+  (wherever yours is installed)</li>
 <li>Rename the "base" directory in <code>/usr/lib/clisp</code>
  to "orig-base".</li>
 <li>Now rename the "full" directory to "base".</li>
