@@ -82,12 +82,12 @@
  <dt><strong><a href="http://sourceforge.net/projects/clisp">Project
    Home</a></strong></dt>
   <dd><ul>
-   <li><a href="http://sourceforge.net/mail/?group_id=1355">mailing
-    lists</a></li>
-   <li><a href="http://sourceforge.net/bugs/?group_id=1355">bug
-    reports</a></li>
-   <li><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/clisp">CVS
-    browsing</a>
+   <li><a href="http://sourceforge.net/mail/?group_id=1355"
+          >mailing lists</a></li>
+   <li><a href="http://sourceforge.net/bugs/?group_id=1355"
+          >bug reports</a></li>
+   <li><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/clisp/"
+          >CVS browsing</a>
     [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
      >tarball</a>]</li>
    <li><a href="http://sourceforge.net/survey/?group_id=1355">surveys</a></li>
@@ -191,6 +191,11 @@
        <a href="http://cl-cookbook.sourceforge.net">home</a>]</dt>
    <dd>A collaborative project that aims to provide for Common Lisp
     something similar to the Perl Cookbook published by O'Reilly.</dd>
+  <dt><strong>Lisp Server Pages</strong>
+      [<a href="http://sourceforge.net/projects/lsp">project</a>
+       <a href="http://lsp.sourceforge.net/">home</a>]</dt>
+   <dd>a system implemented in Common Lisp for generating dynamic HTML
+    from scripted pages.</dd>
  </dl>
  <strong>Other Projects</strong>
  <dl>
@@ -198,10 +203,6 @@
    <dd>Carnegie-Mellon University Public Domain UNIX Common Lisp</dd>
   <dt><strong><a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/lang/lisp/0.html">CMU Common Lisp Repository</a></strong></dt>
    <dd>Lots of Lisp code there!</dd>
-  <dt><strong><a href="http://lsp.everest.com/">Lisp Server
-    Pages</a></strong></dt>
-   <dd>a system implemented in Common Lisp for generating dynamic HTML
-    from scripted pages.</dd>
   <dt><strong><a href="http://ww.telent.net/cliki/">CLiki</a></strong></dt>
    <dd>This site intends to provide a collection of links to and
     resources for free software implemented in Common Lisp and available
@@ -222,7 +223,7 @@
 </td></tr>
 <tr><th><a href="http://sf.net/users/sds">Sam Steingold</a></th>
  <td align="center">
-  <a href="http://www.podval.org/~sds">http://www.podval.org/~sds</a>
+  <a href="http://www.podval.org/~sds/">http://www.podval.org/~sds/</a>
 </td></tr>
 <tr><th colspan="2">Please direct all CLISP-related issues to
 <a href="http://lists.sourceforge.net/mailman/listinfo/clisp-list"
