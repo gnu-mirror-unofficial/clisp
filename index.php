@@ -80,7 +80,7 @@
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
    <li><a href="https://sourceforge.net/donate/?group_id=1355"
           ><strong>donate</strong></a> -
-    <a href=" http://sourceforge.net/export/html_projdonors.php?group_id=1355&show_comments=1">recent donors</a></li>
+    <a href=" http://sourceforge.net/export/html_projdonors.php?group_id=1355&amp;show_comments=1">recent donors</a></li>
   </ul></dd>
  <dt><strong><a href="http://clisp.cons.org">CLISP</a> elsewhere</strong></dt>
   <dd><ul>
@@ -122,6 +122,9 @@
         <option value="5">5</option><option value="4">4</option>
         <option value="3">3</option><option value="2">2</option>
         <option value="1">1</option></select></fieldset></form></td>
+    <td><a href="http://www.programmingpages.com/?r=clispconsorg">
+      <img src="http://www.programmingpages.com/images/progppages10030.gif"
+           alt="vote for CLISP at the Programming Pages"/></a></td>
  </tr></table></dd>
  <dt><strong>How are you using CLISP?</strong></dt>
  <dd><a href="mailto:clisp-list@lists.sourceforge.net?subject='success story'">Tell us your story</a>!</dd>
