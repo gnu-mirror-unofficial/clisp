@@ -69,14 +69,14 @@
   <dd><ul>
    <!-- li><a href="http://sourceforge.net/mail/?group_id=1355"
         >mailing lists</a></li -->
-   <li><a href="http://sourceforge.net/bugs/?group_id=1355"
+   <li><a href="http://sourceforge.net/tracker/?group_id=1355&atid=101355"
           >bug reports</a></li>
-   <li><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/clisp/"
+   <li><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/"
           >CVS browsing</a>
     [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.bz2"
      >tarball</a>]</li>
-   <!-- li><a href="http://sourceforge.net/people/?group_id=1355">help
-        wanted</a></li -->
+   <li><a href="http://sourceforge.net/people/?group_id=1355">help
+     wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
    <li><a href="https://sourceforge.net/donate/?group_id=1355"
           ><strong>donate</strong></a> -
@@ -86,15 +86,16 @@
   <dd><ul>
    <li><a href="http://www.gnu.org">GNU</a>
        <a href="http://www.gnu.org/directory/">Free Software Directory</a>
-     - <a href="http://www.gnu.org/directory/clisp.html">CLISP</a> and
+     - <a href="http://www.gnu.org/directory/CLISP.html">CLISP</a> and
        <a href="http://www.gnu.org/search/fsd-search.py?q=lisp">Lisp</a></li>
    <li><a href="http://www-2.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/0.html">CMU Artificial Intelligence Repository</a>
+    (very old but still valuable)
     - <a href="http://www-2.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/lisp/impl/clisp/0.html">CLISP</a> and
     <a href="http://www-2.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/lisp/0.html">Lisp</a></li>
-   <li><a href="http://sal.kachinatech.com/">Scientific Applications on
-     Linux</a> -
-    <a href="http://sal.kachinatech.com/F/1/CLISP.html">CLISP</a> and
-    <a href="http://sal.kachinatech.com/F/1/#LISP">Lisp</a></li>
+   <!-- the original site, sal.kachinatech.com is dead! -->
+   <li><a href="http://ceu.fi.udc.es/SAL/">Scientific Applications on Linux</a>
+    - <a href="http://ceu.fi.udc.es/SAL/F/1/CLISP.html">CLISP</a> and
+    <a href="http://ceu.fi.udc.es/SAL/F/1/index.shtml#LISP">Lisp</a></li>
    <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
  <dt><strong>Rate CLISP!</strong></dt>
@@ -110,6 +111,9 @@
         <option value="5">5</option><option value="4">4</option>
         <option value="3">3</option><option value="2">2</option>
         <option value="1">1</option></select></fieldset></form></td>
+    <td><a href="http://www.programmingpages.com/?r=clispconsorg">
+      <img src="http://www.programmingpages.com/images/progppages10030.gif"
+           alt="vote for CLISP at the Programming Pages"/></a></td>
     <td><form method="post" action="http://www.osdir.com/modules.php?op=modload&amp;name=Downloads&amp;file=index">
       <fieldset><legend><a href="http://www.osdir.com/Downloads-req-viewdownloaddetails-lid-449-ttitle-CLISP.html">OSDir</a></legend>
        <input type="hidden" name="ratinglid" value="449"/>
@@ -122,12 +126,10 @@
         <option value="5">5</option><option value="4">4</option>
         <option value="3">3</option><option value="2">2</option>
         <option value="1">1</option></select></fieldset></form></td>
-    <td><a href="http://www.programmingpages.com/?r=clispconsorg">
-      <img src="http://www.programmingpages.com/images/progppages10030.gif"
-           alt="vote for CLISP at the Programming Pages"/></a></td>
  </tr></table></dd>
  <dt><strong>How are you using CLISP?</strong></dt>
- <dd><a href="mailto:clisp-list@lists.sourceforge.net?subject='success story'">Tell us your story</a>!</dd>
+ <dd><a href="mailto:clisp-list@lists.sourceforge.net?subject='success story'"
+        >Tell us your story</a>!</dd>
  </dl></td>
 <td><dl>
  <dt><strong>Home</strong></dt>
@@ -143,10 +145,10 @@
   <dd><ul>
     <li><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
            >SourceForge downloads/HTTP</a></li>
-    <li><a href="ftp://cvs2.cons.org/pub/lisp/clisp/"
+    <!-- li><a href="ftp://cvs2.cons.org/pub/lisp/clisp/"
                 >ftp://cvs2.cons.org/pub/lisp/clisp/</a></li>
     <li><a href="http://cvs2.cons.org/ftp-area/clisp/"
-                >http://cvs2.cons.org/ftp-area/clisp/</a></li>
+                >http://cvs2.cons.org/ftp-area/clisp/</a></li-->
     <li><a href="ftp://ftp.gnu.org/pub/gnu/clisp/"
                 >ftp://ftp.gnu.org/pub/gnu/clisp/</a></li>
     <li><a href="http://ftp.gnu.org/pub/gnu/clisp/"
@@ -226,11 +228,10 @@
     <legend><a href="http://gmane.org/"
                ><img src="http://gmane.org/img/gmane-50.png"
                      width="51" height="50" alt="Gmane"/></a>
-     <a href="http://news.gmane.org/thread.php?group=gmane.lisp.clisp.announce"
+     <a href="http://news.gmane.org/gmane.lisp.clisp.announce"
         >clisp-announce</a>
-     <a href="http://news.gmane.org/thread.php?group=gmane.lisp.clisp.general"
-        >clisp-list</a>
-     <a href="http://news.gmane.org/thread.php?group=gmane.lisp.clisp.devel"
+     <a href="http://news.gmane.org/gmane.lisp.clisp.general">clisp-list</a>
+     <a href="http://news.gmane.org/gmane.lisp.clisp.devel"
         >clisp-devel</a></legend>
     <select name="group">
      <option value="gmane.lisp.clisp.general">clisp-list</option>
@@ -257,17 +258,13 @@
   <a href="http://www.podval.org/~sds/">http://www.podval.org/~sds/</a>
 </td></tr>
 <tr><th><a href="http://sf.net/users/ampy">Arseny Slobodjuck</a></th>
- <td align="center">
-  <a href="no home">no home</a>
-</td></tr>
+ <td align="center">no home</td></tr>
 <tr><th><a href="http://sf.net/users/hin">John Hinsdale</a></th>
  <td align="center">
-  <a href="http://www.alma.com/staff/hin">http://www.alma.com/staff/hin</a>
+  <a href="http://www.alma.com/staff/hin/">http://www.alma.com/staff/hin/</a>
 </td></tr>
 <tr><th><a href="http://sf.net/users/hoehle">J&ouml;rg H&ouml;hle</a></th>
- <td align="center">
-  <a href="http://zeus.gmd.de/~hoehle/">http://zeus.gmd.de/~hoehle/</a>
-</td></tr>
+ <td align="center">no home</td></tr>
 <tr><th><a href="http://sf.net/users/peterjb">Peter Burwood</a></th>
  <td align="center">
   <a href="http://www.users.dircon.co.uk/~arcangel/">http://www.users.dircon.co.uk/~arcangel/</a>
