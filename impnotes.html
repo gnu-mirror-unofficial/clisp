@@ -24011,17 +24011,241 @@ postgresql642</span></dt>
 checkboard.</p>
 </dd>
 
-<dt><a name="regexp"></a><span class="term">regexp</span></dt>
+<dt><a name="d39e32642"></a><span class="term"><a href=
+"#regexp">regexp</a></span></dt>
 
 <dd>
-<p>The POSIX Regular Expressions matching, compiling, executing.</p>
+<p>The <a href="regexp.html" target="_top">POSIX Regular Expressions</a>
+matching, compiling, executing.</p>
+</dd>
+
+<dt><a name="d39e32226"></a><span class="term">wildcard</span></dt>
+
+<dd>
+<p>Shell globbing</p>
+</dd>
+</dl>
+
+<div class="section"><a name="regexp"></a>
+<div class="titlepage">
+<div>
+<h4 class="title"><a name="regexp"></a><a href="http://clisp.cons.org"
+target="_top"><b>CLISP</b></a> <a href="#regexp">&ldquo;REGEXP&rdquo;</a>
+module</h4>
+</div>
+</div>
+
+<p>The <a href="#regexp">&ldquo;REGEXP&rdquo;</a> module implements the <a
+href="regexp.html" target="_top">POSIX regular expressions</a> via an <a
+href="#dffi">&ldquo;FFI&rdquo;</a> call to the standard <a href=
+"http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><b>C</b></a>
+system facilities. The syntax of these regular expressions is described in
+many places, such as your local <tt>regexp</tt>(5) manual and <a href=
+"http://www.gnu.org/software/emacs/emacs.html" target="_top">Emacs</a>
+info pages.</p>
+
+<p>The <a href="#regexp">&ldquo;REGEXP&rdquo;</a> package exports the
+following 9 symbols:</p>
+
+<table class="simplelist" border="0" summary="Simple list">
+<tr>
+<td><a href="#re-match"><tt>regexp:match</tt></a></td>
+<td><a href="#re-match-start"><tt>regexp:match-start</tt></a></td>
+<td><a href="#re-match-end"><tt>regexp:match-end</tt></a></td>
+</tr>
+
+<tr>
+<td><a href="#re-match-string"><tt>regexp:match-string</tt></a></td>
+<td><a href="#re-regexp-quote"><tt>regexp:regexp-quote</tt></a></td>
+<td><a href="#re-regexp-compile"><tt>regexp:regexp-compile</tt></a></td>
+</tr>
+
+<tr>
+<td><a href="#re-regexp-exec"><tt>regexp:regexp-exec</tt></a></td>
+<td><a href="#re-regexp-split"><tt>regexp:regexp-split</tt></a></td>
+<td><a href="#re-with-loop-split"><tt>regexp:with-loop-split</tt></a></td>
+</tr>
+</table>
+
+<div class="variablelist">
+<p><b>API</b></p>
+
+<dl>
+<dt><a name="re-match"></a><span class="term"><tt>(<a href=
+"#re-match"><tt>regexp:match</tt></a> <i><tt>pattern</tt></i>
+<i><tt>string</tt></i> <a href=
+"http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target=
+"_top"><tt>&amp;KEY</tt></a> (<tt>:start</tt> 0) <tt>:end</tt>
+(<tt>:case-sensitive</tt> t))</tt></span></dt>
+
+<dd>
+<p><a name="d39e32765"></a>This macro returns as first value a
+<tt>match</tt> structure containing the indices of the start and end of
+the first match for the regular expression <i><tt>pattern</tt></i> in
+<i><tt>string</tt></i>; or <a href=
+"http://www.lisp.org/HyperSpec/Body/convar_nil.html" target=
+"_top"><tt>NIL</tt></a> if there is no match. If <i><tt>start</tt></i> is
+non-<a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target=
+"_top"><tt>NIL</tt></a>, the search starts at that index in
+<i><tt>string</tt></i>. If <i><tt>end</tt></i> is non-<a href=
+"http://www.lisp.org/HyperSpec/Body/convar_nil.html" target=
+"_top"><tt>NIL</tt></a>, only <tt>(<a href=
+"http://www.lisp.org/HyperSpec/Body/acc_subseq.html" target=
+"_top"><tt>SUBSEQ</tt></a> <i><tt>string</tt></i> <i><tt>start</tt></i>
+<i><tt>end</tt></i>)</tt> is considered.</p>
+
+<div class="example">
+<p><a name="d39e32814"></a><b><a href=
+"#re-match"><tt>regexp:match</tt></a></b></p>
+
+<pre class="programlisting">
+    (match "quick" "The quick brown fox jumped quickly.")
+     #S(match :start 4 :end 9)
+    (match "quick" "The quick brown fox jumped quickly." :start 8)
+      #S(match :start 27 :end 32)
+    (match "quick" "The quick brown fox jumped quickly." :start 8 :end 30)
+     NIL
+  
+</pre>
+</div>
+
+The index of the first character of the string is 0, the index of the
+second character is 1, and so on. The next values are <tt>match</tt>
+structures for every <i><tt>\(...\)</tt></i> construct in
+<i><tt>pattern</tt></i>, in the order that the open parentheses appear in
+<i><tt>pattern</tt></i>. <br>
+<br>
+</dd>
+
+<dt><a name="re-match-start"></a><span class="term"><tt>(<a href=
+"#re-match-start"><tt>regexp:match-start</tt></a>
+<i><tt>match</tt></i>)</tt></span></dt>
+
+<dd>
+<p>Extracts the start index of <i><tt>match</tt></i>.</p>
+</dd>
+
+<dt><a name="re-match-end"></a><span class="term"><tt>(<a href=
+"#re-match-end"><tt>regexp:match-end</tt></a>
+<i><tt>match</tt></i>)</tt></span></dt>
+
+<dd>
+<p>Extracts the end index of <i><tt>match</tt></i>.</p>
+</dd>
+
+<dt><a name="re-match-string"></a><span class="term"><tt>(<a href=
+"#re-match-string"><tt>regexp:match-string</tt></a> <i><tt>string</tt></i>
+<i><tt>match</tt></i>)</tt></span></dt>
+
+<dd>
+<p>Extracts the substring of <i><tt>string</tt></i> corresponding to the
+given pair of start and end indices of <i><tt>match</tt></i>. The result
+is shared with <i><tt>string</tt></i>. If you want a freshly consed <a
+href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target=
+"_top"><tt>STRING</tt></a>, use <a href=
+"http://www.lisp.org/HyperSpec/Body/fun_copy-seq.html" target=
+"_top"><tt>COPY-SEQ</tt></a> or <tt>(<a href=
+"http://www.lisp.org/HyperSpec/Body/fun_coerce.html" target=
+"_top"><tt>COERCE</tt></a> (<a href=
+"#re-match-string"><tt>regexp:match-string</tt></a> ...) '<a href=
+"http://www.lisp.org/HyperSpec/Body/typ_simple-string.html" target=
+"_top"><tt>SIMPLE-STRING</tt></a>)</tt>.</p>
+</dd>
+
+<dt><a name="re-regexp-quote"></a><span class="term"><tt>(<a href=
+"#re-regexp-quote"><tt>regexp:regexp-quote</tt></a>
+<i><tt>string</tt></i>)</tt></span></dt>
+
+<dd>
+<p><a name="d39e32937"></a>This function returns a regular expression
+string that matches exactly <i><tt>string</tt></i> and nothing else. This
+allows you to request an exact string match when calling a function that
+wants a regular expression.</p>
+
+<div class="example">
+<p><a name="d39e32943"></a><b><a href=
+"#re-regexp-quote"><tt>regexp:regexp-quote</tt></a></b></p>
+
+<pre class="programlisting">
+    (regexp-quote "^The cat$")
+     "\\^The cat\\$"
+  
+</pre>
+</div>
+
+One use of <a href="#re-regexp-quote"><tt>regexp:regexp-quote</tt></a> is
+to combine an exact string match with context described as a regular
+expression.<br>
+<br>
+</dd>
+
+<dt><a name="re-regexp-compile"></a><span class="term"><tt>(<a href=
+"#re-regexp-compile"><tt>regexp:regexp-compile</tt></a>
+<i><tt>string</tt></i> <a href=
+"http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target=
+"_top"><tt>&amp;OPTIONAL</tt></a> (<i><tt>case-sensitive</tt></i>
+t))</tt></span></dt>
+
+<dd>
+<p>Compile the regular expression <i><tt>string</tt></i> into an object
+suitable for <a href=
+"#re-regexp-exec"><tt>regexp:regexp-exec</tt></a>.</p>
+</dd>
+
+<dt><a name="re-regexp-exec"></a><span class="term"><tt>(<a href=
+"#re-regexp-exec"><tt>regexp:regexp-exec</tt></a> <i><tt>pattern</tt></i>
+<i><tt>string</tt></i> <a href=
+"http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target=
+"_top"><tt>&amp;KEY</tt></a> (<tt>:start</tt> 0)
+<tt>:end</tt>)</tt></span></dt>
+
+<dd>
+<p>Execute the <i><tt>pattern</tt></i>, which must be a compiled regular
+expression returned by <a href=
+"#re-regexp-compile"><tt>regexp:regexp-compile</tt></a>, against the
+appropriate portion of the <i><tt>string</tt></i>.</p>
+</dd>
+
+<dt><a name="re-regexp-split"></a><span class="term"><tt>(<a href=
+"#re-regexp-split"><tt>regexp:regexp-split</tt></a>
+<i><tt>pattern</tt></i> <i><tt>string</tt></i> <a href=
+"http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target=
+"_top"><tt>&amp;KEY</tt></a> (<tt>:start</tt> 0) <tt>:end</tt>
+(<tt>:case-sensitive</tt> t))</tt></span></dt>
+
+<dd>
+<p>Return a list of substrings of <i><tt>string</tt></i> (all sharing the
+structure with <i><tt>string</tt></i>) separated by
+<i><tt>pattern</tt></i> (a regular expression string or a return value of
+<a href="#re-regexp-compile"><tt>regexp:regexp-compile</tt></a>)</p>
+</dd>
+
+<dt><a name="re-with-loop-split"></a><span class="term"><tt>(<a href=
+"#re-with-loop-split"><tt>regexp:with-loop-split</tt></a>
+(<i><tt>variable</tt></i> <i><tt>stream</tt></i> <i><tt>pattern</tt></i>
+<a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target=
+"_top"><tt>&amp;OPTIONAL</tt></a> (<i><tt>case-sensitive</tt></i> t)) <a
+href="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html" target=
+"_top"><tt>&amp;BODY</tt></a> <i><tt>body</tt></i>)</tt></span></dt>
+
+<dd>
+<p>Read lines from <i><tt>stream</tt></i>, split them with <a href=
+"#re-regexp-split"><tt>regexp:regexp-split</tt></a> on
+<i><tt>pattern</tt></i>, and bind the resulting list to
+<i><tt>variable</tt></i>.</p>
+</dd>
+</dl>
+</div>
 
 <p>The following code computes the number of people who use a particular
 shell:</p>
 
 <pre class="programlisting">
-(use-package :regexp)
-(sexp ((h (make-hash-table :test #'equal :size 10)) (n 0))
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target=
+"_top"><tt>DEFPACKAGE</tt></a> "REGEXP-TEST" (:use "LISP" "REGEXP"))
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_in-package.html" target=
+"_top"><tt>IN-PACKAGE</tt></a> "REGEXP-TEST")
+(let ((h (make-hash-table :test #'equal :size 10)) (n 0))
   (with-open-file (f "/etc/passwd")
     (with-loop-split (s f ":")
       (let ((sh (seventh s)))
@@ -24036,7 +24260,8 @@ shell:</p>
 
 <br>
 <br>
-<p>The same is done by the following Perl:</p>
+<p>The same is done by the following <a href="http://www.perl.com" target=
+"_top"><b>Perl</b></a>:</p>
 
 <pre class="programlisting">
 #!/usr/local/bin/perl -w
@@ -24062,14 +24287,6 @@ for my $kk (keys(%hash)) {
 
 <br>
 <br>
-</dd>
-
-<dt><a name="d39e32226"></a><span class="term">wildcard</span></dt>
-
-<dd>
-<p>Shell globbing</p>
-</dd>
-</dl>
 </div>
 </div>
 </div>
