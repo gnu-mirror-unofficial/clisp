@@ -425,6 +425,7 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</a></
  <li><a href="#stack">stack overflow</a></li>
  <li><a href="#self-mod">self-modifying code</a> - a common
   CLISP-independent beginner mistake</li>
+ <li><a href="#autoconf">autoconf problems during build</a></li>
 </ol>
 <hr/>
 
@@ -520,6 +521,19 @@ trying to <a href="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
 
 <p>See <a href="http://www.lisp.org/table/style.htm">Lisp Programming
   Style</a> for more useful information.</p>
+
+<p><a href="#trouble">back to Troubles</a></p><hr/>
+
+<h3 id="autoconf">autoconf problems during build</h3>
+
+<p>When building from the CVS HEAD development sources, you will
+ sometimes get errors when <code>make</code> tries to regenerate
+ a <code>configure</code> script for you.
+ <strong>This is never necessary!</strong> (and will not happen in
+ an officially released source distribution).
+ Please just <code>touch</code> the target, e.g.:</p><pre>
+$ touch src/configure
+</pre><p>and re-<code>make</code>.</p>
 
 <p><a href="#trouble">back to Troubles</a></p><hr/>
 
