@@ -139,6 +139,12 @@
     LISA is based on
     <a href="http://www.ghg.net/clips/CLIPS.html">CLIPS</a> and
     <a href="http://herzberg.ca.sandia.gov/jess/">Jess</a>.</dd>
+  <dt><strong>cCLan - Comprehensive Common Lisp Archive Net</strong>
+      [<a href="http://sourceforge.net/projects/cclan">project</a>
+       <a href="http://cclan.sourceforge.net">home</a>]</dt>
+   <dd>The goal is to facilitate the distribution of Lisp software
+    (and attendant utilities) in an integrated manner,
+    much as CTAN does for (La)TeX or CPAN for Perl.</dd>
  </dl>
  <strong>Other Projects</strong>
  <dl>
@@ -149,6 +155,10 @@
   <dt><a href="http://lsp.everest.com/">Lisp Server Pages</a></dt>
    <dd>a system implemented in Common Lisp for generating dynamic HTML
     from scripted pages.</dd>
+  <dt><a href="http://ww.telent.net/cliki/">CLiki</a></dt>
+   <dd><p>This site intends to provide a collection of links to and
+    resources for free software implemented in Common Lisp and available
+    on Unix-like systems.</dd>
  </dl>
  </td></tr>
 </table>
