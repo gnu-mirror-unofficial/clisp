@@ -453,6 +453,7 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</a></
  <li><a href="#self-mod">self-modifying code</a> - a common
   CLISP-independent beginner mistake</li>
  <li><a href="#autoconf">autoconf problems during build</a></li>
+ <li><a href="#other-problem">function <code>FOO</code> is broken!</a></li>
 </ol>
 <hr/>
 
@@ -584,6 +585,20 @@ trying to <a href="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
  Please just <code>touch</code> the target, e.g.:</p><pre>
 $ touch src/configure
 </pre><p>and re-<code>make</code>.</p>
+
+<p><a href="#trouble">back to Troubles</a></p><hr/>
+
+<h3 id="other-problem">Function <code>FOO</code> is broken!</h3>
+
+<p>When confronted with unexpected behavior, try looking in the
+ <a href="impnotes.html">implementation notes</a>.</p>
+
+<p>E.g., CLISP <code>DIRECTORY</code> is different from the CMUCL
+ implementation, so you should search the CLISP implementation notes
+ for "DIRECTORY".  Alternatively, since the implementation notes are
+ organized in parallel to the CLHS, and <code>DIRECTORY</code> belongs
+ to the section 20 in CLHS, you can just go to section 20 in impnotes
+ and look for "DIRECTORY" there.</p>
 
 <p><a href="#trouble">back to Troubles</a></p><hr/>
 
