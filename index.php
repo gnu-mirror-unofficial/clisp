@@ -184,7 +184,13 @@
    <fieldset>
     <legend><a href="http://gmane.org/"
                ><img src="http://gmane.org/img/gmane-50.png"
-                     width="51" height="50" alt="Gmane"/></a></legend>
+                     width="51" height="50" alt="Gmane"/></a>
+     <a href="http://news.gmane.org/thread.php?group=gmane.lisp.clisp.announce"
+        >clisp-announce</a>
+     <a href="http://news.gmane.org/thread.php?group=gmane.lisp.clisp.general"
+        >clisp-list</a>
+     <a href="http://news.gmane.org/thread.php?group=gmane.lisp.clisp.devel"
+        >clisp-devel</a></legend>
     <select name="group">
      <option value="gmane.lisp.clisp.general">clisp-list</option>
      <option value="gmane.lisp.clisp.devel">clisp-devel</option>
@@ -192,8 +198,7 @@
     </select>
     <input type="text" size="64" name="query" value=""/>
     <input type="submit" value="go"/><br/>
-    <select name="sort">
-     <option value="">Sort by...</option>
+    Sort by <select name="sort">
      <option value="date">Date</option>
      <option value="relevance">Relevance</option>
     </select>
