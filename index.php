@@ -16,8 +16,7 @@
 </head>
 
 <body>
-<h1>Welcome to
-  <a href="http://clisp.cons.org">CLISP home</a></h1>
+<h1>Welcome to <a href="http://clisp.cons.org">CLISP home</a></h1>
 
 <!-- ?php for(reset($headers); $key = key($headers); next($headers))
  { echo "headers[$key] = ".$headers[$key]."<br>\n"; } ?
@@ -194,10 +193,34 @@
  <td align="center">
   <a href="http://www.podval.org/~sds/">http://www.podval.org/~sds/</a>
 </td></tr>
-<tr><th colspan="2">Please direct all CLISP-related issues to
-<a href="http://lists.sourceforge.net/mailman/listinfo/clisp-list"
- >&lt;clisp-list&gt;</a> and <em>not</em> to the developers.
- </th></tr></table>
+<tr><th><a href="http://sf.net/users/ampy">Arseny Slobodjuck</a></th>
+ <td align="center">
+  <a href="no home">no home</a>
+</td></tr>
+<tr><th><a href="http://sf.net/users/hin">John Hinsdale</a></th>
+ <td align="center">
+  <a href="http://www.alma.com/staff/hin">http://www.alma.com/staff/hin</a>
+</td></tr>
+<tr><th><a href="http://sf.net/users/hoehle">J&ouml;rg H&ouml;hle</a></th>
+ <td align="center">
+  <a href="http://zeus.gmd.de/~hoehle/">http://zeus.gmd.de/~hoehle/</a>
+</td></tr>
+<tr><th><a href="http://sf.net/users/peterjb">Peter Burwood</a></th>
+ <td align="center">
+  <a href="http://www.users.dircon.co.uk/~arcangel/">http://www.users.dircon.co.uk/~arcangel/</a>
+</td></tr>
+<tr><th><a href="http://sf.net/users/marco-baringer">Marco Baringer</a></th>
+ <td align="center">
+  <a href="http://www.bese.it/~segv/">http://www.bese.it/~segv/</a>
+</td></tr>
+<tr><th><a href="http://sf.net/users/"></a></th>
+ <td align="center">
+  <a href=""></a>
+</td></tr>
+<tr><th colspan="2"><a href="faq.html#help">Please direct all
+   CLISP-related issues to an appropriate place and <em>not</em> to the
+   developers.</a>
+</th></tr></table>
 
 <p class="center"><a href="http://petition.eurolinux.org"><img
 src="patent_button.png" width="88" height="36" alt="no patents"/></a></p>
@@ -210,7 +233,7 @@ src="patent_button.png" width="88" height="36" alt="no patents"/></a></p>
 <p>This project is <strong>NOT</strong> supported by these or any other
 company or organization.</p>
 
-<p>All contents here is copyright by Bruno Haible and Sam Steingold and
+<p>All contents here is copyright by the developers and
 is released under the <a href="http://www.gnu.org/copyleft/fdl.html">GNU
 Free Documentation License</a></p>
 
