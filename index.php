@@ -66,7 +66,7 @@
   <dd><ul>
    <!-- li><a href="http://sourceforge.net/mail/?group_id=1355"
         >mailing lists</a></li -->
-   <li><a href="http://sourceforge.net/tracker/?group_id=1355&atid=101355"
+   <li><a href="http://sourceforge.net/tracker/?group_id=1355&amp;atid=101355"
           >bug reports</a></li>
    <li><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/"
           >CVS browsing</a>
@@ -152,14 +152,7 @@
                 >http://ftp.gnu.org/pub/gnu/clisp/</a></li>
     <li><a href="ftp://sunsite.unc.edu/pub/Linux/devel/lang/lisp/"
                 >ftp://sunsite.unc.edu/pub/Linux/devel/lang/lisp/</a></li>
-    <li><a
-     href="ftp://ftp.tu-darmstadt.de/pub/programming/languages/lisp/clisp/"
-          >a German mirror</a></li>
-    <li><a href="ftp://ftp.ntnu.no/pub/languages/common_lisp/clisp/"
-           >a Norwegian mirror</a> (<strong>dated!</strong>)</li>
-    <li><a href="ftp://tsx-11.mit.edu/pub/linux/packages/lisp/"
-           >TSX-11</a> (<strong>very dated!</strong>)</li>
-   </ul></dd>
+  </ul></dd>
  <dt><strong>Linux packages</strong></dt>
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
