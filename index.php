@@ -197,6 +197,15 @@
        <a href="http://lsp.sourceforge.net/">home</a>]</dt>
    <dd>a system implemented in Common Lisp for generating dynamic HTML
     from scripted pages.</dd>
+  <dt><strong>JACOL - A framework for bidirectional Java and Common Lisp
+      interoperability</strong>
+      [<a href="http://sourceforge.net/projects/jacol/">project</a>
+       <a href="http://jacol.sourceforge.net/">home</a>]</dt>
+   <dd>JACOL is a framework for allowing Java and Common Lisp to
+    inter-operate. Its intended use is to enable Common Lisp to
+    function as an extension language for Java.
+    It can also be used to expose Java APIs (such as Swing and DOM) to
+    Lisp applications.</dd>
  </dl>
  <strong>Other Projects</strong>
  <dl>
