@@ -33,54 +33,24 @@
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table align="center" cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.28 (2002-03-03)</th>
-<td>sources
- <a href="ftp://cvs2.cons.org/pub/lisp/clisp/source/latest/">FTP</a>/
- <a href="http://cvs2.cons.org/ftp-area/clisp/source/latest/">HTTP</a></td>
-<td>binaries
- <a href="ftp://cvs2.cons.org/pub/lisp/clisp/binaries/latest/">FTP</a>/
- <a href="http://cvs2.cons.org/ftp-area/clisp/binaries/latest/">HTTP</a></td>
-<td><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
-       >SourceForge downloads/HTTP</a></td>
-</tr></table>
+<tr><th>Current version:</th><th>2.28 (2002-03-03)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
-<tr><th>Our Project</th><th>Related Projects</th></tr>
-<tr valign="top"><td>
-<dl>
+<tr><th>About CLISP</th><th>Get CLISP</th></tr>
+<tr valign="top"><td><dl>
  <dt><strong><a href="summary.html">What is CLISP?</a></strong></dt>
   <dd>a feature-loaded implementation of a great language!</dd>
  <dt><strong><a href="propaganda.html">The benefits of Common Lisp and
    CLISP</a></strong></dt>
-  <dd>why is Common Lisp such a great programming environment?</dd>
- <dt><strong><a href="resources.html">CLISP and Common Lisp via FTP and
-   WWW</a></strong></dt>
-  <dd>links to CLISP sources and binaries as well as general Lisp
-   information</dd>
- <dt><strong><a href="clisp.html">CLISP manual page for
-   UN*X</a></strong></dt>
+  <dd>why is ANSI Common Lisp such a great programming environment?</dd>
+ <dt><strong><a href="clisp.html">CLISP manual page for UN*X</a></strong></dt>
   <dd>command line options for other platforms are very similar</dd>
- <dt><strong><a href="impnotes.html">CLISP Implementation
-   Notes</a> <a href="impnotes/">[TOC]</a></strong></dt>
-  <dd>How CLISP implements the <a href="http://www.ansi.org/">ANSI</a>
-   standard <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+X3%2E226%2D1994">X3.226-1994</a>
-   <cite>"Information Technology - Programming Language - Common
-   Lisp"</cite>, available as the <a
-   href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
-   HyperSpec</a>.</dd>
- <dt><strong><a href="clreadline.html">CLISP's line editing
-   facilities</a></strong></dt>
-  <dd>CLISP uses GNU
-  <a href="http://cnswww.cns.cwru.edu/~chet/readline/rltop.html"
-   >readline</a>.</dd>
- <dt><strong><a href="clash.html">CLISP as a login shell</a></strong></dt>
-  <dd>You can use CLISP instead of
-   <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
-   <a href="http://hpcf.nersc.gov/software/os/shells/tcsh/">tcsh</a>!</dd>
+ <dt><strong><a href="resources.html">Common Lisp on the Web</a></strong></dt>
+  <dd>information and software</dd>
  <dt><strong><a href="faq.html">CLISP FAQ list</a></strong></dt>
   <dd>Frequently Asked Questions about CLISP, with answers.</dd>
- <dt><strong><a href="http://sourceforge.net/projects/clisp">Project
-   Home</a></strong></dt>
+ <dt><strong><a href="http://sourceforge.net/projects/clisp"
+                >SourceForge Project Home</a></strong></dt>
   <dd><ul>
    <li><a href="http://sourceforge.net/mail/?group_id=1355"
           >mailing lists</a></li>
@@ -91,8 +61,6 @@
     [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
      >tarball</a>]</li>
    <li><a href="http://sourceforge.net/survey/?group_id=1355">surveys</a></li>
-   <li><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
-          >files released</a></li>
    <li><a href="http://sourceforge.net/people/?group_id=1355">help
     wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
@@ -103,8 +71,6 @@
        <a href="http://www.gnu.org/directory/">Free Software Directory</a>
      - <a href="http://www.gnu.org/directory/clisp.html">CLISP</a> and
        <a href="http://www.gnu.org/search/fsd-search.py?q=lisp">Lisp</a></li>
-   <li><a href="http://www.gnu.org/software/clisp/">CLISP Home Pages
-    Mirrored at GNU</a></li>
    <li><a href="http://freshmeat.net/projects/clisp/">FreshMeat</a></li>
    <li><a href="http://www.opensourcedirectory.org/projects/clisp/"
        >Open Source Directory</a></li>
@@ -124,101 +90,53 @@
   <dd>Tell us your story!</dd>
  </dl>
 </td>
-<td><strong>Related <a href="http://sourceforge.net">SourceForge</a>
-   Projects</strong>
-   (<a href="http://sourceforge.net/search/?q=lisp">search</a>)
- <dl>
-  <dt><strong>Le Sursis</strong>
-      [<a href="http://sourceforge.net/projects/sursis">project</a>
-       <a href="http://sursis.sourceforge.net/">home</a>]</dt>
-   <dd>a tool for writing CGI scripts in Lisp.</dd>
-  <dt><strong>Steel Bank CL</strong>
-      [<a href="http://sourceforge.net/projects/sbcl">project</a>
-       <a href="http://sbcl.sourceforge.net/">home</a>]</dt>
-   <dd>a Common Lisp development system derived from the CMU CL system</dd>
-  <dt><strong>CLOCC</strong>
-      [<a href="http://sourceforge.net/projects/clocc">project</a>
-       <a href="http://clocc.sourceforge.net/">home</a>]</dt>
-   <dd>the Common Lisp Open Code Collection</dd>
-  <dt><strong>Series</strong>
-      [<a href="http://sourceforge.net/projects/series">project</a>
-       <a href="http://series.sourceforge.net/">home</a>]</dt>
-   <dd>translates functional-style expressions into efficient loops</dd>
-  <dt><strong>ILISP</strong>
-      [<a href="http://sourceforge.net/projects/ilisp">project</a>
-       <a href="http://ilisp.cons.org/">home</a>]</dt>
-   <dd>a comprehensive (X)Emacs interface for an inferior Common Lisp,
-    or other Lisp based languages.</dd>
-  <dt><strong>MatLisp</strong>
-      [<a href="http://sourceforge.net/projects/matlisp">project</a>
-       <a href="http://matlisp.sourceforge.net/">home</a>]</dt>
-   <dd>a package for Common Lisp for handling matrices with real-valued
-    or complex-valued elements.
-    <a href="http://www.netlib.org/blas">BLAS</a> is used for elementary
-    matrix operations and
-    <a href="http://www.netlib.org/lapack">LAPACK</a> is used for linear
-    algebra routines.</dd>
-  <dt><strong>Common Lisp ORB</strong>
-      [<a href="http://sourceforge.net/projects/clorb">project</a>
-       <a href="http://clorb.sourceforge.net/">home</a>]</dt>
-   <dd>CLORB is an Object Request Broker implementing <a
-    href="http://www.corba.org/">CORBA</a> 2.  It currently supports
-    DII, DSI and the POA.  The goal is to make the mapping follow the
-    proposed mapping for LISP, but currently this is only half
-    done.</dd>
-  <dt><strong>LISA - Lisp Intelligent Software Agents</strong>
-      [<a href="http://sourceforge.net/projects/lisa">project</a>
-       <a href="http://lisa.sourceforge.net">home</a>]</dt>
-   <dd>a production rule system for Common Lisp.
-    Its purpose is to provide extensive support for the development of
-    intelligent applications.
-    LISA uses a CLOS implementation of the Rete algorithm.
-    LISA is based on
-    <a href="http://www.ghg.net/clips/CLIPS.html">CLIPS</a> and
-    <a href="http://herzberg.ca.sandia.gov/jess/">Jess</a>.</dd>
-  <dt><strong>cCLan - Comprehensive Common Lisp Archive Net</strong>
-      [<a href="http://sourceforge.net/projects/cclan">project</a>
-       <a href="http://cclan.sourceforge.net">home</a>]</dt>
-   <dd>The goal is to facilitate the distribution of Lisp software
-    (and attendant utilities) in an integrated manner,
-    much as CTAN does for (La)TeX or CPAN for Perl.</dd>
-  <dt><strong>The Common Lisp Cookbook</strong>
-      [<a href="http://sourceforge.net/projects/cl-cookbook">project</a>
-       <a href="http://cl-cookbook.sourceforge.net">home</a>]</dt>
-   <dd>A collaborative project that aims to provide for Common Lisp
-    something similar to the Perl Cookbook published by O'Reilly.</dd>
-  <dt><strong>Lisp Server Pages</strong>
-      [<a href="http://sourceforge.net/projects/lsp">project</a>
-       <a href="http://lsp.sourceforge.net/">home</a>]</dt>
-   <dd>a system implemented in Common Lisp for generating dynamic HTML
-    from scripted pages.</dd>
-  <dt><strong>JACOL - A framework for bidirectional Java and Common Lisp
-      interoperability</strong>
-      [<a href="http://sourceforge.net/projects/jacol/">project</a>
-       <a href="http://jacol.sourceforge.net/">home</a>]</dt>
-   <dd>JACOL is a framework for allowing Java and Common Lisp to
-    inter-operate. Its intended use is to enable Common Lisp to
-    function as an extension language for Java.
-    It can also be used to expose Java APIs (such as Swing and DOM) to
-    Lisp applications.</dd>
- </dl>
- <strong>Other Projects</strong>
- <dl>
-  <dt><strong><a href="http://cmucl.cons.org/cmucl/">CMU CL</a></strong></dt>
-   <dd>Carnegie-Mellon University Public Domain UNIX Common Lisp</dd>
-  <dt><strong><a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/lang/lisp/0.html">CMU Common Lisp Repository</a></strong></dt>
-   <dd>Lots of Lisp code there!</dd>
-  <dt><strong><a href="http://ww.telent.net/cliki/">CLiki</a></strong></dt>
-   <dd>This site intends to provide a collection of links to and
-    resources for free software implemented in Common Lisp and available
-    on Unix-like systems.</dd>
-  <dt><strong><a href="http://openmcl.clozure.com/">OpenMCL</a></strong></dt>
-   <dd>an open-sourced Common Lisp implementation, derived from
-    Digitool's Macintosh Common Lisp product, running under
-    <a href="http://www.penguinppc.org">LinuxPPC</a>.</dd>
- </dl>
- </td></tr>
-</table>
+<td><dl>
+ <dt><strong>Home</strong></dt>
+  <dd><ul>
+    <li><a href="http://clisp.cons.org/">http://clisp.cons.org/</a></li>
+    <li><a href="http://www.clisp.org/">http://www.clisp.org/</a></li>
+    <li><a href="http://clisp.sourceforge.net/"
+                >http://clisp.sourceforge.net/</a></li>
+    <li><a href="http://www.gnu.org/software/clisp/"
+                >http://www.gnu.org/software/clisp/</a></li></ul></dd>
+ <dt><strong>Sources and binaries for various Unix, DOS, OS/2,
+   Windows, Amiga, Acorn, Mac platforms</strong></dt>
+  <dd><ul>
+    <li><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
+       >SourceForge downloads/HTTP</a></li>
+    <li><a href="ftp://cvs2.cons.org/pub/lisp/clisp/"
+                >ftp://cvs2.cons.org/pub/lisp/clisp/</a></li>
+    <li><a href="http://cvs2.cons.org/ftp-area/clisp/"
+                >http://cvs2.cons.org/ftp-area/clisp/</a></li>
+    <li><a href="ftp://ftp.gnu.org/pub/gnu/clisp/"
+                >ftp://ftp.gnu.org/pub/gnu/clisp/</a></li>
+    <li><a href="http://ftp.gnu.org/pub/gnu/clisp/"
+                >http://ftp.gnu.org/pub/gnu/clisp/</a></li>
+    <li><a href="ftp://sunsite.unc.edu/pub/Linux/devel/lang/lisp/"
+                >ftp://sunsite.unc.edu/pub/Linux/devel/lang/lisp/</a></li>
+    <li><a
+     href="ftp://ftp.tu-darmstadt.de/pub/programming/languages/lisp/clisp/"
+          >a German mirror</a></li>
+    <li><a href="ftp://ftp.ntnu.no/pub/languages/common_lisp/clisp/"
+           >a Norwegian mirror</a> (<strong>dated!</strong>)</li>
+    <li><a href="ftp://tsx-11.mit.edu/pub/linux/packages/lisp/"
+           >TSX-11</a> (<strong>very dated!</strong>)</li>
+   </ul></dd>
+ <dt><strong>Debian packages</strong></dt>
+  <dd><ul>
+    <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
+        >http://packages.debian.org/unstable/interpreters/clisp.html</a></li>
+    <li><a href="http://packages.debian.org/stable/interpreters/clisp.html"
+          >http://packages.debian.org/stable/interpreters/clisp.html</a></li>
+   </ul></dd>
+ <dt><strong><a href="http://fink.sourceforge.net/">Fink</a> -
+   Unix software for your Mac</strong></dt>
+  <dd><a href="http://fink.sourceforge.net/pdb/package.php/clisp"
+              >http://fink.sourceforge.net/pdb/package.php/clisp</a></dd>
+ <dt><strong>AIX binaries</strong></dt>
+  <dd><a href="http://aixpdslib.seas.ucla.edu/packages/clisp.html"
+              >http://aixpdslib.seas.ucla.edu/packages/clisp.html</a></dd>
+</dl></td></tr></table>
 
 <table align="center" cellpadding="2" border="5">
 <tr><th colspan="2">Currently active developers:</th></tr>
