@@ -119,8 +119,9 @@
    </ins></form></dd>
  </dl>
 </td>
-<td><strong>Related Sourceforge Projects</strong>
-   (<a href="http://sourceforge.net/search/">search</a>)
+<td><strong>Related <a href="http://sourceforge.net">SourceForge</a>
+   Projects</strong>
+   (<a href="http://sourceforge.net/search/?q=lisp">search</a>)
  <dl>
   <dt><strong>Le Sursis</strong>
       [<a href="http://sourceforge.net/projects/sursis">project</a>
