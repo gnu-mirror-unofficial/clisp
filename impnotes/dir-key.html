@@ -1,0 +1,882 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.11. Directory Access</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.10. Shell, Pipes and Printing"
+HREF="shell.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.12. Other"
+HREF="other.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="shell.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="other.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="dir-key"
+>Extensions-2.11. Directory Access</A
+></H1
+><P
+>When <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> is configured with an option
+ <TT
+CLASS="option"
+>--with-dir-key</TT
+>, some directory access is available
+ from lisp, in package <A
+HREF="dir-key.html"
+><SPAN
+CLASS="QUOTE"
+>"LDAP"</SPAN
+></A
+>.  3 types of directory keys
+ may exist, depending on the compilation environment.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>valid directory key types</B
+></P
+><DL
+><DT
+>:win32</DT
+><DD
+><P
+><A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> registry access
+  </P
+></DD
+><DT
+>:gnome</DT
+><DD
+><P
+><A
+HREF="http://developer.gnome.org/doc/API/libgnome/gnome-gnome-config.html"
+TARGET="_top"
+>gnome-config</A
+> access
+  </P
+></DD
+><DT
+>:ldap</DT
+><DD
+><P
+>LDAP interface via
+   <A
+HREF="http://www.openldap.org"
+TARGET="_top"
+>OpenLDAP</A
+> or compatible
+  </P
+></DD
+></DL
+></DIV
+><P
+>The following functions and macros are exported (please note that
+these features are experimental and the API may be modified in the
+future).</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="dir-key-open"
+><TT
+CLASS="literal"
+>(<A
+HREF="dir-key.html#dir-key-open"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-OPEN</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> (<TT
+CLASS="constant"
+>:DIRECTION</TT
+> <TT
+CLASS="constant"
+>:INPUT</TT
+>)
+   <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+></TT
+></A
+></DT
+><DD
+><P
+>Open the directory key under <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>, which should
+   be either an open directory key or a valid <A
+HREF="dir-key.html#dir-key-type"
+>directory key type</A
+>.
+   The meaning of the <TT
+CLASS="constant"
+>:DIRECTION</TT
+> and <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+> keyword
+   arguments is the same as for <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN</TT
+></A
+>.
+  </P
+></DD
+><DT
+><A
+NAME="dir-key-close"
+><TT
+CLASS="literal"
+>(<A
+HREF="dir-key.html#dir-key-close"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-CLOSE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Close the directory key.  The preferred way is to
+   use the <A
+HREF="dir-key.html#with-dir-key-open"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-OPEN</TT
+></A
+> macro.</P
+></DD
+><DT
+><A
+NAME="with-dir-key-open"
+><TT
+CLASS="literal"
+>(<A
+HREF="dir-key.html#with-dir-key-open"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-OPEN</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>options</I
+></TT
+>) <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Open the directory key (by calling <A
+HREF="dir-key.html#dir-key-open"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-OPEN</TT
+></A
+>
+   on <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>options</I
+></TT
+>), bind
+   it to <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+>, execute <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>, then close it with <A
+HREF="dir-key.html#dir-key-close"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-CLOSE</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-TYPE</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return the <A
+HREF="dir-key.html#dir-key-type"
+>directory key type</A
+> of the directory key
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-PATH</TT
+>
+                <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return the path of this directory key, which is the
+   <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> argument of <A
+HREF="dir-key.html#dir-key-open"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-OPEN</TT
+></A
+> if <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> was a <A
+HREF="dir-key.html#dir-key-type"
+>directory key type</A
+> or the
+   concatenation of the <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> argument and the
+   <TT
+CLASS="function"
+>ldap:dir-key-path</TT
+> of <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>.
+   </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-DIRECTION</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>One of <TT
+CLASS="constant"
+>:INPUT</TT
+>, <TT
+CLASS="constant"
+>:OUTPUT</TT
+> and <TT
+CLASS="constant"
+>:IO</TT
+>, indicating
+   the permitted operation on this key and its derivatives.
+   </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-CLOSED-P</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Check whether the key has been closed.
+   It is not an error to close a closed key.
+   </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-SUBKEY-DELETE</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>subkey</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-VALUE-DELETE</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>attribute</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Delete the specified subkey or attribute.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-SUBKEY</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+>
+  <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-ATTRIBUTES</TT
+>
+                <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return the list of the subkeys or attributes.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-VALUE</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>attribute</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>default</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return the value of the specified attribute,
+   similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_gethash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GETHASH</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>able just like <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_gethash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GETHASH</TT
+></A
+>.
+   </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-INFO</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return some information about the directory key.
+   This is highly platform-dependent and will probably be removed or
+   replaced or modified in the future.</P
+></DD
+><DT
+><A
+NAME="with-dir-key-search"
+><TT
+CLASS="literal"
+>(<A
+HREF="dir-key.html#with-dir-key-search"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-SEARCH</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>key-iter</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>atribute-iter</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:scope</TT
+>)
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This is the main way to iterate over the subtree
+   under the key <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>+<TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>.</P
+><P
+><TT
+CLASS="replaceable"
+><I
+>key-iter</I
+></TT
+> is a non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> symbol
+    and is bound via <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MACROLET</TT
+></A
+> to a macro, each call of which returns
+    the next subkey.</P
+><P
+><TT
+CLASS="replaceable"
+><I
+>atribute-iter</I
+></TT
+> is a symbol and is
+    bound, when non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, to a macro, each call of which returns two
+   values - the next attribute and its value.</P
+><P
+>The <TT
+CLASS="constant"
+>:scope</TT
+> keyword argument specifies the
+    scope of the search and can be
+   <P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="constant"
+>:self</TT
+></DT
+><DD
+><P
+>iterate over the key itself
+     </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:level</TT
+></DT
+><DD
+><P
+>iterate over the children of the key
+     </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:tree</TT
+></DT
+><DD
+><P
+>iterate over the subtree
+     </P
+></DD
+></DL
+></DIV
+></P
+><P
+><A
+HREF="dir-key.html#with-dir-key-search"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-SEARCH</TT
+></A
+> is used to implement
+    <TT
+CLASS="function"
+>LDAP:DIR-KEY-VALUES</TT
+>,
+    <TT
+CLASS="function"
+>LDAP:DIR-KEY-CHILDREN</TT
+> and
+    <TT
+CLASS="function"
+>LDAP:DIR-KEY-DUMP-TREE</TT
+> in
+    <TT
+CLASS="filename"
+>dirkey.lisp</TT
+>.
+    </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="shell.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="other.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.10. Shell, Pipes and Printing</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.12. Other</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

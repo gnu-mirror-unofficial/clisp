@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Characters Dictionary
+   [CLHS-13.2]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Characters
+   [CLHS-13]"
+HREF="characters.html"><LINK
+REL="PREVIOUS"
+TITLE="Documentation
+   of Implementation-Defined Scripts
+   [CLHS-13.1.10]"
+HREF="script-ext.html"><LINK
+REL="NEXT"
+TITLE="Functions on characters"
+HREF="char-width.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="script-ext.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
+TARGET="_top"
+>[CLHS-13]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="char-width.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="char-dict"
+>The Characters Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_chara_s_dictionary.html"
+TARGET="_top"
+>[CLHS-13.2]</A
+></A
+></H1
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_char-code.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR-CODE</TT
+></A
+> takes values from 0 (inclusive) to
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_char-code-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>CHAR-CODE-LIMIT</TT
+></A
+> (exclusive), i.e., the implementation
+ supports exactly <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_char-code-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>CHAR-CODE-LIMIT</TT
+></A
+> characters.</P
+><DIV
+CLASS="table"
+><A
+NAME="char-code-limit-table"
+></A
+><P
+><B
+>Table 9. Platform dependent</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>binaries built</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><I
+CLASS="emphasis"
+>without</I
+> <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> support</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><I
+CLASS="emphasis"
+>with</I
+> <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> support</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_char-code-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>CHAR-CODE-LIMIT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>8</SUP
+> = 256</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>16</SUP
+> = 65536</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>The types <TT
+CLASS="classname"
+>ext:string-char</TT
+> and
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_base-char.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BASE-CHAR</TT
+></A
+> are equivalent to <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.</P
+><P
+>The graphic characters have been described above.</P
+><P
+>The standard characters are <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> and the graphic characters with
+ a code between 32 and 126 (inclusive).</P
+><P
+>The alphabetic characters are these characters:
+<P
+CLASS="literallayout"
+><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abcdefghijklmnopqrstuvwxyz<br>
+</P
+>
+and the international alphabetic characters from the character set:
+<P
+CLASS="literallayout"
+><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜßáíóúñÑªºãõØøÀÃÕ&nbsp;etc.<br>
+</P
+></P
+><P
+>The functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_chareqcm__ar-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR-EQUAL</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_chareqcm__ar-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR-NOT-EQUAL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_chareqcm__ar-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR-LESSP</TT
+></A
+>,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_chareqcm__ar-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR-GREATERP</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_chareqcm__ar-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR-NOT-GREATERP</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_chareqcm__ar-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR-NOT-LESSP</TT
+></A
+> ignore bits and
+ font attributes of their arguments.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="script-ext.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="char-width.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Documentation
+   of Implementation-Defined Scripts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-10.html"
+TARGET="_top"
+>[CLHS-13.1.10]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="characters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Functions on characters</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,871 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Printer Dictionary
+   [CLHS-22.4]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Printer
+   [CLHS-22]"
+HREF="printer.html"><LINK
+REL="PREVIOUS"
+TITLE="The Lisp Pretty Printer
+   [CLHS-22.2]"
+HREF="clpp.html"><LINK
+REL="NEXT"
+TITLE="Reader
+   [CLHS-23]"
+HREF="reader.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="clpp.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-22.html"
+TARGET="_top"
+>[CLHS-22]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="reader.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="print-dict"
+>The Printer Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_printer_dictionary.html"
+TARGET="_top"
+>[CLHS-22.4]</A
+></A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE</TT
+></A
+> &#38; <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-to-_nc-to-string.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-TO-STRING</TT
+></A
+>. </B
+></B
+>The functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-to-_nc-to-string.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-TO-STRING</TT
+></A
+> have an additional
+ keyword argument <TT
+CLASS="constant"
+>:closure</TT
+> which is used to bind
+ <A
+HREF="printer.html#pr-closure"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-CLOSURE*</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="format"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+></A
+></H2
+><P
+>The <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> instruction <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~W</TT
+></A
+> is similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~A</TT
+></A
+> and
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~S</TT
+></A
+>, but avoids binding of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-escapest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ESCAPE*</TT
+></A
+>.
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> "~W" <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+> is
+ equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> <TT
+CLASS="constant"
+>:STREAM</TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+>.</P
+><P
+>The <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> instruction <I
+CLASS="emphasis"
+><TT
+CLASS="literal"
+>~!</TT
+></I
+> is similar to
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-5-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~/</TT
+></A
+>, but avoids putting a function name into a string.
+ Thus, even if the function is not interned in the <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></A
+> package,
+ you might not need to specify the package.</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> "~args!" <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+> is equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>colon-modifier-p</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>atsign-modifier-p</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>args</I
+></TT
+>)</TT
+>.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~R</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~:R</TT
+></A
+> can output only
+ integers in the range <TT
+CLASS="varname"
+>|n| &#60;
+ <TT
+CLASS="replaceable"
+><I
+>10<SUP
+>66</SUP
+></I
+></TT
+></TT
+>.
+ The output is in English, according to the American conventions, and
+ these conventions are identical to the British conventions only in the
+ range <TT
+CLASS="varname"
+>|n| &#60;
+ <TT
+CLASS="replaceable"
+><I
+>10<SUP
+>9</SUP
+></I
+></TT
+></TT
+>.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-1-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~:@C</TT
+></A
+> does not output the character itself, only the
+ instruction how to type the character.</P
+><P
+>For <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~E</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~G</TT
+></A
+>, the value of
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stread-de_oat-formatst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*READ-DEFAULT-FLOAT-FORMAT*</TT
+></A
+> does not matter if <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+>
+ is true.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-6-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~T</TT
+></A
+> can determine the current column of any
+ built-in stream.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="pathprint"
+>pathnames</A
+></H2
+><P
+>Pathnames are printed as follows: If <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-escapest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ESCAPE*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+ only the namestring is printed; otherwise it is printed with
+ <TT
+CLASS="filename"
+>#P""</TT
+> syntax, as per [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] Issue <A
+HREF="http://www.lisp.org/HyperSpec/Issues/iss276.html"
+TARGET="_top"
+>PRINT-READABLY-BEHAVIOR:CLARIFY</A
+>.
+ But, if <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> is true, we are in trouble as
+ <TT
+CLASS="filename"
+>#P""</TT
+> is ambiguous (which is verboten when
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> is true), while being mandated by the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>].
+ Therefore, in this case, <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s behavior is determined by the value
+ of <A
+HREF="print-dict.html#pathprint"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-PATHNAMES-ANSI*</TT
+></A
+>: when it is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, we print pathnames like this:
+<TT
+CLASS="computeroutput"
+>#-CLISP #P"" #+CLISP #S(PATHNAME ...)</TT
+>.
+ Otherwise, when the variable <A
+HREF="print-dict.html#pathprint"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-PATHNAMES-ANSI*</TT
+></A
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the
+ <TT
+CLASS="filename"
+>#P""</TT
+> notation is used as per <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-5-1-4.html"
+TARGET="_top"
+>1.5.1.4.1 Resolution of Apparent
+ Conflicts in Exceptional Situations</A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="print-misc"
+>Miscellaneous Issues</A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-casest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-CASE*</TT
+></A
+> controls the output not only of symbols, but also
+ of characters and some <TT
+CLASS="computeroutput"
+>#&#60;...&#62;</TT
+>
+ objects.</P
+><P
+>In the absence of <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>sys::write-float-decimal</TT
+></I
+>,
+ floating point numbers are output in radix 2.  This function is defined
+ in <TT
+CLASS="filename"
+>floatpri.lisp</TT
+> and is not available if you run
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> without a <A
+HREF="p-indep.html#image"
+>memory image</A
+> (which you should never do anyway!)</P
+><P
+>If <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> is true,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stread-de_oat-formatst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*READ-DEFAULT-FLOAT-FORMAT*</TT
+></A
+> has no influence on the way
+ floating point numbers are printed.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>,
+   <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+> platforms only.</DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-prettyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-PRETTY*</TT
+></A
+> is initially <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> but set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>
+ in <TT
+CLASS="filename"
+>#P"config.lisp"</TT
+>.  This makes screen output prettier.
+ </P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> platforms only.</DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-prettyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-PRETTY*</TT
+></A
+> is initially <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> but set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>
+ in <TT
+CLASS="filename"
+>#P"config.lisp"</TT
+>.  This makes unbuffered screen output both much faster
+ and prettier.
+ </P
+></DD
+></DL
+></DIV
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-arrayst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ARRAY*</TT
+></A
+> is initially set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="clpp.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="reader.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Lisp Pretty Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-2.html"
+TARGET="_top"
+>[CLHS-22.2]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="printer.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Reader
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
+TARGET="_top"
+>[CLHS-23]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Classes
+  [CLHS-4.3]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Types and Classes
+   [CLHS-4]"
+HREF="types-classes.html"><LINK
+REL="PREVIOUS"
+TITLE="Types and Classes
+   [CLHS-4]"
+HREF="types-classes.html"><LINK
+REL="NEXT"
+TITLE="Deviations from ANSI CL standard"
+HREF="clos-diff.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="types-classes.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="clos-diff.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="classes"
+>Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3.html"
+TARGET="_top"
+>[CLHS-4.3]</A
+></A
+></H1
+><P
+>The <B
+CLASS="command"
+>CLOS</B
+> symbols are <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPORT</TT
+></A
+>ed from the package <A
+HREF="classes.html"
+><SPAN
+CLASS="QUOTE"
+>"CLOS"</SPAN
+></A
+>.
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+> uses (as in <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_use-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>USE-PACKAGE</TT
+></A
+>) <A
+HREF="classes.html"
+><SPAN
+CLASS="QUOTE"
+>"CLOS"</SPAN
+></A
+> and <A
+HREF="pack-dict.html#re-export"
+><TT
+CLASS="function"
+>EXT:RE-EXPORT</TT
+></A
+>s all its
+ exported symbols.
+ Since the default <TT
+CLASS="constant"
+>:USE</TT
+> argument to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-PACKAGE</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+>
+ (see <A
+HREF="pack-dict.html#make-pack"
+>here</A
+>),
+ the <B
+CLASS="command"
+>CLOS</B
+> symbols are normally visible in all user packages.
+ If you do not want them (for example, if you want to use the
+ <A
+HREF="ftp://clisp.cons.org/pub/lisp/clisp/packages/pcl.sept92f.clisp.tar.gz"
+TARGET="_top"
+>PCL</A
+>
+ implementation of <B
+CLASS="command"
+>CLOS</B
+> instead of the native one), do the following:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "CL-NO-CLOS" (:use "CL"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_do-symbol_-all-symbols.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DO-EXTERNAL-SYMBOLS</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+>)
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_shadow.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SHADOW</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> "CL-NO-CLOS"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_do-symbol_-all-symbols.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DO-SYMBOLS</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> "CL-NO-CLOS")
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPORT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> "CL-NO-CLOS"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "CL-NO-CLOS")
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> "pcl") ; or whatever
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "MY-USER" (:use "CL-NO-CLOS"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "MY-USER")
+;; your code which uses PCL goes here
+</PRE
+></TD
+></TR
+></TABLE
+>.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="types-classes.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="clos-diff.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="types-classes.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Deviations from [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

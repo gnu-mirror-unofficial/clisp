@@ -1,0 +1,751 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Sequences
+   [CLHS-17]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Strings
+   [CLHS-16]"
+HREF="strings.html"><LINK
+REL="NEXT"
+TITLE="Hash Tables
+   [CLHS-18]"
+HREF="hash.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="strings.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="hash.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="sequences"
+>Sequences
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-17.html"
+TARGET="_top"
+>[CLHS-17]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="seq-dict"
+>The Sequences Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_seque_s_dictionary.html"
+TARGET="_top"
+>[CLHS-17.3.]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="seq-macro-ext"
+>Additional Macros</A
+></H2
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="doseq"
+>Macro <A
+HREF="sequences.html#doseq"
+><TT
+CLASS="function"
+>EXT:DOSEQ</TT
+></A
+></A
+></H3
+><P
+>For iteration through a sequence, a macro <A
+HREF="sequences.html#doseq"
+><TT
+CLASS="function"
+>EXT:DOSEQ</TT
+></A
+>,
+ similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_dolist.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DOLIST</TT
+></A
+>, may be used instead of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_map.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAP</TT
+></A
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="sequences.html#doseq"
+><TT
+CLASS="function"
+>EXT:DOSEQ</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>seqform</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>resultform</I
+></TT
+>])
+  {<TT
+CLASS="replaceable"
+><I
+>declaration</I
+></TT
+>}*
+  {<TT
+CLASS="replaceable"
+><I
+>tag</I
+></TT
+>|<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)
+</PRE
+></TD
+></TR
+></TABLE
+><P
+><A
+HREF="sequences.html#doseq"
+><TT
+CLASS="function"
+>EXT:DOSEQ</TT
+></A
+> forms are <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#iteration_form"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"iteration forms"</SPAN
+></A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="nreverse-nreconc"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_reversecm_nreverse.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NREVERSE</TT
+></A
+> &#38; <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_revappendcm_nreconc.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NRECONC</TT
+></A
+></A
+></H2
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_reversecm_nreverse.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NREVERSE</TT
+></A
+>. </B
+></B
+>The result of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_reversecm_nreverse.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NREVERSE</TT
+></A
+> is always <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> to the argument.
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_reversecm_nreverse.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NREVERSE</TT
+></A
+> on a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> swaps pairs of elements.
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_reversecm_nreverse.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NREVERSE</TT
+></A
+> on a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+> swaps the first and the last
+ element and reverses the list chaining between them.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_revappendcm_nreconc.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NRECONC</TT
+></A
+>. </B
+></B
+>The result of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_revappendcm_nreconc.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NRECONC</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> to the first argument unless it is
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, in which case the result is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> to the second argument.</P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="rem-del"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REMOVE</TT
+></A
+> &#38; <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DELETE</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REMOVE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REMOVE-IF</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REMOVE-IF-NOT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_remove-du_e-duplicates.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REMOVE-DUPLICATES</TT
+></A
+> return
+ their argument unchanged, if no element has to be removed.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DELETE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DELETE-IF</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DELETE-IF-NOT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_remove-du_e-duplicates.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DELETE-DUPLICATES</TT
+></A
+>
+ destructively modify their argument: If the argument is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+>,
+ the <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+> parts are modified.  If the argument is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> with
+ fill pointer, the fill pointer is lowered and the remaining elements are
+ compacted below the new fill pointer.</P
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="sequences.html#count-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*SEQUENCE-COUNT-ANSI*</TT
+></A
+>. </B
+></B
+>Contrary to the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] issue 283 <A
+HREF="http://www.lisp.org/HyperSpec/Issues/iss283.html"
+TARGET="_top"
+>RANGE-OF-COUNT-KEYWORD:NIL-OR-INTEGER</A
+>,
+ negative <TT
+CLASS="constant"
+>:COUNT</TT
+> keyword arguments are not allowed unless you set
+ <A
+HREF="sequences.html#count-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*SEQUENCE-COUNT-ANSI*</TT
+></A
+> to a non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> value, in hich case <SPAN
+CLASS="QUOTE"
+>"using a negative
+ integer value is functionally equivalent to using a value of
+ zero"</SPAN
+>, as per the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] issue.</P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="sorting"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SORT</TT
+></A
+> &#38; <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STABLE-SORT</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SORT</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STABLE-SORT</TT
+></A
+> have two additional keywords <TT
+CLASS="constant"
+>:START</TT
+>
+and <TT
+CLASS="constant"
+>:END</TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SORT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>predicate</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:KEY</TT
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STABLE-SORT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>predicate</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:KEY</TT
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)
+</PRE
+></TD
+></TR
+></TABLE
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SORT</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sortcm_stable-sort.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STABLE-SORT</TT
+></A
+> are identical.
+ They implement the mergesort algorithm.
+ Worst case complexity: <TT
+CLASS="varname"
+>O(n*log(n))</TT
+> comparisons,
+ where <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+> of the subsequence bounded
+ by the <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> arguments.</P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="strings.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="hash.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Strings
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-16.html"
+TARGET="_top"
+>[CLHS-16]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Hash Tables
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-18.html"
+TARGET="_top"
+>[CLHS-18]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

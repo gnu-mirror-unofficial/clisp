@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Functions on characters</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Characters
+   [CLHS-13]"
+HREF="characters.html"><LINK
+REL="PREVIOUS"
+TITLE="The Characters Dictionary
+   [CLHS-13.2]"
+HREF="char-dict.html"><LINK
+REL="NEXT"
+TITLE="platform-dependent characters"
+HREF="char-platform-dep.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="char-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
+TARGET="_top"
+>[CLHS-13]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="char-platform-dep.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="char-width"
+>Functions on characters</A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="literal"
+>(<A
+HREF="char-width.html"
+><TT
+CLASS="function"
+>EXT:CHAR-WIDTH</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>char</I
+></TT
+>)</TT
+>. </B
+></B
+>returns the number of screen columns occupied by <TT
+CLASS="replaceable"
+><I
+>char</I
+></TT
+>.
+ This is 0 for non-spacing characters
+  (such as control characters and many combining characters),
+ 2 for double-width East Asian characters,
+ and 1 for all other characters.
+ See also function <A
+HREF="strings.html#string-width"
+><TT
+CLASS="function"
+>EXT:STRING-WIDTH</TT
+></A
+>.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="char-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="char-platform-dep.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Characters Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_chara_s_dictionary.html"
+TARGET="_top"
+>[CLHS-13.2]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="characters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>platform-dependent characters</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

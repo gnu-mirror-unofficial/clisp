@@ -1,0 +1,2163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Streams Dictionary
+   [CLHS-21.2.]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Streams
+   [CLHS-21]"
+HREF="streams.html"><LINK
+REL="PREVIOUS"
+TITLE="Terminal interaction."
+HREF="terminal.html"><LINK
+REL="NEXT"
+TITLE="Printer
+   [CLHS-22]"
+HREF="printer.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="terminal.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Streams
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-21.html"
+TARGET="_top"
+>[CLHS-21]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="printer.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="stream-dict"
+>The Streams Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_streams_dictionary.html"
+TARGET="_top"
+>[CLHS-21.2.]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="stream-eltype"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>able. The <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> of
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>s created by the functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN</TT
+></A
+>, <A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-INPUT-STREAM</TT
+></A
+>
+  <A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-OUTPUT-STREAM</TT
+></A
+>, <A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-IO-STREAM</TT
+></A
+>, <A
+HREF="socket.html#so-accept"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-ACCEPT</TT
+></A
+>, <A
+HREF="socket.html#so-connect"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-CONNECT</TT
+></A
+>
+  can be modified, if the old and the new <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>s are either
+<P
+></P
+><UL
+><LI
+><P
+>both equivalent to <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+> or
+      <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>; or</P
+></LI
+><LI
+><P
+>both equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+> or
+      <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+>, with the same <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>.</P
+></LI
+></UL
+></P
+><P
+>Note that you cannot change <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> for some
+built-in streams, such as terminal streams (which is normally the
+value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*TERMINAL-IO*</TT
+></A
+>).</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="bin-input"
+>Binary input, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>,
+  <A
+HREF="stream-dict.html#bin-input"
+><TT
+CLASS="function"
+>EXT:READ-INTEGER</TT
+></A
+> &#38; <A
+HREF="stream-dict.html#bin-input"
+><TT
+CLASS="function"
+>EXT:READ-FLOAT</TT
+></A
+></A
+></H2
+><P
+>The function <TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#bin-input"
+><TT
+CLASS="function"
+>EXT:READ-INTEGER</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <A
+HREF="stream-dict.html#endianness"
+><TT
+CLASS="replaceable"
+><I
+>ENDIANNESS</I
+></TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>eof-error-p</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>eof-value</I
+></TT
+>)</TT
+>
+ reads a multi-byte <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> from <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> should be a stream with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> should be a type equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+>, where
+ <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is a multiple of 8.</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#bin-input"
+><TT
+CLASS="function"
+>EXT:READ-INTEGER</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+>)</TT
+> is like <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+> if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> were set to
+ <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+>, except that <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_file-position.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FILE-POSITION</TT
+></A
+> will increase by
+ <SUP
+><TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+></SUP
+>/<SUB
+>8</SUB
+>
+ instead of 1.</P
+><P
+><A
+HREF="stream-dict.html#endianness"
+><TT
+CLASS="replaceable"
+><I
+>ENDIANNESS</I
+></TT
+></A
+> can be <TT
+CLASS="constant"
+>:little</TT
+>
+ or <TT
+CLASS="constant"
+>:big</TT
+>.  The default is
+ <TT
+CLASS="constant"
+>:little</TT
+>, which corresponds to the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>
+ behavior in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+><P
+>Together with <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>)</TT
+>, this function permits mixed
+ character/binary input from a stream.</P
+><P
+>The function <TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#bin-input"
+><TT
+CLASS="function"
+>EXT:READ-FLOAT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <A
+HREF="stream-dict.html#endianness"
+><TT
+CLASS="replaceable"
+><I
+>ENDIANNESS</I
+></TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>eof-error-p</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>eof-value</I
+></TT
+>)</TT
+>
+ reads a floating-point number in IEEE binary representation from <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> should be a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> should be a type equivalent to
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="bin-output"
+>Binary output, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-BYTE</TT
+></A
+>,
+  <A
+HREF="stream-dict.html#bin-output"
+><TT
+CLASS="function"
+>EXT:WRITE-INTEGER</TT
+></A
+> &#38; <A
+HREF="stream-dict.html#bin-output"
+><TT
+CLASS="function"
+>EXT:WRITE-FLOAT</TT
+></A
+></A
+></H2
+><P
+>The function <TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#bin-output"
+><TT
+CLASS="function"
+>EXT:WRITE-INTEGER</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <A
+HREF="stream-dict.html#endianness"
+><TT
+CLASS="replaceable"
+><I
+>ENDIANNESS</I
+></TT
+></A
+>)</TT
+>
+ writes a multi-byte integer to <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> should be a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> should be a type equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+>, where
+ <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is a multiple of 8.</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#bin-output"
+><TT
+CLASS="function"
+>EXT:WRITE-INTEGER</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+>)</TT
+> is like <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-BYTE</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+> if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>
+ were set to <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+>, except that <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_file-position.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FILE-POSITION</TT
+></A
+> will
+ increase by <SUP
+><TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+></SUP
+>/<SUB
+>8</SUB
+>
+ instead of 1.</P
+><P
+>Together with <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>)</TT
+>, this function permits mixed
+  character/binary output to a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>.</P
+><P
+>The function <TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#bin-output"
+><TT
+CLASS="function"
+>EXT:WRITE-FLOAT</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>float</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <A
+HREF="stream-dict.html#endianness"
+><TT
+CLASS="replaceable"
+><I
+>ENDIANNESS</I
+></TT
+></A
+>)</TT
+>
+ writes a floating-point number in IEEE binary representation to <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> should be a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+ <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> should be a type equivalent to
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="read-seq"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-SEQUENCE</TT
+></A
+></A
+></H2
+><P
+>In addition to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-SEQUENCE</TT
+></A
+>, the following two
+ functions are provided:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="rd-by-seq"
+><A
+HREF="stream-dict.html#rd-by-seq"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-SEQUENCE</TT
+></A
+>
+   performs multiple <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+> operations:</A
+></DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#rd-by-seq"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-SEQUENCE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)</TT
+> fills the
+   subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified by <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> with
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>s consecutively read from <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.  It returns the
+   index of the first element of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> that was not updated (=
+   <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> or &#60; <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> if the <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> reached its end).</P
+><P
+>This function is especially efficient if <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is a
+   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+> and <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is a <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+>
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="rd-ch-seq"
+><A
+HREF="stream-dict.html#rd-ch-seq"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-SEQUENCE</TT
+></A
+>
+   performs multiple <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+> operations:</A
+></DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#rd-ch-seq"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-SEQUENCE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)</TT
+> fills the
+  subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified by <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> with
+  characters consecutively read from <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.  It returns the index
+  of the first element of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> that was not updated (= <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>
+  or &#60; <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> if the <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> reached its end).</P
+><P
+>This function is especially efficient if <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is a
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> and <TT
+CLASS="constant"
+>:STREAM</TT
+> is a <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+> stream with
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+> or an <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#input"
+TARGET="_top"
+>input</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_s.html#string_stream"
+TARGET="_top"
+>string stream</A
+>.
+  </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="write-seq"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-sequence.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-SEQUENCE</TT
+></A
+></A
+></H2
+><P
+>In addition to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-sequence.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-SEQUENCE</TT
+></A
+>, the following two
+functions are provided:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="wr-by-seq"
+><A
+HREF="stream-dict.html#wr-by-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-BYTE-SEQUENCE</TT
+></A
+>
+   performs multiple <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-BYTE</TT
+></A
+> operations:</A
+></DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#wr-by-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-BYTE-SEQUENCE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+  <TT
+CLASS="constant"
+>:STREAM</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)</TT
+> outputs the
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>s of the subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified by
+  <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> to <TT
+CLASS="constant"
+>:STREAM</TT
+>. It returns <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>.</P
+><P
+>This function is especially efficient if <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is a
+  <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+> and <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is a <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+>
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="wr-ch-seq"
+><A
+HREF="stream-dict.html#wr-ch-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-CHAR-SEQUENCE</TT
+></A
+>
+  performs multiple <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-CHAR</TT
+></A
+> operations:</A
+></DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="stream-dict.html#wr-ch-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-CHAR-SEQUENCE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+  <TT
+CLASS="constant"
+>:STREAM</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)</TT
+> outputs the
+  characters of the subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified by <TT
+CLASS="constant"
+>:START</TT
+>
+  and <TT
+CLASS="constant"
+>:END</TT
+> to <TT
+CLASS="constant"
+>:STREAM</TT
+>.  It returns <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>.</P
+><P
+>This function is especially efficient if <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is a
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> and <TT
+CLASS="constant"
+>:STREAM</TT
+> is a <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>
+  with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.
+  </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="file-pos"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_file-position.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FILE-POSITION</TT
+></A
+></A
+></H2
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+    platforms only.</DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_file-position.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FILE-POSITION</TT
+></A
+> works on any buffered file stream.
+  When a <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> is output to (respectively input from) a file stream,
+  its file position is increased by 2 since <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> is encoded as
+  <SPAN
+CLASS="keycode"
+>CR</SPAN
+>/<SPAN
+CLASS="keycode"
+>LF</SPAN
+> in the file.
+</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="open"
+>Function  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN</TT
+></A
+> cannot handle files of size &#8805; 4 GB.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN</TT
+></A
+> accepts three additional keywords: <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+>, <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+>,
+   <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>The acceptable values for the
+   <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+> functions</B
+></P
+><DL
+><DT
+><A
+NAME="eltype"
+><A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+></A
+></DT
+><DD
+><P
+>types equivalent to <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+> or
+   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+>; if the
+   stream is to be unbuffered, <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> must be a multiple of 8.
+   </P
+></DD
+><DT
+><A
+NAME="extfmt"
+><A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+></A
+></DT
+><DD
+><P
+><A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+>s, (constant) <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+>s in the
+   <A
+HREF="encoding.html"
+><SPAN
+CLASS="QUOTE"
+>"CHARSET"</SPAN
+></A
+> package, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>s (denoting <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>-based
+   encodings), the symbol <TT
+CLASS="constant"
+>:DEFAULT</TT
+>, and the <A
+HREF="encoding.html#newline"
+>line terminator</A
+> keywords
+   <TT
+CLASS="constant"
+>:UNIX</TT
+>, <TT
+CLASS="constant"
+>:MAC</TT
+>, <TT
+CLASS="constant"
+>:DOS</TT
+>.  The default encoding is <A
+HREF="encoding.html#def-file-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*DEFAULT-FILE-ENCODING*</TT
+></A
+>.
+  </P
+></DD
+><DT
+><A
+NAME="buffered"
+><A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+></A
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, or <TT
+CLASS="constant"
+>:DEFAULT</TT
+>.
+  <P
+></P
+><UL
+><LI
+><P
+>for functions that create <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>s and
+    <A
+HREF="shell.html#pipe"
+>pipes</A
+>, <TT
+CLASS="constant"
+>:DEFAULT</TT
+> is
+    equivalent to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>;</P
+></LI
+><LI
+><P
+>for functions that <A
+HREF="stream-dict.html#open"
+>open</A
+>
+    files, <TT
+CLASS="constant"
+>:DEFAULT</TT
+> means that buffered file streams will be returned
+    for regular files and (on Unix) block-devices, and unbuffered file
+    streams for special files.</P
+></LI
+></UL
+>
+</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="close"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+> ignores its <TT
+CLASS="constant"
+>:ABORT</TT
+> argument.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="broadcast-stream"
+>Class <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_broadcast-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BROADCAST-STREAM</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_input-str_put-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INPUT-STREAM-P</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_interactive-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INTERACTIVE-STREAM-P</TT
+></A
+> return false for
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_b.html#broadcast_stream"
+TARGET="_top"
+>broadcast
+ streams</A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="terminal.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="printer.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Terminal interaction.</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="streams.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-22.html"
+TARGET="_top"
+>[CLHS-22]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

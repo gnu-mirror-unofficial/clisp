@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Strings
+   [CLHS-16]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="The Arrays Dictionary
+   [CLHS-15.2]"
+HREF="array-dict.html"><LINK
+REL="NEXT"
+TITLE="Sequences
+   [CLHS-17]"
+HREF="sequences.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="array-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="sequences.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="strings"
+>Strings
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-16.html"
+TARGET="_top"
+>[CLHS-16]</A
+></A
+></H1
+><P
+>String comparison is based on the function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_chareqcm__ar-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CHAR&#60;=</TT
+></A
+>.  Therefore
+ diphthongs do not obey the usual national rules.  Example:
+ <TT
+CLASS="literal"
+>o</TT
+> &#60; <TT
+CLASS="literal"
+>oe</TT
+> &#60;
+ <TT
+CLASS="literal"
+>z</TT
+> &#60; <TT
+CLASS="literal"
+>ö</TT
+>.</P
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="string-dict"
+>The Strings Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_strings_dictionary.html"
+TARGET="_top"
+>[CLHS-16.2]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="string-width"
+>Functions on strings</A
+></H2
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="literal"
+>(<A
+HREF="strings.html#string-width"
+><TT
+CLASS="function"
+>EXT:STRING-WIDTH</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>)</TT
+>. </B
+></B
+>returns the number of screen columns occupied by <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>.
+ This is computed as the sum of all <A
+HREF="char-width.html"
+><TT
+CLASS="function"
+>EXT:CHAR-WIDTH</TT
+></A
+>s
+ of all of the <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>'s characters.</P
+></DIV
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="array-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="sequences.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Arrays Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_arrays_dictionary.html"
+TARGET="_top"
+>[CLHS-15.2]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Sequences
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-17.html"
+TARGET="_top"
+>[CLHS-17]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

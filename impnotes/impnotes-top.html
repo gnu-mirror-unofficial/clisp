@@ -1,0 +1,1607 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Implementation Notes for GNU CLISP.</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="NEXT"
+TITLE="[CLISP icon]"
+HREF="preface.html"><META
+NAME="KEYWORD"
+CONTENT="Lisp"><META
+NAME="KEYWORD"
+CONTENT="Common Lisp"><META
+NAME="KEYWORD"
+CONTENT="CLISP"></HEAD
+><BODY
+CLASS="book"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="BOOK"
+><A
+NAME="impnotes-top"
+></A
+><DIV
+CLASS="TITLEPAGE"
+><H1
+CLASS="title"
+><A
+NAME="impnotes-top"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</A
+></H1
+><H3
+CLASS="author"
+><A
+NAME="AEN16"
+></A
+></H3
+><H3
+CLASS="author"
+><A
+NAME="AEN22"
+>Dr. Bruno Haible</A
+></H3
+><H3
+CLASS="author"
+><A
+NAME="AEN26"
+>Dr. Sam Steingold</A
+></H3
+><A
+HREF="ln7.html"
+>Legal Notice</A
+><HR></DIV
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="preface.html"
+><SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="clisp.png"
+ALT="[CLISP icon]"
+></IMG
+></SPAN
+></A
+></DT
+><DT
+>I. <A
+HREF="clhs-chapters.html"
+>Chapters or the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLHS"
+>Common Lisp HyperSpec</A
+></SPAN
+>]</A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="intro.html"
+>Introduction
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-1.html"
+TARGET="_top"
+>[CLHS-1]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="intro.html#spec-symb"
+>Special Symbols
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-1-3.html"
+TARGET="_top"
+>[CLHS-1.4.1.3]</A
+></A
+></DT
+><DT
+><A
+HREF="error-terms.html"
+>Error Terminology
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-2.html"
+TARGET="_top"
+>[CLHS-1.4.2]</A
+></A
+></DT
+><DT
+><A
+HREF="class-prec.html"
+>Class Precedence Lists
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-4-5.html"
+TARGET="_top"
+>[CLHS-1.4.4.5]</A
+></A
+></DT
+><DT
+><A
+HREF="cl-symb.html"
+>Symbols in the Package <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+>
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-9.html"
+TARGET="_top"
+>[CLHS-1.9]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="syntax.html"
+>Syntax
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-2.html"
+TARGET="_top"
+>[CLHS-2]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="syntax.html#tokens"
+>Symbols as Tokens
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-4.html"
+TARGET="_top"
+>[CLHS-2.3.4]</A
+></A
+></DT
+><DT
+><A
+HREF="valid-patterns.html"
+>Valid Patterns for Tokens
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-5.html"
+TARGET="_top"
+>[CLHS-2.3.5]</A
+></A
+></DT
+><DT
+><A
+HREF="double-quote.html"
+>Double-Quote
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-5.html"
+TARGET="_top"
+>[CLHS-2.4.5]</A
+></A
+></DT
+><DT
+><A
+HREF="backquote.html"
+>Backquote
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-6.html"
+TARGET="_top"
+>[CLHS-2.4.6]</A
+></A
+></DT
+><DT
+><A
+HREF="sharpsign.html"
+>Sharpsign
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-8.html"
+TARGET="_top"
+>[CLHS-2.4.8]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="eval.html"
+>Evaluation and Compilation
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-3.html"
+TARGET="_top"
+>[CLHS-3]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="eval.html#evaluation"
+>Evaluation
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-1.html"
+TARGET="_top"
+>[CLHS-3.1]</A
+></A
+></DT
+><DT
+><A
+HREF="compilation.html"
+>Compilation
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-2.html"
+TARGET="_top"
+>[CLHS-3.2]</A
+></A
+></DT
+><DT
+><A
+HREF="declarations.html"
+>Declarations
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-3.html"
+TARGET="_top"
+>[CLHS-3.3]</A
+></A
+></DT
+><DT
+><A
+HREF="lalist.html"
+>Lambda Lists
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4.html"
+TARGET="_top"
+>[CLHS-3.4]</A
+></A
+></DT
+><DT
+><A
+HREF="eval-comp.html"
+>The Evaluation and Compilation Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-8.html"
+TARGET="_top"
+>[CLHS-3.8]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="types-classes.html"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="types-classes.html#types"
+>Types
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2.html"
+TARGET="_top"
+>[CLHS-4.2]</A
+></A
+></DT
+><DT
+><A
+HREF="classes.html"
+>Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3.html"
+TARGET="_top"
+>[CLHS-4.3]</A
+></A
+></DT
+><DT
+><A
+HREF="clos-diff.html"
+>Deviations from [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+></DT
+><DT
+><A
+HREF="metaclasses.html"
+>Standard Metaclasses
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-1-1.html"
+TARGET="_top"
+>[CLHS-4.3.1.1]</A
+></A
+></DT
+><DT
+><A
+HREF="def-class.html"
+>Defining Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-2.html"
+TARGET="_top"
+>[CLHS-4.3.2]</A
+></A
+></DT
+><DT
+><A
+HREF="redef-class.html"
+>Redefining Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-6.html"
+TARGET="_top"
+>[CLHS-4.3.6]</A
+></A
+></DT
+><DT
+><A
+HREF="type-class-int.html"
+>Integrating Types and Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-7.html"
+TARGET="_top"
+>[CLHS-4.3.7]</A
+></A
+></DT
+><DT
+><A
+HREF="type-class-dict.html"
+>The Types and Classes Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_types_s_dictionary.html"
+TARGET="_top"
+>[CLHS-4.4]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="data.html"
+>Data and Control Flow
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-5.html"
+TARGET="_top"
+>[CLHS-5]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="data.html#flow-dict"
+>The Data and Control Flow Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_data__w_dictionary.html"
+TARGET="_top"
+>[CLHS-5.3]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="iteration.html"
+>Iteration
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-6.html"
+TARGET="_top"
+>[CLHS-6]</A
+></A
+></DT
+><DT
+><A
+HREF="objects.html"
+>Objects
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-7.html"
+TARGET="_top"
+>[CLHS-7]</A
+></A
+></DT
+><DT
+><A
+HREF="structures.html"
+>Structures
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-8.html"
+TARGET="_top"
+>[CLHS-8]</A
+></A
+></DT
+><DT
+><A
+HREF="conditions.html"
+>Conditions
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-9.html"
+TARGET="_top"
+>[CLHS-9]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="conditions.html#cond-nl"
+>Embedded Newlines in Condition Reports
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_9-1-3-1-3.html"
+TARGET="_top"
+>[CLHS-9.1.3.1.3]</A
+></A
+></DT
+><DT
+><A
+HREF="cond-dict.html"
+>The Conditions Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_condi_s_dictionary.html"
+TARGET="_top"
+>[CLHS-9.2.]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="symbols.html"
+>Symbols
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-10.html"
+TARGET="_top"
+>[CLHS-10]</A
+></A
+></DT
+><DT
+><A
+HREF="packages.html"
+>Packages
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-11.html"
+TARGET="_top"
+>[CLHS-11]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="packages.html#pack-lock"
+>Constraints on the COMMON-LISP Package for
+ Conforming Programs - package locking
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
+TARGET="_top"
+>[CLHS-11.1.2.1.2]</A
+></A
+></DT
+><DT
+><A
+HREF="clupack.html"
+>The COMMON-LISP-USER Package
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+>[CLHS-11.1.2.2]</A
+></A
+></DT
+><DT
+><A
+HREF="imppack.html"
+>Implementation-Defined Packages
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-4.html"
+TARGET="_top"
+>[CLHS-11.1.2.4]</A
+></A
+></DT
+><DT
+><A
+HREF="pack-dict.html"
+>The Packages Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_packa_s_dictionary.html"
+TARGET="_top"
+>[CLHS-11.2.]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="numbers.html"
+>Numbers
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-12.html"
+TARGET="_top"
+>[CLHS-12]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="numbers.html#num-types"
+>Numeric Types</A
+></DT
+><DT
+><A
+HREF="num-concepts.html"
+>Number Concepts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1.html"
+TARGET="_top"
+>[CLHS-12.1]</A
+></A
+></DT
+><DT
+><A
+HREF="num-dict.html"
+>The Numbers Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_numbers_dictionary.html"
+TARGET="_top"
+>[CLHS-12.2]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="characters.html"
+>Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
+TARGET="_top"
+>[CLHS-13]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="characters.html#input-char"
+>Attributes</A
+></DT
+><DT
+><A
+HREF="char-script.html"
+>Character Scripts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-2-1.html"
+TARGET="_top"
+>[CLHS-13.1.2.1]</A
+></A
+></DT
+><DT
+><A
+HREF="char-attrib.html"
+>Character Attributes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-3.html"
+TARGET="_top"
+>[CLHS-13.1.3]</A
+></A
+></DT
+><DT
+><A
+HREF="graph-char.html"
+>Graphic Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-1.html"
+TARGET="_top"
+>[CLHS-13.1.4.1]</A
+></A
+></DT
+><DT
+><A
+HREF="alpha-char.html"
+>Alphabetic Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-2.html"
+TARGET="_top"
+>[CLHS-13.1.4.2]</A
+></A
+></DT
+><DT
+><A
+HREF="char-ext.html"
+>Case of Implementation-Defined Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-3-4.html"
+TARGET="_top"
+>[CLHS-13.1.4.3.4]</A
+></A
+></DT
+><DT
+><A
+HREF="num-char.html"
+>Numeric Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-4-4.html"
+TARGET="_top"
+>[CLHS-13.1.4.4]</A
+></A
+></DT
+><DT
+><A
+HREF="char-ord.html"
+>Ordering of Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-6.html"
+TARGET="_top"
+>[CLHS-13.1.6]</A
+></A
+></DT
+><DT
+><A
+HREF="clhs-newline.html"
+>Treatment of Newline during Input and Output
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-8.html"
+TARGET="_top"
+>[CLHS-13.1.8]</A
+></A
+></DT
+><DT
+><A
+HREF="char-int.html"
+>Character Encodings
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-9.html"
+TARGET="_top"
+>[CLHS-13.1.9]</A
+></A
+></DT
+><DT
+><A
+HREF="script-ext.html"
+>Documentation
+   of Implementation-Defined Scripts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-10.html"
+TARGET="_top"
+>[CLHS-13.1.10]</A
+></A
+></DT
+><DT
+><A
+HREF="char-dict.html"
+>The Characters Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_chara_s_dictionary.html"
+TARGET="_top"
+>[CLHS-13.2]</A
+></A
+></DT
+><DT
+><A
+HREF="char-width.html"
+>Functions on characters</A
+></DT
+><DT
+><A
+HREF="char-platform-dep.html"
+>platform-dependent characters</A
+></DT
+><DT
+><A
+HREF="char-bits.html"
+>Obsolete Constants</A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="conses.html"
+>Conses
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-14.html"
+TARGET="_top"
+>[CLHS-14]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="conses.html#cons-dict"
+>The Conses Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_conses_dictionary.html"
+TARGET="_top"
+>[CLHS-14.2]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="arrays.html"
+>Arrays
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-15.html"
+TARGET="_top"
+>[CLHS-15]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="arrays.html#array-elts"
+>Array Elements
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_15-1-1.html"
+TARGET="_top"
+>[CLHS-15.1.1]</A
+></A
+></DT
+><DT
+><A
+HREF="array-dict.html"
+>The Arrays Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_arrays_dictionary.html"
+TARGET="_top"
+>[CLHS-15.2]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="strings.html"
+>Strings
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-16.html"
+TARGET="_top"
+>[CLHS-16]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="strings.html#string-dict"
+>The Strings Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_strings_dictionary.html"
+TARGET="_top"
+>[CLHS-16.2]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="sequences.html"
+>Sequences
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-17.html"
+TARGET="_top"
+>[CLHS-17]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="sequences.html#seq-dict"
+>The Sequences Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_seque_s_dictionary.html"
+TARGET="_top"
+>[CLHS-17.3.]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="hash.html"
+>Hash Tables
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-18.html"
+TARGET="_top"
+>[CLHS-18]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="hash.html#hash-dict"
+>The Hash Tables Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_hash__s_dictionary.html"
+TARGET="_top"
+>[CLHS-18.2.]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="filenames.html"
+>Filenames
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
+TARGET="_top"
+>[CLHS-19]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="filenames.html#path-components"
+>Pathname Components
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-1.html"
+TARGET="_top"
+>[CLHS-19.2.1]</A
+></A
+></DT
+><DT
+><A
+HREF="path-external-notation.html"
+>External notation.</A
+></DT
+><DT
+><A
+HREF="log-path.html"
+>Logical Pathnames
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-3.html"
+TARGET="_top"
+>[CLHS-19.3]</A
+></A
+></DT
+><DT
+><A
+HREF="filename-dict.html"
+>The Filenames Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_filen_s_dictionary.html"
+TARGET="_top"
+>[CLHS-19.4]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="files.html"
+>Files
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-20.html"
+TARGET="_top"
+>[CLHS-20]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="files.html#file-dict"
+>The Files Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_files_dictionary.html"
+TARGET="_top"
+>[CLHS-20.2]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="streams.html"
+>Streams
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-21.html"
+TARGET="_top"
+>[CLHS-21]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="streams.html#streams-interactive"
+>Interactive Streams
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_21-1-1-1-3.html"
+TARGET="_top"
+>[CLHS-21.1.1.1.3]</A
+></A
+></DT
+><DT
+><A
+HREF="terminal.html"
+>Terminal interaction.</A
+></DT
+><DT
+><A
+HREF="stream-dict.html"
+>The Streams Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_streams_dictionary.html"
+TARGET="_top"
+>[CLHS-21.2.]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="printer.html"
+>Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-22.html"
+TARGET="_top"
+>[CLHS-22]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="printer.html#multi-rep"
+>Multiple Possible Textual Representations
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-1-1-1.html"
+TARGET="_top"
+>[CLHS-22.1.1.1]</A
+></A
+></DT
+><DT
+><A
+HREF="print-vector.html"
+>Printing Other Vectors
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-1-3-7.html"
+TARGET="_top"
+>[CLHS-22.1.3.7]</A
+></A
+></DT
+><DT
+><A
+HREF="print-array.html"
+>Printing Other Arrays
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-1-3-8.html"
+TARGET="_top"
+>[CLHS-22.1.3.8]</A
+></A
+></DT
+><DT
+><A
+HREF="clpp.html"
+>The Lisp Pretty Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-2.html"
+TARGET="_top"
+>[CLHS-22.2]</A
+></A
+></DT
+><DT
+><A
+HREF="print-dict.html"
+>The Printer Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_printer_dictionary.html"
+TARGET="_top"
+>[CLHS-22.4]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="reader.html"
+>Reader
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
+TARGET="_top"
+>[CLHS-23]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="reader.html#chario"
+>characters</A
+></DT
+><DT
+><A
+HREF="read-dispatch-ext.html"
+>Additional read dispatch macros</A
+></DT
+><DT
+><A
+HREF="rt-case.html"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READTABLE-CASE</TT
+></A
+></A
+></DT
+><DT
+><A
+HREF="listen.html"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR-NO-HANG</TT
+></A
+></A
+></DT
+><DT
+><A
+HREF="read-byte.html"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="system.html"
+>System Construction
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-24.html"
+TARGET="_top"
+>[CLHS-24]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="system.html#system-dict"
+>The System Construction Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_syste_n_dictionary.html"
+TARGET="_top"
+>[CLHS-24.2]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="environment.html"
+>Environment
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-25.html"
+TARGET="_top"
+>[CLHS-25]</A
+></A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="environment.html#debugger"
+>Debugging Utilities
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-2.html"
+TARGET="_top"
+>[CLHS-25.1.2]</A
+></A
+></DT
+><DT
+><A
+HREF="environment-dict.html"
+>The Environment Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_envir_t_dictionary.html"
+TARGET="_top"
+>[CLHS-25.2]</A
+></A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="glossary.html"
+>Glossary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-26.html"
+TARGET="_top"
+>[CLHS-26]</A
+></A
+></DT
+><DT
+><A
+HREF="appendix.html"
+>Appendix
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-a.html"
+TARGET="_top"
+>[CLHS-a]</A
+></A
+></DT
+><DT
+><A
+HREF="issues.html"
+>X3J13 Issue Index
+   <A
+HREF="http://www.lisp.org/HyperSpec/Issues/Issues-Categorized.html"
+TARGET="_top"
+>[CLHS-ic]</A
+></A
+></DT
+></DL
+></DD
+><DT
+>II. <A
+HREF="internals.html"
+>Internals of the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> Implementation</A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="gc.html"
+>Overview of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s Garbage Collection</A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="gc.html#internals-intro"
+>Introduction</A
+></DT
+><DT
+><A
+HREF="lisp-obj-in-c.html"
+>Lisp objects in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+><A
+HREF="memory-models.html"
+>Memory Models</A
+></DT
+><DT
+><A
+HREF="gc-safety.html"
+>The burden of <A
+HREF="gc.html"
+>garbage-collect</A
+>ion upon the rest of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+><A
+HREF="foreign-pointers.html"
+>Foreign Pointers</A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="bytecode.html"
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="bytecode.html#byte-intro"
+>Introduction</A
+></DT
+><DT
+><A
+HREF="vm.html"
+>The virtual machine</A
+></DT
+><DT
+><A
+HREF="comp-fun.html"
+>The structure of compiled functions</A
+></DT
+><DT
+><A
+HREF="intr-struct.html"
+>The general structure of the instructions</A
+></DT
+><DT
+><A
+HREF="intr-set.html"
+>The instruction set</A
+></DT
+></DL
+></DD
+></DL
+></DD
+><DT
+>III. <A
+HREF="extensions.html"
+>Extensions</A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="p-indep.html"
+>Extensions-1: Platform independent Extensions</A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="p-indep.html#image"
+>Extensions-1.1. Saving an Image</A
+></DT
+><DT
+><A
+HREF="quit.html"
+>Extensions-1.2. Quitting <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+><A
+HREF="i18n.html"
+>Extensions-1.3. Internationalization</A
+></DT
+><DT
+><A
+HREF="encoding.html"
+>Extensions-1.4. Encodings</A
+></DT
+><DT
+><A
+HREF="clos-stream.html"
+>Extensions-1.5. Defining new kinds of Streams</A
+></DT
+><DT
+><A
+HREF="weak.html"
+>Extensions-1.6. Weak Pointers</A
+></DT
+><DT
+><A
+HREF="final.html"
+>Extensions-1.7. Finalization</A
+></DT
+><DT
+><A
+HREF="prompt.html"
+>Extensions-1.8. The Prompt</A
+></DT
+><DT
+><A
+HREF="ansi.html"
+>Extensions-1.9. Maximum ANSI CL compliance</A
+></DT
+><DT
+><A
+HREF="macros3.html"
+>Extensions-1.10. Additional Fancy Macros</A
+></DT
+><DT
+><A
+HREF="customize.html"
+>Extensions-1.11. Customizing <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> behavior.</A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="platform.html"
+>Extensions-2: Platform specific Extensions</A
+></DT
+><DD
+><DL
+><DT
+><A
+HREF="platform.html#screen"
+>Extensions-2.1. Random Screen Access</A
+></DT
+><DT
+><A
+HREF="modules.html"
+>Extensions-2.2. External Modules</A
+></DT
+><DT
+><A
+HREF="dffi.html"
+>Extensions-2.3. The Foreign Function Call Facility</A
+></DT
+><DT
+><A
+HREF="affi.html"
+>Extensions-2.4. The Amiga Foreign Function Call Facility</A
+></DT
+><DT
+><A
+HREF="rexx.html"
+>Extensions-2.5. ARexx</A
+></DT
+><DT
+><A
+HREF="socket.html"
+>Extensions-2.6. Socket Streams</A
+></DT
+><DT
+><A
+HREF="syscalls.html"
+>Extensions-2.7. System Calls</A
+></DT
+><DT
+><A
+HREF="quickstart.html"
+>Extensions-2.8. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+><A
+HREF="app-dev.html"
+>Extensions-2.9. Application delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></DT
+><DT
+><A
+HREF="shell.html"
+>Extensions-2.10. Shell, Pipes and Printing</A
+></DT
+><DT
+><A
+HREF="dir-key.html"
+>Extensions-2.11. Directory Access</A
+></DT
+><DT
+><A
+HREF="other.html"
+>Extensions-2.12. Other</A
+></DT
+></DL
+></DD
+></DL
+></DD
+><DT
+><A
+HREF="gfdl.html"
+>GNU Free Documentation License</A
+></DT
+><DD
+><DL
+><DT
+>0. <A
+HREF="gfdl.html#AEN21610"
+>PREAMBLE</A
+></DT
+><DT
+>1. <A
+HREF="x21615.html"
+>APPLICABILITY AND DEFINITIONS</A
+></DT
+><DT
+>2. <A
+HREF="x21625.html"
+>VERBATIM COPYING</A
+></DT
+><DT
+>3. <A
+HREF="x21629.html"
+>COPYING IN QUANTITY</A
+></DT
+><DT
+>4. <A
+HREF="x21635.html"
+>MODIFICATIONS</A
+></DT
+><DT
+>5. <A
+HREF="x21671.html"
+>COMBINING DOCUMENTS</A
+></DT
+><DT
+>6. <A
+HREF="x21676.html"
+>COLLECTIONS OF DOCUMENTS</A
+></DT
+><DT
+>7. <A
+HREF="x21680.html"
+>AGGREGATION WITH INDEPENDENT WORKS</A
+></DT
+><DT
+>8. <A
+HREF="x21684.html"
+>TRANSLATION</A
+></DT
+><DT
+>9. <A
+HREF="x21687.html"
+>TERMINATION</A
+></DT
+><DT
+>10. <A
+HREF="x21690.html"
+>FUTURE REVISIONS OF THIS LICENSE</A
+></DT
+><DT
+><A
+HREF="x21695.html"
+>How to use this License for your documents</A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="references.html"
+>References</A
+></DT
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="preface.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="clisp.png"
+ALT="[CLISP icon]"
+></IMG
+></SPAN
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Printing Other Arrays
+   [CLHS-22.1.3.8]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Printer
+   [CLHS-22]"
+HREF="printer.html"><LINK
+REL="PREVIOUS"
+TITLE="Printing Other Vectors
+   [CLHS-22.1.3.7]"
+HREF="print-vector.html"><LINK
+REL="NEXT"
+TITLE="The Lisp Pretty Printer
+   [CLHS-22.2]"
+HREF="clpp.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="print-vector.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-22.html"
+TARGET="_top"
+>[CLHS-22]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="clpp.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="print-array"
+>Printing Other Arrays
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-1-3-8.html"
+TARGET="_top"
+>[CLHS-22.1.3.8]</A
+></A
+></H1
+><P
+>When <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> is true, other arrays are written as
+ follows: if the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_array-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ARRAY-ELEMENT-TYPE</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_t.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>T</TT
+></A
+>, the syntax <TT
+CLASS="literal"
+>#<TT
+CLASS="replaceable"
+><I
+>rank</I
+></TT
+>A <TT
+CLASS="replaceable"
+><I
+>contents</I
+></TT
+></TT
+> is
+ used.  Otherwise, the syntax <TT
+CLASS="literal"
+>#A(<TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>dimensions</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>contents</I
+></TT
+>)</TT
+> is used.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="print-vector.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="clpp.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Printing Other Vectors
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-1-3-7.html"
+TARGET="_top"
+>[CLHS-22.1.3.7]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="printer.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The Lisp Pretty Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-2.html"
+TARGET="_top"
+>[CLHS-22.2]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

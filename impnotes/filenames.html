@@ -1,0 +1,6106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Filenames
+   [CLHS-19]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Hash Tables
+   [CLHS-18]"
+HREF="hash.html"><LINK
+REL="NEXT"
+TITLE="External notation."
+HREF="path-external-notation.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="hash.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="path-external-notation.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="filenames"
+>Filenames
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
+TARGET="_top"
+>[CLHS-19]</A
+></A
+></H1
+><P
+>For most operations, pathnames denoting files and pathnames
+ denoting directories cannot be used interchangeably.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> platforms only.</DT
+><DD
+><P
+>For example, <TT
+CLASS="filename"
+>#p"FOO/BAR"</TT
+> denotes
+ the file <TT
+CLASS="filename"
+>BAR</TT
+> in the directory
+ <TT
+CLASS="filename"
+>FOO</TT
+>, while <TT
+CLASS="filename"
+>#p"FOO/BAR/"</TT
+>
+ denotes the subdirectory <TT
+CLASS="filename"
+>BAR</TT
+> of the directory
+ <TT
+CLASS="filename"
+>FOO</TT
+>.
+</P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+   platforms only.</DT
+><DD
+><P
+>For example, <TT
+CLASS="filename"
+>#p"FOO\\BAR"</TT
+>
+ denotes the file <TT
+CLASS="filename"
+>BAR</TT
+> in the directory
+ <TT
+CLASS="filename"
+>FOO</TT
+>, while <TT
+CLASS="filename"
+>#p"FOO\\BAR\\"</TT
+>
+ denotes the subdirectory <TT
+CLASS="filename"
+>BAR</TT
+> of the directory
+ <TT
+CLASS="filename"
+>FOO</TT
+>.
+</P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+> platforms only.</DT
+><DD
+><P
+>For example, <TT
+CLASS="filename"
+>#p"FOO.BAR"</TT
+> denotes
+ the file <TT
+CLASS="filename"
+>FOO</TT
+> in the directory
+ <TT
+CLASS="filename"
+>BAR</TT
+>, while <TT
+CLASS="filename"
+>#p"FOO.BAR."</TT
+>
+ denotes the subdirectory <TT
+CLASS="filename"
+>BAR</TT
+> of the directory
+ <TT
+CLASS="filename"
+>FOO</TT
+>.
+</P
+></DD
+></DL
+></DIV
+><P
+>This is especially important for the functions <A
+HREF="files.html#dir"
+><TT
+CLASS="function"
+>directory</TT
+>,
+ <TT
+CLASS="function"
+>ext:dir</TT
+>, <TT
+CLASS="function"
+>ext:cd</TT
+>,
+ <TT
+CLASS="function"
+>ext:make-dir</TT
+>,
+ <TT
+CLASS="function"
+>ext:delete-dir</TT
+></A
+>.</P
+><DIV
+CLASS="table"
+><A
+NAME="min-filename-syntax-table"
+></A
+><P
+><B
+>Table 1. The minimum filename syntax that may be used portably</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>pathname</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>xxx</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>for a file with name <TT
+CLASS="replaceable"
+><I
+>xxx</I
+></TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>xxx.yy</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>for a file with name <TT
+CLASS="replaceable"
+><I
+>xxx</I
+></TT
+> and type
+   <TT
+CLASS="replaceable"
+><I
+>yy</I
+></TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>.yy</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>for a pathname with type <TT
+CLASS="replaceable"
+><I
+>yy</I
+></TT
+> and no
+   name specified</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>Hereby <TT
+CLASS="replaceable"
+><I
+>xxx</I
+></TT
+> denotes 1 to 8 characters,
+ and <TT
+CLASS="replaceable"
+><I
+>yy</I
+></TT
+> denotes 1 to 3 characters, each of
+ which being either an alphanumeric character or the underscore
+ <SPAN
+CLASS="keysym"
+>#\_</SPAN
+>.  Other properties of pathname syntax vary between
+ operating systems.</P
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="path-components"
+>Pathname Components
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-1.html"
+TARGET="_top"
+>[CLHS-19.2.1]</A
+></A
+></H1
+><P
+>When a pathname is to be fully specified (no wildcards), that
+ means that no <TT
+CLASS="constant"
+>:WILD</TT
+>, <TT
+CLASS="constant"
+>:WILD-INFERIORS</TT
+> is allowed, no wildcard
+ characters are allowed in the strings, and <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> may not
+ be allowed either.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> platforms only.</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Pathname components</B
+></P
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>device</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or a
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+></P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>directory</I
+></TT
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="amiga-dir-table"
+></A
+><P
+><B
+>Table 2. <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>element</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>values</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:RELATIVE</TT
+> | <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>()</TT
+> | <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:WILD-INFERIORS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>**</TT
+> or
+  <TT
+CLASS="filename"
+>...</TT
+>, all subdirectories </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+   may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:PARENT</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>/</TT
+> instead of <TT
+CLASS="filename"
+>subdir/</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>version</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+> or
+   <TT
+CLASS="constant"
+>:NEWEST</TT
+>)</P
+></DD
+></DL
+></DIV
+><P
+>Constraint: <TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+> = <TT
+CLASS="constant"
+>:RELATIVE</TT
+> only if <TT
+CLASS="replaceable"
+><I
+>device</I
+></TT
+> is
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.  If the device is specified, the pathname must be absolute!</P
+><P
+>An <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> filename is <A
+HREF="filenames.html#name-type-split"
+>split into name and type</A
+>.</P
+><P
+>Case is ignored in the strings on comparison.  No case conversions
+ are performed.</P
+><DIV
+CLASS="table"
+><A
+NAME="pathnames-externally-amiga"
+></A
+><P
+><B
+>Table 3. filename notations</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>External notation:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>dev:sub1.typ/sub2.typ/name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>using defaults:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>    sub1.typ/sub2.typ/name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>                      name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>    sub1.typ/**/sub3.typ/x*.lisp</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or similar.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Formal specification of the external notation</B
+></P
+><DL
+><DT
+>ch ::==</DT
+><DD
+><P
+>any character except ':','/' and '*','?'
+   </P
+></DD
+><DT
+>name ::==</DT
+><DD
+><P
+>{ch}+</P
+></DD
+><DT
+>device ::==</DT
+><DD
+><P
+>[ &#60;empty&#62; | ':' | name ':' ]
+    <DIV
+CLASS="table"
+><A
+NAME="AEN5509"
+></A
+><P
+><B
+>Table 4. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>empty</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current device, relative to
+     current directory</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>':'</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current device, absolute (relative
+     to root for disks)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>name ':'</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>specified device, absolute
+     (relative to root for disks)</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></P
+></DD
+><DT
+>subdir ::==</DT
+><DD
+><P
+>[ &#60;empty&#62; | name ]
+    <DIV
+CLASS="table"
+><A
+NAME="AEN5526"
+></A
+><P
+><B
+>Table 5. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>empty</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>parent directory</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></P
+></DD
+><DT
+>pathname ::==</DT
+><DD
+><P
+>device { subdir '/' }* name
+   </P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="table"
+><A
+NAME="amiga-path-examples-table"
+></A
+><P
+><B
+>Table 6. Examples</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>String</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Device</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Directory</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>our pathname</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>'c:foo'</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'C'</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>"c"</TT
+>
+        (<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="filename"
+>"foo"</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>'c:foo/'</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'C'</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>"c"</TT
+>
+        (<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="filename"
+>"foo"</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>'c:foo/bar'</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'C'</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;foo-&#62;bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>"c"</TT
+>
+        (<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="filename"
+>"foo" "bar"</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>'c:/foo'</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'C'</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;up-&#62;foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>"c"</TT
+>
+        (<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:PARENT</TT
+> <TT
+CLASS="filename"
+>"foo"</TT
+>)
+        </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>'c:'</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'C'</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>"c"</TT
+> (<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>:foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;root-&#62;foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="filename"
+>"foo"</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (<TT
+CLASS="constant"
+>:RELATIVE</TT
+> <TT
+CLASS="filename"
+>"foo"</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>'/foo'</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;up-&#62;foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (<TT
+CLASS="constant"
+>:RELATIVE</TT
+> <TT
+CLASS="constant"
+>:PARENT</TT
+> <TT
+CLASS="filename"
+>"foo"</TT
+>)
+   </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>'//foo/bar'</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device-&#62;up-&#62;up-&#62;foo-&#62;bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (<TT
+CLASS="constant"
+>:RELATIVE</TT
+> <TT
+CLASS="constant"
+>:PARENT</TT
+> <TT
+CLASS="constant"
+>:PARENT</TT
+> <TT
+CLASS="filename"
+>"foo"
+               "bar"</TT
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>\</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>current</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>device</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (<TT
+CLASS="constant"
+>:RELATIVE</TT
+>)</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>Appending a <TT
+CLASS="filename"
+>/</TT
+> to a path string that is non-empty and
+ does not end with <TT
+CLASS="filename"
+>:</TT
+> or <TT
+CLASS="filename"
+>/</TT
+> does not change its
+ meaning.  This <TT
+CLASS="filename"
+>/</TT
+> must be appended before another non-empty
+ component can be appended.  But appending a <TT
+CLASS="filename"
+>/</TT
+> to a path
+ string that is empty or ends with <TT
+CLASS="filename"
+>:</TT
+> or <TT
+CLASS="filename"
+>/</TT
+> means
+ going up to the parent directory!</P
+><P
+>We interpret any path string that is empty or ends with
+ <TT
+CLASS="filename"
+>:</TT
+> or <TT
+CLASS="filename"
+>/</TT
+> as pathname of a directory (with both
+ <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> being <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>).</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> platforms only.</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Pathname components</B
+></P
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>device</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>directory</I
+></TT
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="unix-dir-table"
+></A
+><P
+><B
+>Table 7. <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>element</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>values</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:RELATIVE</TT
+> | <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>()</TT
+> | <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:WILD-INFERIORS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>**</TT
+> or
+  <TT
+CLASS="filename"
+>...</TT
+>, all subdirectories </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+   may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>version</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+> or
+   <TT
+CLASS="constant"
+>:NEWEST</TT
+>)</P
+></DD
+></DL
+></DIV
+><P
+>A <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> filename is <A
+HREF="filenames.html#name-type-split"
+>split into name and type</A
+>.</P
+><DIV
+CLASS="table"
+><A
+NAME="unix-filename-table"
+></A
+><P
+><B
+>Table 8. filename notations</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>External notation:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&#13;  <TT
+CLASS="filename"
+>server:sub1.typ/sub2.typ/name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>using defaults:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&#13;  <TT
+CLASS="filename"
+>       sub1.typ/sub2.typ/name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&#13;  <TT
+CLASS="filename"
+>                         name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&#13;  <TT
+CLASS="filename"
+>       sub1.typ/**/sub3.typ/x*.lisp</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or similar.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+> platforms only.</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Pathname components</B
+></P
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>device</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <TT
+CLASS="constant"
+>:WILD</TT
+> or <TT
+CLASS="filename"
+>A</TT
+>|...|<TT
+CLASS="filename"
+>Z</TT
+>
+ </P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>directory</I
+></TT
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="os2-dir-table"
+></A
+><P
+><B
+>Table 9. <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>element</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>values</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:RELATIVE</TT
+> | <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>()</TT
+> | <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:WILD-INFERIORS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>**</TT
+> or
+  <TT
+CLASS="filename"
+>...</TT
+>, all subdirectories </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+   may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>version</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+> or
+   <TT
+CLASS="constant"
+>:NEWEST</TT
+>)</P
+></DD
+></DL
+></DIV
+><P
+>An <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+> filename is <A
+HREF="filenames.html#name-type-split"
+>split into name and type</A
+>.</P
+><DIV
+CLASS="table"
+><A
+NAME="os2-filename-table"
+></A
+><P
+><B
+>Table 10. filename notations</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>External notation:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>A:\sub1.typ\sub2.typ\name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>using defaults:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>  \sub1.typ\sub2.typ\name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>                     name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>*:\sub1.typ\**\sub3.typ\x*.lisp</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or similar.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>Instead of <TT
+CLASS="filename"
+>\</TT
+> one may use <TT
+CLASS="filename"
+>/</TT
+>, as usual for DOS
+ calls.</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Pathname components</B
+></P
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>, wildcard characters may
+   occur but don't act as wildcards</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>device</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <TT
+CLASS="constant"
+>:WILD</TT
+> or <TT
+CLASS="filename"
+>A</TT
+>|...|<TT
+CLASS="filename"
+>Z</TT
+>
+ </P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>directory</I
+></TT
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="win32-dir-table"
+></A
+><P
+><B
+>Table 11. <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>element</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>values</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:RELATIVE</TT
+> | <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>()</TT
+> | <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:WILD-INFERIORS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>**</TT
+> or
+  <TT
+CLASS="filename"
+>...</TT
+>, all subdirectories </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+   may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>,
+  may contain wildcard characters <TT
+CLASS="filename"
+>?</TT
+> and
+  <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)</P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>version</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+> or
+   <TT
+CLASS="constant"
+>:NEWEST</TT
+>)</P
+></DD
+></DL
+></DIV
+><P
+>If <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <TT
+CLASS="replaceable"
+><I
+>device</I
+></TT
+> must be <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+><P
+>A <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> filename is <A
+HREF="filenames.html#name-type-split"
+>split into name and type</A
+>.</P
+><DIV
+CLASS="table"
+><A
+NAME="win32-filename-table"
+></A
+><P
+><B
+>Table 12. filename notations</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>External notation:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>A:\sub1.typ\sub2.typ\name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>using defaults:</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>  \sub1.typ\sub2.typ\name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>                     name.typ</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>*:\sub1.typ\**\sub3.typ\x*.lisp</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>or similar.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>Instead of <TT
+CLASS="filename"
+>\</TT
+> one may use <TT
+CLASS="filename"
+>/</TT
+>, as usual for DOS
+ calls.</P
+><P
+>If <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and the <TT
+CLASS="replaceable"
+><I
+>directory</I
+></TT
+>'s <TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+>
+ is not <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_namestrin_h-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NAMESTRING</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>))</TT
+> will not be the same as <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>.</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+    platforms only.</DT
+><DD
+><P
+>The wildcard characters: <TT
+CLASS="filename"
+>*</TT
+> matches any
+ sequence of characters, <TT
+CLASS="filename"
+>?</TT
+> matches any one character.
+ </P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent:  <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+   platforms only.</DT
+><DD
+><P
+>A filename is split into name and type according to the
+ following rule: <P
+></P
+><UL
+><LI
+><P
+>if there is no <TT
+CLASS="filename"
+>.</TT
+> in the filename, then the
+   <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> is everything, <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>;</P
+></LI
+><LI
+><P
+>if there is a <TT
+CLASS="filename"
+>.</TT
+>, then <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> is the part
+   before and <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> the part after the last dot.</P
+></LI
+></UL
+></P
+><P
+>Due to this name/type splitting rule, there are pathnames that
+ cannot result from <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+>.
+ To get a pathname whose type contains a dot or whose name contains a
+ dot and whose type is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-PATHNAME</TT
+></A
+> must be used.  Example:
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-PATHNAME</TT
+></A
+> :name ".profile")</TT
+>.
+ </P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+> platforms only.</DT
+><DD
+><P
+>RISC OS provides several file systems as standard
+  (ADFS, IDEFS, NetFS, RamFS, NetPrint) and support for extra file
+  systems (DOSFS, ResourceFS and DeviceFS).</P
+><P
+>A module called FileSwitch is at the center of all file system
+ operation in RISC OS.  FileSwitch provides a common core of functions
+ used by all file systems.  It only provides the parts of these services
+ that are device independent.  The device dependent services that
+ control the hardware are provided by separate modules, which are the
+ actual file systems.  FileSwitch keeps track of active file systems and
+ switches between them as necessary.</P
+><P
+>One of the file system modules that RISC OS provides is
+ FileCore.  It takes the normal calls that FileSwitch sends to a file
+ system module, and converts them to a simpler set of calls to modules
+ that control the hardware.  Unlike FileSwitch it creates a fresh
+ instantiation of itself for each module that it supports.  Using
+ FileCore to build file system modules imposes a more rigid structure on
+ it, as more of the file system is predefined.</P
+><P
+>As well as standard file systems, FileSwitch supports image
+ file systems.  These provide facilities for RISC OS to handle media in
+ foreign formats, and to support `image files' (or partitions) in those
+ formats.  Rather than accessing the hardware directly they rely on
+ standard RISC OS file systems to do so.  DOSFS is an example of an
+ image file system used to handle DOS format discs.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Terminology</DT
+><DD
+><P
+>A pathname may include a file system name, a special
+  field, a media name (e.g., a disc name), directory name(s), and the
+  name of the object itself; each of these parts of a pathname is known
+  as an `element' of the pathname.</P
+></DD
+><DT
+>Filenames</DT
+><DD
+><P
+>Filename `elements' may be up to ten characters in
+  length on FileCore-based file systems and on NetFS.  These characters
+  may be digits or letters.  FileSwitch makes no distinction between
+  upper and lower case, although file systems can do so.  As a general
+  rule, you should not use top-bit-set characters in filenames, although
+  some file systems (such as FileCore-based ones) support them.  Other
+  characters may be used provided they do not have a special
+  significance.  Those that do are listed below:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="filename"
+>.</TT
+></DT
+><DD
+><P
+>Separates directory specifications, e.g.,
+   <TT
+CLASS="filename"
+>$.fred</TT
+></P
+></DD
+><DT
+><TT
+CLASS="filename"
+>:</TT
+></DT
+><DD
+><P
+>Introduces a drive or disc specification, e.g.,
+   <TT
+CLASS="filename"
+>:0</TT
+>, <TT
+CLASS="filename"
+>:bigdisc</TT
+>.  It also
+   marks the end of a file system name, e.g.,
+   <TT
+CLASS="filename"
+>adfs:</TT
+></P
+></DD
+><DT
+><TT
+CLASS="filename"
+>*</TT
+></DT
+><DD
+><P
+>Acts as a `wildcard' to match zero or more
+   characters.</P
+></DD
+><DT
+><TT
+CLASS="filename"
+>#</TT
+></DT
+><DD
+><P
+>Acts as a `wildcard' to match any single
+   character.</P
+></DD
+><DT
+><TT
+CLASS="filename"
+>$</TT
+></DT
+><DD
+><P
+>is the name of the root directory of the disc.
+   </P
+></DD
+><DT
+><TT
+CLASS="filename"
+>&#38;</TT
+></DT
+><DD
+><P
+>is the user root directory (URD)
+   </P
+></DD
+><DT
+><TT
+CLASS="filename"
+>@</TT
+></DT
+><DD
+><P
+>is the currently selected directory (CSD)
+   </P
+></DD
+><DT
+><TT
+CLASS="filename"
+>^</TT
+></DT
+><DD
+><P
+>is the `parent' directory
+   </P
+></DD
+><DT
+><TT
+CLASS="filename"
+>%</TT
+></DT
+><DD
+><P
+>is the currently selected library (CSL)
+   </P
+></DD
+><DT
+><TT
+CLASS="filename"
+>\</TT
+></DT
+><DD
+><P
+>is the previously selected directory (PSD)
+   </P
+></DD
+></DL
+></DIV
+></DD
+><DT
+>Directories</DT
+><DD
+><P
+>The root directory, <TT
+CLASS="filename"
+>$</TT
+>, forms
+  the top of the directory hierarchy of the media which contains the
+  CSD.  <TT
+CLASS="filename"
+>$</TT
+> does not have a parent directory, trying
+  to access its parent will just access <TT
+CLASS="filename"
+>$</TT
+>.  Each
+  directory name is separated by a <TT
+CLASS="filename"
+>.</TT
+> character.
+  For example:</P
+><P
+></P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>$.Documents.Memos</TT
+>
+   </P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>%.cc</TT
+></P
+></LI
+></UL
+></DD
+><DT
+>File Systems</DT
+><DD
+><P
+>Files may also be accessed on file systems other
+  than the current one by prefixing the filename with a file system
+  specification.  A file system name may appear between
+  <TT
+CLASS="filename"
+>-</TT
+> characters, or suffixed by a
+  <TT
+CLASS="filename"
+>:</TT
+>, though the latter is advised since
+  <TT
+CLASS="filename"
+>-</TT
+> can also be used to introduce a parameter on a
+  command line, or as part of a file name.  For example:</P
+><P
+></P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>-net-$.SystemMesg</TT
+>
+   </P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>adfs:%.aasm</TT
+></P
+></LI
+></UL
+></DD
+><DT
+>Special Fields</DT
+><DD
+><P
+>Special fields are used to supply more information
+  to the file system than you can using standard path names; for example
+  NetFS and NetPrint use them to specify server addresses or names. They
+  are introduced by a <TT
+CLASS="filename"
+>#</TT
+> character; a variety of
+  syntaxes are possible:</P
+><P
+></P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>  net#MJHardy::disc1.mike</TT
+>
+   </P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>     #MJHardy::disc1.mike</TT
+>
+   </P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+> -net#MJHardy-:disc1.mike</TT
+>
+   </P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>    -#MJHardy-:disc1.mike</TT
+>
+   </P
+></LI
+></UL
+><P
+>The special fields here are all MJHardy, and give the name of
+  the fileserver to use.  Special fields may use any character except for
+  control characters, double quote '"', solidus '|' and space.  If
+  a special field contains a hyphen you may only use the first two
+  syntaxes given above.</P
+></DD
+><DT
+><TT
+CLASS="filename"
+>File$Path</TT
+> and
+  <TT
+CLASS="filename"
+>Run$Path</TT
+></DT
+><DD
+><P
+>These two special variables control exactly where a
+  file will be looked for, according to the operation being performed on
+  it.</P
+><DIV
+CLASS="table"
+><A
+NAME="AEN6273"
+></A
+><P
+><B
+>Table 13. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>name</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>purpose</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>File$Path</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>for read operations</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Run$Path</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>for execute operations</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>The contents of each variable should expand to a list or
+  prefixes, separated by commas.  When a read operation is performed
+  then the prefixes in <TT
+CLASS="filename"
+>File$Path</TT
+> are used in the
+  order in which they are listed. The first object that matches is used,
+  whether it be a file or directory.  Similarly any execute operation
+  uses the prefixes in Run$Path.  These search paths are only used when
+  the pathname does not contain an explicit file system reference, e.g.,
+  executing <TT
+CLASS="filename"
+>adfs:file</TT
+> will not use
+  <TT
+CLASS="filename"
+>Run$Path</TT
+>.</P
+></DD
+><DT
+>Other path variables</DT
+><DD
+><P
+>You can set up other path variables and use them as
+  pseudo file systems.  For example if you typed:
+  <P
+CLASS="literallayout"
+><TT
+CLASS="userinput"
+><B
+>*Set Source$Path adfs:$.src.,adfs:$.public.src.</B
+></TT
+></P
+>,
+  you could then refer to the pseudo file system as
+  <TT
+CLASS="filename"
+>Source:</TT
+> or (less preferable) as
+  <TT
+CLASS="filename"
+>-Source-</TT
+>.  These path variables work in the same
+  was as <TT
+CLASS="filename"
+>File$Path</TT
+> and
+  <TT
+CLASS="filename"
+>Run$Path</TT
+>.</P
+><P
+>NOTE: Path variables are not implemented in this version of
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.  A workaround for this is to use "&#60;Foo$Path&#62;"
+ instead of "Foo:" until they are made available.</P
+></DD
+><DT
+><A
+NAME="pathnames-externally-acorn"
+>from Lisp-string
+  notation to internal representation</A
+></DT
+><DD
+><P
+><I
+CLASS="emphasis"
+>No</I
+> swapping.
+   <TT
+CLASS="filename"
+>foo.lisp</TT
+> means file type
+   <TT
+CLASS="filename"
+>#P".lisp"</TT
+> and file name <TT
+CLASS="filename"
+>foo</TT
+>.
+   This is pseudo-BNF:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>legal character ::==</DT
+><DD
+><P
+>any ISO latin-1 graphic character &#8805; ' ' except
+    '.' ':' '*' '#' '$' '&#38;' '@' '^' '%' '\' '?'
+    </P
+></DD
+><DT
+>extended legal character ::==</DT
+><DD
+><P
+>any ISO latin-1 graphic character &#8805; ' ' except
+    ':' '"' '|'
+    </P
+></DD
+><DT
+>legal-wild char ::==</DT
+><DD
+><P
+>legal char | '*' | '#' | '?'
+    </P
+></DD
+><DT
+>host ::==</DT
+><DD
+><P
+> '-' { extended legal char except '-' }+ '-'
+    | { extended legal char except '-' } { extended legal char }* ':' | empty
+    </P
+></DD
+><DT
+>device ::==</DT
+><DD
+><P
+> ':' { legal char }+ '.' | empty
+    </P
+></DD
+><DT
+>directory ::==</DT
+><DD
+><P
+> { '$' | '&#38;' | '@' | '%' | '\' } '.'
+    { subdirectory }* | { subdirectory }+ | empty
+    <DIV
+CLASS="table"
+><A
+NAME="AEN6337"
+></A
+><P
+><B
+>Table 14. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'$' -&#62;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'&#38;' -&#62;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:HOME</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'@' -&#62;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:CURRENT</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'%' -&#62;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:LIBRARY</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'\' -&#62;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:PRECIOUS</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>else</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:RELATIVE</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></P
+></DD
+><DT
+>subdirectory ::==</DT
+><DD
+><P
+>{ '^' | { legal-wild char }+ } '.'
+   <DIV
+CLASS="table"
+><A
+NAME="AEN6374"
+></A
+><P
+><B
+>Table 15. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>'^' -&#62;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:PARENT</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></P
+></DD
+><DT
+>filename ::==</DT
+><DD
+><P
+>{ { legal-wild char }+ | empty }
+   </P
+></DD
+><DT
+>filetype ::==</DT
+><DD
+><P
+>{ '.' { legal-wild char }+ | empty }
+   </P
+></DD
+><DT
+>pathname ::==</DT
+><DD
+><P
+>host device directory filename filetype
+   </P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="table"
+><A
+NAME="acorn-path-example-table"
+></A
+><P
+><B
+>Table 16. Examples</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>String</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Hostname</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Device</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Directory</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Name</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Type</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>-net-$.SystemMesg</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>SystemMesg</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net#MJHardy::disc1.mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net#MJHardy</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>#MJHardy::disc1.mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>#MJHardy</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>-net#MJHardy-:disc1.mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net#MJHardy</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>-#MJHardy-:disc1.mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>#MJHardy</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>mike</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>@.foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:CURRENT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>^.</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+> <TT
+CLASS="constant"
+>:PARENT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>@.^.</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:CURRENT</TT
+>
+        <TT
+CLASS="constant"
+>:PARENT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo.bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo.bar.baz</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+> "foo")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>baz</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo.bar.</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+> "foo" "bar")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo.@.</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>illegal</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+>From internal representation to RISCOS string</DT
+><DD
+><P
+>with swapping <I
+CLASS="emphasis"
+>only</I
+> of name/type
+  components.</P
+><DIV
+CLASS="table"
+><A
+NAME="AEN6624"
+></A
+><P
+><B
+>Table 17. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Hostname</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Device</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Directory</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Name</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Type</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>RISCOS String</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net::disc1.$.foo</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net#MJ</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+> "foo")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>baz</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>net#MJ::disc1.$.foo.baz.bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>adfs</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>4</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+> "foo"
+        "bar")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>adfs::4.$.foo.bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+> "foo")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>:disc1.$.foo.bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:CURRENT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>illegal here</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>:disc1.</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>disc1</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>:disc1.</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>$.foo</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:CURRENT</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>@.foo</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar.foo</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+> "foo")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>baz</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo.baz.bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:LIBRARY</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>%.bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:LIBRARY</TT
+> "foo")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>%.foo.bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar.foo</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+> "foo")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>foo.bar</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:RELATIVE</TT
+> "foo")</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>bar</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>illegal here</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>That is, the RISCOS string is the flattening-concatenation
+ of</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;  (append
+    (if (null hostname) "" (append hostname ":"))
+    (if (null device) "" (append ":" device "."))
+    (case (pop directory)
+      (:absolute (case (pop directory)
+                         (:root "$.")
+                         (:home "&#38;.")
+                         (:current "@.")
+                         (:library "%.")
+                         (:previous "\\.")))
+      (:relative ""))
+    (mapcar (lambda (subdir) (append subdir ".")) directory)
+    (if (null name)
+        (if (null type) "" (error "type with name illegal here"))
+        (if (null type)
+            name
+            (append type "." name))))
+</PRE
+></TD
+></TR
+></TABLE
+></DD
+><DT
+>internal representation</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Pathname components</B
+></P
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or a
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+></P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>device</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or a
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+></P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>directory</I
+></TT
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="acorn-dir-table"
+></A
+><P
+><B
+>Table 18. <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>element</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>values</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:RELATIVE</TT
+> | <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>anchor</I
+></TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>anchor</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ROOT</TT
+> | <TT
+CLASS="constant"
+>:HOME</TT
+> | <TT
+CLASS="constant"
+>:CURRENT</TT
+> | <TT
+CLASS="constant"
+>:LIBRARY</TT
+> |
+   <TT
+CLASS="constant"
+>:PRECIOUS</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>()</TT
+> | <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+>
+   . <TT
+CLASS="replaceable"
+><I
+>subdirs</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:PARENT</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>subdir</I
+></TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>, may contain wildcard characters
+   <TT
+CLASS="filename"
+>?</TT
+>,<TT
+CLASS="filename"
+>#</TT
+> and <TT
+CLASS="filename"
+>*</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, may contain wildcard
+ characters <TT
+CLASS="filename"
+>?</TT
+>,<TT
+CLASS="filename"
+>#</TT
+> and
+ <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)
+ </P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>, may contain wildcard
+ characters <TT
+CLASS="filename"
+>?</TT
+>,<TT
+CLASS="filename"
+>#</TT
+> and
+ <TT
+CLASS="filename"
+>*</TT
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+>)
+ </P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>version</I
+></TT
+></DT
+><DD
+><P
+>always <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (may also be specified as <TT
+CLASS="constant"
+>:WILD</TT
+> or
+   <TT
+CLASS="constant"
+>:NEWEST</TT
+>)</P
+></DD
+></DL
+></DIV
+><P
+>Constraint: <TT
+CLASS="replaceable"
+><I
+>startpoint</I
+></TT
+> is not <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+> <TT
+CLASS="constant"
+>:ROOT</TT
+> only if device
+ is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>. If the device is specified, the pathname must be <TT
+CLASS="constant"
+>:ABSOLUTE</TT
+>
+ <TT
+CLASS="constant"
+>:ROOT</TT
+>.</P
+><P
+>The wildcard characters: <TT
+CLASS="filename"
+>*</TT
+> matches any
+ sequence of characters, <TT
+CLASS="filename"
+>'#'</TT
+> or
+ <TT
+CLASS="filename"
+>?</TT
+> matches any one character.</P
+><P
+>Due to the name/type swapping rule, there are pathnames that
+ cannot result from <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+>.  To get a pathname whose type is
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-PATHNAME</TT
+></A
+> must be used.  Example: <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-PATHNAME</TT
+></A
+> :directory "!Clisp." :name
+ "README")</TT
+>.</P
+></DD
+></DL
+></DIV
+></DD
+></DL
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="hash.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="path-external-notation.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Hash Tables
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-18.html"
+TARGET="_top"
+>[CLHS-18]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>External notation.</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

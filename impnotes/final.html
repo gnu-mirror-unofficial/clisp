@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1.7. Finalization</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-1: Platform independent Extensions"
+HREF="p-indep.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.6. Weak Pointers"
+HREF="weak.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.8. The Prompt"
+HREF="prompt.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="weak.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-1: Platform independent Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="prompt.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="final"
+>Extensions-1.7. Finalization</A
+></H1
+><P
+>Calling <TT
+CLASS="literal"
+>(<A
+HREF="final.html"
+><TT
+CLASS="function"
+>EXT:FINALIZE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>)</TT
+> has the effect that when the specified object is
+ being <A
+HREF="gc.html"
+>garbage-collect</A
+>ed, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+> will be executed.</P
+><P
+>Calling <TT
+CLASS="literal"
+>(<A
+HREF="final.html"
+><TT
+CLASS="function"
+>EXT:FINALIZE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>guardian</I
+></TT
+>)</TT
+> has a similar effect,
+ but only as long as the "guardian" has not been <A
+HREF="gc.html"
+>garbage-collect</A
+>ed: When <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>
+ is being <A
+HREF="gc.html"
+>garbage-collect</A
+>ed, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>guardian</I
+></TT
+>)</TT
+> will be executed.  If
+ the guardian is <A
+HREF="gc.html"
+>garbage-collect</A
+>ed before <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> is, nothing happens.</P
+><P
+>Note: The time when <SPAN
+CLASS="QUOTE"
+>"the <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> is being <A
+HREF="gc.html"
+>garbage-collect</A
+>ed"</SPAN
+>
+ is not defined deterministically.  (Actually, it might possibly never
+ occur.)  It denotes a moment at which no references to <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> exist
+ from other Lisp objects.  When the <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> is called, <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> (and
+ possibly <TT
+CLASS="replaceable"
+><I
+>guardian</I
+></TT
+>) enter the "arena of live
+ Lisp objects" again.</P
+><P
+>No finalization request will be executed more than once.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="weak.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="prompt.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.6. Weak Pointers</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="p-indep.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.8. The Prompt</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

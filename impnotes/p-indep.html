@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1: Platform independent Extensions</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions"
+HREF="extensions.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions"
+HREF="extensions.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.2. Quitting CLISP"
+HREF="quit.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="extensions.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="quit.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="p-indep"
+>Extensions-1: Platform independent Extensions</A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="image"
+>Extensions-1.1. Saving an Image</A
+></H1
+><P
+>The function
+  <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>ext:saveinitmem</TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+> "lispinit.mem")
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :quiet :init-function :locked-packages)</TT
+>
+saves the running <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s memory to the file <TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+>;
+extension <TT
+CLASS="filename"
+>#P".mem"</TT
+> is recommended.
+If the <TT
+CLASS="constant"
+>:quiet</TT
+> argument is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the startup
+banner and the good-bye message will be suppressed.
+The <TT
+CLASS="constant"
+>:init-function</TT
+> argument specifies a function
+that will be executed at startup of the saved image.
+When <TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+> does not have an extension,
+<TT
+CLASS="filename"
+>#P".mem"</TT
+> extension is automatically used.
+The <TT
+CLASS="constant"
+>:locked-packages</TT
+> argument specifies the
+packages to lock before saving the image; this is convenient for
+application delivery, when you do not want your user to mess up your
+product.  This argument defaults to <A
+HREF="packages.html#pack-lock"
+><TT
+CLASS="varname"
+>CUSTOM:*SYSTEM-PACKAGE-LIST*</TT
+></A
+>.
+The starting package of the new image is the one in which you were when
+you invoked <TT
+CLASS="function"
+>ext:saveinitmem</TT
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="extensions.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="quit.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="extensions.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.2. Quitting <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Declarations
+  [CLHS-3.3]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Evaluation and Compilation
+   [CLHS-3]"
+HREF="eval.html"><LINK
+REL="PREVIOUS"
+TITLE="Compilation
+  [CLHS-3.2]"
+HREF="compilation.html"><LINK
+REL="NEXT"
+TITLE="Lambda Lists
+   [CLHS-3.4]"
+HREF="lalist.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="compilation.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Evaluation and Compilation
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-3.html"
+TARGET="_top"
+>[CLHS-3]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="lalist.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="declarations"
+>Declarations
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-3.html"
+TARGET="_top"
+>[CLHS-3.3]</A
+></A
+></H1
+><P
+>The declarations
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_type.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>TYPE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> ...)</TT
+>,
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_ftype.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>FTYPE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>
+        <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> ...)</TT
+>,
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_optimize.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>OPTIMIZE</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>quality</I
+></TT
+>
+        <TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+>) ...)</TT
+>
+   are ignored by the interpreter and the compiler.</P
+><P
+>The [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] declaration <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_optimize.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>OPTIMIZE</TT
+></A
+>
+ (debug ...))</TT
+> is legal.</P
+><P
+>The [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] declaration <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_ignorecm_ignorable.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>IGNORABLE</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> ...)</TT
+> affects the variable
+ binding for the variable <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+>.  The compiler
+ will not warn about the variable, regardless whether it is used or
+ not.</P
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="compile-decl"
+>Additional declarations</A
+></H2
+><P
+>The declaration <TT
+CLASS="literal"
+>(compile)</TT
+> has the
+ effect that the current form is compiled prior to execution.
+ Examples:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_locally.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOCALLY</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/sym_declare.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>DECLARE</TT
+></A
+> (compile)) <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>)
+</PRE
+></TD
+></TR
+></TABLE
+>
+executes a compiled version of form.</P
+><P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LET</TT
+></A
+> ((x 0))
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLET</TT
+></A
+> ((inc () (<A
+HREF="http://www.lisp.org/HyperSpec/Body/sym_declare.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>DECLARE</TT
+></A
+> (compile)) (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_incfcm_decf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INCF</TT
+></A
+> x))
+         (dec () (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_incfcm_decf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DECF</TT
+></A
+> x)))
+    (<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_values.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>VALUES</TT
+></A
+> #'inc #'dec)))
+</PRE
+></TD
+></TR
+></TABLE
+>
+ returns two functions.  The first is compiled and increments <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>, the
+ second is interpreted (slower) and decrements the same <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>.</P
+><P
+>The type assertion <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_the.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>THE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>value-type</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>)</TT
+> enforces a type check in interpreted code.
+ No type check is done in compiled code.  See also the <A
+HREF="macros3.html#ethe"
+><TT
+CLASS="function"
+>EXT:ETHE</TT
+></A
+> macro.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="compilation.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="lalist.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Compilation
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-2.html"
+TARGET="_top"
+>[CLHS-3.2]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="eval.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Lambda Lists
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4.html"
+TARGET="_top"
+>[CLHS-3.4]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,1572 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Environment Dictionary
+   [CLHS-25.2]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Environment
+   [CLHS-25]"
+HREF="environment.html"><LINK
+REL="PREVIOUS"
+TITLE="Environment
+   [CLHS-25]"
+HREF="environment.html"><LINK
+REL="NEXT"
+TITLE="Glossary
+   [CLHS-26]"
+HREF="glossary.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="environment.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Environment
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-25.html"
+TARGET="_top"
+>[CLHS-25]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="glossary.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="environment-dict"
+>The Environment Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_envir_t_dictionary.html"
+TARGET="_top"
+>[CLHS-25.2]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="disassemble"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DISASSEMBLE</TT
+></A
+></A
+></H2
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> platforms only.</DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DISASSEMBLE</TT
+></A
+> can disassemble to machine code,
+ provided that <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> gdb is present.  In that case the argument may be a
+ <TT
+CLASS="classname"
+>system-function</TT
+>, a
+ <TT
+CLASS="classname"
+>foreign-function</TT
+>, a special operator indicator,
+ a symbol denoting one of these, a number, or a string.
+ </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="uncompile"
+>Function <A
+HREF="environment-dict.html#uncompile"
+><TT
+CLASS="function"
+>EXT:UNCOMPILE</TT
+></A
+></A
+></H2
+><P
+>The function <A
+HREF="environment-dict.html#uncompile"
+><TT
+CLASS="function"
+>EXT:UNCOMPILE</TT
+></A
+> does the converse of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE</TT
+></A
+>: <TT
+CLASS="literal"
+>(<A
+HREF="environment-dict.html#uncompile"
+><TT
+CLASS="function"
+>EXT:UNCOMPILE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>)</TT
+> reverts a compiled
+ <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> (name), that has been entered or loaded in the same session
+ and then compiled, back to its interpreted form.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="documentation"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DOCUMENTATION</TT
+></A
+></A
+></H2
+><P
+>No on-line documentation is available for the system functions
+ (yet).  <A
+HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DOCUMENTATION</TT
+></A
+> still has the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLtL1"
+>CLtL1</A
+></SPAN
+>] implementation.</P
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>ext:clhs</TT
+>. </B
+></B
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLHS"
+>Common Lisp HyperSpec</A
+></SPAN
+>] access is provided via <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>ext:clhs</TT
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+  <TT
+CLASS="literal"
+>:browser</TT
+>)</TT
+>
+  function, which uses your web browser.
+  <TT
+CLASS="replaceable"
+><I
+>browser</I
+></TT
+> should be a valid
+  keyword in the <TT
+CLASS="varname"
+>custom:*browsers*</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_a.html#association_list"
+TARGET="_top"
+>alist</A
+>.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="trace"
+>Macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRACE</TT
+></A
+></A
+></H2
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRACE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> ...)</TT
+> makes the
+ functions <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>, ... traced.  <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> should be either a symbol or
+ a list <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+ <TT
+CLASS="constant"
+>:suppress-if</TT
+> <TT
+CLASS="constant"
+>:step-if</TT
+>
+ <TT
+CLASS="constant"
+>:pre</TT
+> <TT
+CLASS="constant"
+>:post</TT
+>
+ <TT
+CLASS="constant"
+>:pre-break-if</TT
+> <TT
+CLASS="constant"
+>:post-break-if</TT
+>
+ <TT
+CLASS="constant"
+>:pre-print</TT
+> <TT
+CLASS="constant"
+>:post-print</TT
+>
+ <TT
+CLASS="constant"
+>:PRINT</TT
+>)</TT
+>, where</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="constant"
+>:suppress-if</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>no trace output as long as <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> is true
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:step-if</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>invokes the stepper as soon as <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> is true
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:pre</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>evaluates <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> before calling the function
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:post</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>evaluates <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> after return from the function
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:pre-break-if</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>goes into the break loop before calling the
+   function if <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> is true</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:post-break-if</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>goes into the break loop after return from the
+   function if <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> is true</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:pre-print</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>prints the values of <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> before calling the
+   function</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:post-print</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>prints the values of <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> after return from the
+   function</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:PRINT</TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+></DT
+><DD
+><P
+>prints the values of <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> both before calling
+   and after return from the function</P
+></DD
+></DL
+></DIV
+><P
+>In all these forms you can access the following variables:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="varname"
+>EXT:*TRACE-FUNCTION*</TT
+></DT
+><DD
+><P
+>the function itself
+  </P
+></DD
+><DT
+><TT
+CLASS="varname"
+>EXT:*TRACE-ARGS*</TT
+></DT
+><DD
+><P
+>the arguments to the function
+  </P
+></DD
+><DT
+><TT
+CLASS="varname"
+>EXT:*TRACE-FORM*</TT
+></DT
+><DD
+><P
+>the function/macro call as form
+  </P
+></DD
+><DT
+><A
+NAME="trace-val"
+><A
+HREF="environment-dict.html#trace-val"
+><TT
+CLASS="varname"
+>EXT:*TRACE-VALUES*</TT
+></A
+></A
+></DT
+><DD
+><P
+>after return from the function: the list of return
+  values from the function call</P
+></DD
+></DL
+></DIV
+>
+and you can leave the function call with specified values by using
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_return.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RETURN</TT
+></A
+>.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRACE</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNTRACE</TT
+></A
+> are also applicable to functions <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>)</TT
+> and to macros, but not to
+ locally defined functions and macros.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="inspect"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INSPECT</TT
+></A
+></A
+></H2
+><P
+>The function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INSPECT</TT
+></A
+> takes a keyword argument
+ <TT
+CLASS="constant"
+>:frontend</TT
+>, which specifies the way <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> will
+ interact with the user.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Available <TT
+CLASS="constant"
+>:frontend</TT
+>s for
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INSPECT</TT
+></A
+> in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></B
+></P
+><DL
+><DT
+><TT
+CLASS="constant"
+>:tty</TT
+></DT
+><DD
+><P
+>The interaction is conducted via the <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*TERMINAL-IO*</TT
+></A
+>
+   stream.  Please use the <TT
+CLASS="userinput"
+><B
+>:h</B
+></TT
+> command to get the
+   list of all available commands.</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:http</TT
+></DT
+><DD
+><P
+>A window in your Web browser (specified by the
+   <A
+HREF="environment-dict.html#browser"
+><TT
+CLASS="constant"
+>:BROWSER</TT
+></A
+> keyword argument) is opened and it is controlled by
+   <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> via a <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>, using the HTTP protocol.  You should be
+   able to use all the standard browser features.</P
+><P
+>Since <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> is not multitasking at this time, you will not
+   be able to do anything else during an <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INSPECT</TT
+></A
+> session.  Please click on
+   the <TT
+CLASS="userinput"
+><B
+>quit</B
+></TT
+> link to terminate the session.</P
+><P
+>Please be aware though, that once you terminate an <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INSPECT</TT
+></A
+>
+   session, all links in all <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INSPECT</TT
+></A
+> windows in your browser will become
+   obsolete and using them in a new <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INSPECT</TT
+></A
+> session will result in
+   unpredictable behavior.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="space"
+>Macro <A
+HREF="environment-dict.html#space"
+><TT
+CLASS="function"
+>EXT:SPACE</TT
+></A
+></A
+></H2
+><P
+>The macro <A
+HREF="environment-dict.html#space"
+><TT
+CLASS="function"
+>EXT:SPACE</TT
+></A
+> is like the macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TIME</TT
+></A
+>: <TT
+CLASS="literal"
+>(<A
+HREF="environment-dict.html#space"
+><TT
+CLASS="function"
+>EXT:SPACE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>)</TT
+>
+ evaluates the <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>, and, as a side effect, outputs information
+ about the memory allocations caused by this evaluation.
+ It also prints everything printed by <A
+HREF="environment-dict.html#time"
+><TT
+CLASS="function"
+>TIME</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="room"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_room.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ROOM</TT
+></A
+></A
+></H2
+><P
+>The function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_room.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ROOM</TT
+></A
+> returns two values: the number of bytes
+ currently occupied by Lisp objects, and the number of bytes that can be
+ allocated before the next regular <A
+HREF="gc.html"
+>garbage-collect</A
+>ion occurs.</P
+><P
+>The function <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>EXT:GC</TT
+></I
+> starts a
+ global <A
+HREF="gc.html"
+>garbage-collect</A
+>ion and its return value has the same meaning as the
+ second value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_room.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ROOM</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="time"
+>Macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TIME</TT
+></A
+></A
+></H2
+><P
+>The timing data printed by the macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TIME</TT
+></A
+> includes: The real
+ time (elapsed time), the run time (processor time for this process),
+ the number of bytes allocated (use the <A
+HREF="environment-dict.html#space"
+><TT
+CLASS="function"
+>EXT:SPACE</TT
+></A
+> macro for more
+ detailed analysis), and the number of <A
+HREF="gc.html"
+>garbage-collect</A
+>ions performed, if any.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="ed"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_ed.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ED</TT
+></A
+></A
+></H2
+><P
+>The function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_ed.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ED</TT
+></A
+> calls the external editor specified by the
+ variable <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>CUSTOM:*EDITOR*</TT
+></I
+> (see
+ <TT
+CLASS="filename"
+>#P"config.lisp"</TT
+>).  If the argument is a function name which was defined
+ in the current session (not loaded from a file), the program text to be
+ edited is a pretty-printed version (without comments) of the text which
+ was used to define the function.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="clock"
+>Clock Time</A
+></H2
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+>, <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+>, <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>
+   platforms only.</DT
+><DD
+><P
+>The variable <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>CUSTOM:*DEFAULT-TIME-ZONE*</TT
+></I
+>
+   contains the default time zone used by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_encode-universal-time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ENCODE-UNIVERSAL-TIME</TT
+></A
+> and
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_decode-universal-time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DECODE-UNIVERSAL-TIME</TT
+></A
+>.  It is initially set to -1 (which
+   means 1 hour east of Greenwich, i.e., Mid European Time).
+   </P
+></DD
+></DL
+></DIV
+><P
+>The <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#time_zone"
+TARGET="_top"
+>time
+ zone</A
+> in a decoded time must not necessarily be an integer,
+ but (as float or rational number) it should be a multiple of
+ <TT
+CLASS="literal"
+>1/3600</TT
+>.</P
+><DIV
+CLASS="table"
+><A
+NAME="internal-time-units-table"
+></A
+><P
+><B
+>Table 7. Platform dependent</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>platform</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+>, <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+></TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+></TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+></TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+></TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_intern_s-per-second.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>INTERNAL-TIME-UNITS-PER-SECOND</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>100</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>50</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>1,000,000</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>10,000,000</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_get-internal-run-time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GET-INTERNAL-RUN-TIME</TT
+></A
+> returns the amount of run time
+ consumed by the current <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> process since its startup.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="machine"
+>Machine</A
+></H2
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.</DT
+><DD
+><P
+>The functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_short-sit_ng-site-name.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SHORT-SITE-NAME</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_short-sit_ng-site-name.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LONG-SITE-NAME</TT
+></A
+>
+  should be defined in a site-specific <TT
+CLASS="filename"
+>#P"config.lisp"</TT
+> file.
+  </P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+>, <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+>, <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>
+    platforms only.</DT
+><DD
+><P
+>The functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_machine-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MACHINE-TYPE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_machine-version.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MACHINE-VERSION</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_machine-instance.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MACHINE-INSTANCE</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_short-sit_ng-site-name.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SHORT-SITE-NAME</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_short-sit_ng-site-name.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LONG-SITE-NAME</TT
+></A
+> should be
+  defined by every user in his user-specific <TT
+CLASS="filename"
+>#P"config.lisp"</TT
+> file.
+  </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="apropos"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_aproposcm_apropos-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APROPOS</TT
+></A
+> &#38; <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_aproposcm_apropos-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APROPOS-LIST</TT
+></A
+></A
+></H2
+><P
+>The search performed by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_aproposcm_apropos-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APROPOS</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_aproposcm_apropos-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APROPOS-LIST</TT
+></A
+> is
+ case-insensitive.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dribble"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_dribble.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DRIBBLE</TT
+></A
+></A
+></H2
+><P
+>If <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_dribble.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DRIBBLE</TT
+></A
+> is called with an argument, and dribbling is already
+ enabled, a warning is printed, and the new dribbling request is
+ ignored.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="version"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISP-IMPLEMENTATION-VERSION</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISP-IMPLEMENTATION-VERSION</TT
+></A
+> returns
+ the numeric version (like <TT
+CLASS="literal"
+>3.14</TT
+>), and
+ the release date (like <TT
+CLASS="literal"
+>"1999-07-21"</TT
+>).
+ When running on the same machine on which <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> was built, it appends
+  the binary build and <A
+HREF="p-indep.html#image"
+>memory image</A
+> dump date in universal time
+  (like <TT
+CLASS="literal"
+>3141592654</TT
+>).
+ When running on a different machine, it appends the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_machine-instance.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MACHINE-INSTANCE</TT
+></A
+>
+  of the machine on which it was built.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="environment.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="glossary.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Environment
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-25.html"
+TARGET="_top"
+>[CLHS-25]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="environment.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Glossary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-26.html"
+TARGET="_top"
+>[CLHS-26]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

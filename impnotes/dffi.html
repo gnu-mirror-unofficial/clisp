@@ -1,0 +1,5394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.3. The Foreign Function Call Facility</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.2. External Modules"
+HREF="modules.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.4. The Amiga Foreign Function Call Facility"
+HREF="affi.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="modules.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="affi.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="dffi"
+>Extensions-2.3. The Foreign Function Call Facility</A
+></H1
+><FONT
+COLOR="RED"
+>Platform dependent: many <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.</FONT
+><P
+>A foreign function description is written as a Lisp file, and when
+ compiled it produces a <TT
+CLASS="filename"
+>#P".c"</TT
+> file which is then compiled by the
+ <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler and may be linked together with
+ <TT
+CLASS="filename"
+>lisp.a</TT
+>.</P
+><P
+>All symbols relating to the foreign function interface are
+ exported from the package <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+>.  To use them,
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_use-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>USE-PACKAGE</TT
+></A
+> "FFI")</TT
+>.</P
+><P
+>Special <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> forms may appear anywhere in the Lisp file.</P
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dffi-overview"
+>Overview</A
+></H2
+><P
+>These are the special <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> forms.  We have taken a pragmatic
+ approach: the only foreign languages we support for now are <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+ and ANSI <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>special <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> forms; <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> is any Lisp
+   symbol; <TT
+CLASS="replaceable"
+><I
+>c-name</I
+></TT
+> is a string.</B
+></P
+><DL
+><DT
+><A
+NAME="def-c-type"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>def-c-type</TT
+>
+        <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This form makes <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> a shortcut for <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.
+  Note that <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> may already refer to name.
+  Forward declarations of types are not possible, however.
+ </P
+></DD
+><DT
+><A
+NAME="def-c-var"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>def-c-var</TT
+>
+        <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*)</TT
+></A
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="AEN18383"
+></A
+><P
+><B
+>Table 1. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+> ::==</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:name
+   <TT
+CLASS="replaceable"
+><I
+>c-name</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:type
+  <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:read-only
+  <TT
+CLASS="replaceable"
+><I
+>boolean</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:alloc
+  <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+>)</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>This form defines a foreign variable.  <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> is the Lisp
+ name, a regular Lisp symbol.</P
+><P
+>The <TT
+CLASS="constant"
+>:name</TT
+> option specifies the name, as
+ seen from <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>, as a string.  If not specified, it is derived from
+ the print name of the Lisp name.</P
+><P
+>The <TT
+CLASS="constant"
+>:type</TT
+> option specifies the variable's
+ foreign type.</P
+><P
+>If the <TT
+CLASS="constant"
+>:read-only</TT
+> option is specified and
+non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, it will be impossible to change the variable's value from
+within Lisp (using <A
+HREF="http://www.lisp.org/HyperSpec/Body/spefor_setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETQ</TT
+></A
+> or similar).</P
+><P
+>The <TT
+CLASS="constant"
+>:alloc</TT
+> option can be either <TT
+CLASS="constant"
+>:NONE</TT
+>
+ or <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+> and defaults to <TT
+CLASS="constant"
+>:NONE</TT
+>.  If it is <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+>,
+ any values of type <A
+HREF="dffi.html#c-string"
+><SPAN
+CLASS="type"
+>FFI:C-STRING</SPAN
+></A
+>, <A
+HREF="dffi.html#c-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-PTR</SPAN
+></A
+>, <A
+HREF="dffi.html#c-ptr-null"
+><SPAN
+CLASS="type"
+>FFI:C-PTR-NULL</SPAN
+></A
+>, <A
+HREF="dffi.html#c-array-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY-PTR</SPAN
+></A
+>
+ within the foreign value are assumed to be pointers to
+ <TT
+CLASS="function"
+>malloc()</TT
+>-allocated storage, and when <A
+HREF="http://www.lisp.org/HyperSpec/Body/spefor_setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETQ</TT
+></A
+> replaces an old value by a
+ new one, the old storage is freed using <TT
+CLASS="function"
+>free()</TT
+> and the new storage
+ allocated using <TT
+CLASS="function"
+>malloc()</TT
+>.  If it is <TT
+CLASS="constant"
+>:NONE</TT
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/spefor_setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETQ</TT
+></A
+> assumes that the
+ pointers point to good storage (not <TT
+CLASS="constant"
+>NULL</TT
+>!) and overwrites the old
+ values by the new ones.  This is dangerous (just think of overwriting a
+ string with a longer one or storing some data in a <TT
+CLASS="constant"
+>NULL</TT
+> pointer...)
+ and deprecated.</P
+></DD
+><DT
+><A
+NAME="def-call-out"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#def-call-out"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-OUT</TT
+></A
+>
+              <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*)</TT
+></A
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="AEN18464"
+></A
+><P
+><B
+>Table 2. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+> ::==</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:name
+   <TT
+CLASS="replaceable"
+><I
+>c-name</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:arguments
+   {(<TT
+CLASS="replaceable"
+><I
+>arg-name</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>
+    [<A
+HREF="dffi.html#param-mode"
+><TT
+CLASS="replaceable"
+><I
+>PARAM-MODE</I
+></TT
+></A
+> [<A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+>]])}*)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:return-type
+   <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> [<A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+>])</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-flavor"
+><TT
+CLASS="constant"
+>:LANGUAGE</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>language</I
+></TT
+>)</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>This form defines a named call-out function (a foreign function
+ called from Lisp: control flow temporarily leaves Lisp).  Any Lisp
+ function call to <TT
+CLASS="function"
+>#'<TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></TT
+>
+ is redirected to call the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function <TT
+CLASS="replaceable"
+><I
+>c-name</I
+></TT
+>.
+</P
+></DD
+><DT
+><A
+NAME="def-call-in"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#def-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-IN</TT
+></A
+>
+              <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*)</TT
+></A
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="AEN18521"
+></A
+><P
+><B
+>Table 3. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+> ::==</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:name
+   <TT
+CLASS="replaceable"
+><I
+>c-name</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:arguments
+   {(<TT
+CLASS="replaceable"
+><I
+>arg-name</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>
+    [<A
+HREF="dffi.html#param-mode"
+><TT
+CLASS="replaceable"
+><I
+>PARAM-MODE</I
+></TT
+></A
+> [<A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+>]])}*)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:return-type
+   <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> [<A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+>])</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-flavor"
+><TT
+CLASS="constant"
+>:LANGUAGE</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>language</I
+></TT
+>)</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>This form defines a named call-in function (i.e., a Lisp
+ function called from the foreign language: control flow temporary
+ enters Lisp).  Any <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function call to the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function
+ <TT
+CLASS="replaceable"
+><I
+>c-name</I
+></TT
+> is redirected to call the <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> function
+ <TT
+CLASS="function"
+>#'<TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+></TT
+>.</P
+></DD
+><DT
+><A
+NAME="def-c-call-out"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#def-c-call-out"
+><TT
+CLASS="function"
+>FFI:DEF-C-CALL-OUT</TT
+></A
+>
+        <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*)</TT
+></A
+></DT
+><DD
+><P
+>This is equivalent to <A
+HREF="dffi.html#def-call-out"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-OUT</TT
+></A
+> with
+   <A
+HREF="dffi.html#c-flavor"
+><TT
+CLASS="constant"
+>:LANGUAGE</TT
+></A
+> <TT
+CLASS="constant"
+>:STDC</TT
+>.</P
+></DD
+><DT
+><A
+NAME="def-c-call-in"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#def-c-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-C-CALL-IN</TT
+></A
+>
+        <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*)</TT
+></A
+></DT
+><DD
+><P
+>This is equivalent to <A
+HREF="dffi.html#def-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-IN</TT
+></A
+> with
+   <A
+HREF="dffi.html#c-flavor"
+><TT
+CLASS="constant"
+>:LANGUAGE</TT
+></A
+> <TT
+CLASS="constant"
+>:STDC</TT
+>.</P
+></DD
+><DT
+><A
+NAME="def-c-struct"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#def-c-struct"
+><TT
+CLASS="function"
+>FFI:DEF-C-STRUCT</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> (<TT
+CLASS="replaceable"
+><I
+>ident</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)*)</TT
+></A
+></DT
+><DD
+><P
+>This form defines <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> to be both a
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_structure-class.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRUCTURE-CLASS</TT
+></A
+> and a foreign <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type with the given slots.
+ </P
+></DD
+><DT
+><A
+NAME="def-c-enum"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#def-c-enum"
+><TT
+CLASS="function"
+>FFI:DEF-C-ENUM</TT
+></A
+>
+        <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>ident</I
+></TT
+> |
+                  (<TT
+CLASS="replaceable"
+><I
+>ident</I
+></TT
+>
+                  [<TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+>])}*)</TT
+></A
+></DT
+><DD
+><P
+>This form defines <TT
+CLASS="replaceable"
+><I
+>ident</I
+></TT
+>s
+  as constants, similarly to the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> declaration <SPAN
+CLASS="type"
+>enum {
+  <TT
+CLASS="replaceable"
+><I
+>ident</I
+></TT
+> [= <TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+>],
+  ... };</SPAN
+></P
+></DD
+><DT
+><A
+NAME="c-lines"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-lines"
+><TT
+CLASS="function"
+>FFI:C-LINES</TT
+></A
+>
+                <TT
+CLASS="replaceable"
+><I
+>format-string</I
+></TT
+>
+                {<TT
+CLASS="replaceable"
+><I
+>argument</I
+></TT
+>}*)</TT
+></A
+></DT
+><DD
+><P
+>This form outputs the string <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>format-string</I
+></TT
+>
+  {<TT
+CLASS="replaceable"
+><I
+>argument</I
+></TT
+>}*)</TT
+> to the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+  output file.  This is a rarely needed low-level facility.
+ </P
+></DD
+><DT
+><A
+NAME="element"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#element"
+><TT
+CLASS="function"
+>FFI:ELEMENT</TT
+></A
+>
+     <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>index<SUB
+>1</SUB
+></I
+></TT
+> ...
+     <TT
+CLASS="replaceable"
+><I
+>index<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Array element: If <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> is of foreign type
+  <TT
+CLASS="literal"
+>(c-array <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>1</SUB
+></I
+></TT
+>
+  ... <TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+>
+  and 0 &#8804; <TT
+CLASS="replaceable"
+><I
+>index<SUB
+>1</SUB
+></I
+></TT
+>
+  &#60; <TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>1</SUB
+></I
+></TT
+>, ..., 0
+  &#8804; <TT
+CLASS="replaceable"
+><I
+>index<SUB
+>n</SUB
+></I
+></TT
+> &#60;
+  <TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>n</SUB
+></I
+></TT
+>, this will be
+  the place corresponding to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_aref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>AREF</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>index<SUB
+>1</SUB
+></I
+></TT
+>
+  ... <TT
+CLASS="replaceable"
+><I
+>index<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+> or
+  <TT
+CLASS="varname"
+><TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>[<TT
+CLASS="replaceable"
+><I
+>index<SUB
+>1</SUB
+></I
+></TT
+>]...[<TT
+CLASS="replaceable"
+><I
+>index<SUB
+>n</SUB
+></I
+></TT
+>]</TT
+>.
+  It is a place of type <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.
+  If <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> is of foreign type <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-array-max"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY-MAX</SPAN
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>dim</I
+></TT
+>)</TT
+> and 0 &#8804;
+  <TT
+CLASS="replaceable"
+><I
+>index</I
+></TT
+> &#60; <TT
+CLASS="replaceable"
+><I
+>dim</I
+></TT
+>,
+  this will be the place corresponding to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_aref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>AREF</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>index</I
+></TT
+>)</TT
+> or
+  <TT
+CLASS="varname"
+><TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>[<TT
+CLASS="replaceable"
+><I
+>index</I
+></TT
+>]</TT
+>.
+  It is a place of type <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.
+</P
+></DD
+><DT
+><A
+NAME="deref"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#deref"
+><TT
+CLASS="function"
+>FFI:DEREF</TT
+></A
+>
+                <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Dereference pointer: If
+  <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> is of foreign type
+  <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-PTR</SPAN
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+> or
+  <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-ptr-null"
+><SPAN
+CLASS="type"
+>FFI:C-PTR-NULL</SPAN
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+>,
+  this will be the place the pointer points to.
+  It is a place of type <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.
+  For <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-ptr-null"
+><SPAN
+CLASS="type"
+>FFI:C-PTR-NULL</SPAN
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+>,
+  the <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> may not be <TT
+CLASS="constant"
+>NULL</TT
+>.
+</P
+></DD
+><DT
+><A
+NAME="slot"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#slot"
+><TT
+CLASS="function"
+>FFI:SLOT</TT
+></A
+>
+       <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>slot-name</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Struct or union component: If <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> is of
+  foreign type <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-struct"
+><SPAN
+CLASS="type"
+>FFI:C-STRUCT</SPAN
+></A
+> <TT
+CLASS="replaceable"
+><I
+>class</I
+></TT
+>
+  ... (<TT
+CLASS="replaceable"
+><I
+>slot-name</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>) ...)</TT
+> or
+  of type <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-union"
+><SPAN
+CLASS="type"
+>FFI:C-UNION</SPAN
+></A
+>
+  ... (<TT
+CLASS="replaceable"
+><I
+>slot-name</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>) ...)</TT
+>,
+  this will be of type <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.
+  </P
+></DD
+><DT
+><A
+NAME="cast"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#cast"
+><TT
+CLASS="function"
+>FFI:CAST</TT
+></A
+>
+           <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Type change: A place denoting the same memory
+  locations as the original <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>, but of type <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="typeof"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#typeof"
+><TT
+CLASS="function"
+>FFI:TYPEOF</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>returns the <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> corresponding to the <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>.
+  </P
+></DD
+><DT
+><A
+NAME="sizeof"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#sizeof"
+><TT
+CLASS="function"
+>FFI:SIZEOF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+>,
+        <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#sizeof"
+><TT
+CLASS="function"
+>FFI:SIZEOF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>The first form returns the size and alignment of a
+  <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>, measured in bytes.</P
+><P
+>The second form returns the size and alignment of the
+  <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type of <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>, measured in bytes.
+  </P
+></DD
+><DT
+><A
+NAME="bitsizeof"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#bitsizeof"
+><TT
+CLASS="function"
+>FFI:BITSIZEOF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+>,
+        <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#bitsizeof"
+><TT
+CLASS="function"
+>FFI:BITSIZEOF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>The first form returns the size and alignment of the
+  <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>, measured in bits.</P
+><P
+>The second form returns the size and alignment of the
+  <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type of <TT
+CLASS="replaceable"
+><I
+>c-place</I
+></TT
+>, measured in bits.
+ </P
+></DD
+><DT
+><A
+NAME="validp"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#validp"
+><TT
+CLASS="function"
+>FFI:VALIDP</TT
+></A
+>
+                <TT
+CLASS="replaceable"
+><I
+>foreign-entity</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This predicate returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if the
+  <TT
+CLASS="replaceable"
+><I
+>foreign-entity</I
+></TT
+> (e.g. the Lisp equivalent of
+  a <TT
+CLASS="function"
+>c-pointer</TT
+>) refers to a pointer which is invalid
+  because it comes from a previous Lisp session.  It returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> if
+  <TT
+CLASS="replaceable"
+><I
+>foreign-entity</I
+></TT
+> can be used within the
+  current Lisp process.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dffi-types"
+>(Foreign) <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types</A
+></H2
+><P
+>Foreign <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types are used in the <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+>.
+They are <I
+CLASS="emphasis"
+>not</I
+> regular <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> types or <B
+CLASS="command"
+>CLOS</B
+>
+classes.</P
+><P
+>A <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> is either a predefined <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type or the name of a
+ type defined by <A
+HREF="dffi.html#def-c-type"
+><TT
+CLASS="function"
+>FFI:DEF-C-TYPE</TT
+></A
+>.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>the predefined <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types (<TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</B
+></P
+><DL
+><DT
+><A
+NAME="simple-c-type"
+><TT
+CLASS="replaceable"
+><I
+>simple-c-type</I
+></TT
+></A
+></DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="AEN18859"
+></A
+><P
+><B
+>Table 4. the simple <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Lisp name</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Lisp equivalent</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> equivalent</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>ILU
+ equivalent</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Comment</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>void</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>as a result type only</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_boolean.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BOOLEAN</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_boolean.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BOOLEAN</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>int</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>BOOLEAN</SPAN
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>char</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>SHORT CHARACTER</SPAN
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>char</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>signed char</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uchar</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>unsigned char</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>short</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>short</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>ushort</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>unsigned short</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>int</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>int</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>unsigned int</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>long</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>long</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>ulong</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>unsigned long</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint8</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint8</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>BYTE</SPAN
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint8</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint8</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint16</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 16)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint16</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>SHORT CARDINAL</SPAN
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint16</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 16)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint16</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>SHORT INTEGER</SPAN
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint32</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 32)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint32</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>CARDINAL</SPAN
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint32</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 32)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint32</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>INTEGER</SPAN
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint64</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 64)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>uint64</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>LONG CARDINAL</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>does not work on all platforms</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint64</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 64)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>sint64</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>LONG INTEGER</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>does not work on all platforms</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>float</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>double</SPAN
+></TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+><A
+NAME="c-pointer"
+><A
+HREF="dffi.html#c-pointer"
+><SPAN
+CLASS="type"
+>FFI:C-POINTER</SPAN
+></A
+></A
+></DT
+><DD
+><P
+>This type corresponds to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+>void*</SPAN
+>, an opaque pointer.
+ </P
+></DD
+><DT
+><A
+NAME="c-string"
+><A
+HREF="dffi.html#c-string"
+><SPAN
+CLASS="type"
+>FFI:C-STRING</SPAN
+></A
+></A
+></DT
+><DD
+><P
+>This type corresponds to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+>char*</SPAN
+>, a zero-terminated string.  Its Lisp equivalent is
+  a string, without the trailing zero character.
+ </P
+></DD
+><DT
+><A
+NAME="c-struct"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-struct"
+><SPAN
+CLASS="type"
+>FFI:C-STRUCT</SPAN
+></A
+> <TT
+CLASS="replaceable"
+><I
+>class</I
+></TT
+>
+  (<TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>1</SUB
+></I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>1</SUB
+></I
+></TT
+>) ...
+  (<TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>n</SUB
+></I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>n</SUB
+></I
+></TT
+>))</TT
+></A
+></DT
+><DD
+><P
+>This type is equivalent to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+ <SPAN
+CLASS="type"
+>struct { <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>1</SUB
+></I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>1</SUB
+></I
+></TT
+>; ...;
+ <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>n</SUB
+></I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>n</SUB
+></I
+></TT
+>; }</SPAN
+>.
+ Its Lisp equivalent is: if <TT
+CLASS="replaceable"
+><I
+>class</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+>, a
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+>; if <TT
+CLASS="replaceable"
+><I
+>class</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+>, a list; if
+ <TT
+CLASS="replaceable"
+><I
+>class</I
+></TT
+> is a symbol naming a structure or <B
+CLASS="command"
+>CLOS</B
+> class, an instance
+ of this class, with slots of names <TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>1</SUB
+></I
+></TT
+>,
+ ... ,<TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>n</SUB
+></I
+></TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="c-union"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-union"
+><SPAN
+CLASS="type"
+>FFI:C-UNION</SPAN
+></A
+>
+  (<TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>1</SUB
+></I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>1</SUB
+></I
+></TT
+>) ...
+  (<TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>n</SUB
+></I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>n</SUB
+></I
+></TT
+>))</TT
+></A
+></DT
+><DD
+><P
+>This type is equivalent to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+>union { <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>1</SUB
+></I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>1</SUB
+></I
+></TT
+>; ...;
+  <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>n</SUB
+></I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>ident<SUB
+>n</SUB
+></I
+></TT
+>;
+  }</SPAN
+>.
+  Conversion to and from Lisp assumes that a value is to be viewed as
+  being of <TT
+CLASS="replaceable"
+><I
+>c-type<SUB
+>1</SUB
+></I
+></TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="c-array"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-array"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY</SPAN
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>1</SUB
+></I
+></TT
+> ...
+   <TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This type is equivalent to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+><TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>1</SUB
+></I
+></TT
+>]
+  ... [<TT
+CLASS="replaceable"
+><I
+>dim<SUB
+>n</SUB
+></I
+></TT
+>]</SPAN
+>.
+  Note that when an array is passed as an argument to a function in
+  <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>, it is actually passed as a pointer; you therefore have to
+  write <TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-PTR</SPAN
+></A
+> (<A
+HREF="dffi.html#c-array"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY</SPAN
+></A
+> ...))</TT
+> for this
+  argument's type.</P
+></DD
+><DT
+><A
+NAME="c-array-max"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-array-max"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY-MAX</SPAN
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>maxdimension</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This type is equivalent to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+><TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>maxdimension</I
+></TT
+>]</SPAN
+>, an array containing up to
+  <TT
+CLASS="replaceable"
+><I
+>maxdimension</I
+></TT
+> elements.
+  The array is zero-terminated if it contains less than <TT
+CLASS="replaceable"
+><I
+>maxdimension</I
+></TT
+> elements.
+  Conversion from Lisp of an array with more than <TT
+CLASS="replaceable"
+><I
+>maxdimension</I
+></TT
+> elements
+  silently ignores the superfluous elements.
+  </P
+></DD
+><DT
+><A
+NAME="c-function"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-function"
+><SPAN
+CLASS="type"
+>FFI:C-FUNCTION</SPAN
+></A
+> (<TT
+CLASS="constant"
+>:ARGUMENTS</TT
+>
+      {(<TT
+CLASS="replaceable"
+><I
+>arg-name</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>a-c-type</I
+></TT
+>
+        [<A
+HREF="dffi.html#param-mode"
+><TT
+CLASS="replaceable"
+><I
+>PARAM-MODE</I
+></TT
+></A
+> [<A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+>]])}*)
+    (<TT
+CLASS="constant"
+>:return-type</TT
+> <TT
+CLASS="replaceable"
+><I
+>r-c-type</I
+></TT
+>
+       [<A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+>])
+    (<A
+HREF="dffi.html#c-flavor"
+><TT
+CLASS="constant"
+>:LANGUAGE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>language</I
+></TT
+>))</TT
+></A
+></DT
+><DD
+><P
+>This type designates a <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function that can be
+  called according to the given prototype <TT
+CLASS="literal"
+>(<TT
+CLASS="replaceable"
+><I
+>r-c-type</I
+></TT
+> (*)
+  (<TT
+CLASS="replaceable"
+><I
+>a-c-type<SUB
+>1</SUB
+></I
+></TT
+>, ...))</TT
+>.
+  Conversion between <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> functions and Lisp functions
+  is transparent.</P
+></DD
+><DT
+><A
+NAME="c-ptr"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-PTR</SPAN
+></A
+>
+              <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This type is equivalent to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+><TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> *</SPAN
+>: a pointer to a single item of the given
+  <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.</P
+></DD
+><DT
+><A
+NAME="c-ptr-null"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-ptr-null"
+><SPAN
+CLASS="type"
+>FFI:C-PTR-NULL</SPAN
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This type is also equivalent to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+><TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> *</SPAN
+>: a pointer to a single item of the given
+  <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>, with the exception that <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> <TT
+CLASS="constant"
+>NULL</TT
+> corresponds to
+  Lisp <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="c-array-ptr"
+><TT
+CLASS="literal"
+>(<A
+HREF="dffi.html#c-array-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY-PTR</SPAN
+></A
+> <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This type is equivalent to what <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> calls
+  <SPAN
+CLASS="type"
+><TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+> (*)[]</SPAN
+>: a pointer to a zero-terminated array of
+  items of the given <TT
+CLASS="replaceable"
+><I
+>c-type</I
+></TT
+>.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="c-flavor"
+>The choice of the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> flavor.</A
+></H2
+><P
+><A
+HREF="dffi.html#c-function"
+><SPAN
+CLASS="type"
+>FFI:C-FUNCTION</SPAN
+></A
+>, <A
+HREF="dffi.html#def-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-IN</TT
+></A
+>, <A
+HREF="dffi.html#def-call-out"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-OUT</TT
+></A
+> take <A
+HREF="dffi.html#c-flavor"
+><TT
+CLASS="constant"
+>:LANGUAGE</TT
+></A
+> argument.
+The <TT
+CLASS="replaceable"
+><I
+>language</I
+></TT
+> is either <TT
+CLASS="constant"
+>:C</TT
+> (denotes K&#38;R <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>) or <TT
+CLASS="constant"
+>:STDC</TT
+>
+(denotes ANSI <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>) or <TT
+CLASS="constant"
+>:STDC-STDCALL</TT
+> (denotes ANSI <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+with <I
+CLASS="emphasis"
+>stdcall</I
+> calling convention).
+It specifies whether the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function (caller or callee) has been
+compiled by a K&#38;R <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler or by an ANSI <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler,
+and possibly the calling convention.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dffi-variables"
+>Foreign variables</A
+></H2
+><P
+>Foreign variables are variables whose storage is allocated in the
+ foreign language module.  They can nevertheless be evaluated and
+ modified through <A
+HREF="http://www.lisp.org/HyperSpec/Body/spefor_setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETQ</TT
+></A
+>, just as normal variables can, except that the
+ range of allowed values is limited according to the variable's foreign
+ type.  Note that for a foreign variable <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> the form <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>)</TT
+> is not necessarily true,
+ since every time <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> is evaluated its foreign value is converted to a
+ freshly created Lisp value.  Foreign variables are defined using
+ <A
+HREF="dffi.html#def-c-var"
+><TT
+CLASS="function"
+>FFI:DEF-C-VAR</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dffi-places"
+>Operations on foreign places</A
+></H2
+><P
+>A foreign variable <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> defined by <A
+HREF="dffi.html#def-c-var"
+><TT
+CLASS="function"
+>FFI:DEF-C-VAR</TT
+></A
+> defines a
+ "place", i.e., a form which can also be used as argument to <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>.
+ (An "lvalue" in <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> terminology.)  The following operations are
+ available on foreign places: <A
+HREF="dffi.html#element"
+><TT
+CLASS="function"
+>FFI:ELEMENT</TT
+></A
+>, <A
+HREF="dffi.html#deref"
+><TT
+CLASS="function"
+>FFI:DEREF</TT
+></A
+>, <A
+HREF="dffi.html#slot"
+><TT
+CLASS="function"
+>FFI:SLOT</TT
+></A
+>, <A
+HREF="dffi.html#cast"
+><TT
+CLASS="function"
+>FFI:CAST</TT
+></A
+>,
+ <A
+HREF="dffi.html#typeof"
+><TT
+CLASS="function"
+>FFI:TYPEOF</TT
+></A
+>, <A
+HREF="dffi.html#sizeof"
+><TT
+CLASS="function"
+>FFI:SIZEOF</TT
+></A
+>, <A
+HREF="dffi.html#bitsizeof"
+><TT
+CLASS="function"
+>FFI:BITSIZEOF</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dffi-functions"
+>Foreign functions</A
+></H2
+><P
+>Foreign functions are functions which are defined in the foreign
+ language.  There are <I
+CLASS="emphasis"
+>named foreign functions</I
+>
+ (imported via <A
+HREF="dffi.html#def-call-out"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-OUT</TT
+></A
+> or created via <A
+HREF="dffi.html#def-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-IN</TT
+></A
+>) and
+ <I
+CLASS="emphasis"
+>anonymous foreign functions</I
+>; they arise through
+ conversion of function pointers.</P
+><P
+>A <I
+CLASS="emphasis"
+>"call-out"</I
+> function is a foreign function
+ called from Lisp: control flow temporarily leaves Lisp.  A
+ <I
+CLASS="emphasis"
+>"call-in"</I
+> function is a Lisp function called from
+ the foreign language: control flow temporary enters Lisp.</P
+><P
+>The following forms define foreign functions: <A
+HREF="dffi.html#def-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-IN</TT
+></A
+>,
+ <A
+HREF="dffi.html#def-call-out"
+><TT
+CLASS="function"
+>FFI:DEF-CALL-OUT</TT
+></A
+>, <A
+HREF="dffi.html#def-c-call-in"
+><TT
+CLASS="function"
+>FFI:DEF-C-CALL-IN</TT
+></A
+>, <A
+HREF="dffi.html#def-c-call-out"
+><TT
+CLASS="function"
+>FFI:DEF-C-CALL-OUT</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="allocation"
+>Argument and result passing conventions</A
+></H2
+><P
+>When passed to and from functions, allocation of arguments and
+ results is handled as follows:</P
+><P
+>Values of <A
+HREF="dffi.html#simple-c-type"
+><TT
+CLASS="replaceable"
+><I
+>SIMPLE-C-TYPE</I
+></TT
+></A
+>, <A
+HREF="dffi.html#c-pointer"
+><SPAN
+CLASS="type"
+>FFI:C-POINTER</SPAN
+></A
+> are passed on the stack,
+ with dynamic extent. The <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is effectively ignored.</P
+><P
+>Values of type <A
+HREF="dffi.html#c-string"
+><SPAN
+CLASS="type"
+>FFI:C-STRING</SPAN
+></A
+>, <A
+HREF="dffi.html#c-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-PTR</SPAN
+></A
+>, <A
+HREF="dffi.html#c-ptr-null"
+><SPAN
+CLASS="type"
+>FFI:C-PTR-NULL</SPAN
+></A
+>, <A
+HREF="dffi.html#c-array-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY-PTR</SPAN
+></A
+>
+ need storage.  The <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> specifies the allocation policy:</P
+><DIV
+CLASS="table"
+><A
+NAME="AEN19391"
+></A
+><P
+><B
+>Table 5. allocation policy</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+></TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:NONE</TT
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>no storage is allocated.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ALLOCA</TT
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>allocation of storage on the
+   stack, which has dynamic extent.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>storage will be allocated via
+   <TT
+CLASS="function"
+>malloc()</TT
+> and freed via <TT
+CLASS="function"
+>free()</TT
+>.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>If no <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is specified, the default <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is
+ <TT
+CLASS="constant"
+>:NONE</TT
+> for most types, but <TT
+CLASS="constant"
+>:ALLOCA</TT
+> for <A
+HREF="dffi.html#c-string"
+><SPAN
+CLASS="type"
+>FFI:C-STRING</SPAN
+></A
+> and <A
+HREF="dffi.html#c-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-PTR</SPAN
+></A
+> and
+ <A
+HREF="dffi.html#c-ptr-null"
+><SPAN
+CLASS="type"
+>FFI:C-PTR-NULL</SPAN
+></A
+> and <A
+HREF="dffi.html#c-array-ptr"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY-PTR</SPAN
+></A
+> and for <TT
+CLASS="constant"
+>:OUT</TT
+> arguments. [Subject to
+ change!]  The <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+> policy provides the ability to pass
+ arbitrarily nested structs containing pointers pointing to structs
+ ... within a single conversion.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>For call-out functions:</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>For arguments passed from Lisp to <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>:</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+>:</DT
+><DD
+><P
+>Lisp allocates the storage using <TT
+CLASS="function"
+>malloc()</TT
+> and
+     never deallocates it.  The <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function is supposed to call
+     <TT
+CLASS="function"
+>free()</TT
+> when done with it.</P
+></DD
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:ALLOCA</TT
+>:</DT
+><DD
+><P
+>Lisp allocates the storage on the stack, with
+     dynamic extent.  It is freed when the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function returns.
+    </P
+></DD
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:NONE</TT
+>:</DT
+><DD
+><P
+>Lisp assumes that the pointer already points to a
+     valid area of the proper size and puts the result value there.
+     This is dangerous! and deprecated.
+    </P
+></DD
+></DL
+></DIV
+></DD
+><DT
+>For results passed from <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> to Lisp:</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+>:</DT
+><DD
+><P
+>Lisp calls <TT
+CLASS="function"
+>free()</TT
+> on it when done.
+    </P
+></DD
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:NONE</TT
+>:</DT
+><DD
+><P
+>Lisp does nothing.
+    </P
+></DD
+></DL
+></DIV
+></DD
+></DL
+></DIV
+></DD
+><DT
+>For call-in functions:</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>For arguments passed from <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> to Lisp:</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+>:</DT
+><DD
+><P
+>Lisp calls <TT
+CLASS="function"
+>free()</TT
+> on it when done.
+     </P
+></DD
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:ALLOCA</TT
+> or <TT
+CLASS="constant"
+>:NONE</TT
+>:</DT
+><DD
+><P
+>Lisp does nothing.
+     </P
+></DD
+></DL
+></DIV
+></DD
+><DT
+>For results passed from Lisp to <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>:</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+>:</DT
+><DD
+><P
+>Lisp allocates the storage using <TT
+CLASS="function"
+>malloc()</TT
+> and
+      never deallocates it.  The <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function is supposed to call
+      <TT
+CLASS="function"
+>free()</TT
+> when done with it.</P
+></DD
+><DT
+>If <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> is <TT
+CLASS="constant"
+>:NONE</TT
+>:</DT
+><DD
+><P
+>Lisp assumes that the pointer already points to a
+     valid area of the proper size and puts the result value there.
+     This is dangerous! and deprecated.
+    </P
+></DD
+></DL
+></DIV
+></DD
+></DL
+></DIV
+></DD
+></DL
+></DIV
+><P
+>A function parameter's <A
+HREF="dffi.html#param-mode"
+><TT
+CLASS="replaceable"
+><I
+>PARAM-MODE</I
+></TT
+></A
+> may be</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="constant"
+>:IN</TT
+> (means: read-only):</DT
+><DD
+><P
+>The caller passes information to the callee.
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:OUT</TT
+> (means: write-only):</DT
+><DD
+><P
+>The callee passes information back to the caller on
+   return.  When viewed as a Lisp function, there is no Lisp argument
+   corresponding to this, instead it means an additional return value.
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:IN-OUT</TT
+> (means: read-write):</DT
+><DD
+><P
+>Information is passed from the caller to the callee
+   and then back to the caller.  When viewed as a Lisp function, the
+   <TT
+CLASS="constant"
+>:OUT</TT
+> value is returned as an additional multiple value.
+  </P
+></DD
+></DL
+></DIV
+><P
+>The default is <TT
+CLASS="constant"
+>:IN</TT
+>.</P
+><P
+>[Currently, only <TT
+CLASS="constant"
+>:IN</TT
+> is fully implemented.  <TT
+CLASS="constant"
+>:OUT</TT
+> works only
+ with <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> = <TT
+CLASS="constant"
+>:ALLOCA</TT
+>.]</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> platforms only.</DT
+><DD
+><P
+><A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> may not be <TT
+CLASS="constant"
+>:MALLOC-FREE</TT
+> because there
+ is no commonly used <TT
+CLASS="function"
+>malloc()</TT
+>/<TT
+CLASS="function"
+>free()</TT
+> library function.</P
+><P
+>The <A
+HREF="dffi.html#allocation"
+><TT
+CLASS="replaceable"
+><I
+>ALLOCATION</I
+></TT
+></A
+> may be followed by a register specification,
+ any of the symbols <TT
+CLASS="constant"
+>:d0</TT
+>, <TT
+CLASS="constant"
+>:d1</TT
+>,
+ <TT
+CLASS="constant"
+>:d2</TT
+>, <TT
+CLASS="constant"
+>:d3</TT
+>,
+ <TT
+CLASS="constant"
+>:d4</TT
+>, <TT
+CLASS="constant"
+>:d5</TT
+>,
+ <TT
+CLASS="constant"
+>:d6</TT
+>, <TT
+CLASS="constant"
+>:d7</TT
+>,
+ <TT
+CLASS="constant"
+>:a0</TT
+>, <TT
+CLASS="constant"
+>:a1</TT
+>,
+ <TT
+CLASS="constant"
+>:a2</TT
+>, <TT
+CLASS="constant"
+>:a3</TT
+>,
+ <TT
+CLASS="constant"
+>:a4</TT
+>, <TT
+CLASS="constant"
+>:a5</TT
+>,
+ <TT
+CLASS="constant"
+>:a6</TT
+>, each representing one 680x0 register.
+ This works only for integral types: integers, pointers, <A
+HREF="dffi.html#c-string"
+><SPAN
+CLASS="type"
+>FFI:C-STRING</SPAN
+></A
+>,
+ <A
+HREF="dffi.html#c-function"
+><SPAN
+CLASS="type"
+>FFI:C-FUNCTION</SPAN
+></A
+>.
+</P
+></DD
+></DL
+></DIV
+><P
+>Passing <A
+HREF="dffi.html#c-struct"
+><SPAN
+CLASS="type"
+>FFI:C-STRUCT</SPAN
+></A
+>, <A
+HREF="dffi.html#c-union"
+><SPAN
+CLASS="type"
+>FFI:C-UNION</SPAN
+></A
+>, <A
+HREF="dffi.html#c-array"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY</SPAN
+></A
+>, <A
+HREF="dffi.html#c-array-max"
+><SPAN
+CLASS="type"
+>FFI:C-ARRAY-MAX</SPAN
+></A
+> values as
+ arguments (not via pointers) is only possible to the extent the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+ compiler supports it. Most <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compilers do it right, but some
+ <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compilers (such as gcc on hppa) have problems with this.</P
+><P
+>See also <A
+HREF="encoding.html#foreign-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*FOREIGN-ENCODING*</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dffi-examples"
+>Examples</A
+></H2
+><DIV
+CLASS="example"
+><A
+NAME="AEN19623"
+></A
+><P
+><B
+>Example 3. Simple declarations and access</B
+></P
+><P
+>The <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> declaration
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;struct foo {
+    int a;
+    struct foo * b[100];
+};
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+corresponds to
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(def-c-struct foo
+  (a int)
+  (b (c-array (c-ptr foo) 100)))
+</PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+>The element access
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;struct foo f;
+f.b[7].a
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+corresponds to
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(declare (type foo f))
+(foo-a (aref (foo-b f) 7)) or (slot-value (aref (slot-value f 'b) 7) 'a)
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="AEN19633"
+></A
+><P
+><B
+>Example 4. external <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> variable and some accesses</B
+></P
+><P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;struct bar {
+    short x, y;
+    char a, b;
+    int z;
+    struct bar * n;
+};
+
+extern struct bar * my_struct;
+
+my_struct-&#62;x++;
+my_struct-&#62;a = 5;
+my_struct = my_struct-&#62;n;
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+corresponds to
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(def-c-struct bar
+  (x short)
+  (y short)
+  (a char)
+  (b char) ; or (b character) if it represents a character, not a number
+  (z int)
+  (n (c-ptr bar)))
+
+(def-c-var my_struct (:type (c-ptr bar)))
+
+(setq my_struct (let ((s my_struct)) (incf (slot-value s 'x)) s))
+or (incf (slot my_struct 'x))
+(setq my_struct (let ((s my_struct)) (setf (slot-value s 'a) 5) s))
+or (setf (slot my_struct 'a) 5)
+(setq my_struct (slot-value my_struct 'n))
+or (setq my_struct (deref (slot my_struct 'n)))
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="AEN19640"
+></A
+><P
+><B
+>Example 5. Calling an external function</B
+></P
+><P
+>On ANSI <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> systems, <TT
+CLASS="filename"
+>stdlib.h</TT
+> contains
+the declarations:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;typedef struct {
+  int quot;   /* Quotient */
+  int rem;    /* Remainder */
+} div_t;
+extern div_t div (int numer, int denom);
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+This translates to
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(def-c-struct div_t
+  (quot int)
+  (rem int))
+(def-c-call-out div (:arguments (numer int) (denom int))
+                    (:return-type div_t))
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+Sample call from within Lisp:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;&#62; (div 20 3)
+#S(DIV :QUOT 6 :REM 2)
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="AEN19649"
+></A
+><P
+><B
+>Example 6. Another example for calling an external function</B
+></P
+><P
+>Suppose the following is defined in a file
+ <TT
+CLASS="filename"
+>cfun.c</TT
+>:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;struct cfunr { int x; char *s; };
+struct cfunr * cfun (int i,char *s,struct cfunr * r,int a[10]) {
+  int j;
+  struct cfunr * r2;
+  printf("i = %d\n", i);
+  printf("s = %s\n", s);
+  printf("r-&#62;x = %d\n", r-&#62;x);
+  printf("r-&#62;s = %s\n", r-&#62;s);
+  for (j = 0; j &#60; 10; j++) printf("a[%d] = %d.\n", j, a[j]);
+  r2 = (struct cfunr *) malloc (sizeof (struct cfunr));
+  r2-&#62;x = i+5;
+  r2-&#62;s = "A C string";
+  return r2;
+}
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+It is possible to call this function from Lisp using the file
+<TT
+CLASS="filename"
+>callcfun.lisp</TT
+> (do not call it
+<TT
+CLASS="filename"
+>cfun.lisp</TT
+> - <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+> would overwrite
+<TT
+CLASS="filename"
+>cfun.c</TT
+>) whose contents is:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "TEST-C-CALL" (:use "LISP" "FFI"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "TEST-C-CALL")
+(def-c-struct cfunr (x int) (s c-string))
+(def-c-call-out cfun (:arguments (i int)
+                                 (s c-string)
+                                 (r (c-ptr cfunr) :in :alloca)
+                                 (a (c-ptr (c-array int 10)) :in :alloca))
+                     (:return-type (c-ptr cfunr)))
+(defun call-cfun ()
+  (cfun 5 "A Lisp string" (make-cfunr :x 10 :s "Another Lisp string")
+        '#(0 1 2 3 4 5 6 7 8 9)))
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+Use the module facility:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;$ clisp-link create-module-set cfun callcfun.c
+$ cc -O -c cfun.c
+$ cd cfun
+$ ln -s ../cfun.o cfun.o
+Add cfun.o to NEW_LIBS and NEW_FILES in link.sh.
+$ cd ..
+$ base/lisp.run -M base/lispinit.mem -c callcfun.lisp
+$ clisp-link add-module-set cfun base base+cfun
+$ base+cfun/lisp.run -M base+cfun/lispinit.mem -i callcfun
+&#62; (test-c-call::call-cfun)
+i = 5
+s = A Lisp string
+r-&#62;x = 10
+r-&#62;s = Another Lisp string
+a[0] = 0.
+a[1] = 1.
+a[2] = 2.
+a[3] = 3.
+a[4] = 4.
+a[5] = 5.
+a[6] = 6.
+a[7] = 7.
+a[8] = 8.
+a[9] = 9.
+#S(TEST-C-CALL::CFUNR :X 10 :S "A C string")
+&#62;
+$ rm -r base+cfun
+</PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+>Note that there is a memory leak here: The return value
+<TT
+CLASS="varname"
+>r2</TT
+> of <TT
+CLASS="function"
+>cfun()</TT
+> is
+<TT
+CLASS="function"
+>malloc()</TT
+>ed but never <TT
+CLASS="function"
+>free()</TT
+>d. Specifying
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(:return-type (c-ptr cfunr) :malloc-free)
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+is not an alternative because this would also
+
+<TT
+CLASS="function"
+>free(r2-&#62;x)</TT
+> but <TT
+CLASS="varname"
+>r2-&#62;x</TT
+> is a
+pointer to static data.</P
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="AEN19673"
+></A
+><P
+><B
+>Example 7. call-in</B
+></P
+><P
+>To sort an array of double-floats using the Lisp function
+ <TT
+CLASS="function"
+>sort</TT
+> instead of the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> library function
+ <TT
+CLASS="function"
+>qsort()</TT
+>, one can use the following interface code
+ <TT
+CLASS="filename"
+>sort1.c</TT
+>.  The main problem is to pass a
+ variable-sized array.
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;extern void lispsort_begin (int);
+void* lispsort_function;
+void lispsort_double (int n, double * array) {
+    double * sorted_array;
+    int i;
+    lispsort_begin(n); /* store #'sort2 in lispsort_function */
+    sorted_array = ((double * (*) (double *)) lispsort_function) (array);
+    for (i = 0; i &#60; n; i++) array[i] = sorted_array[i];
+    free(sorted_array);
+}
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+This is accompanied by <TT
+CLASS="filename"
+>sort2.lisp</TT
+>:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "FFI-TEST" (:use "LISP" "FFI"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "FFI-TEST")
+(def-call-in lispsort_begin (:arguments (n int))
+                            (:return-type nil)
+                            (:language :stdc))
+(def-c-var lispsort_function (:type c-pointer))
+(defun lispsort_begin (n)
+  (setf (cast lispsort_function
+              `(c-function
+                 (:arguments (v (c-ptr (c-array double-float ,n))))
+                 (:return-type (c-ptr (c-array double-float ,n))
+                               :malloc-free)))
+        #'sort2))
+(defun sort2 (v)
+  (declare (type vector v))
+  (sort v #'&#60;))
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+To test this, use the following test file <TT
+CLASS="filename"
+>sorttest.lisp</TT
+>:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(def-call-out sort10
+              (:name "lispsort_double")
+              (:language :stdc)
+              (:arguments (n int)
+                          (array (c-ptr (c-array double-float 10))
+                                 :in-out)))
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+Now try
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;$ clisp-link create-module-set sort sort2.c sorttest.c
+$ cc -O -c sort1.c
+$ cd sort
+$ ln -s ../sort1.o sort1.o
+Add sort1.o to NEW_LIBS and NEW_FILES in link.sh.
+$ cd ..
+$ base/lisp.run -M base/lispinit.mem -c sort2.lisp sorttest.lisp
+$ clisp-link add-module-set sort base base+sort
+$ base+sort/lisp.run -M base+sort/lispinit.mem -i sort2 sorttest
+&#62; (sort10 10 '#(0.501d0 0.528d0 0.615d0 0.550d0 0.711d0
+                0.523d0 0.585d0 0.670d0 0.271d0 0.063d0))
+#(0.063d0 0.271d0 0.501d0 0.523d0 0.528d0 0.55d0 0.585d0 0.615d0 0.67d0 0.711d0)
+$ rm -r base+sort
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="modules.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="affi.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.2. External Modules</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.4. The Amiga Foreign Function Call Facility</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,813 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Reader
+   [CLHS-23]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="The Printer Dictionary
+   [CLHS-22.4]"
+HREF="print-dict.html"><LINK
+REL="NEXT"
+TITLE="Additional read dispatch macros"
+HREF="read-dispatch-ext.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="print-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="read-dispatch-ext.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="reader"
+>Reader
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
+TARGET="_top"
+>[CLHS-23]</A
+></A
+></H1
+><P
+>This is the list of objects whose external representation cannot
+  be meaningfully read in:
+<DIV
+CLASS="table"
+><A
+NAME="unreadable-objects-table"
+></A
+><P
+><B
+>Table 1. unreadable objects</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>format</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;<TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> ...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>all structures lacking a keyword constructor</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;ARRAY <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>dimensions</I
+></TT
+>&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>all arrays except strings, if <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-arrayst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ARRAY*</TT
+></A
+> is
+       <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;SYSTEM-FUNCTION
+       <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>built-in function written in <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;ADD-ON-SYSTEM-FUNCTION
+       <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>other function written in <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;SPECIAL-OPERATOR
+       <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>special operator handler</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;COMPILED-CLOSURE
+       <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>compiled function, if <A
+HREF="printer.html#pr-closure"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-CLOSURE*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;CLOSURE <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>
+       ...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>interpreted function</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;FRAME-POINTER #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>pointer to a stack frame</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;DISABLED POINTER&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>frame pointer which has become invalid on exit from the
+       corresponding <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;...-STREAM ...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>stream</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;PACKAGE
+       <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>package</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;HASH-TABLE #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>hash table, if <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-arrayst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ARRAY*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;READTABLE #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>readtable</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;SYMBOL-MACRO <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> handler</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;FOREIGN-POINTER #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>foreign pointer
+      <I
+CLASS="emphasis"
+>(Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+>
+         platforms only.)</I
+>
+     </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;FOREIGN-ADDRESS #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>foreign address
+     <I
+CLASS="emphasis"
+>(Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.)</I
+>
+    </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;FOREIGN-VARIABLE
+       <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>foreign variable
+     <I
+CLASS="emphasis"
+>(Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.)</I
+>
+    </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;FOREIGN-FUNCTION
+       <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>foreign function
+     <I
+CLASS="emphasis"
+>(Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.)</I
+>
+    </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>"value" of a symbol without value, "value" of an unsupplied
+      optional or keyword argument</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;SPECIAL REFERENCE&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>environment marker for variables declared <A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_special.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>SPECIAL</TT
+></A
+>
+      </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;DOT&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>internal <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ</TT
+></A
+> result for "."</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;END OF FILE&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>internal <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ</TT
+></A
+> result, when the end of file is reached
+      </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;READ-LABEL ...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>intermediate <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ</TT
+></A
+> result for <TT
+CLASS="literal"
+>#n#</TT
+>
+      </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;ADDRESS #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>machine address, should not occur</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;SYSTEM-POINTER #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>should not occur</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></P
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="chario"
+>characters</A
+></H1
+><P
+><SPAN
+CLASS="keysym"
+>#\Code</SPAN
+> allows input of characters of arbitrary code:
+ e.g., <SPAN
+CLASS="keysym"
+>#\Code231</SPAN
+> reads as the character
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_code-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CODE-CHAR</TT
+></A
+> 231.)</TT
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="print-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="read-dispatch-ext.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Printer Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_printer_dictionary.html"
+TARGET="_top"
+>[CLHS-22.4]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Additional read dispatch macros</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

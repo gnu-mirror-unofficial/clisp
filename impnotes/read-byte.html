@@ -1,0 +1,460 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Function READ-BYTE</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Reader
+   [CLHS-23]"
+HREF="reader.html"><LINK
+REL="PREVIOUS"
+TITLE="Functions LISTEN, READ-CHAR-NO-HANG"
+HREF="listen.html"><LINK
+REL="NEXT"
+TITLE="System Construction
+   [CLHS-24]"
+HREF="system.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="listen.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Reader
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
+TARGET="_top"
+>[CLHS-23]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="system.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="read-byte"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+></A
+></H1
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="rbla"
+><TT
+CLASS="literal"
+>(<A
+HREF="read-byte.html#rbla"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-LOOKAHEAD</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> if <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+> would return immediately with an
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> result.
+   Returns <TT
+CLASS="constant"
+>:EOF</TT
+> if the <TT
+CLASS="literal"
+>end-of-stream</TT
+> is already known to be reached.
+   If <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>'s value is not available immediately, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>
+   instead of waiting.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:READ-BYTE-WILL-HANG-P</TT
+>
+              <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+> will return immediately.
+   Otherwise it returns true.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:READ-BYTE-NO-HANG</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>eof-error-p</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>eof-value</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns an <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> or does <TT
+CLASS="literal"
+>end-of-stream</TT
+> handling, like <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>,
+   if that would return immediately.
+   If <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>'s value is not available immediately, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>
+   instead of waiting.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="listen.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="system.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR-NO-HANG</TT
+></A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="reader.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>System Construction
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-24.html"
+TARGET="_top"
+>[CLHS-24]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

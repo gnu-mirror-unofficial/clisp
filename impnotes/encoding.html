@@ -1,0 +1,2785 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1.4. Encodings</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-1: Platform independent Extensions"
+HREF="p-indep.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.3. Internationalization"
+HREF="i18n.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.5. Defining new kinds of Streams"
+HREF="clos-stream.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="i18n.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-1: Platform independent Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="clos-stream.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="encoding"
+>Extensions-1.4. Encodings</A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="encodings-intro"
+>Introduction</A
+></H2
+><P
+>An <I
+CLASS="emphasis"
+>encoding</I
+> describes the correspondence
+ between <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s and raw bytes during input/output via
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>s with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.</P
+><P
+>An <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+> is an object composed of the following facets:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+HREF="encoding.html#charset"
+>character set</A
+></DT
+><DD
+><P
+>This denotes both the set of characters that
+   can be represented and passed through the I/O channel, and the way
+   these characters translate into raw bytes.  In this context, for
+   example, "UTF-8" and "UCS-4" are considered different, although they
+   can represent the same set of characters.
+  </P
+></DD
+><DT
+><A
+HREF="encoding.html#newline"
+>line terminator</A
+> mode</DT
+><DD
+><P
+>This denotes the way newline characters are
+   represented.</P
+></DD
+></DL
+></DIV
+></P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="charset"
+>Character Sets</A
+></H2
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: Only in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> built
+  <I
+CLASS="emphasis"
+>without</I
+> compile-time flag <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+>.</DT
+><DD
+><P
+>Only one character set is understood: the platform's
+ native (8-bit) character set.  See <A
+HREF="characters.html"
+>Chapter
+ 13</A
+>.</P
+></DD
+><DT
+><A
+NAME="charset-symbols"
+>Platform dependent:
+  Only in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> built <I
+CLASS="emphasis"
+>with</I
+> compile-time flag <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+>.</A
+></DT
+><DD
+><P
+>The following character sets are supported, as values
+ of the corresponding (constant) symbol in the <A
+HREF="encoding.html"
+><SPAN
+CLASS="QUOTE"
+>"CHARSET"</SPAN
+></A
+> package:
+<P
+></P
+><UL
+><LI
+><A
+NAME="charset-UCS-2"
+></A
+><P
+><TT
+CLASS="literal"
+>UCS-2</TT
+>
+   = <TT
+CLASS="literal"
+>UNICODE-16</TT
+> = <TT
+CLASS="literal"
+>UNICODE-16-BIG-ENDIAN</TT
+>,
+   the 16-bit <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character set. Every character is represented
+   as two bytes.</P
+></LI
+><LI
+><A
+NAME="charset-UNICODE-16-LITTLE-ENDIAN"
+></A
+><P
+><TT
+CLASS="literal"
+>UNICODE-16-LITTLE-ENDIAN</TT
+>
+    </P
+></LI
+><LI
+><A
+NAME="charset-UCS-4"
+></A
+><P
+><TT
+CLASS="literal"
+>UCS-4</TT
+>
+   = <TT
+CLASS="literal"
+>UNICODE-32</TT
+> = <TT
+CLASS="literal"
+>UNICODE-32-BIG-ENDIAN</TT
+>,
+   the 32-bit <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character set. Every character is represented as
+   four bytes. Note that <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> understands only those characters which
+   are already contained in the 16-bit <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character set.
+   </P
+></LI
+><LI
+><A
+NAME="charset-UNICODE-32-LITTLE-ENDIAN"
+></A
+><P
+><TT
+CLASS="literal"
+>UNICODE-32-LITTLE-ENDIAN</TT
+>
+    </P
+></LI
+><LI
+><A
+NAME="charset-UTF-8"
+></A
+><P
+><TT
+CLASS="literal"
+>UTF-8</TT
+>,
+      the 16-bit <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character set. Every character is represented
+      as one to three bytes. ASCII characters represent themselves and need
+      one byte per character. Most Latin/Greek/Cyrillic/Hebrew characters
+      need two bytes per character, and the remaining characters need three
+      bytes per character. This is therefore, in general, the most
+      space-efficient encoding of all of Unicode-16.
+    </P
+></LI
+><LI
+><A
+NAME="charset-UTF-16"
+></A
+><P
+><TT
+CLASS="literal"
+>UTF-16</TT
+>,
+      the 16-bit <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character set. Every character is represented
+      as two bytes.</P
+></LI
+><LI
+><A
+NAME="charset-UTF-7"
+></A
+><P
+><TT
+CLASS="literal"
+>UTF-7</TT
+>,
+      the 16-bit <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character set. This is a stateful 7-bit encoding.
+      Not all ASCII characters represent themselves.
+    </P
+></LI
+><LI
+><A
+NAME="charset-JAVA"
+></A
+><P
+><TT
+CLASS="literal"
+>JAVA</TT
+>,
+      the 16-bit <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character set.
+      ASCII characters represent themselves and need one byte per character.
+      All other characters are represented
+      by <TT
+CLASS="literal"
+>\u<TT
+CLASS="replaceable"
+><I
+>nnnn</I
+></TT
+></TT
+> sequences
+      (<TT
+CLASS="replaceable"
+><I
+>nnnn</I
+></TT
+> a hexadecimal number)
+      and need 6 bytes per character. While this encoding is very comfortable
+      for editing Unicode files using only ASCII aware tools and editors, it
+      cannot faithfully represent all <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> text. Only text which
+      does not contain <TT
+CLASS="literal"
+>\u</TT
+> (backslash followed by
+      lowercase Latin u) can be faithfully represented by this encoding.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ASCII"
+></A
+><P
+><TT
+CLASS="literal"
+>ASCII</TT
+>,
+      the well-known US-centric 7-bit character set (American Standard
+      Code for Information Interchange).
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-1"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-1</TT
+>,
+      an extension of the ASCII character set, suitable for the
+      Afrikaans, Albanian, Basque, Breton, Catalan, Cornish, Danish, Dutch,
+      English, Faeroese, Finnish, French, Frisian, Galician, German,
+      Greenlandic, Icelandic, Irish, Italian, Latin, Luxemburgish, Norwegian,
+      Portuguese, Raeto-Romanic, Scottish, Spanish, and Swedish languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-2"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-2</TT
+>,
+      an extension of the ASCII character set, suitable for the Croatian,
+      Czech, German, Hungarian, Polish, Slovak, Slovenian, and Sorbian
+      languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-3"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-3</TT
+>,
+      an extension of the ASCII character set, suitable for the
+      Esperanto and Maltese languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-4"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-4</TT
+>,
+      an extension of the ASCII character set, suitable for the
+      Estonian, Latvian, Lithuanian and Sami (Lappish) languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-5"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-5</TT
+>,
+      an extension of the ASCII character set, suitable for the Bulgarian,
+      Byelorussian, Macedonian, Russian, Serbian, and Ukrainian languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-6"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-6</TT
+>,
+      suitable for the Arabic language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-7"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-7</TT
+>,
+      an extension of the ASCII character set, suitable for the Greek
+      language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-8"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-8</TT
+>,
+      an extension of the ASCII character set, suitable for the Hebrew
+      language (without punctuation).
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-9"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-9</TT
+>,
+      an extension of the ASCII character set, suitable for the Turkish
+      language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-10"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-10</TT
+>,
+      an extension of the ASCII character set, suitable for the Estonian,
+      Icelandic, Inuit (Greenlandic), Latvian, Lithuanian, and Sami (Lappish)
+      languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-13"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-13</TT
+>,
+      an extension of the ASCII character set, suitable for the Estonian,
+      Latvian, Lithuanian, Polish and Sami (Lappish) languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-14"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-14</TT
+>,
+      an extension of the ASCII character set, suitable for Irish Gaelic,
+      Manx Gaelic, Scottish Gaelic, and Welsh languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-15"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-15</TT
+>,
+      an extension of the ASCII character set, suitable for the ISO-8859-1
+      languages, with improvements for French, Finnish and the Euro.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-8859-16"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-8859-16</TT
+>
+      an extension of the ASCII character set, suitable for the Rumanian
+      language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-KOI8-R"
+></A
+><P
+><TT
+CLASS="literal"
+>KOI8-R</TT
+>,
+      an extension of the ASCII character set,
+      a popular character set for the Russian language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-KOI8-U"
+></A
+><P
+><TT
+CLASS="literal"
+>KOI8-U</TT
+>,
+      an extension of the ASCII character set,
+      a popular character set for the Ukrainian language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-KOI8-RU"
+></A
+><P
+><TT
+CLASS="literal"
+>KOI8-RU</TT
+>,
+      an extension of the ASCII character set, suitable for Russian
+      (this is the standard Russian encoding on the Internet)
+    </P
+></LI
+><LI
+><P
+><TT
+CLASS="literal"
+>JIS_X0201</TT
+>,
+      a character set for the Japanese language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-ARABIC"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-ARABIC</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-CENTRAL-EUROPE"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-CENTRAL-EUROPE</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-CROATIAN"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-CROATIAN</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-CYRILLIC"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-CYRILLIC</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-DINGBAT"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-DINGBAT</TT
+>,
+      a platform specific character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-GREEK"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-GREEK</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-HEBREW"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-HEBREW</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-ICELAND"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-ICELAND</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-ROMAN"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-ROMAN</TT
+>
+   = <TT
+CLASS="literal"
+>MACINTOSH</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-ROMANIA"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-ROMANIA</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-SYMBOL"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-SYMBOL</TT
+>,
+      a platform specific character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-THAI"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-THAI</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-TURKISH"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-TURKISH</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MAC-UKRAINE"
+></A
+><P
+><TT
+CLASS="literal"
+>MAC-UKRAINE</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP437"
+></A
+><P
+><TT
+CLASS="literal"
+>CP437</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP437-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP437-IBM</TT
+>,
+     an IBM variant of <TT
+CLASS="literal"
+>CP437</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP737"
+></A
+><P
+><TT
+CLASS="literal"
+>CP737</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Greek language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP775"
+></A
+><P
+><TT
+CLASS="literal"
+>CP775</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for some Baltic languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP850"
+></A
+><P
+><TT
+CLASS="literal"
+>CP850</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP852"
+></A
+><P
+><TT
+CLASS="literal"
+>CP852</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP852-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP852-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP852</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP855"
+></A
+><P
+><TT
+CLASS="literal"
+>CP855</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Russian language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP857"
+></A
+><P
+><TT
+CLASS="literal"
+>CP857</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Turkish language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP860"
+></A
+><P
+><TT
+CLASS="literal"
+>CP860</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Portuguese language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP860-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP860-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP860</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP861"
+></A
+><P
+><TT
+CLASS="literal"
+>CP861</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Icelandic language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP861-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP861-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP861</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP862"
+></A
+><P
+><TT
+CLASS="literal"
+>CP862</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Hebrew language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP862-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP862-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP862</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP863"
+></A
+><P
+><TT
+CLASS="literal"
+>CP863</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP863-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP863-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP863</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP864"
+></A
+><P
+><TT
+CLASS="literal"
+>CP864</TT
+>, a DOS oldie,
+      meant to be suitable for the Arabic language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP864-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP864-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP864</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP865"
+></A
+><P
+><TT
+CLASS="literal"
+>CP865</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for some Nordic languages.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP865-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP865-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP865</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP866"
+></A
+><P
+><TT
+CLASS="literal"
+>CP866</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Russian language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP869"
+></A
+><P
+><TT
+CLASS="literal"
+>CP869</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Greek language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP869-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP869-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP869</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP874"
+></A
+><P
+><TT
+CLASS="literal"
+>CP874</TT
+>, a DOS oldie,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Thai language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP874-IBM"
+></A
+><P
+><TT
+CLASS="literal"
+>CP874-IBM</TT
+>,
+   an IBM variant of <TT
+CLASS="literal"
+>CP874</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1250"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1250</TT
+>
+   = <TT
+CLASS="literal"
+>CP1250</TT
+>,
+      a platform specific extension of the ASCII character set,
+      heavily incompatible with ISO-8859-2.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1251"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1251</TT
+>
+   = <TT
+CLASS="literal"
+>CP1251</TT
+>,
+      a platform specific extension of the ASCII character set,
+      heavily incompatible with ISO-8859-5,
+      meant to be suitable for the Russian language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1252"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1252</TT
+>
+   = <TT
+CLASS="literal"
+>CP1252</TT
+>,
+      a platform specific extension of the ISO-8859-1 character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1253"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1253</TT
+>
+   = <TT
+CLASS="literal"
+>CP1253</TT
+>,
+      a platform specific extension of the ASCII character set,
+      gratuitously incompatible with ISO-8859-7,
+      meant to be suitable for the Greek language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1254"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1254</TT
+>
+   = <TT
+CLASS="literal"
+>CP1254</TT
+>,
+      a platform specific extension of the ISO-8859-9 character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1255"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1255</TT
+>
+   = <TT
+CLASS="literal"
+>CP1255</TT
+>,
+      a platform specific extension of the ASCII character set,
+      gratuitously incompatible with ISO-8859-8,
+      suitable for the Hebrew language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1256"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1256</TT
+>
+   = <TT
+CLASS="literal"
+>CP1256</TT
+>,
+      a platform specific extension of the ASCII character set,
+      meant to be suitable for the Arabic language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1257"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1257</TT
+>
+   = <TT
+CLASS="literal"
+>CP1257</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-WINDOWS-1258"
+></A
+><P
+><TT
+CLASS="literal"
+>WINDOWS-1258</TT
+>
+   = <TT
+CLASS="literal"
+>CP1258</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-HP-ROMAN8"
+></A
+><P
+><TT
+CLASS="literal"
+>HP-ROMAN8</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-NEXTSTEP"
+></A
+><P
+><TT
+CLASS="literal"
+>NEXTSTEP</TT
+>,
+      a platform specific extension of the ASCII character set.
+    </P
+></LI
+><LI
+><A
+NAME="charset-EUC-JP"
+></A
+><P
+><TT
+CLASS="literal"
+>EUC-JP</TT
+>,
+      a multibyte character set for the Japanese language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-SHIFT-JIS"
+></A
+><P
+><TT
+CLASS="literal"
+>SHIFT-JIS</TT
+>,
+      a multibyte character set for the Japanese language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP932"
+></A
+><P
+><TT
+CLASS="literal"
+>CP932</TT
+>,
+      a Microsoft variant of <TT
+CLASS="literal"
+>SHIFT-JIS</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-2022-JP"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-2022-JP</TT
+>,
+      a stateful 7-bit multibyte character set for the Japanese language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-2022-JP-2"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-2022-JP-2</TT
+>,
+      a stateful 7-bit multibyte character set for the Japanese language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-2022-JP-1"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-2022-JP-1</TT
+>,
+      a stateful 7-bit multibyte character set for the Japanese language.
+    </P
+></LI
+><LI
+><A
+NAME="charset-EUC-CN"
+></A
+><P
+><TT
+CLASS="literal"
+>EUC-CN</TT
+>,
+      a multibyte character set for simplified Chinese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-HZ"
+></A
+><P
+><TT
+CLASS="literal"
+>HZ</TT
+>,
+      a stateful 7-bit multibyte character set for simplified Chinese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-GBK"
+></A
+><P
+><TT
+CLASS="literal"
+>GBK</TT
+>,
+      a multibyte character set for Chinese,
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP936"
+></A
+><P
+><TT
+CLASS="literal"
+>CP936</TT
+>,
+      a Microsoft variant of <TT
+CLASS="literal"
+>GBK</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-GB18030"
+></A
+><P
+><TT
+CLASS="literal"
+>GB18030</TT
+>,
+      a multibyte character set for Chinese,
+    </P
+></LI
+><LI
+><A
+NAME="charset-EUC-TW"
+></A
+><P
+><TT
+CLASS="literal"
+>EUC-TW</TT
+>,
+      a multibyte character set for traditional Chinese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-BIG5"
+></A
+><P
+><TT
+CLASS="literal"
+>BIG5</TT
+>,
+      a multibyte character set for traditional Chinese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP950"
+></A
+><P
+><TT
+CLASS="literal"
+>CP950</TT
+>,
+      a Microsoft variant of <TT
+CLASS="literal"
+>BIG5</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-BIG5HKSCS"
+></A
+><P
+><TT
+CLASS="literal"
+>BIG5HKSCS</TT
+>,
+      a multibyte character set for traditional Chinese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-2022-CN"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-2022-CN</TT
+>,
+      a stateful 7-bit multibyte character set for Chinese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-2022-CN-EXT"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-2022-CN-EXT</TT
+>,
+      a stateful 7-bit multibyte character set for Chinese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-EUC-KR"
+></A
+><P
+><TT
+CLASS="literal"
+>EUC-KR</TT
+>,
+      a multibyte character set for Korean.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP949"
+></A
+><P
+><TT
+CLASS="literal"
+>CP949</TT
+>,
+      a Microsoft variant of <TT
+CLASS="literal"
+>EUC-KR</TT
+>.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ISO-2022-KR"
+></A
+><P
+><TT
+CLASS="literal"
+>ISO-2022-KR</TT
+>,
+      a stateful 7-bit multibyte character set for Korean.
+    </P
+></LI
+><LI
+><A
+NAME="charset-ARMSCII-8"
+></A
+><P
+><TT
+CLASS="literal"
+>ARMSCII-8</TT
+>,
+      an extension of the ASCII character set, suitable for Armenian.
+    </P
+></LI
+><LI
+><A
+NAME="charset-GEORGIAN-ACADEMY"
+></A
+><P
+><TT
+CLASS="literal"
+>GEORGIAN-ACADEMY</TT
+>,
+      an extension of the ASCII character set, suitable for Georgian.
+    </P
+></LI
+><LI
+><A
+NAME="charset-GEORGIAN-PS"
+></A
+><P
+><TT
+CLASS="literal"
+>GEORGIAN-PS</TT
+>,
+      an extension of the ASCII character set, suitable for Georgian.
+    </P
+></LI
+><LI
+><A
+NAME="charset-TIS-620"
+></A
+><P
+><TT
+CLASS="literal"
+>TIS-620</TT
+>,
+      an extension of the ASCII character set, suitable for Thai.
+    </P
+></LI
+><LI
+><A
+NAME="charset-MULELAO-1"
+></A
+><P
+><TT
+CLASS="literal"
+>MULELAO-1</TT
+>,
+      an extension of the ASCII character set, suitable for Laotian.
+    </P
+></LI
+><LI
+><A
+NAME="charset-CP1133"
+></A
+><P
+><TT
+CLASS="literal"
+>CP1133</TT
+>,
+      an extension of the ASCII character set, suitable for Laotian.
+    </P
+></LI
+><LI
+><A
+NAME="charset-VISCII"
+></A
+><P
+><TT
+CLASS="literal"
+>VISCII</TT
+>,
+      an extension of the ASCII character set, suitable for Vietnamese.
+    </P
+></LI
+><LI
+><A
+NAME="charset-TCVN"
+></A
+><P
+><TT
+CLASS="literal"
+>TCVN</TT
+>,
+      an extension of the ASCII character set, suitable for Vietnamese.
+    </P
+></LI
+></UL
+>
+
+
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="iconv"
+>[<A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> comes with it own implementation
+   of <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>, so the following is more or less obsolete now.]
+    (Platform dependent: Only on <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> systems having the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+     library function <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>).</A
+></DT
+><DD
+><P
+>The character sets provided by the library function
+ <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+> can also be used as encodings.  To create such an encoding,
+ call <A
+HREF="encoding.html#make-encoding"
+><TT
+CLASS="function"
+>EXT:MAKE-ENCODING</TT
+></A
+> with the character set name (a string) as
+ <TT
+CLASS="constant"
+>:charset</TT
+> argument.</P
+><P
+>These encodings are not assigned to global variables, since
+ there is no portable way to get the list of all character sets
+ supported by <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>.</P
+><P
+>On <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> systems (such as GNU/Linux and GNU/Hurd), you get
+ this list by calling the <I
+CLASS="emphasis"
+>program</I
+>
+ iconv: <B
+CLASS="command"
+>iconv --list</B
+>.
+ <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> glibc-2.1 supports in particular, among others:</P
+><P
+></P
+><UL
+><LI
+><A
+NAME="charset-EUC-JP-gnu"
+></A
+><P
+><TT
+CLASS="literal"
+>EUC-JP</TT
+> and
+  <TT
+CLASS="literal"
+>SHIFT-JIS</TT
+>, for the Japanese language,</P
+></LI
+><LI
+><A
+NAME="charset-EUC-CN-gnu"
+></A
+><P
+><TT
+CLASS="literal"
+>EUC-CN</TT
+>,
+  <TT
+CLASS="literal"
+>EUC-TW</TT
+>, <TT
+CLASS="literal"
+>BIG5</TT
+> and
+  <TT
+CLASS="literal"
+>GB</TT
+>, for the Chinese language,</P
+></LI
+><LI
+><A
+NAME="charset-EUC-KR-gnu"
+></A
+><P
+><TT
+CLASS="literal"
+>EUC-KR</TT
+> and
+  <TT
+CLASS="literal"
+>ISO-2022-KR</TT
+>, for the Korean language.</P
+></LI
+></UL
+><P
+>HP-UX systems support in particular, among others:</P
+><P
+></P
+><UL
+><LI
+><A
+NAME="charset-eucJP"
+></A
+><P
+><TT
+CLASS="literal"
+>eucJP</TT
+> and
+  <TT
+CLASS="literal"
+>sjis</TT
+>, for the Japanese language,</P
+></LI
+><LI
+><A
+NAME="charset-eucTW"
+></A
+><P
+><TT
+CLASS="literal"
+>eucTW</TT
+>,
+  <TT
+CLASS="literal"
+>big5</TT
+> and <TT
+CLASS="literal"
+>chinese-gb</TT
+>,
+  for the Chinese language,</P
+></LI
+><LI
+><A
+NAME="charset-eucKR"
+></A
+><P
+><TT
+CLASS="literal"
+>eucKR</TT
+>,
+  for the Korean language.</P
+></LI
+></UL
+><P
+>AIX 4.2 systems support in particular, among others:</P
+><P
+></P
+><UL
+><LI
+><A
+NAME="charset-IBM-eucJP"
+></A
+><P
+><TT
+CLASS="literal"
+>IBM-eucJP</TT
+>,
+  for the Japanese language,</P
+></LI
+><LI
+><A
+NAME="charset-IBM-eucTW"
+></A
+><P
+><TT
+CLASS="literal"
+>IBM-eucTW</TT
+>,
+  for the Chinese language,</P
+></LI
+><LI
+><A
+NAME="charset-IBM-eucKR"
+></A
+><P
+><TT
+CLASS="literal"
+>IBM-eucKR</TT
+>,
+  for the Korean language.</P
+></LI
+></UL
+><P
+>On Solaris systems, you can forget about <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>-based
+ encodings, because all the possible encodings are already
+ <A
+HREF="encoding.html#charset-symbols"
+>built-in</A
+>.  (Solaris knows about Japanese, Chinese and Korean
+ encodings, but can convert them only to/from UTF-8, not to/from UCS-2,
+ which is the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s internal encoding.)</P
+><P
+>On IRIX systems, you can forget about <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>-based encodings
+ as well, because all the interesting possible encodings are already
+ <A
+HREF="encoding.html#charset-symbols"
+>built-in</A
+>.</P
+><P
+>On OSF/1 systems, <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>-based encodings are not usable at
+ all.</P
+><P
+>When an encoding is available as a <A
+HREF="encoding.html#charset-symbols"
+>built-in</A
+> and through
+ <A
+HREF="encoding.html#iconv"
+><TT
+CLASS="function"
+>iconv()</TT
+></A
+>, the <A
+HREF="encoding.html#charset-symbols"
+>built-in</A
+> is preferred, because it is more efficient
+ and available across platforms.</P
+></DD
+></DL
+></DIV
+>
+
+</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="newline"
+>Line Terminators</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="newline-table"
+></A
+><P
+><B
+>Table 1. The line terminator mode
+  can be one of the following three keywords</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>keyword</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>newline representation</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:UNIX</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Newline is represented by the ASCII
+     <SPAN
+CLASS="keycode"
+>LF</SPAN
+> character (<SPAN
+CLASS="keycode"
+>U000A</SPAN
+>).</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:MAC</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Newline is represented by the ASCII
+     <SPAN
+CLASS="keycode"
+>CR</SPAN
+> character (<SPAN
+CLASS="keycode"
+>U000D</SPAN
+>).</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:DOS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Newline is represented by the ASCII
+     <SPAN
+CLASS="keycode"
+>CR</SPAN
+> followed by the ASCII <SPAN
+CLASS="keycode"
+>LF</SPAN
+>.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>Windows programs typically use the <TT
+CLASS="constant"
+>:DOS</TT
+> line terminator,
+ sometimes they also accept <TT
+CLASS="constant"
+>:UNIX</TT
+> line terminators or produce
+ <TT
+CLASS="constant"
+>:MAC</TT
+> line terminators.</P
+><P
+>The line terminator mode is relevant only for output (writing to a
+ <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+>).  During input, all three kinds of line terminators
+ are recognized.  If you do not want this, i.e., if you really want to
+ distinguish <SPAN
+CLASS="keycode"
+>LF</SPAN
+>, <SPAN
+CLASS="keycode"
+>CR</SPAN
+> and <SPAN
+CLASS="keycode"
+>CR</SPAN
+>/<SPAN
+CLASS="keycode"
+>LF</SPAN
+>, you have to resort to
+ binary input (function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>).</P
+><P
+>See also <A
+HREF="clhs-newline.html"
+>13.1.8 Treatment of Newline
+ during Input and Output</A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="make-encoding"
+>Function <A
+HREF="encoding.html#make-encoding"
+><TT
+CLASS="function"
+>EXT:MAKE-ENCODING</TT
+></A
+></A
+></H2
+><P
+>The function
+  <TT
+CLASS="literal"
+>(<A
+HREF="encoding.html#make-encoding"
+><TT
+CLASS="function"
+>EXT:MAKE-ENCODING</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :charset
+     :line-terminator :input-error-action :output-error-action)</TT
+>
+ returns an <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+>. The <TT
+CLASS="constant"
+>:charset</TT
+> argument may be
+ an encoding, a string, or <TT
+CLASS="constant"
+>:DEFAULT</TT
+>.
+ The possible values for the <A
+HREF="encoding.html#newline"
+>line terminator</A
+> argument are the
+ keywords <TT
+CLASS="constant"
+>:UNIX</TT
+>, <TT
+CLASS="constant"
+>:MAC</TT
+>, <TT
+CLASS="constant"
+>:DOS</TT
+>.</P
+><P
+>The <TT
+CLASS="constant"
+>:input-error-action</TT
+> specifies what
+ happens when an invalid byte sequence is encountered while converting
+ bytes to characters.  Its value can be <TT
+CLASS="constant"
+>:ERROR</TT
+>, <TT
+CLASS="constant"
+>:IGNORE</TT
+> or a
+ character to be used instead.  The <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+> character
+ <SPAN
+CLASS="keysym"
+>#\uFFFD</SPAN
+> is typically used to indicate an error in the
+ input sequence.</P
+><P
+>The <TT
+CLASS="constant"
+>:output-error-action</TT
+> specifies what
+ happens when an invalid character is encountered while converting
+ characters to bytes.  Its value can be <TT
+CLASS="constant"
+>:ERROR</TT
+>, <TT
+CLASS="constant"
+>:IGNORE</TT
+>, a byte to
+ be used instead, or a character to be used instead.  The <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+>
+ character <SPAN
+CLASS="keysym"
+>#\uFFFD</SPAN
+> can be used here only if it is
+ encodable in the character set.</P
+><P
+>Encodings are types.  As such, they represent the set of
+ characters encodable in the character set.  In this context, the way
+ characters are translated into raw bytes is ignored, and the line
+ terminator mode is ignored as well.  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_typep.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TYPEP</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_subtypep.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SUBTYPEP</TT
+></A
+> can be used
+ on encodings.</P
+><P
+>Besides every <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+> stream containing an encoding,
+ the following <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> places contain global <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+>s:</P
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="encoding.html#def-file-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*DEFAULT-FILE-ENCODING*</TT
+></A
+>. </B
+></B
+>The <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> place <A
+HREF="encoding.html#def-file-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*DEFAULT-FILE-ENCODING*</TT
+></A
+> is the encoding used for
+ new <A
+HREF="stream-dict.html#open"
+>file</A
+>/<A
+HREF="shell.html#pipe"
+>pipe</A
+>/<A
+HREF="socket.html"
+>socket</A
+> streams, when no <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> argument was
+ specified.</P
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: Only in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> built
+  <I
+CLASS="emphasis"
+>with</I
+> compile-time flag <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNICODE</I
+></A
+>.</DT
+><DD
+><P
+>The following are <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> places.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="path-enc"
+><A
+HREF="encoding.html#path-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*PATHNAME-ENCODING*</TT
+></A
+></A
+></DT
+><DD
+><P
+>is the encoding used for pathnames in the file
+ system. Normally, this is a 1:1 encoding.  Its <A
+HREF="encoding.html#newline"
+>line terminator</A
+> mode is ignored.
+ </P
+></DD
+><DT
+><A
+NAME="term-enc"
+><A
+HREF="encoding.html#term-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*TERMINAL-ENCODING*</TT
+></A
+></A
+></DT
+><DD
+><P
+>is the encoding used for communication with the
+  terminal, in particular by <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*TERMINAL-IO*</TT
+></A
+>.
+ </P
+></DD
+><DT
+><A
+NAME="misc-enc"
+><A
+HREF="encoding.html#misc-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*MISC-ENCODING*</TT
+></A
+></A
+></DT
+><DD
+><P
+>is the encoding used for access to environment
+ variables, command line options, and the like.
+ Its <A
+HREF="encoding.html#newline"
+>line terminator</A
+> mode is ignored.
+ </P
+></DD
+><DT
+><A
+NAME="foreign-enc"
+><A
+HREF="encoding.html#foreign-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*FOREIGN-ENCODING*</TT
+></A
+></A
+></DT
+><DD
+><P
+>is the encoding for characters and strings passed
+ through the <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> (some plaforms only).
+ Its value must be a 1:1 encoding, i.e., an encoding in which every
+ character is represented by one byte.
+</P
+></DD
+></DL
+></DIV
+></DD
+></DL
+></DIV
+><P
+>The default encoding objects are initialized as described in the
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <A
+HREF="clisp.html#opt-enc"
+TARGET="_top"
+>manual page</A
+></P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="string-byte"
+>Converting between strings and byte vectors</A
+></H2
+><P
+>Encodings can also be used to convert directly between strings and
+their corresponding byte vector representation according to that encoding.
+</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>&#13; (<TT
+CLASS="function"
+>EXT:CONVERT-STRING-FROM-BYTES</TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>byte-vector</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>encoding</I
+></TT
+>
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)</TT
+></DT
+><DD
+><P
+>converts the subsequence of
+  <TT
+CLASS="replaceable"
+><I
+>byte-vector</I
+></TT
+> from <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> to <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> to a
+  string, according to the given <TT
+CLASS="replaceable"
+><I
+>encoding</I
+></TT
+>, and returns the resulting
+  string.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>&#13; (<TT
+CLASS="function"
+>EXT:CONVERT-STRING-TO-BYTES</TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>encoding</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:START</TT
+> <TT
+CLASS="constant"
+>:END</TT
+>)</TT
+></DT
+><DD
+><P
+>converts the subsequence of <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> from
+  <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> to <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> to a <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+>,
+  according to the given <TT
+CLASS="replaceable"
+><I
+>encoding</I
+></TT
+>, and returns the resulting byte
+  vector.</P
+></DD
+></DL
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="i18n.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="clos-stream.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.3. Internationalization</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="p-indep.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.5. Defining new kinds of Streams</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Additional read dispatch macros</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Reader
+   [CLHS-23]"
+HREF="reader.html"><LINK
+REL="PREVIOUS"
+TITLE="Reader
+   [CLHS-23]"
+HREF="reader.html"><LINK
+REL="NEXT"
+TITLE="Function READTABLE-CASE"
+HREF="rt-case.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="reader.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Reader
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
+TARGET="_top"
+>[CLHS-23]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="rt-case.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="read-dispatch-ext"
+>Additional read dispatch macros</A
+></H1
+><P
+></P
+><UL
+><LI
+><P
+><SPAN
+CLASS="keysym"
+>#Y</SPAN
+> is used to read compiled
+  functions and to set the current input stream's <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+>.
+  </P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>#""</TT
+> is used to read pathnames:
+  <TT
+CLASS="filename"
+>#"test.lisp"</TT
+> is the value of <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PATHNAME</TT
+></A
+> "test.lisp")</TT
+></P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+   platforms only.</DT
+><DD
+><P
+>As in all strings, backslashes must be written twice
+  here: <TT
+CLASS="filename"
+>#"A:\\programs\\test.lisp"</TT
+>
+  </P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+> platforms only.</DT
+><DD
+><P
+> As in all strings, backslashes must be written twice
+  here: <TT
+CLASS="filename"
+>#"\\.test.lisp"</TT
+>
+  </P
+></DD
+></DL
+></DIV
+></LI
+></UL
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="reader.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="rt-case.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Reader
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
+TARGET="_top"
+>[CLHS-23]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="reader.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READTABLE-CASE</TT
+></A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,2117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.2. External Modules</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.3. The Foreign Function Call Facility"
+HREF="dffi.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="platform.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="dffi.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="modules"
+>Extensions-2.2. External Modules</A
+></H1
+><FONT
+COLOR="RED"
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> platforms only.</FONT
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> has a facility for adding external modules (written in
+ <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>, for example).  It is invoked through
+ <B
+CLASS="command"
+>clisp-link</B
+>.</P
+><P
+>A module is a piece of external code which defines extra Lisp
+ objects, symbols and functions.  A module name must consist of the
+ characters <TT
+CLASS="filename"
+>A</TT
+>-<TT
+CLASS="filename"
+>Z</TT
+>,
+ <TT
+CLASS="filename"
+>a</TT
+>-<TT
+CLASS="filename"
+>z</TT
+>, <TT
+CLASS="filename"
+>_</TT
+>,
+ <TT
+CLASS="filename"
+>0</TT
+>-<TT
+CLASS="filename"
+>9</TT
+>.  The module name
+ <SPAN
+CLASS="QUOTE"
+>"clisp"</SPAN
+> is reserved.  Normally a module name is derived
+ from the corresponding file name.</P
+><P
+><B
+CLASS="command"
+>clisp-link</B
+> needs a directory containing:
+<P
+></P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>modules.d</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>modules.c</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>clisp.h</TT
+></P
+></LI
+></UL
+>
+<B
+CLASS="command"
+>clisp-link</B
+> expects to find these files in a subdirectory
+<TT
+CLASS="filename"
+>linkkit/</TT
+> of the current directory. This can be overridden
+by the environment variable <TT
+CLASS="envar"
+>CLISP_LINKKIT</TT
+>.</P
+><P
+><B
+CLASS="command"
+>clisp-link</B
+> operates on <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> linking sets and
+ on module sets.</P
+><P
+>A <I
+CLASS="emphasis"
+>linking set</I
+> is a directory
+ containing:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="filename"
+>makevars</TT
+></DT
+><DD
+><P
+>some <B
+CLASS="command"
+>/bin/sh</B
+> commands, setting
+  the variables
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="envar"
+>CC</TT
+></DT
+><DD
+><P
+>the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler
+   </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>CFLAGS</TT
+></DT
+><DD
+><P
+>flags for the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler, when compiling
+   </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>CLFLAGS</TT
+></DT
+><DD
+><P
+>flags for the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler, when linking
+   </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>LIBS</TT
+></DT
+><DD
+><P
+>libraries to use when linking
+   </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>X_LIBS</TT
+></DT
+><DD
+><P
+>additional X window system libraries to use
+   </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>RANLIB</TT
+></DT
+><DD
+><P
+>the ranlib command
+   </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>FILES</TT
+></DT
+><DD
+><P
+>the list of files needed when linking
+   </P
+></DD
+></DL
+></DIV
+></P
+></DD
+><DT
+><TT
+CLASS="filename"
+>modules.h</TT
+></DT
+><DD
+><P
+>the list of modules contained in this linking set
+  </P
+></DD
+><DT
+><TT
+CLASS="filename"
+>modules.o</TT
+></DT
+><DD
+><P
+>the compiled list of modules contained in this linking set
+  </P
+></DD
+><DT
+>all the <TT
+CLASS="filename"
+>FILES</TT
+></DT
+><DD
+><P
+>listed in <TT
+CLASS="filename"
+>makevars</TT
+>
+  </P
+></DD
+><DT
+><TT
+CLASS="filename"
+>lisp.run</TT
+></DT
+><DD
+><P
+>the executable</P
+></DD
+><DT
+><A
+HREF="p-indep.html#image"
+><TT
+CLASS="filename"
+>#P"lispinit.mem"</TT
+></A
+></DT
+><DD
+><P
+>the <A
+HREF="p-indep.html#image"
+>memory image</A
+></P
+></DD
+></DL
+></DIV
+><P
+>To run a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> contained in some linking set
+ <TT
+CLASS="filename"
+>dir</TT
+>, call
+ <B
+CLASS="command"
+><TT
+CLASS="replaceable"
+><I
+>dir</I
+></TT
+>/lisp.run -M
+ <TT
+CLASS="replaceable"
+><I
+>dir</I
+></TT
+>/lispinit.mem</B
+></P
+><P
+>A <I
+CLASS="emphasis"
+>module set</I
+> is a directory
+containing:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><B
+CLASS="command"
+>link.sh</B
+></DT
+><DD
+><P
+>some <B
+CLASS="command"
+>/bin/sh</B
+> commands, which
+  prepare the directory before linking, and set the variables
+  <TT
+CLASS="envar"
+>NEW_FILES</TT
+>, <TT
+CLASS="envar"
+>NEW_LIBS</TT
+>,
+  <TT
+CLASS="envar"
+>NEW_MODULES</TT
+>, <TT
+CLASS="envar"
+>TO_LOAD</TT
+> and optionally
+  <TT
+CLASS="envar"
+>TO_PRELOAD</TT
+></P
+></DD
+><DT
+>and any other files</DT
+><DD
+><P
+>needed by <B
+CLASS="command"
+>link.sh</B
+>
+ </P
+></DD
+></DL
+></DIV
+><P
+>Note that in <B
+CLASS="command"
+>link.sh</B
+> the module set directory
+ is referred to as <TT
+CLASS="varname"
+>$modulename/</TT
+>.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="envar"
+>NEW_FILES</TT
+></DT
+><DD
+><P
+>the space-separated list of files that
+  belong to the module set and will belong to every new linking set.
+ </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>NEW_LIBS</TT
+></DT
+><DD
+><P
+>the space-separated list of files or
+  <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler switches that need to be passed to the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+  compiler when linking the lisp.run belonging to a new linking set.
+ </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>NEW_MODULES</TT
+></DT
+><DD
+><P
+>the space-separated list of the module names
+  belonging to the module set.  Normally, every <TT
+CLASS="filename"
+>#P".c"</TT
+> file in the
+  module set defines a module of its own.  The module name is derived
+  from the file name.</P
+></DD
+><DT
+><TT
+CLASS="envar"
+>TO_LOAD</TT
+></DT
+><DD
+><P
+>the space-separated list of Lisp files to load
+  before building the <A
+HREF="p-indep.html#image"
+><TT
+CLASS="filename"
+>#P"lispinit.mem"</TT
+></A
+> belonging to a new linking set.
+ </P
+></DD
+><DT
+><TT
+CLASS="envar"
+>TO_PRELOAD</TT
+> (optional)</DT
+><DD
+><P
+>the space-separated list of Lisp files to load into
+  an intermediate <A
+HREF="p-indep.html#image"
+><TT
+CLASS="filename"
+>#P"lispinit.mem"</TT
+></A
+> file, before building the <A
+HREF="p-indep.html#image"
+><TT
+CLASS="filename"
+>#P"lispinit.mem"</TT
+></A
+>
+  belonging to a new linking set.  This variable is usually used for
+  defining Lisp packages which must be present when the new <TT
+CLASS="filename"
+>#P".c"</TT
+>
+  files are initialized.</P
+></DD
+></DL
+></DIV
+><P
+>The command <B
+CLASS="command"
+>clisp-link create-module-set
+ <TT
+CLASS="replaceable"
+><I
+>module-dir</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>file1.c</I
+></TT
+> ...</B
+> creates a module set
+ in <TT
+CLASS="replaceable"
+><I
+>module-dir</I
+></TT
+> which refers (via symbolic
+ links) to <TT
+CLASS="replaceable"
+><I
+>file1.c</I
+></TT
+> etc.  The files are
+ expected to be modules of their own.</P
+><P
+>The command <B
+CLASS="command"
+>clisp-link add-module-set
+ <TT
+CLASS="replaceable"
+><I
+>module-dir</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>source-dir</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>destination-dir</I
+></TT
+></B
+> combines a linking
+ set in <TT
+CLASS="replaceable"
+><I
+>source-dir</I
+></TT
+> and a module in
+ <TT
+CLASS="replaceable"
+><I
+>module-dir</I
+></TT
+> to a new linking set, in a
+ directory <TT
+CLASS="replaceable"
+><I
+>destination-dir</I
+></TT
+> which is newly
+ created.</P
+><P
+>The command <B
+CLASS="command"
+>clisp-link run <TT
+CLASS="replaceable"
+><I
+>source-dir</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>module-dir</I
+></TT
+> ...</B
+> runs the linking
+ set in <TT
+CLASS="replaceable"
+><I
+>source-dir</I
+></TT
+>, with the module in
+ <TT
+CLASS="replaceable"
+><I
+>module-dir</I
+></TT
+> loaded.  More than one module can
+ be specified.  If <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> has been built with the configuration option
+ <TT
+CLASS="option"
+>--with-dynamic-modules</TT
+>, the loading will be performed
+ through dynamic loading.  Otherwise - this is much slower - a temporary
+ linking set will be created and deleted afterwards.  Note that dynamic
+ loading does not work on all operating systems, and that
+ <TT
+CLASS="option"
+>--with-dynamic-modules</TT
+> precludes some efficiency
+ optimizations which are on by default.</P
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="mod-set-example"
+>Example</A
+></H2
+><P
+>To link in the <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> bindings for the GNU/Linux operating
+ system, the following steps are needed.  (Step 1 and step 2 need not be
+ executed in this order.)</P
+><P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>Create a new module set:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>$ clisp-link create-module-set linux /<TT
+CLASS="replaceable"
+><I
+>somewhere</I
+></TT
+>/bindings/linux.c</PRE
+></TD
+></TR
+></TABLE
+>
+
+ Modify the newly created <TT
+CLASS="filename"
+>linux/link.sh</TT
+> to add
+ <TT
+CLASS="option"
+>-lm</TT
+>; to the libraries: replace
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>NEW_LIBS="$file_list"</PRE
+></TD
+></TR
+></TABLE
+>
+   with
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>NEW_LIBS="$file_list -lm"</PRE
+></TD
+></TR
+></TABLE
+>
+
+   Modify the newly created <TT
+CLASS="filename"
+>linux/link.sh</TT
+> to load
+   <TT
+CLASS="filename"
+>linux.fas</TT
+> before saving the <A
+HREF="p-indep.html#image"
+>memory image</A
+>:
+   replace
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>TO_LOAD=''</PRE
+></TD
+></TR
+></TABLE
+>
+   with
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>TO_LOAD='/<TT
+CLASS="replaceable"
+><I
+>somewhere</I
+></TT
+>/bindings/linux.fas'</PRE
+></TD
+></TR
+></TABLE
+></P
+></LI
+><LI
+><P
+>Compile <TT
+CLASS="filename"
+>linux.lisp</TT
+>, creating
+  <TT
+CLASS="filename"
+>linux.c</TT
+>:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>$ clisp -c /<TT
+CLASS="replaceable"
+><I
+>somewhere</I
+></TT
+>/bindings/linux.lisp</PRE
+></TD
+></TR
+></TABLE
+></P
+></LI
+><LI
+><P
+>Create a new linking set:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>$ clisp-link add-module-set linux base base+linux</PRE
+></TD
+></TR
+></TABLE
+></P
+></LI
+><LI
+><P
+>Run and try it:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>$ base+linux/lisp.run -M base+linux/lispinit.mem &#62; (linux::stat "/tmp")</PRE
+></TD
+></TR
+></TABLE
+></P
+></LI
+></OL
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="included-modules"
+>Modules included in the distribution.</A
+></H2
+><P
+>The following modules come with the distribution of
+<A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>bindings</DT
+><DD
+><P
+>Call the operating system functions from <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.  The
+   following platforms are supported:
+   <P
+></P
+><UL
+><LI
+><P
+>AmigaOS</P
+></LI
+><LI
+><P
+>Linux/libc5</P
+></LI
+><LI
+><P
+>Linux/libc6</P
+></LI
+></UL
+></P
+></DD
+><DT
+>CLX</DT
+><DD
+><P
+>Call Xlib functions from <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.  Two
+   implementations are supplied:
+   <P
+></P
+><UL
+><LI
+><P
+>mit-clx, from MIT
+     <A
+HREF="ftp://ftp.x.org/R5contrib/CLX.R5.02.tar.Z"
+TARGET="_top"
+>ftp://ftp.x.org/R5contrib/CLX.R5.02.tar.Z</A
+>
+    </P
+></LI
+><LI
+><P
+>new-clx, by <A
+HREF="http://www.uni-karlsruhe.de/~unk6/"
+TARGET="_top"
+>Gilbert Baumann</A
+>
+    <A
+HREF="mailto:unk6@rz.uni-karlsruhe.de"
+TARGET="_top"
+>&#60;unk6@rz.uni-karlsruhe.de&#62;</A
+>.
+    </P
+></LI
+></UL
+></P
+></DD
+><DT
+>postgresql632, postgresql642</DT
+><DD
+><P
+>Access <A
+HREF="http://www.PostgreSQL.org/"
+TARGET="_top"
+>PostgreSQL</A
+> from <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.
+  </P
+></DD
+><DT
+>queens</DT
+><DD
+><P
+>Compute the number of solutions to the n-queens
+   problem on a n*n checkboard.
+  </P
+></DD
+><DT
+><A
+HREF="modules.html#regexp"
+>regexp</A
+></DT
+><DD
+><P
+>The <A
+HREF="regexp.html"
+TARGET="_top"
+>POSIX Regular
+   Expressions</A
+> matching, compiling, executing.
+  </P
+></DD
+><DT
+><A
+HREF="wildcard.html"
+TARGET="_top"
+>wildcard</A
+></DT
+><DD
+><P
+>Shell globbing</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="regexp"
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <A
+HREF="modules.html#regexp"
+><SPAN
+CLASS="QUOTE"
+>"REGEXP"</SPAN
+></A
+> module</A
+></H3
+><P
+>The <A
+HREF="modules.html#regexp"
+><SPAN
+CLASS="QUOTE"
+>"REGEXP"</SPAN
+></A
+> module implements the
+ <A
+HREF="regexp.html"
+TARGET="_top"
+>POSIX regular expressions</A
+>
+via an <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+> call to the standard <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> system facilities.
+The syntax of these regular expressions is described in many places,
+such as your local <TT
+CLASS="function"
+>regexp(5)</TT
+> manual and <A
+HREF="http://www.gnu.org/software/emacs/emacs.html"
+TARGET="_top"
+>Emacs</A
+>
+info pages.</P
+><P
+>The <A
+HREF="modules.html#regexp"
+><SPAN
+CLASS="QUOTE"
+>"REGEXP"</SPAN
+></A
+> package exports the following 9 symbols:</P
+><P
+></P
+><TABLE
+BORDER="0"
+><TBODY
+><TR
+><TD
+><A
+HREF="modules.html#re-match"
+><TT
+CLASS="function"
+>REGEXP:MATCH</TT
+></A
+></TD
+><TD
+><A
+HREF="modules.html#re-match-start"
+><TT
+CLASS="function"
+>REGEXP:MATCH-START</TT
+></A
+></TD
+><TD
+><A
+HREF="modules.html#re-match-end"
+><TT
+CLASS="function"
+>REGEXP:MATCH-END</TT
+></A
+></TD
+></TR
+><TR
+><TD
+><A
+HREF="modules.html#re-match-string"
+><TT
+CLASS="function"
+>REGEXP:MATCH-STRING</TT
+></A
+></TD
+><TD
+><A
+HREF="modules.html#re-regexp-quote"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-QUOTE</TT
+></A
+></TD
+><TD
+><A
+HREF="modules.html#re-regexp-compile"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-COMPILE</TT
+></A
+></TD
+></TR
+><TR
+><TD
+><A
+HREF="modules.html#re-regexp-exec"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-EXEC</TT
+></A
+></TD
+><TD
+><A
+HREF="modules.html#re-regexp-split"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-SPLIT</TT
+></A
+></TD
+><TD
+><A
+HREF="modules.html#re-with-loop-split"
+><TT
+CLASS="function"
+>REGEXP:WITH-LOOP-SPLIT</TT
+></A
+></TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>API</B
+></P
+><DL
+><DT
+><A
+NAME="re-match"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-match"
+><TT
+CLASS="function"
+>REGEXP:MATCH</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+     (<TT
+CLASS="constant"
+>:START</TT
+> 0) <TT
+CLASS="constant"
+>:END</TT
+> (<TT
+CLASS="constant"
+>:CASE-SENSITIVE</TT
+> t))</TT
+></A
+></DT
+><DD
+><P
+>This macro returns as first value a <TT
+CLASS="classname"
+>REGEXP::REGMATCH_T</TT
+> structure
+  containing the indices of the start and end of the first match for the
+  regular expression <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+> in <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>;
+  or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if there is no match.
+  Additionally, a <TT
+CLASS="classname"
+>REGEXP::REGMATCH_T</TT
+> structure is returned for every matched
+  <TT
+CLASS="literal"
+>"\(...\)"</TT
+> group in <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+>, in the
+  order that the open parentheses appear in <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+>.
+  If <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the search starts at that index in <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>.
+  If <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, only <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_subseq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SUBSEQ</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>)</TT
+> is considered.
+  <DIV
+CLASS="example"
+><A
+NAME="AEN18154"
+></A
+><P
+><B
+>Example 1. <A
+HREF="modules.html#re-match"
+><TT
+CLASS="function"
+>REGEXP:MATCH</TT
+></A
+></B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;    (<A
+HREF="modules.html#re-match"
+><TT
+CLASS="function"
+>REGEXP:MATCH</TT
+></A
+> "quick" "The quick brown fox jumped quickly.")
+     <TT
+CLASS="literal"
+>#S(<TT
+CLASS="classname"
+>REGEXP::REGMATCH_T</TT
+> :RM_SO 4 :RM_EO 9)</TT
+>
+    (<A
+HREF="modules.html#re-match"
+><TT
+CLASS="function"
+>REGEXP:MATCH</TT
+></A
+> "quick" "The quick brown fox jumped quickly." :start 8)
+     <TT
+CLASS="literal"
+>#S(<TT
+CLASS="classname"
+>REGEXP::REGMATCH_T</TT
+> :RM_SO 27 :RM_EO 32)</TT
+>
+    (<A
+HREF="modules.html#re-match"
+><TT
+CLASS="function"
+>REGEXP:MATCH</TT
+></A
+> "quick" "The quick brown fox jumped quickly." :start 8 :end 30)
+     <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>
+    (<A
+HREF="modules.html#re-match"
+><TT
+CLASS="function"
+>REGEXP:MATCH</TT
+></A
+> "\\([a-z]*\\)[0-9]*\\(bar\\)" "foo12bar")
+     <TT
+CLASS="literal"
+>#S(<TT
+CLASS="classname"
+>REGEXP::REGMATCH_T</TT
+> :RM_SO 0 :RM_EO 8) ;</TT
+>
+     <TT
+CLASS="literal"
+>#S(<TT
+CLASS="classname"
+>REGEXP::REGMATCH_T</TT
+> :RM_SO 0 :RM_EO 3) ;</TT
+>
+     <TT
+CLASS="literal"
+>#S(<TT
+CLASS="classname"
+>REGEXP::REGMATCH_T</TT
+> :RM_SO 5 :RM_EO 8)</TT
+>
+   </PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+ </P
+></DD
+><DT
+><A
+NAME="re-match-start"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-match-start"
+><TT
+CLASS="function"
+>REGEXP:MATCH-START</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>match</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Extracts the start index of <TT
+CLASS="replaceable"
+><I
+>match</I
+></TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="re-match-end"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-match-end"
+><TT
+CLASS="function"
+>REGEXP:MATCH-END</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>match</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Extracts the end index of <TT
+CLASS="replaceable"
+><I
+>match</I
+></TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="re-match-string"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-match-string"
+><TT
+CLASS="function"
+>REGEXP:MATCH-STRING</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>match</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Extracts the substring of <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> corresponding
+  to the given pair of start and end indices of <TT
+CLASS="replaceable"
+><I
+>match</I
+></TT
+>.
+  The result is shared with <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>.
+  If you want a freshly consed <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>, use <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_copy-seq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COPY-SEQ</TT
+></A
+> or
+  <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+> (<A
+HREF="modules.html#re-match-string"
+><TT
+CLASS="function"
+>REGEXP:MATCH-STRING</TT
+></A
+> ...)
+  '<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>)</TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="re-regexp-quote"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-regexp-quote"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-QUOTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>This function returns a regular expression string
+  that matches exactly <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> and nothing else.
+  This allows you to request an exact string match when calling a
+  function that wants a regular expression.
+  <DIV
+CLASS="example"
+><A
+NAME="AEN18229"
+></A
+><P
+><B
+>Example 2. <A
+HREF="modules.html#re-regexp-quote"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-QUOTE</TT
+></A
+></B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;    (regexp-quote "^The cat$")
+     <SPAN
+CLASS="returnvalue"
+>"\\^The cat\\$"</SPAN
+>
+   </PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+  One use of <A
+HREF="modules.html#re-regexp-quote"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-QUOTE</TT
+></A
+> is to combine an exact string match with
+  context described as a regular expression.</P
+></DD
+><DT
+><A
+NAME="re-regexp-compile"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-regexp-compile"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-COMPILE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+     (<TT
+CLASS="replaceable"
+><I
+>case-sensitive</I
+></TT
+> t))</TT
+></A
+></DT
+><DD
+><P
+>Compile the regular expression <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> into an
+  object suitable for <A
+HREF="modules.html#re-regexp-exec"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-EXEC</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="re-regexp-exec"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-regexp-exec"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-EXEC</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+     (<TT
+CLASS="constant"
+>:START</TT
+> 0) <TT
+CLASS="constant"
+>:END</TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Execute the <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+>, which must be a compiled
+  regular expression returned by <A
+HREF="modules.html#re-regexp-compile"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-COMPILE</TT
+></A
+>, against the
+  appropriate portion of the <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>.</P
+><P
+>Negative <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> means <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pl.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>+</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>) <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>)</TT
+></P
+></DD
+><DT
+><A
+NAME="re-regexp-split"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-regexp-split"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-SPLIT</TT
+></A
+>  <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+     (<TT
+CLASS="constant"
+>:START</TT
+> 0) <TT
+CLASS="constant"
+>:END</TT
+> (<TT
+CLASS="constant"
+>:CASE-SENSITIVE</TT
+> t))</TT
+></A
+></DT
+><DD
+><P
+>Return a list of substrings of <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> (all
+  sharing the structure with <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>) separated by <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+> (a
+  regular expression string or a return value of <A
+HREF="modules.html#re-regexp-compile"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-COMPILE</TT
+></A
+>)
+ </P
+></DD
+><DT
+><A
+NAME="re-with-loop-split"
+><TT
+CLASS="literal"
+>(<A
+HREF="modules.html#re-with-loop-split"
+><TT
+CLASS="function"
+>REGEXP:WITH-LOOP-SPLIT</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+>
+     <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> (<TT
+CLASS="constant"
+>:START</TT
+> 0) <TT
+CLASS="constant"
+>:END</TT
+> (<TT
+CLASS="constant"
+>:CASE-SENSITIVE</TT
+> t))
+     <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Read lines from <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>, split them with
+  <A
+HREF="modules.html#re-regexp-split"
+><TT
+CLASS="function"
+>REGEXP:REGEXP-SPLIT</TT
+></A
+> on <TT
+CLASS="replaceable"
+><I
+>pattern</I
+></TT
+>, and bind the resulting list to
+  <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+>.</P
+></DD
+></DL
+></DIV
+><P
+>The following code computes the number of people who use a
+ particular shell:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "REGEXP-TEST" (:use "LISP" "REGEXP"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "REGEXP-TEST")
+(let ((h (make-hash-table :test #'equal :size 10)) (n 0))
+  (with-open-file (f "/etc/passwd")
+    (with-loop-split (s f ":")
+      (let ((sh (seventh s)))
+        (if (gethash sh h)
+            (incf (gethash sh h))
+            (setf (gethash sh h) 1)))))
+  (with-hash-table-iterator (i h)
+    (loop (multiple-value-bind (r k v) (i)
+            (unless r (return))
+            (format t "[~d] ~s~30t== ~5:d~%" (incf n) k v)))))
+</PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+>The same is done by the following <A
+HREF="http://www.perl.com"
+TARGET="_top"
+><B
+CLASS="command"
+>Perl</B
+></A
+>:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;#!/usr/local/bin/perl -w
+
+use diagnostics;
+use strict;
+
+my $IN = $ARGV[0];
+open(INF,"&#60; $IN") || die "$0: cannot read file [$IN]: $!\n;";
+my %hash;
+while (&#60;INF&#62;) {
+  chop;
+  my @all = split($ARGV[1]);
+  my $shell = ($#all &#62;= 6 ? $all[6] : "");
+  if ($hash{$shell}) { $hash{$shell} ++; }
+  else { $hash{$shell} = 1; }
+}
+my $ii = 0;
+for my $kk (keys(%hash)) {
+  print "[",++$ii,"] \"",$kk,"\"  --  ",$hash{$kk},"\n";
+}
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="platform.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="dffi.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.3. The Foreign Function Call Facility</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

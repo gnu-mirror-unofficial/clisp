@@ -1,0 +1,985 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The structure of compiled functions</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="The CLISP bytecode specification"
+HREF="bytecode.html"><LINK
+REL="PREVIOUS"
+TITLE="The virtual machine"
+HREF="vm.html"><LINK
+REL="NEXT"
+TITLE="The general structure of the instructions"
+HREF="intr-struct.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="vm.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="intr-struct.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="comp-fun"
+>The structure of compiled functions</A
+></H1
+><P
+>A compiled function consists of two objects: The function itself,
+containing the references to all <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects needed for the bytecode,
+and a byte vector containing only immediate data, including the bytecode
+proper.</P
+><P
+>Typically, the byte vector is about twice as large as the function
+vector.  The separation thus helps the garbage collector (since the byte
+vector does not need to be scanned for pointers).</P
+><P
+>A function looks like this
+ (cf. the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type <TT
+CLASS="literal"
+>Cclosure</TT
+>):
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>name</DT
+><DD
+><P
+>This is the name of the function, normally a symbol
+   or a list of the form <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>)</TT
+>.
+   It is used for printing the function and for error messages.
+   This field is immutable.</P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>codevec</TT
+></A
+></DT
+><DD
+><P
+>This is the byte vector. It is a
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-bit-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-BIT-VECTOR</TT
+></A
+> (because that's the simplest type in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+   which contains immediate data -- note that <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+>
+   is more complex than this).
+   This field is immutable.</P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[]</DT
+><DD
+><P
+>The remaining fields in the function object are
+   references to other <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects.  These references are immutable,
+   which is why they are called "constants".  (The referenced <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+   objects can be mutable objects, such as conses or vectors, however.)
+  </P
+></DD
+></DL
+></DIV
+></P
+><P
+>There is actually one exception to the immutability rule: When a
+generic function's dispatch code is installed, the <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>codevec</TT
+></A
+> and
+<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+> fields are destructively modified.</P
+><P
+>Some of the <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+> can play special roles.
+ A function looks like this, in more detail:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>name</DT
+><DD
+><P
+>see above</P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>codevec</TT
+></A
+></DT
+><DD
+><P
+>see above</P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>venv-const</TT
+></A
+>*</DT
+><DD
+><P
+>At most one object, representing the closed-up
+   variables, representing the variables of the lexical environment in
+   which this function was defined.  It is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+>, which
+   looks like this: <TT
+CLASS="literal"
+>#(<TT
+CLASS="replaceable"
+><I
+>next</I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>value<SUB
+>1</SUB
+></I
+></TT
+> ...
+   <TT
+CLASS="replaceable"
+><I
+>value<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+>
+   where <TT
+CLASS="replaceable"
+><I
+>value<SUB
+>1</SUB
+></I
+></TT
+>, ...,
+   <TT
+CLASS="replaceable"
+><I
+>value<SUB
+>n</SUB
+></I
+></TT
+>
+   are the values of the closed-up variables, and
+   <TT
+CLASS="replaceable"
+><I
+>next</I
+></TT
+> is either <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or a
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+> having the same structure.
+  </P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>block-const</TT
+></A
+>*</DT
+><DD
+><P
+>Objects representing closed-up <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> tags,
+   representing the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> tags of the lexical environment in which
+   this function was defined.  Each is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+> containing in the
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+> part: either a frame pointer to the block frame, or <TT
+CLASS="literal"
+>#&#60;DISABLED&#62;</TT
+>.
+   The <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+> is the block's name, only for error message purposes.
+  </P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>tagbody-const</TT
+></A
+>*</DT
+><DD
+><P
+>Objects representing closed-up <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> tags,
+   representing the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> tags of the lexical environment in which
+   this function was defined.  Each is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+> containing in the
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+> part: either a frame pointer to the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> frame, or
+   <TT
+CLASS="literal"
+>#&#60;DISABLED&#62;</TT
+> if the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> has already been left.  The <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+> is a
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+> containing the names of the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> tags, only
+   for the error message purposes.
+  </P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>keyword-const</TT
+></A
+>*</DT
+><DD
+><P
+>If the function was defined with a <A
+HREF="lalist.html"
+>lambda list</A
+>
+   containing <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>, here come the symbols ("keywords"), in their
+   correct order.  They are used by the interpreter during function call.
+  </P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>other-const</TT
+></A
+>*</DT
+><DD
+><P
+>Other objects needed by the function's bytecode.
+  </P
+></DD
+></DL
+></DIV
+>
+</P
+><P
+>If <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>venv-const</TT
+></A
+>, <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>block-const</TT
+></A
+>, <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>tagbody-const</TT
+></A
+> are all absent,
+the function is called <I
+CLASS="emphasis"
+>autonomous</I
+>.
+This is the case if the function does not refer to lexical variables,
+blocks or tags defined in compile code outside of the function.
+In particular, it is the case if the function is defined in a null
+lexical environment.</P
+><P
+>If some <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>venv-const</TT
+></A
+>, <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>block-const</TT
+></A
+>, or <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>tagbody-const</TT
+></A
+> are
+present, the function (a "closure") is created at runtime.
+The compiler only generates a prototype, containing <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> values
+instead of each <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>venv-const</TT
+></A
+>, <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>block-const</TT
+></A
+>, <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>tagbody-const</TT
+></A
+>.
+At runtime, a function is created by copying this prototype and
+replacing the <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> values by the definitive ones.</P
+><P
+>The list <TT
+CLASS="literal"
+>(<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>keyword-const</TT
+></A
+>*
+<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>other-const</TT
+></A
+>*)</TT
+> normally does not contain duplicates, because
+the compiler removes duplicates when possible.  (Duplicates can occur
+nevertheless, through the use of <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_load-time-value.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD-TIME-VALUE</TT
+></A
+>.)</P
+><P
+>The <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>codevec</TT
+></A
+> looks like this
+ (cf. the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> type <TT
+CLASS="literal"
+>Codevec</TT
+>):
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>spdepth_1</TT
+> (2 bytes)</DT
+><DD
+><P
+>The 1st part of the maximal <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> depth.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>spdepth_jmpbufsize</TT
+> (2 bytes)</DT
+><DD
+><P
+>The <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> part of the maximal <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> depth.
+   The maximal <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> depth (precomputed by the compiler) is given by
+   <TT
+CLASS="literal"
+>spdepth_1 + spdepth_jmpbufsize * <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+></TT
+>.
+  </P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>numreq</TT
+></A
+> (2 bytes)</DT
+><DD
+><P
+>Number of required parameters.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>numopt</TT
+> (2 bytes)</DT
+><DD
+><P
+>Number of optional parameters.
+  </P
+></DD
+><DT
+><A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>flags</TT
+></A
+> (1 byte)</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>bit 0</DT
+><DD
+><P
+>set if the function has an <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+> parameter
+    </P
+></DD
+><DT
+>bit 7</DT
+><DD
+><P
+>set if the function has <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> parameters
+    </P
+></DD
+><DT
+>bit 6</DT
+><DD
+><P
+>set if the function has <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;ALLOW-OTHER-KEYS</TT
+></A
+>
+    </P
+></DD
+><DT
+>bit 4</DT
+><DD
+><P
+>set if the function is a generic function
+    </P
+></DD
+><DT
+>bit 3</DT
+><DD
+><P
+>set if the function is a generic function and its
+     effective method shall be returned (instead of being executed)
+    </P
+></DD
+></DL
+></DIV
+></DD
+><DT
+><TT
+CLASS="literal"
+>signature</TT
+> (1 byte)</DT
+><DD
+><P
+>An abbreviation code depending on
+    <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>numreq</TT
+></A
+>, <TT
+CLASS="literal"
+>numopt</TT
+>, <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>flags</TT
+></A
+>.
+    It is used for speeding up the function
+    call.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>numkey</TT
+> (2 bytes, only if the
+     function has <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>)</DT
+><DD
+><P
+>The number of <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> parameters.
+   </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>keyconsts</TT
+> (2 bytes, only if the
+     function has <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>)</DT
+><DD
+><P
+>The offset of the <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>keyword-const</TT
+></A
+> in the function.
+   </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>byte</TT
+>* (any number of bytes)</DT
+><DD
+><P
+>The bytecode instructions.
+   </P
+></DD
+></DL
+></DIV
+></P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="vm.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="intr-struct.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The virtual machine</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="bytecode.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The general structure of the instructions</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

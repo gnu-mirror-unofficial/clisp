@@ -1,0 +1,755 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Memory Models</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Overview of CLISP's Garbage Collection"
+HREF="gc.html"><LINK
+REL="PREVIOUS"
+TITLE="Lisp objects in CLISP"
+HREF="lisp-obj-in-c.html"><LINK
+REL="NEXT"
+TITLE="The burden of garbage-collection upon the rest of CLISP"
+HREF="gc-safety.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="lisp-obj-in-c.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Overview of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s Garbage Collection</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="gc-safety.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="memory-models"
+>Memory Models</A
+></H1
+><P
+>There are 6 memory models. Which one is used, depends on the
+operating system and is determined at build time.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Memory Models</B
+></P
+><DL
+><DT
+>SPVW_MIXED_BLOCKS_OPPOSITE</DT
+><DD
+><P
+>The heap consists of one block of fixed length
+  (allocated at startup).
+  The variable-length objects are allocated from the left, the 2-pointer
+  objects are allocated from the right.
+  There is a hole between them.
+  When the hole shrinks to 0, <A
+HREF="gc.html"
+>garbage-collect</A
+> is invoked.
+  <A
+HREF="gc.html"
+>garbage-collect</A
+> slides the variable-length objects to the left and concentrates
+  the 2-pointer objects at the right end of the block again.
+  When no more room is available, some reserve area beyond the right end
+  of the block is halved, and the 2-pointer objects are moved to the
+  right accordingly.
+  <P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>overview</B
+></P
+><DL
+><DT
+>(+)</DT
+><DD
+><P
+>Simple management.
+    </P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>No fragmentation at all.
+    </P
+></DD
+><DT
+>(-)</DT
+><DD
+><P
+>The total heap size is limited.
+    </P
+></DD
+></DL
+></DIV
+>
+ </P
+></DD
+><DT
+>SPVW_MIXED_BLOCKS_OPPOSITE &#38; TRIVIALMAP_MEMORY</DT
+><DD
+><P
+>The heap consists of two big blocks, one for
+  variable-length objects and one for 2-pointer objects.
+  The former one has a hole to the right and is extensible to the right,
+  the latter one has a hole to the left and is extensible to the left.
+  Similar to the previous model, except that the hole is unmapped.
+  <P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>overview</B
+></P
+><DL
+><DT
+>(+)</DT
+><DD
+><P
+>Total heap size grows depending on the
+     application's needs.</P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>No fragmentation at all.
+    </P
+></DD
+><DT
+>(*)</DT
+><DD
+><P
+>Works only when SINGLEMAP_MEMORY is
+     possible as well.</P
+></DD
+></DL
+></DIV
+>
+ </P
+></DD
+><DT
+>SPVW_MIXED_BLOCKS_STAGGERED &#38; TRIVIALMAP_MEMORY</DT
+><DD
+><P
+>The heap consists of two big blocks, one for
+  variable-length objects and one for 2-pointer objects.
+  Both have a hole to the right, but are extensible to the right.
+  <P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>overview</B
+></P
+><DL
+><DT
+>(+)</DT
+><DD
+><P
+>Total heap size grows depending on the
+     application's needs.</P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>No fragmentation at all.
+    </P
+></DD
+><DT
+>(*)</DT
+><DD
+><P
+>Works only when SINGLEMAP_MEMORY is
+     possible as well.</P
+></DD
+></DL
+></DIV
+>
+ </P
+></DD
+><DT
+>SPVW_MIXED_PAGES</DT
+><DD
+><P
+>The heap consists of many small pages (usually around 8 KB).
+  There are two kinds of pages: one for 2-pointer objects, one for
+  variable-length objects.
+  The set of all pages of a fixed kind is called a "Heap".
+  Each page has its hole (free space) at its end.
+  For every heap, the pages are kept sorted according to the size of
+  their hole, using AVL trees.
+  Garbage collection is invoked when the used space has grown by 25%
+  since the last GC; until that point new pages are allocated from the
+  operating system.
+  The GC compacts the data in each page separately:
+  data is moved to the left. Emptied pages are given back to the OS.
+  If the holes then make up more than 25% of the occupied storage, a
+  second GC turn moves objects across pages, from nearly empty ones to
+  nearly full ones, with the aim to free as many pages as possible.
+  <P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>overview</B
+></P
+><DL
+><DT
+>(-)</DT
+><DD
+><P
+>every allocation requires AVL tree operations,
+     thus slower</P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>Total heap size grows depending on the
+     application's needs.</P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>Works on operating systems which do not provide
+     large contiguous areas.</P
+></DD
+></DL
+></DIV
+>
+ </P
+></DD
+><DT
+>SPVW_PURE_PAGES</DT
+><DD
+><P
+>Just like SPVW_MIXED_PAGES, except that every page
+  contains data of only a single type tag, i.e. there is a Heap for
+  every type tag.
+  <P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>overview</B
+></P
+><DL
+><DT
+>(-)</DT
+><DD
+><P
+>every allocation requires AVL tree operations,
+     thus slower</P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>Total heap size grows depending on the
+     application's needs.</P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>Works on operating systems which do not provide
+     large contiguous areas.</P
+></DD
+><DT
+>(-)</DT
+><DD
+><P
+>More fragmentation because objects of different
+    type never fit into the same page.</P
+></DD
+></DL
+></DIV
+></P
+></DD
+><DT
+>SPVW_PURE_BLOCKS</DT
+><DD
+><P
+>There is a big block of storage for each type tag.
+  Each of these blocks has its data to the left and the hole to the
+  right, but these blocks are extensible to the right (because there is
+  enough room between them).
+  A garbage collection is triggered when the allocation amount since the
+  last GC reaches 50% of the amount of used space at the last GC, but at
+  least 512 KB.
+  The garbage collection cleans up each block separately: data is moved left.
+  <P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>overview</B
+></P
+><DL
+><DT
+>(+)</DT
+><DD
+><P
+>Total heap size grows depending on the
+     application's needs.</P
+></DD
+><DT
+>(+)</DT
+><DD
+><P
+>No 16 MB total size limit.
+    </P
+></DD
+><DT
+>(*)</DT
+><DD
+><P
+>Works only in combination with SINGLEMAP_MEMORY.
+    </P
+></DD
+></DL
+></DIV
+>
+ </P
+></DD
+></DL
+></DIV
+><P
+>In page based memory models, an object larger than a page is the
+only object carried by its pages.
+There are no small objects in pages belonging to a big object.</P
+><P
+>The following combinations of memory model and mmap tricks are
+possible:</P
+><DIV
+CLASS="table"
+><A
+NAME="AEN12379"
+></A
+><P
+><B
+>Table 1. With TYPECODES (the number indicates the order
+  in which the respective models have been developed:</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>no MAP_MEMORY</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>TRIVIALMAP_MEMORY</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SINGLEMAP_MEMORY</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>MULTIMAP_MEMORY</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>GENERATIONAL_GC</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_MIXED_BLOCKS_OPPOSITE</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>1</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>10</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>9</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_MIXED_BLOCKS_STAGGERED</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>7</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>8</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_PURE_BLOCKS</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>5</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>6</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_MIXED_PAGES</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>3</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_PURE_PAGES</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>4</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><DIV
+CLASS="table"
+><A
+NAME="AEN12426"
+></A
+><P
+><B
+>Table 2. With no TYPECODES</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>no MAP_MEMORY</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>TRIVIALMAP_MEMORY</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>GENERATIONAL_GC</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_MIXED_BLOCKS_OPPOSITE</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_MIXED_BLOCKS_STAGGERED</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>SPVW_MIXED_PAGES</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="lisp-obj-in-c.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gc-safety.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Lisp objects in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="gc.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The burden of <A
+HREF="gc.html"
+>garbage-collect</A
+>ion upon the rest of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

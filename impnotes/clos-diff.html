@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Deviations from ANSI CL standard</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Types and Classes
+   [CLHS-4]"
+HREF="types-classes.html"><LINK
+REL="PREVIOUS"
+TITLE="Classes
+  [CLHS-4.3]"
+HREF="classes.html"><LINK
+REL="NEXT"
+TITLE="Standard Metaclasses
+  [CLHS-4.3.1.1]"
+HREF="metaclasses.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="classes.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="metaclasses.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="clos-diff"
+>Deviations from [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCLASS</TT
+></A
+>. </B
+></B
+>It <I
+CLASS="emphasis"
+>is</I
+> required that the superclasses of a
+ class be defined before the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCLASS</TT
+></A
+> form for the class is evaluated.
+ </P
+></DIV
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCLASS</TT
+></A
+> supports the option <TT
+CLASS="constant"
+>:METACLASS</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_structure-class.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRUCTURE-CLASS</TT
+></A
+>.
+ This option is necessary in order to define a subclass of a
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defstruct.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFSTRUCT</TT
+></A
+>-defined structure type using <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCLASS</TT
+></A
+> instead of
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defstruct.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFSTRUCT</TT
+></A
+>.</P
+><P
+>When <A
+HREF="http://www.lisp.org/HyperSpec/Body/locfun_call-next-method.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CALL-NEXT-METHOD</TT
+></A
+> is called with arguments, the rule that
+ the ordered set of applicable methods must be the same as for the
+ original arguments is enforced by the implementation only in
+ interpreted code.</P
+><P
+>There is a generic function <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>CLOS:NO-PRIMARY-METHOD</TT
+></I
+>
+ (similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_no-_cable-method.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NO-APPLICABLE-METHOD</TT
+></A
+>) which is called when a generic
+ function of the class <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_standa_ric-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STANDARD-GENERIC-FUNCTION</TT
+></A
+> is invoked and
+ no primary method on that generic function is applicable.</P
+><P
+><I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>clos:generic-flet</TT
+></I
+> and
+ <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>clos:generic-labels</TT
+></I
+> are
+ implemented as macros, not as special operators.  They are not imported
+ into the packages <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+> because of the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] issue
+ <A
+HREF="http://www.lisp.org/HyperSpec/Issues/iss181.html"
+TARGET="_top"
+>GENERIC-FLET-POORLY-DESIGNED:DELETE</A
+>.
+ </P
+><P
+>The function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_ensure-ge_ric-function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ENSURE-GENERIC-FUNCTION</TT
+></A
+> is not implemented.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_add-method.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ADD-METHOD</TT
+></A
+> can put methods into other generic functions
+ than the one the method came from.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_print-object.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINT-OBJECT</TT
+></A
+> is only called on objects of type
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/cla_standard-object.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STANDARD-OBJECT</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/cla_structure-object.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRUCTURE-OBJECT</TT
+></A
+>.
+ It is not called on other objects, like <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+>es
+ and <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_number.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NUMBER</TT
+></A
+>s, due to the performance concerns.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DOCUMENTATION</TT
+></A
+> still has the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLtL1"
+>CLtL1</A
+></SPAN
+>] implementation.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="classes.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="metaclasses.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3.html"
+TARGET="_top"
+>[CLHS-4.3]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="types-classes.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Standard Metaclasses
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-1-1.html"
+TARGET="_top"
+>[CLHS-4.3.1.1]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,446 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1.10. Additional Fancy Macros</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-1: Platform independent Extensions"
+HREF="p-indep.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.9. Maximum ANSI CL compliance"
+HREF="ansi.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.11. Customizing CLISP behavior."
+HREF="customize.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="ansi.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-1: Platform independent Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="customize.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="macros3"
+>Extensions-1.10. Additional Fancy Macros</A
+></H1
+><P
+>If you uncomment the <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+>
+ "macros3")</TT
+> line in the file <TT
+CLASS="filename"
+>init.lisp</TT
+>
+ before doing <B
+CLASS="command"
+>make</B
+>, or load the file
+ <TT
+CLASS="filename"
+>macros3.lisp</TT
+> into a running <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>, you can
+ use the following macros:</P
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="macros3.html#ethe"
+><TT
+CLASS="function"
+>EXT:ETHE</TT
+></A
+>. </B
+></B
+><TT
+CLASS="literal"
+>(<A
+HREF="macros3.html#ethe"
+><TT
+CLASS="function"
+>EXT:ETHE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>value-type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>)</TT
+>
+ enforces a type check in both interpreted and compiled code.
+ </P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+>Macros <A
+HREF="macros3.html#letf"
+><TT
+CLASS="function"
+>EXT:LETF</TT
+></A
+> &#38; <A
+HREF="macros3.html#letf"
+><TT
+CLASS="function"
+>EXT:LETF*</TT
+></A
+>. </B
+></B
+>These macros are similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LET</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LET*</TT
+></A
+>, respectively,
+ except that they can bind places, even places with multiple values.
+ Example:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (letf (((values a b) form)) ...)
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+is equivalent to
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (multiple-value-bind (a b) form ...)
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+while
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(letf (((first l) 7)) ...)
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+is approximately equivalent to
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_letcm_letst.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LET*</TT
+></A
+> ((#:g1 l) (#:g2 (first #:g1)))
+   (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_progn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PROGN</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (first #:g1) 7) ...)
+      (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (first #:g1) #:g2)))
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>ext:with-collect</TT
+>. </B
+></B
+>Similar to the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_loop.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOOP</TT
+></A
+>'s <TT
+CLASS="constant"
+>collect</TT
+> instruction,
+ except that it is more "Lispy" in appearance and can appear arbitrarily
+ deep.  It defines local macros (with <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MACROLET</TT
+></A
+>) which collect objects
+ given to it in lists, which are then returned as multiple values.  E.g.,
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (ext:with-collect (c0 c1)
+   (dotimes (i 10) (if (oddp i) (c0 i) (c1 i))))
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+returns two lists <TT
+CLASS="literal"
+>(1 3 5 7 9)</TT
+> and
+<TT
+CLASS="literal"
+>(0 2 4 6 8)</TT
+> as multiple values.
+</P
+></DIV
+><P
+>You might want to add a <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+>
+ "macros3")</TT
+> statement to your <A
+HREF="clisp.html#opt-norc"
+TARGET="_top"
+><TT
+CLASS="filename"
+>.clisprc</TT
+></A
+>
+ file if you do not want to dump your own <A
+HREF="p-indep.html#image"
+>memory image</A
+>.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="ansi.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="customize.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.9. Maximum ANSI CL compliance</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="p-indep.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.11. Customizing <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> behavior.</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

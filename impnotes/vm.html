@@ -1,0 +1,465 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The virtual machine</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="The CLISP bytecode specification"
+HREF="bytecode.html"><LINK
+REL="PREVIOUS"
+TITLE="The CLISP bytecode specification"
+HREF="bytecode.html"><LINK
+REL="NEXT"
+TITLE="The structure of compiled functions"
+HREF="comp-fun.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="bytecode.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="comp-fun.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="vm"
+>The virtual machine</A
+></H1
+><P
+>The bytecode can be thought of as being interpreted by a virtual
+processor.  The engine which actually interprets the bytecode (the
+"implementation of the virtual machine") is actually a <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+function, but it could as well be a just-in-time compiler which
+translates a function's bytecode into hardware CPU instructions the
+first time said function is called.</P
+><P
+>The virtual machine is a stack machine with two stacks:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+></DT
+><DD
+><P
+>a stack for <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects and frames.
+  </P
+></DD
+><DT
+><A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+></DT
+><DD
+><P
+>a stack for other data and pointers.
+</P
+></DD
+></DL
+></DIV
+></P
+><P
+>This two-stack architecture permits to save an unlimited number of
+<A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> (needed for handling of <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> multiple
+values), without consing.  Also, in a world with a compacting
+no-ambiguous-roots garbage collector, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> must only hold <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+objects, and <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> can hold all the other data belonging to a frame,
+which would not fit into <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> without tagging/untagging
+overhead.</P
+><P
+>The scope of <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> and <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> is only valid for a given function
+invocation.  Whereas the amount of <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> space needed for executing a
+function (excluding other function calls) is unlimited, the amount of
+<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> space needed is known a priori, at compile time.  When a function
+is called, no relation is specified between the caller's <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> and the
+callee's <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, and between the caller's <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> and the callee's <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>.
+The bytecode is designed so that outgoing arguments on the caller's
+<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> can be shared by the caller's incoming arguments area (on the
+callee's <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>), but a virtual machine implementation may also copy
+outgoing arguments to incoming arguments instead of sharing them.</P
+><P
+>The virtual machine has a special data structure,
+<TT
+CLASS="literal"
+>values</TT
+>, containing the "top of stack", specially
+adapted to <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> multiple values:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+></DT
+><DD
+><P
+>an unsigned integer.
+  </P
+></DD
+><DT
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+></DT
+><DD
+><P
+>the first value, a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> object.
+  If <TT
+CLASS="literal"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+></TT
+> = 0, this is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+  </P
+></DD
+><DT
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_space</TT
+></A
+></DT
+><DD
+><P
+>all values except the first one, an array of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+  objects.</P
+></DD
+></DL
+></DIV
+></P
+><P
+>The contents of <TT
+CLASS="literal"
+>values</TT
+> is short-lived.
+It does not survive a function call, not even a garbage collection.</P
+><P
+>The interpretation of some bytecode instructions depends on a
+constant, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.  This is a CPU-dependent number, the value of
+<TT
+CLASS="varname"
+>system::*jmpbuf-size*</TT
+>.  In <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>, it is defined as
+<TT
+CLASS="literal"
+>ceiling(sizeof(jmp_buf),sizeof(void*))</TT
+>.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="bytecode.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="comp-fun.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="bytecode.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The structure of compiled functions</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,1008 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.8. Quickstarting delivery with CLISP</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.7. System Calls"
+HREF="syscalls.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.9. Application delivery with CLISP"
+HREF="app-dev.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="syscalls.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="app-dev.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="quickstart"
+>Extensions-2.8. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></H1
+><P
+>This section describes four ways to turn <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> programs into
+ executable programs, which can be started as quickly as executables
+ written in other languages.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>UNIX</DT
+><DD
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> can act as a script interpreter.
+  </P
+></DD
+><DT
+>Desktop environments such as <A
+HREF="http://www.kde.org"
+TARGET="_top"
+>KDE</A
+>, <A
+HREF="http://www.gnome.org"
+TARGET="_top"
+>GNOME</A
+>, or Windows.</DT
+><DD
+><P
+>Files created with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> can be associated with
+   the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> executables so that clicking on them would make <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+   execute the appropriate code.</P
+></DD
+><DT
+>Linux kernel with
+               <TT
+CLASS="option"
+>CONFIG_BINFMT_MISC=y</TT
+></DT
+><DD
+><P
+>Associate the extensions <TT
+CLASS="filename"
+>#P".fas"</TT
+>
+   and <TT
+CLASS="filename"
+>#P".lisp"</TT
+> with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>; then you can make the
+   files executable and run them from the command line.
+  </P
+></DD
+><DT
+><A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+></DT
+><DD
+><P
+>Files created with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> can be associated with a
+   Workbench project icon so that clicking on them would make <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+   execute the appropriate code.  Note that several <TT
+CLASS="filename"
+>#P".fas"</TT
+> files
+   can be concatenated (using <TT
+CLASS="function"
+>Join</TT
+>) into one file.
+  </P
+></DD
+></DL
+></DIV
+><P
+>These four techniques apply to a single <TT
+CLASS="filename"
+>#P".lisp"</TT
+> or <TT
+CLASS="filename"
+>#P".fas"</TT
+> file.
+ If your application is made up of several <TT
+CLASS="filename"
+>#P".lisp"</TT
+> or <TT
+CLASS="filename"
+>#P".fas"</TT
+> files,
+ you can simply concatenate them (using <B
+CLASS="command"
+>cat</B
+>(1))
+ into one file; the techniques then apply to that concatenated file.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> platforms only.</DT
+><DD
+><P
+>On Unix, a text file (<TT
+CLASS="filename"
+>#P".fas"</TT
+> or <TT
+CLASS="filename"
+>#P".lisp"</TT
+>) can be
+ made executable by adding a first line of the form
+ <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>#!<TT
+CLASS="replaceable"
+><I
+>interpreter</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>interpreter-arguments</I
+></TT
+>]</PRE
+></TD
+></TR
+></TABLE
+>
+ and using <B
+CLASS="command"
+>chmod</B
+>(1) to make the script executable.
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> can be used as a script interpreter under the following
+ circumstances:</P
+><P
+></P
+><UL
+><LI
+><P
+>The <TT
+CLASS="replaceable"
+><I
+>interpreter</I
+></TT
+> must be the full pathname of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.
+ The recommended path is <TT
+CLASS="filename"
+>/usr/local/bin/clisp</TT
+>,
+ and if <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> is actually installed elsewhere, making
+ <TT
+CLASS="filename"
+>/usr/local/bin/clisp</TT
+> be a symbolic link to the
+ real <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+></LI
+><LI
+><P
+>The <TT
+CLASS="replaceable"
+><I
+>interpreter</I
+></TT
+> must be a real executable, not a script.
+ Unfortunately, in the binary distributions of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> on Solaris,
+ <B
+CLASS="command"
+>clisp</B
+> is a shell script because a <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> compiler cannot be
+ assumed to be installed on this platform.  If you do have a <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+ compiler installed, build <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> from the source yourself;
+ <B
+CLASS="command"
+>make install</B
+> will install <B
+CLASS="command"
+>clisp</B
+> as a real
+ executable.</P
+></LI
+><LI
+><P
+>On some platforms, the first line which specifies the
+ interpreter is limited in length:
+   <P
+></P
+><UL
+><LI
+><P
+>max. 32 characters on SunOS 4,</P
+></LI
+><LI
+><P
+>max. 80 characters on HP-UX,</P
+></LI
+><LI
+><P
+>max. 127 characters on Linux.</P
+></LI
+></UL
+>
+   Characters exceeding this limit are simply cut off by the system.
+   At least 128 characters are accepted on Solaris, IRIX, AIX, OSF/1.
+   There is no workaround: You have to keep the interpreter pathname
+   and arguments short.</P
+></LI
+><LI
+><P
+>On Solaris and HP-UX, only the first
+ <TT
+CLASS="replaceable"
+><I
+>interpreter-arg</I
+></TT
+> is passed to the
+ <TT
+CLASS="replaceable"
+><I
+>interpreter</I
+></TT
+>.  In order to pass more than one
+ option (for example, <TT
+CLASS="option"
+>-Msomewhere.mem</TT
+> and
+ <TT
+CLASS="option"
+>-C</TT
+>) to <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>, separate them by hard spaces (ISO
+ Latin-1 character 160) instead of normal spaces.  (But the separator
+ between <TT
+CLASS="replaceable"
+><I
+>interpreter</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>interpreter-arguments</I
+></TT
+> must still be a normal space!)
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> will split the <TT
+CLASS="replaceable"
+><I
+>interpreter-arguments</I
+></TT
+> at hard spaces and at normal
+ spaces.</P
+></LI
+></UL
+><P
+>The script should contain Lisp forms, except in the
+ <TT
+CLASS="literal"
+>#!</TT
+> line.
+ The file is loaded normally, through the function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+>.
+ Before it is loaded, the variable <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>ext:*args*</TT
+></I
+> is bound to a
+ list of strings, representing the arguments given to the Lisp script.
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*STANDARD-INPUT*</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*STANDARD-OUTPUT*</TT
+></A
+> are bound, as usual, to
+ the Unix standard input and output.  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*ERROR-OUTPUT*</TT
+></A
+> is bound to the
+ Unix error output.  Continuable errors will be turned to warnings.
+ Non-continuable errors and
+ <B
+CLASS="keycap"
+>Control</B
+>-<SPAN
+CLASS="keysym"
+>C</SPAN
+> interrupts
+ will terminate the execution of the Lisp script with an error status.
+ If you wish the script's contents to be compiled during loading, add
+   <A
+HREF="clisp.html#opt-load-comp"
+TARGET="_top"
+><TT
+CLASS="option"
+>-C</TT
+></A
+>
+ to the <TT
+CLASS="replaceable"
+><I
+>interpreter-arguments</I
+></TT
+>.</P
+><P
+>Another, quite inferior, alternative is to put the following into
+ a file:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;#!/bin/sh
+exec clisp &#60;&#60;EOF
+(lisp-form)
+(another-lisp-form)
+(yet-another-lisp-form)
+EOF
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>The problem with this approach is that the return values of each form
+will be printed to the standard output.  Another problem is that no user
+input will be available.</P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.</DT
+><DD
+><P
+>There are two different ways to make <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+ "executables" for Windows platforms.</P
+><P
+></P
+><UL
+><LI
+><P
+>Associate the <TT
+CLASS="filename"
+>#P".mem"</TT
+> extension with
+   <B
+CLASS="command"
+>c:\clisp\lisp.exe -B c:\clisp -M %s</B
+>.
+  </P
+></LI
+><LI
+><P
+>Associate the <TT
+CLASS="filename"
+>#P".fas"</TT
+> extension with
+   <B
+CLASS="command"
+>c:\clisp\lisp.exe -B c:\clisp -M c:\clisp\lispinit.mem
+    -i %s</B
+>.
+    Alternatively, you may want to have a function
+    <TT
+CLASS="function"
+>main</TT
+> in your <TT
+CLASS="filename"
+>#P".fas"</TT
+> files and associate
+    the <TT
+CLASS="filename"
+>#P".fas"</TT
+> extension with <B
+CLASS="command"
+>c:\clisp\lisp.exe -B
+    c:\clisp -M c:\clisp\lispinit.mem -i %s -x (main)</B
+>.
+  </P
+></LI
+></UL
+><P
+>Then clicking on the compiled lisp file (with <TT
+CLASS="filename"
+>#P".fas"</TT
+>
+ extension) will load the file (thus executing all the code in the
+ file), while the clicking on a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <A
+HREF="p-indep.html#image"
+>memory image</A
+> (with <TT
+CLASS="filename"
+>#P".mem"</TT
+>
+ extension) will start clisp with the given <A
+HREF="p-indep.html#image"
+>memory image</A
+>.</P
+><P
+>Note that <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> is distributed with a file
+ <TT
+CLASS="filename"
+>install.bat</TT
+>, which creates a file
+ <TT
+CLASS="filename"
+>clisp.bat</TT
+> on your desktop and also associates
+ <TT
+CLASS="filename"
+>#P".fas"</TT
+>, <TT
+CLASS="filename"
+>#P".lisp"</TT
+>, and <TT
+CLASS="filename"
+>#P".mem"</TT
+> files with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.linux.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Linux</I
+></A
+> platforms only.</DT
+><DD
+><P
+>You have to build your kernel with
+ <TT
+CLASS="option"
+>CONFIG_BINFMT_MISC=y</TT
+> and
+ <TT
+CLASS="option"
+>CONFIG_PROC_FS=y</TT
+>.  Then you will have a
+ <TT
+CLASS="filename"
+>/proc/sys/fs/binfmt_misc/</TT
+> directory and you will
+ be able to do (as <TT
+CLASS="literal"
+>root</TT
+>; you might want to put
+ these lines into <TT
+CLASS="filename"
+>/etc/rc.d/rc.local</TT
+>):
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;bash# echo ":CLISP:E::fas::/usr/bin/clisp:" &#62;&#62; /proc/sys/fs/binfmt_misc/register
+bash# echo ":CLISP:E::lisp::/usr/bin/clisp:" &#62;&#62; /proc/sys/fs/binfmt_misc/register
+</PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+>Then you can do the following:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;bash$ cat &#60;&#60; EOF &#62; hello.lisp
+(print "hello, world!")
+EOF
+bash$ clisp -c hello.lisp
+
+Compiling file hello.lisp ...
+
+Compilation of file hello.lisp is finished.
+0 errors, 0 warnings
+bash$ chmod +x hello.fas
+bash$ hello.fas
+
+"hello, world!"
+bash$
+</PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+>Please read
+ <TT
+CLASS="filename"
+>/usr/src/linux/Documentation/binfmt_misc.txt</TT
+> for
+ details.</P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> platforms only.</DT
+><DD
+><P
+>Using a Workbench project file, the <A
+HREF="p-indep.html#image"
+>memory image</A
+>s,
+ source and binary files can be made "executable".
+
+<P
+></P
+><UL
+><LI
+><P
+>Using IconEdit, create a project icon.</P
+></LI
+><LI
+><P
+>Set the tool to <TT
+CLASS="filename"
+>lisp:lisp.run</TT
+>
+  (or wherever the binary is located).</P
+></LI
+><LI
+><P
+>Define a tooltype named
+  <TT
+CLASS="replaceable"
+><I
+>ARGS</I
+></TT
+> set to <TT
+CLASS="option"
+>-M *</TT
+>
+  for a <A
+HREF="p-indep.html#image"
+>memory image</A
+> project icon or to <TT
+CLASS="option"
+>-M lisp:lispinit.mem
+  -i *</TT
+> for a source or compiled lisp file.  The startup code
+  will replace an isolated <SPAN
+CLASS="token"
+>*</SPAN
+> token with the file
+  name.</P
+></LI
+><LI
+><P
+>Alternatively, you may want to have a function
+  <TT
+CLASS="function"
+>main</TT
+> in your files and set the
+  <TT
+CLASS="replaceable"
+><I
+>ARGS</I
+></TT
+> tooltype to <TT
+CLASS="option"
+>-M
+  lisp:lispinit.mem -i * -x (main)</TT
+>.</P
+></LI
+><LI
+><P
+>You might want to add more <A
+HREF="clisp.html"
+TARGET="_top"
+>command line options</A
+> to the
+  <TT
+CLASS="replaceable"
+><I
+>ARGS</I
+></TT
+> tooltype.</P
+></LI
+></UL
+>
+
+ Clicking on the compiled lisp file (with <TT
+CLASS="filename"
+>#P".fas"</TT
+> suffix) will load
+ the image and the file (thus executing all the code in the file), while
+ clicking on the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s <A
+HREF="p-indep.html#image"
+>memory image</A
+> (with <TT
+CLASS="filename"
+>#P".mem"</TT
+> suffix) with
+ start <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> with the given <A
+HREF="p-indep.html#image"
+>memory image</A
+>.</P
+><P
+>You might want to add a tooltype named
+ <TT
+CLASS="replaceable"
+><I
+>WINDOW</I
+></TT
+> which names the console window that
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*TERMINAL-IO*</TT
+></A
+> will be bound to, for example
+ <TT
+CLASS="filename"
+>CON:0/0/500/300/CLISP-Listener/AUTO/CLOSE</TT
+>, or
+ <TT
+CLASS="filename"
+>TCP:20002</TT
+>.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="syscalls.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="app-dev.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.7. System Calls</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.9. Application delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,951 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Filenames Dictionary
+   [CLHS-19.4]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Filenames
+   [CLHS-19]"
+HREF="filenames.html"><LINK
+REL="PREVIOUS"
+TITLE="Logical Pathnames
+   [CLHS-19.3]"
+HREF="log-path.html"><LINK
+REL="NEXT"
+TITLE="Files
+   [CLHS-20]"
+HREF="files.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="log-path.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Filenames
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
+TARGET="_top"
+>[CLHS-19]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="files.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="filename-dict"
+>The Filenames Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_filen_s_dictionary.html"
+TARGET="_top"
+>[CLHS-19.4]</A
+></A
+></H1
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PATHNAME</TT
+></A
+> always returns a physical pathname.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname-match-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PATHNAME-MATCH-P</TT
+></A
+> does not interpret missing components as
+ wild.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_translate-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRANSLATE-PATHNAME</TT
+></A
+> has two additional keywords: <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_translate-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRANSLATE-PATHNAME</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>from-wildname</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>to-wildname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:ALL</TT
+>
+ <TT
+CLASS="constant"
+>:MERGE</TT
+>)</TT
+></P
+><P
+>If <TT
+CLASS="constant"
+>:ALL</TT
+> is specified and non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, a list of all resulting
+ pathnames, corresponding to all matches of <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pathname-match-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PATHNAME-MATCH-P</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>from-wildname</I
+></TT
+>)</TT
+>, is returned.  If
+ <TT
+CLASS="constant"
+>:MERGE</TT
+> is specified and <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, unspecified pieces of
+ <TT
+CLASS="replaceable"
+><I
+>to-pathname</I
+></TT
+> are not replaced by
+ corresponding pieces of <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+>.</P
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="parsename"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+></A
+></H2
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-NAMESTRING</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>defaults</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>junk-allowed</I
+></TT
+>)</TT
+>
+ returns a logical pathname only if <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is a
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_l.html#logical_host"
+TARGET="_top"
+>logical host</A
+>
+ or <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and <TT
+CLASS="replaceable"
+><I
+>defaults</I
+></TT
+> is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_logical-pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LOGICAL-PATHNAME</TT
+></A
+>.
+ To construct a logical pathname from a string, the function
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_logical-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOGICAL-PATHNAME</TT
+></A
+> can be used.</P
+><P
+>The ANSI-mandated behavior of recognizing logical pathnames when
+the <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> begins with some alphanumeric characters followed by a
+colon (<SPAN
+CLASS="keysym"
+>#\:</SPAN
+>) is very confusing (cf.
+<TT
+CLASS="literal"
+>"c:/autoexec.bat"</TT
+>, <TT
+CLASS="literal"
+>"home:.clisprc"</TT
+>
+and <TT
+CLASS="literal"
+>"prep:/pub/gnu"</TT
+>) and therefore disabled by default.
+To enable the ANSI standard behavior, you should set <A
+HREF="filename-dict.html#parsename"
+><TT
+CLASS="varname"
+>CUSTOM:*PARSE-NAMESTRING-ANSI*</TT
+></A
+> to
+non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="pathmerge"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+></A
+></H2
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>
+   [<TT
+CLASS="replaceable"
+><I
+>default-pathname</I
+></TT
+>])</TT
+> returns a
+   logical pathname only if
+ <TT
+CLASS="replaceable"
+><I
+>default-pathname</I
+></TT
+> is a logical pathname.  To
+ construct a logical pathname from a string, the function
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_logical-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOGICAL-PATHNAME</TT
+></A
+> can be used.</P
+><P
+>When both <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>default-pathname</I
+></TT
+>
+ are relative pathnames, the behavior depends on <A
+HREF="filename-dict.html#pathmerge"
+><TT
+CLASS="varname"
+>CUSTOM:*MERGE-PATHNAMES-ANSI*</TT
+></A
+>: when it is
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, then <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> retains its traditional behavior:
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> #p"x/" #p"y/")</TT
+>
+ evaluates to <TT
+CLASS="filename"
+>#p"x/"</TT
+></P
+><P
+><I
+CLASS="emphasis"
+>Rationale</I
+>: <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> is used to
+ specify default components for pathnames, so there is some analogy
+ between <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> a b)</TT
+> and
+ <TT
+CLASS="literal"
+>(or a b)</TT
+>.  Obviously putting in the same
+ default a second time should do the same as putting it in once:
+ <TT
+CLASS="literal"
+>(or a b b)</TT
+> is the same as <TT
+CLASS="literal"
+>(or a b)</TT
+>, so <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> a b) b)</TT
+>
+ should be the same as <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> a
+ b)</TT
+>.</P
+><P
+>(This question actually matters because in <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> there is no
+ distinction between <SPAN
+CLASS="QUOTE"
+>"pathnames with defaults merged-in"</SPAN
+> and
+ <SPAN
+CLASS="QUOTE"
+>"pathnames with defaults not yet applied"</SPAN
+>.)</P
+><P
+>Now, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+>
+ '#p"x/" '#p"y/") '#p"y/")</TT
+> and <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> '#p"x/" '#p"y/")</TT
+> are <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_equal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQUAL</TT
+></A
+>
+ in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> (when <A
+HREF="filename-dict.html#pathmerge"
+><TT
+CLASS="varname"
+>CUSTOM:*MERGE-PATHNAMES-ANSI*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>), but not in implementations that
+ strictly follow the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] spec.  In fact, the above twice-default =
+ once-default rule holds for all pathnames in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+><P
+>When <A
+HREF="filename-dict.html#pathmerge"
+><TT
+CLASS="varname"
+>CUSTOM:*MERGE-PATHNAMES-ANSI*</TT
+></A
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the normal
+ [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] behavior is exhibited:
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MERGE-PATHNAMES</TT
+></A
+> #p"x/" #p"y/")</TT
+>
+  evaluates to <TT
+CLASS="filename"
+>#p"y/x/"</TT
+></P
+><P
+>The rationale is that <SPAN
+CLASS="QUOTE"
+>"merge"</SPAN
+> is
+ <I
+CLASS="emphasis"
+>merge</I
+> and not <I
+CLASS="emphasis"
+>or</I
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="load-lpt"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load-logi_translations.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD-LOGICAL-PATHNAME-TRANSLATIONS</TT
+></A
+></A
+></H2
+><P
+>When the <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> argument to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load-logi_translations.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD-LOGICAL-PATHNAME-TRANSLATIONS</TT
+></A
+>
+is not a defined logical host yet, we proceed as follows:
+<P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>If both environment variables
+  <TT
+CLASS="envar"
+>LOGICAL_HOST_<TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>_FROM</TT
+> and
+  <TT
+CLASS="envar"
+>LOGICAL_HOST_<TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>_TO</TT
+> exist, then they define the
+  map of the <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>.</P
+></LI
+><LI
+><P
+>If the environment variable
+  <TT
+CLASS="envar"
+>LOGICAL_HOST_<TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+></TT
+> exists, its value is read from,
+  and the result is passed to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_logical-p_translations.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOGICAL-PATHNAME-TRANSLATIONS</TT
+></A
+>)</TT
+>.</P
+></LI
+><LI
+><P
+>Variable <A
+HREF="filename-dict.html#load-lpt"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-LOGICAL-PATHNAME-TRANSLATIONS-DATABASE*</TT
+></A
+> is consulted.
+  Its value should be a list of files and/or directories,
+  which are searched for in the <A
+HREF="system.html#load-paths"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-PATHS*</TT
+></A
+>, just like for <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+>.
+  When the element is a file, it is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ</TT
+></A
+> from,
+  <A
+HREF="http://www.franz.com/support/documentation/6.0/doc/pathnames.htm#load-logical-pathname-translations-2"
+TARGET="_top"
+>Allegro CL-style</A
+>,
+  odd objects being host names and even object being their
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_logical-p_translations.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOGICAL-PATHNAME-TRANSLATIONS</TT
+></A
+>.
+  When the element is a directory, a file, named <TT
+CLASS="filename"
+><TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+></TT
+>
+  or <TT
+CLASS="filename"
+><TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>.host</TT
+>, in that directory, is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ</TT
+></A
+>
+  from once, <A
+HREF="http://cvs2.cons.org/ftp-area/cmucl/doc/cmu-user/extensions.html#logical-pathnames"
+TARGET="_top"
+>CMUCL-style</A
+>,
+  the object read being the
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_logical-p_translations.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOGICAL-PATHNAME-TRANSLATIONS</TT
+></A
+> of the <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>.</P
+></LI
+></OL
+></P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="log-path.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="files.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Logical Pathnames
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-3.html"
+TARGET="_top"
+>[CLHS-19.3]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="filenames.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Files
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-20.html"
+TARGET="_top"
+>[CLHS-20]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Implementation-Defined Packages
+   [CLHS-11.1.2.4]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Packages
+   [CLHS-11]"
+HREF="packages.html"><LINK
+REL="PREVIOUS"
+TITLE="The COMMON-LISP-USER Package
+   [CLHS-11.1.2.2]"
+HREF="clupack.html"><LINK
+REL="NEXT"
+TITLE="The Packages Dictionary
+   [CLHS-11.2.]"
+HREF="pack-dict.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="clupack.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Packages
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-11.html"
+TARGET="_top"
+>[CLHS-11]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="pack-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="imppack"
+>Implementation-Defined Packages
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-4.html"
+TARGET="_top"
+>[CLHS-11.1.2.4]</A
+></A
+></H1
+><P
+>The following additional packages exist:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Implementation-Defined Packages</B
+></P
+><DL
+><DT
+><A
+HREF="classes.html"
+><SPAN
+CLASS="QUOTE"
+>"CLOS"</SPAN
+></A
+></DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPORT</TT
+></A
+>s all <B
+CLASS="command"
+>CLOS</B
+> specific symbols, including some
+   <A
+HREF="clos-diff.html"
+>additional symbols</A
+>.
+   </P
+></DD
+><DT
+><A
+NAME="sys-pac"
+><A
+HREF="imppack.html#sys-pac"
+><SPAN
+CLASS="QUOTE"
+>"SYSTEM"</SPAN
+></A
+></A
+></DT
+><DD
+><P
+>has the nicknames <I
+CLASS="emphasis"
+><SPAN
+CLASS="QUOTE"
+>"SYS"</SPAN
+></I
+> and <I
+CLASS="emphasis"
+><SPAN
+CLASS="QUOTE"
+>"COMPILER"</SPAN
+></I
+>, and has no
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPORT</TT
+></A
+>ed symbols.  It defines many system internals.
+   </P
+></DD
+><DT
+><A
+NAME="ext-pac"
+><SPAN
+CLASS="QUOTE"
+>"EXT"</SPAN
+></A
+></DT
+><DD
+><P
+>&#13;   is the umbrella package for all extensions: it imports and <A
+HREF="pack-dict.html#re-export"
+><TT
+CLASS="function"
+>EXT:RE-EXPORT</TT
+></A
+>s
+   all the external symbols in all <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extensions, so a simple
+   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_use-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>USE-PACKAGE</TT
+></A
+> "EXT")</TT
+> is enough to
+   make all the extensions available in the current package.
+   This package uses packages (in addition to <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+>):
+   <A
+HREF="dir-key.html"
+><SPAN
+CLASS="QUOTE"
+>"LDAP"</SPAN
+></A
+> <A
+HREF="syscalls.html"
+><SPAN
+CLASS="QUOTE"
+>"POSIX"</SPAN
+></A
+> <A
+HREF="socket.html"
+><SPAN
+CLASS="QUOTE"
+>"SOCKET"</SPAN
+></A
+> <A
+HREF="clos-stream.html#gstream"
+><SPAN
+CLASS="QUOTE"
+>"GSTREAM"</SPAN
+></A
+> <A
+HREF="clos-stream.html#gray"
+><SPAN
+CLASS="QUOTE"
+>"GRAY"</SPAN
+></A
+>
+   <A
+HREF="i18n.html"
+><SPAN
+CLASS="QUOTE"
+>"I18N"</SPAN
+></A
+> <A
+HREF="customize.html"
+><SPAN
+CLASS="QUOTE"
+>"CUSTOM"</SPAN
+></A
+>.</P
+></DD
+><DT
+><A
+HREF="encoding.html"
+><SPAN
+CLASS="QUOTE"
+>"CHARSET"</SPAN
+></A
+></DT
+><DD
+><P
+>defines and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPORT</TT
+></A
+>s some character sets, for use with
+   <A
+HREF="encoding.html#make-encoding"
+><TT
+CLASS="function"
+>EXT:MAKE-ENCODING</TT
+></A
+> and as <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> argument.
+   </P
+></DD
+><DT
+><A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+></DT
+><DD
+><P
+>implements the <A
+HREF="dffi.html"
+>foreign function
+   interface</A
+>.  Some platforms only.
+   </P
+></DD
+><DT
+><A
+HREF="platform.html#screen"
+><SPAN
+CLASS="QUOTE"
+>"SCREEN"</SPAN
+></A
+></DT
+><DD
+><P
+>defines an API for <A
+HREF="platform.html#screen"
+>random screen
+   access</A
+>.  Some platforms only.
+   </P
+></DD
+></DL
+></DIV
+><P
+>All pre-existing packages except <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></A
+> belong to the
+ implementation, in the sense that the programs that do not follow
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
+TARGET="_top"
+>Section 11.1.2.1.2
+ Constraints on the COMMON-LISP Package for Conforming Programs</A
+>
+ cause undefined behavior.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="clupack.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="pack-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The COMMON-LISP-USER Package
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+>[CLHS-11.1.2.2]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="packages.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The Packages Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_packa_s_dictionary.html"
+TARGET="_top"
+>[CLHS-11.2.]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

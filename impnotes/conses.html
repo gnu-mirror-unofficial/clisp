@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Conses
+   [CLHS-14]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Obsolete Constants"
+HREF="char-bits.html"><LINK
+REL="NEXT"
+TITLE="Arrays
+   [CLHS-15]"
+HREF="arrays.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="char-bits.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="arrays.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="conses"
+>Conses
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-14.html"
+TARGET="_top"
+>[CLHS-14]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="cons-dict"
+>The Conses Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_conses_dictionary.html"
+TARGET="_top"
+>[CLHS-14.2]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="map-func"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPCAR</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPCAN</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPLIST</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPCON</TT
+></A
+>, ...</A
+></H2
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="mapcap"
+>Function <A
+HREF="conses.html#mapcap"
+><TT
+CLASS="function"
+>EXT:MAPCAP</TT
+></A
+></A
+></H3
+><P
+>The function <A
+HREF="conses.html#mapcap"
+><TT
+CLASS="function"
+>EXT:MAPCAP</TT
+></A
+> is like <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPCAN</TT
+></A
+>, except that it
+ concatenates the resulting lists with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_append.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APPEND</TT
+></A
+> instead of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NCONC</TT
+></A
+>:</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="conses.html#mapcap"
+><TT
+CLASS="function"
+>EXT:MAPCAP</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+> ... <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+> ==
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_apply.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APPLY</TT
+></A
+> #'<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_append.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APPEND</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPCAR</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+>
+ ... <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>))</TT
+></P
+><P
+>(Actually a bit more efficient that this would have been.)</P
+></DIV
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="maplap"
+>Function <A
+HREF="conses.html#mapcap"
+><TT
+CLASS="function"
+>EXT:MAPLAP</TT
+></A
+></A
+></H3
+><P
+>The function <A
+HREF="conses.html#mapcap"
+><TT
+CLASS="function"
+>EXT:MAPLAP</TT
+></A
+> is like <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPCON</TT
+></A
+>, except that it
+ concatenates the resulting lists with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_append.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APPEND</TT
+></A
+> instead of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NCONC</TT
+></A
+>:</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="conses.html#mapcap"
+><TT
+CLASS="function"
+>EXT:MAPLAP</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+> ... <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+> ==
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_apply.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APPLY</TT
+></A
+> #'<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_append.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>APPEND</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPLIST</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+>
+ ... <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>))</TT
+></P
+><P
+>(Actually a bit more efficient that this would have been.)</P
+></DIV
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="char-bits.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="arrays.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Obsolete Constants</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Arrays
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-15.html"
+TARGET="_top"
+>[CLHS-15]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Conditions Dictionary
+   [CLHS-9.2.]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Conditions
+   [CLHS-9]"
+HREF="conditions.html"><LINK
+REL="PREVIOUS"
+TITLE="Conditions
+   [CLHS-9]"
+HREF="conditions.html"><LINK
+REL="NEXT"
+TITLE="Symbols
+   [CLHS-10]"
+HREF="symbols.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="conditions.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Conditions
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-9.html"
+TARGET="_top"
+>[CLHS-9]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="symbols.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="cond-dict"
+>The Conditions Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_condi_s_dictionary.html"
+TARGET="_top"
+>[CLHS-9.2.]</A
+></A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RESTART-CASE</TT
+></A
+>. </B
+></B
+>In <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RESTART-CASE</TT
+></A
+> clauses the argument list can also be specified
+ after the keyword/value pairs instead of before them.  The syntax
+ therefore is
+
+<P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RESTART-CASE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>
+ {<TT
+CLASS="varname"
+>restart-clause</TT
+>}*)</TT
+></B
+></P
+><DL
+><DT
+><TT
+CLASS="varname"
+>restart-clause</TT
+> ::==</DT
+><DD
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;   (<TT
+CLASS="varname"
+>restart-name</TT
+> <TT
+CLASS="replaceable"
+><I
+>arglist</I
+></TT
+>
+    {<TT
+CLASS="varname"
+>keyword-value</TT
+>}* {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*) |
+   (<TT
+CLASS="varname"
+>restart-name</TT
+> {<TT
+CLASS="varname"
+>keyword-value</TT
+>}*
+    <TT
+CLASS="replaceable"
+><I
+>arglist</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)
+</PRE
+></TD
+></TR
+></TABLE
+></DD
+></DL
+></DIV
+>
+</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compute-restarts.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPUTE-RESTARTS</TT
+></A
+>. </B
+></B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compute-restarts.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPUTE-RESTARTS</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_find-restart.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FIND-RESTART</TT
+></A
+> behave as specified in
+ [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]: If the optional condition argument is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, only
+ restarts associated with that condition and restarts associated to no
+ condition at all are considered.  Therefore the effect of associating a
+ restart to a condition is not to activate it, but to hide it from other
+ conditions.  This makes the syntax dependent implicit association
+ performed by <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RESTART-CASE</TT
+></A
+> nearly obsolete.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="conditions.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="symbols.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Conditions
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-9.html"
+TARGET="_top"
+>[CLHS-9]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="conditions.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Symbols
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-10.html"
+TARGET="_top"
+>[CLHS-10]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,2985 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1.5. Defining new kinds of Streams</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-1: Platform independent Extensions"
+HREF="p-indep.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.4. Encodings"
+HREF="encoding.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.6. Weak Pointers"
+HREF="weak.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="encoding.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-1: Platform independent Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="weak.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="clos-stream"
+>Extensions-1.5. Defining new kinds of Streams</A
+></H1
+><P
+>Two mechanisms are supported for creating new streams with
+user-defined behavior:
+<P
+></P
+><UL
+><LI
+><P
+>You can create a new subclass of <A
+HREF="clos-stream.html#fu-st"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-STREAM</TT
+></A
+> and define
+  methods for the elementary stream operations on it.  These generic
+  functions all have a name starting with the prefix "stream-".
+  </P
+></LI
+><LI
+><P
+>You can create a new subclass of
+  <TT
+CLASS="classname"
+>gstream:generic-stream-controller</TT
+> and define
+  methods for the elementary stream operations on it.  These generic
+  functions all have a name starting with the prefix
+  "generic-stream-".  The stream itself is a different object, created
+  using the function <TT
+CLASS="function"
+>gstream:make-generic-stream</TT
+>.
+  </P
+></LI
+></UL
+></P
+><P
+>The <TT
+CLASS="function"
+>fundamental-stream</TT
+> API is based on the
+ <A
+HREF="ftp://parcftp.xerox.com/pub/cl/cleanup/mail/stream-definition-by-user.mail"
+TARGET="_top"
+>STREAM-DEFINITION-BY-USER:GENERIC-FUNCTIONS</A
+> proposal by David N. Gray and is supported by most <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+>
+ implementations currently in use.
+ The <TT
+CLASS="classname"
+>gstream:generic-stream-controller</TT
+>
+ API is <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> specific and is now obsolete.</P
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="gray"
+>Gray streams</A
+></H2
+><P
+>This interface permits the definition of new classes of streams,
+and programming their behavior by defining methods for the elementary
+stream operations.  It is based on the proposal <A
+HREF="ftp://parcftp.xerox.com/pub/cl/cleanup/mail/stream-definition-by-user.mail"
+TARGET="_top"
+>STREAM-DEFINITION-BY-USER:GENERIC-FUNCTIONS</A
+> of David
+N. Gray to X3J13.</P
+><P
+>All symbols defined by this interface, starting with the prefix
+ "fundamental-" or "stream-", are exported from the package
+ <A
+HREF="clos-stream.html#gray"
+><SPAN
+CLASS="QUOTE"
+>"GRAY"</SPAN
+></A
+> and re-exported from <A
+HREF="imppack.html#ext-pac"
+><SPAN
+CLASS="QUOTE"
+>"EXT"</SPAN
+></A
+>.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Defined classes</B
+></P
+><DL
+><DT
+><A
+NAME="fu-st"
+><A
+HREF="clos-stream.html#fu-st"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-STREAM</TT
+></A
+></A
+></DT
+><DD
+><P
+>This is a superclass of all user-defined streams.
+   It is a subclass of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> and of <A
+HREF="http://www.lisp.org/HyperSpec/Body/cla_standard-object.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STANDARD-OBJECT</TT
+></A
+>.
+   Its metaclass is <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_standard-class.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STANDARD-CLASS</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="fu-st-in"
+><A
+HREF="clos-stream.html#fu-st-in"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-INPUT-STREAM</TT
+></A
+></A
+></DT
+><DD
+><P
+>This is a superclass of all user-defined input streams.
+   It is a subclass of <A
+HREF="clos-stream.html#fu-st"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-STREAM</TT
+></A
+>.  The built-in function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_input-str_put-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>INPUT-STREAM-P</TT
+></A
+>
+   returns true on instances of this class.  This means that when you
+   define a new stream class capable of doing input, you have to make it
+   a subclass of <A
+HREF="clos-stream.html#fu-st-in"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-INPUT-STREAM</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="fu-st-out"
+><A
+HREF="clos-stream.html#fu-st-out"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-OUTPUT-STREAM</TT
+></A
+></A
+></DT
+><DD
+><P
+>This is a superclass of all user-defined output streams.
+   It is a subclass of <A
+HREF="clos-stream.html#fu-st"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-STREAM</TT
+></A
+>.  The built-in function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_input-str_put-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OUTPUT-STREAM-P</TT
+></A
+>
+   returns true on instances of this class.  This means that when you
+   define a new stream class capable of doing output, you have to make
+   it a subclass of <A
+HREF="clos-stream.html#fu-st-out"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-OUTPUT-STREAM</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="fu-st-char"
+><A
+HREF="clos-stream.html#fu-st-char"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-CHARACTER-STREAM</TT
+></A
+></A
+></DT
+><DD
+><P
+>This is a superclass of all user-defined streams
+   whose <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.  It is a subclass of
+   <A
+HREF="clos-stream.html#fu-st"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-STREAM</TT
+></A
+>.  It defines a method on <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> that returns
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="fu-st-bin"
+><A
+HREF="clos-stream.html#fu-st-bin"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-BINARY-STREAM</TT
+></A
+></A
+></DT
+><DD
+><P
+>This is a superclass of all user-defined streams
+   whose <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is a subtype of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>.  It is a
+   subclass of <A
+HREF="clos-stream.html#fu-st"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-STREAM</TT
+></A
+>.  When you define a subclass of <A
+HREF="clos-stream.html#fu-st-bin"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-BINARY-STREAM</TT
+></A
+>,
+   you have to provide a method on <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-CHARACTER-INPUT-STREAM</TT
+></DT
+><DD
+><P
+>This is a convenience class inheriting from both
+   <A
+HREF="clos-stream.html#fu-st-char"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-CHARACTER-STREAM</TT
+></A
+> and <A
+HREF="clos-stream.html#fu-st-in"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-INPUT-STREAM</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-CHARACTER-OUTPUT-STREAM</TT
+></DT
+><DD
+><P
+>This is a convenience class inheriting from both
+   <A
+HREF="clos-stream.html#fu-st-char"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-CHARACTER-STREAM</TT
+></A
+> and <A
+HREF="clos-stream.html#fu-st-out"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-OUTPUT-STREAM</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-BINARY-INPUT-STREAM</TT
+></DT
+><DD
+><P
+>This is a convenience class inheriting from both
+   <A
+HREF="clos-stream.html#fu-st-bin"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-BINARY-STREAM</TT
+></A
+> and <A
+HREF="clos-stream.html#fu-st-in"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-INPUT-STREAM</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-BINARY-OUTPUT-STREAM</TT
+></DT
+><DD
+><P
+>This is a convenience class inheriting from both
+   <A
+HREF="clos-stream.html#fu-st-bin"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-BINARY-STREAM</TT
+></A
+> and <A
+HREF="clos-stream.html#fu-st-out"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-OUTPUT-STREAM</TT
+></A
+>.</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>general generic functions defined on streams</B
+></P
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Returns the stream's element type, normally a
+   subtype of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>.</P
+><P
+>The method for <A
+HREF="clos-stream.html#fu-st-char"
+><TT
+CLASS="classname"
+>GRAY:FUNDAMENTAL-CHARACTER-STREAM</TT
+></A
+> returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>((<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>)
+    <TT
+CLASS="replaceable"
+><I
+>new-element-type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Changes the stream's element type.</P
+><P
+>The default method signals an error.</P
+><P
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see <A
+HREF="stream-dict.html#stream-eltype"
+>setting <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+></A
+>)</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:ABORT</TT
+>)</TT
+></DT
+><DD
+><P
+>Closes the stream and flushes any associated buffers.
+   </P
+><P
+>When you define a primary method on this
+    function, do not forget to <A
+HREF="http://www.lisp.org/HyperSpec/Body/locfun_call-next-method.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CALL-NEXT-METHOD</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN-STREAM-P</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Returns true before the stream has been closed, and
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> after the stream has been closed.</P
+><P
+>You do not need to add methods to this function.</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>generic functions for character input</B
+></P
+><DL
+><DT
+><A
+NAME="st-rc"
+><TT
+CLASS="literal"
+>(<A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>If a character was pushed back using <A
+HREF="clos-stream.html#st-uc"
+><TT
+CLASS="function"
+>GRAY:STREAM-UNREAD-CHAR</TT
+></A
+>,
+   returns and consumes it.  Otherwise returns and consumes the next
+   character from the stream. Returns <TT
+CLASS="constant"
+>:EOF</TT
+> if the <TT
+CLASS="literal"
+>end-of-stream</TT
+> is reached.
+   </P
+><P
+>You must define a method for this function.</P
+></DD
+><DT
+><A
+NAME="st-uc"
+><TT
+CLASS="literal"
+>(<A
+HREF="clos-stream.html#st-uc"
+><TT
+CLASS="function"
+>GRAY:STREAM-UNREAD-CHAR</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>char</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Pushes <TT
+CLASS="replaceable"
+><I
+>char</I
+></TT
+>, which must be the last character
+   read from the <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>, back onto the front of the <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.
+   </P
+><P
+>You must define a method for this function.</P
+></DD
+><DT
+><A
+NAME="st-rcnh"
+><TT
+CLASS="literal"
+>(<A
+HREF="clos-stream.html#st-rcnh"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR-NO-HANG</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Returns a character or <TT
+CLASS="constant"
+>:EOF</TT
+>, like <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+>, if
+   that would return immediately.  If <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+>'s value is not available
+   immediately, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> instead of waiting.</P
+><P
+>&#13;   The default method simply calls <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+>; this is sufficient for streams
+   whose <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> method never blocks.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-PEEK-CHAR</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>If a character was pushed back using <A
+HREF="clos-stream.html#st-uc"
+><TT
+CLASS="function"
+>GRAY:STREAM-UNREAD-CHAR</TT
+></A
+>,
+   returns it.  Otherwise returns the next character from the stream,
+   avoiding any side effects <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> would do.  Returns <TT
+CLASS="constant"
+>:EOF</TT
+> if the
+   <TT
+CLASS="literal"
+>end-of-stream</TT
+> is reached.</P
+><P
+>The default method calls <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> and <A
+HREF="clos-stream.html#st-uc"
+><TT
+CLASS="function"
+>GRAY:STREAM-UNREAD-CHAR</TT
+></A
+>; this is
+   sufficient for streams whose <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> method has no
+   side-effects.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-LISTEN</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>If a character was pushed back using <A
+HREF="clos-stream.html#st-uc"
+><TT
+CLASS="function"
+>GRAY:STREAM-UNREAD-CHAR</TT
+></A
+>,
+   returns it.  Otherwise returns the next character from the stream, if
+   already available.  If no character is available immediately, or if
+   <TT
+CLASS="literal"
+>end-of-stream</TT
+> is reached, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+><P
+>The default method calls <A
+HREF="clos-stream.html#st-rcnh"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR-NO-HANG</TT
+></A
+> and <A
+HREF="clos-stream.html#st-uc"
+><TT
+CLASS="function"
+>GRAY:STREAM-UNREAD-CHAR</TT
+></A
+>; this is
+   sufficient for streams whose <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> method has no
+   side-effects.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR-WILL-HANG-P</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> will return immediately.
+   Otherwise it returns true.</P
+><P
+>The default method calls <A
+HREF="clos-stream.html#st-rcnh"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR-NO-HANG</TT
+></A
+> and <A
+HREF="clos-stream.html#st-uc"
+><TT
+CLASS="function"
+>GRAY:STREAM-UNREAD-CHAR</TT
+></A
+>; this is
+   sufficient for streams whose <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+> method has no side-effects.</P
+><P
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see <A
+HREF="listen.html#rcwhp"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-WILL-HANG-P</TT
+></A
+>).</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR-SEQUENCE</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> [<TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>]])</TT
+></DT
+><DD
+><P
+>Fills the subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified by
+   <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> with characters consecutively read from <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.
+   Returns the index of the first element of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> that was not
+   updated (= <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> or &#60; <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> if the stream reached its end).
+   </P
+><P
+><TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is an array of characters, i.e. a
+   string.  <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> is a nonnegative integer and default to 0.
+   <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> is a nonnegative integer or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and defaults to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+   which stands for <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>)</TT
+>.
+   </P
+><P
+>The default method repeatedly calls <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+>; this
+   is always sufficient if speed does not matter.</P
+><P
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see
+    <A
+HREF="stream-dict.html#rd-ch-seq"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-SEQUENCE</TT
+></A
+>)</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-READ-LINE</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Reads a line of characters, and return two values: the
+   line (a string, without the terminating <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> character), and a boolean
+   value which is true if the line was terminated by <TT
+CLASS="literal"
+>end-of-stream</TT
+> instead of <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+>.
+   </P
+><P
+>The default method repeatedly calls <A
+HREF="clos-stream.html#st-rc"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-CHAR</TT
+></A
+>; this
+   is always sufficient.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gray:stream-clear-input</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Clears all pending interactive input from the
+   stream, and returns true if some pending input was removed.</P
+><P
+>The default method does nothing and returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>; this is
+   sufficient for non-interactive streams.</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>generic functions for character output</B
+></P
+><DL
+><DT
+><A
+NAME="st-wc"
+><TT
+CLASS="literal"
+>(<A
+HREF="clos-stream.html#st-wc"
+><TT
+CLASS="function"
+>GRAY:STREAM-WRITE-CHAR</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>char</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Writes <TT
+CLASS="replaceable"
+><I
+>char</I
+></TT
+>.
+   </P
+><P
+>You must define a method for this function.</P
+></DD
+><DT
+><A
+NAME="st-lc"
+><TT
+CLASS="literal"
+>(<A
+HREF="clos-stream.html#st-lc"
+><TT
+CLASS="function"
+>GRAY:STREAM-LINE-COLUMN</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Returns the column number where the next character
+   would be written (0 stands for the first column), or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if that is
+   not meaningful for this stream.
+   </P
+><P
+>You must define a method for this function.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-START-LINE-P</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Returns true if the next character would be
+   written at the start of a new line.</P
+><P
+>The default method calls <A
+HREF="clos-stream.html#st-lc"
+><TT
+CLASS="function"
+>GRAY:STREAM-LINE-COLUMN</TT
+></A
+> and compares its result with
+   0; this is sufficient for streams whose <A
+HREF="clos-stream.html#st-lc"
+><TT
+CLASS="function"
+>GRAY:STREAM-LINE-COLUMN</TT
+></A
+> never returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-WRITE-CHAR-SEQUENCE</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> [<TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>]])</TT
+></DT
+><DD
+><P
+>Outputs the subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified
+   by <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> to <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.</P
+><P
+><TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is an array of characters, i.e. a string.
+   <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> is a nonnegative integer and default to 0.  <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> is a
+   nonnegative integer or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and defaults to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, which stands
+   for <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>)</TT
+>.
+   </P
+><P
+>The default method repeatedly calls <A
+HREF="clos-stream.html#st-wc"
+><TT
+CLASS="function"
+>GRAY:STREAM-WRITE-CHAR</TT
+></A
+>; this
+   is always sufficient if speed does not matter.
+   </P
+><P
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension
+    (see <A
+HREF="stream-dict.html#wr-ch-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-CHAR-SEQUENCE</TT
+></A
+>)</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-WRITE-STRING</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> [<TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>]])</TT
+></DT
+><DD
+><P
+>Outputs the subsequence of <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> specified by
+   <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> to <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.  Returns <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>.</P
+><P
+><TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> is a string.  <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> is a nonnegative integer
+   and default to 0.  <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> is a nonnegative integer or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and
+   defaults to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, which stands for <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>)</TT
+>.</P
+><P
+>The default method calls
+   <TT
+CLASS="function"
+>GRAY:STREAM-WRITE-CHAR-SEQUENCE</TT
+>;
+   this is always sufficient.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-TERPRI</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Outputs a <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> character.</P
+><P
+>The default method calls <A
+HREF="clos-stream.html#st-wc"
+><TT
+CLASS="function"
+>GRAY:STREAM-WRITE-CHAR</TT
+></A
+>; this is always
+   sufficient.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-FRESH-LINE</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Possibly outputs a <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> character, so as to ensure
+   that the next character would be written at the start of a new line.
+   Returns true if it did output a <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> character.</P
+><P
+>The default method calls
+   <TT
+CLASS="function"
+>GRAY:STREAM-START-LINE-P</TT
+> and then
+   <TT
+CLASS="function"
+>GRAY:STREAM-TERPRI</TT
+> if necessary; this is always
+   sufficient.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-FINISH-OUTPUT</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Ensures that any buffered output has reached its
+   destination, and then returns.</P
+><P
+>The default method does nothing.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-FORCE-OUTPUT</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Brings any buffered output on its way towards its
+   destination, and returns without waiting until it has reached its
+   destination.</P
+><P
+>The default method does nothing.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-CLEAR-OUTPUT</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Attempts to discard any buffered output which has
+   not yet reached its destination.</P
+><P
+>The default method does nothing.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-ADVANCE-TO-COLUMN</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>column</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Ensures that the next character will be written at
+   <TT
+CLASS="replaceable"
+><I
+>column</I
+></TT
+> at least.</P
+><P
+>The default method outputs an appropriate amount of space
+   characters; this is sufficient for non-proportional output.</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>generic functions for binary input</B
+></P
+><DL
+><DT
+><A
+NAME="st-rb"
+><TT
+CLASS="literal"
+>(<A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Returns and consumes the next integer from the
+   stream. Returns <TT
+CLASS="constant"
+>:EOF</TT
+> if the <TT
+CLASS="literal"
+>end-of-stream</TT
+> is reached.</P
+><P
+>You must define a method for this function.</P
+></DD
+><DT
+><A
+NAME="st-rbla"
+><TT
+CLASS="literal"
+>(<A
+HREF="clos-stream.html#st-rbla"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE-LOOKAHEAD</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> if <A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+> would return immediately with an
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> result.  Returns <TT
+CLASS="constant"
+>:EOF</TT
+> if the <TT
+CLASS="literal"
+>end-of-stream</TT
+> is already
+   known to be reached.  If <A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+>'s value is not available
+   immediately, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> instead of waiting.</P
+><P
+>You must define a method for this function.</P
+><P
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see
+   <A
+HREF="read-byte.html#rbla"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-LOOKAHEAD</TT
+></A
+>).</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE-WILL-HANG-P</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if <A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+> will return immediately.
+   Otherwise it returns true.</P
+><P
+>The default method calls <A
+HREF="clos-stream.html#st-rbla"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE-LOOKAHEAD</TT
+></A
+>; this is always sufficient.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE-NO-HANG</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns an <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> or <TT
+CLASS="constant"
+>:EOF</TT
+>, like <A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+>, if that would
+   return immediately.  If <A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+>'s value is not available immediately,
+   returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> instead of waiting.</P
+><P
+>The default method calls <A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+> if <A
+HREF="clos-stream.html#st-rbla"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE-LOOKAHEAD</TT
+></A
+> returns true;
+   this is always sufficient.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE-SEQUENCE</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> [<TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>]])</TT
+></DT
+><DD
+><P
+>Fills the subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified by
+   <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> with integers consecutively read from
+   <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>.  Returns the index of the first element of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+   that was not updated (= <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> or &#60; <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> if the stream reached
+   its end).</P
+><P
+><TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is an array of integers.  <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> is a
+   nonnegative integer and default to 0.  <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> is a nonnegative
+   integer or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and defaults to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, which stands for <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>)</TT
+>.</P
+><P
+>The default method repeatedly calls <A
+HREF="clos-stream.html#st-rb"
+><TT
+CLASS="function"
+>GRAY:STREAM-READ-BYTE</TT
+></A
+>; this is always
+   sufficient if speed does not matter.</P
+><P
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see
+   <A
+HREF="stream-dict.html#rd-by-seq"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-SEQUENCE</TT
+></A
+>).</P
+></DD
+></DL
+></DIV
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>generic functions for binary output</B
+></P
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-WRITE-BYTE</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Writes <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+>.</P
+><P
+>You must define a method for this function.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>GRAY:STREAM-WRITE-BYTE-SEQUENCE</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> [<TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>]])</TT
+></DT
+><DD
+><P
+>Outputs the subsequence of <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> specified
+   by <TT
+CLASS="constant"
+>:START</TT
+> and <TT
+CLASS="constant"
+>:END</TT
+> to <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+></P
+><P
+><TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+> is an array of integers.  <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> is a
+   nonnegative integer and default to 0.  <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+> is a nonnegative
+   integer or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and defaults to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, which stands for <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>sequence</I
+></TT
+>)</TT
+>.</P
+><P
+>The default method repeatedly calls
+   <TT
+CLASS="function"
+>GRAY:STREAM-WRITE-BYTE</TT
+>; this is always
+   sufficient if speed does not matter.</P
+><P
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see
+   <A
+HREF="stream-dict.html#wr-by-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-BYTE-SEQUENCE</TT
+></A
+>).</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="gstream"
+>Generic streams</A
+></H2
+><P
+>This interface is <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> specific and now obsolete.  Please use
+ the <A
+HREF="clos-stream.html#gray"
+>Gray streams</A
+> interface instead.</P
+><P
+>Generic streams are user programmable streams.
+ The programmer interface:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:make-generic-stream</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>returns a generic stream.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-controller</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>returns a private object to which generic stream
+   methods dispatch.  The typical usage is to retrieve the object
+   originally provided by the user in
+   <TT
+CLASS="function"
+>gstream:make-generic-stream</TT
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-p</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>determines whether a stream is a generic stream,
+   returning <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> if it is, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> otherwise.
+  </P
+></DD
+></DL
+></DIV
+><P
+>In order to specify the behavior of a generic stream, the user
+ must define <B
+CLASS="command"
+>CLOS</B
+> methods on the following <B
+CLASS="command"
+>CLOS</B
+> generic
+ functions.  The function
+ <TT
+CLASS="function"
+>gstream:generic-stream-<TT
+CLASS="replaceable"
+><I
+>xyz</I
+></TT
+></TT
+>
+ corresponds to the <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> function
+ <TT
+CLASS="function"
+><TT
+CLASS="replaceable"
+><I
+>xyz</I
+></TT
+></TT
+>.  They all take a
+ controller and some number of arguments.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-read-char</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+> Returns and consumes the next character, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> at
+    end of file.  Takes one argument, the controller object.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-peek-char</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+> Returns the next character, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> at end of file.  A
+   second value indicates whether the side effects associated with
+   consuming the character were executed: <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> means that a full
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+> was done, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> means that no side effects were done.
+   Takes one argument, the controller object.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-read-byte</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Returns and consumes the next integer, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> at end
+   of file.  Takes one argument, the controller object.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-read-char-will-hang-p</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>This generic function is used to query the stream's
+   input status.  It returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if
+   <TT
+CLASS="function"
+>gstream:generic-stream-read-char</TT
+> and
+   <TT
+CLASS="function"
+>gstream:generic-stream-peek-char</TT
+> will certainly
+   return immediately.  Otherwise it returns true.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-write-char</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>char</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>The first argument is the controller object.
+   The second argument is the character to be written.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-write-byte</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>by</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>The first argument is the controller object.
+   The second argument is the integer to be written.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-write-string</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>length</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Writes the subsequence of <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> starting from
+   <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> of length <TT
+CLASS="replaceable"
+><I
+>length</I
+></TT
+>.
+   The first argument is the controller object.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-clear-input</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+>
+  <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-clear-output</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+>
+  <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-finish-output</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+>
+  <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-force-output</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+>
+  <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>gstream:generic-stream-close</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>controller</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Take one argument, the controller object.
+ </P
+></DD
+></DL
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="encoding.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="weak.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.4. Encodings</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="p-indep.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.6. Weak Pointers</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

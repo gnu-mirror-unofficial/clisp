@@ -1,0 +1,9573 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The instruction set</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="The CLISP bytecode specification"
+HREF="bytecode.html"><LINK
+REL="PREVIOUS"
+TITLE="The general structure of the instructions"
+HREF="intr-struct.html"><LINK
+REL="NEXT"
+TITLE="Extensions"
+HREF="extensions.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="intr-struct.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="extensions.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="intr-set"
+>The instruction set</A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-const"
+>Instructions for constants</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN12947"
+></A
+><P
+><B
+>Table 1. Instructions for constants</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(PUSH-NIL <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Push <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>s into the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> times do: *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load the function's <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>th constant into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>],
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-lex-var"
+>Instructions for lexical variables</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN13018"
+></A
+><P
+><B
+>Table 2. Instructions for lexical variables</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load a directly accessible local variable into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADI <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load an indirectly accessible local variable into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+              <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := *(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)+ <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>),
+              <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADC <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load a closed-up variable, defined in the same function and
+             directly accessible, into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>),1+<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADV <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load a closed-up variable, defined in an outer function,
+             into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+> := <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>venv-const</TT
+></A
+>,
+             <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> times do: <TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+>,0),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+>,<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADIC <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load a closed-up variable, defined in the same function and
+             indirectly accessible, into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(*(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>),1+<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Store values into a directly accessible local variable.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(STOREI <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Store values into an indirectly accessible local variable.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+              *(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)+ <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+              <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(STOREC <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Store values into a closed-up variable, defined in the same
+             function and directly accessible.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>),1+m) := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(STOREV <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Store values into a closed-up variable, defined in an outer
+             function.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+> := <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>venv-const</TT
+></A
+>,
+             <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> times do: <TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+>,0),
+             <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+>,<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>) := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(STOREIC <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Store values into a closed-up variable, defined in the same
+             function and indirectly accessible.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+             <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(*(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>),1+<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>) := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-dyn-var"
+>Instructions for dynamic variables</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN13242"
+></A
+><P
+><B
+>Table 3. Instructions for dynamic variables</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(GETVALUE
+             <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load a symbol's value into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := symbol-value(<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>]),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SETVALUE
+             <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Store values into a symbol's value.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>symbol-value(<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>]) := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(BIND
+             <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Bind a symbol dynamically.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Bind the value of the symbol
+             <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>] to <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             implicitly <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= 3,
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNBIND1)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve one binding frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Unbind the binding frame <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> is pointing to,
+             implicitly <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 3</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNBIND
+             <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> binding frames.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> times do:
+              Unbind the binding frame <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> is pointing to, thereby
+              incrementing <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>
+             Thus, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 1+2*<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(PROGV)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Bind a set of symbols dynamically to a set of values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>symbols</I
+></TT
+> := *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++,
+             *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>,
+             build a single binding frame binding the symbols in
+             <TT
+CLASS="replaceable"
+><I
+>symbols</I
+></TT
+> to the values in <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             values undefined</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-stack"
+>Instructions for stack operations</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN13331"
+></A
+><P
+><B
+>Table 4. Instructions for stack operations</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Push one object onto the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(POP)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Pop one object from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SKIP <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Restore a previous <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> pointer.
+             Remove <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> objects from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> + <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SKIPI <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Restore a previous <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> pointer. Remove an unknown
+             number of objects from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>+1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SKIPSP <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Restore a previous <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> pointer.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-jump"
+>Instructions for control flow, jumps</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN13436"
+></A
+><P
+><B
+>Table 5. Instructions for control flow, jumps</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SKIP&#38;RET <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Clean up the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, and return from the function.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>,
+            return from the function, returning values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SKIP&#38;RETGF <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Clean up the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, and return from the generic
+             function.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If bit 3 is set in the function's <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>flags</TT
+></A
+>,
+                then <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1,
+                     and return from the function.
+             Otherwise: if the current function has no <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+> argument,
+                then <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>numreq</TT
+></A
+>,
+                     apply <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> to the <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>numreq</TT
+></A
+> arguments
+                           still on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, and
+                           return from the function.
+                Else <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>numreq</TT
+></A
+>-1,
+                     apply <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> to the <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>numreq</TT
+></A
+> arguments and the
+                           <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+> argument, all still on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, and
+                           return from the function.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMP <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIF <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is true.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is false.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIF1 <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+> and forget secondary values,
+             if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is true.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+                <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1, PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFNOT1 <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+> and forget secondary values,
+             if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is false.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+                <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1, PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFATOM <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is not a cons.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is not a cons, PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFCONSP <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is a cons.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is a cons, PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+                values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFEQ <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> to the top-of-stack.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If eq(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++), PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFNOTEQ <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+>
+             to the top-of-stack.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If not eq(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++), PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFEQTO <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>,
+             if the top-of-stack is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> to a constant.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If eq(*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++,<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>]), PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFNOTEQTO <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>
+             <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if the top-of-stack is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+>
+             to a constant.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If not eq(*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++,<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>]), PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPHASH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Table-driven jump, depending on <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Lookup <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> in the hash table <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>].
+             (The hash table's test is either <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQL</TT
+></A
+>.)
+             If found, the hash table value is a signed <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>,
+             jump to it: PC := PC + value.  Else jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPHASHV <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Table-driven jump, depending on <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>,
+             inside a generic function.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Lookup <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> in the hash table <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[0],<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>).
+             (The hash table's test is either <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQL</TT
+></A
+>.)
+             If found, the hash table value is a signed <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>,
+             jump to it: PC := PC + value.  Else jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JSR <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Subroutine call.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := function. Then start interpreting the
+             bytecode at <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, with values undefined.
+             When a <TT
+CLASS="literal"
+>(RET)</TT
+> is encountered,
+             program execution is resumed at the instruction after
+             <TT
+CLASS="literal"
+>(JSR <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPTAIL <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>
+             <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Tail subroutine call.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> &#62;= <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>.
+             The <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> frame of size <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is reduced to size <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>:
+             {*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>), ..., *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1)} :=
+               {*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, ..., *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>-1)}.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += n-m.
+             *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := function.
+             Then jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, with values undefined.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-env"
+>Instructions for lexical environment,
+   creation of closures</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN13750"
+></A
+><P
+><B
+>Table 6. Instructions for lexical environment,
+   creation of closures</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(VENV)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load the <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>venv-const</TT
+></A
+> into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[0], <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(MAKE-VECTOR1&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a simple-vector used for closed-up variables.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+> := new simple-vector of size <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>+1.
+             <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+>,0) := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.
+             *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <TT
+CLASS="replaceable"
+><I
+>v</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(COPY-CLOSURE <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a closure by copying the prototype and filling in
+             the lexical environment.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>f</I
+></TT
+> := copy-function(<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>]).
+             For <TT
+CLASS="replaceable"
+><I
+>i</I
+></TT
+>=0,..,<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1:
+                 <TT
+CLASS="replaceable"
+><I
+>f</I
+></TT
+>_<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[i] := *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1-<TT
+CLASS="replaceable"
+><I
+>i</I
+></TT
+>).
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>.
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <TT
+CLASS="replaceable"
+><I
+>f</I
+></TT
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-funcall"
+>Instructions for function calls</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN13818"
+></A
+><P
+><B
+>Table 7. Instructions for function calls</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a constant function with <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> arguments.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>The function <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>] is called
+             with the arguments *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>-1), ..., *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0).
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL0 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a constant function with 0 arguments.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>The function <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>] is called with 0 arguments.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL1 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a constant function with 1 argument.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>The function <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>] is called with one argument *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 1. The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL2 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a constant function with 2 arguments.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>The function <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>] is called
+             with two arguments *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+1) and *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0).
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 2. The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a system function with no <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls the system function FUNTAB[<TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>].
+             The right number of arguments is already on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>
+             (including <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>s in place of absent <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> or
+              <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> parameters).
+             The arguments are removed from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a system function with no <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls the system function FUNTAB[256+<TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>].
+             The right number of arguments is already on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>
+             (including <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>s in place of absent <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> or
+              <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> parameters).
+             The arguments are removed from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a system function with <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls the system function FUNTABR[<TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>].
+             The minimum number of arguments is already on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>,
+             and <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> additional arguments as well.
+             The arguments are removed from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLC)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a computed compiled function with no <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls the compiled function <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.
+             The right number of arguments is already on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>
+             (including <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>s in place of absent <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+              parameters).
+             The arguments are removed from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLCKEY)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a computed compiled function with <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls the compiled function <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.
+             The right number of arguments is already on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>
+             (including <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>s in place of absent <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+              or <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> parameters).
+             The arguments are removed from the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(FUNCALL <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a computed function.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls the function *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)
+             with the arguments *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1), ..., *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0).
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>+1.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(APPLY <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls a computed function with an unknown number of
+             arguments.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Calls the function *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)
+             with the arguments *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1), ..., *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0)
+             and a list of additional arguments <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>+1.
+             The returned values go into values.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-optkey"
+>Instructions for optional
+  and keyword parameters</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14006"
+></A
+><P
+><B
+>Table 8. Instructions for optional
+  and keyword parameters</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(PUSH-UNBOUND <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Push <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>s into the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> times do: *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNLIST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Destructure a proper list.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>0 &#8804; <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> &#8804; <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>.
+             <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> times do: *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+>(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>).
+             During the last <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> iterations, the list <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>
+             may already have reached its end;
+             in this case, *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>.
+             At the end, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> must be <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNLIST* <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Destructure a proper or dotted list.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>0 &#8804; <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> &#8804; <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> &#62; 0.
+             <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> times do: *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+>(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>).
+             During the last <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> iterations, the list <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>
+             may already have reached its end;
+             in this case, *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>.
+             At the end, after <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>s, *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JMPIFBOUNDP <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>, if a local variable is not unbound.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) is not <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>,
+                <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>), <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1, PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.
+             Else: values undefined.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(BOUNDP <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> into values, depending on whether a local
+             variable is bound.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) is not <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>,
+                <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.
+             Else: <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNBOUND-&#62;NIL <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If a local variable is unbound, assign a default value
+             <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> to it.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>If *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) is <TT
+CLASS="literal"
+>#&#60;UNBOUND&#62;</TT
+>,
+             *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-mulval"
+>Instructions for multiple values</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14162"
+></A
+><P
+><B
+>Table 9. Instructions for multiple values</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(VALUES0)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load no values into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 0</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(VALUES1)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Forget secondary values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>-TO-MV <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Pop the first <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> objects from <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Load values(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1),...,*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0)) into
+             values. <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(MV-TO-<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Save values on <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Push the <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> values onto the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>
+             (in order: <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> comes first).
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(NV-TO-<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Save <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> values on <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Push the first <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> values onto the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>
+             (in order: <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> comes first).
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(MV-TO-LIST)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Convert multiple values into a list.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := list of values, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LIST-TO-MV)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Convert a list into multiple values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Call the function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_values-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>VALUES-LIST</TT
+></A
+> with <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> as argument.
+             The returned values go into values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(MVCALLP)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Start a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_multiple-value-call.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MULTIPLE-VALUE-CALL</TT
+></A
+> invocation.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>*--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>. *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(MVCALL)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Finish a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_multiple-value-call.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MULTIPLE-VALUE-CALL</TT
+></A
+> invocation.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>newSTACK := *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>++.
+             Call the function *(newSTACK-1), passing it
+             *(newSTACK-2), ..., *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0) as arguments.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := newSTACK.
+             The returned values go into values.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-block"
+>Instructions for
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_return-from.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RETURN-FROM</TT
+></A
+></A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14298"
+></A
+><P
+><B
+>Table 10. Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_return-from.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RETURN-FROM</TT
+></A
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(BLOCK-OPEN <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> frame, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= 3, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> -= 2+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             The topmost (third) object in the block frame is
+             <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_cons.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONS</TT
+></A
+>(<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>],frame-pointer) (its <TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+>).
+             Upon a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_return-from.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RETURN-FROM</TT
+></A
+> to this frame,
+             execution will continue at <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(BLOCK-CLOSE)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> frame at <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 3,
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> += 2+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>. Mark the <TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+> as invalid.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(RETURN-FROM <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Leave a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> whose <TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+> is given.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+> := <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>].
+             If <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+>) = <TT
+CLASS="literal"
+>#&#60;DISABLED&#62;</TT
+>, signal an error.
+             Else <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+>) is a frame-pointer.
+             Unwind the stack up to this frame, pass it values.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(RETURN-FROM-I <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Leave a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BLOCK</TT
+></A
+> whose <TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+> is indirectly accessible.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+             <TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+> := *(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>).
+             If <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+>) = <TT
+CLASS="literal"
+>#&#60;DISABLED&#62;</TT
+>, signal an error.
+             Else <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>block-cons</I
+></TT
+>) is a frame-pointer.
+             Unwind the stack up to this frame, pass it values.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-tagbody"
+>Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_go.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GO</TT
+></A
+></A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14413"
+></A
+><P
+><B
+>Table 11. Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_go.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GO</TT
+></A
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(TAGBODY-OPEN <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>
+             <TT
+CLASS="replaceable"
+><I
+>label<SUB
+>1</SUB
+></I
+></TT
+> ...
+             <TT
+CLASS="replaceable"
+><I
+>label<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a tagbody frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Fetch <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>], this is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+> with
+             <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> elements, then decode <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> label operands.
+             Create a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_tagbody.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TAGBODY</TT
+></A
+> frame, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= 3+<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> -= 1+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             The third object in the tagbody frame is
+             <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_cons.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONS</TT
+></A
+>(<A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>],frame-pointer) (the <TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+>)
+             Upon a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_go.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GO</TT
+></A
+> to tag <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+> of this frame, execution
+             will continue at
+              <TT
+CLASS="replaceable"
+><I
+>label<SUB
+>l</SUB
+></I
+></TT
+>.
+             values undefined</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(TAGBODY-CLOSE-NIL)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve a tagbody frame, and load <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> into values.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve the tagbody frame at <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 3+<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> += 1+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             Mark the <TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+> as invalid.
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(TAGBODY-CLOSE)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve a tagbody frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve the tagbody frame at <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 3+<TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> += 1+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             Mark the <TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+> as invalid.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(GO <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump into a tagbody whose <TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+> is given.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+> := <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>].
+             If <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+>) = <TT
+CLASS="literal"
+>#&#60;DISABLED&#62;</TT
+>, signal an error.
+             Else <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+>) is a frame-pointer. Unwind the stack up
+             to this frame, pass it the number <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(GO-I <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Jump into a tagbody whose <TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+> is indirectly
+             accessible.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> := <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> + <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+> * <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+>,
+             <TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+> := *(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>).
+             If <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+>) = <TT
+CLASS="literal"
+>#&#60;DISABLED&#62;</TT
+>, signal an error.
+             Else <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>tagbody-cons</I
+></TT
+>) is a frame-pointer. Unwind the stack up
+             to this frame, pass it the number <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-catch"
+>Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_throw.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>THROW</TT
+></A
+></A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14559"
+></A
+><P
+><B
+>Table 12. Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_throw.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>THROW</TT
+></A
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CATCH-OPEN <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> frame, with <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> as tag.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= 3, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> -= 2+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             Upon a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_throw.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>THROW</TT
+></A
+> to this tag execution continues at
+             <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CATCH-CLOSE)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> frame at <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 3, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> += 2+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(THROW)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Non-local exit to a <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>tag</I
+></TT
+> := *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++.
+             Search the innermost <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_catch.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CATCH</TT
+></A
+> frame with tag
+             <TT
+CLASS="replaceable"
+><I
+>tag</I
+></TT
+> on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, unwind the
+             stack up to it, pass it values.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-unwind"
+>Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+></A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14629"
+></A
+><P
+><B
+>Table 13. Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNWIND-PROTECT-OPEN
+             <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create an <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+> frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create an <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+> frame.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= 2, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> -= 2+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             When the stack will be unwound by a non-local exit,
+             values will be saved on <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, and execution will be
+             transferred to <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNWIND-PROTECT-NORMAL-EXIT)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve an <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+> frame, and start the cleanup
+             code.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+> frame at <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 2, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> += 2+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := 0, *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := 0, *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             Save the values on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNWIND-PROTECT-CLOSE)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Terminate the cleanup code.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>newSTACK := *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>++. Load
+             values(*(newSTACK-1), ..., *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0)) into values.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := newSTACK. SPword1 := *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>++, SPword2 := *<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>++.
+             Continue depending on SPword1 and SPword2.
+             If both are 0, simply continue execution.
+             If SPword2 is 0 but SPword1 is nonzero, interpret it as a
+             label and jump to it.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(UNWIND-PROTECT-CLEANUP)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve an <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+> frame, and execute the cleanup
+             code like a subroutine call.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Dissolve the <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+> frame at <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>,
+             get <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+> out of the frame.
+             <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 2, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> += 2+<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>jmpbufsize</TT
+></A
+>.
+             *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := 0, *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := PC, *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>.
+             Save the values on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> -= <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+>.
+             PC := <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-handler"
+>Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_handler-bind.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>HANDLER-BIND</TT
+></A
+></A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14742"
+></A
+><P
+><B
+>Table 14. Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_handler-bind.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>HANDLER-BIND</TT
+></A
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(HANDLER-OPEN <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a handler frame.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Create a handler frame, using <A
+HREF="comp-fun.html"
+><TT
+CLASS="literal"
+>consts</TT
+></A
+>[<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>] which
+             contains the condition types, the corresponding labels and
+             the current <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> depth (= function entry <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> - current <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+>).
+             </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(HANDLER-BEGIN&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Start a handler.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Restore the same <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>SP</TT
+></A
+> state as after the HANDLER-OPEN.
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := the condition that was passed to the handler,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.
+             *--<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> := <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-inline"
+>Instructions for some inlined
+  functions</A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="AEN14785"
+></A
+><P
+><B
+>Table 15. Instructions for some inlined functions</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>description</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>semantics</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(NOT)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to NOT.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := not(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>), <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(EQ)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to EQ.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := eq(*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++,<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CAR)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+>(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>), <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CDR)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>), <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONS)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_cons.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONS</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := cons(*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++,<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SYMBOL-FUNCTION)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-FUNCTION</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-FUNCTION</TT
+></A
+>(<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SVREF)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(*<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>++,<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(SVSET)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <TT
+CLASS="function"
+>SYSTEM::SVSTORE</TT
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="replaceable"
+><I
+>arg1</I
+></TT
+> := *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+1),
+             <TT
+CLASS="replaceable"
+><I
+>arg2</I
+></TT
+> := *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0), <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += 2.
+             <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_svref.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SVREF</TT
+></A
+>(<TT
+CLASS="replaceable"
+><I
+>arg2</I
+></TT
+>,<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>) :=
+                  <TT
+CLASS="replaceable"
+><I
+>arg1</I
+></TT
+>.
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <TT
+CLASS="replaceable"
+><I
+>arg1</I
+></TT
+>,
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LIST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst_list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LIST</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst_list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LIST</TT
+></A
+>(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1),...,*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0)),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>.</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LIST* <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Inlined call to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LIST*</TT
+></A
+>.</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+> := <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listcm_listst.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LIST*</TT
+></A
+>(*(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-1),...,
+                                     *(<A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>+0),<A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>value1</TT
+></A
+>),
+             <A
+HREF="vm.html"
+><TT
+CLASS="varname"
+>mv_count</TT
+></A
+> := 1, <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> += <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-combo"
+>Combined instructions</A
+></H2
+><P
+>The most frequent short sequences of instructions have an
+equivalent combined instruction.  They are only present for space and
+speed optimization. The only exception is
+<TT
+CLASS="literal"
+>FUNCALL&#38;SKIP&#38;RETGF</TT
+>, which is needed for
+generic functions.</P
+><DIV
+CLASS="table"
+><A
+NAME="AEN14970"
+></A
+><P
+><B
+>Table 16. Combined instructions</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>equivalent</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(NIL&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(NIL) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(T&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(T) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADI&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADI <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>2</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADC&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADC <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADV&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOADV <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(POP&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(POP) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(GETVALUE&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(GETVALUE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JSR&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(JSR <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(COPY-CLOSURE&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(COPY-CLOSURE <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL1&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL1 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL2&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL2 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLC&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLC) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLCKEY&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLCKEY) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(FUNCALL&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(FUNCALL <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(APPLY&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(APPLY <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CAR&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CAR) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CDR&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CDR) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONS&#38;PUSH)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONS) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LIST&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LIST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LIST*&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LIST* <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(NIL&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(NIL) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(T&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(T) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;STOREC <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>) (STOREC <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1&#38;STORE <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (STORE <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2&#38;STORE <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (STORE <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR&#38;STORE <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (STORE <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;CDR&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (CDR) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;CONS&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>+1) (CONS) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;INC&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (CALL1 #'1+) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;DEC&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (CALL1 #'1-) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;CAR&#38;STORE <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>) (CAR) (STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL1&#38;JMPIF <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL1 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIF <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL1&#38;JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL1 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL2&#38;JMPIF <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL2 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIF <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL2&#38;JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALL2 <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1&#38;JMPIF <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (JMPIF <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1&#38;JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS1 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2&#38;JMPIF <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (JMPIF <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2&#38;JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLS2 <TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+>) (JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR&#38;JMPIF <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIF <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR&#38;JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CALLSR <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;JMPIF <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIF <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (JMPIFNOT <TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;CAR&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (CAR) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;CDR&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (CDR) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;INC&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (CALL1 #'1+) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;DEC&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (CALL1 #'1-) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST&#38;SYMBOL-FUNCTION <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (SYMBOL-FUNCTION)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST&#38;SYMBOL-FUNCTION&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (SYMBOL-FUNCTION) (PUSH)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST&#38;SYMBOL-FUNCTION&#38;STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (SYMBOL-FUNCTION) (STORE <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(APPLY&#38;SKIP&#38;RET <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(APPLY <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (SKIP&#38;RET <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(FUNCALL&#38;SKIP&#38;RETGF <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(FUNCALL <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>) (SKIP&#38;RETGF <TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>)</TT
+></TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="instr-shortcut"
+>Shortcut instructions</A
+></H2
+><P
+>There are special one-byte instructions (without explicit
+operands) for the following frequent instructions:</P
+><DIV
+CLASS="table"
+><A
+NAME="AEN15443"
+></A
+><P
+><B
+>Table 17. Shortcut instructions</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mnemonic</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>operand range</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>0 &#8804; <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> &#60; 15</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(LOAD&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>0 &#8804; <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> &#60; 25</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>0 &#8804; <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> &#60; 21</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(CONST&#38;PUSH <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>0 &#8804; <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> &#60; 30</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(STORE <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>0 &#8804; <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> &#60; 8</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="intr-struct.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="extensions.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The general structure of the instructions</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="bytecode.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

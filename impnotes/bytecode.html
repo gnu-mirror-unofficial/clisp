@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The CLISP bytecode specification</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Internals of the CLISP Implementation"
+HREF="internals.html"><LINK
+REL="PREVIOUS"
+TITLE="Foreign Pointers"
+HREF="foreign-pointers.html"><LINK
+REL="NEXT"
+TITLE="The virtual machine"
+HREF="vm.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="foreign-pointers.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="vm.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="bytecode"
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</A
+></H1
+><FONT
+COLOR="RED"
+>Last modified: 19 September 1998.</FONT
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="byte-intro"
+>Introduction</A
+></H1
+><P
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> compiler compiles <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> programs into instruction codes
+for a virtual processor.  This bytecode is optimized for saving space in
+the most common cases of <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> programs.  The main advantages/drawbacks
+of this approach, compared to native code compilation, are:
+<P
+></P
+><UL
+><LI
+><P
+>Bytecode compiled programs are a lot smaller than
+  when compiled to native code.  This results in better use of CPU
+  caches, and in less virtual memory paging. Users perceive this as good
+  responsiveness.</P
+></LI
+><LI
+><P
+>Maximum execution speed (throughput in tight loops)
+   is limited.</P
+></LI
+><LI
+><P
+>Since no bytecode instructions are provided for
+   "unsafe" operations (like unchecked array accesses, or "fast"
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+>/<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CDR</TT
+></A
+>), programs run with all safety checks enabled even when
+   compiled.</P
+></LI
+><LI
+><P
+>Execution speed of a program can easily be
+   understood by looking at the output of the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DISASSEMBLE</TT
+></A
+> function.
+   A rule of thumb is that every elementary instruction costs 1 time
+   unit, whereas a function call costs 3 to 4 time units.
+  </P
+></LI
+><LI
+><P
+>Needing to do no type inference, the compiler is
+   pretty straightforward and fast.  As a consequence, the definition of
+   <B
+CLASS="command"
+>CLOS</B
+> generic functions, which needs to compile small pieces of
+   generated code, is not perceived to be slow.</P
+></LI
+><LI
+><P
+>The compiler is independent from the hardware CPU.
+   Different backends, one for each hardware CPU, are not needed.  As a
+   consequence, the compiler is fairly small (and would have been easily
+   maintainable if it were written in a less kludgey way...), and it is
+   impossible for the compiler writer to introduce CPU dependent bugs.
+ </P
+></LI
+></UL
+>
+</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="foreign-pointers.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="vm.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Foreign Pointers</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="internals.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The virtual machine</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

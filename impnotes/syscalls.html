@@ -1,0 +1,599 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.7. System Calls</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.6. Socket Streams"
+HREF="socket.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.8. Quickstarting delivery with CLISP"
+HREF="quickstart.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="socket.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="quickstart.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="syscalls"
+>Extensions-2.7. System Calls</A
+></H1
+><P
+>When <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> is configured with an option
+ <TT
+CLASS="option"
+>--with-export-syscalls</TT
+>, some system calls are
+ available from lisp, in package <A
+HREF="syscalls.html"
+><SPAN
+CLASS="QUOTE"
+>"POSIX"</SPAN
+></A
+>.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:resolve-host-ipaddr</TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Returns the <SPAN
+CLASS="type"
+>hostent</SPAN
+> struct (name,
+   list of aliases, list of IP addresses as dotted quads (for IPv4) or
+   coloned octets (for IPv6), address type - IPv4 or IPv6).
+   When <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is omitted or <TT
+CLASS="constant"
+>:DEFAULT</TT
+>, return the data for the
+   current host. When <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is given and is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, all the
+   host database is returned as a list (this would be the contents of the
+   <TT
+CLASS="filename"
+>/etc/hosts</TT
+> file on a UNIX system or
+   <TT
+CLASS="filename"
+>${windir}/system32/etc/hosts</TT
+> on a Win32 system).
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:file-stat</TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>
+      <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>link-p</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return the stat struct.  <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> can
+   be a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>, a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PATHNAME</TT
+></A
+>, a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or a
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_number.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NUMBER</TT
+></A
+> (on a <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> system, meaning file descriptor).  The
+   first slot of the struct returned is the string or the number on which
+   <TT
+CLASS="function"
+>stat(2)</TT
+>/<TT
+CLASS="function"
+>fstat(2)</TT
+>/<TT
+CLASS="function"
+>lstat(2)</TT
+>
+   was called.  The other 13 slots are numbers, members of the stat
+   struct: device, inode, protection, number of hard links, owner's UID,
+   owner's GID, device type, total size (bytes), blocksize for
+   filesystem I/O, number of blocks allocated, atime, mtime, ctime (as
+   the number of seconds since 1900-01-01).  If the system does not
+   support a particular field (e.g., Win32 does not have hard links),
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (or the default, like 1 for the number of hard links for Win32
+   or DOS) is returned.
+   </P
+><P
+>[UNIX systems only at this time, patches are welcome.]
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:user-data</TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>user</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return the passwd struct (name, encoded password,
+   UID, GID, full name, home directory, shell).  When
+   <TT
+CLASS="replaceable"
+><I
+>user</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, return all users.  When
+   <TT
+CLASS="replaceable"
+><I
+>user</I
+></TT
+> is <TT
+CLASS="constant"
+>:DEFAULT</TT
+> or
+   not supplied, return the information about the current user.  If the
+   system does not support a particular field (e.g., Win32 does not have
+   a concept of a shell), <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (or the default, like
+   <TT
+CLASS="filename"
+>c:\command.com</TT
+> for DOS) is returned.
+   </P
+><P
+>[UNIX systems only at this time, patches are welcome.]
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:sysinfo</TT
+>)</TT
+></DT
+><DD
+><P
+>Return a struct describing the OS, derived from
+   <TT
+CLASS="function"
+>uname(2)</TT
+> and <TT
+CLASS="function"
+>sysconf(3)</TT
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:resource-usage-limits</TT
+>)</TT
+></DT
+><DD
+><P
+>Return 3 structs describing the resources usage and
+    limits, derived from <TT
+CLASS="function"
+>getrlimit(2)</TT
+> and
+    <TT
+CLASS="function"
+>getrusage(3)</TT
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:erf</TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:erfc</TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:j0</TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:j1</TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:jn</TT
+>
+                         <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:y0</TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:y1</TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:yn</TT
+>
+                         <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:gamma</TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>posix:lgamma</TT
+>
+                         <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Compute the error functions, Bessel functions and
+   Gamma.  These functions are required by the POSIX standard and should
+   be available in libm.so.  Please note that these functions do not
+   provide lisp-style error handling and precision, and do all the
+   computations at the double float level.
+  </P
+><P
+>[UNIX systems only at this time, patches are welcome.]
+ </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="socket.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="quickstart.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.6. Socket Streams</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.8. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

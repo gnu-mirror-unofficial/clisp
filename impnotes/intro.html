@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Introduction
+  [CLHS-1]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="NEXT"
+TITLE="Error Terminology
+  [CLHS-1.4.2]"
+HREF="error-terms.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="clhs-chapters.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="error-terms.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="intro"
+>Introduction
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-1.html"
+TARGET="_top"
+>[CLHS-1]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="spec-symb"
+>Special Symbols
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-1-3.html"
+TARGET="_top"
+>[CLHS-1.4.1.3]</A
+></A
+></H1
+><P
+>The final delimiter of an interactive stream: On <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, the user
+ has to type <B
+CLASS="keycap"
+>Control</B
+>-<SPAN
+CLASS="keysym"
+>D</SPAN
+> at the
+ beginning of a line. On <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+> or <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>, the user has to type
+ <B
+CLASS="keycap"
+>Control</B
+>-<SPAN
+CLASS="keysym"
+>Z</SPAN
+>, followed
+ by <B
+CLASS="keycap"
+>Return</B
+>.  This final delimiter is never actually
+ seen by programs; no need to test for <SPAN
+CLASS="keysym"
+>#\^D</SPAN
+> or
+ <SPAN
+CLASS="keysym"
+>#\^Z</SPAN
+> - use <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR-NO-HANG</TT
+></A
+> to check for end of
+ stream.  Calling <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_clear-input.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLEAR-INPUT</TT
+></A
+> on the stream removes the <TT
+CLASS="literal"
+>end-of-stream</TT
+> state,
+ thus making it available for further input.</P
+><P
+>A newline character can be entered by the user by pressing the
+ <B
+CLASS="keycap"
+>Newline</B
+> key or, on the numeric keypad, the
+ <B
+CLASS="keycap"
+>Enter</B
+> key.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="error-terms.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Chapters or the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLHS"
+>Common Lisp HyperSpec</A
+></SPAN
+>]</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Error Terminology
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_1-4-2.html"
+TARGET="_top"
+>[CLHS-1.4.2]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,1716 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Data and Control Flow
+   [CLHS-5]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="The Types and Classes Dictionary
+  [CLHS-4.4]"
+HREF="type-class-dict.html"><LINK
+REL="NEXT"
+TITLE="Iteration
+   [CLHS-6]"
+HREF="iteration.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="type-class-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="iteration.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="data"
+>Data and Control Flow
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-5.html"
+TARGET="_top"
+>[CLHS-5]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="flow-dict"
+>The Data and Control Flow Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_data__w_dictionary.html"
+TARGET="_top"
+>[CLHS-5.3]</A
+></A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_destructuring-bind.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DESTRUCTURING-BIND</TT
+></A
+>. </B
+></B
+>does not perform full error checking.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_prog1cm_prog2.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PROG1</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_prog1cm_prog2.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PROG2</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_and.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>AND</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_or.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OR</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_psetq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PSETQ</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_whencm_unless.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WHEN</TT
+></A
+>,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_whencm_unless.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNLESS</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_cond.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COND</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_casecm_ccasecm_ecase.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CASE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_multiple-value-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MULTIPLE-VALUE-LIST</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_multiple-value-bind.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MULTIPLE-VALUE-BIND</TT
+></A
+>,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_multiple-value-setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MULTIPLE-VALUE-SETQ</TT
+></A
+>. </B
+></B
+>are implemented as special operators and, as
+ such, are rather efficient.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="fcase"
+>Macro <TT
+CLASS="function"
+>EXT:FCASE</TT
+></A
+></H2
+><P
+>This macro allows specifying the test for <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_casecm_ccasecm_ecase.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CASE</TT
+></A
+>, e.g.,
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(fcase string= (subseq foo 0 (position #\Space foo))
+  ("first" 1)
+  (("second" "two") 2)
+  (("true" "yes") t)
+  (otherwise nil))
+</PRE
+></TD
+></TR
+></TABLE
+>
+is the same as
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(let ((var (subseq foo 0 (position #\Space foo))))
+  (cond ((string= var "first") 1)
+        ((or (string= var "second") (string= var "two")) 2)
+        ((or (string= var "true") (string= var "yes")) t)
+        (t nil)))
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="eq"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+> compares <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s and <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>s as <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQL</TT
+></A
+> does.
+ No unnecessary copies are made of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s and <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_number.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NUMBER</TT
+></A
+>s.
+ Nevertheless, one should use <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQL</TT
+></A
+> as it is more portable across <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+>
+ implementations.</P
+><P
+><TT
+CLASS="literal"
+>(let ((x y)) (eq x x))</TT
+> always
+ returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, regardless of <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="sym-fun"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-FUNCTION</TT
+></A
+></A
+></H2
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-FUNCTION</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>)
+ <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+> requires <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> to be either a function, a
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-FUNCTION</TT
+></A
+> return value or a <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_l.html#lambda_expression"
+TARGET="_top"
+>lambda expression</A
+>.  The <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_l.html#lambda_expression"
+TARGET="_top"
+>lambda expression</A
+>
+ is thereby immediately converted to a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="setf"
+>Macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+></A
+></H2
+><P
+>Additional places:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+></DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> #'<TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> ...)
+     <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+>
+    and
+   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> '<TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> ...)
+     <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+>
+   are equivalent to
+   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> ...) <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+>.
+  </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_progn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PROGN</TT
+></A
+></DT
+><DD
+><P
+>&#13;   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_progn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PROGN</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> ... <TT
+CLASS="replaceable"
+><I
+>place</I
+></TT
+>)
+                                <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+>
+  </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_locally.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOCALLY</TT
+></A
+></DT
+><DD
+><P
+>&#13;   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_locally.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOCALLY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>declaration</I
+></TT
+> ... <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> ...
+                                 <TT
+CLASS="replaceable"
+><I
+>place</I
+></TT
+>) <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+>
+  </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_if.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IF</TT
+></A
+></DT
+><DD
+><P
+>&#13;   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_if.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>condition</I
+></TT
+>
+                                  <TT
+CLASS="replaceable"
+><I
+>place1</I
+></TT
+>
+                                  <TT
+CLASS="replaceable"
+><I
+>place2</I
+></TT
+>)
+                                <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+>
+  </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_set-dispa_ro-character.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GET-DISPATCH-MACRO-CHARACTER</TT
+></A
+></DT
+><DD
+><P
+>&#13;   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_set-dispa_ro-character.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GET-DISPATCH-MACRO-CHARACTER</TT
+></A
+> ...)
+     ...)</TT
+> calls <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_set-dispa_ro-character.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SET-DISPATCH-MACRO-CHARACTER</TT
+></A
+>.
+  </P
+></DD
+><DT
+><A
+HREF="num-concepts.html#lfd"
+><TT
+CLASS="function"
+>EXT:LONG-FLOAT-DIGITS</TT
+></A
+>:</DT
+><DD
+><P
+>&#13;   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="num-concepts.html#lfd"
+><TT
+CLASS="function"
+>EXT:LONG-FLOAT-DIGITS</TT
+></A
+>) <TT
+CLASS="replaceable"
+><I
+>digits</I
+></TT
+>)</TT
+> sets the
+    default mantissa length of long floats to <TT
+CLASS="replaceable"
+><I
+>digits</I
+></TT
+> bits.
+   </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_values-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>VALUES-LIST</TT
+></A
+></DT
+><DD
+><P
+>&#13;   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_values-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>VALUES-LIST</TT
+></A
+>
+       <TT
+CLASS="replaceable"
+><I
+>list</I
+></TT
+>) <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>)</TT
+>
+    is equivalent to
+   <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_values-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>VALUES-LIST</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>list</I
+></TT
+>
+    (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_multiple-value-list.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MULTIPLE-VALUE-LIST</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>)))</TT
+>
+  </P
+></DD
+></DL
+></DIV
+></P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> markers in <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defsetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFSETF</TT
+></A
+> <A
+HREF="lalist.html"
+>lambda list</A
+>s are supported, but the
+ corresponding keywords must appear literally in the program text.</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_get-setf-expansion.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GET-SETF-EXPANSION</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+>)</TT
+>, <TT
+CLASS="literal"
+>(EXT:GET-SETF-METHOD <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+>)</TT
+>, and <TT
+CLASS="literal"
+>(EXT:GET-SETF-METHOD-MULTIPLE-VALUE <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+>)</TT
+> receive as optional argument <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+>
+ the environment necessary for macro expansions.  In
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-setf-expander.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFINE-SETF-EXPANDER</TT
+></A
+> and <TT
+CLASS="function"
+>EXT:DEFINE-SETF-METHOD</TT
+>
+ <A
+HREF="lalist.html"
+>lambda list</A
+>s, one can specify <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;ENVIRONMENT</TT
+></A
+> and a variable, which will
+ be bound to the environment.  This environment should be passed to all
+ calls of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_get-setf-expansion.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GET-SETF-EXPANSION</TT
+></A
+>,
+ <TT
+CLASS="function"
+>EXT:GET-SETF-METHOD</TT
+> and
+ <TT
+CLASS="function"
+>EXT:GET-SETF-METHOD-MULTIPLE-VALUE</TT
+>.  If this is
+ done, even local macros will be interpreted as places correctly.</P
+><P
+>Attempts to modify read-only data will signal an error.  Program
+ text and quoted constants loaded from files are considered read-only
+ data.  This check is only performed for strings, not for conses, other
+ kinds of arrays, and user-defined data types.</P
+><P
+>See also the <A
+HREF="macros3.html#letf"
+><TT
+CLASS="function"
+>EXT:LETF</TT
+></A
+> and <A
+HREF="macros3.html#letf"
+><TT
+CLASS="function"
+>EXT:LETF*</TT
+></A
+> macros.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="func"
+>Special Operator <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCTION</TT
+></A
+></A
+></H2
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCTION</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>)</TT
+> returns the
+ local function definition established by <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLET</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LABELS</TT
+></A
+>, if it
+ exists, otherwise the global function definition.</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_special-operator-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SPECIAL-OPERATOR-P</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>)</TT
+>
+ returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.  If it returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, then <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-FUNCTION</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>)</TT
+> returns the
+ (useless) special operator handler.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="def-sym-mac"
+>Macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFINE-SYMBOL-MACRO</TT
+></A
+></A
+></H2
+><P
+>The macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFINE-SYMBOL-MACRO</TT
+></A
+> establishes <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>s with
+ global scope (as opposed to <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>s defined with
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_symbol-macrolet.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-MACROLET</TT
+></A
+>, which have local scope):
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFINE-SYMBOL-MACRO</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>expansion</I
+></TT
+>)</TT
+>.</P
+><P
+>The function <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>EXT:SYMBOL-MACRO-EXPAND</TT
+></I
+>
+ tests for a <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>: If <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> is defined as
+ a <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>, <TT
+CLASS="literal"
+>(EXT:SYMBOL-MACRO-EXPAND
+ <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+>)</TT
+> returns two values, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> and the
+ expansion, otherwise it returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+><P
+>Calling <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_boundp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>BOUNDP</TT
+></A
+> on a symbol defined as a <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> returns
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+><P
+>Calling <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-value.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SYMBOL-VALUE</TT
+></A
+> on a symbol defined as a <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>
+ returns the value of the expansion.  Calling <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_set.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SET</TT
+></A
+> on a symbol defined
+ as a <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> calls <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> on the expansion.</P
+><P
+>Calling <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_makunbound.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKUNBOUND</TT
+></A
+> on a symbol defined as a <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>
+ removes the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> definition.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="lambda"
+>Macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LAMBDA</TT
+></A
+></A
+></H2
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_lambda_ist-keywords.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LAMBDA-LIST-KEYWORDS</TT
+></A
+>. </B
+></B
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;ALLOW-OTHER-KEYS</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;AUX</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;WHOLE</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;ENVIRONMENT</TT
+></A
+>)
+</TT
+></P
+></DIV
+><DIV
+CLASS="table"
+><A
+NAME="values-limits-table"
+></A
+><P
+><B
+>Table 1. Platform dependent</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>CPU type</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>16-bit CPU</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>32-bit CPU</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>64-bit CPU</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_call-a_uments-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>CALL-ARGUMENTS-LIMIT</TT
+></A
+></TD
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>16</SUP
+>=65536</TD
+><TD
+COLSPAN="2"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>32</SUP
+>=4294967296</TD
+></TR
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_multip_values-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>MULTIPLE-VALUES-LIMIT</TT
+></A
+></TD
+><TD
+COLSPAN="3"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>7</SUP
+>=128</TD
+></TR
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_lambda_meters-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LAMBDA-PARAMETERS-LIMIT</TT
+></A
+></TD
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>16</SUP
+>=65536</TD
+><TD
+COLSPAN="2"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>32</SUP
+>=4294967296</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="defun"
+>Macros <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defun.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFUN</TT
+></A
+> &#38; <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defmacro.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFMACRO</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defun.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFUN</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defmacro.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFMACRO</TT
+></A
+> are allowed in non-toplevel positions. As
+ an example, consider the old ([<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLtL1"
+>CLtL1</A
+></SPAN
+>]) definition of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_gensym.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GENSYM</TT
+></A
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(let ((gensym-prefix "G")
+      (gensym-count 1))
+  (defun gensym (&#38;optional (x nil s))
+    (when s
+      (cond ((stringp x) (setq gensym-prefix x))
+            ((integerp x)
+             (if (minusp x)
+               (error "~S: index ~S is negative" 'gensym x)
+               (setq gensym-count x)))
+            (t (error "~S: argument ~S of wrong type" 'gensym x))))
+    (prog1
+      (make-symbol
+        (concatenate 'string
+          gensym-prefix
+          (write-to-string gensym-count :base 10 :radix nil)))
+      (incf gensym-count))))
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="type-class-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="iteration.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Types and Classes Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_types_s_dictionary.html"
+TARGET="_top"
+>[CLHS-4.4]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Iteration
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-6.html"
+TARGET="_top"
+>[CLHS-6]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

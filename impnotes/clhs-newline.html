@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Treatment of Newline during Input and Output
+   [CLHS-13.1.8]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Characters
+   [CLHS-13]"
+HREF="characters.html"><LINK
+REL="PREVIOUS"
+TITLE="Ordering of Characters
+   [CLHS-13.1.6]"
+HREF="char-ord.html"><LINK
+REL="NEXT"
+TITLE="Character Encodings
+   [CLHS-13.1.9]"
+HREF="char-int.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="char-ord.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
+TARGET="_top"
+>[CLHS-13]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="char-int.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="clhs-newline"
+>Treatment of Newline during Input and Output
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-8.html"
+TARGET="_top"
+>[CLHS-13.1.8]</A
+></A
+></H1
+><P
+>Newlines are written according to the stream's <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+>, see the
+ function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-external-format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-EXTERNAL-FORMAT</TT
+></A
+> and the description of <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+>s,
+ in particular, <A
+HREF="encoding.html#newline"
+>line terminator</A
+>s.
+ The default behavior is as follows:</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+   platforms only.</DT
+><DD
+><P
+>When writing to a file, <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> is converted to
+ <SPAN
+CLASS="keycode"
+>CR</SPAN
+>/<SPAN
+CLASS="keycode"
+>LF</SPAN
+>. (This is the usual convention on <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>.)
+ For example, <SPAN
+CLASS="keysym"
+>#\Return</SPAN
+>+<SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> is written as <SPAN
+CLASS="keycode"
+>CR</SPAN
+>/<SPAN
+CLASS="keycode"
+>CR</SPAN
+>/<SPAN
+CLASS="keycode"
+>LF</SPAN
+>.
+</P
+></DD
+></DL
+></DIV
+><P
+>When reading from a file, <SPAN
+CLASS="keycode"
+>CR</SPAN
+>/<SPAN
+CLASS="keycode"
+>LF</SPAN
+> is converted to <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+>
+ (the usual convention on <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>), and <SPAN
+CLASS="keycode"
+>CR</SPAN
+> not followed by <SPAN
+CLASS="keycode"
+>LF</SPAN
+> is
+ converted to <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> as well (the usual conversion on MacOS, also used
+ by some programs on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>).</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="char-ord.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="char-int.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Ordering of Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-6.html"
+TARGET="_top"
+>[CLHS-13.1.6]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="characters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Character Encodings
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_13-1-9.html"
+TARGET="_top"
+>[CLHS-13.1.9]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,317 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Numbers
+   [CLHS-12]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="The Packages Dictionary
+   [CLHS-11.2.]"
+HREF="pack-dict.html"><LINK
+REL="NEXT"
+TITLE="Number Concepts
+   [CLHS-12.1]"
+HREF="num-concepts.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="pack-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="num-concepts.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="numbers"
+>Numbers
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-12.html"
+TARGET="_top"
+>[CLHS-12]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="num-types"
+>Numeric Types</A
+></H1
+><P
+>The type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_number.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NUMBER</TT
+></A
+> is the disjoint union of the types
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>REAL</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#exhaustive_partition"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"exhaustive
+ partition"</SPAN
+></A
+>)</P
+><P
+>The type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>REAL</TT
+></A
+> is the disjoint union of the types
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_rational.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIONAL</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOAT</TT
+></A
+>.</P
+><P
+>The type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_rational.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIONAL</TT
+></A
+> is the disjoint union of the types
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_ratio.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIO</TT
+></A
+>.</P
+><P
+>The type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> is the disjoint union of the types
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_bignum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BIGNUM</TT
+></A
+>.</P
+><P
+>The type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOAT</TT
+></A
+> is the disjoint union of the types
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+> and
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="pack-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="num-concepts.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Packages Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_packa_s_dictionary.html"
+TARGET="_top"
+>[CLHS-11.2.]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Number Concepts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1.html"
+TARGET="_top"
+>[CLHS-12.1]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

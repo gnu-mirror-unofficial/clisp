@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>[CLISP icon]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="PREVIOUS"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="NEXT"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"></HEAD
+><BODY
+CLASS="preface"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="impnotes-top.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="clhs-chapters.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="preface"
+><H1
+><A
+NAME="preface"
+><SPAN
+CLASS="inlinemediaobject"
+><IMG
+SRC="clisp.png"
+ALT="[CLISP icon]"
+></IMG
+></SPAN
+></A
+></H1
+><FONT
+COLOR="RED"
+>Last modified: 2002-02-13</FONT
+><P
+>These notes discuss the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> implementation of <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> by
+<A
+NAME="AEN47"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+CLASS="address"
+><SPAN
+CLASS="honorific"
+>Dr</SPAN
+>&nbsp;<SPAN
+CLASS="firstname"
+>Bruno</SPAN
+>&nbsp;<SPAN
+CLASS="surname"
+>Haible</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="street"
+>Louisenstraﬂe 103</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="city"
+>Bad Homburg</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="postcode"
+>D-61348</SPAN
+>&nbsp;<SPAN
+CLASS="country"
+>Germany</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="otheraddr"
+><A
+HREF="http://clisp.cons.org/~haible"
+TARGET="_top"
+>http://clisp.cons.org/~haible</A
+></SPAN
+><br>
+</P
+></BLOCKQUOTE
+>
+ and
+<A
+NAME="AEN58"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+CLASS="address"
+><SPAN
+CLASS="honorific"
+>Dr</SPAN
+>&nbsp;<SPAN
+CLASS="firstname"
+>Michael</SPAN
+>&nbsp;<SPAN
+CLASS="surname"
+>Stoll</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="street"
+>Westerwaldweg 22</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="city"
+>Remagen-Oberwinter</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="postcode"
+>D-53424</SPAN
+>&nbsp;<SPAN
+CLASS="country"
+>Germany</SPAN
+><br>
+&nbsp;<SPAN
+CLASS="otheraddr"
+><A
+HREF="http://www.math.uni-duesseldorf.de/home/stoll"
+TARGET="_top"
+>http://www.math.uni-duesseldorf.de/home/stoll</A
+></SPAN
+><br>
+</P
+></BLOCKQUOTE
+>
+ The current maintainers are
+ <A
+NAME="AEN69"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+CLASS="address"
+><SPAN
+CLASS="honorific"
+>Dr</SPAN
+>&nbsp;<SPAN
+CLASS="firstname"
+>Bruno</SPAN
+>&nbsp;<SPAN
+CLASS="surname"
+>Haible</SPAN
+></P
+></BLOCKQUOTE
+>
+ and
+ <A
+NAME="AEN74"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+CLASS="address"
+><SPAN
+CLASS="honorific"
+>Dr</SPAN
+>&nbsp;<SPAN
+CLASS="firstname"
+>Sam</SPAN
+>&nbsp;<SPAN
+CLASS="surname"
+>Steingold</SPAN
+><br>
+&nbsp;<TT
+CLASS="email"
+>&#60;<A
+HREF="mailto:sds@clisp.cons.org"
+>sds@clisp.cons.org</A
+>&#62;</TT
+><br>
+&nbsp;<SPAN
+CLASS="otheraddr"
+><A
+HREF="http://clisp.cons.org/~sds"
+TARGET="_top"
+>http://clisp.cons.org/~sds</A
+></SPAN
+></P
+></BLOCKQUOTE
+>
+</P
+><P
+>This implementation is mostly conforming to the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]
+ available on-line as the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLHS"
+>Common Lisp HyperSpec</A
+></SPAN
+>] (but the printed ANSI document
+ remains the authoritative source of information).  [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] supersedes
+ the earlier specifications [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLtL1"
+>CLtL1</A
+></SPAN
+>] and [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLtL2"
+>CLtL2</A
+></SPAN
+>].</P
+><P
+>The first part of these notes is indexed in parallel to the
+ [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLHS"
+>Common Lisp HyperSpec</A
+></SPAN
+>] and documents the differences between the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+ implementation of <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> and the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>].</P
+><P
+>The second part documents the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <A
+HREF="gc.html"
+>garbage-collect</A
+>ion (for developers
+ only) and the bytecodes generated by the compiler (i.e., what is
+ printer by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DISASSEMBLE</TT
+></A
+>).</P
+><P
+>The third part documents the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extensions.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Chapters or the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#CLHS"
+>Common Lisp HyperSpec</A
+></SPAN
+>]</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1.8. The Prompt</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-1: Platform independent Extensions"
+HREF="p-indep.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.7. Finalization"
+HREF="final.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.9. Maximum ANSI CL compliance"
+HREF="ansi.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="final.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-1: Platform independent Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="ansi.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="prompt"
+>Extensions-1.8. The Prompt</A
+></H1
+><P
+>The variable <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>custom:*prompt*</TT
+></I
+> controls the
+ appearance of the prompt.  When its value is a function, it is called
+ and its value is printed with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINC</TT
+></A
+>.  Otherwise, the value itself is
+ printed with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINC</TT
+></A
+>.  The default value of
+ <TT
+CLASS="varname"
+>custom:*prompt*</TT
+> prints
+ <TT
+CLASS="prompt"
+>"package[nn]&#62; "</TT
+> where
+ <TT
+CLASS="replaceable"
+><I
+>package</I
+></TT
+> is the shortest (nick)name of the
+ current package <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stpackagest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PACKAGE*</TT
+></A
+> if it is the same as it was in the
+ beginning or if it does not contain symbol <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> (it is assumed that in
+ the latter case you would want to keep in mind that your current
+ package is something weird); and <TT
+CLASS="replaceable"
+><I
+>nn</I
+></TT
+> is the
+ ordinal number of the current prompt (hopefully, it will remain
+ finite).  To help you in constructing your own fancy prompts, two
+ functions are provided: <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>ext:prompt-new-package</TT
+></I
+>,
+ returning <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stpackagest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PACKAGE*</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if the current package is the same as
+ it was initially; and <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>ext:package-short-name</TT
+></I
+>
+ taking one argument, a package, and returning its shortest name or
+ nickname.  Also, a variable <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>ext:*command-index*</TT
+></I
+>
+ contains the current prompt number, it is your responsibility to
+ increment it
+ (this variable is bound to 0 before saving the <A
+HREF="p-indep.html#image"
+>memory image</A
+>).</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="final.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="ansi.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.7. Finalization</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="p-indep.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.9. Maximum ANSI CL compliance</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

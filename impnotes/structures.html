@@ -1,0 +1,732 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Structures
+   [CLHS-8]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Objects
+   [CLHS-7]"
+HREF="objects.html"><LINK
+REL="NEXT"
+TITLE="Conditions
+   [CLHS-9]"
+HREF="conditions.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="objects.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="conditions.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="structures"
+>Structures
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-8.html"
+TARGET="_top"
+>[CLHS-8]</A
+></A
+></H1
+><P
+>The <TT
+CLASS="constant"
+>:PRINT-FUNCTION</TT
+> option should contain a <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_l.html#lambda_expression"
+TARGET="_top"
+>lambda expression</A
+>
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LAMBDA</TT
+></A
+> (structure stream depth) (declare
+ (ignore depth)) ...)</TT
+> This <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_l.html#lambda_expression"
+TARGET="_top"
+>lambda expression</A
+> names a function
+ whose task is to output the external representation of structure onto
+ the stream. This may be done by outputting text onto the stream using
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-CHAR</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-str_m_write-line.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-STRING</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRIN1</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINC</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINT</TT
+></A
+>,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PPRINT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> and the like. The following rules must be
+ obeyed:</P
+><P
+></P
+><UL
+><LI
+><P
+>The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-escapest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ESCAPE*</TT
+></A
+> must be
+  respected.</P
+></LI
+><LI
+><P
+>The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-prettyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-PRETTY*</TT
+></A
+> should not and
+  cannot be respected, since the pretty-print mechanism is not
+  accessible from outside.</P
+></LI
+><LI
+><P
+>The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-circlest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-CIRCLE*</TT
+></A
+> need not be
+  respected.  This is managed by the system.  (But the print-circle
+  mechanism handles only those objects that are (direct or indirect)
+  components of structure.)</P
+></LI
+><LI
+><P
+>The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-l_int-lengthst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-LEVEL*</TT
+></A
+> is respected by
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRIN1</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINC</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PPRINT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> instructions
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~A</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~S</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~W</TT
+></A
+>, and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> instructions
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~R</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~D</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~B</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~O</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-5.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~X</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~F</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~E</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~G</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~$</TT
+></A
+> with not-numerical arguments.
+  Therefore the print-level mechanism works automatically if only these
+  functions are used for outputting objects and if they are not called
+  on objects with nesting level &#62; 1. (The print-level mechanism does
+  not recognize how many parentheses you have output. It only counts how
+  many times it was called recursively.)</P
+></LI
+><LI
+><P
+>The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-l_int-lengthst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-LENGTH*</TT
+></A
+> must be respected,
+  especially if you are outputting an arbitrary number of components.
+  </P
+></LI
+><LI
+><P
+>The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> must be
+  respected. Remember that the values of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-escapest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ESCAPE*</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-l_int-lengthst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-LEVEL*</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-l_int-lengthst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-LENGTH*</TT
+></A
+> are ignored if
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> is true.  The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> is
+  respected by <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_print-unr_dable-object.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINT-UNREADABLE-OBJECT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRIN1</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINC</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PRINT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PPRINT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> instructions <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~A</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~S</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-4-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~W</TT
+></A
+>, and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_format.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORMAT</TT
+></A
+> instructions <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~R</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~D</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~B</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~O</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-2-5.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~X</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~F</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-2.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~E</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-3.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~G</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-3-3-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>~$</TT
+></A
+> with not-numerical arguments.  Therefore
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-readablyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-READABLY*</TT
+></A
+> will be respected automatically if only these
+  functions are used for printing objects.</P
+></LI
+><LI
+><P
+>You need not worry about the values of
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-b_rint-radixst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-BASE*</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-b_rint-radixst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-RADIX*</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-casest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-CASE*</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-gensymst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-GENSYM*</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-arrayst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-ARRAY*</TT
+></A
+>, <A
+HREF="printer.html#pr-closure"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-CLOSURE*</TT
+></A
+>,
+  <A
+HREF="printer.html#pr-rpars"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-RPARS*</TT
+></A
+>, <A
+HREF="printer.html#pr-indent"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-INDENT-LISTS*</TT
+></A
+>.</P
+></LI
+></UL
+><P
+>The <TT
+CLASS="constant"
+>:INHERIT</TT
+> option is exactly like <TT
+CLASS="constant"
+>:INCLUDE</TT
+> except that it
+ does not create new accessors for the inherited slots.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="objects.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="conditions.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Objects
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-7.html"
+TARGET="_top"
+>[CLHS-7]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Conditions
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-9.html"
+TARGET="_top"
+>[CLHS-9]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

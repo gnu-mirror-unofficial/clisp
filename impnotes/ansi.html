@@ -1,0 +1,505 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1.9. Maximum ANSI CL compliance</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-1: Platform independent Extensions"
+HREF="p-indep.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.8. The Prompt"
+HREF="prompt.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.10. Additional Fancy Macros"
+HREF="macros3.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="prompt.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-1: Platform independent Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="macros3.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="ansi"
+>Extensions-1.9. Maximum ANSI CL compliance</A
+></H1
+><P
+>Some [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] features are turned off by default for backwards
+ compatibility.
+ They can be switched on, all at once by setting the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>
+ <A
+HREF="ansi.html"
+><TT
+CLASS="varname"
+>CUSTOM:*ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, or they can be switched on individually.
+ Setting <A
+HREF="ansi.html"
+><TT
+CLASS="varname"
+>CUSTOM:*ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> implies the following:</P
+><P
+></P
+><UL
+><LI
+><P
+>Setting <A
+HREF="print-dict.html#pathprint"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-PATHNAMES-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="type-class-dict.html#fixnum-char-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*COERCE-FIXNUM-CHAR-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="sequences.html#count-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*SEQUENCE-COUNT-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="filename-dict.html#pathmerge"
+><TT
+CLASS="varname"
+>CUSTOM:*MERGE-PATHNAMES-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="filename-dict.html#parsename"
+><TT
+CLASS="varname"
+>CUSTOM:*PARSE-NAMESTRING-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="num-concepts.html#flocont"
+><TT
+CLASS="varname"
+>CUSTOM:*FLOATING-POINT-CONTAGION-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></LI
+></UL
+><P
+>Please note that if you run <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> with the <A
+HREF="clisp.html#opt-ansi"
+TARGET="_top"
+><TT
+CLASS="option"
+>-ansi</TT
+></A
+> switch or
+ set the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> <A
+HREF="ansi.html"
+><TT
+CLASS="varname"
+>CUSTOM:*ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> and save <A
+HREF="p-indep.html#image"
+>memory image</A
+>, then all
+ subsequent invocations of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> with this image will be as if with
+ <A
+HREF="clisp.html#opt-ansi"
+TARGET="_top"
+><TT
+CLASS="option"
+>-ansi</TT
+></A
+> (regardless whether you actually supply the <A
+HREF="clisp.html#opt-ansi"
+TARGET="_top"
+><TT
+CLASS="option"
+>-ansi</TT
+></A
+> switch).
+ You can always set the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+> <A
+HREF="ansi.html"
+><TT
+CLASS="varname"
+>CUSTOM:*ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+ or invoke <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> with the <A
+HREF="clisp.html#opt-traditional"
+TARGET="_top"
+><TT
+CLASS="option"
+>-traditional</TT
+></A
+> switch,
+ reversing the above settings, i.e.,</P
+><P
+></P
+><UL
+><LI
+><P
+>Setting <A
+HREF="print-dict.html#pathprint"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-PATHNAMES-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="type-class-dict.html#fixnum-char-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*COERCE-FIXNUM-CHAR-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="sequences.html#count-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*SEQUENCE-COUNT-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="filename-dict.html#pathmerge"
+><TT
+CLASS="varname"
+>CUSTOM:*MERGE-PATHNAMES-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="filename-dict.html#parsename"
+><TT
+CLASS="varname"
+>CUSTOM:*PARSE-NAMESTRING-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></LI
+><LI
+><P
+>Setting <A
+HREF="num-concepts.html#flocont"
+><TT
+CLASS="varname"
+>CUSTOM:*FLOATING-POINT-CONTAGION-ANSI*</TT
+></A
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></LI
+></UL
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="prompt.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="macros3.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.8. The Prompt</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="p-indep.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.10. Additional Fancy Macros</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

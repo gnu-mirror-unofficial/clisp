@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Backquote
+  [CLHS-2.4.6]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Syntax
+   [CLHS-2]"
+HREF="syntax.html"><LINK
+REL="PREVIOUS"
+TITLE="Double-Quote
+  [CLHS-2.4.5]"
+HREF="double-quote.html"><LINK
+REL="NEXT"
+TITLE="Sharpsign
+  [CLHS-2.4.8]"
+HREF="sharpsign.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="double-quote.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Syntax
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-2.html"
+TARGET="_top"
+>[CLHS-2]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="sharpsign.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="backquote"
+>Backquote
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-6.html"
+TARGET="_top"
+>[CLHS-2.4.6]</A
+></A
+></H1
+><P
+>The backquote read macro also works when nested. Example:
+<DIV
+CLASS="informalexample"
+><A
+NAME="AEN336"
+></A
+><P
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;   (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eval.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL</TT
+></A
+> ``(,#'(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LAMBDA</TT
+></A
+> () ',a) ,#'(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LAMBDA</TT
+></A
+> () ',b)))
+ = (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eval.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL</TT
+></A
+> `(list #'(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LAMBDA</TT
+></A
+> () ',a) #'(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LAMBDA</TT
+></A
+> () ',b)))
+ = (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eval.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL</TT
+></A
+> (list 'list (list 'function (list 'lambda nil (list 'quote a)))
+                     (list 'function (list 'lambda nil (list 'quote b)))))
+</PRE
+></TD
+></TR
+></TABLE
+><P
+></P
+></DIV
+></P
+><P
+>Multiple backquote combinations like <TT
+CLASS="literal"
+>,,@</TT
+> or
+ <TT
+CLASS="literal"
+>,@,@</TT
+> are not implemented.  Their use would be
+ confusing anyway.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="double-quote.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="sharpsign.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Double-Quote
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-5.html"
+TARGET="_top"
+>[CLHS-2.4.5]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="syntax.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Sharpsign
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-8.html"
+TARGET="_top"
+>[CLHS-2.4.8]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

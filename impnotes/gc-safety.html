@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The burden of garbage-collection upon the rest of CLISP</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Overview of CLISP's Garbage Collection"
+HREF="gc.html"><LINK
+REL="PREVIOUS"
+TITLE="Memory Models"
+HREF="memory-models.html"><LINK
+REL="NEXT"
+TITLE="Foreign Pointers"
+HREF="foreign-pointers.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="memory-models.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Overview of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s Garbage Collection</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="foreign-pointers.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="gc-safety"
+>The burden of <A
+HREF="gc.html"
+>garbage-collect</A
+>ion upon the rest of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></H1
+><P
+>Every subroutine marked with <I
+CLASS="emphasis"
+>can trigger GC</I
+>
+may invoke <A
+HREF="gc.html"
+>garbage-collect</A
+>.
+<A
+HREF="gc.html"
+>garbage-collect</A
+> moves all the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects and updates the pointers.
+But the <A
+HREF="gc.html"
+>garbage-collect</A
+> looks only on the <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+> and not in the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>
+variables. (Anything else would not be portable.)
+Therefore at every "unsafe" point, i.e. every call to such a subroutine,
+all the <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> variables of type <SPAN
+CLASS="type"
+>object</SPAN
+>
+<I
+CLASS="emphasis"
+>MUST BE ASSUMED TO BECOME GARBAGE</I
+>.
+(Except for <SPAN
+CLASS="type"
+>object</SPAN
+>s that are known to be unmovable,
+ e.g. immediate data or <SPAN
+CLASS="type"
+>Subr</SPAN
+>s.)
+Pointers inside <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> data (e.g. to the characters of a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>
+or to the elements of a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+>) become
+<I
+CLASS="emphasis"
+>INVALID</I
+> as well.</P
+><P
+>The workaround is usually to allocate all the needed <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> data
+first and do the rest of the computation with <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> variables,
+without calling unsafe routines, and without worrying about <A
+HREF="gc.html"
+>garbage-collect</A
+>.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="memory-models.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="foreign-pointers.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Memory Models</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="gc.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Foreign Pointers</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

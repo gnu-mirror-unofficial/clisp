@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Packages
+   [CLHS-11]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Symbols
+   [CLHS-10]"
+HREF="symbols.html"><LINK
+REL="NEXT"
+TITLE="The COMMON-LISP-USER Package
+   [CLHS-11.1.2.2]"
+HREF="clupack.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="symbols.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="clupack.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="packages"
+>Packages
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-11.html"
+TARGET="_top"
+>[CLHS-11]</A
+></A
+></H1
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>The [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] packages present in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></B
+></P
+><DL
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+></DT
+><DD
+><P
+>with the nicknames
+   <I
+CLASS="emphasis"
+><TT
+CLASS="constant"
+>"CL"</TT
+></I
+> and
+   <I
+CLASS="emphasis"
+><TT
+CLASS="constant"
+>"LISP"</TT
+></I
+>
+  </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></A
+></DT
+><DD
+><P
+>with the nicknames
+   <I
+CLASS="emphasis"
+><TT
+CLASS="constant"
+>"CL-USER"</TT
+></I
+> and
+   <I
+CLASS="emphasis"
+><TT
+CLASS="constant"
+>"USER"</TT
+></I
+>
+  </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-3.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"KEYWORD"</SPAN
+></A
+></DT
+><DD
+><P
+>with the nickname
+   <I
+CLASS="emphasis"
+><TT
+CLASS="constant"
+>""</TT
+></I
+>
+  </P
+></DD
+></DL
+></DIV
+><P
+>The package <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPORT</TT
+></A
+>s only those symbols
+ from the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] that are actually implemented.</P
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="pack-lock"
+>Constraints on the COMMON-LISP Package for
+ Conforming Programs - package locking
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
+TARGET="_top"
+>[CLHS-11.1.2.1.2]</A
+></A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="packages.html#pack-lock"
+><TT
+CLASS="function"
+>EXT:PACKAGE-LOCK</TT
+></A
+>. </B
+></B
+>Packages can be <SPAN
+CLASS="QUOTE"
+>"locked"</SPAN
+>.
+When a package is locked, attempts to change its symbol table or
+redefine functions which its symbols name result in a continuable error
+(continuing overrides locking for this operation).
+Function <TT
+CLASS="literal"
+>(<A
+HREF="packages.html#pack-lock"
+><TT
+CLASS="function"
+>EXT:PACKAGE-LOCK</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>package</I
+></TT
+>)</TT
+> returns the
+generalized boolean indicating whether the package is locked.
+A package (or list thereof) can be locked using <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="packages.html#pack-lock"
+><TT
+CLASS="function"
+>EXT:PACKAGE-LOCK</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>package-or-list</I
+></TT
+>)
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>)</TT
+>.
+<A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> locks its system packages (specified in the variable
+<A
+HREF="packages.html#pack-lock"
+><TT
+CLASS="varname"
+>CUSTOM:*SYSTEM-PACKAGE-LIST*</TT
+></A
+>).
+If you want to evaluate some forms with certain packages unlocked, you
+can use <TT
+CLASS="function"
+>EXT:WITHOUT-PACKAGE-LOCK</TT
+>:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(without-package-lock ("LISP" "EXT" "CLOS")
+  (defun restart () ...))
+</PRE
+></TD
+></TR
+></TABLE
+>
+<TT
+CLASS="literal"
+>(without-package-lock () ...)</TT
+> unlocks
+all packages in <A
+HREF="packages.html#pack-lock"
+><TT
+CLASS="varname"
+>CUSTOM:*SYSTEM-PACKAGE-LIST*</TT
+></A
+>.</P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="symbols.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="clupack.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Symbols
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-10.html"
+TARGET="_top"
+>[CLHS-10]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The COMMON-LISP-USER Package
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
+TARGET="_top"
+>[CLHS-11.1.2.2]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

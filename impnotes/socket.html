@@ -1,0 +1,1029 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.6. Socket Streams</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.5. ARexx"
+HREF="rexx.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.7. System Calls"
+HREF="syscalls.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="rexx.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="syscalls.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="socket"
+>Extensions-2.6. Socket Streams</A
+></H1
+><FONT
+COLOR="RED"
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.</FONT
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="sose"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#sose"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-SERVER</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+                 [<TT
+CLASS="replaceable"
+><I
+>port-or-socket</I
+></TT
+>])</TT
+></A
+></DT
+><DD
+><P
+>This function creates a socket, binds a port to the
+   socket, and then listens for connect attempts.  The server exists to
+   watch for client connect attempts.  The optional argument is either a
+   port (positive <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>) or a <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+> (from whose peer the
+   connections will be made).
+  </P
+></DD
+><DT
+><A
+NAME="sose-close"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#sose-close"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-SERVER-CLOSE</TT
+></A
+>
+                 <TT
+CLASS="replaceable"
+><I
+>socket-server</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Closes down the server socket.
+  </P
+></DD
+><DT
+><A
+NAME="sose-port"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#sose-port"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-SERVER-PORT</TT
+></A
+>
+                 <TT
+CLASS="replaceable"
+><I
+>socket-server</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>Returns the port which was bound using
+   <A
+HREF="socket.html#sose"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-SERVER</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="so-wait"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#so-wait"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-WAIT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>socket-server</I
+></TT
+>
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <A
+HREF="socket.html#timeout"
+>[<TT
+CLASS="replaceable"
+><I
+>seconds</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>microseconds</I
+></TT
+>]]</A
+>)</TT
+></A
+></DT
+><DD
+><P
+>Wait for a fixed time for a connection
+   on the <TT
+CLASS="replaceable"
+><I
+>socket-server</I
+></TT
+> (a <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-SERVER</TT
+></A
+>).
+   Without a timeout argument, <A
+HREF="socket.html#so-wait"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-WAIT</TT
+></A
+> blocks indefinitely.
+   When timeout is zero, poll.</P
+></DD
+><DT
+><A
+NAME="so-accept"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#so-accept"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-ACCEPT</TT
+></A
+>
+          <TT
+CLASS="replaceable"
+><I
+>socket-server</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>)</TT
+></A
+></DT
+><DD
+><P
+>Creates the server-side two-way stream for the connection.
+  </P
+></DD
+><DT
+><A
+NAME="so-connect"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#so-connect"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-CONNECT</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>port</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> [<TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>] <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+    <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>)</TT
+></A
+></DT
+><DD
+><P
+>Attempts to create a client-side two-way <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>.
+   Blocks until the server accepts the connections.
+  </P
+></DD
+><DT
+><A
+NAME="so-status"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#so-status"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STATUS</TT
+></A
+>
+                 <TT
+CLASS="replaceable"
+><I
+>socket-stream-or-list</I
+></TT
+>
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <A
+HREF="socket.html#timeout"
+>[<TT
+CLASS="replaceable"
+><I
+>seconds</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>microseconds</I
+></TT
+>]]</A
+>)</TT
+></A
+></DT
+><DD
+><P
+>Checks whether it is possible to read from or write
+   to a <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+> or whether a connection is available on a
+   <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-SERVER</TT
+></A
+> without blocking.  (For the cognoscenti:
+   this is the interface to <TT
+CLASS="function"
+>select(2)</TT
+>).
+   This is similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+>, which checks only one stream and only for
+   input, and <A
+HREF="socket.html#so-wait"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-WAIT</TT
+></A
+>, which works only with <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-SERVER</TT
+></A
+>s.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Possible values of
+       <TT
+CLASS="replaceable"
+><I
+>socket-stream-or-list</I
+></TT
+></B
+></P
+><DL
+><DT
+><A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+> or <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-SERVER</TT
+></A
+></DT
+><DD
+><P
+>Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> if a connection on the
+      <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-SERVER</TT
+></A
+> is available; or <TT
+CLASS="constant"
+>:INPUT</TT
+>, <TT
+CLASS="constant"
+>:OUTPUT</TT
+> or <TT
+CLASS="constant"
+>:IO</TT
+>
+      if some input/output is possible on the <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>
+     </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>
+       . <TT
+CLASS="replaceable"
+><I
+>direction</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>Return the appropriate keyword (<TT
+CLASS="constant"
+>:INPUT</TT
+>,
+      <TT
+CLASS="constant"
+>:OUTPUT</TT
+> or <TT
+CLASS="constant"
+>:IO</TT
+>) if some input/output is possible on the
+      <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+> in the specified <TT
+CLASS="replaceable"
+><I
+>direction</I
+></TT
+>
+      (which should be one of <TT
+CLASS="constant"
+>:INPUT</TT
+>, <TT
+CLASS="constant"
+>:OUTPUT</TT
+> or <TT
+CLASS="constant"
+>:IO</TT
+>).
+     </P
+></DD
+><DT
+>a list of the above</DT
+><DD
+><P
+>Return a list of values, one for each element of the
+      argument list (a la <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAPCAR</TT
+></A
+>)</P
+></DD
+></DL
+></DIV
+><P
+>The optional arguments specify the timeout. <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> means wait
+   forever, <TT
+CLASS="literal"
+>0</TT
+> means poll.  Note that this function
+   never waits for input or output to arrive, only for information on
+   input or output presense (so that <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-CHAR</TT
+></A
+> will
+   not block) to become available (or a connection to become
+   possible).</P
+><P
+>For each <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+> this function returns</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>Return values of <A
+HREF="socket.html#so-status"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STATUS</TT
+></A
+></B
+></P
+><DL
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></DT
+><DD
+><P
+>when no information is available or no operation
+      is possible</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:ERROR</TT
+></DT
+><DD
+><P
+>when an i/o operation will cause an error
+     </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:INPUT</TT
+></DT
+><DD
+><P
+>when you can only read from the stream
+     </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:OUTPUT</TT
+></DT
+><DD
+><P
+>when you can only write to the stream
+     </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:IO</TT
+></DT
+><DD
+><P
+>when you can both read from and write to the stream
+     </P
+></DD
+></DL
+></DIV
+></DD
+><DT
+><A
+NAME="sost-hopo"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#sost-hopo"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-HOST</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>socket-stream</I
+></TT
+>)</TT
+>,
+         <TT
+CLASS="literal"
+>(<A
+HREF="socket.html#sost-hopo"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-PORT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>socket-stream</I
+></TT
+>)</TT
+></A
+></DT
+><DD
+><P
+>These two functions return information about the
+   <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>.  For a server, <A
+HREF="socket.html#sost-hopo"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-HOST</TT
+></A
+> returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+  </P
+></DD
+><DT
+><A
+NAME="service-port"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#service-port"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-SERVICE-PORT</TT
+></A
+>
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>service-name</I
+></TT
+>
+                 (<TT
+CLASS="replaceable"
+><I
+>protocol</I
+></TT
+> "tcp"))</TT
+></A
+></DT
+><DD
+><P
+>A convenience function for looking up a port given
+   the service name.  It returns the servent struct as multiple values
+   (name, list of aliases, port, protocol) for the given
+   <TT
+CLASS="replaceable"
+><I
+>service-name</I
+></TT
+> and
+   <TT
+CLASS="replaceable"
+><I
+>protocol</I
+></TT
+>, or all services as the list of
+   vectors of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LENGTH</TT
+></A
+> 4, if <TT
+CLASS="replaceable"
+><I
+>service-name</I
+></TT
+> is
+   not given or is <TT
+CLASS="constant"
+>:DEFAULT</TT
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+  </P
+></DD
+><DT
+><A
+NAME="sost-peer"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#sost-peer"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-PEER</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>socket-stream</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>do-not-resolve-p</I
+></TT
+>])</TT
+></A
+></DT
+><DD
+><P
+>Given a stream, this function returns the name of
+   the host on the opposite side of the connection and its port number;
+   the server-side can use this to see who connected.</P
+><P
+>When the optional second argument is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the hostname
+   resolution is disabled and just the IP address is returned, without
+   the <SPAN
+CLASS="acronym"
+>FQDN</SPAN
+> (Fully Qualified Domain Name).
+   </P
+></DD
+><DT
+><A
+NAME="sost-local"
+><TT
+CLASS="literal"
+>(<A
+HREF="socket.html#sost-local"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-LOCAL</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>socket-stream</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>do-not-resolve-p</I
+></TT
+>])</TT
+></A
+></DT
+><DD
+><P
+>The dual to <A
+HREF="socket.html#sost-peer"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-PEER</TT
+></A
+> - same information,
+   host name and port number, but for the local host.
+   The difference from <A
+HREF="socket.html#sost-hopo"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-HOST</TT
+></A
+> and <A
+HREF="socket.html#sost-hopo"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STREAM-PORT</TT
+></A
+> is that this function
+   asks the OS (and thus returns the correct trusted values) while the
+   other two are just accessors to the internal data structure, and
+   basically return the arguments given to the function which created
+   the <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="rexx.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="syscalls.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.5. ARexx</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.7. System Calls</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

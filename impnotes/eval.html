@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Evaluation and Compilation
+   [CLHS-3]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Sharpsign
+  [CLHS-2.4.8]"
+HREF="sharpsign.html"><LINK
+REL="NEXT"
+TITLE="Compilation
+  [CLHS-3.2]"
+HREF="compilation.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="sharpsign.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="compilation.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="eval"
+>Evaluation and Compilation
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-3.html"
+TARGET="_top"
+>[CLHS-3]</A
+></A
+></H1
+><P
+>All the functions built by <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_function.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCTION</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE</TT
+></A
+> and the like are
+ atoms.  There are built-in functions written in <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>, compiled
+ functions (both of type <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_compiled-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPILED-FUNCTION</TT
+></A
+>) and interpreted
+ functions (of type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+>).</P
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="evaluation"
+>Evaluation
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-1.html"
+TARGET="_top"
+>[CLHS-3.1]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="eval-environ"
+>Introduction to Environments
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-1-1.html"
+TARGET="_top"
+>[CLHS-3.1.1]</A
+></A
+></H2
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="eval.html#the-env"
+><TT
+CLASS="function"
+>EXT:THE-ENVIRONMENT</TT
+></A
+>. </B
+></B
+>As in Scheme, the macro <TT
+CLASS="literal"
+>(<A
+HREF="eval.html#the-env"
+><TT
+CLASS="function"
+>EXT:THE-ENVIRONMENT</TT
+></A
+>)</TT
+>
+ returns the current lexical environment.  This works only in
+ interpreted code and is not compilable!</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="literal"
+>(EXT:EVAL-ENV
+ <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+>)</TT
+>. </B
+></B
+>evaluates a form in a given lexical environment, just as if the
+ form had been a part of the program that the environment came from.
+</P
+></DIV
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="sharpsign.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="compilation.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Sharpsign
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-8.html"
+TARGET="_top"
+>[CLHS-2.4.8]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Compilation
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-2.html"
+TARGET="_top"
+>[CLHS-3.2]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

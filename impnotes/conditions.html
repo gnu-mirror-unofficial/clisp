@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Conditions
+   [CLHS-9]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Structures
+   [CLHS-8]"
+HREF="structures.html"><LINK
+REL="NEXT"
+TITLE="The Conditions Dictionary
+   [CLHS-9.2.]"
+HREF="cond-dict.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="structures.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="cond-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="conditions"
+>Conditions
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-9.html"
+TARGET="_top"
+>[CLHS-9]</A
+></A
+></H1
+><P
+>When an error occurred, you are in a break loop. You can evaluate
+ forms as usual. The <B
+CLASS="command"
+>help</B
+> command (or help key if
+ there is one) lists the available <A
+HREF="environment.html#debugger"
+>debugging
+ commands</A
+>.</P
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>EXT:MUFFLE-CERRORS</TT
+>. </B
+></B
+>The macro <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:MUFFLE-CERRORS</TT
+>
+ {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)</TT
+> executes the <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>s.  When a continuable
+ error occurs, no message is printed.  Instead, the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_abortcm_c_cm_use-value.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONTINUE</TT
+></A
+> restart
+ is invoked.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>EXT:APPEASE-CERRORS</TT
+>. </B
+></B
+>The macro <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:APPEASE-CERRORS</TT
+>
+ {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)</TT
+> executes the <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>s.  When a continuable
+ error occurs, the error is printed as a warning and the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_abortcm_c_cm_use-value.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONTINUE</TT
+></A
+>
+ restart is invoked.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>EXT:EXIT-ON-ERROR</TT
+>. </B
+></B
+>The macro <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:EXIT-ON-ERROR</TT
+>
+ {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)</TT
+> executes the <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>s.  When a non-continuable
+ error or a <B
+CLASS="keycap"
+>Control</B
+>-<SPAN
+CLASS="keysym"
+>C</SPAN
+>
+ interrupt occurs, the error is printed and <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> terminates with an
+ error status.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>EXT:WITH-RESTARTS</TT
+>. </B
+></B
+>The macro <TT
+CLASS="function"
+>EXT:WITH-RESTARTS</TT
+> is like
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RESTART-CASE</TT
+></A
+>, except that the forms are specified after the restart
+ clauses instead of before them, and the restarts created are not
+ implicitly associated to any condition.
+ <TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:WITH-RESTARTS</TT
+>
+ ({<TT
+CLASS="varname"
+>restart-clause</TT
+>}*) {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)</TT
+> is
+ therefore equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>RESTART-CASE</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_progn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PROGN</TT
+></A
+>
+ {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*) {<TT
+CLASS="varname"
+>restart-clause</TT
+>}*)</TT
+>.
+</P
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="cond-nl"
+>Embedded Newlines in Condition Reports
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_9-1-3-1-3.html"
+TARGET="_top"
+>[CLHS-9.1.3.1.3]</A
+></A
+></H1
+><P
+>The error message prefix for the first line is "*** - ". There is
+ no prefix for subsequent error lines. The aesthetics of condition
+ reports containing an object, which requires newlines when pretty
+ printing is enabled, is undefined.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="structures.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="cond-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Structures
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-8.html"
+TARGET="_top"
+>[CLHS-8]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The Conditions Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_condi_s_dictionary.html"
+TARGET="_top"
+>[CLHS-9.2.]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

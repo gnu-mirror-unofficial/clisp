@@ -1,0 +1,400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Printer
+   [CLHS-22]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="The Streams Dictionary
+   [CLHS-21.2.]"
+HREF="stream-dict.html"><LINK
+REL="NEXT"
+TITLE="Printing Other Vectors
+   [CLHS-22.1.3.7]"
+HREF="print-vector.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="stream-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="print-vector.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="printer"
+>Printer
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-22.html"
+TARGET="_top"
+>[CLHS-22]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="multi-rep"
+>Multiple Possible Textual Representations
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-1-1-1.html"
+TARGET="_top"
+>[CLHS-22.1.1.1]</A
+></A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="printer.html#pr-closure"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-CLOSURE*</TT
+></A
+>. </B
+></B
+>An additional variable <A
+HREF="printer.html#pr-closure"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-CLOSURE*</TT
+></A
+> controls whether compiled and
+ interpreted functions (closures) are output in detailed form.
+ If <A
+HREF="printer.html#pr-closure"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-CLOSURE*</TT
+></A
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, compiled closures are output in
+ <SPAN
+CLASS="keysym"
+>#Y</SPAN
+> syntax which the reader understands.
+ <A
+HREF="printer.html#pr-closure"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-CLOSURE*</TT
+></A
+> is initially set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="printer.html#pr-rpars"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-RPARS*</TT
+></A
+>. </B
+></B
+>An additional variable <A
+HREF="printer.html#pr-rpars"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-RPARS*</TT
+></A
+> controls
+ the output of the right (closing) parentheses.
+ If <A
+HREF="printer.html#pr-rpars"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-RPARS*</TT
+></A
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, closing parentheses which do not fit onto
+ the same line as the the corresponding opening parenthesis are output
+ just below their corresponding opening parenthesis, in the same column.
+ <A
+HREF="printer.html#pr-rpars"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-RPARS*</TT
+></A
+> is initially set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="printer.html#pr-indent"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-INDENT-LISTS*</TT
+></A
+>. </B
+></B
+>An additional variable <A
+HREF="printer.html#pr-indent"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-INDENT-LISTS*</TT
+></A
+> controls the indentation of
+ lists that span more than one line.
+ It specifies by how many characters items within the list will be
+ indented relative to the beginning of the list.
+ <A
+HREF="printer.html#pr-indent"
+><TT
+CLASS="varname"
+>CUSTOM:*PRINT-INDENT-LISTS*</TT
+></A
+> is initially set to <TT
+CLASS="literal"
+>1</TT
+>.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="printer.html#ppr-first-newline"
+><TT
+CLASS="varname"
+>CUSTOM:*PPRINT-FIRST-NEWLINE*</TT
+></A
+>. </B
+></B
+>An additional variable <A
+HREF="printer.html#ppr-first-newline"
+><TT
+CLASS="varname"
+>CUSTOM:*PPRINT-FIRST-NEWLINE*</TT
+></A
+> controls
+ pretty-printing of multi-line objects.
+ When <A
+HREF="printer.html#ppr-first-newline"
+><TT
+CLASS="varname"
+>CUSTOM:*PPRINT-FIRST-NEWLINE*</TT
+></A
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+ and the current line already has some characters on it,
+ and the next object will be printed on several lines,
+ and it does not start with a <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+>,
+ then a <SPAN
+CLASS="keysym"
+>#\Newline</SPAN
+> is printed before the object.
+ <A
+HREF="printer.html#ppr-first-newline"
+><TT
+CLASS="varname"
+>CUSTOM:*PPRINT-FIRST-NEWLINE*</TT
+></A
+> has no effect if <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-prettyst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*PRINT-PRETTY*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+ <A
+HREF="printer.html#ppr-first-newline"
+><TT
+CLASS="varname"
+>CUSTOM:*PPRINT-FIRST-NEWLINE*</TT
+></A
+> is initially set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="stream-dict.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="print-vector.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Streams Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_streams_dictionary.html"
+TARGET="_top"
+>[CLHS-21.2.]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Printing Other Vectors
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_22-1-3-7.html"
+TARGET="_top"
+>[CLHS-22.1.3.7]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Evaluation and Compilation Dictionary
+  [CLHS-3.8]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Evaluation and Compilation
+   [CLHS-3]"
+HREF="eval.html"><LINK
+REL="PREVIOUS"
+TITLE="Lambda Lists
+   [CLHS-3.4]"
+HREF="lalist.html"><LINK
+REL="NEXT"
+TITLE="Types and Classes
+   [CLHS-4]"
+HREF="types-classes.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="lalist.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Evaluation and Compilation
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-3.html"
+TARGET="_top"
+>[CLHS-3]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="types-classes.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="eval-comp"
+>The Evaluation and Compilation Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-8.html"
+TARGET="_top"
+>[CLHS-3.8]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="spec-decl"
+>Declaration <A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_special.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>SPECIAL</TT
+></A
+></A
+></H2
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_proclaim.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PROCLAIM</TT
+></A
+> '(<A
+HREF="http://www.lisp.org/HyperSpec/Body/dec_special.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>SPECIAL</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+>))</TT
+> declarations may not be undone.  The same holds for
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defparametercm_defvar.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFVAR</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defparametercm_defvar.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPARAMETER</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defconstant.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCONSTANT</TT
+></A
+> declarations.</P
+><P
+>It is an error if a <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defconstant.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCONSTANT</TT
+></A
+> variable is bound at the moment
+ the <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defconstant.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCONSTANT</TT
+></A
+> is executed, but <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defconstant.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCONSTANT</TT
+></A
+> does not check
+ this.</P
+><P
+>Constants may not be bound dynamically or lexically.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="eval-when"
+>Macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL-WHEN</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL-WHEN</TT
+></A
+> also accepts the situations <TT
+CLASS="literal"
+>(not
+ eval)</TT
+> and <TT
+CLASS="literal"
+>(not
+ compile)</TT
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="lalist.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="types-classes.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Lambda Lists
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4.html"
+TARGET="_top"
+>[CLHS-3.4]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="eval.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,2377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.4. The Amiga Foreign Function Call Facility</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.3. The Foreign Function Call Facility"
+HREF="dffi.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.5. ARexx"
+HREF="rexx.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="dffi.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="rexx.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="affi"
+>Extensions-2.4. The Amiga Foreign Function Call Facility</A
+></H1
+><FONT
+COLOR="RED"
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> platforms only.</FONT
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+>Another Foreign Function Interface. </B
+></B
+>All symbols relating to the simple foreign function interface are
+ exported from the package <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+>. To use them,
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_use-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>USE-PACKAGE</TT
+></A
+> "AFFI")</TT
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-design"
+>Design issues</A
+></H2
+><P
+><A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> was designed to be small in size but powerful enough to
+use most library functions.  Lisp files may be compiled to <TT
+CLASS="filename"
+>#P".fas"</TT
+>
+files without the need to load function definition files at run-time and
+without external <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> or linker support.
+<A
+HREF="p-indep.html#image"
+>memory image</A
+>s can be created, provided that the function libraries are
+opened at run-time.</P
+><P
+>Therefore, <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> supports only primitive <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types (integers
+8, 16 and 32 bits wide, signed or unsigned, pointers) and defines no new
+types or classes.  Foreign functions are not first-class objects (you
+can define a lambda yourself), name spaces are separate.</P
+><P
+>The <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> does no tracking of resources.  Use <A
+HREF="final.html"
+><TT
+CLASS="function"
+>EXT:FINALIZE</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-overview"
+>Overview</A
+></H2
+><P
+>These are the <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> forms:</P
+><P
+><TT
+CLASS="literal"
+>(declare-library-base
+ <TT
+CLASS="replaceable"
+><I
+>keyword-base</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>library-name</I
+></TT
+>)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(require-library-functions
+ <TT
+CLASS="replaceable"
+><I
+>library-name</I
+></TT
+> [(:import
+ {<TT
+CLASS="replaceable"
+><I
+>string-name</I
+></TT
+>}*)])</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(open-library
+ <TT
+CLASS="replaceable"
+><I
+>base-symbol</I
+></TT
+>)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(clos-library
+ <TT
+CLASS="replaceable"
+><I
+>base-symbol</I
+></TT
+>)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(with-open-library
+ (<TT
+CLASS="replaceable"
+><I
+>base-symbol</I
+></TT
+> |
+ <TT
+CLASS="replaceable"
+><I
+>library-name</I
+></TT
+>)
+ {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(defflibfun
+ <TT
+CLASS="replaceable"
+><I
+>function-name</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>base-symbol</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>offset</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>mask</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>result-type</I
+></TT
+>
+ {<TT
+CLASS="replaceable"
+><I
+>argument-type</I
+></TT
+>}*)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(declare-library-function
+ <TT
+CLASS="replaceable"
+><I
+>function-name</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>library-name</I
+></TT
+>
+ {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(flibcall <TT
+CLASS="replaceable"
+><I
+>function-name</I
+></TT
+>
+ {<TT
+CLASS="replaceable"
+><I
+>argument</I
+></TT
+>}*)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(mlibcall <TT
+CLASS="replaceable"
+><I
+>function-name</I
+></TT
+>
+ {<TT
+CLASS="replaceable"
+><I
+>argument</I
+></TT
+>}*)</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(mem-read <TT
+CLASS="replaceable"
+><I
+>address</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>result-type</I
+></TT
+>
+ [<TT
+CLASS="replaceable"
+><I
+>offset</I
+></TT
+>])</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(mem-write <TT
+CLASS="replaceable"
+><I
+>address</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+> [<TT
+CLASS="replaceable"
+><I
+>offset</I
+></TT
+>])</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(mem-write-vector
+ <TT
+CLASS="replaceable"
+><I
+>address</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>vector</I
+></TT
+>
+ [<TT
+CLASS="replaceable"
+><I
+>offset</I
+></TT
+>])</TT
+></P
+><P
+><TT
+CLASS="literal"
+>(nzero-pointer-p <TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+>)</TT
+></P
+><P
+>Except for <TT
+CLASS="function"
+>with-open-library</TT
+>,
+<TT
+CLASS="function"
+>declare-library-function</TT
+> and
+<TT
+CLASS="function"
+>mlibcall</TT
+>, all of the above are functions.</P
+><P
+>A library contains a collection of functions.  The library is
+referred to by a symbol referred as library-base at the <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+>
+level.  This symbol is created in the package <SPAN
+CLASS="QUOTE"
+>"<A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>'AFFI'</SPAN
+></A
+>"</SPAN
+>.
+The link between this symbol and the OS-level library name is
+established by <TT
+CLASS="function"
+>declare-library-base</TT
+>.  To avoid
+multiple package conflicts, this and only this function requires the
+symbol-name to be in the <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-3.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"KEYWORD"</SPAN
+></A
+> package. The function returns the
+library-base.</P
+><P
+>A library may be opened by <TT
+CLASS="function"
+>open-library</TT
+> and
+ closed by <TT
+CLASS="function"
+>close-library</TT
+>. An opened library must be
+ closed. <TT
+CLASS="function"
+>with-open-library</TT
+> is provided to
+ automatically close the library for you, thus it is much safer to
+ use.</P
+><P
+>A function is contained in a library.  Every function is referred
+to by a symbol.  A function is defined through
+<TT
+CLASS="function"
+>defflibfun</TT
+> or
+<TT
+CLASS="function"
+>declare-library-function</TT
+> by giving the function
+name, the library-base, an offset into the library, a mask (or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>)
+for register-based library calls, the result type and all
+parameter-types.  <TT
+CLASS="function"
+>require-library-functions</TT
+> loads
+the complete set of functions defined in a library file. Symbols are
+created in the package <SPAN
+CLASS="QUOTE"
+>"<A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>'AFFI'</SPAN
+></A
+>"</SPAN
+> and imported into the
+current package.</P
+><P
+><TT
+CLASS="function"
+>flibcall</TT
+> and <TT
+CLASS="function"
+>mlibcall</TT
+>
+call library functions. <TT
+CLASS="function"
+>mlibcall</TT
+> is a macro that
+does a few checks at macroexpansion time and allows the compiler to
+inline the call, not requiring the foreign function to be defined again
+at load or execution time. The use of this macro is advertised wherever
+possible.</P
+><P
+><TT
+CLASS="function"
+>mem-read</TT
+> reads an arbitrary address (with
+offset for structure references) and returns the given type.</P
+><P
+><TT
+CLASS="function"
+>mem-write</TT
+> writes an arbitrary
+address. <TT
+CLASS="function"
+>mem-write-vector</TT
+> copies the content of a
+Lisp <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+> into memory.</P
+><P
+><TT
+CLASS="function"
+>nzero-pointer-p</TT
+> tests for
+non-<TT
+CLASS="constant"
+>NULL</TT
+> pointers in all recognized representations
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_null.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NULL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> and <TT
+CLASS="classname"
+>FFI:FOREIGN-POINTER</TT
+>).</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-libs"
+>Foreign Libraries</A
+></H2
+><P
+><TT
+CLASS="function"
+>declare-library-base</TT
+> ought to be wrapped in an
+<TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL-WHEN</TT
+></A
+> (compile eval load) ...)</TT
+>
+form and come before any function is referenced, because the library
+base symbol must be known.</P
+><P
+><TT
+CLASS="function"
+>open-library</TT
+> tries to open the library
+referenced by the base symbol.  Therefore it must have been preceded
+with <TT
+CLASS="function"
+>declare-library-base</TT
+>.  The call returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>
+on failure. <TT
+CLASS="function"
+>open-library</TT
+> calls nest.  Every
+successful call must be matched by <TT
+CLASS="function"
+>close-library</TT
+>.
+<TT
+CLASS="function"
+>with-open-library</TT
+> does this for you and also allows
+you to specify the library by name, provided that its base has been
+declared.  It is recommended to use this macro and to reference the
+library by name.</P
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> will not close libraries for you at program exit.  [A
+previous version did so but now <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> is a module and there are no
+module exit functions.]  Programmers, watch
+<TT
+CLASS="function"
+>AFFI::*LIBRARIES-ALIST*</TT
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-types"
+>(Foreign) <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types</A
+></H2
+><P
+>The following foreign <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types are used in <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+>.
+They are <I
+CLASS="emphasis"
+>not</I
+> regular <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> types or <B
+CLASS="command"
+>CLOS</B
+>
+classes.</P
+><DIV
+CLASS="table"
+><A
+NAME="AEN19871"
+></A
+><P
+><B
+>Table 6. foreign <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> types used in <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+></B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> name</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Lisp equivalent</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> equivalent</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Comment</TH
+><TD
+>&nbsp;</TD
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>void</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>as a result type for functions only</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>4</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 32)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>unsigned long</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>2</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 16)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>unsigned short</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>1</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>unsigned char</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>-4</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 32)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>long</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>-2</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 16)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>short</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>-1</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>signed char</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>0</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_boolean.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BOOLEAN</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>BOOL</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>as a result type for functions only</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>*</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>opaque</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>void*</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:EXTERNAL</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>opaque</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>void*</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>char*</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:IO</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><SPAN
+CLASS="type"
+>char*</SPAN
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>Objects of type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> are copied and passed
+<TT
+CLASS="constant"
+>NULL</TT
+>-terminated on the execution stack.  On return, a Lisp string is
+allocated and filled from the address returned (unless <TT
+CLASS="constant"
+>NULL</TT
+>).
+Functions with <TT
+CLASS="constant"
+>:IO</TT
+> parameters are passed the address of the Lisp
+string or unsigned byte vector. These are not <TT
+CLASS="constant"
+>NULL</TT
+>-terminated!
+This is useful for functions like like <TT
+CLASS="function"
+>read()</TT
+> which
+do not need an array at a constant address longer than the dynamic
+extent of the call (it is dangerous to define callback functions with
+<TT
+CLASS="constant"
+>:IO</TT
+> (or <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>) type parameters).
+Arguments of type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> and <TT
+CLASS="classname"
+>FFI:FOREIGN-POINTER</TT
+> are always
+acceptable where a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or <TT
+CLASS="constant"
+>:IO</TT
+> type is specified.</P
+><P
+>See also <A
+HREF="encoding.html#foreign-enc"
+><TT
+CLASS="varname"
+>CUSTOM:*FOREIGN-ENCODING*</TT
+></A
+>.</P
+><P
+>To meet the design goals, predefined types and objects were
+used. As such, pointers were represented as integers. Now that there is
+the <TT
+CLASS="classname"
+>FFI:FOREIGN-POINTER</TT
+> type, both representations may be used on input.
+The pointer type should be therefore considered as opaque.
+Use <TT
+CLASS="function"
+>nzero-pointer-p</TT
+> for <TT
+CLASS="constant"
+>NULL</TT
+> tests.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-functions"
+>Foreign functions</A
+></H2
+><P
+>Foreign Functions are declared either through
+<TT
+CLASS="function"
+>defflibfun</TT
+> or
+<TT
+CLASS="function"
+>declare-library-function</TT
+>.  The former is closer to
+the low-level implementation of the interface, the latter is closer to
+the other <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+>.</P
+><P
+><TT
+CLASS="function"
+>defflibfun</TT
+> requires the library base symbol
+and register mask to be specified,
+<TT
+CLASS="function"
+>declare-library-function</TT
+> requires the library name
+and computes the mask from the declaration of the arguments.</P
+><P
+>The value of mask is implementation-dependent. On the Amiga, it is
+an integer whose hexadecimal value is the reverse of the function
+argument register numbers, where d0 has number <TT
+CLASS="literal"
+>1</TT
+>
+and a6 number <TT
+CLASS="literal"
+>#xF</TT
+>.  A <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> mask is reserved for
+stack-based calls (unimplemented).</P
+><P
+>The <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> type <TT
+CLASS="literal"
+>0</TT
+> is only acceptable as a
+function result type and yields either <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>. The difference
+between <TT
+CLASS="function"
+>*</TT
+> and <TT
+CLASS="constant"
+>:EXTERNAL</TT
+> is the following:
+<TT
+CLASS="function"
+>*</TT
+> uses integers, <TT
+CLASS="constant"
+>:EXTERNAL</TT
+> uses
+<TT
+CLASS="classname"
+>FFI:FOREIGN-POINTER</TT
+> as function result-type (except from <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> for a
+<TT
+CLASS="constant"
+>NULL</TT
+> pointer) and refuses objects of type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or
+<TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+> as input.  Thus <TT
+CLASS="constant"
+>:EXTERNAL</TT
+> provides some security
+on the input and the ability to use <A
+HREF="final.html"
+><TT
+CLASS="function"
+>EXT:FINALIZE</TT
+></A
+> for resource-tracking on
+the output side.</P
+><P
+><TT
+CLASS="literal"
+>(declare-library-function <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>library-name</I
+></TT
+> {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*)</TT
+>
+
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+> ::==</DT
+><DD
+><DIV
+CLASS="table"
+><A
+NAME="AEN20080"
+></A
+><P
+><B
+>Table 7. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:offset
+    <TT
+CLASS="replaceable"
+><I
+>library-offset</I
+></TT
+>)</TT
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(<TT
+CLASS="constant"
+>:ARGUMENTS</TT
+>
+    {(<TT
+CLASS="replaceable"
+><I
+>arg-name</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+><A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+>-type</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>register</I
+></TT
+>)}*)</TT
+></TD
+><TD
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>|</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>(:return-type
+    <TT
+CLASS="replaceable"
+><I
+><A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+>-type</I
+></TT
+>)</TT
+></TD
+><TD
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>register</I
+></TT
+> ::==</DT
+><DD
+><P
+><TT
+CLASS="constant"
+>:d0</TT
+> | <TT
+CLASS="constant"
+>:d1</TT
+>
+ | ... | <TT
+CLASS="constant"
+>:d7</TT
+> | <TT
+CLASS="constant"
+>:a0</TT
+> | ... |
+ <TT
+CLASS="constant"
+>:a6</TT
+></P
+></DD
+></DL
+></DIV
+>
+
+declares a named library function for further reference through
+<TT
+CLASS="function"
+>flibcall</TT
+> and <TT
+CLASS="function"
+>mlibcall</TT
+>.</P
+><P
+><TT
+CLASS="function"
+>mlibcall</TT
+> should be the preferred way of
+calling foreign functions (when they are known at compile-time) as
+macroexpansion-time checks may be performed and the call can be sort of
+inlined.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-memory-access"
+>Memory access</A
+></H2
+><P
+><TT
+CLASS="literal"
+>(affi:mem-read <TT
+CLASS="replaceable"
+><I
+>address</I
+></TT
+>
+<TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>
+<TT
+CLASS="replaceable"
+><I
+>offset</I
+></TT
+>)</TT
+> can read 8, 16 and 32 bit
+signed or unsigned integers (<A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> types <SPAN
+CLASS="type"
+>-4</SPAN
+>,
+<SPAN
+CLASS="type"
+>-2</SPAN
+>, <SPAN
+CLASS="type"
+>-1</SPAN
+>, <SPAN
+CLASS="type"
+>1</SPAN
+>, <SPAN
+CLASS="type"
+>2</SPAN
+>,
+<SPAN
+CLASS="type"
+>4</SPAN
+>), a pointer (<SPAN
+CLASS="type"
+>*</SPAN
+>), a <TT
+CLASS="constant"
+>NULL</TT
+>-terminated
+string (<SPAN
+CLASS="type"
+>string</SPAN
+>) or, if the type argument is of type
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+>, it can fill this vector.
+<TT
+CLASS="constant"
+>:EXTERNAL</TT
+> is not an acceptable type as no object can be created by
+using <TT
+CLASS="function"
+>affi:mem-read</TT
+>.</P
+><P
+><TT
+CLASS="literal"
+>(affi:mem-write
+<TT
+CLASS="replaceable"
+><I
+>address</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+>
+[<TT
+CLASS="replaceable"
+><I
+>offset</I
+></TT
+>])</TT
+> writes integers (<A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+>
+type <SPAN
+CLASS="type"
+>-4</SPAN
+>, <SPAN
+CLASS="type"
+>-2</SPAN
+>, <SPAN
+CLASS="type"
+>-1</SPAN
+>, <SPAN
+CLASS="type"
+>1</SPAN
+>,
+<SPAN
+CLASS="type"
+>2</SPAN
+> and <SPAN
+CLASS="type"
+>4</SPAN
+>) or pointer values (type
+<SPAN
+CLASS="type"
+>*</SPAN
+>), but not vectors to the specified memory address.</P
+><P
+><TT
+CLASS="literal"
+>(affi:mem-write-vector
+<TT
+CLASS="replaceable"
+><I
+>address</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>vector</I
+></TT
+>
+[<TT
+CLASS="replaceable"
+><I
+>offset</I
+></TT
+>])</TT
+> can write memory from the
+given vector (of type <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8))</TT
+>).</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-func-def"
+>Function Definition Files</A
+></H2
+><P
+><TT
+CLASS="function"
+>affi:require-library-functions</TT
+> will <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+> a
+file of name derived from thelibrary name and with type
+<TT
+CLASS="filename"
+>affi</TT
+>. It may be used to import all names into the
+current package or only a given subset identified by string names, using
+the <TT
+CLASS="constant"
+>:import</TT
+> keyword (recommended use).
+Some definition files for standard Amiga libraries are provided.
+See <A
+HREF="affi.html#affi-ex-1-predefined"
+>example 1</A
+> below.</P
+><P
+>As <TT
+CLASS="function"
+>affi:require-library-functions</TT
+> loads a
+global file which you, the programmer, may have not defined, you may
+consider declaring every function yourself to be certain what the return
+and argument types are.
+See <A
+HREF="affi.html#affi-ex-4-sample"
+>example 4</A
+> below.</P
+><P
+>The file <TT
+CLASS="filename"
+>read-fd.lisp</TT
+> defines the function
+<TT
+CLASS="function"
+>make-partial-fd-file</TT
+> with which the provided
+<TT
+CLASS="filename"
+>.affi</TT
+> files have been prepared from the original
+Amiga FD files (located in the directory <TT
+CLASS="filename"
+>FD:</TT
+>).
+They must still be edited as the function cannot know whether a function
+accepts a <TT
+CLASS="function"
+>*</TT
+>, <TT
+CLASS="constant"
+>:IO</TT
+>,
+<TT
+CLASS="function"
+>string</TT
+> or <TT
+CLASS="constant"
+>:EXTERNAL</TT
+> argument and because files
+in <TT
+CLASS="filename"
+>FD:</TT
+> only contain a register specification, not
+the width of integer arguments (<TT
+CLASS="literal"
+>-4</TT
+>,
+<TT
+CLASS="literal"
+>-2</TT
+>, <TT
+CLASS="literal"
+>-1</TT
+>, <TT
+CLASS="literal"
+>1</TT
+>,
+<TT
+CLASS="literal"
+>2</TT
+>, or <TT
+CLASS="literal"
+>4</TT
+>).</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-hints"
+>Hints</A
+></H2
+><P
+>By using appropriate <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL-WHEN</TT
+></A
+> forms for
+<TT
+CLASS="function"
+>affi:declare-library-base</TT
+> and
+<TT
+CLASS="function"
+>affi:require-library-functions</TT
+> and not using
+<TT
+CLASS="function"
+>affi:flibcall</TT
+>, it is possible to write code that
+only loads library function definition files at compile-time.
+See <A
+HREF="affi.html#affi-ex-1-predefined"
+>example 1</A
+> below.</P
+><P
+>Do not rely on <A
+HREF="final.html"
+><TT
+CLASS="function"
+>EXT:FINALIZE</TT
+></A
+> to free resources for you, as <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+does not call finalizers when it exits, use <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UNWIND-PROTECT</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-caveats"
+>Caveats</A
+></H2
+><P
+>You can consider the library bases being symbols in need of being
+imported from the package <A
+HREF="affi.html"
+><SPAN
+CLASS="QUOTE"
+>"AFFI"</SPAN
+></A
+> originating from a brain-damage, causing
+the usual symbol headaches when using foreign functions calls within
+macros.  Luckily, even if the high-level interface (or its
+implementation in <TT
+CLASS="filename"
+>affi1.lisp</TT
+>) were to change, the
+low-level part (<TT
+CLASS="filename"
+>affi.d</TT
+>) should remain untouched as
+all it knows are <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>s and <TT
+CLASS="classname"
+>FFI:FOREIGN-POINTER</TT
+>s, no <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+>s.
+The difficulty is just to get the library base value at run-time.
+Feel free to suggest enhancements to this facility!</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="affi-examples"
+>Examples</A
+></H2
+><FONT
+COLOR="RED"
+>NB: These examples are somewhat specific to the Amiga.</FONT
+><DIV
+CLASS="example"
+><A
+NAME="affi-ex-1-predefined"
+></A
+><P
+><B
+>Example 8. Using a predefined library function file</B
+></P
+><P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "AFFI-TEST" (:use "LISP" "AFFI"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "AFFI-TEST")
+
+;; SysBase is the conventional name for exec.library
+;; It is only enforced by the file loaded by REQUIRE-LIBRARY-FUNCTIONS
+(eval-when (compile eval load)
+  (declare-library-base :SysBase "exec.library")) ;keyword avoids name conflicts
+
+;; using only MLIBCALL allows not to load definitions at load-time
+(eval-when (compile eval)
+  (require-library-functions "exec.library"
+    :import '("FindTask")))
+
+(with-open-library ("exec.library")
+  (print (mlibcall FindTask 0)))
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+This file can be used in interpreted and compiled mode.
+Compiled, it will have inlined the library function calls.
+</P
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="affi-ex-2-flibcall"
+></A
+><P
+><B
+>Example 9. Using flibcall</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "AFFI-TEST" (:use "LISP" "AFFI"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "AFFI-TEST")
+
+(eval-when (compile eval load)
+  ;; keyword avoids name conflicts
+  (declare-library-base :SysBase "exec.library"))
+
+;; The load situation permits the use of flibcall
+(eval-when (eval compile load)
+  (require-library-functions "exec.library"))
+
+(unless (open-library 'SysBase) (error "No library for SysBase"))
+(flibcall (if t 'FindTask 'Debug) 0)
+(close-library 'SysBase)
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="affi-ex-3-dynamic"
+></A
+><P
+><B
+>Example 10. Be fully dynamic, defining library bases ourselves</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPACKAGE</TT
+></A
+> "AFFI-TEST" (:use "LISP" "AFFI"))
+(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IN-PACKAGE</TT
+></A
+> "AFFI-TEST")
+
+(eval-when (compile eval load)
+  (defvar mylib (declare-library-base :foobase "foo.library")))
+(eval-when (eval compile load)          ;eval allows mlibcall, load flibcall
+  (defflibfun 'foo1 mylib -30 '#xA '* 'string)
+  (defflibfun 'foo2 mylib -36 '#x21 0 * 4))
+
+(defun foo (name)
+  (when (open-library mylib)
+    (list (mlibcall foo1 name) (flibcall 'foo2 name 123213))
+    (close-library mylib)))
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="affi-ex-4-sample"
+></A
+><P
+><B
+>Example 11. Some sample function definitions</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(defflibfun 'FindTask 'SysBase -294 #xA '* 'string)
+(eval-library-function FindTask "exec.library"
+  (:offset -294)
+  (:return-type *)
+  (:arguments
+   (name   string   :A1)))
+(declare-library-function NameFromLock "dos.library"
+  (:offset -402)
+  (:return-type 0)
+  (:arguments
+   (lock   4   :D1)
+   (buffer :io :D2)
+   (len    4   :D3)))
+
+(eval-when (compile eval)
+  (defconstant GVF_LOCAL_ONLY (ash 1 9))
+  (defflibfun 'SetVar 'DosBase -900 #x5432 0 'string 'string -4 4))
+(defun setvar (name value)
+  (with-open-library (DosBase)
+    ;; length of -1 means find length of <TT
+CLASS="constant"
+>NULL</TT
+>-terminated-string
+    (mlibcall SetVar name value -1 GVF_LOCAL_ONLY)))
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="dffi.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="rexx.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.3. The Foreign Function Call Facility</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.5. ARexx</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

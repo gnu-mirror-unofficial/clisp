@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Valid Patterns for Tokens
+  [CLHS-2.3.5]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Syntax
+   [CLHS-2]"
+HREF="syntax.html"><LINK
+REL="PREVIOUS"
+TITLE="Syntax
+   [CLHS-2]"
+HREF="syntax.html"><LINK
+REL="NEXT"
+TITLE="Double-Quote
+  [CLHS-2.4.5]"
+HREF="double-quote.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="syntax.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Syntax
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-2.html"
+TARGET="_top"
+>[CLHS-2]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="double-quote.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="valid-patterns"
+>Valid Patterns for Tokens
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-5.html"
+TARGET="_top"
+>[CLHS-2.3.5]</A
+></A
+></H1
+><P
+>When a token with package markers is read, then no checking is
+ done whether the package part and the symbol-name part do not have
+ number syntax. (What's the purpose of this check?) So we consider
+ tokens like <SPAN
+CLASS="token"
+>USER::</SPAN
+> or <SPAN
+CLASS="token"
+>:1</SPAN
+> or
+ <SPAN
+CLASS="token"
+>LISP::4711</SPAN
+> or <SPAN
+CLASS="token"
+>21:3</SPAN
+> as symbols.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="syntax.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="double-quote.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Syntax
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-2.html"
+TARGET="_top"
+>[CLHS-2]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="syntax.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Double-Quote
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-4-5.html"
+TARGET="_top"
+>[CLHS-2.4.5]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

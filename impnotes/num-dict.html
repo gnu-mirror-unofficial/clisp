@@ -1,0 +1,1425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Numbers Dictionary
+   [CLHS-12.2]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Numbers
+   [CLHS-12]"
+HREF="numbers.html"><LINK
+REL="PREVIOUS"
+TITLE="Number Concepts
+   [CLHS-12.1]"
+HREF="num-concepts.html"><LINK
+REL="NEXT"
+TITLE="Characters
+   [CLHS-13]"
+HREF="characters.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="num-concepts.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Numbers
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-12.html"
+TARGET="_top"
+>[CLHS-12]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="characters.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="num-dict"
+>The Numbers Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_numbers_dictionary.html"
+TARGET="_top"
+>[CLHS-12.2]</A
+></A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_upgraded-_ex-part-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UPGRADED-COMPLEX-PART-TYPE</TT
+></A
+>. </B
+></B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_upgraded-_ex-part-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>UPGRADED-COMPLEX-PART-TYPE</TT
+></A
+> always returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, since a
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> number in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> can always have <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_realpartcm_imagpart.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REALPART</TT
+></A
+> and
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_realpartcm_imagpart.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>IMAGPART</TT
+></A
+> of any type.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="num-dict.html#default-float-format"
+><TT
+CLASS="varname"
+>CUSTOM:*DEFAULT-FLOAT-FORMAT*</TT
+></A
+>. </B
+></B
+>When rational numbers are to be converted to floats (due to
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_float.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sqrtcm_isqrt.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SQRT</TT
+></A
+> or a transcendental function), the result
+ type is given by the variable <A
+HREF="num-dict.html#default-float-format"
+><TT
+CLASS="varname"
+>CUSTOM:*DEFAULT-FLOAT-FORMAT*</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="num-dict.html#no-underflow"
+><TT
+CLASS="function"
+>EXT:WITHOUT-FLOATING-POINT-UNDERFLOW</TT
+></A
+>. </B
+></B
+>The macro <TT
+CLASS="literal"
+>(<A
+HREF="num-dict.html#no-underflow"
+><TT
+CLASS="function"
+>EXT:WITHOUT-FLOATING-POINT-UNDERFLOW</TT
+></A
+>
+ {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)</TT
+> executes the <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>s, with errors of type
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_floati_nt-underflow.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOATING-POINT-UNDERFLOW</TT
+></A
+> inhibited.  Floating point operations
+ will silently return zero instead of signalling an error of type
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_floati_nt-underflow.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOATING-POINT-UNDERFLOW</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="int-func-ext"
+>Additional Integer Functions</A
+></H2
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>ext:!</TT
+> </B
+></B
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>ext:!</TT
+> <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+>
+ returns the factorial of <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> being a nonnegative
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>ext:exquo</TT
+>. </B
+></B
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>ext:exquo</TT
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>)</TT
+> returns the integer quotient <TT
+CLASS="varname"
+>x/y</TT
+> of
+ two integers <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>,<TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>, and signals an error when the quotient is not
+ integer.  (This is more efficient than <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sl.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>/</TT
+></A
+>.)</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="function"
+>ext:xgcd</TT
+>. </B
+></B
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>ext:xgcd</TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+> ... <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>)</TT
+>
+ returns the values <TT
+CLASS="replaceable"
+><I
+>l</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+>, ..., <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>n</SUB
+></I
+></TT
+>, where <TT
+CLASS="replaceable"
+><I
+>l</I
+></TT
+> is the
+ greatest common divisor of the integers <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+>, ..., <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>, and
+ <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+>, ..., <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>n</SUB
+></I
+></TT
+> are the integer coefficients such that
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; <TT
+CLASS="replaceable"
+><I
+>l</I
+></TT
+> = (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_gcd.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GCD</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+> ... <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>)
+   = (+ (* <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>1</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>1</SUB
+></I
+></TT
+>) ... (* <TT
+CLASS="replaceable"
+><I
+>k<SUB
+>n</SUB
+></I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x<SUB
+>n</SUB
+></I
+></TT
+>))
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="float-notes"
+>Floating Point</A
+></H2
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_expcm_expt.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPT</TT
+></A
+>. </B
+></B
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_expcm_expt.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>base</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>exponent</I
+></TT
+>)</TT
+> is not very precise if
+ <TT
+CLASS="replaceable"
+><I
+>exponent</I
+></TT
+> has a large absolute
+ value.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_log.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOG</TT
+></A
+>. </B
+></B
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_log.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOG</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>number</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>base</I
+></TT
+>)</TT
+> signals
+ an error if <TT
+CLASS="literal"
+><TT
+CLASS="replaceable"
+><I
+>base</I
+></TT
+> = 1</TT
+>.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+>. </B
+></B
+>The value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+> is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+> with the precision given
+ by <TT
+CLASS="literal"
+>(<A
+HREF="num-concepts.html#lfd"
+><TT
+CLASS="function"
+>EXT:LONG-FLOAT-DIGITS</TT
+></A
+>)</TT
+>.  When this precision is changed, the value of <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+> is
+ automatically recomputed.  Therefore <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+> is a variable, not a
+ constant.</P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="float-decode"
+>Float Decoding
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_decode-fl_decode-float.html"
+TARGET="_top"
+>[CLHS]</A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_decode-fl_decode-float.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLOAT-RADIX</TT
+></A
+> always returns <TT
+CLASS="literal"
+>2</TT
+>.</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_decode-fl_decode-float.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLOAT-DIGITS</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>number</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>digits</I
+></TT
+>)</TT
+> coerces <TT
+CLASS="replaceable"
+><I
+>number</I
+></TT
+> (a real number) to a floating
+ point number with at least <TT
+CLASS="replaceable"
+><I
+>digits</I
+></TT
+> mantissa digits.
+ The following holds:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (&#62;= (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_decode-fl_decode-float.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLOAT-DIGITS</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_decode-fl_decode-float.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLOAT-DIGITS</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>number</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>digits</I
+></TT
+>)) <TT
+CLASS="replaceable"
+><I
+>digits</I
+></TT
+>)
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="bool-ops"
+>Boolean Operations
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+>[CLHS]</A
+></A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="bool-op-table"
+></A
+><P
+><B
+>Table 2. Boolean Operations</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>constant</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>value</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-CLR</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>0</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-SET</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>15</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-1</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>10</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-2</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>12</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-C1</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>5</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-C2</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>3</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-AND</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>8</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-IOR</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>14</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-XOR</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>6</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-EQV</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>9</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-NAND</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>7</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-NOR</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>1</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-ANDC1</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>4</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-ANDC2</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>2</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-ORC1</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>13</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>BOOLE-ORC2</TT
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>11</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="fixnum-lim"
+>Fixnum Limits
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_ative-fixnum.html"
+TARGET="_top"
+>[CLHS]</A
+></A
+></H2
+><DIV
+CLASS="table"
+><A
+NAME="fixnum-lim-table"
+></A
+><P
+><B
+>Table 3. Platform dependent</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>CPU type</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>16-bit CPU</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>32-bit CPU</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>64-bit CPU</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_ative-fixnum.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>MOST-POSITIVE-FIXNUM</TT
+></A
+></TD
+><TD
+COLSPAN="2"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>24</SUP
+>-1 = 16777215</TD
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>32</SUP
+>-1 = 4294967295</TD
+></TR
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_ative-fixnum.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>MOST-NEGATIVE-FIXNUM</TT
+></A
+></TD
+><TD
+COLSPAN="2"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>-2<SUP
+>24</SUP
+> = -16777216</TD
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>-2<SUP
+>32</SUP
+> = -4294967296</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="float-lim"
+>Float Limits
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
+TARGET="_top"
+>[CLHS]</A
+></A
+></H2
+><P
+>Together with <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+>, the other long float constants
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LEAST-NEGATIVE-LONG-FLOAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LEAST-NEGATIVE-NORMALIZED-LONG-FLOAT</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LEAST-POSITIVE-LONG-FLOAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LEAST-POSITIVE-NORMALIZED-LONG-FLOAT</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_short-_tive-epsilon.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LONG-FLOAT-EPSILON</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_short-_tive-epsilon.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>LONG-FLOAT-NEGATIVE-EPSILON</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>MOST-NEGATIVE-LONG-FLOAT</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>MOST-POSITIVE-LONG-FLOAT</TT
+></A
+> are recomputed
+ whenever <TT
+CLASS="literal"
+>(<A
+HREF="num-concepts.html#lfd"
+><TT
+CLASS="function"
+>EXT:LONG-FLOAT-DIGITS</TT
+></A
+>)</TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>ed.  They are variables, not constants.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="float-invalid-op"
+>Condition <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_floati_id-operation.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOATING-POINT-INVALID-OPERATION</TT
+></A
+></A
+></H2
+><P
+>This condition is never signaled by <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="float-inexact"
+>Condition <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_floati_oint-inexact.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOATING-POINT-INEXACT</TT
+></A
+></A
+></H2
+><P
+>This condition is never signaled by <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="num-concepts.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="characters.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Number Concepts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1.html"
+TARGET="_top"
+>[CLHS-12.1]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="numbers.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Characters
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
+TARGET="_top"
+>[CLHS-13]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

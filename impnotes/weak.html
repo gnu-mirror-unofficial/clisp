@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-1.6. Weak Pointers</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-1: Platform independent Extensions"
+HREF="p-indep.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.5. Defining new kinds of Streams"
+HREF="clos-stream.html"><LINK
+REL="NEXT"
+TITLE="Extensions-1.7. Finalization"
+HREF="final.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="clos-stream.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-1: Platform independent Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="final.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="weak"
+>Extensions-1.6. Weak Pointers</A
+></H1
+><P
+>A weak pointer is an object holding a reference to a given object,
+ without keeping the latter from being <A
+HREF="gc.html"
+>garbage-collect</A
+>ed.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:MAKE-WEAK-POINTER</TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>returns a fresh weak pointer referring to
+  <TT
+CLASS="replaceable"
+><I
+>value</I
+></TT
+>.</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:WEAK-POINTER-P</TT
+>
+   <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>returns true if the <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> is of type <A
+HREF="weak.html"
+><TT
+CLASS="classname"
+>EXT:WEAK-POINTER</TT
+></A
+>.
+ </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>EXT:WEAK-POINTER-VALUE</TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>weak-pointer</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>returns two values: The original value and <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, if
+    the value has not yet been <A
+HREF="gc.html"
+>garbage-collect</A
+>ed, else <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+  </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="clos-stream.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="final.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.5. Defining new kinds of Streams</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="p-indep.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-1.7. Finalization</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

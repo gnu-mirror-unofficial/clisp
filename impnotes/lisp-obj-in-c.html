@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Lisp objects in CLISP</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Overview of CLISP's Garbage Collection"
+HREF="gc.html"><LINK
+REL="PREVIOUS"
+TITLE="Overview of CLISP's Garbage Collection"
+HREF="gc.html"><LINK
+REL="NEXT"
+TITLE="Memory Models"
+HREF="memory-models.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="gc.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Overview of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s Garbage Collection</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="memory-models.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="lisp-obj-in-c"
+>Lisp objects in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></H1
+><P
+></P
+><P
+><B
+>Three kinds of storage are distinguished:</B
+></P
+><UL
+><LI
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> data (the "heap"), i.e. storage which contains
+  Lisp objects and is managed by the garbage collector.</P
+></LI
+><LI
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> stack (called <A
+HREF="vm.html"
+><TT
+CLASS="literal"
+>STACK</TT
+></A
+>), contains <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+  objects</P
+></LI
+><LI
+><P
+><A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> data (including program text, data,
+  <TT
+CLASS="function"
+>malloc()</TT
+>ed memory)</P
+></LI
+></UL
+><P
+>A <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> object is one word, containing a tag (partial type
+information) and either immediate data (e.g. fixnums or short floats) or
+a pointer to storage.  Pointers to <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> data have tag = machine_type
+= 0, pointers to <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> stack have tag = system_type, most other pointers
+point to <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> data.</P
+><P
+>Let us turn to these <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects that consume regular <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+memory.  Every <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> object has a size which is determined when the
+object is allocated (using one of the <TT
+CLASS="function"
+>allocate_*()</TT
+>
+routines). The size can be computed from the type tag and - if necessary
+- the length field of the object's header. The length field always
+contains the number of elements of the object. The number of bytes is
+given by the function <TT
+CLASS="function"
+>objsize()</TT
+>.</P
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects which contain exactly 2 <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects
+(i.e. <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+>es, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> numbers, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_ratio.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIO</TT
+></A
+>s) are
+stored in a separate area and occupy 2 words each.
+All other <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> objects have "varying length" (more precisely,
+not a fixed length) and include a word for garbage collection purposes
+at their beginning.</P
+><P
+>The garbage collector is invoked when an
+<TT
+CLASS="function"
+>allocate_*()</TT
+> request cannot be fulfilled.
+It marks all objects which are "live" (may be reached from the "roots"),
+compacts these objects and unmarks them.  Non-live objects are lost;
+their storage is reclaimed.</P
+><P
+>2-pointer objects are compacted by a simple hole-filling
+algorithm: fill the most-left object into the most-right hole, and so
+on, until the objects are contiguous at the right and the hole is
+contiguous at the left.</P
+><P
+>Variable-length objects are compacted by sliding them down (their
+address decreases).</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gc.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="memory-models.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Overview of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>'s Garbage Collection</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="gc.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Memory Models</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

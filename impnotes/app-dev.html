@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.9. Application delivery with CLISP</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.8. Quickstarting delivery with CLISP"
+HREF="quickstart.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.10. Shell, Pipes and Printing"
+HREF="shell.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="quickstart.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="shell.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="app-dev"
+>Extensions-2.9. Application delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+></H1
+><P
+>Some ways of packaging <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> programs are discussed in the
+ section <A
+HREF="quickstart.html"
+>Quickstarting delivery with
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
+>.</P
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> is Free Software, covered by the <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/copyleft/gpl.html"
+TARGET="_top"
+>GPL</A
+>, with special
+ terms governing the distribution of applications that run in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.
+ The precise terms can be found in the <TT
+CLASS="filename"
+>COPYRIGHT</TT
+>
+ file contained in the source and binary distributions of <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.  Here
+ is an informal clarification what these terms mean in practice.  Please
+ refer to the said <TT
+CLASS="filename"
+>COPYRIGHT</TT
+> file when in
+ doubt.</P
+><P
+>In many cases, <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> does not force an application to be covered
+ by the <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/copyleft/gpl.html"
+TARGET="_top"
+>GPL</A
+>. Nevertheless, we encourage you to release your software
+ under an open source copyright. The benefits of such a copyright for
+ your users are numerous, in particular they are free to modify the
+ application when their needs/requirements change, and they are free to
+ recompile the application when they upgrade their machine or operating
+ system.</P
+><P
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extensions, i.e. programs which need to access
+ non-portable <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> internal symbols (in the packages <A
+HREF="imppack.html#sys-pac"
+><SPAN
+CLASS="QUOTE"
+>"SYSTEM"</SPAN
+></A
+>,
+ <A
+HREF="classes.html"
+><SPAN
+CLASS="QUOTE"
+>"CLOS"</SPAN
+></A
+>, <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+>, ...), must be covered by <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/copyleft/gpl.html"
+TARGET="_top"
+>GPL</A
+> as
+ well.</P
+><P
+>Other programs running in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> have to or need not to be placed
+ under <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/copyleft/gpl.html"
+TARGET="_top"
+>GPL</A
+>, depending on their distribution form:
+
+<P
+></P
+><UL
+><LI
+><P
+>Programs distributed as Lisp source or
+  <TT
+CLASS="filename"
+>#P".fas"</TT
+> files can be distributed without restrictions coming from
+  <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+></LI
+><LI
+><P
+>Programs distributed as <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <A
+HREF="p-indep.html#image"
+>memory image</A
+>s can be
+  distributed only if accompanied with the non-<A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <TT
+CLASS="filename"
+>#P".fas"</TT
+> files
+  which make up the <A
+HREF="p-indep.html#image"
+>memory image</A
+>, and a <TT
+CLASS="filename"
+>#P"Makefile"</TT
+>
+  for rebuilding the <A
+HREF="p-indep.html#image"
+>memory image</A
+>.</P
+></LI
+><LI
+><P
+>If you need to distribute a modified <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+  executable (for example, incorporating additional modules written in
+  <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>), you must distribute its full source under <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/copyleft/gpl.html"
+TARGET="_top"
+>GPL</A
+>.
+  If you are not satisfied with this, you can instead put the additional
+  modules into a separate (non-<A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>) program, with which your Lisp
+  program will communicate via <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>s.</P
+></LI
+></UL
+></P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="quickstart.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="shell.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.8. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.10. Shell, Pipes and Printing</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

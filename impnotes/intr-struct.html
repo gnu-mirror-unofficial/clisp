@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The general structure of the instructions</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="The CLISP bytecode specification"
+HREF="bytecode.html"><LINK
+REL="PREVIOUS"
+TITLE="The structure of compiled functions"
+HREF="comp-fun.html"><LINK
+REL="NEXT"
+TITLE="The instruction set"
+HREF="intr-set.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="comp-fun.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> bytecode specification</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="intr-set.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="intr-struct"
+>The general structure of the instructions</A
+></H1
+><P
+>All instructions consist of one byte, denoting the opcode, and
+some number of operands.</P
+><P
+>The conversion from a byte (in the range 0..255) to the opcode is
+performed by lookup in the table contained in the file
+<TT
+CLASS="filename"
+>bytecode.d</TT
+>.</P
+><P
+>There are the following types of operands, denoted by different
+letters:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>k</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>m</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>l</I
+></TT
+></DT
+><DD
+><P
+>A (nonnegative) numeric operand.
+   The next byte is read.
+   If its bit 7 is zero, then the bits 6..0 give the value (7 bits).
+   If its bit 7 is one, then the bits 6..0 and the subsequent byte
+   together form the value (15 bits).
+  </P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>b</I
+></TT
+></DT
+><DD
+><P
+>A (nonnegative) 1-byte operand.
+   The next byte is read and is the value.
+  </P
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>label</I
+></TT
+></DT
+><DD
+><P
+>A label operand.
+   A signed numeric operand is read: The next byte is read.
+   If its bit 7 is zero, then the bits 6..0 give the value
+    (7 bits, sign-extended).
+   If its bit 7 is one, then the bits 6..0 and the subsequent byte
+    together form the value (15 bits, sign-extended).
+   If the latter 15-bit result is zero, then four more bytes are read
+    and put together (32 bits, sign-extended).
+   Finally, the bytecode pointer for the target is computed as the
+   current bytecode pointer (pointing after the operand just read), plus
+   the signed numeric operand.
+  </P
+></DD
+></DL
+></DIV
+></P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="comp-fun.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="intr-set.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The structure of compiled functions</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="bytecode.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The instruction set</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Arrays
+   [CLHS-15]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Conses
+   [CLHS-14]"
+HREF="conses.html"><LINK
+REL="NEXT"
+TITLE="The Arrays Dictionary
+   [CLHS-15.2]"
+HREF="array-dict.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="conses.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="array-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="arrays"
+>Arrays
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-15.html"
+TARGET="_top"
+>[CLHS-15]</A
+></A
+></H1
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-array.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-ARRAY</TT
+></A
+>. </B
+></B
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-array.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-ARRAY</TT
+></A
+> can return specialized arrays for the
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_array-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ARRAY-ELEMENT-TYPE</TT
+></A
+>s
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 2)</TT
+>,
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 4)</TT
+>,
+ <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 16)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 32)</TT
+>,
+ and, of course, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_bit.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BIT</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="array-elts"
+>Array Elements
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_15-1-1.html"
+TARGET="_top"
+>[CLHS-15.1.1]</A
+></A
+></H1
+><DIV
+CLASS="table"
+><A
+NAME="array-limit-table"
+></A
+><P
+><B
+>Table 1. Platform dependent</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>CPU type</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>16-bit CPU</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>32-bit CPU</TH
+><TH
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>64-bit CPU</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_array-rank-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>ARRAY-RANK-LIMIT</TT
+></A
+></TD
+><TD
+COLSPAN="2"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>16</SUP
+> = 65536</TD
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>32</SUP
+> = 4294967296</TD
+></TR
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_array-_ension-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>ARRAY-DIMENSION-LIMIT</TT
+></A
+></TD
+><TD
+COLSPAN="2"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>24</SUP
+> = 16777216</TD
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>32</SUP
+> = 4294967296</TD
+></TR
+><TR
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_array-_l-size-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>ARRAY-TOTAL-SIZE-LIMIT</TT
+></A
+></TD
+><TD
+COLSPAN="2"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>24</SUP
+> = 16777216</TD
+><TD
+WIDTH="25%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>2<SUP
+>32</SUP
+> = 4294967296</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>Note that these constants are not fixnums, contrary to the [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]
+ Issue <A
+HREF="http://www.lisp.org/HyperSpec/Issues/iss014.html"
+TARGET="_top"
+>ARRAY-DIMENSION-LIMIT-IMPLICATIONS:ALL-FIXNUM</A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="conses.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="array-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Conses
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-14.html"
+TARGET="_top"
+>[CLHS-14]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The Arrays Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_arrays_dictionary.html"
+TARGET="_top"
+>[CLHS-15.2]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

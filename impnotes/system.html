@@ -1,0 +1,1590 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>System Construction
+   [CLHS-24]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="Function READ-BYTE"
+HREF="read-byte.html"><LINK
+REL="NEXT"
+TITLE="Environment
+   [CLHS-25]"
+HREF="environment.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="read-byte.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="environment.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="system"
+>System Construction
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-24.html"
+TARGET="_top"
+>[CLHS-24]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="system-dict"
+>The System Construction Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_syste_n_dictionary.html"
+TARGET="_top"
+>[CLHS-24.2]</A
+></A
+></H1
+><P
+>The compiler can be called not only by the functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE</TT
+></A
+>,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DISASSEMBLE</TT
+></A
+>, but also by the declaration <A
+HREF="declarations.html#compile-decl"
+><TT
+CLASS="literal"
+>(compile)</TT
+></A
+>.</P
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="compilefile"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+></A
+></H2
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+>
+          <TT
+CLASS="replaceable"
+><I
+>input-file</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :output-file
+          :listing <TT
+CLASS="constant"
+>:WARNINGS</TT
+> <TT
+CLASS="constant"
+>:VERBOSE</TT
+> <TT
+CLASS="constant"
+>:PRINT</TT
+>)</TT
+>
+compiles a file to platform-independent bytecode.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>input-file</I
+></TT
+></DT
+><DD
+><P
+>should be a pathname/string/symbol.
+ </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:output-file</TT
+></DT
+><DD
+><P
+>should be <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> or a pathname/string/symbol
+ or an output-stream.  The default is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.
+ </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:listing</TT
+></DT
+><DD
+><P
+>should be <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> or a pathname/string/symbol
+ or an output-stream.  The default is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+ </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:WARNINGS</TT
+></DT
+><DD
+><P
+>specifies whether warnings should also appear on the
+ screen.</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:VERBOSE</TT
+></DT
+><DD
+><P
+>specifies whether error messages should also appear
+ on the screen.</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:PRINT</TT
+></DT
+><DD
+><P
+>specifies whether an indication which forms are
+ being compiled should appear on the screen.
+ </P
+></DD
+></DL
+></DIV
+><P
+>The variables <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>custom:*compile-warnings*</TT
+></I
+>,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stcompile_le-verbosest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*COMPILE-VERBOSE*</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stcompile_le-verbosest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*COMPILE-PRINT*</TT
+></A
+> provide defaults for the
+ <TT
+CLASS="constant"
+>:WARNINGS</TT
+>, <TT
+CLASS="constant"
+>:VERBOSE</TT
+>, <TT
+CLASS="constant"
+>:PRINT</TT
+> keyword arguments, respectively.
+ For each input file (default file type: <TT
+CLASS="filename"
+>#P".lisp"</TT
+>)
+ the following files are generated:</P
+><DIV
+CLASS="table"
+><A
+NAME="compile-file-new-files-table"
+></A
+><P
+><B
+>Table 1. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>File</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>When</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Default file type</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Contents</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>output file</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>only if <TT
+CLASS="constant"
+>:output-file</TT
+> is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>#P".fas"</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>can be loaded using the <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> function</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>auxiliary output file</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>only if <TT
+CLASS="constant"
+>:output-file</TT
+> is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="system.html#require"
+><TT
+CLASS="filename"
+>#P".lib"</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>used by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+> when compiling a <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+> form referring
+    to the input file</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>listing file</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>only if <TT
+CLASS="constant"
+>:listing</TT
+> is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>#p".lis"</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>disassembly of the output file</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> output file</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>only if <TT
+CLASS="constant"
+>:output-file</TT
+> is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="filename"
+>#p".c"</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>foreign function interface; this file is deleted if it is
+    empty</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="compile-file-path"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file-pathname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE-PATHNAME</TT
+></A
+></A
+></H2
+><P
+>The default for the <TT
+CLASS="constant"
+>:output-file</TT
+> argument is
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, which means <TT
+CLASS="filename"
+>#P".fas"</TT
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="require"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+></A
+></H2
+><P
+>The function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+> receives as the optional argument either a
+ pathname or a list of pathnames: files to be loaded if the required
+ module is not already loaded.</P
+><P
+>At compile time, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+> "foo")</TT
+>
+forms are treated specially:  <A
+HREF="system.html#load-paths"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-PATHS*</TT
+></A
+> is searched
+for <TT
+CLASS="filename"
+>"foo.lisp"</TT
+> <I
+CLASS="emphasis"
+>and</I
+>
+<TT
+CLASS="filename"
+>"foo.lib"</TT
+>.
+If the latest such file is a <TT
+CLASS="filename"
+>#P".lisp"</TT
+>, it is compiled;
+otherwise the <A
+HREF="system.html#require"
+><TT
+CLASS="filename"
+>#P".lib"</TT
+></A
+> is loaded.
+The <A
+HREF="system.html#require"
+><TT
+CLASS="filename"
+>#P".lib"</TT
+></A
+> is a <SPAN
+CLASS="QUOTE"
+>"header"</SPAN
+> file which contains the
+constant, variable, inline and macro definitions necessary for
+compilation of the files that <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+> this file, but not the function
+definitions and calls that are not necessary for that.
+Thus it is <I
+CLASS="emphasis"
+>not</I
+> necessary to either enclose
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+> forms in <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL-WHEN</TT
+></A
+> or to load the required files in the
+makefiles: if you have two files, <TT
+CLASS="filename"
+>"foo.lisp"</TT
+>
+and <TT
+CLASS="filename"
+>"bar.lisp"</TT
+>, and the latter requires the
+former, you can write in your <TT
+CLASS="filename"
+>#P"Makefile"</TT
+>:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;all: foo.fas bar.fas
+
+foo.fas: foo.lisp
+	clisp -c foo
+
+bar.fas: bar.lisp foo.fas
+        clisp -c bar
+</PRE
+></TD
+></TR
+></TABLE
+>
+instead of the more cumbersome (and slower, since <A
+HREF="system.html#require"
+><TT
+CLASS="filename"
+>#P".lib"</TT
+></A
+>s are
+usually smaller and load faster that <TT
+CLASS="filename"
+>#P".fas"</TT
+>s):
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;bar.fas: bar.lisp foo.fas
+        clisp -i foo -c bar
+</PRE
+></TD
+></TR
+></TABLE
+>
+Thus, you do not need to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> <TT
+CLASS="filename"
+>"foo"</TT
+>
+in order to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+> <TT
+CLASS="filename"
+>"bar.lisp"</TT
+>.
+If memory is tight, and if <TT
+CLASS="filename"
+>"foo.lisp"</TT
+> contains
+only a few inline functions, macros, constants or variables,
+this is a space and time saver.
+If <TT
+CLASS="filename"
+>"foo.lisp"</TT
+> does a lot of initializations or side
+effects when being loaded, this is important as well.
+</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="loadfile"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> has two additional keywords <TT
+CLASS="constant"
+>:ECHO</TT
+> and <TT
+CLASS="constant"
+>:COMPILING</TT
+>.</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:VERBOSE</TT
+>
+ <TT
+CLASS="constant"
+>:PRINT</TT
+> <TT
+CLASS="constant"
+>:ECHO</TT
+> <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+> <TT
+CLASS="constant"
+>:COMPILING</TT
+>)</TT
+></P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="constant"
+>:VERBOSE</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+></DT
+><DD
+><P
+>causes <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> to emit a short message that a file is
+   being loaded.  The default is <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stload-pr_ad-verbosest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*LOAD-VERBOSE*</TT
+></A
+>, which is initially <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:PRINT</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+></DT
+><DD
+><P
+>causes <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> to print the value of each form.  The
+  default is <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stload-pr_ad-verbosest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*LOAD-PRINT*</TT
+></A
+>, which is initially <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:ECHO</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+></DT
+><DD
+><P
+>causes the input from the file to be echoed to
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*STANDARD-OUTPUT*</TT
+></A
+> (normally to the screen).  Should
+  there be an error in the file, you can see at one glance where it is.
+  The default is <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>custom:*load-echo*</TT
+></I
+>, which is
+  initially <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:COMPILING</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+></DT
+><DD
+><P
+>causes each form read to be compiled on the fly.
+  The compiled code is executed at once and - in contrast to <A
+HREF="system.html#compilefile"
+><TT
+CLASS="function"
+>compile-file</TT
+></A
+> - not
+  written to a file.  The default is <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>custom:*load-compiling*</TT
+></I
+>,
+  which is initially <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="system.html#load-paths"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-PATHS*</TT
+></A
+>. </B
+></B
+>The variable <A
+HREF="system.html#load-paths"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-PATHS*</TT
+></A
+> contains a list of directories where the
+ files are looked for - in addition to the specified or current
+ directory - by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REQUIRE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+> and
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load-logi_translations.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD-LOGICAL-PATHNAME-TRANSLATIONS</TT
+></A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="features"
+>Variable <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*FEATURES*</TT
+></A
+></A
+></H2
+><P
+>The variable <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*FEATURES*</TT
+></A
+> initially contains the symbols
+<DIV
+CLASS="table"
+><A
+NAME="features-table"
+></A
+><P
+><B
+>Table 2. </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>keyword</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>meaning</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:CLISP</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>the name of this implementation</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:ANSI-CL</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:COMMON-LISP</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:INTERPRETER</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:COMPILER</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:SOCKETS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>see <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>s</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:GENERIC-STREAMS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>see <A
+HREF="clos-stream.html"
+>Defining new kinds of
+    Streams</A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:SYSCALLS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>see <A
+HREF="syscalls.html"
+>System Calls</A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:DIR-KEY</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>see <A
+HREF="dir-key.html"
+>Directory Access</A
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:LOGICAL-PATHNAMES</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:FFI</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if a foreign function interface (see <A
+HREF="dffi.html"
+><SPAN
+CLASS="QUOTE"
+>"FFI"</SPAN
+></A
+>) is supported
+     <I
+CLASS="emphasis"
+>(Platform dependent: many <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms
+     only)</I
+>
+    </TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:GETTEXT</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if internationalization (see <A
+HREF="i18n.html"
+><SPAN
+CLASS="QUOTE"
+>"I18N"</SPAN
+></A
+>) using the <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/gettext/gettext.html"
+TARGET="_top"
+>gettext</A
+>
+     package is supported
+     <I
+CLASS="emphasis"
+>(Platform dependent: most <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> platforms
+     only)</I
+></TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:UNICODE</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if Unicode (ISO 10646) characters are supported (see
+     <A
+HREF="encoding.html"
+><SPAN
+CLASS="QUOTE"
+>"CHARSET"</SPAN
+></A
+>)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:LOOP</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:CLOS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:AMIGA</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if <TT
+CLASS="replaceable"
+><I
+>hardware</I
+></TT
+> = Amiga and <TT
+CLASS="replaceable"
+><I
+>operating system</I
+></TT
+> = Exec/AmigaDOS</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:DOS</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if <TT
+CLASS="replaceable"
+><I
+>hardware</I
+></TT
+> = PC (clone) and <TT
+CLASS="replaceable"
+><I
+>operating system</I
+></TT
+> = DOS</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:OS/2</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if <TT
+CLASS="replaceable"
+><I
+>hardware</I
+></TT
+> = PC (clone) and <TT
+CLASS="replaceable"
+><I
+>operating system</I
+></TT
+> = OS/2</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:WIN32</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if <TT
+CLASS="replaceable"
+><I
+>hardware</I
+></TT
+> = PC (clone) and
+             <TT
+CLASS="replaceable"
+><I
+>operating system</I
+></TT
+> = Win32 (Windows 95/98/NT/Me/2000)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:PC386</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if <TT
+CLASS="replaceable"
+><I
+>hardware</I
+></TT
+> = PC (clone) with a 386/486/586/686 CPU</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="constant"
+>:UNIX</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>if <TT
+CLASS="replaceable"
+><I
+>operating system</I
+></TT
+> = Unix (in this case the <TT
+CLASS="replaceable"
+><I
+>hardware</I
+></TT
+> is irrelevant!)</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="read-byte.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="environment.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Environment
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-25.html"
+TARGET="_top"
+>[CLHS-25]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

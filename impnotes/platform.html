@@ -1,0 +1,543 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2: Platform specific Extensions</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions"
+HREF="extensions.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-1.11. Customizing CLISP behavior."
+HREF="customize.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.2. External Modules"
+HREF="modules.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="customize.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="modules.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="platform"
+>Extensions-2: Platform specific Extensions</A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="screen"
+>Extensions-2.1. Random Screen Access</A
+></H1
+><FONT
+COLOR="RED"
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+>, <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+   platforms only.</FONT
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:make-window</TT
+>)</TT
+></DT
+><DD
+><P
+>returns a "window stream".  As long as this stream
+   is open, the terminal is in cbreak/noecho mode.  <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*TERMINAL-IO*</TT
+></A
+>
+   should not be used for input or output during this time.
+   (Use <A
+HREF="terminal.html"
+><TT
+CLASS="function"
+>EXT:WITH-KEYBOARD</TT
+></A
+> and <A
+HREF="terminal.html"
+><TT
+CLASS="varname"
+>EXT:*KEYBOARD-INPUT*</TT
+></A
+> instead.)
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:with-window</TT
+>
+                 . <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>binds <I
+CLASS="emphasis"
+><TT
+CLASS="varname"
+>screen:*window*</TT
+></I
+> to a
+   window stream and executes <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>.  The stream is guaranteed to be
+   closed when the body is left.  During its execution,
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*TERMINAL-IO*</TT
+></A
+> should not be used, as above.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:window-size</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>returns the window's size, as two values:
+   height (= y<SUB
+>max</SUB
+>+1) and width (=
+   x<SUB
+>max</SUB
+>+1).
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:window-cursor-position</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>returns the position of the cursor in the window,
+   as two values: line (&#8805;0, &#8804;y<SUB
+>max</SUB
+>, 0 means
+   top), column (&#8805;0, &#8804;x<SUB
+>max</SUB
+>, 0 means left
+   margin).</P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:set-window-cursor-position</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>line</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>column</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>sets the position of the cursor in the window.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:clear-window</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>clears the window's contents and puts the cursor in
+   the upper left corner.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:clear-window-to-eot</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>clears the window's contents from the cursor
+   position to the end of window.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:clear-window-to-eol</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>clears the window's contents from the cursor
+   position to the end of line.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:delete-window-line</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>removes the cursor's line, moves the lines below it
+   up by one line and clears the window's last line.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:insert-window-line</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>inserts a line at the cursor's line, moving the
+   lines below it down by one line.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:highlight-on</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>switches highlighted output on.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:highlight-off</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>switches highlighted output off.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:window-cursor-on</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>makes the cursor visible, a cursor block in most
+   implementations.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>screen:window-cursor-off</TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+>makes the cursor invisible, in implementations
+   where this is possible.
+  </P
+></DD
+></DL
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="customize.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="modules.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-1.11. Customizing <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> behavior.</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="extensions.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.2. External Modules</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

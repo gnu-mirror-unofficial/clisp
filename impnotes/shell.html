@@ -1,0 +1,1144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Extensions-2.10. Shell, Pipes and Printing</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Extensions-2: Platform specific Extensions"
+HREF="platform.html"><LINK
+REL="PREVIOUS"
+TITLE="Extensions-2.9. Application delivery with CLISP"
+HREF="app-dev.html"><LINK
+REL="NEXT"
+TITLE="Extensions-2.11. Directory Access"
+HREF="dir-key.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="app-dev.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Extensions-2: Platform specific Extensions</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="dir-key.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="shell"
+>Extensions-2.10. Shell, Pipes and Printing</A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="exec"
+>Shell</A
+></H2
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+>, <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>,
+   platforms only.</DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#exec"
+><TT
+CLASS="function"
+>EXT:EXECUTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>program</I
+></TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>arg<SUB
+>1</SUB
+></I
+></TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>arg<SUB
+>2</SUB
+></I
+></TT
+> ...)</TT
+>
+   executes an external program.
+   Its name is <TT
+CLASS="replaceable"
+><I
+>program</I
+></TT
+> (a full pathname).
+   It is given the strings <TT
+CLASS="replaceable"
+><I
+>arg<SUB
+>1</SUB
+></I
+></TT
+>,
+   <TT
+CLASS="replaceable"
+><I
+>arg<SUB
+>2</SUB
+></I
+></TT
+>, ... as arguments.
+ </P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+> platforms only.</DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#exec"
+><TT
+CLASS="function"
+>EXT:EXECUTE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+>)</TT
+>
+   executes a given <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+> using the operating system's shell.
+ </P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Amiga</I
+></A
+>,
+   <A
+HREF="http://www.acorn.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Acorn</I
+></A
+>, <A
+HREF="http://www.freedos.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>DOS</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+> platforms only.</DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#exec"
+><TT
+CLASS="function"
+>EXT:SHELL</TT
+></A
+> [<TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+>])</TT
+>
+   calls the operating system's shell. <TT
+CLASS="literal"
+>(<A
+HREF="shell.html#exec"
+><TT
+CLASS="function"
+>EXT:SHELL</TT
+></A
+>)</TT
+> calls the shell for interactive use.
+   <TT
+CLASS="literal"
+>(<A
+HREF="shell.html#exec"
+><TT
+CLASS="function"
+>EXT:SHELL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+>)</TT
+> calls the shell
+   only for execution of the one given <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+>.
+ </P
+></DD
+><DT
+><A
+NAME="run-prog"
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+   platforms only.</A
+></DT
+><DD
+><P
+>The functions <A
+HREF="shell.html#run-prog"
+><TT
+CLASS="function"
+>EXT:RUN-SHELL-COMMAND</TT
+></A
+> and <A
+HREF="shell.html#run-prog"
+><TT
+CLASS="function"
+>EXT:RUN-PROGRAM</TT
+></A
+> are the
+   general interface to <A
+HREF="shell.html#exec"
+><TT
+CLASS="function"
+>EXT:SHELL</TT
+></A
+> and the above:</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#run-prog"
+><TT
+CLASS="function"
+>EXT:RUN-SHELL-COMMAND</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   <TT
+CLASS="constant"
+>:INPUT</TT
+> <TT
+CLASS="constant"
+>:OUTPUT</TT
+> <TT
+CLASS="constant"
+>:IF-OUTPUT-EXISTS</TT
+> <TT
+CLASS="constant"
+>:WAIT</TT
+>)</TT
+>
+   runs a shell command (including shell built-in commands,
+   like <B
+CLASS="command"
+>DIR</B
+> on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>/<A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>
+   and <B
+CLASS="command"
+>for/do/done</B
+> on <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>).</P
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#run-prog"
+><TT
+CLASS="function"
+>EXT:RUN-PROGRAM</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>program</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   <TT
+CLASS="constant"
+>:ARGUMENTS</TT
+> <TT
+CLASS="constant"
+>:INPUT</TT
+> <TT
+CLASS="constant"
+>:OUTPUT</TT
+> <TT
+CLASS="constant"
+>:IF-OUTPUT-EXISTS</TT
+> <TT
+CLASS="constant"
+>:WAIT</TT
+>)</TT
+>
+   runs an external program.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+></DT
+><DD
+><P
+>the shell command.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> platforms only.</DT
+><DD
+><P
+>The shell the command is passed to is the value
+       of the environment variable <TT
+CLASS="envar"
+>SHELL</TT
+>, which normally
+       is <TT
+CLASS="filename"
+>/bin/sh</TT
+>.
+       The command should be a <SPAN
+CLASS="QUOTE"
+>"simple command"</SPAN
+>;
+       a <SPAN
+CLASS="QUOTE"
+>"command list"</SPAN
+> should be enclosed in "{
+       ... ; }" (for <TT
+CLASS="filename"
+>/bin/sh</TT
+>) or "( ... )" (for
+       <TT
+CLASS="filename"
+>/bin/csh</TT
+>).
+     </P
+></DD
+></DL
+></DIV
+></DD
+><DT
+><TT
+CLASS="replaceable"
+><I
+>program</I
+></TT
+></DT
+><DD
+><P
+>the program.  The directories listed in the
+     <TT
+CLASS="envar"
+>PATH</TT
+> environment variable will be searched for it.
+    </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:ARGUMENTS</TT
+></DT
+><DD
+><P
+>a list of arguments (strings) that are given to the
+     program.</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:INPUT</TT
+></DT
+><DD
+><P
+>where the program's input is to come from: either
+     <TT
+CLASS="constant"
+>:TERMINAL</TT
+> (the standard input) or <TT
+CLASS="constant"
+>:STREAM</TT
+>
+     (a Lisp stream to be created) or a pathname (an input file) or
+     <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (no input at all).</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:OUTPUT</TT
+></DT
+><DD
+><P
+>where the program's output is to be sent to: either
+     <TT
+CLASS="constant"
+>:TERMINAL</TT
+> (the standard output) or <TT
+CLASS="constant"
+>:STREAM</TT
+>
+     (a Lisp stream to be created) or a pathname (an output file) or
+     <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (ignore the output).</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:IF-OUTPUT-EXISTS</TT
+></DT
+><DD
+><P
+>what to do if the <TT
+CLASS="constant"
+>:OUTPUT</TT
+> file already
+     exists.  The possible values are <TT
+CLASS="constant"
+>:OVERWRITE</TT
+>, <TT
+CLASS="constant"
+>:APPEND</TT
+>,
+     <TT
+CLASS="constant"
+>:ERROR</TT
+>, with the same meaning as for <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN</TT
+></A
+>.
+    </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:WAIT</TT
+></DT
+><DD
+><P
+>wether to wait for program termination or not
+     (this is useful when no i/o to the process is needed).
+    </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:MAY-EXEC</TT
+></DT
+><DD
+><P
+>pass <B
+CLASS="command"
+>exec</B
+> to the underlying
+    shell (<A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+> only).</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:INDIRECTP</TT
+></DT
+><DD
+><P
+>use a shell to run the command, e.g.,
+    <TT
+CLASS="literal"
+>(<A
+HREF="shell.html#run-prog"
+><TT
+CLASS="function"
+>EXT:RUN-PROGRAM</TT
+></A
+> "dir" :indirectp <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>)</TT
+>
+    will run the shell built-in command <B
+CLASS="command"
+>DIR</B
+>.
+    (<A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>/<A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+> only).</P
+></DD
+></DL
+></DIV
+><P
+>If <TT
+CLASS="constant"
+>:STREAM</TT
+> was specified for <TT
+CLASS="constant"
+>:INPUT</TT
+> or <TT
+CLASS="constant"
+>:OUTPUT</TT
+>, a Lisp
+ stream is returned.  If <TT
+CLASS="constant"
+>:STREAM</TT
+> was specified for <TT
+CLASS="constant"
+>:INPUT</TT
+> and
+ <TT
+CLASS="constant"
+>:OUTPUT</TT
+>, three Lisp streams are returned, as for the function
+ <A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-IO-STREAM</TT
+></A
+>.  This use of <A
+HREF="shell.html#run-prog"
+><TT
+CLASS="function"
+>EXT:RUN-PROGRAM</TT
+></A
+> can cause deadlocks, see
+ <A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-IO-STREAM</TT
+></A
+>.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="pipe"
+>Pipes</A
+></H2
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Platform dependent: <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>UNIX</I
+></A
+>, <A
+HREF="http://www.os2.org/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>OS/2</I
+></A
+>, <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><I
+CLASS="emphasis"
+>Win32</I
+></A
+>
+    platforms only.</DT
+><DD
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-INPUT-STREAM</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>)</TT
+></DT
+><DD
+><P
+>returns an input stream that will supply the output
+  from the execution of the given operating system command.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-OUTPUT-STREAM</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>)</TT
+></DT
+><DD
+><P
+>returns an output stream that will pass its output as
+   input to the execution of the given operating system command.
+  </P
+></DD
+><DT
+><TT
+CLASS="literal"
+>(<A
+HREF="shell.html#pipe"
+><TT
+CLASS="function"
+>EXT:MAKE-PIPE-IO-STREAM</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>command</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>)</TT
+></DT
+><DD
+><P
+>returns three values.  The first value is a
+  bidirectional stream that will simultaneously pass its output as input
+  to the execution of the given operating system command and supply the
+  output from this command as input. The second and third value will be
+  the input stream and the output stream that make up the I/O stream,
+  respectively.  Note that they must be closed individually.</P
+><P
+>Warning: Improper use of this function can lead to
+  deadlocks.  Use it at your own risk!</P
+><P
+>A deadlock occurs if the command and your program either both
+  try to read from each other at the same time or both try to write to
+  each other at the same time. To avoid deadlocks, it is recommended
+  that you fix a protocol between the command and your program and avoid
+  any hidden buffering: use <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR-NO-HANG</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+>
+  instead of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-line.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-LINE</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ</TT
+></A
+> on the input side, and complete
+  every output operation by a <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FINISH-OUTPUT</TT
+></A
+>. The same cautions must
+  apply to the called command as well.</P
+></DD
+></DL
+></DIV
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="hardcopy"
+>Printing</A
+></H2
+><P
+>The macro <I
+CLASS="emphasis"
+><TT
+CLASS="function"
+>EXT:WITH-OUTPUT-TO-PRINTER</TT
+></I
+>:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(ext:with-output-to-printer (<TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> [<A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+>])
+  {<TT
+CLASS="replaceable"
+><I
+>declaration</I
+></TT
+>}*
+  {<TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>}*)
+</PRE
+></TD
+></TR
+></TABLE
+>
+ binds the variable <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> to an output stream
+ that sends its output to the printer.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="app-dev.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="dir-key.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Extensions-2.9. Application delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="platform.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Extensions-2.11. Directory Access</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

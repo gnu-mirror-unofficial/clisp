@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Types and Classes Dictionary
+  [CLHS-4.4]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Types and Classes
+   [CLHS-4]"
+HREF="types-classes.html"><LINK
+REL="PREVIOUS"
+TITLE="Integrating Types and Classes
+  [CLHS-4.3.7]"
+HREF="type-class-int.html"><LINK
+REL="NEXT"
+TITLE="Data and Control Flow
+   [CLHS-5]"
+HREF="data.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="type-class-int.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="data.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="type-class-dict"
+>The Types and Classes Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_types_s_dictionary.html"
+TARGET="_top"
+>[CLHS-4.4]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="fixnum-char-ansi"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+></A
+></H2
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+> is not a <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_c.html#character_designator"
+TARGET="_top"
+>character
+  designator</A
+> in [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>], although <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_code-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CODE-CHAR</TT
+></A
+> provides an
+  obvious venue to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+> a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+> to a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>.
+  When <A
+HREF="type-class-dict.html#fixnum-char-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*COERCE-FIXNUM-CHAR-ANSI*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+>s <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>s to
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s via <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_code-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CODE-CHAR</TT
+></A
+>.
+  When <A
+HREF="type-class-dict.html#fixnum-char-ansi"
+><TT
+CLASS="varname"
+>CUSTOM:*COERCE-FIXNUM-CHAR-ANSI*</TT
+></A
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>s cannot be
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+>d to <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="type-class-int.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="data.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Integrating Types and Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-7.html"
+TARGET="_top"
+>[CLHS-4.3.7]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="types-classes.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Data and Control Flow
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-5.html"
+TARGET="_top"
+>[CLHS-5]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

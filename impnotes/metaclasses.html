@@ -1,0 +1,501 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Standard Metaclasses
+  [CLHS-4.3.1.1]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Types and Classes
+   [CLHS-4]"
+HREF="types-classes.html"><LINK
+REL="PREVIOUS"
+TITLE="Deviations from ANSI CL standard"
+HREF="clos-diff.html"><LINK
+REL="NEXT"
+TITLE="Defining Classes
+  [CLHS-4.3.2]"
+HREF="def-class.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="clos-diff.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="def-class.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="metaclasses"
+>Standard Metaclasses
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-1-1.html"
+TARGET="_top"
+>[CLHS-4.3.1.1]</A
+></A
+></H1
+><P
+>Among those classes listed in <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-7.html#classtypecorrespondence"
+TARGET="_top"
+>Figure
+ 4-8</A
+>, only the following are instances of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_built-in-class.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BUILT-IN-CLASS</TT
+></A
+>:
+
+<P
+></P
+><UL
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_t.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>T</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_number.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NUMBER</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>REAL</TT
+></A
+>,
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_rational.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIONAL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_ratio.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIO</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>
+  </P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_sequence.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SEQUENCE</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ARRAY</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_bit-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BIT-VECTOR</TT
+></A
+>
+      <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_null.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NULL</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_generic-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>GENERIC-FUNCTION</TT
+></A
+>,
+      <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_standa_ric-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STANDARD-GENERIC-FUNCTION</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>HASH-TABLE</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_package.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PACKAGE</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PATHNAME</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_logical-pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LOGICAL-PATHNAME</TT
+></A
+>
+  </P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_random-state.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RANDOM-STATE</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_readtable.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>READTABLE</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_broadcast-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BROADCAST-STREAM</TT
+></A
+>,
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_concatenated-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONCATENATED-STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_echo-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ECHO-STREAM</TT
+></A
+>,
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING-STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_file-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FILE-STREAM</TT
+></A
+>,
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_synonym-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYNONYM-STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_two-way-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>TWO-WAY-STREAM</TT
+></A
+></P
+></LI
+></UL
+></P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="clos-diff.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="def-class.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Deviations from [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="types-classes.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Defining Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-2.html"
+TARGET="_top"
+>[CLHS-4.3.2]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

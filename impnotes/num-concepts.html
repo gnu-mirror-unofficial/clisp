@@ -1,0 +1,1128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Number Concepts
+   [CLHS-12.1]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Numbers
+   [CLHS-12]"
+HREF="numbers.html"><LINK
+REL="PREVIOUS"
+TITLE="Numbers
+   [CLHS-12]"
+HREF="numbers.html"><LINK
+REL="NEXT"
+TITLE="The Numbers Dictionary
+   [CLHS-12.2]"
+HREF="num-dict.html"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="numbers.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Numbers
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-12.html"
+TARGET="_top"
+>[CLHS-12]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="num-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="num-concepts"
+>Number Concepts
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1.html"
+TARGET="_top"
+>[CLHS-12.1]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="byte-type"
+>Byte Operations on Integers
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-1-3-2.html"
+TARGET="_top"
+>[CLHS-12.1.1.3.2]</A
+></A
+></H2
+><P
+>Byte specifiers are objects of built-in type <A
+HREF="num-concepts.html#byte-type"
+><SPAN
+CLASS="type"
+>BYTE</SPAN
+></A
+>,
+ not <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>s.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="float-subst"
+>Rule of Float Substitutability
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-3-3.html"
+TARGET="_top"
+>[CLHS-12.1.3.3]</A
+></A
+></H2
+><P
+>When a mathematical function may return an exact (rational) or
+ inexact (floating-point) result, it always returns the exact result.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="float-comp"
+>Floating-point Computations
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-4.html"
+TARGET="_top"
+>[CLHS-12.1.4]</A
+></A
+></H2
+><P
+>There are four floating point types: <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+>:</P
+><DIV
+CLASS="table"
+><A
+NAME="floating-types-table"
+></A
+><P
+><B
+>Table 1. floating point types</B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>type</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>sign</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>mantissa</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>exponent</TH
+><TH
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>comment</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>1 bit</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>16+1 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>8 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>immediate</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>1 bit</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>23+1 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>8 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>IEEE format</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>1 bit</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>52+1 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>11 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>IEEE format</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>1 bit</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>&#62;=64 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>32 bits</TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>variable
+ length</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>The single and double float formats are those of the IEEE standard
+ (1981), except that <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> does not support features like
+ <TT
+CLASS="literal"
+>+0</TT
+>, <TT
+CLASS="literal"
+>-0</TT
+>, <TT
+CLASS="literal"
+>+inf</TT
+>,
+ <TT
+CLASS="literal"
+>-inf</TT
+>, gradual underflow, <TT
+CLASS="literal"
+>NaN</TT
+>,
+ etc. (<A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> does not make use of these features.)
+ This is why <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*FEATURES*</TT
+></A
+> does not contain the
+ <TT
+CLASS="constant"
+>:IEEE-FLOATING-POINT</TT
+> keyword.</P
+><P
+>Long floats have variable mantissa length, which is a
+ multiple of 16 (or 32, depending on the word size of the processor).
+ The default length used when long floats are read is given by the place
+ <TT
+CLASS="literal"
+>(<A
+HREF="num-concepts.html#lfd"
+><TT
+CLASS="function"
+>EXT:LONG-FLOAT-DIGITS</TT
+></A
+>)</TT
+>.  It can be set by <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="num-concepts.html#lfd"
+><TT
+CLASS="function"
+>EXT:LONG-FLOAT-DIGITS</TT
+></A
+>)
+ <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>)</TT
+>, where <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is a positive integer.  E.g., <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+> (<A
+HREF="num-concepts.html#lfd"
+><TT
+CLASS="function"
+>EXT:LONG-FLOAT-DIGITS</TT
+></A
+>) 3322)</TT
+> sets the default precision
+ of long floats to 1000 decimal digits.</P
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="flocont"
+>Rule of Float Precision Contagion
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-4-4.html"
+TARGET="_top"
+>[CLHS-12.1.4.4]</A
+></A
+></H3
+><P
+>The floating point contagion is controlled by the variable
+ <A
+HREF="num-concepts.html#flocont"
+><TT
+CLASS="varname"
+>CUSTOM:*FLOATING-POINT-CONTAGION-ANSI*</TT
+></A
+>.  When it is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, contagion is done as per the
+ [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]: <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+> &#8594; <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+> &#8594;
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+> &#8594; <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+>.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Rationale:</DT
+><DD
+><P
+>See it pragmatically: save what you can and let
+  others worry about the rest.</P
+></DD
+><DT
+>Brief:</DT
+><DD
+><P
+><A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> knows the number's precision, not accuracy, so
+  preserving the precision can be accomplished reliably, while anything
+  relating to the accuracy is just a speculation - only the user
+  (programmer) knows what it is in each case.
+ </P
+></DD
+><DT
+>Detailed:</DT
+><DD
+><P
+>A float is an approximation of a real number.  One
+  can think of it as a random variable with the mean equal to itself and
+  standard deviation equal to half the last significant digit.  E.g.,
+  <TT
+CLASS="literal"
+>1.5</TT
+> is actually <TT
+CLASS="literal"
+>1.5+-0.05</TT
+>.
+  Consider adding <TT
+CLASS="literal"
+>1.5</TT
+> and <TT
+CLASS="literal"
+>1.75</TT
+>.
+  [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] requires that <TT
+CLASS="literal"
+>(+ 1.5 1.75)</TT
+>
+  return <TT
+CLASS="literal"
+>3.25</TT
+>, while traditional <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> would return
+  <TT
+CLASS="literal"
+>3.3</TT
+>.  The implied random variables are:
+  <TT
+CLASS="literal"
+>3.25+-0.005</TT
+> and <TT
+CLASS="literal"
+>3.3+-0.05</TT
+>.  Note
+  that the traditional <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> way <I
+CLASS="emphasis"
+>does</I
+>
+  lie about the mean: the mean <I
+CLASS="emphasis"
+>is</I
+>
+  <TT
+CLASS="literal"
+>3.25</TT
+> and nothing else, while the standard way
+  <I
+CLASS="emphasis"
+>could</I
+> be lying about the deviation
+  (accuracy): if the implied accuracy of <TT
+CLASS="literal"
+>1.5 (0.05)</TT
+>
+  is its actual accuracy, then the accuracy of the result cannot be
+  smaller that that.  Therefore, since <A
+HREF="http://www.lisp.org"
+TARGET="_top"
+><B
+CLASS="command"
+>Common Lisp</B
+></A
+> has no way of knowing the
+  actual accuracy, [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] (and all the other standard engineering
+  programming languages, like <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+>, FORTRAN etc) decides that
+  keeping the accuracy correct is the business of the programmer, while
+  the language should preserve what it can - the precision.
+  </P
+></DD
+><DT
+>Experience:</DT
+><DD
+><P
+> Rounding errors accumulate, and if a computation
+  is conducted with insufficient precision, an outright incorrect
+  result can be returned.  (E.g.,
+  <TT
+CLASS="literal"
+>E(x<SUP
+>2</SUP
+>) -
+  E(x)<SUP
+>2</SUP
+></TT
+> can be negative!)  The user
+  should not mix floats of different precision (that's what <A
+HREF="num-concepts.html#warn-fpc"
+><TT
+CLASS="varname"
+>CUSTOM:*WARN-ON-FLOATING-POINT-CONTAGION*</TT
+></A
+> is
+  for), but one should not be penalized for this too harshly.
+  </P
+></DD
+></DL
+></DIV
+><P
+>When <A
+HREF="num-concepts.html#flocont"
+><TT
+CLASS="varname"
+>CUSTOM:*FLOATING-POINT-CONTAGION-ANSI*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the traditional <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> method is used,
+ namely the result of an arithmetic operation whose arguments are of
+ different float types is rounded to the float format of the shortest
+ (least precise) of the arguments: <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_rational.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIONAL</TT
+></A
+> &#8594;
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+> &#8594; <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+> &#8594; <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+>
+ &#8594; <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+> (in contrast to <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-4-4.html"
+TARGET="_top"
+>12.1.4.4 Rule of Float Precision
+ Contagion</A
+>!)</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Rationale:</DT
+><DD
+><P
+> See it mathematically.  Add intervals:
+  <TT
+CLASS="literal"
+>{1.0 ± 1e-8} + {1.0 ± 1e-16} = {2.0 ±
+  1e-8}</TT
+>.  So, if we add <TT
+CLASS="literal"
+>1.0s0</TT
+> and
+  <TT
+CLASS="literal"
+>1.0d0</TT
+>, we should get <TT
+CLASS="literal"
+>2.0s0</TT
+>.
+  </P
+></DD
+><DT
+>Brief:</DT
+><DD
+><P
+>Do not suggest accuracy of a result by giving it a
+  precision that is greater than its accuracy.
+  </P
+></DD
+><DT
+>Example:</DT
+><DD
+><P
+><TT
+CLASS="literal"
+>(- (+ 1.7 <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+>) <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+>)</TT
+>
+  should not return <TT
+CLASS="literal"
+>1.700000726342836417234L0</TT
+>, it
+  should return <TT
+CLASS="literal"
+>1.7f0</TT
+> (or
+  <TT
+CLASS="literal"
+>1.700001f0</TT
+> if there were rounding errors).
+  </P
+></DD
+><DT
+>Experience:</DT
+><DD
+><P
+>If in a computation using thousands of short floats,
+  a long float (like <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+>) happens to be used, the long precision should
+  not propagate throughout all the intermediate values. Otherwise, the
+  long result would look precise, but its accuracy is only that of a
+  short float; furthermore much computation time would be lost by
+  calculating with long floats when only short floats would be needed.
+  </P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><A
+HREF="num-concepts.html#warn-fpc"
+><TT
+CLASS="varname"
+>CUSTOM:*WARN-ON-FLOATING-POINT-CONTAGION*</TT
+></A
+>. </B
+></B
+>If the variable <A
+HREF="num-concepts.html#warn-fpc"
+><TT
+CLASS="varname"
+>CUSTOM:*WARN-ON-FLOATING-POINT-CONTAGION*</TT
+></A
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, a warning is emitted for
+ every coercion involving different floating-point types.
+</P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="complex-comp"
+>Complex Computations
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-5.html"
+TARGET="_top"
+>[CLHS-12.1.5]</A
+></A
+></H2
+><P
+>Complex numbers can have a real part and an imaginary part of
+ different types. For example, <TT
+CLASS="literal"
+>(sqrt
+ -9.0)</TT
+> evaluates to the number <TT
+CLASS="literal"
+>#C(0 3.0)</TT
+>,
+ which has a real part of exactly <TT
+CLASS="literal"
+>0</TT
+>, not only
+ <TT
+CLASS="literal"
+>0.0</TT
+> (which would mean "approximately 0").</P
+><P
+>The type specifier for this is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+>)</TT
+>, and <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> <TT
+CLASS="varname"
+>type-of-real-part</TT
+>
+ <TT
+CLASS="varname"
+>type-of-imaginary-part</TT
+>)</TT
+> in general.</P
+><P
+>The type specifier <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>)</TT
+> is equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>)</TT
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="complex-rational"
+>Rule of
+   Canonical Representation for Complex Rationals
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-5-3.html"
+TARGET="_top"
+>[CLHS-12.1.5.3]</A
+></A
+></H2
+><P
+>Complex numbers can have a real part and an imaginary part of
+ different types.  If the imaginary part is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQL</TT
+></A
+> to
+ <TT
+CLASS="literal"
+>0</TT
+>, the number is automatically converted to a real
+ number.</P
+><P
+>This has the advantage that
+   <TT
+CLASS="literal"
+>(let ((x (sqrt -9.0))) (* x x))</TT
+>
+ - instead of evaluating to <TT
+CLASS="literal"
+>#C(-9.0 0.0)</TT
+>,
+ with <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> = <TT
+CLASS="literal"
+>#C(0.0 3.0)</TT
+> - evaluates to
+ <TT
+CLASS="literal"
+>#C(-9.0 0)</TT
+> = <TT
+CLASS="literal"
+>-9.0</TT
+>,
+ with <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> = <TT
+CLASS="literal"
+>#C(0 3.0)</TT
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="numbers.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="num-dict.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Numbers
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-12.html"
+TARGET="_top"
+>[CLHS-12]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="numbers.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The Numbers Dictionary
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_the_numbers_dictionary.html"
+TARGET="_top"
+>[CLHS-12.2]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

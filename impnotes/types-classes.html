@@ -1,0 +1,972 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Types and Classes
+   [CLHS-4]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Chapters or the Common Lisp HyperSpec"
+HREF="clhs-chapters.html"><LINK
+REL="PREVIOUS"
+TITLE="The Evaluation and Compilation Dictionary
+  [CLHS-3.8]"
+HREF="eval-comp.html"><LINK
+REL="NEXT"
+TITLE="Classes
+  [CLHS-4.3]"
+HREF="classes.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="eval-comp.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="classes.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="types-classes"
+>Types and Classes
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
+TARGET="_top"
+>[CLHS-4]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="types"
+>Types
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2.html"
+TARGET="_top"
+>[CLHS-4.2]</A
+></A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="type-spec"
+>Type Specifiers
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2-3.html"
+TARGET="_top"
+>[CLHS-4.2.3]</A
+></A
+></H2
+><P
+>The general form of the <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> type specifier is <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>type-of-real-part</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>type-of-imaginary-part</I
+></TT
+>)</TT
+>.  The type
+ specifier <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>)</TT
+> is
+ equivalent to <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>type</I
+></TT
+>)</TT
+>.</P
+><P
+>The [<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>] type specifier <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>REAL</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>low</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>high</I
+></TT
+>)</TT
+>
+ denotes the real numbers between <TT
+CLASS="replaceable"
+><I
+>low</I
+></TT
+> and
+ <TT
+CLASS="replaceable"
+><I
+>high</I
+></TT
+>.</P
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_deftype.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFTYPE</TT
+></A
+> <A
+HREF="lalist.html"
+>lambda list</A
+>s are subject to destructuring (nested <A
+HREF="lalist.html"
+>lambda list</A
+>s
+ are allowed, as in <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defmacro.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFMACRO</TT
+></A
+>) and may contain a <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;WHOLE</TT
+></A
+> marker,
+ but not an <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;ENVIRONMENT</TT
+></A
+> marker.</P
+><DIV
+CLASS="formalpara"
+><P
+><B
+><B
+><TT
+CLASS="literal"
+>(<TT
+CLASS="function"
+>ext:type-expand</TT
+>
+ <TT
+CLASS="replaceable"
+><I
+>typespec</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+ <TT
+CLASS="replaceable"
+><I
+>once-p</I
+></TT
+>)</TT
+>. </B
+></B
+>If <TT
+CLASS="replaceable"
+><I
+>typespec</I
+></TT
+> is a user-defined type,
+ this will expand it recursively until it is no longer a user-defined
+ type (unless <TT
+CLASS="replaceable"
+><I
+>once-p</I
+></TT
+> is supplied and
+ non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>).  Two values are returned - the expansion and an indicator
+ (<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>) of whether the original
+ <TT
+CLASS="replaceable"
+><I
+>typespec</I
+></TT
+> was a user-defined type.
+</P
+></DIV
+><P
+></P
+><P
+><B
+>The possible results of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_type-of.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TYPE-OF</TT
+></A
+></B
+></P
+><UL
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_null.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NULL</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_boolean.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BOOLEAN</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_bignum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BIGNUM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_rational.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RATIONAL</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SINGLE-FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPLEX</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_base-char.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BASE-CHAR</TT
+></A
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ARRAY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>dimensions</I
+></TT
+>)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-ARRAY</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>element-type</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>dimensions</I
+></TT
+>)</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>VECTOR</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_base-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BASE-STRING</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-base-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-BASE-STRING</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_bit-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BIT-VECTOR</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+>, <TT
+CLASS="literal"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-bit-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-BIT-VECTOR</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>size</I
+></TT
+>)</TT
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_compiled-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>COMPILED-FUNCTION</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_file-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FILE-STREAM</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_synonym-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYNONYM-STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_broadcast-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BROADCAST-STREAM</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_concatenated-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONCATENATED-STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_two-way-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>TWO-WAY-STREAM</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_echo-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ECHO-STREAM</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING-STREAM</TT
+></A
+></P
+></LI
+><LI
+><P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_package.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PACKAGE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>HASH-TABLE</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_readtable.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>READTABLE</TT
+></A
+>,
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PATHNAME</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_logical-pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LOGICAL-PATHNAME</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_random-state.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>RANDOM-STATE</TT
+></A
+>,
+  <A
+HREF="num-concepts.html#byte-type"
+><SPAN
+CLASS="type"
+>BYTE</SPAN
+></A
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="classname"
+>special-operator</TT
+>,
+  <TT
+CLASS="classname"
+>load-time-eval</TT
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL-MACRO</TT
+></A
+>, <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+>,
+  <TT
+CLASS="classname"
+>FFI:FOREIGN-POINTER</TT
+>, <TT
+CLASS="classname"
+>foreign-address</TT
+>,
+  <TT
+CLASS="classname"
+>foreign-variable</TT
+>,
+  <TT
+CLASS="classname"
+>foreign-function</TT
+></P
+></LI
+><LI
+><P
+><A
+HREF="weak.html"
+><TT
+CLASS="classname"
+>EXT:WEAK-POINTER</TT
+></A
+>,
+          <A
+HREF="reader.html"
+><TT
+CLASS="classname"
+>read-label</TT
+></A
+>,
+          <A
+HREF="reader.html"
+><TT
+CLASS="classname"
+>frame-pointer</TT
+></A
+>,
+      <TT
+CLASS="classname"
+>system-internal</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="classname"
+>address</TT
+> (should not
+  occur)</P
+></LI
+><LI
+><P
+>any other symbol (structure types or <B
+CLASS="command"
+>CLOS</B
+>
+  classes)</P
+></LI
+><LI
+><P
+>a class (<B
+CLASS="command"
+>CLOS</B
+> classes without proper
+  name)</P
+></LI
+></UL
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="eval-comp.html"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="classes.html"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The Evaluation and Compilation Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-8.html"
+TARGET="_top"
+>[CLHS-3.8]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="clhs-chapters.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Classes
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3.html"
+TARGET="_top"
+>[CLHS-4.3]</A
+></TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
