@@ -133,8 +133,9 @@ moved it here.</p>
 
 <dl>
  <dt><strong>USENET group <a href="http://groups.google.com/groups?as_ugroup=comp.lang.lisp">comp.lang.lisp</a></strong></dt>
-  <dd>This is the right place to ask all general Lisp questions, such
-   as "how do I find a character in a string?"</dd>
+  <dd>This is the right place to ask all general Lisp questions, such as
+   <a href="http://www.lisp.org/HyperSpec/Body/acc_charcm_schar.html">"how
+    do I access a character in a string?"</a></dd>
  <dt><strong>CLISP User Mailing List
   <a href="http://lists.sourceforge.net/lists/listinfo/clisp-list"
      >&lt;clisp-list&gt;</a></strong></dt>
@@ -153,7 +154,8 @@ moved it here.</p>
    This is actually for your own benefit: the CLISP developers are so
    busy, they might get weeks to answer your question;
    as well as for the benefit of the other CLISP users,
-   since the mailing lists are publicly archived.</dd>
+   since the mailing lists are publicly archived
+   (you are encouraged to search them before asking).</dd>
 </dl>
 
 <p><a href="#meta">back to Meta</a></p><hr/>
@@ -175,12 +177,14 @@ CLISP.  The CLISP developers took pains to modify CLISP to
 unconditionally comply with the ANSI spec in all cases
 <a href="impnotes.html#ansi">except those 6 situations where they
  believed that the committee made a mistake</a>,
-in which cases the committee behavior is still optionally available.</p>
+in which cases the committee behavior is <em>still</em> optionally
+available.</p>
 
 <p>CLISP does not start in the <code>ANSI</code> mode by default for
 historical reasons and this is not about to change.
-<a href="impnotes.html#image">Dumping an image</a> or passing a command
-line argument is easy enough.</p>
+<a href="impnotes.html#image">Dumping an image</a> or
+<a href="clisp.html#opt-ansi">passing a command line argument</a>
+are easy enough.</p>
 
 <p><a href="#meta">back to Meta</a></p><hr/>
 
@@ -274,16 +278,19 @@ line argument is easy enough.</p>
 <h2 id="trouble">Troubles</h2>
 
 <ol>
- <li><a href="#enc-err">invalid byte #x94 in CHARSET:ASCII conversion</a></li>
+ <li><a href="#enc-err">invalid byte #x94 in CHARSET:ASCII conversion<br/>
+character #\u00B3 cannot be represented in the character set CHARSET:ASCII</a></li>
  <li><a href="#rl-tab">Display all 1259 possibilities? (y or n)</a></li>
  <li><a href="#stack">stack overflow</a></li>
 </ol>
 <hr/>
 
-<h3 id="enc-err">invalid byte #x94 in CHARSET:ASCII conversion</h3>
+<h3 id="enc-err">invalid byte #x94 in CHARSET:ASCII conversion<br/>or<br/>
+character #\u00B3 cannot be represented in the character set CHARSET:ASCII</h3>
 
-<p>This means that you are trying to read a non-ASCII character from a
- stream which has
+<p>This means that you are trying to read ("invalid byte")
+ or write ("character cannot be represented") a non-ASCII
+ character from (or to) a character stream which has
  <a href="impnotes.html#charset-ASCII">ASCII</a>
  <a href="impnotes.html#extfmt">STREAM-EXTERNAL-FORMAT</a>.
  The default is described in
@@ -298,16 +305,20 @@ line argument is easy enough.</p>
   readline</a> for command line editing and
  <a href="clisp.html#completion">completion</a>.
  You get this "Display all 1259 possibilities" message (and sometimes
- many screens of symbols) when you hit <code>TAB</code> too many times.
+ many screens of symbols) when you hit <code>TAB</code> too many times
+ in an inappropriate place.
  <a href="clisp.html#opt-ilisp">You can turn this feature off</a>
- if you are using Emacs.</p>
+ if you are using Emacs.  It is a good idea
+ <a href="http://www.w3.org/MarkUp/html3/literal.html">not</a> to
+ use <code>TAB</code>s in your code.</p>
 
 <p><a href="#trouble">back to Troubles</a></p><hr/>
 
 <h3 id="stack">stack overflow</h3>
 
-<p>CLISP has <a href="impnotes.html#vm"><em>two</em> stacks</a>, and
- both may overflow.</p>
+<p>CLISP has <a href="impnotes.html#vm"><em>two</em> stacks</a>, the
+ "program stack" and the "lisp stack", and both may occasionally
+ overflow.</p>
 
 <h4>Avoiding stack overflow: Generic</h4>
 <ul><li>You will always get a stack overflow when you try to
@@ -324,7 +335,7 @@ line argument is easy enough.</p>
  <li>If you get a segmentation fault after (or instead of) a "program
   stack overflow" message, please make sure that you had
   <a href="http://sourceforge.net/projects/libsigsegv">GNU libsigsegv</a>
-  installed when you built CLISP.</li></ul>
+  installed when you configured and built CLISP.</li></ul>
 
 <h4>Avoiding stack overflow: Platform-specific</h4>
 <dl><dt><strong>win32</strong></dt>
