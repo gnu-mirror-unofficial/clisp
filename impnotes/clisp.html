@@ -44,16 +44,12 @@ that can be executed more efficiently.</p>
    <a href="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html" target="_top"><tt class="classname">SYMBOL-MACRO</tt></a> <tt class="varname">*LIB-DIRECTORY*</tt>.
 </dd>
 <dt><a id="opt-link-set"></a><tt class="option">-K</tt>
-  <i class="replaceable"><tt>linking-set</tt></i></dt><dd><p>Specifies the <a href="modules.html#linkset">linking set</a> to be run.
+  <i class="replaceable"><tt>linking-set</tt></i></dt><dd>Specifies the <a href="modules.html#linkset">linking set</a> to be run.
    This is a directory (relative to the
    <a href="#opt-libdir"><i class="replaceable"><tt>lisp-lib-dir</tt></i></a>)
    containing at least a main executable (<a href="#runtime">runtime</a>) and an initial <a href="image.html">memory image</a>.
-   Possible values are
-   </p><div class="variablelist"><dl><dt><span><b class="command">base</b></span></dt><dd>the core <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a></dd><dt><span><b class="command">full</b></span></dt><dd>core plus all the modules with which this
-       installation was built, see
-       <a href="modules.html">Section 30.2, “Extensions-2.2. External Modules”</a>.
-   </dd></dl></div><p>
-   The default is <span><b class="command">base</b></span>.</p></dd>
+   Possible values are <span><b class="command">base</b></span>, <span><b class="command">full</b></span>.
+   The default is <span><b class="command">base</b></span>.</dd>
 <dt><a id="opt-memfile"></a><tt class="option">-M</tt>
   <i class="replaceable"><tt>mem-file</tt></i></dt><dd>Specifies the initial <a href="image.html">memory image</a>.
    This must be a memory dump produced by the
@@ -77,9 +73,13 @@ that can be executed more efficiently.</p>
 
    </p><p>This version of <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>
 
-   allocates memory dynamically.
-   <i class="replaceable"><tt>mem-size</tt></i> is essentially ignored
-   (except that it determines the Lisp <a href="vm.html"><tt class="literal">STACK</tt></a> size).
+
+   is not likely to actually use the entire
+   <i class="replaceable"><tt>mem-size</tt></i> since garbage collection will
+   periodically reduce the amount of used memory.
+   It is therefore common to specify 10 MB even if only 2 MB are going
+   to be used.
+
 
 
 </p></dd>
@@ -264,7 +264,7 @@ that can be executed more efficiently.</p>
 </div><div class="refsection" lang="en" xml:lang="en"><a id="files"></a><h2>Files</h2>
 
 <div class="variablelist">
-<dl><dt><span><b class="command">clisp</b></span></dt><dd>startup driver (a script or an executable)
+<dl><dt><span><b class="command">clisp</b></span> on <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a></dt><dd>startup driver (a script or an executable)
 </dd>
 <dt><a id="runtime"></a><tt class="filename">lisp.run</tt><br /><tt class="filename">lisp.exe</tt></dt><dd>main executable (runtime)
 </dd><dt><tt class="filename">lispinit.mem</tt></dt><dd>initial <a href="image.html">memory image</a></dd><dt><a id="config-file"></a><tt class="filename">config.lisp</tt></dt><dd>site-dependent configuration (should have been

@@ -5,7 +5,7 @@
   [CLHS-7.7]</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="std-meth-combo.html">Prev</a> </td><th width="60%" align="center">Chapter 7. Objects
    [CLHS-7]</th><td width="20%" align="right"> <a accesskey="n" href="structures.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="obj-dict"></a>7.2. The Objects Dictionary
   <a href="http://www.lisp.org/HyperSpec/Body/sec_7-7.html" target="_top">[CLHS-7.7]</a></h2></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="obj-dict.html#class-proto">7.2.1. Generic function <tt class="function">CLOS:CLASS-PROTOTYPE</tt>.</a></span></dt></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="class-proto"></a>7.2.1. Generic function <a href="obj-dict.html#class-proto" title="7.2.1. Generic function CLOS:CLASS-PROTOTYPE."><tt class="function">CLOS:CLASS-PROTOTYPE</tt></a>.</h3></div></div><div></div></div><p>The [<span class="citation"><a href="references.html#amop">Metaobject Protocol</a></span>] generic function <a href="obj-dict.html#class-proto" title="7.2.1. Generic function CLOS:CLASS-PROTOTYPE."><tt class="function">CLOS:CLASS-PROTOTYPE</tt></a> is implemented.
- This allows non-<a href="http://www.lisp.org/HyperSpec/Body/glo_c.html#cons" target="_top">consing[3]</a> access to slots with
+ This allows non-consing access to slots with
  allocation <tt class="constant">:CLASS</tt>:
  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
   (defclass counter ()

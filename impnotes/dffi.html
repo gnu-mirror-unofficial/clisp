@@ -211,8 +211,8 @@ only.</h3></div></div><div></div></div><div class="toc"><dl><dt><span class="sec
   (<a href="dffi.html#c-array"><span class="type">FFI:C-ARRAY</span></a> <span class="type">uint8</span> 32))</tt> (!) both allocate place
   for a single pointer, initialized to <tt class="constant">NULL</tt>.</p><p>When <i class="replaceable"><tt>initarg</tt></i> is supplied, they
   allocate space for an arbitrarily complex set of structures rooted in
-  <i class="replaceable"><tt>c-type</tt></i>.  Therefore, <a href="dffi.html#c-array-max"><span class="type">FFI:C-ARRAY-MAX</span></a>, <tt class="data">#()</tt>
-  and <tt class="data">""</tt> are your friends for creating a
+  <i class="replaceable"><tt>c-type</tt></i>.  Therefore, <a href="dffi.html#c-array-max"><span class="type">FFI:C-ARRAY-MAX</span></a>, <tt class="sexp">#()</tt>
+  and <tt class="sexp">""</tt> are your friends for creating a
   pointer to the empty arrays:
 </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">(with-c-var (v '(c-ptr (c-array-max uint8 32)) #())
   (setf (element (deref v) 0) 127) v)</pre></td></tr></table><p>
@@ -449,7 +449,7 @@ unit</a> (usually a file), a warning is issued and
   Most <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> compilers do it right, but some <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> compilers
   (such as <a href="http://gcc.gnu.org/" target="_top"><span><b class="command">gcc</b></span></a> on hppa and <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>) have problems with this.
   The recommended workaround is to pass pointers; this is fully supported.
-  See also this <tt class="email">&lt;<a href="mailto:clisp-list/at/sf.net"><a href="http://lists.sourceforge.net/lists/listinfo/clisp-list" target="_top">clisp-list/at/sf.net</a></a>&gt;</tt>
+  See also this <tt class="email">&lt;<a href="mailto:clisp-list@sf.net">clisp-list@sf.net</a>&gt;</tt>
   <a href="http://article.gmane.org/gmane.lisp.clisp.devel/10089" target="_top">message</a>.</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="param-mode"></a>30.3.8. Parameter Mode</h3></div></div><div></div></div><p>A function parameter's <a href="dffi.html#param-mode" title="30.3.8. Parameter Mode"><i class="replaceable"><tt>PARAM-MODE</tt></i></a> may be</p><div class="variablelist"><dl><dt><tt class="constant">:IN</tt> (means: read-only):</dt><dd>The caller passes information to the callee.
   </dd><dt><tt class="constant">:OUT</tt> (means: write-only):</dt><dd>The callee passes information back to the caller on
    return.  When viewed as a Lisp function, there is no Lisp argument
@@ -805,6 +805,6 @@ double test_dll(struct bar *ptr)
 (get-own-c-float (<a href="dffi.html#c-var-addr"><tt class="function">FFI:C-VAR-ADDRESS</tt></a> my-c-var))
 <span class="returnvalue">122.0d0</span>
 </pre></td></tr></table></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="dffi-ex-more"></a>30.3.9.1. More examples</h4></div></div><div></div></div><p>You can find more information and examples of the <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>
- <a href="dffi.html" title="30.3. Extensions-2.3. The Foreign Function Call Facility"><strong class="package">“<span class="quote">FFI</span>”</strong></a> in the following <tt class="email">&lt;<a href="mailto:clisp-list/at/sf.net"><a href="http://lists.sourceforge.net/lists/listinfo/clisp-list" target="_top">clisp-list/at/sf.net</a></a>&gt;</tt> messages:
+ <a href="dffi.html" title="30.3. Extensions-2.3. The Foreign Function Call Facility"><strong class="package">“<span class="quote">FFI</span>”</strong></a> in the following <tt class="email">&lt;<a href="mailto:clisp-list@sf.net">clisp-list@sf.net</a>&gt;</tt> messages:
  </p><div class="itemizedlist"><ul type="disc"><li><a href="http://article.gmane.org/gmane.lisp.clisp.general/7278" target="_top">"variable size values"</a></li><li><a href="http://article.gmane.org/gmane.lisp.clisp.general/6626" target="_top">"variable length arrays"</a></li></ul></div><p>
 </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="modules.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="platform.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="affi.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">30.2. Extensions-2.2. External Modules </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 30.4. Extensions-2.4. The Amiga Foreign Function Call Facility</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>

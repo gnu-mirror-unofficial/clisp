@@ -17,7 +17,7 @@
  <tt class="filename">0</tt>-<tt class="filename">9</tt>.
  The module name “<span class="quote">clisp</span>” is reserved.
  Normally a module name is derived from the corresponding file name.</p><p><span><b class="command">clisp-link</b></span> needs a directory containing:
-</p><div class="itemizedlist"><ul type="disc"><li><tt class="filename">#P"modules.d"</tt></li><li><tt class="filename">#P"modules.c"</tt></li><li><a href="modules.html#clisp-h" title="30.2.5.2. clisp.h"><tt class="filename">#P"clisp.h"</tt></a></li></ul></div><p>
+</p><div class="itemizedlist"><ul type="disc"><li><tt class="filename">modules.d</tt></li><li><tt class="filename">modules.c</tt></li><li><tt class="filename">clisp.h</tt></li></ul></div><p>
 <span><b class="command">clisp-link</b></span> expects to find these files in a
 subdirectory <tt class="filename">linkkit/</tt> of the current directory.
 This can be overridden by the <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html" target="_top">environment variable</a> <tt class="envar">CLISP_LINKKIT</tt>.</p><p><span><b class="command">clisp-link</b></span> operates on <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> <a href="modules.html#linkset">linking set</a>s and
@@ -130,7 +130,7 @@ precludes some efficiency optimizations which are on by default.</p></div><p>Fun
 </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">$ clisp -c /<i class="replaceable"><tt>somewhere</tt></i>/bindings/linux.lisp</pre></td></tr></table></li><li><p>Create a new <a href="modules.html#linkset">linking set</a>:
 </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">$ clisp-link add-module-set linux base base+linux</pre></td></tr></table></li><li><p>Run and try it:
 
-</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">$ base+linux/lisp.run -M base+linux/lispinit.mem -x '(linux:stat "/tmp")'</pre></td></tr></table></li></ol></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="module-tools"></a>30.2.5. Module tools</h3></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#modprep">30.2.5.1. Modprep</a></span></dt><dt><span class="section"><a href="modules.html#clisp-h">30.2.5.2. clisp.h</a></span></dt><dt><span class="section"><a href="modules.html#exporting">30.2.5.3. Exporting</a></span></dt></dl></div><p>There are some tools to facilitate easy module writing.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="modprep"></a>30.2.5.1. Modprep</h4></div></div><div></div></div><p>If your module is written in <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a>, you can pre-process your
+</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">$ base+linux/lisp.run -M base+linux/lispinit.mem -x '(linux:stat "/tmp")'</pre></td></tr></table></li></ol></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="module-tools"></a>30.2.5. Module tools</h3></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#modprep">30.2.5.1. Modprep</a></span></dt><dt><span class="section"><a href="modules.html#exporting">30.2.5.2. Exporting</a></span></dt></dl></div><p>There are some tools to facilitate easy module writing.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="modprep"></a>30.2.5.1. Modprep</h4></div></div><div></div></div><p>If your module is written in <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a>, you can pre-process your
  sources with <tt class="filename">modprep.lisp</tt> in the <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>
  distribution and define lisp functions with the
  <tt class="function">DEFUN</tt> macro:</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
@@ -143,43 +143,21 @@ DEFUN(MY-PACKAGE:MY-FUNCTION-NAME, arg1 arg2 <a href="http://www.lisp.org/HyperS
   VALUES1(listof(7)); /* cons up a new list and clean up the STACK */
 }</pre></td></tr></table><p>
 Then <tt class="sexp">(MY-PACKAGE:MY-FUNCTION-NAME 'A 12 :FOO
- T)</tt> will return <tt class="data">(A 12 T 0
+ T)</tt> will return <tt class="sexp">(A 12 T 0
  MY-PACKAGE::SOME-SYMBOL #(:THIS :IS :A :VECTOR)
  #&lt;ADD-ON-SYSTEM-FUNCTION MY-PACKAGE:MY-FUNCTION-NAME&gt;)</tt>
 (assuming you <a href="http://www.lisp.org/HyperSpec/Body/fun_export.html" target="_top"><tt class="function">EXPORT</tt></a>ed <tt class="literal">MY-FUNCTION-NAME</tt> from
- <strong class="package">“<span class="quote">MY-PACKAGE</span>”</strong>).</p><p>Another useful macros are:
- </p><div class="variablelist"><dl><dt><tt class="function">DEFVAR</tt></dt><dd>create a GC-visible private object
-  </dd><dt><tt class="function">DEFFLAGSET</tt></dt><dd>define a <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> function which will remove
-     several flag arguments from the <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a> and return the combined flag
-     value</dd></dl></div><p>See <tt class="filename">modules/syscalls</tt> and other included
+ <strong class="package">“<span class="quote">MY-PACKAGE</span>”</strong>).</p><p>Another useful macro is <tt class="function">DEFVAR</tt> which lets
+ you create a GC-visible object.</p><p>See <tt class="filename">modules/syscalls</tt> and other included
  modules for more examples and file <tt class="filename">modprep.lisp</tt>
  for full documentation.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>If you manipulate Lisp objects, you need to watch for
-  <a href="gc-safety.html" title="31.5. The burden of garbage-collection upon the rest of CLISP">GC-safety</a>.</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="clisp-h"></a>30.2.5.2. clisp.h</h4></div></div><div></div></div><p>If your module is written in <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a>, you will probably want
- to <tt class="literal">#include "clisp.h"</tt> to access <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> objects.
- You will certainly need to read <a href="modules.html#clisp-h" title="30.2.5.2. clisp.h"><tt class="filename">#P"clisp.h"</tt></a> and the code in
- <a href="modules.html#included-modules" title="30.2.6. Modules included in the distribution.">included modules</a>, but here are
- some important hints that you will need to keep in mind:
-</p><div class="itemizedlist"><ul type="disc"><li>Lisp objects have type <span class="type">object</span>.
- </li><li>Variables of this type are invalidated by
-   <a href="gc-safety.html" title="31.5. The burden of garbage-collection upon the rest of CLISP">memory allocation</a> and must be saved
-   on the <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a> using macros <tt class="function">pushSTASH()</tt>,
-   <tt class="function">popSTACK()</tt> and <tt class="function">skipSTACK()</tt>.
- </li><li>Access object slots using the
-   approprate <tt class="function">TheFoo()</tt> macro, e.g.,
-   <tt class="function">TheCons(my_cons)-&gt;Car</tt>, but first check the
-   type with <tt class="function">consp()</tt>.</li><li>Arguments are passed on the <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a>, as illustrated
-   in the <a href="modules.html#modprep" title="30.2.5.1. Modprep">above example</a>.</li><li>Wrap your system calls in
-   <tt class="literal">begin_system_call()</tt>/<tt class="literal">end_system_call()</tt>
-   pairs. These macros, defined in <a href="modules.html#clisp-h" title="30.2.5.2. clisp.h"><tt class="filename">#P"clisp.h"</tt></a>, save and restore
-   registers used by <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> which could be clobbered by a system call.
- </li></ul></div><p>
-</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="exporting"></a>30.2.5.3. Exporting</h4></div></div><div></div></div><p>If your module uses <a href="dffi.html" title="30.3. Extensions-2.3. The Foreign Function Call Facility"><strong class="package">“<span class="quote">FFI</span>”</strong></a> to interface to a <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> library,
+  <a href="gc-safety.html" title="31.4. The burden of garbage-collection upon the rest of CLISP">GC-safety</a>.</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="exporting"></a>30.2.5.2. Exporting</h4></div></div><div></div></div><p>If your module uses <a href="dffi.html" title="30.3. Extensions-2.3. The Foreign Function Call Facility"><strong class="package">“<span class="quote">FFI</span>”</strong></a> to interface to a <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> library,
  you might want to make your module package
  <a href="pack-dict.html#make-pack" title="11.4.1. Function MAKE-PACKAGE">case-sensitive</a> and use
  <tt class="filename">exporting.lisp</tt> in the <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> distribution to
  make all <a href="dffi.html" title="30.3. Extensions-2.3. The Foreign Function Call Facility"><strong class="package">“<span class="quote">FFI</span>”</strong></a> forms export the symbols they define.
  See <tt class="filename">modules/netica</tt>
- and <tt class="filename">modules/bindings/*</tt> for examples.</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="included-modules"></a>30.2.6. Modules included in the distribution.</h3></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#matlab">30.2.6.1. Matlab Interface</a></span></dt><dt><span class="section"><a href="modules.html#netica">30.2.6.2. Netica Interface</a></span></dt><dt><span class="section"><a href="modules.html#dir-key">30.2.6.3. Directory Access</a></span></dt><dt><span class="section"><a href="modules.html#berkeley-db">30.2.6.4. Berkeley DB access.</a></span></dt><dt><span class="section"><a href="modules.html#regexp">30.2.6.5. <span><b class="command">CLISP</b></span> <strong class="package">“<span class="quote">REGEXP</span>”</strong> module</a></span></dt><dt><span class="section"><a href="modules.html#pcre">30.2.6.6. Perl Compatible Regular Expressions.</a></span></dt><dt><span class="section"><a href="modules.html#syscalls">30.2.6.7. System Calls</a></span></dt><dt><span class="section"><a href="modules.html#oracle">30.2.6.8. Oracle Interface</a></span></dt><dt><span class="section"><a href="modules.html#fastcgi">30.2.6.9. The FastCGI Interface</a></span></dt><dt><span class="section"><a href="modules.html#rawsock">30.2.6.10. Raw Socket Access.</a></span></dt></dl></div><p>The following modules come with the distribution of
+ and <tt class="filename">modules/bindings/*</tt> for examples.</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="included-modules"></a>30.2.6. Modules included in the distribution.</h3></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#netica">30.2.6.1. Netica Interface</a></span></dt><dt><span class="section"><a href="modules.html#dir-key">30.2.6.2. Directory Access</a></span></dt><dt><span class="section"><a href="modules.html#berkeley-db">30.2.6.3. Berkeley DB access.</a></span></dt><dt><span class="section"><a href="modules.html#regexp">30.2.6.4. <span><b class="command">CLISP</b></span> <strong class="package">“<span class="quote">REGEXP</span>”</strong> module</a></span></dt><dt><span class="section"><a href="modules.html#pcre">30.2.6.5. Perl Compatible Regular Expressions.</a></span></dt><dt><span class="section"><a href="modules.html#syscalls">30.2.6.6. System Calls</a></span></dt><dt><span class="section"><a href="modules.html#oracle">30.2.6.7. Oracle Interface</a></span></dt><dt><span class="section"><a href="modules.html#fastcgi">30.2.6.8. The FastCGI Interface</a></span></dt></dl></div><p>The following modules come with the distribution of
 <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>:</p><div class="variablelist"><dl><dt>bindings</dt><dd><p>Call the operating system functions from <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>.
     The following platforms are supported:
    </p><div class="itemizedlist"><ul type="disc"><li><a href="http://www.linux.org/" target="_top"><strong>Linux</strong></a>/<a href="http://www.gnu.org" target="_top">GNU</a> <a href="http://www.gnu.org/software/libc/" target="_top">libc</a></li><li><a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a></li></ul></div></dd><dt><a href="http://www.cliki.net/CLX" target="_top"><span><b class="command">CLX</b></span></a></dt><dd><p>Call
@@ -189,36 +167,24 @@ Then <tt class="sexp">(MY-PACKAGE:MY-FUNCTION-NAME 'A 12 :FOO
      <a href="ftp://ftp.x.org/R5contrib/CLX.R5.02.tar.Z" target="_top">ftp://ftp.x.org/R5contrib/CLX.R5.02.tar.Z</a>
      - the standard implementation</li><li>new-clx, by <span class="author"><span class="firstname">Gilbert</span> <span class="surname">Baumann</span></span>
       - faster, with additional features, but not quite complete yet.
-    </li></ul></div></dd><dt><a href="modules.html#oracle" title="30.2.6.8. Oracle Interface">oracle</a></dt><dd>Access
+    </li></ul></div></dd><dt><a href="modules.html#oracle" title="30.2.6.7. Oracle Interface">oracle</a></dt><dd>Access
     <a href="http://www.oracle.com/" target="_top">Oracle</a> from <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>;
-    by <span class="author"><span class="firstname">John</span> <span class="surname">Hinsdale</span></span>.</dd><dt><a href="modules.html#fastcgi" title="30.2.6.9. The FastCGI Interface">fastcgi</a></dt><dd>Access
+    by <span class="author"><span class="firstname">John</span> <span class="surname">Hinsdale</span></span>.</dd><dt><a href="modules.html#fastcgi" title="30.2.6.8. The FastCGI Interface">fastcgi</a></dt><dd>Access
     <a href="http://www.fastcgi.com/" target="_top">FastCGI</a> from <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>;
-    by <span class="author"><span class="firstname">John</span> <span class="surname">Hinsdale</span></span>.</dd><dt><a href="modules.html#matlab" title="30.2.6.1. Matlab Interface">matlab</a></dt><dd>Do matrix computations via
-    <a href="http://www.mathworks.com/products/matlab/" target="_top">MATLAB</a>.
- </dd><dt><a href="modules.html#netica" title="30.2.6.2. Netica Interface">netica</a></dt><dd>Work with Bayesian belief networks and influence
+    by <span class="author"><span class="firstname">John</span> <span class="surname">Hinsdale</span></span>.</dd><dt><a href="modules.html#netica" title="30.2.6.1. Netica Interface">netica</a></dt><dd>Work with Bayesian belief networks and influence
     diagrams using
     <a href="http://norsys.com/netica_c_api.htm" target="_top">Netica</a>.
  </dd><dt>postgresql</dt><dd>Access
     <a href="http://www.PostgreSQL.org/" target="_top">PostgreSQL</a> from <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>.
   </dd><dt>queens</dt><dd>Compute the number of solutions to the n-queens
     problem on a n*n checkboard (a toy example for the users to
-    explore).</dd><dt><a href="modules.html#dir-key" title="30.2.6.3. Directory Access">dirkey</a></dt><dd>Directory Access</dd><dt><a href="modules.html#berkeley-db" title="30.2.6.4. Berkeley DB access.">berkeley-db</a></dt><dd><a href="http://www.sleepycat.com/docs/index.html" target="_top">Berkeley DB from Sleepycat Software</a>
-    interface</dd><dt><a href="modules.html#regexp" title="30.2.6.5. CLISP “REGEXP” module">regexp</a></dt><dd>The <a href="regexp.html" target="_top">POSIX Regular
+    explore).</dd><dt><a href="modules.html#dir-key" title="30.2.6.2. Directory Access">dirkey</a></dt><dd>Directory Access</dd><dt><a href="modules.html#berkeley-db" title="30.2.6.3. Berkeley DB access.">berkeley-db</a></dt><dd><a href="http://www.sleepycat.com/docs/index.html" target="_top">Berkeley DB from Sleepycat Software</a>
+    interface</dd><dt><a href="modules.html#regexp" title="30.2.6.4. CLISP “REGEXP” module">regexp</a></dt><dd>The <a href="regexp.html" target="_top">POSIX Regular
    Expressions</a> matching, compiling, executing.
- </dd><dt><a href="modules.html#pcre" title="30.2.6.6. Perl Compatible Regular Expressions.">pcre</a></dt><dd>The <a href="http://www.pcre.org/" target="_top">Perl
+ </dd><dt><a href="modules.html#pcre" title="30.2.6.5. Perl Compatible Regular Expressions.">pcre</a></dt><dd>The <a href="http://www.pcre.org/" target="_top">Perl
      Compatible Regular Expressions</a> matching, compiling,
-    executing.</dd><dt><a href="modules.html#syscalls" title="30.2.6.7. System Calls">syscalls</a></dt><dd>Use some system calls in a platform-independent way.
- </dd><dt><a href="wildcard.html" target="_top">wildcard</a></dt><dd>Shell (<a href="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html" target="_top"><span><b class="command">/bin/sh</b></span></a>) globbing</dd><dt><a href="modules.html#rawsock" title="30.2.6.10. Raw Socket Access.">rawsock</a></dt><dd>Raw socket access.
- </dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="matlab"></a>30.2.6.1. Matlab Interface</h4></div></div><div></div></div><p>This is an interface to the
- <a href="http://www.mathworks.com/access/helpdesk/help/techdoc/apiref/apiref.shtml" target="_top">Matlab C API</a>.
- The package <strong class="package">“<span class="quote">MATLAB</span>”</strong> is
- <a href="pack-dict.html#make-pack" title="11.4.1. Function MAKE-PACKAGE">case-sensitive</a>, so you would write
- <tt class="sexp">(matlab:engOpen ...)</tt>
- when you need to call
- <a href="http://www.mathworks.com/access/helpdesk/help/techdoc/apiref/engopen.html" target="_top"><tt class="function">engOpen()</tt></a>.
-</p><p>Additionally, some higher level functionality is available
- (see <tt class="filename">modules/matlab/demo.lisp</tt> for sample
- usage)</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="netica"></a>30.2.6.2. Netica Interface</h4></div></div><div></div></div><p>This is an interface to the
+    executing.</dd><dt><a href="modules.html#syscalls" title="30.2.6.6. System Calls">syscalls</a></dt><dd>Use some system calls in a platform-independent way.
+ </dd><dt><a href="wildcard.html" target="_top">wildcard</a></dt><dd>Shell (<a href="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html" target="_top"><span><b class="command">/bin/sh</b></span></a>) globbing</dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="netica"></a>30.2.6.1. Netica Interface</h4></div></div><div></div></div><p>This is an interface to the
  <a href="http://norsys.com/netica_c_api.htm" target="_top">Netica C API</a>.
  The package <strong class="package">“<span class="quote">NETICA</span>”</strong> is
  <a href="pack-dict.html#make-pack" title="11.4.1. Function MAKE-PACKAGE">case-sensitive</a>, you would write
@@ -289,8 +255,8 @@ Then <tt class="sexp">(MY-PACKAGE:MY-FUNCTION-NAME 'A 12 :FOO
    for the <tt class="literal">:LICENSE</tt> argument.
 </dd><dt><tt class="varname">netica:*env*</tt></dt><dd>The Netica environment object; the default value
    for the <tt class="literal">:ENV</tt> argument.
-</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="dir-key"></a>30.2.6.3. Directory Access</h4></div></div><div></div></div><p>This module provides some directory access from lisp,
- in package <a href="modules.html#dir-key" title="30.2.6.3. Directory Access"><strong class="package">“<span class="quote">LDAP</span>”</strong></a>.  3 types of directory keys
+</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="dir-key"></a>30.2.6.2. Directory Access</h4></div></div><div></div></div><p>This module provides some directory access from lisp,
+ in package <a href="modules.html#dir-key" title="30.2.6.2. Directory Access"><strong class="package">“<span class="quote">LDAP</span>”</strong></a>.  3 types of directory keys
  may exist, depending on the compilation environment.</p><div class="variablelist"><a id="dir-key-type"></a><p class="title"><b>valid directory key types</b></p><dl><dt>:win32</dt><dd><a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a> registry access
   </dd><dt>:gnome</dt><dd><a href="http://developer.gnome.org/doc/API/libgnome/gnome-gnome-config.html" target="_top">gnome-config</a> access
   </dd><dt>:ldap</dt><dd>LDAP interface via
@@ -348,8 +314,8 @@ future).</p><div class="variablelist"><dl><dt><a id="dir-key-open"></a><tt class
     <tt class="function">LDAP:DIR-KEY-CHILDREN</tt> and
     <tt class="function">LDAP:DIR-KEY-DUMP-TREE</tt> in
     <tt class="filename">dirkey.lisp</tt>.
-    </p></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="berkeley-db"></a>30.2.6.4. Berkeley DB access.</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#bdb-db-environment">30.2.6.4.1. Database Environment</a></span></dt><dt><span class="section"><a href="modules.html#bdb-environment-config">30.2.6.4.2. Environment Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-operations">30.2.6.4.3. Database Operations</a></span></dt><dt><span class="section"><a href="modules.html#bdb-db-config">30.2.6.4.4. Database Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-bt-rn-config">30.2.6.4.5. Btree/Recno Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-hash-q-config">30.2.6.4.6. Hash/Queue Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-cursor">30.2.6.4.7. Database Cursor Operations</a></span></dt><dt><span class="section"><a href="modules.html#bdb-lock">30.2.6.4.8. Lock Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-log">30.2.6.4.9. Log Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-log-cursor">30.2.6.4.10. Log Cursor Operations</a></span></dt><dt><span class="section"><a href="modules.html#bdb-log-seq">30.2.6.4.11. Log Sequence Numbers</a></span></dt><dt><span class="section"><a href="modules.html#bdb-mem-pool">30.2.6.4.12. Memory Pool Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-transaction">30.2.6.4.13. Transaction Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-replication">30.2.6.4.14. Replication</a></span></dt></dl></div><p>This interface to <a href="http://www.sleepycat.com/docs/index.html" target="_top">Berkeley DB from Sleepycat Software</a> exports almost all
- functions in the official <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> API.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-db-environment"></a>30.2.6.4.1. Database Environment</h5></div></div><div></div></div><div class="variablelist"><dl><dt><tt class="sexp">(BDB:DB-VERSION)</tt></dt><dd>Return version information as 4 values: descriptive
+    </p></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="berkeley-db"></a>30.2.6.3. Berkeley DB access.</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#bdb-db-environment">30.2.6.3.1. Database Environment</a></span></dt><dt><span class="section"><a href="modules.html#bdb-environment-config">30.2.6.3.2. Environment Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-operations">30.2.6.3.3. Database Operations</a></span></dt><dt><span class="section"><a href="modules.html#bdb-db-config">30.2.6.3.4. Database Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-bt-rn-config">30.2.6.3.5. Btree/Recno Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-hash-q-config">30.2.6.3.6. Hash/Queue Configuration</a></span></dt><dt><span class="section"><a href="modules.html#bdb-cursor">30.2.6.3.7. Database Cursor Operations</a></span></dt><dt><span class="section"><a href="modules.html#bdb-lock">30.2.6.3.8. Lock Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-log">30.2.6.3.9. Log Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-log-cursor">30.2.6.3.10. Log Cursor Operations</a></span></dt><dt><span class="section"><a href="modules.html#bdb-log-seq">30.2.6.3.11. Log Sequence Numbers</a></span></dt><dt><span class="section"><a href="modules.html#bdb-mem-pool">30.2.6.3.12. Memory Pool Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-transaction">30.2.6.3.13. Transaction Subsystem</a></span></dt><dt><span class="section"><a href="modules.html#bdb-replication">30.2.6.3.14. Replication</a></span></dt></dl></div><p>This interface to <a href="http://www.sleepycat.com/docs/index.html" target="_top">Berkeley DB from Sleepycat Software</a> exports almost all
+ functions in the official <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> API.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-db-environment"></a>30.2.6.3.1. Database Environment</h5></div></div><div></div></div><div class="variablelist"><dl><dt><tt class="sexp">(BDB:DB-VERSION)</tt></dt><dd>Return version information as 4 values: descriptive
     <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> and 3 <a href="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html" target="_top"><tt class="classname">FIXNUM</tt></a>s: major, minor and patch number (<a href="http://www.sleepycat.com/docs/api_c/env_version.html" target="_top"><tt class="function">db_version</tt></a>).
  </dd><dt><tt class="sexp">(BDB:ENV-CREATE <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
     :PASSWORD :ENCRYPT :HOST :CLIENT-TIMEOUT :SERVER-TIMEOUT)</tt></dt><dd>Create an environment handle (<a href="http://www.sleepycat.com/docs/api_c/env_create.html" target="_top"><tt class="function">db_env_create</tt></a>),
@@ -366,14 +332,14 @@ future).</p><div class="variablelist"><dl><dt><a id="dir-key-open"></a><tt class
     :LOCKDOWN :PRIVATE :SYSTEM-MEM :THREAD :MODE)</tt></dt><dd>Open an environment (<a href="http://www.sleepycat.com/docs/api_c/env_open.html" target="_top"><tt class="function">DB_ENV-&gt;open</tt></a>).
  </dd><dt><tt class="sexp">(BDB:ENV-REMOVE dbe <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
     :HOME :FORCE :USE-ENVIRON :USE-ENVIRON-ROOT)</tt></dt><dd>Destroy an environment (<a href="http://www.sleepycat.com/docs/api_c/env_remove.html" target="_top"><tt class="function">DB_ENV-&gt;remove</tt></a>).
- </dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-environment-config"></a>30.2.6.4.2. Environment Configuration</h5></div></div><div></div></div><div class="variablelist"><dl><dt><tt class="sexp">(BDB:ENV-SET-OPTIONS dbe
+ </dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-environment-config"></a>30.2.6.3.2. Environment Configuration</h5></div></div><div></div></div><div class="variablelist"><dl><dt><tt class="sexp">(BDB:ENV-SET-OPTIONS dbe
    <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a> :DATA-DIR :TMP-DIR :AUTO-COMMIT :CDB-ALLDB :DIRECT-DB
    :DIRECT-LOG :NOLOCKING :NOMMAP :NOPANIC :OVERWRITE :PANIC-ENVIRONMENT
    :REGION-INIT :TXN-NOSYNC :TXN-WRITE-NOSYNC :YIELDCPU :VERB-CHKPOINT
    :VERB-DEADLOCK :VERB-RECOVERY :VERB-REPLICATION :VERB-WAITSFOR
    :VERBOSE)</tt></dt><dd>Set some environment options using <a href="http://www.sleepycat.com/docs/api_c/env_set_flags.html" target="_top"><tt class="function">DB_ENV-&gt;set_flags</tt></a>,
    <a href="http://www.sleepycat.com/docs/api_c/env_set_verbose.html" target="_top"><tt class="function">DB_ENV-&gt;set_verbose</tt></a>, <a href="http://www.sleepycat.com/docs/api_c/env_set_tmp_dir.html" target="_top"><tt class="function">DB_ENV-&gt;set_tmp_dir</tt></a> and <a href="http://www.sleepycat.com/docs/api_c/env_set_data_dir.html" target="_top"><tt class="function">DB_ENV-&gt;set_data_dir</tt></a>.
-</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-operations"></a>30.2.6.4.3. Database Operations</h5></div></div><div></div></div>
+</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-operations"></a>30.2.6.3.3. Database Operations</h5></div></div><div></div></div>
 <!--DB->associate Associate a secondary index DB->err Error message with error string DB->errx Error message DB->join Perform a database join on cursors DB->key_range Return estimate of key location DB->verify Verify/salvage a database-->
 <div class="variablelist"><dl><dt><tt class="sexp">(BDB:DB-CREATE dbe <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
    :XA)</tt></dt><dd>Create a database handle (<a href="http://www.sleepycat.com/docs/api_c/db_create.html" target="_top"><tt class="function">db_create</tt></a>).
@@ -401,25 +367,25 @@ future).</p><div class="variablelist"><dl><dt><a id="dir-key-open"></a><tt class
    newname)</tt></dt><dd>Rename a database (<a href="http://www.sleepycat.com/docs/api_c/db_rename.html" target="_top"><tt class="function">DB-&gt;rename</tt></a>).
 </dd><dt><tt class="sexp">(BDB:DB-REMOVE db file
    database)</tt></dt><dd>Remove a database (<a href="http://www.sleepycat.com/docs/api_c/db_remove.html" target="_top"><tt class="function">DB-&gt;remove</tt></a>).
-</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-db-config"></a>30.2.6.4.4. Database Configuration</h5></div></div><div></div></div>
+</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-db-config"></a>30.2.6.3.4. Database Configuration</h5></div></div><div></div></div>
 <!--DB->set_alloc Set local space allocation functions DB->set_cache_priority Set the database cache priority DB->set_cachesize Set the database cache size DB->set_dup_compare Set a duplicate comparison function DB->set_encrypt Set the database cryptographic key DB->set_errcall Set error message callback DB->set_errfile Set error message FILE DB->set_errpfx Set error message prefix DB->set_feedback Set feedback callback DB->set_flags General database configuration DB->set_lorder Set the database byte order DB->set_pagesize Set the underlying database page size DB->set_paniccall Set panic callback-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-bt-rn-config"></a>30.2.6.4.5. Btree/Recno Configuration</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-bt-rn-config"></a>30.2.6.3.5. Btree/Recno Configuration</h5></div></div><div></div></div>
 <!--DB->set_append_recno Set record append callback DB->set_bt_compare Set a Btree comparison function DB->set_bt_minkey Set the minimum number of keys per Btree page DB->set_bt_prefix Set a Btree prefix comparison function DB->set_re_delim Set the variable-length record delimiter DB->set_re_len Set the fixed-length record length DB->set_re_pad Set the fixed-length record pad byte DB->set_re_source Set the backing Recno text file-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-hash-q-config"></a>30.2.6.4.6. Hash/Queue Configuration</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-hash-q-config"></a>30.2.6.3.6. Hash/Queue Configuration</h5></div></div><div></div></div>
 <!--DB->set_h_ffactor Set the Hash table density DB->set_h_hash Set a hashing function DB->set_h_nelem Set the Hash table size DB->set_q_extentsize Set Queue database extent size-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-cursor"></a>30.2.6.4.7. Database Cursor Operations</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-cursor"></a>30.2.6.3.7. Database Cursor Operations</h5></div></div><div></div></div>
 <!--DB->cursor Create a cursor handle DBcursor->c_close Close a cursor DBcursor->c_count Return count of duplicates DBcursor->c_del Delete by cursor DBcursor->c_dup Duplicate a cursor DBcursor->c_get, DBcursor->c_pget Retrieve by cursor DBcursor->c_put Store by cursor-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-lock"></a>30.2.6.4.8. Lock Subsystem</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-lock"></a>30.2.6.3.8. Lock Subsystem</h5></div></div><div></div></div>
 <!--DB_ENV->set_lk_conflicts Set lock conflicts matrix DB_ENV->set_lk_detect Set automatic deadlock detection DB_ENV->set_lk_max_lockers Set maximum number of lockers DB_ENV->set_lk_max_locks Set maximum number of locks DB_ENV->set_lk_max_objects Set maximum number of lock objects DB_ENV->lock_detect Perform deadlock detection DB_ENV->lock_get Acquire a lock DB_ENV->lock_id Acquire a locker ID DB_ENV->lock_id_free Release a locker ID DB_ENV->lock_put Release a lock DB_ENV->lock_stat Return lock subsystem statistics DB_ENV->lock_vec Acquire/release locks-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-log"></a>30.2.6.4.9. Log Subsystem</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-log"></a>30.2.6.3.9. Log Subsystem</h5></div></div><div></div></div>
 <!--DB_ENV->set_lg_bsize Set log buffer size DB_ENV->set_lg_dir Set the environment logging directory DB_ENV->set_lg_max Set log file size DB_ENV->set_lg_regionmax Set logging region size DB_ENV->log_archive List log and database files DB_ENV->log_file Map Log Sequence Numbers to log files DB_ENV->log_flush Flush log records DB_ENV->log_put Write a log record DB_ENV->log_stat Return log subsystem statistics-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-log-cursor"></a>30.2.6.4.10. Log Cursor Operations</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-log-cursor"></a>30.2.6.3.10. Log Cursor Operations</h5></div></div><div></div></div>
 <!--DB_ENV->log_cursor Create a log cursor handle DB_LOGC->close Close a log cursor DB_LOGC->get Retrieve a log record-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-log-seq"></a>30.2.6.4.11. Log Sequence Numbers</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-log-seq"></a>30.2.6.3.11. Log Sequence Numbers</h5></div></div><div></div></div>
 <!--log_compare Compare two Log Sequence Numbers-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-mem-pool"></a>30.2.6.4.12. Memory Pool Subsystem</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-mem-pool"></a>30.2.6.3.12. Memory Pool Subsystem</h5></div></div><div></div></div>
 <!--DB_ENV->set_cachesize Set the environment cache size DB_ENV->set_mp_mmapsize Set maximum mapped-in database file size DB_ENV->memp_register Register input/output functions for a file in a memory pool DB_ENV->memp_stat Return memory pool statistics DB_ENV->memp_sync Flush pages from a memory pool DB_ENV->memp_trickle Trickle flush pages from a memory pool Memory Pool Files DB_ENV->memp_fcreate Open a file in a memory pool DB_MPOOLFILE->close Close a file in a memory pool DB_MPOOLFILE->get Get page from a file in a memory pool DB_MPOOLFILE->open Open a file in a memory pool DB_MPOOLFILE->put Return a page to a memory pool DB_MPOOLFILE->set Set memory pool page status DB_MPOOLFILE->sync Flush pages from a file in a memory pool DB_MPOOLFILE->set_clear_len Set file page bytes to be cleared DB_MPOOLFILE->set_fileid Set file unique identifier DB_MPOOLFILE->set_ftype Set file type DB_MPOOLFILE->set_lsn_offset Set file log-sequence-number offset DB_MPOOLFILE->set_pgcookie Set file cookie for pgin/pgout-->
-<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-transaction"></a>30.2.6.4.13. Transaction Subsystem</h5></div></div><div></div></div>
+<div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-transaction"></a>30.2.6.3.13. Transaction Subsystem</h5></div></div><div></div></div>
 <!--DB_ENV->set_tx_max Set maximum number of transactions DB_ENV->set_tx_timestamp Set recovery timestamp DB_ENV->txn_checkpoint Checkpoint the transaction subsystem DB_ENV->txn_recover Distributed transaction recovery DB_ENV->txn_stat Return transaction subsystem statistics DB_TXN->abort Abort a transaction DB_TXN->commit Commit a transaction DB_TXN->discard Discard a prepared but not resolved transaction handle DB_TXN->id Return a transaction's ID DB_TXN->prepare Prepare a transaction for commit DB_TXN->set_timeout Set transaction timeout-->
 <div class="variablelist"><dl><dt><tt class="sexp">(BDB:TXN-BEGIN dbe <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
    :PARENT :DIRTY-READ :NOSYNC :NOWAIT :SYNC)</tt></dt><dd>Begin a transaction (<a href="http://www.sleepycat.com/docs/api_c/txn_begin.html" target="_top"><tt class="function">DB_ENV-&gt;txn_begin</tt></a>).
@@ -427,11 +393,11 @@ future).</p><div class="variablelist"><dl><dt><a id="dir-key-open"></a><tt class
 </dd><dt><tt class="sexp">(BDB:TXN-COMMIT txn <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
    :NOSYNC :SYNC)</tt></dt><dd>Commit a transaction (<a href="http://www.sleepycat.com/docs/api_c/txn_commit.html" target="_top"><tt class="function">DB_TXN-&gt;commit</tt></a>).
 </dd><dt><tt class="sexp">(BDB:TXN-DISCARD txn)</tt></dt><dd>Discard a transaction (<a href="http://www.sleepycat.com/docs/api_c/txn_discard.html" target="_top"><tt class="function">DB_TXN-&gt;discard</tt></a>).
-</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-replication"></a>30.2.6.4.14. Replication</h5></div></div><div></div></div>
+</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="bdb-replication"></a>30.2.6.3.14. Replication</h5></div></div><div></div></div>
 <!--DB_ENV->set_rep_transport Configure replication transport DB_ENV->rep_elect Hold a replication election DB_ENV->set_rep_limit Limit data sent in response to a single message DB_ENV->rep_process_message Process a replication message DB_ENV->rep_start Configure an environment for replication DB_ENV->rep_stat Replication statistics-->
 <div class="variablelist"><dl><dt><tt class="sexp">()</tt></dt><dd></dd></dl></div></div>
 <!--<section id="bdb-"><title></title> <variablelist> <varlistentry><term><literal role="sexp">()</literal></term> <listitem><simpara></simpara></listitem></varlistentry> </variablelist> </section>-->
-</div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="regexp"></a>30.2.6.5. <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> <a href="modules.html#regexp" title="30.2.6.5. CLISP “REGEXP” module"><strong class="package">“<span class="quote">REGEXP</span>”</strong></a> module</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#re-example">30.2.6.5.1. Example</a></span></dt></dl></div><p>The <a href="modules.html#regexp" title="30.2.6.5. CLISP “REGEXP” module"><strong class="package">“<span class="quote">REGEXP</span>”</strong></a> module implements the
+</div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="regexp"></a>30.2.6.4. <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> <a href="modules.html#regexp" title="30.2.6.4. CLISP “REGEXP” module"><strong class="package">“<span class="quote">REGEXP</span>”</strong></a> module</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#re-example">30.2.6.4.1. Example</a></span></dt></dl></div><p>The <a href="modules.html#regexp" title="30.2.6.4. CLISP “REGEXP” module"><strong class="package">“<span class="quote">REGEXP</span>”</strong></a> module implements the
  <a href="regexp.html" target="_top">POSIX regular expressions</a>
 by calling the standard <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> system facilities.
 The syntax of these <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap09.html" target="_top">regular expression</a>s is described in many places,
@@ -448,15 +414,15 @@ such as your local <a href="http://www.opengroup.org/onlinepubs/007904975/basede
   <i class="replaceable"><tt>string</tt></i> <i class="replaceable"><tt>start</tt></i> <i class="replaceable"><tt>end</tt></i>)</tt> is considered.
   </p><div class="example"><a id="ex-re-match"></a><p class="title"><b>Example 30.1. <a href="modules.html#re-match"><tt class="function">REGEXP:MATCH</tt></a></b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
     (<a href="modules.html#re-match"><tt class="function">REGEXP:MATCH</tt></a> "quick" "The quick brown fox jumped quickly.")
-     <tt class="data">#S(<tt class="classname">REGEXP:MATCH</tt> :START 4 :END 9)</tt>
+     <tt class="sexp">#S(<tt class="classname">REGEXP:MATCH</tt> :START 4 :END 9)</tt>
     (<a href="modules.html#re-match"><tt class="function">REGEXP:MATCH</tt></a> "quick" "The quick brown fox jumped quickly." :start 8)
-     <tt class="data">#S(<tt class="classname">REGEXP:MATCH</tt> :START 27 :END 32)</tt>
+     <tt class="sexp">#S(<tt class="classname">REGEXP:MATCH</tt> :START 27 :END 32)</tt>
     (<a href="modules.html#re-match"><tt class="function">REGEXP:MATCH</tt></a> "quick" "The quick brown fox jumped quickly." :start 8 :end 30)
      <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>
     (<a href="modules.html#re-match"><tt class="function">REGEXP:MATCH</tt></a> "\\([a-z]*\\)[0-9]*\\(bar\\)" "foo12bar")
-     <tt class="data">#S(<tt class="classname">REGEXP:MATCH</tt> :START 0 :END 8) ;</tt>
-     <tt class="data">#S(<tt class="classname">REGEXP:MATCH</tt> :START 0 :END 3) ;</tt>
-     <tt class="data">#S(<tt class="classname">REGEXP:MATCH</tt> :START 5 :END 8)</tt>
+     <tt class="sexp">#S(<tt class="classname">REGEXP:MATCH</tt> :START 0 :END 8) ;</tt>
+     <tt class="sexp">#S(<tt class="classname">REGEXP:MATCH</tt> :START 0 :END 3) ;</tt>
+     <tt class="sexp">#S(<tt class="classname">REGEXP:MATCH</tt> :START 5 :END 8)</tt>
   </pre></td></tr></table></div><p>
 </p></dd><dt><a id="re-match-access"></a><tt class="sexp">(<a href="modules.html#re-match-access"><tt class="function">REGEXP:MATCH-START</tt></a> <i class="replaceable"><tt>match</tt></i>)</tt><br /><tt class="sexp">(<a href="modules.html#re-match-access"><tt class="function">REGEXP:MATCH-END</tt></a> <i class="replaceable"><tt>match</tt></i>)</tt></dt><dd>Return the start and end the <i class="replaceable"><tt>match</tt></i>; <a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a>-able.
 </dd><dt><a id="re-match-string"></a><tt class="sexp">(<a href="modules.html#re-match-string"><tt class="function">REGEXP:MATCH-STRING</tt></a> <i class="replaceable"><tt>string</tt></i> <i class="replaceable"><tt>match</tt></i>)</tt></dt><dd>Extracts the substring of <i class="replaceable"><tt>string</tt></i> corresponding
@@ -504,7 +470,7 @@ such as your local <a href="http://www.opengroup.org/onlinepubs/007904975/basede
    This will work only when your <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap07.html" target="_top">locale</a> is <a href="encoding.html#charset-UTF-8"><tt class="constant">CHARSET:UTF-8</tt></a>
    because <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> uses <a href="encoding.html#charset-UTF-8"><tt class="constant">CHARSET:UTF-8</tt></a> internally and POSIX constrains
    <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/regex.h.html" target="_top"><tt class="filename">regex.h</tt></a> to use the current <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap07.html" target="_top">locale</a>.
-</dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="re-example"></a>30.2.6.5.1. Example</h5></div></div><div></div></div><p>The following code computes the number of people who use a
+</dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="re-example"></a>30.2.6.4.1. Example</h5></div></div><div></div></div><p>The following code computes the number of people who use a
  particular shell:</p><div class="example"><a id="re-example-lisp"></a><p class="title"><b>Example 30.3. shell-count.lisp</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
 #!/usr/local/bin/clisp -C
 (<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target="_top"><tt class="function">DEFPACKAGE</tt></a> "REGEXP-TEST" (:use "LISP" "REGEXP"))
@@ -538,7 +504,7 @@ for my $kk (keys(%hash)) {
   print "[",++$ii,"] \"",$kk,"\"  --  ",$hash{$kk},"\n";
 }
 close(INF);
-</pre></td></tr></table></div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="pcre"></a>30.2.6.6. Perl Compatible Regular Expressions.</h4></div></div><div></div></div><p>This is an interface to <a href="http://www.pcre.org/" target="_top">Perl
+</pre></td></tr></table></div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="pcre"></a>30.2.6.5. Perl Compatible Regular Expressions.</h4></div></div><div></div></div><p>This is an interface to <a href="http://www.pcre.org/" target="_top">Perl
   Compatible Regular Expressions</a>.</p><p>When this module is present, <a href="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html" target="_top"><tt class="varname">*FEATURES*</tt></a> contains the
  symbol <tt class="constant">:PCRE</tt>.</p><div class="variablelist"><a id="pcre-api"></a><p class="title"><b>PCRE module API</b></p><dl><dt><a id="pcre-version"></a><tt class="sexp">(PCRE:PCRE-VERSION)</tt></dt><dd>Return version information as 3 values: descriptive
     <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> and 2 <a href="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html" target="_top"><tt class="classname">FIXNUM</tt></a>s: major and minor numbers.
@@ -579,7 +545,7 @@ close(INF);
     If <i class="replaceable"><tt>which</tt></i> is a name of the sub-pattern (as
     opposed to its number), <i class="replaceable"><tt>pattern</tt></i> must be supplied.
  </dd><dt><a id="pcre-matcher"></a><tt class="sexp">(PCRE:PCRE-MATCHER <i class="replaceable"><tt>pattern</tt></i>)</tt></dt><dd>A valid value for <a href="environment-dict.html#apropos" title="25.2.11. Functions APROPOS &amp; APROPOS-LIST"><tt class="varname">CUSTOM:*APROPOS-MATCHER*</tt></a>.
- </dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="syscalls"></a>30.2.6.7. System Calls</h4></div></div><div></div></div><p>The <a href="modules.html#syscalls" title="30.2.6.7. System Calls"><strong class="package">“<span class="quote">POSIX</span>”</strong></a> module makes some system calls available from lisp.
+ </dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="syscalls"></a>30.2.6.6. System Calls</h4></div></div><div></div></div><p>The <a href="modules.html#syscalls" title="30.2.6.6. System Calls"><strong class="package">“<span class="quote">POSIX</span>”</strong></a> module makes some system calls available from lisp.
  Not all of these system calls are actually POSIX, so this package has a
  nickname <strong class="package">“<span class="quote">OS</span>”</strong>.</p><p>When this module is present, <a href="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html" target="_top"><tt class="varname">*FEATURES*</tt></a> contains the
  symbol <tt class="constant">:SYSCALLS</tt>.</p><div class="variablelist"><dl><dt><tt class="sexp">(<tt class="function">POSIX:RESOLVE-HOST-IPADDR</tt>
@@ -625,10 +591,6 @@ close(INF);
     (or the default, like 1 for the number of hard links for old
     <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>) is returned.
    </p><p>[<a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> systems only at this time, patches are welcome.]
- </p></dd><dt><a id="set-file-stat"></a><tt class="sexp">(<tt class="function">POSIX:SET-FILE-STAT</tt> <i class="replaceable"><tt>pathname</tt></i>
-    <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a> <i class="replaceable"><tt>mode</tt></i> <i class="replaceable"><tt>uid</tt></i>
-    <i class="replaceable"><tt>gid</tt></i>)</tt></dt><dd><p>Set some file attributes using <a href="http://www.opengroup.org/onlinepubs/007904975/functions/chmod.html" target="_top"><tt class="function">chmod</tt></a> and <a href="http://www.opengroup.org/onlinepubs/007904975/functions/chown.html" target="_top"><tt class="function">chown</tt></a>.
-   </p><p>[<a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> systems only at this time, patches ar welcome.]
  </p></dd><dt><a id="stat-vfs"></a><tt class="sexp">(<tt class="function">POSIX:STAT-VFS</tt>
     <i class="replaceable"><tt>pathname</tt></i>)</tt></dt><dd><p>Return the <span class="type">STAT-VFS</span> structure.
    <i class="replaceable"><tt>pathname</tt></i> can be a <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a>, a <a href="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html" target="_top"><tt class="classname">PATHNAME</tt></a>, a <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or a
@@ -699,14 +661,7 @@ close(INF);
    (i.e., <span class="emphasis"><em>read</em></span>) lock, but only one can set
    an <span class="emphasis"><em>exclusive</em></span> (i.e., <span class="emphasis"><em>write</em></span>,
    or non-<i class="replaceable"><tt>shared</tt></i>) lock.
- </dd><dt><a id="mknod"></a><tt class="sexp">(<tt class="function">POSIX:MKNOD</tt> <i class="replaceable"><tt>pathname</tt></i> <i class="replaceable"><tt>type</tt></i>
-    <i class="replaceable"><tt>mode</tt></i>)</tt></dt><dd>Create a special file using <a href="http://www.opengroup.org/onlinepubs/007904975/functions/mknod.html" target="_top"><tt class="function">mknod</tt></a>.
-   Use <tt class="literal">:FIFO</tt> to create pipes
-   and <tt class="literal">:SOCK</tt> to create sockets.
- </dd><dt><a id="convert-modes"></a><tt class="sexp">(<tt class="function">POSIX:CONVERT-MODE</tt> <i class="replaceable"><tt>mode</tt></i>)</tt></dt><dd>Convert between numeric, (e.g., <tt class="literal">0644</tt>)
-   and symbolic (e.g., <tt class="sexp">(:RUSR :WUSR :RGRP :ROTH)</tt>)
-   file modes.</dd><dt><a id="umask"></a><tt class="sexp">(<tt class="function">UMASK</tt> <i class="replaceable"><tt>mode</tt></i>)</tt></dt><dd>Change process mask using <a href="http://www.opengroup.org/onlinepubs/007904975/functions/umask.html" target="_top"><tt class="function">umask</tt></a>.
- </dd><dt><a id="copy-file"></a>
+ </dd><dt>
    <tt class="sexp">(<tt class="function">POSIX:COPY-FILE</tt>
     <i class="replaceable"><tt>source-path</tt></i>
     <i class="replaceable"><tt>destination-path</tt></i>
@@ -718,7 +673,7 @@ close(INF);
     (when <i class="replaceable"><tt>method</tt></i> is <tt class="constant">:COPY</tt>).
    </p><p>Both <i class="replaceable"><tt>source-path</tt></i> and
     <i class="replaceable"><tt>destination-path</tt></i> may be wild.
- </p></dd><dt><a id="dup-handle"></a>
+ </p></dd><dt>
    <tt class="sexp">(<tt class="function">POSIX:DUPLICATE-HANDLE</tt>
     <i class="replaceable"><tt>fd1</tt></i>
     <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a> <i class="replaceable"><tt>fd2</tt></i>)</tt></dt><dd>This is an interface to the <a href="http://www.opengroup.org/onlinepubs/007904975/functions/dup.html" target="_top"><tt class="function">dup/dup2</tt></a> system calls on
@@ -732,15 +687,8 @@ close(INF);
     a <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a> shortcut (<tt class="filename">#P".lnk"</tt>) file.
  </dd><dt><tt class="sexp">(OS:SYSTEM-INFO)</tt></dt><dd>Return <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a> system information in a
     <span class="type">SYSTEM-INFO</span> structure.</dd><dt><tt class="sexp">(OS:VERSION)</tt></dt><dd>Return <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a> version information in a
-    <span class="type">VERSION</span> structure.</dd><dt><tt class="sexp">(POSIX:CRYPT <i class="replaceable"><tt>key</tt></i>
-    <i class="replaceable"><tt>salt</tt></i>)</tt></dt><dd>Call <a href="http://www.opengroup.org/onlinepubs/007904975/functions/crypt.html" target="_top"><tt class="function">crypt</tt></a>, arguments are <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a>s.
- </dd><dt><tt class="sexp">(POSIX:ENCRYPT <i class="replaceable"><tt>block</tt></i>
-    <i class="replaceable"><tt>decrypt-p</tt></i>)</tt><br /><tt class="sexp">(POSIX:SETKEY <i class="replaceable"><tt>key</tt></i>)</tt></dt><dd>Call <a href="http://www.opengroup.org/onlinepubs/007904975/functions/encrypt.html" target="_top"><tt class="function">encrypt</tt></a> and <a href="http://www.opengroup.org/onlinepubs/007904975/functions/setkey.html" target="_top"><tt class="function">setkey</tt></a>, respectively.
-    <i class="replaceable"><tt>block</tt></i> and <i class="replaceable"><tt>key</tt></i> are of type
-    <tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/fun_vector.html" target="_top"><tt class="function">VECTOR</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 8) 8)</tt>.
-    <i class="replaceable"><tt>decrypt-p</tt></i> is <a href="http://www.lisp.org/HyperSpec/Body/typ_boolean.html" target="_top"><tt class="classname">BOOLEAN</tt></a>.
- </dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="oracle"></a>30.2.6.8. <a href="http://www.oracle.com" target="_top">Oracle</a> Interface</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#ora-functionality">30.2.6.8.1. Functions and Macros in
-  package ORACLE</a></span></dt><dt><span class="section"><a href="modules.html#ora-example">30.2.6.8.2. Oracle Example</a></span></dt><dt><span class="section"><a href="modules.html#ora-config">30.2.6.8.3. Oracle Configuration</a></span></dt><dt><span class="section"><a href="modules.html#ora-build">30.2.6.8.4. Building the Oracle Interface</a></span></dt></dl></div><p>
+    <span class="type">VERSION</span> structure.</dd></dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="oracle"></a>30.2.6.7. <a href="http://www.oracle.com" target="_top">Oracle</a> Interface</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#ora-functionality">30.2.6.7.1. Functions and Macros in
+  package ORACLE</a></span></dt><dt><span class="section"><a href="modules.html#ora-example">30.2.6.7.2. Oracle Example</a></span></dt><dt><span class="section"><a href="modules.html#ora-config">30.2.6.7.3. Oracle Configuration</a></span></dt><dt><span class="section"><a href="modules.html#ora-build">30.2.6.7.4. Building the Oracle Interface</a></span></dt></dl></div><p>
 The <a href="http://www.oracle.com" target="_top">Oracle</a> module allows a <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> program to act as client to an
 <a href="http://www.oracle.com" target="_top">Oracle</a> database server.  The module includes full
 SQL support, transactions (including auto-commit), support for most
@@ -749,7 +697,7 @@ between <a href="http://www.oracle.com" target="_top">Oracle</a> and <a href="ht
 retry, concurrent connections to multiple databases, proper handling
 of <a href="http://www.oracle.com" target="_top">Oracle</a> errors, and more.  </p><p>The module can be used to build sophisticated <a href="http://www.oracle.com" target="_top">Oracle</a> database
 applications in <a href="http://www.lisp.org" target="_top"><span><b class="command">Common Lisp</b></span></a>.</p><p>When this module is present, <a href="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html" target="_top"><tt class="varname">*FEATURES*</tt></a> contains the
- symbol <tt class="constant">:ORACLE</tt>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-functionality"></a>30.2.6.8.1. Functions and Macros in
+ symbol <tt class="constant">:ORACLE</tt>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-functionality"></a>30.2.6.7.1. Functions and Macros in
   package <strong class="package">“<span class="quote">ORACLE</span>”</strong></h5></div></div><div></div></div><p>Access to <a href="http://www.oracle.com" target="_top">Oracle</a> is via these functions and macros in
 package <strong class="package">“<span class="quote">ORACLE</span>”</strong>.
 When any <a href="http://www.oracle.com" target="_top">Oracle</a> function fails, the general Lisp function
@@ -1058,7 +1006,7 @@ inside the <tt class="function">WITH-TRANSACTION</tt> macro.
 <tt class="function">WITH-TRANSACTION</tt>.
 </dd>
 <!--=-=-==-=-==-=-==-=-==-=-==-=-= End of functions section-->
-</dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-example"></a>30.2.6.8.2. <a href="http://www.oracle.com" target="_top">Oracle</a> Example</h5></div></div><div></div></div><p>
+</dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-example"></a>30.2.6.7.2. <a href="http://www.oracle.com" target="_top">Oracle</a> Example</h5></div></div><div></div></div><p>
 Below is a simple example script which uses <a href="http://www.oracle.com" target="_top">Oracle</a>'s demo database
 schema, <tt class="literal">SCOTT</tt>.
 
@@ -1081,7 +1029,7 @@ schema, <tt class="literal">SCOTT</tt>.
 
 (oracle:update-row "dept" "dname = :acctval" '(("dname" "ACCOUNTING")) '(("acctval" "NEWACCT")))
 </pre></td></tr></table><p>
-</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-config"></a>30.2.6.8.3. <a href="http://www.oracle.com" target="_top">Oracle</a> Configuration</h5></div></div><div></div></div><p>Obviously, a working <a href="http://www.oracle.com" target="_top">Oracle</a> environment is required.  It is
+</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-config"></a>30.2.6.7.3. <a href="http://www.oracle.com" target="_top">Oracle</a> Configuration</h5></div></div><div></div></div><p>Obviously, a working <a href="http://www.oracle.com" target="_top">Oracle</a> environment is required.  It is
 recommended that you first be able to log on and use the <a href="http://www.oracle.com" target="_top">Oracle</a>
 SQL*Plus application to test your environment
 <span class="emphasis"><em>before</em></span> attempting <a href="http://www.oracle.com" target="_top">Oracle</a> access via the
@@ -1090,7 +1038,7 @@ At a minimum you will need to set environment variables
 <tt class="envar">ORACLE_HOME</tt> to the <a href="http://www.oracle.com" target="_top">Oracle</a> base directory and
 <tt class="envar">LD_LIBRARY_PATH</tt> to include
 <tt class="literal">$<tt class="envar">ORACLE_HOME</tt>/lib</tt> and possibly other
-directories.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-build"></a>30.2.6.8.4. Building the <a href="http://www.oracle.com" target="_top">Oracle</a> Interface</h5></div></div><div></div></div><p>The module uses the <a href="http://www.oracle.com" target="_top">Oracle</a> Call Interface (<a href="http://www.vivtek.com/oracle.html" target="_top">OCI</a>)
+directories.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="ora-build"></a>30.2.6.7.4. Building the <a href="http://www.oracle.com" target="_top">Oracle</a> Interface</h5></div></div><div></div></div><p>The module uses the <a href="http://www.oracle.com" target="_top">Oracle</a> Call Interface (<a href="http://www.vivtek.com/oracle.html" target="_top">OCI</a>)
 <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> library.  To build the module you will need the <a href="http://www.oracle.com" target="_top">Oracle</a>
 <a href="http://www.vivtek.com/oracle.html" target="_top">OCI</a> headers and link libraries; as a quick check, make sure
 you have the file <tt class="filename">oci.h</tt> somewhere
@@ -1111,7 +1059,7 @@ It may be necessary to edit the Makefile in the
 prior to running <span><b class="command">./configure</b></span>.
 
 
-</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="fastcgi"></a>30.2.6.9. The <a href="http://www.fastcgi.com" target="_top">FastCGI</a> Interface</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#fcgi-overview">30.2.6.9.1. Overview of FastCGI</a></span></dt><dt><span class="section"><a href="modules.html#fcgi-functionality">30.2.6.9.2. Functions in Package FASTCGI</a></span></dt><dt><span class="section"><a href="modules.html#fcgi-example">30.2.6.9.3. FastCGI Example</a></span></dt><dt><span class="section"><a href="modules.html#fcgi-build">30.2.6.9.4. Building and configuring the
+</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="fastcgi"></a>30.2.6.8. The <a href="http://www.fastcgi.com" target="_top">FastCGI</a> Interface</h4></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="modules.html#fcgi-overview">30.2.6.8.1. Overview of FastCGI</a></span></dt><dt><span class="section"><a href="modules.html#fcgi-functionality">30.2.6.8.2. Functions in Package FASTCGI</a></span></dt><dt><span class="section"><a href="modules.html#fcgi-example">30.2.6.8.3. FastCGI Example</a></span></dt><dt><span class="section"><a href="modules.html#fcgi-build">30.2.6.8.4. Building and configuring the
   FastCGI Interface</a></span></dt></dl></div><p>
 The <a href="http://www.fastcgi.com" target="_top">FastCGI</a> module speeds up <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> CGI
 scripts launched by a Web server.  Working with a
@@ -1122,7 +1070,7 @@ The performance improvements stem from the fact that the script's
 process remains running across <a href="http://www.w3.org/Protocols/" target="_top"><span><b class="command">HTTP</b></span></a> requests, eliminating startup
 overhead and allowing for caching of data structures and other resources.  This
 is the same approach used is in other languages (e.g., <a href="http://perl.apache.org" target="_top">mod_perl</a> for Perl).  </p><p>When this module is present, <a href="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html" target="_top"><tt class="varname">*FEATURES*</tt></a> contains the
- symbol <tt class="constant">:FASTCGI</tt>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-overview"></a>30.2.6.9.1. Overview of <a href="http://www.fastcgi.com" target="_top">FastCGI</a></h5></div></div><div></div></div><p>
+ symbol <tt class="constant">:FASTCGI</tt>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-overview"></a>30.2.6.8.1. Overview of <a href="http://www.fastcgi.com" target="_top">FastCGI</a></h5></div></div><div></div></div><p>
 Traditional CGI programs work by doing input/output with the Web
 server via the following channels:
 </p><div class="orderedlist"><ol type="1"><li>
@@ -1152,7 +1100,7 @@ because the program stays running from <a href="http://www.w3.org/Protocols/" ta
 it can cache information in memory such as database connections
 or large in-memory data structures.
 
-</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-functionality"></a>30.2.6.9.2. Functions in Package <strong class="package">“<span class="quote">FASTCGI</span>”</strong></h5></div></div><div></div></div><p>Access to
+</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-functionality"></a>30.2.6.8.2. Functions in Package <strong class="package">“<span class="quote">FASTCGI</span>”</strong></h5></div></div><div></div></div><p>Access to
 <a href="http://www.fastcgi.com" target="_top">FastCGI</a> is via these functions in package <strong class="package">“<span class="quote">FASTCGI</span>”</strong>.
 
 </p><div class="variablelist">
@@ -1232,7 +1180,7 @@ will write the string <tt class="literal">"foo 10 20"</tt>.  This function
 is useful when building strings in memory for display.
 </dd></dl></div><p>
 
-</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-example"></a>30.2.6.9.3. <a href="http://www.fastcgi.com" target="_top">FastCGI</a> Example</h5></div></div><div></div></div><p>
+</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-example"></a>30.2.6.8.3. <a href="http://www.fastcgi.com" target="_top">FastCGI</a> Example</h5></div></div><div></div></div><p>
 
 Below is a simple example CGI script using <a href="http://www.fastcgi.com" target="_top">FastCGI</a>.
 
@@ -1251,7 +1199,7 @@ Below is a simple example CGI script using <a href="http://www.fastcgi.com" targ
     (fastcgi:finish))
 </pre></td></tr></table><p>
 
-</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-build"></a>30.2.6.9.4. Building and configuring the
+</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="fcgi-build"></a>30.2.6.8.4. Building and configuring the
   <a href="http://www.fastcgi.com" target="_top">FastCGI</a> Interface</h5></div></div><div></div></div><p>
 It is necessary to download the <a href="http://www.fastcgi.com" target="_top">FastCGI</a> developers' kit, build it,
 and install it, before building <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> with <a href="http://www.fastcgi.com" target="_top">FastCGI</a> support.
@@ -1264,29 +1212,4 @@ After that, you can convert <tt class="filename">foo.cgi</tt> by linking it
 to a script names <tt class="filename">foo.fcgi</tt>.  Since a <a href="http://www.fastcgi.com" target="_top">FastCGI</a>
 script is also a valid CGI script, it can be run unmodified in either
 mode.
-</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="rawsock"></a>30.2.6.10. Raw Socket Access.</h4></div></div><div></div></div><p>This is the raw socket interface, as described in <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/syssocket.h.html" target="_top"><tt class="filename">sys/socket.h</tt></a>.
-Sockets are represented by their <a href="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html" target="_top"><tt class="classname">FIXNUM</tt></a> <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap03.html#tag_03_165" target="_top">file descriptor</a>s.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title"><a id="rawsock-use-sockets"></a>Use <tt class="classname">SOCKET:SOCKET-STREAM</tt> instead!</h3><p>This interface is very low-level, and you probably do not need
- it - unless you are doing something <span class="emphasis"><em>very</em></span> unusual.
- If you are interested in TCP/IP (Internet) sockets, you should use
- <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-STREAM</tt></a>s, <span class="emphasis"><em>not</em></span> this package.</p></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title"><a id="rawsock-not-streams"></a>Do not use <tt class="function">EXT:MAKE-STREAM</tt>!</h3><p>You can turn such a raw socket into a usual lisp <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a>
-  using <a href="stream-dict.html#make-stream" title="21.3.2. Function EXT:MAKE-STREAM"><tt class="function">EXT:MAKE-STREAM</tt></a>, but you should be <span class="emphasis"><em>extremely</em></span>
-  careful with such dubious actions!  See the <tt class="email">&lt;<a href="mailto:clisp-devel/at/sf.net"><a href="http://lists.sourceforge.net/lists/listinfo/clisp-devel" target="_top">clisp-devel/at/sf.net</a></a>&gt;</tt>
-  <a href="http://sourceforge.net/mailarchive/message.php?msg_id=7203955" target="_top">mailing list archives</a> for more details.</p></div><p>We implement access to
- </p><table class="simplelist" border="0" summary="Simple list"><tr><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/accept.html" target="_top"><tt class="function">accept</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/getsockname.html" target="_top"><tt class="function">getsockname</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/recvmsg.html" target="_top"><tt class="function">recvmsg</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/socket.html" target="_top"><tt class="function">socket</tt></a></td></tr><tr><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/bind.html" target="_top"><tt class="function">bind</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/listen.html" target="_top"><tt class="function">listen</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/send.html" target="_top"><tt class="function">send</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/socketpair.html" target="_top"><tt class="function">socketpair</tt></a></td></tr><tr><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/connect.html" target="_top"><tt class="function">connect</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/recv.html" target="_top"><tt class="function">recv</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/sendmsg.html" target="_top"><tt class="function">sendmsg</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/shutdown.html" target="_top"><tt class="function">shutdown</tt></a></td></tr><tr><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/getpeername.html" target="_top"><tt class="function">getpeername</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/recvfrom.html" target="_top"><tt class="function">recvfrom</tt></a></td><td><a href="http://www.opengroup.org/onlinepubs/007904975/functions/sendto.html" target="_top"><tt class="function">sendto</tt></a></td><td> </td></tr></table><p>
- using same-named lisp functions in package
- <strong class="package">“<span class="quote">RAWSOCK</span>”</strong>.
- Additionally,</p><div class="itemizedlist"><ul type="disc"><li><tt class="function">RAWSOCK:SOCK-READ</tt>
-    calls <a href="http://www.opengroup.org/onlinepubs/007904975/functions/read.html" target="_top"><tt class="function">read</tt></a>;</li><li><tt class="function">RAWSOCK:SOCK-WRITE</tt>
-    calls <a href="http://www.opengroup.org/onlinepubs/007904975/functions/write.html" target="_top"><tt class="function">write</tt></a>;</li><li><tt class="function">RAWSOCK:SOCK-CLOSE</tt>
-   calls <a href="http://www.opengroup.org/onlinepubs/007904975/functions/close.html" target="_top"><tt class="function">close</tt></a>.</li></ul></div><p>We do not interface to <a href="http://www.opengroup.org/onlinepubs/007904975/functions/getsockopt.html" target="_top"><tt class="function">getsockopt</tt></a> and <a href="http://www.opengroup.org/onlinepubs/007904975/functions/setsockopt.html" target="_top"><tt class="function">setsockopt</tt></a>,
- they are available through <a href="socket.html#so-opt"><tt class="function">SOCKET:SOCKET-OPTIONS</tt></a>.</p><p>We do not interface to <a href="http://www.opengroup.org/onlinepubs/007904975/functions/select.html" target="_top"><tt class="function">select</tt></a>,
- it is available through <a href="socket.html#so-status"><tt class="function">SOCKET:SOCKET-STATUS</tt></a>.</p><p>We do not interface to <a href="http://www.opengroup.org/onlinepubs/007904975/functions/poll.html" target="_top"><tt class="function">poll</tt></a> yet, patches are welcome.</p><div class="variablelist"><a id="rawsock-add-on"></a><p class="title"><b>Additional Functions</b></p><dl><dt><tt class="sexp">(RAWSOCK:MAKE-SOCKADDR
-    <i class="replaceable"><tt>family</tt></i>
-    <i class="replaceable"><tt>data</tt></i>)</tt></dt><dd>create a <span class="type">sockaddr</span> object.
- </dd><dt><tt class="sexp">(RAWSOCK:SOCKADDR-FAMILY
-    <i class="replaceable"><tt>sockaddr</tt></i>)</tt></dt><dd>return the numeric family of a
-    <span class="type">sockaddr</span> object.</dd><dt><tt class="sexp">(RAWSOCK:SOCKADDR-DATA
-    <i class="replaceable"><tt>sockaddr</tt></i>)</tt></dt><dd>return a <a href="http://www.lisp.org/HyperSpec/Body/glo_f.html#fresh" target="_top">fresh</a> data vector of a
-    <span class="type">sockaddr</span> object.</dd><dt><tt class="sexp">(RAWSOCK:OPEN-UNIX-SOCKET
-    <i class="replaceable"><tt>pathname</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a> <i class="replaceable"><tt>type</tt></i>)</tt></dt><dd>open a <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> socket special file.
- </dd></dl></div></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="screen.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="platform.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="dffi.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">30.1. Extensions-2.1. Random Screen Access </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 30.3. Extensions-2.3. The Foreign Function Call Facility</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>
+</p></div></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="screen.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="platform.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="dffi.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">30.1. Extensions-2.1. Random Screen Access </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 30.3. Extensions-2.3. The Foreign Function Call Facility</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>

@@ -20,11 +20,7 @@
  by some programs on <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>).
  If you do not want this, i.e., if you really want to distinguish
  <span class="keycode">LF</span>, <span class="keycode">CR</span> and <span class="keycode">CR</span>/<span class="keycode">LF</span>, you have to resort to
- binary input (function <a href="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html" target="_top"><tt class="function">READ-BYTE</tt></a>).</p><p><b>Justification. </b><a href="http://www.unicode.org/reports/tr13/tr13-9.html" target="_top">Unicode
-  Newline Guidelines</a> say: “<span class="quote">Even if you know which
-  characters represents NLF on your particular platform, on input and in
-  interpretation, treat CR, LF, CRLF, and NEL the same. Only on output do
-  you need to distinguish between them.</span>”</p><p><b>Rationale. </b>In <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>, <span class="keysym">#\Newline</span> is identical to <span class="keysym">#\Linefeed</span>
+ binary input (function <a href="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html" target="_top"><tt class="function">READ-BYTE</tt></a>).</p><p><b>Rationale. </b>In <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>, <span class="keysym">#\Newline</span> is identical to <span class="keysym">#\Linefeed</span>
  (which is specifically permitted by [<span class="citation"><a href="references.html#ansi-cl">ANSI CL standard</a></span>] in section
  <a href="http://www.lisp.org/HyperSpec/Body/sec_13-1-7.html" target="_top">Character
   Names</a>).

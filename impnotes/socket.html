@@ -25,8 +25,8 @@
     <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-STREAM</tt></a> for the connection.
    Waits for an attempt to connect to the server for no more than
    <a href="socket.html#timeout-k"><tt class="constant">:TIMEOUT</tt></a> seconds (which may be a non-negative real number or a
-   list <tt class="data">(sec usec)</tt> or a pair
-   <tt class="data">(sec . usec)</tt>).
+   list <tt class="sexp">(sec usec)</tt> or a pair
+   <tt class="sexp">(sec . usec)</tt>).
    <a href="http://www.lisp.org/HyperSpec/Body/fun_signal.html" target="_top"><tt class="function">SIGNAL</tt></a>s an <a href="http://www.lisp.org/HyperSpec/Body/contyp_error.html" target="_top"><tt class="classname">ERROR</tt></a> if no connection is made in that time.
   </dd><dt><a id="so-connect"></a><tt class="sexp">(<a href="socket.html#so-connect"><tt class="function">SOCKET:SOCKET-CONNECT</tt></a>
     <i class="replaceable"><tt>port</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a> [<i class="replaceable"><tt>host</tt></i>] <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
@@ -40,13 +40,12 @@
                  <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a> <a href="socket.html#timeout-opt">[<i class="replaceable"><tt>seconds</tt></i> [<i class="replaceable"><tt>microseconds</tt></i>]]</a>)</tt></dt><dd><p>Checks whether it is possible to read from or write
    to a <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-STREAM</tt></a> or whether a connection is available on a
    <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-SERVER</tt></a> without blocking.</p><p>For the cognoscenti: this is the interface to <a href="http://www.opengroup.org/onlinepubs/007904975/functions/select.html" target="_top"><tt class="function">select</tt></a>, so
-    it will work for any <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> which is based on a
-    <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap03.html#tag_03_165" target="_top">file descriptor</a>, e.g., <a href="stream-dict.html#open" title="21.3.8. Function  OPEN">file</a>/<a href="shell.html#pipe" title="30.8.2. Pipes">pipe</a>/<a href="socket.html" title="30.5. Extensions-2.5. Socket Streams">socket</a> and <a href="terminal.html" title="21.2. Terminal interaction."><tt class="varname">EXT:*KEYBOARD-INPUT*</tt></a>, as well as
-    for <a href="modules.html#rawsock" title="30.2.6.10. Raw Socket Access.">raw sockets</a>.</p><p>This is similar to <a href="http://www.lisp.org/HyperSpec/Body/fun_listen.html" target="_top"><tt class="function">LISTEN</tt></a>, which checks only one
-    <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> and only for input, and <a href="socket.html#so-wait"><tt class="function">SOCKET:SOCKET-WAIT</tt></a>, which works only with
-    <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-SERVER</tt></a>s.</p><p>We define “<span class="quote">status</span>” for a <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-SERVER</tt></a> or a
+   it will work for any <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> which is based on a
+   <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap03.html#tag_03_165" target="_top">file descriptor</a>, e.g., <a href="stream-dict.html#open" title="21.3.8. Function  OPEN">file</a>/<a href="shell.html#pipe" title="30.8.2. Pipes">pipe</a>/<a href="socket.html" title="30.5. Extensions-2.5. Socket Streams">socket</a> and <a href="terminal.html" title="21.2. Terminal interaction."><tt class="varname">EXT:*KEYBOARD-INPUT*</tt></a>.</p><p>This is similar to
+    <a href="http://www.lisp.org/HyperSpec/Body/fun_listen.html" target="_top"><tt class="function">LISTEN</tt></a>, which checks only one <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> and only for input, and
+    <a href="socket.html#so-wait"><tt class="function">SOCKET:SOCKET-WAIT</tt></a>, which works only with <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-SERVER</tt></a>s.</p><p>We define “<span class="quote">status</span>” for a <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-SERVER</tt></a> or a
     <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-STREAM</tt></a> to be <tt class="constant">:ERROR</tt> if any i/o operation will cause an
-    <a href="http://www.lisp.org/HyperSpec/Body/contyp_error.html" target="_top"><tt class="classname">ERROR</tt></a>.</p><p>Additionally, for a <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-SERVER</tt></a>, we define
+    error.</p><p>Additionally, for a <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-SERVER</tt></a>, we define
     “<span class="quote">status</span>” to be <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><tt class="constant">T</tt></a> if a connection is available, i.e.,
     is <a href="socket.html#so-accept"><tt class="function">SOCKET:SOCKET-ACCEPT</tt></a> will not block, and <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> otherwise.</p><p>Additionally, for a <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-STREAM</tt></a>, we define
     “<span class="quote">status</span>” in the given <i class="replaceable"><tt>direction</tt></i> (one of <tt class="constant">:INPUT</tt>,
@@ -62,10 +61,10 @@
     </dd><dt><tt class="sexp">(<a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-STREAM</tt></a>
        . <i class="replaceable"><tt>direction</tt></i>)</tt></dt><dd>Return the status in the specified direction
     </dd><dt>a list of the above</dt><dd>Return a list of values, one for each element of the
-       argument list (a la <a href="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html" target="_top"><tt class="function">MAPCAR</tt></a>)</dd></dl></div><p>If you want to avoid <a href="http://www.lisp.org/HyperSpec/Body/glo_c.html#cons" target="_top">consing[3]</a> up a <a href="http://www.lisp.org/HyperSpec/Body/glo_f.html#fresh" target="_top">fresh</a> list, you can
+       argument list (a la <a href="http://www.lisp.org/HyperSpec/Body/fun_mapccm_ma_istcm_mapcon.html" target="_top"><tt class="function">MAPCAR</tt></a>)</dd></dl></div><p>If you want to avoid <a href="http://www.lisp.org/HyperSpec/Body/fun_cons.html" target="_top"><tt class="function">CONS</tt></a>ing up a <a href="http://www.lisp.org/HyperSpec/Body/glo_f.html#fresh" target="_top">fresh</a> list, you can
     make the elements of <i class="replaceable"><tt>socket-stream-or-list</tt></i>
-    to be <tt class="data">(<i class="replaceable"><tt>socket-stream</tt></i> <i class="replaceable"><tt>direction</tt></i> .
-     <i class="replaceable"><tt>x</tt></i>)</tt> or <tt class="data">(<i class="replaceable"><tt>socket-server</tt></i> . <i class="replaceable"><tt>x</tt></i>)</tt>.
+    to be <tt class="sexp">(<i class="replaceable"><tt>socket-stream</tt></i> <i class="replaceable"><tt>direction</tt></i> .
+     <i class="replaceable"><tt>x</tt></i>)</tt> or <tt class="sexp">(<i class="replaceable"><tt>socket-server</tt></i> . <i class="replaceable"><tt>x</tt></i>)</tt>.
     Then <a href="socket.html#so-status"><tt class="function">SOCKET:SOCKET-STATUS</tt></a> will destructively modify its argument and replace
     <i class="replaceable"><tt>x</tt></i> or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> with the status and return the modified list.
     You can pass this modified list to <a href="socket.html#so-status"><tt class="function">SOCKET:SOCKET-STATUS</tt></a> again.</p><p>The optional arguments specify the timeout. <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> means
@@ -84,7 +83,7 @@
    <tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html" target="_top"><tt class="classname">SIMPLE-VECTOR</tt></a> 4)</tt>
    if <i class="replaceable"><tt>service-name</tt></i> is not given or is
    <tt class="constant">:DEFAULT</tt> or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>.</dd><dt><a id="sost-peer"></a><tt class="sexp">(<a href="socket.html#sost-peer"><tt class="function">SOCKET:SOCKET-STREAM-PEER</tt></a>
-    <i class="replaceable"><tt>socket-stream</tt></i> [<i class="replaceable"><tt>do-not-resolve-p</tt></i>])</tt></dt><dd><p>Given a <a href="socket.html" title="30.5. Extensions-2.5. Socket Streams"><tt class="classname">SOCKET:SOCKET-STREAM</tt></a>, this function returns the
+    <i class="replaceable"><tt>socket-stream</tt></i> [<i class="replaceable"><tt>do-not-resolve-p</tt></i>])</tt></dt><dd><p>Given a socket stream, this function returns the
    name of the host on the opposite side of the connection and its port
    number; the server-side can use this to see who connected.</p><p>When the optional second argument is non-<a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>, the hostname
    resolution is disabled and just the IP address is returned, without

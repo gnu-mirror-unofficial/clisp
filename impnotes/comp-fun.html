@@ -6,7 +6,7 @@ and a byte vector containing only immediate data, including the bytecode
 proper.</p><p>Typically, the byte vector is about twice as large as the function
 vector.  The separation thus helps the garbage collector (since the byte
 vector does not need to be scanned for pointers).</p><p>A function looks like this
- (cf. the <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> type <span class="type">Cclosure</span>):
+ (cf. the <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> type <tt class="literal">Cclosure</tt>):
 </p><div class="variablelist"><dl><dt><a id="func-name"></a>name</dt><dd>This is the name of the function, normally a symbol
    or a list of the form <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a> <i class="replaceable"><tt>symbol</tt></i>)</tt>.
    It is used for printing the function and for error messages.
@@ -23,7 +23,7 @@ vector does not need to be scanned for pointers).</p><p>A function looks like th
  </dd><dt><a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">venv-const</tt></a>*</dt><dd>At most one object, representing the closed-up
    variables, representing the variables of the lexical environment in
    which this function was defined.  It is a <a href="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html" target="_top"><tt class="classname">SIMPLE-VECTOR</tt></a>, which
-   looks like this: <tt class="data">#(<i class="replaceable"><tt>next</tt></i>
+   looks like this: <tt class="sexp">#(<i class="replaceable"><tt>next</tt></i>
    <i class="replaceable"><tt>value<sub>1</sub></tt></i> ...
    <i class="replaceable"><tt>value<sub>n</sub></tt></i>)</tt>
    where <i class="replaceable"><tt>value<sub>1</sub></tt></i>, ...,
@@ -58,11 +58,11 @@ present, the function (a "closure") is created at runtime.
 The compiler only generates a prototype, containing <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> values
 instead of each <a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">venv-const</tt></a>, <a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">block-const</tt></a>, <a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">tagbody-const</tt></a>.
 At runtime, a function is created by copying this prototype and
-replacing the <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> values by the definitive ones.</p><p>The list <tt class="data">(<a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">keyword-const</tt></a>*
+replacing the <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> values by the definitive ones.</p><p>The list <tt class="sexp">(<a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">keyword-const</tt></a>*
 <a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">other-const</tt></a>*)</tt> normally does not contain duplicates, because
 the compiler removes duplicates when possible.  (Duplicates can occur
 nevertheless, through the use of <a href="http://www.lisp.org/HyperSpec/Body/speope_load-time-value.html" target="_top"><tt class="function">LOAD-TIME-VALUE</tt></a>.)</p><p>The <a href="comp-fun.html" title="33.3. The structure of compiled functions"><tt class="literal">codevec</tt></a> looks like this
- (cf. the <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> type <span class="type">Codevec</span>):
+ (cf. the <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> type <tt class="literal">Codevec</tt>):
 </p><div class="variablelist"><dl><dt><tt class="literal">spdepth_1</tt> (2 bytes)</dt><dd>The 1st part of the maximal <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">SP</tt></a> depth.
   </dd><dt><tt class="literal">spdepth_jmpbufsize</tt> (2 bytes)</dt><dd>The <a href="vm.html" title="33.2. The virtual machine"><tt class="varname">jmpbufsize</tt></a> part of the maximal <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">SP</tt></a> depth.
    The maximal <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">SP</tt></a> depth (precomputed by the compiler) is given by

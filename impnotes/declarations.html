@@ -15,8 +15,9 @@
  <i class="replaceable"><tt>variable</tt></i> ...)</tt> affects the variable
  binding for the variable <i class="replaceable"><tt>variable</tt></i>.  The compiler
  will not warn about the variable, regardless whether it is used or
- not.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="compile-decl"></a>3.3.1. Additional declarations</h3></div></div><div></div></div><p>The declaration <a href="declarations.html#compile-decl" title="3.3.1. Additional declarations"><tt class="sexp">(compile)</tt></a> has the effect that the current
- form is compiled prior to execution.  Examples:
+ not.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="compile-decl"></a>3.3.1. Additional declarations</h3></div></div><div></div></div><p>The declaration <tt class="sexp">(COMPILE)</tt> has the
+ effect that the current form is compiled prior to execution.
+ Examples:
 </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
  (<a href="http://www.lisp.org/HyperSpec/Body/speope_locally.html" target="_top"><tt class="function">LOCALLY</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/sym_declare.html" target="_top"><tt class="function">DECLARE</tt></a> (compile)) <i class="replaceable"><tt>form</tt></i>)
 </pre></td></tr></table><p>

@@ -15,7 +15,7 @@ user-defined behavior:
  <a href="ftp://parcftp.xerox.com/pub/cl/cleanup/mail/stream-definition-by-user.mail" target="_top">STREAM-DEFINITION-BY-USER:GENERIC-FUNCTIONS</a> proposal by David N. Gray and is supported by most <a href="http://www.lisp.org" target="_top"><span><b class="command">Common Lisp</b></span></a>
  implementations currently in use.
  The <tt class="classname">GSTREAM:GENERIC-STREAM-CONTROLLER</tt>
- API is <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>-specific and is now obsolete.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="gray"></a>29.5.1. Gray streams</h3></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="clos-stream.html#fill-stream">29.5.1.1. Class <tt class="classname">EXT:FILL-STREAM</tt>.</a></span></dt></dl></div><p>This interface permits the definition of new classes of streams,
+ API is <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>-specific and is now obsolete.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="gray"></a>29.5.1. Gray streams</h3></div></div><div></div></div><p>This interface permits the definition of new classes of streams,
 and programming their behavior by defining methods for the elementary
 stream operations.  It is based on the proposal <a href="ftp://parcftp.xerox.com/pub/cl/cleanup/mail/stream-definition-by-user.mail" target="_top">STREAM-DEFINITION-BY-USER:GENERIC-FUNCTIONS</a> of David
 N. Gray to X3J13.</p><p>All symbols defined by this interface, starting with the prefix
@@ -180,48 +180,7 @@ N. Gray to X3J13.</p><p>All symbols defined by this interface, starting with the
   </p><p>The default method repeatedly calls
    <tt class="function">GRAY:STREAM-WRITE-BYTE</tt>; this is always
    sufficient if speed does not matter.</p><p>This function is a <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> extension (see
-   <a href="stream-dict.html#wr-by-seq"><tt class="function">EXT:WRITE-BYTE-SEQUENCE</tt></a>).</p></dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="fill-stream"></a>29.5.1.1. Class <a href="clos-stream.html#fill-stream" title="29.5.1.1. Class EXT:FILL-STREAM."><tt class="classname">EXT:FILL-STREAM</tt></a>.</h4></div></div><div></div></div><p>As an example of the use of <a href="clos-stream.html#gray" title="29.5.1. Gray streams"><strong class="package">“<span class="quote">GRAY</span>”</strong></a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a>s, <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>
- offers an additional class, <a href="clos-stream.html#fill-stream" title="29.5.1.1. Class EXT:FILL-STREAM."><tt class="classname">EXT:FILL-STREAM</tt></a>.  An instance of this class
- is a “<span class="quote">formatting</span>” <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a>, which makes the final
- output to the underlying stream look neat: indented and filled.
- An instance of <a href="clos-stream.html#fill-stream" title="29.5.1.1. Class EXT:FILL-STREAM."><tt class="classname">EXT:FILL-STREAM</tt></a> is created like this:
-<tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/stagenfun_make-instance.html" target="_top"><tt class="function">MAKE-INSTANCE</tt></a> '<a href="clos-stream.html#fill-stream" title="29.5.1.1. Class EXT:FILL-STREAM."><tt class="classname">EXT:FILL-STREAM</tt></a> :stream <i class="replaceable"><tt>stream</tt></i>
- [:indent symbol-or-number])</tt> where <i class="replaceable"><tt>stream</tt></i> is the target
- stream where the output actually goes
- and <i class="replaceable"><tt>symbol-or-number</tt></i> is the variable whose
- value is the integer indentation or the indentation itself.</p><p>Note that, due to buffering, one must call <a href="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html" target="_top"><tt class="function">FORCE-OUTPUT</tt></a> when
- done with the <a href="clos-stream.html#fill-stream" title="29.5.1.1. Class EXT:FILL-STREAM."><tt class="classname">EXT:FILL-STREAM</tt></a> (and before changing the indent variable).
- The former is done automatically by the macro
-<tt class="sexp">(with-fill-stream (fill stream [:indent
- symbol-or-number]) ...)</tt>.</p><div class="example"><a id="id4891906"></a><p class="title"><b>Example 29.6. Example of <a href="clos-stream.html#fill-stream" title="29.5.1.1. Class EXT:FILL-STREAM."><tt class="classname">EXT:FILL-STREAM</tt></a> usage</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(defvar *my-indent-level*)
-(with-output-to-string (out)
-  (let ((*print-right-margin* 20)
-        (*my-indent-level* 2))
-    (with-fill-stream (fill out :indent '*my-indent-level*)
-      (format fill "~%this is     some long sentence which will be broken at spaces")
-      (force-output fill)
-      (let ((*my-indent-level* 5))
-        (format fill "~%and   properly    indented to the level specified by the ~S argument which can be a sybol or an integer." :INDENT))
-      (format fill "~%Don't forget   to call ~S on it, and/or use ~S" 'force-output 'with-fill-stream))))
-"
-  this is some long
-  sentence which
-  will be broken at
-  spaces
-     and properly
-     indented to
-     the level
-     specified by
-     the :INDENT
-     argument which
-     can be a sybol
-     or an integer.
-  Don't forget to
-  call FORCE-OUTPUT
-  on it, and/or use
-  WITH-FILL-STREAM"
- </pre></td></tr></table></div></div></div>
+   <a href="stream-dict.html#wr-by-seq"><tt class="function">EXT:WRITE-BYTE-SEQUENCE</tt></a>).</p></dd></dl></div></div>
 <!--#ifdef GENERIC_STREAMS-->
 <div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="gstream"></a>29.5.2. Generic streams</h3></div></div><div></div></div><p>This interface is <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>-specific and now obsolete.  Please use
  the <a href="clos-stream.html#gray" title="29.5.1. Gray streams">Gray streams</a> interface instead.</p><p>Generic streams are user programmable streams.

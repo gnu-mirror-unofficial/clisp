@@ -10,7 +10,7 @@ first time said function is called.</p><p>The virtual machine is a stack machine
    (“<span class="quote">Lisp stack</span>”).</dd><dt><a href="vm.html" title="33.2. The virtual machine"><tt class="literal">SP</tt></a></dt><dd>a stack for other data and pointers
    (“<span class="quote">Program stack</span>”).</dd></dl></div><p>This two-stack architecture permits to save an unlimited number of
 <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> objects on the <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a> (needed for handling of <a href="http://www.lisp.org" target="_top"><span><b class="command">Common Lisp</b></span></a> <a href="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values" target="_top">multiple values</a>),
-without <a href="http://www.lisp.org/HyperSpec/Body/glo_c.html#cons" target="_top">consing[3]</a>.  Also, in a world with a compacting no-ambiguous-roots
+without consing.  Also, in a world with a compacting no-ambiguous-roots
 garbage collector, <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a> must only hold <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> objects, and <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">SP</tt></a> can
 hold all the other data belonging to a frame, which would not fit into
 <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a> without tagging/untagging overhead.</p><p>The scope of <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a> and <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">SP</tt></a> is only valid for a given function
@@ -23,12 +23,13 @@ The bytecode is designed so that outgoing arguments on the caller's
 <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a> can be shared by the caller's incoming arguments area (on the
 callee's <a href="vm.html" title="33.2. The virtual machine"><tt class="literal">STACK</tt></a>), but a virtual machine implementation may also copy
 outgoing arguments to incoming arguments instead of sharing them.</p><p>The virtual machine has a special data structure,
-<tt class="varname">values</tt>, containing the "top of stack", specially
+<tt class="literal">values</tt>, containing the "top of stack", specially
 adapted to <a href="http://www.lisp.org" target="_top"><span><b class="command">Common Lisp</b></span></a> <a href="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values" target="_top">multiple values</a>:
 </p><div class="variablelist"><dl><dt><a href="vm.html" title="33.2. The virtual machine"><tt class="varname">mv_count</tt></a></dt><dd>an unsigned integer.
   </dd><dt><a href="vm.html" title="33.2. The virtual machine"><tt class="varname">value1</tt></a></dt><dd>the first value, a <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> object.
-  If <a href="vm.html" title="33.2. The virtual machine"><tt class="varname">mv_count</tt></a> = 0, this is <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>.</dd><dt><a href="vm.html" title="33.2. The virtual machine"><tt class="varname">mv_space</tt></a></dt><dd>all values except the first one, an array of <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>
-  objects.</dd></dl></div><p>The contents of <tt class="varname">values</tt> is short-lived.
+  If <tt class="literal"><a href="vm.html" title="33.2. The virtual machine"><tt class="varname">mv_count</tt></a></tt> = 0, this is <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>.
+  </dd><dt><a href="vm.html" title="33.2. The virtual machine"><tt class="varname">mv_space</tt></a></dt><dd>all values except the first one, an array of <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>
+  objects.</dd></dl></div><p>The contents of <tt class="literal">values</tt> is short-lived.
 It does not survive a function call, not even a garbage collection.</p><p>The interpretation of some bytecode instructions depends on a
 constant, <a href="vm.html" title="33.2. The virtual machine"><tt class="varname">jmpbufsize</tt></a>.  This is a CPU-dependent number, the value of
 <tt class="varname">SYSTEM::*JMPBUF-SIZE*</tt>.  In <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a>, it is defined as

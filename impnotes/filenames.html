@@ -33,10 +33,10 @@
   translate into the appropriate platform-specific representation,
   so that on <a href="http://cygwin.com/" target="_top"><strong>Cygwin</strong></a>,
   <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html" target="_top"><tt class="function">PARSE-NAMESTRING</tt></a> "c:/gnu/clisp/")</tt>
-  returns <tt class="filename">#P"/cygdrive/c/gnu/clisp/"</tt>,
+  returns <tt class="sexp">#P"/cygdrive/c/gnu/clisp/"</tt>,
   while on <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>
   <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html" target="_top"><tt class="function">PARSE-NAMESTRING</tt></a> "/cygdrive/c/gnu/clisp/")</tt>
-  returns <tt class="filename">#P"C:/gnu/clisp/"</tt>.
+  returns <tt class="sexp">#P"C:/gnu/clisp/"</tt>.
   The initial value is <tt class="literal">"cygdrive"</tt>, you should edit
   <a href="customize.html" title="29.11. Extensions-1.11. Customizing CLISP behavior."><tt class="filename">#P"config.lisp"</tt></a> to change it.</dd>
 <!--#endif-->
