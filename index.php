@@ -46,30 +46,36 @@
 <tr><th>Our Project</th><th>Related Projects</th></tr>
 <tr valign="top"><td>
 <dl>
- <dt><a href="summary.html">What is CLISP?</a></dt>
+ <dt><strong><a href="summary.html">What is CLISP?</a></strong></dt>
   <dd>a feature-loaded implementation of a great language!</dd>
- <dt><a href="propaganda.html">The benefits of Common Lisp and CLISP</a></dt>
+ <dt><strong><a href="propaganda.html">The benefits of Common Lisp and
+   CLISP</a></strong></dt>
   <dd>why is Common Lisp such a great programming environment?</dd>
- <dt><a href="resources.html">CLISP and Common Lisp via FTP and WWW</a></dt>
+ <dt><strong><a href="resources.html">CLISP and Common Lisp via FTP and
+   WWW</a></strong></dt>
   <dd>links to CLISP sources and binaries as well as general Lisp
    information</dd>
- <dt><a href="clisp.html">CLISP manual page for Linux</a></dt>
+ <dt><strong><a href="clisp.html">CLISP manual page for
+   UN*X</a></strong></dt>
   <dd>command line options for other platforms are very similar</dd>
- <dt><a href="impnotes.html">CLISP Implementation Notes</a></dt>
+ <dt><strong><a href="impnotes.html">CLISP Implementation
+   Notes</a></strong></dt>
   <dd>How CLISP implements the ANSI standard X3.226-1994
    <cite>"Information Technology - Programming Language - Common
    Lisp"</cite>, available as the <a
    href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
    HyperSpec</a>.</dd>
- <dt><a href="clreadline.html">CLISP's line editing facilities</a></dt>
+ <dt><strong><a href="clreadline.html">CLISP's line editing
+   facilities</a></strong></dt>
   <dd>CLISP uses GNU
   <a href="http://cnswww.cns.cwru.edu/~chet/readline/rltop.html"
    >readline</a>.</dd>
- <dt><a href="clash.html">CLISP as a login shell</a></dt>
+ <dt><strong><a href="clash.html">CLISP as a login shell</a></strong></dt>
   <dd>You can use CLISP instead of
    <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
    <a href="http://hpcf.nersc.gov/software/os/shells/tcsh/">tcsh</a>!</dd>
- <dt><a href="http://sourceforge.net/projects/clisp">Project Home</a></dt>
+ <dt><strong><a href="http://sourceforge.net/projects/clisp">Project
+   Home</a></strong></dt>
   <dd><ul>
    <li><a href="http://sourceforge.net/mail/?group_id=1355">mailing
     lists</a></li>
@@ -173,14 +179,15 @@
  </dl>
  <strong>Other Projects</strong>
  <dl>
-  <dt><a href="http://cmucl.cons.org/cmucl/">CMU CL</a></dt>
+  <dt><strong><a href="http://cmucl.cons.org/cmucl/">CMU CL</a></strong></dt>
    <dd>Carnegie-Mellon University Public Domain UNIX Common Lisp</dd>
-  <dt><a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/lang/lisp/0.html">CMU Common Lisp Repository</a></dt>
+  <dt><strong><a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/lang/lisp/0.html">CMU Common Lisp Repository</a></strong></dt>
    <dd>Lots of Lisp code there!</dd>
-  <dt><a href="http://lsp.everest.com/">Lisp Server Pages</a></dt>
+  <dt><strong><a href="http://lsp.everest.com/">Lisp Server
+    Pages</a></strong></dt>
    <dd>a system implemented in Common Lisp for generating dynamic HTML
     from scripted pages.</dd>
-  <dt><a href="http://ww.telent.net/cliki/">CLiki</a></dt>
+  <dt><strong><a href="http://ww.telent.net/cliki/">CLiki</a></strong></dt>
    <dd>This site intends to provide a collection of links to and
     resources for free software implemented in Common Lisp and available
     on Unix-like systems.</dd>
