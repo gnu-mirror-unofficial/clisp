@@ -90,7 +90,8 @@
     <a href="http://www-2.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/lisp/0.html">Lisp</a></li>
    <li><a href="http://sal.kachinatech.com/">Scientific Applications on
      Linux</a> -
-    <a href="http://sal.kachinatech.com/F/1/CLISP.html">CLISP</a></li>
+    <a href="http://sal.kachinatech.com/F/1/CLISP.html">CLISP</a> and
+    <a href="http://sal.kachinatech.com/F/1/#LISP">Lisp</a></li>
    <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
  <dt><strong>Rate CLISP!</strong></dt>
