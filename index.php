@@ -12,7 +12,7 @@
  <link rel="stylesheet" href="clisp.css" type="text/css"/>
  <link rel="icon" href="clisp.png" type="image/png"/>
  <link rel="shortcut icon" href="clisp.png" type="image/png"/>
- <title>CLISP - an ANSI Common Lisp</title>
+ <title>CLISP - an ANSI Common Lisp Implementation</title>
 </head>
 
 <body>
@@ -26,7 +26,8 @@
   <a href="http://www.gnu.org">GNU</a>
   <a href="http://sourceforge.net/projects/clisp">CLISP</a>
    - an <a href="http://www.ansi.org/">ANSI</a>
-  <a href="http://www.lisp.org/">Common Lisp</a></h2>
+  <a href="http://www.lisp.org/">Common Lisp</a>
+  Implementation</h2>
 
 <p class="center">
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
