@@ -160,8 +160,8 @@
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
            >Debian GNU/Linux</a></li>
-    <li><a href="http://atrpms.physik.fu-berlin.de/name/clisp/"
-           >Red Hat Linux</a></li>
+    <li><a href="http://atrpms.physik.fu-berlin.de/name/clisp/">Red Hat</a>,
+     <a href="https://bugzilla.fedora.us/show_bug.cgi?id=843">Fedora</a></li>
     <li><a href="http://www.gentoo.org/packages/dev-lisp/clisp.html"
            >Gentoo Linux</a></li>
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
