@@ -61,7 +61,7 @@ CLASS="command"
 > version 2.31.</H2
 ><SPAN
 CLASS="date"
->Last modified: 2003-09-04<BR></SPAN
+>Last modified: 2003-09-07<BR></SPAN
 ><H3
 CLASS="author"
 ><A
@@ -62097,7 +62097,10 @@ CLASS="command"
     by John Hinsdale.</P
 ></DD
 ><DT
->netica</DT
+><A
+HREF="#netica"
+>netica</A
+></DT
 ><DD
 ><P
 ALIGN="justify"
@@ -62201,9 +62204,543 @@ CLASS="section"
 ><HR><H3
 CLASS="section"
 ><A
+NAME="netica"
+></A
+>30.2.6.1. Netica Interface</H3
+><P
+ALIGN="justify"
+>This is an interface to the
+ <A
+HREF="http://norsys.com/netica_c_api.htm"
+TARGET="_top"
+>Netica C API</A
+>.
+ The package <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"NETICA"</SPAN
+></STRONG
+> is
+ <A
+HREF="#make-pack"
+>case-sensitive</A
+>, you would write
+ <TT
+CLASS="sexp"
+>(netica:GetNodeExpectedUtils_bn ...)</TT
+>
+ when you need to call
+ <A
+HREF="http://norsys.com/onLineAPIManual/functions/GetNodeExpectedUtils_bn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GetNodeExpectedUtils_bn()</TT
+></A
+>
+</P
+><P
+ALIGN="justify"
+>Additionally, some higher level functionality is available
+ (see <TT
+CLASS="filename"
+>modules/netica/demo.lisp</TT
+> for a sample
+ usage):</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="sexp"
+>(netica:start-netica <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   :license :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Call
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/NewNeticaEnviron_ns.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NewNeticaEnviron_ns()</TT
+></A
+> and
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/InitNetica_bn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>InitNetica_bn()</TT
+></A
+>
+   and print some statistics; initialize
+   <TT
+CLASS="varname"
+>netica:*env*</TT
+>.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:check-errors <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   :env :clear :severity)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Show and, optionally,
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/ClearError_ns.html"
+TARGET="_top"
+>clear</A
+>, the errors of
+   the given <A
+HREF="http://norsys.com/onLineAPIManual/functions/ErrorSeverity_ns.html"
+TARGET="_top"
+>severity</A
+>
+   and above.  You should call this function
+   after <I
+CLASS="emphasis"
+>every</I
+> call to a Netica function.
+   Every wrapper function in this list calls it, so you do <I
+CLASS="emphasis"
+>not</I
+> need to
+   call it after a call to a wrapper function.
+</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:error-message
+   error)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Convert netica error to a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> containing
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/ErrorCategory_ns.html"
+TARGET="_top"
+>error category</A
+>,
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/ErrorSeverity_ns.html"
+TARGET="_top"
+>error severity</A
+>,
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/ErrorNumber_ns.html"
+TARGET="_top"
+>error number</A
+>,
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/ErrorMessage_ns.html"
+TARGET="_top"
+>error message</A
+>.
+</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:close-netica <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   :env :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Terminate the netica session.
+   Sets <TT
+CLASS="varname"
+>netica:*env*</TT
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> when it was closed.
+</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:make-net <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :name
+   :comment :title :env :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Make a <A
+HREF="http://norsys.com/onLineAPIManual/functions/NewNet_bn.html"
+TARGET="_top"
+>new
+    network</A
+> with a given name,
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/SetNetTitle_bn.html"
+TARGET="_top"
+>title</A
+> and
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/SetNetComment_bn.html"
+TARGET="_top"
+>comment</A
+>
+   and return it.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:net-info net)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Print some information about the net
+   (<A
+HREF="http://norsys.com/onLineAPIManual/functions/GetNetName_bn.html"
+TARGET="_top"
+>name</A
+>,
+    <A
+HREF="http://norsys.com/onLineAPIManual/functions/GetNetTitle_bn.html"
+TARGET="_top"
+>title</A
+>,
+    <A
+HREF="http://norsys.com/onLineAPIManual/functions/GetNetComment_bn.html"
+TARGET="_top"
+>comment</A
+>,
+    <A
+HREF="http://norsys.com/onLineAPIManual/functions/GetNetFileName_bn.html"
+TARGET="_top"
+>file name</A
+> and
+    <A
+HREF="http://norsys.com/onLineAPIManual/functions/GetNetNodes_bn.html"
+TARGET="_top"
+>nodes</A
+>).
+</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:make-node <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   :name :net :kind :levels :states :num-states :title :comment :parents
+   :cpt :x :y :env :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Make a <A
+HREF="http://norsys.com/onLineAPIManual/functions/NewNode_bn.html"
+TARGET="_top"
+>new
+    node</A
+> with the given name and many other parameters.
+</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:node-info node
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :header)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Print some information about the node, preceded by
+   the header.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:get-beliefs node
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :env :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://norsys.com/onLineAPIManual/functions/GetNodeBeliefs_bn.html"
+TARGET="_top"
+>Get
+    the belief vector</A
+> for the node.
+</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:enter-finding net node
+   state <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :env :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://norsys.com/onLineAPIManual/functions/EnterFinding_bn.html"
+TARGET="_top"
+>Enter a
+    finding</A
+> by
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/NodeNamed_bn.html"
+TARGET="_top"
+>node</A
+>
+   and <A
+HREF="http://norsys.com/onLineAPIManual/functions/StateNamed_bn.html"
+TARGET="_top"
+>state</A
+>
+   names.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:save-net net <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   :file :env :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://norsys.com/onLineAPIManual/functions/WriteNet_bn.html"
+TARGET="_top"
+>Write</A
+>
+   a network to a file.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:read-net file <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+   :env :verbose)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://norsys.com/onLineAPIManual/functions/ReadNet_bn.html"
+TARGET="_top"
+>Read</A
+>
+   a network from a file.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(netica:with-open-dne-file (var
+   file <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+> opts) <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> body)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://norsys.com/onLineAPIManual/functions/NewStreamFile_ns.html"
+TARGET="_top"
+>Open
+    a netica stream</A
+>, execute <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>,
+   <A
+HREF="http://norsys.com/onLineAPIManual/functions/DeleteStream_ns.html"
+TARGET="_top"
+>close the stream</A
+>
+   - just like <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_with-open-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WITH-OPEN-FILE</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="varname"
+>netica:*verbose*</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>The log <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>; the default value for
+   the <TT
+CLASS="literal"
+>:VERBOSE</TT
+> argument.
+</P
+></DD
+><DT
+><TT
+CLASS="varname"
+>netica:*license*</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>The license key provided by
+   <A
+HREF="http://norsys.com/"
+TARGET="_top"
+>Norsys</A
+>; the default value
+   for the <TT
+CLASS="literal"
+>:LICENSE</TT
+> argument.
+</P
+></DD
+><DT
+><TT
+CLASS="varname"
+>netica:*env*</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>The Netica environment object; the default value
+   for the <TT
+CLASS="literal"
+>:ENV</TT
+> argument.
+</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><HR><H3
+CLASS="section"
+><A
 NAME="dir-key"
 ></A
->30.2.6.1. Directory Access</H3
+>30.2.6.2. Directory Access</H3
 ><P
 ALIGN="justify"
 >This module provides some directory access from lisp,
@@ -62961,7 +63498,7 @@ CLASS="section"
 ><A
 NAME="regexp"
 ></A
->30.2.6.2. <A
+>30.2.6.3. <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -64216,7 +64753,7 @@ CLASS="section"
 ><A
 NAME="syscalls"
 ></A
->30.2.6.3. System Calls</H3
+>30.2.6.4. System Calls</H3
 ><P
 ALIGN="justify"
 >The <A
@@ -72768,13 +73305,7 @@ NAME="dffi-extern-func1"
 ></P
 ><P
 ALIGN="justify"
->On <A
-HREF="#ansi"
-><TT
-CLASS="varname"
->CUSTOM:*ANSI*</TT
-></A
-> <A
+>On ANSI <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
@@ -73284,11 +73815,99 @@ $ rm -r base+sort
 ><DIV
 CLASS="example"
 ><A
+NAME="ex-call-in-dll"
+></A
+><P
+><B
+>Example 30-8. Calling Lisp from <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> dynamically</B
+></P
+><P
+ALIGN="justify"
+>Create a dynamic library <TT
+CLASS="filename"
+>lispdll</TT
+>
+ (<TT
+CLASS="filename"
+>#P".dll"</TT
+> on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>,
+  <TT
+CLASS="filename"
+>#P".so"</TT
+> on <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+>)
+  with the following function:<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;typedef int (*LispFunc)(int parameter);
+int CallInFunc(LispFunc f) {
+  return f(5)+11;
+}
+</PRE
+></TD
+></TR
+></TABLE
+>
+  and call it from Lisp:
+  <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(ffi:def-call-out callout
+  (:name "CallInFunc")
+  (:library "lispdll.dll")
+  (:arguments (function-arg
+               (ffi:c-function (:arguments (number ffi:int))
+                               (:return-type ffi:int) (:language :stdc))))
+  (:return-type ffi:int)
+  (:language :stdc))
+&#62; (defun f (x) (* x 2))
+F
+&#62; (callout #'f)
+21
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+><DIV
+CLASS="example"
+><A
 NAME="dffi-gethostname"
 ></A
 ><P
 ><B
->Example 30-8. Variable size arguments:
+>Example 30-9. Variable size arguments:
   calling <A
 HREF="http://www.opengroup.org/onlinepubs/007904975/functions/gethostname.html"
 TARGET="_top"
@@ -73417,7 +74036,7 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
-> specifies that "kost names are limited to HOST_NAME_MAX bytes",
+> specifies that "host names are limited to HOST_NAME_MAX bytes",
  which is, of course, system dependent, but it appears that 256 is a
  common value.</P
 ><P
@@ -75704,7 +76323,7 @@ NAME="affi-ex-1-predefined"
 ></A
 ><P
 ><B
->Example 30-9. Using a predefined library function file</B
+>Example 30-10. Using a predefined library function file</B
 ></P
 ><P
 ALIGN="justify"
@@ -75762,7 +76381,7 @@ NAME="affi-ex-2-flibcall"
 ></A
 ><P
 ><B
->Example 30-10. Using flibcall</B
+>Example 30-11. Using flibcall</B
 ></P
 ><TABLE
 BORDER="0"
@@ -75812,7 +76431,7 @@ NAME="affi-ex-3-dynamic"
 ></A
 ><P
 ><B
->Example 30-11. Be fully dynamic, defining library bases ourselves</B
+>Example 30-12. Be fully dynamic, defining library bases ourselves</B
 ></P
 ><TABLE
 BORDER="0"
@@ -75861,7 +76480,7 @@ NAME="affi-ex-4-sample"
 ></A
 ><P
 ><B
->Example 30-12. Some sample function definitions</B
+>Example 30-13. Some sample function definitions</B
 ></P
 ><TABLE
 BORDER="0"

@@ -7687,13 +7687,7 @@ NAME="dffi-extern-func1"
 ></P
 ><P
 ALIGN="justify"
->On <A
-HREF="ansi.html"
-><TT
-CLASS="varname"
->CUSTOM:*ANSI*</TT
-></A
-> <A
+>On ANSI <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
@@ -8203,11 +8197,99 @@ $ rm -r base+sort
 ><DIV
 CLASS="example"
 ><A
+NAME="ex-call-in-dll"
+></A
+><P
+><B
+>Example 30-8. Calling Lisp from <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> dynamically</B
+></P
+><P
+ALIGN="justify"
+>Create a dynamic library <TT
+CLASS="filename"
+>lispdll</TT
+>
+ (<TT
+CLASS="filename"
+>#P".dll"</TT
+> on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>,
+  <TT
+CLASS="filename"
+>#P".so"</TT
+> on <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+>)
+  with the following function:<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;typedef int (*LispFunc)(int parameter);
+int CallInFunc(LispFunc f) {
+  return f(5)+11;
+}
+</PRE
+></TD
+></TR
+></TABLE
+>
+  and call it from Lisp:
+  <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(ffi:def-call-out callout
+  (:name "CallInFunc")
+  (:library "lispdll.dll")
+  (:arguments (function-arg
+               (ffi:c-function (:arguments (number ffi:int))
+                               (:return-type ffi:int) (:language :stdc))))
+  (:return-type ffi:int)
+  (:language :stdc))
+&#62; (defun f (x) (* x 2))
+F
+&#62; (callout #'f)
+21
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+><DIV
+CLASS="example"
+><A
 NAME="dffi-gethostname"
 ></A
 ><P
 ><B
->Example 30-8. Variable size arguments:
+>Example 30-9. Variable size arguments:
   calling <A
 HREF="http://www.opengroup.org/onlinepubs/007904975/functions/gethostname.html"
 TARGET="_top"
@@ -8336,7 +8418,7 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
-> specifies that "kost names are limited to HOST_NAME_MAX bytes",
+> specifies that "host names are limited to HOST_NAME_MAX bytes",
  which is, of course, system dependent, but it appears that 256 is a
  common value.</P
 ><P
