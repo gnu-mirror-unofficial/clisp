@@ -156,7 +156,7 @@
    <dd>a system implemented in Common Lisp for generating dynamic HTML
     from scripted pages.</dd>
   <dt><a href="http://ww.telent.net/cliki/">CLiki</a></dt>
-   <dd><p>This site intends to provide a collection of links to and
+   <dd>This site intends to provide a collection of links to and
     resources for free software implemented in Common Lisp and available
     on Unix-like systems.</dd>
  </dl>
