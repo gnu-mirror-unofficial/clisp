@@ -31,9 +31,6 @@
 <p class="center">
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
-<p class="center"><a href="wanted.html">CLISP project founder Bruno
- Haible was one of the finalists for the 2002 Free Software Awards!</a></p>
-
 <table cellspacing="5" border="15">
 <tr><th>Current version:</th><th>2.33.2 (2004-06-02)</th></tr></table>
 
@@ -75,8 +72,8 @@
           >CVS browsing</a>
     [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.bz2"
      >tarball</a>]</li>
-   <li><a href="http://sourceforge.net/people/?group_id=1355">help
-     wanted</a></li>
+   <li><a href="https://savannah.gnu.org/people/?group=clisp">help</a>
+    <a href="wanted.html">wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
    <li><a href="https://sourceforge.net/donate/?group_id=1355"
           ><strong>donate</strong></a> -
