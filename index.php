@@ -91,14 +91,15 @@
    <li><a href="ftp://ftp.ntnu.no/pub/languages/common_lisp/clisp/"
     >Norway</a></li>
   </ul></dd>
- <dt><strong><a href="http://clisp.cons.org">CLISP</a> and
-             <a href="http://www.gnu.org">GNU</a></strong></dt>
+ <dt><strong><a href="http://clisp.cons.org">CLISP</a> elsewhere</strong></dt>
   <dd><ul>
-   <li><a href="http://www.gnu.org/directory/">GNU Free Software Directory</a>
+   <li><a href="http://www.gnu.org">GNU</a>
+       <a href="http://www.gnu.org/directory/">Free Software Directory</a>
      - <a href="http://www.gnu.org/directory/clisp.html">CLISP</a> and
        <a href="http://www.gnu.org/directory/lisp.html">Lisp</a></li>
    <li><a href="http://www.gnu.org/software/clisp/">CLISP Home Pages
     Mirrored at GNU</a></li>
+   <li><a href="http://freshmeat.net/projects/clisp/">FreshMeat</a></li>
   </ul></dd>
  </dl>
 </td>
