@@ -192,6 +192,10 @@
    <dd>This site intends to provide a collection of links to and
     resources for free software implemented in Common Lisp and available
     on Unix-like systems.</dd>
+  <dt><strong><a href="http://openmcl.clozure.com/">OpenMCL</a></strong></dt>
+   <dd>an open-sourced Common Lisp implementation, derived from
+    Digitool's Macintosh Common Lisp product, running under
+    <a href="http://www.penguinppc.org">LinuxPPC</a>.</dd>
  </dl>
  </td></tr>
 </table>
