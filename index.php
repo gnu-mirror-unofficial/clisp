@@ -77,6 +77,8 @@
   <dd>You can use CLISP instead of
    <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
    <a href="http://hpcf.nersc.gov/software/os/shells/tcsh/">tcsh</a>!</dd>
+ <dt><strong><a href="faq.html">CLISP FAQ list</a></strong></dt>
+  <dd>Frequently Asked Questions about CLISP, with answers.</dd>
  <dt><strong><a href="http://sourceforge.net/projects/clisp">Project
    Home</a></strong></dt>
   <dd><ul>
