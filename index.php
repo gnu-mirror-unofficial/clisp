@@ -75,7 +75,6 @@
           >CVS browsing</a>
     [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
      >tarball</a>]</li>
-   <li><a href="http://sourceforge.net/survey/?group_id=1355">surveys</a></li>
    <!-- li><a href="http://sourceforge.net/people/?group_id=1355">help
         wanted</a></li -->
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
@@ -91,8 +90,9 @@
        >Open Source Directory</a></li>
    <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
- <dt><strong>How are <a href="http://sourceforge.net/survey/survey.php?group_id=1355&amp;survey_id=12508">you</a> using CLISP?</strong></dt>
-  <dd>Tell us your story!</dd>
+ <dt><strong>How are <a href="mailto:clisp-list@lists.sourceforge.net">you</a>
+   using CLISP?</strong></dt>
+ <dd>Tell us your story!</dd>
  </dl></td>
 <td><dl>
  <dt><strong>Home</strong></dt>
