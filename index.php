@@ -35,7 +35,7 @@
  Haible was one of the finalists for the 2002 Free Software Awards!</a></p>
 
 <table cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.31 (2003-09-01)</th></tr></table>
+<tr><th>Current version:</th><th>2.32 (2003-12-29)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
  <col width="70%"/><col width="30%"/>
@@ -78,6 +78,7 @@
    <!-- li><a href="http://sourceforge.net/people/?group_id=1355">help
         wanted</a></li -->
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
+   <li><a href="https://sourceforge.net/donate/?group_id=1355">donate</a></li>
   </ul></dd>
  <dt><strong><a href="http://clisp.cons.org">CLISP</a> elsewhere</strong></dt>
   <dd><ul>
@@ -162,8 +163,7 @@
            >Debian GNU/Linux</a></li>
     <li><a href="http://atrpms.physik.fu-berlin.de/name/clisp/">Red Hat</a>,
      <a href="https://bugzilla.fedora.us/show_bug.cgi?id=843">Fedora</a></li>
-    <li><a href="http://www.gentoo.org/packages/dev-lisp/clisp.html"
-           >Gentoo Linux</a></li>
+    <li><a href="http://packages.gentoo.org/packages/?category=dev-lisp;name=clisp">Gentoo Linux</a></li>
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
            >ALT Linux</a></li>
    </ul></dd>
