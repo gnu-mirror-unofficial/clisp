@@ -260,10 +260,6 @@
  <td align="center">
   <a href="http://www.users.dircon.co.uk/~arcangel/">http://www.users.dircon.co.uk/~arcangel/</a>
 </td></tr>
-<tr><th><a href="http://sf.net/users/marco-baringer">Marco Baringer</a></th>
- <td align="center">
-  <a href="http://www.bese.it/~segv/">http://www.bese.it/~segv/</a>
-</td></tr>
 <tr><th><a href="http://sf.net/users/"></a></th>
  <td align="center">
   <a href=""></a>
@@ -273,7 +269,7 @@
    developers.</a>
 </th></tr></table>
 
-<p class="center">
+<hr/><p class="center">
  <a href="http://petition.eurolinux.org">
   <img src="http://aful.org/images/patent_button.jpg" width="88"
        height="36" alt="no e-patents"/></a>
