@@ -70,8 +70,8 @@
  <dt><strong><a href="http://sourceforge.net/projects/clisp"
                 >SourceForge Project Home</a></strong></dt>
   <dd><ul>
-   <li><a href="http://sourceforge.net/mail/?group_id=1355"
-          >mailing lists</a></li>
+   <!-- li><a href="http://sourceforge.net/mail/?group_id=1355"
+        >mailing lists</a></li -->
    <li><a href="http://sourceforge.net/bugs/?group_id=1355"
           >bug reports</a></li>
    <li><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/clisp/"
@@ -79,8 +79,8 @@
     [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
      >tarball</a>]</li>
    <li><a href="http://sourceforge.net/survey/?group_id=1355">surveys</a></li>
-   <li><a href="http://sourceforge.net/people/?group_id=1355">help
-    wanted</a></li>
+   <!-- li><a href="http://sourceforge.net/people/?group_id=1355">help
+        wanted</a></li -->
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
   </ul></dd>
  <dt><strong><a href="http://clisp.cons.org">CLISP</a> elsewhere</strong></dt>
@@ -94,16 +94,37 @@
        >Open Source Directory</a></li>
    <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
- <dt><strong>Search
-   <a href="http://clisp.cons.org"><code>clisp.cons.org</code></a>
-   with <a href="http://www.google.com/search"
-   ><img src="http://www.google.com/logos/Logo_40wht.gif"
-   alt="Google"/></a></strong></dt>
-  <dd><form method="get" action="http://www.google.com/custom"><ins>
-   <input type="text" name="q" size="31" maxlength="255" value=""/>
-   <input type="submit" name="sa" value="Search"/>
-   <input type="hidden" name="sitesearch" value="clisp.cons.org"/>
-   </ins></form></dd>
+ <dt><strong>Search</strong></dt>
+  <dd><form method="get" action="http://www.google.com/custom">
+    <fieldset><legend><a href="http://www.google.com/search"
+                         ><img src="http://www.google.com/logos/Logo_40wht.gif"
+                               alt="Google"/></a></legend>
+     <select name="sitesearch">
+      <option value="clisp.cons.org">clisp.cons.org</option>
+      <option value="cons.org">cons.org</option>
+      <option value="gnu.org">gnu.org</option>
+      <option value="sourceforge.net">sourceforge.net</option>
+      <option value="">the whole web</option>
+     </select>
+     <input type="text" name="q" size="31" maxlength="255" value=""/>
+     <input type="submit" name="sa" value="go"/>
+   </fieldset></form>
+   <form method="post" action="http://sourceforge.net/search/">
+    <fieldset>
+     <legend><a href="http://sourceforge.net/mail/?group_id=1355"
+                >mailing list</a> archives</legend>
+     <select name="forum_id">
+      <option value="6767">clisp-list</option>
+      <option value="6768">clisp-devel</option>
+      <option value="6769">clisp-announce</option>
+     </select>
+     <input type="hidden" name="type_of_search" value="mlists"/>
+     <input type="hidden" name="group_id" value="1355"/>
+     <input type="text" size="31" name="words" value=""/>
+     <input type="submit" name="search" value="go"/><br/>
+     <input type="checkbox" name="exact" value="1" checked="checked"/>
+     Require all words?
+  </fieldset></form></dd>
  <dt><strong>How are <a href="http://sourceforge.net/survey/survey.php?group_id=1355&amp;survey_id=12508">you</a> using CLISP?</strong></dt>
   <dd>Tell us your story!</dd>
  </dl>
