@@ -448,9 +448,24 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</h3>
  <a href="impnotes.html#path-enc"><code>CUSTOM:*PATHNAME-ENCODING*</code></a>
  is set incorrectly, many filesystem accesses
  (like <code>LOAD</code>, <code>DIRECTORY</code> etc)
- will raise this error.  Note that <code>LOAD</code> will traverse
- directories mentioned in
+ will raise this error.
+ Note that <code>LOAD</code> will traverse the directories mentioned in
  <a href="#load-paths"><code>CUSTOM:*LOAD-PATHS*</code></a>.</p>
+
+<p>Note that this error may be signaled by the Print part of the
+ Read-Eval-Print Loop and <em>not</em> by the function you call.
+ E.g., if file <code>"foo"</code> contains non-ASCII characters,
+ you will see such an error when you type</p><pre>
+(with-open-file (s "foo" :direction :input :external-format charset:iso-8859-1)
+  (read-line s))
+</pre><p>If instead you type</p><pre>
+(with-open-file (s "foo" :direction :input :external-format charset:iso-8859-1)
+  (setq l (read-line s))
+  nil)
+</pre><p>CLISP will just print <code>NIL</code> and signal the error
+ when you type <code>l</code>.  You will need to set
+ <a href="impnotes.html#term-enc"><code>CUSTOM:*PATHNAME-ENCODING*</code></a>
+ or pass <a href="clisp.html#opt-enc"><code>-E</code></a> to CLISP.</p>
 
 <p><a href="#trouble">back to Troubles</a></p><hr/>
 
