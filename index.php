@@ -27,7 +27,7 @@
   <a href="http://www.lisp.org/">Common Lisp</a></h2>
 
 <p class="center">
-<img src="clisp.gif" width="48" height="48" alt="[CLISP Logo]"/></p>
+<img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table align="center" cellspacing="5" border="15">
 <tr><th>Current version:</th><th>2.27 (2001-07-17)</th>
@@ -200,7 +200,7 @@ Free Documentation License</a></p>
 
 <hr/>
 <table width="100%"><tr><td align="left">
- <a href="http://clisp.cons.org"><img src="clisp.gif" width="48"
+ <a href="http://clisp.cons.org"><img src="clisp.png" width="48"
     height="48" alt="[CLISP home]"/></a></td>
  <td align="right"><a href="http://validator.w3.org/check/referer"><img
      src="http://www.w3.org/Icons/valid-xhtml10"
