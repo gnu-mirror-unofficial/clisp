@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- <?php $headers = getallheaders(); ?> -->
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <meta http-equiv="Content-Type" content="text/html"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  <meta http-equiv="description" content="CLISP homepage"/>
  <meta http-equiv="keywords"
   content="clisp, lisp, common lisp, cl, open-source, free software"/>
@@ -163,7 +163,7 @@
  </td></tr>
 </table>
 
-<table align="cener" cellpadding="2" border="5">
+<table align="center" cellpadding="2" border="5">
 <tr><th colspan="2">Currently active developers:</th></tr>
 <tr><th><a href="http://sf.net/users/haible">Bruno Haible</a></th>
  <td align="center">
