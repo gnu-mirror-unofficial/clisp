@@ -135,7 +135,7 @@
            >Red Hat Linux</a></li>
     <li><a href="http://www.gentoo.org/packages/dev-lisp/clisp.html"
            >Gentoo Linux</a></li>
-    <li><a href="http://www.altlinux.com/?module=sisyphus&package=clisp"
+    <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
            >ALT Linux</a></li>
    </ul></dd>
  <dt><strong>*BSD ports</strong></dt>
@@ -248,8 +248,22 @@
    developers.</a>
 </th></tr></table>
 
-<p class="center"><a href="http://petition.eurolinux.org"><img
-src="patent_button.png" width="88" height="36" alt="no patents"/></a></p>
+<p class="center">
+ <a href="http://petition.eurolinux.org">
+  <img src="http://aful.org/images/patent_button.jpg" width="88"
+       height="36" alt="no e-patents"/></a>
+ <a href="http://swpat.ffii.org">
+  <img src="http://petition.eurolinux.org/logos/ffii.jpg"
+       width="70" height="59"
+       alt="FFII: Software Patents in Europe"/></a>
+ <a href="http://www.freepatents.org">
+  <img src="http://www.freepatents.org/Logo" width="117" height="85"
+       alt="Free Patents -- Protecting Innovation and Competition in the
+            IT Industry"/></a>
+ <a href="http://lpf.ai.mit.edu/">
+  <img src="http://lpf.ai.mit.edu/Images/liberty.jpg" width="77"
+       height="115" alt="League for Programming Freedom"/></a>
+</p>
 
 <hr/><p>This project is hosted by
  <a href="http://sourceforge.net">SourceForge</a>,
