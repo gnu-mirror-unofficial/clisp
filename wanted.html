@@ -51,29 +51,8 @@ members to recruit new members, with the following incentives:</p>
 <h3 id="segfault">Segmentation faults</h3>
 
 <p>Any hard crash (segmentation fault, bus error etc) is a bug in CLISP.
- Do <code>make testsuite-all</code> in your make directory to see some
- of those.</p>
+ There are no known bugs of this kind at this time.</p>
 
-<ol>
- <li id="make-list-gc"><pre>
-[6]&gt; (setq z (make-list 10000000) a nil)
-NIL
-[7]&gt; (time (progn (mapcar #'null z) a))
-Real time: 12.207998 sec.
-Run time: 5.6 sec.
-Space: 80000000 Bytes
-GC: 4, GC time: 4.5 sec.
-NIL
-[8]&gt; (gc)
-3487317
-[9]&gt; (setq z nil)
-NIL
-[10]&gt; (gc)
-
-*** - handle_fault error2 ! address = 0x1a9b2a84 not in [0x2026a000,0x20342dcc) !
-SIGSEGV cannot be cured. Fault address = 0x1a9b2a84.
-Segmentation fault</pre><p><br/></p></li>
-</ol>
 
 <h3 id="new">New features</h3>
 
@@ -89,7 +68,9 @@ Segmentation fault</pre><p><br/></p></li>
   <p><br/></p></li>
  <li>compilation to JVM<p><br/></p></li>
  <li>making FFI compatible with
-  <a href="http://uffi.med-info.com/">UFFI</a><p><br/></p></li>
+  <a href="http://uffi.med-info.com/">UFFI</a>
+  (<a href="http://www.informatimago.com/develop/lisp/"> Pascal
+   Bourguignon is working on this</a>)<p><br/></p></li>
  <li>adding GUI, e.g., via
   <a href="http://sourceforge.net/projects/wxlisp/">wxCL</a><p><br/></p></li>
  <li>adding <a href="http://www.openssl.org/">SSL</a> bindings<p><br/></p></li>
