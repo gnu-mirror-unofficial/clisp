@@ -163,6 +163,8 @@
     <li><a href="http://packages.gentoo.org/packages/?category=dev-lisp;name=clisp">Gentoo Linux</a></li>
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
            >ALT Linux</a></li>
+    <li><a href="http://archlinux.org/packages.php?id=4178">Arch Linux</a></li>
+    <li><a href="http://www.slackware.com/pb/searchpkg.php?v=current&string=clisp">Slackware</a></li>
    </ul></dd>
  <dt><strong>*BSD ports</strong></dt>
   <dd><ul>
@@ -277,10 +279,10 @@
   <img src="http://petition.eurolinux.org/logos/ffii.jpg"
        width="70" height="59"
        alt="FFII: Software Patents in Europe"/></a>
- <a href="http://www.freepatents.org">
+ <!-- a href="http://www.freepatents.org">
   <img src="http://www.freepatents.org/Logo" width="117" height="85"
        alt="Free Patents -- Protecting Innovation and Competition in the
-            IT Industry"/></a>
+            IT Industry"/></a-->
  <a href="http://lpf.ai.mit.edu/">
   <img src="http://lpf.ai.mit.edu/Images/liberty.jpg" width="77"
        height="115" alt="League for Programming Freedom"/></a>
