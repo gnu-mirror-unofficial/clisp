@@ -85,6 +85,12 @@
        <a href="http://www.gnu.org/directory/">Free Software Directory</a>
      - <a href="http://www.gnu.org/directory/clisp.html">CLISP</a> and
        <a href="http://www.gnu.org/search/fsd-search.py?q=lisp">Lisp</a></li>
+   <li><a href="http://www-2.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/0.html">CMU Artificial Intelligence Repository</a>
+    - <a href="http://www-2.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/lisp/impl/clisp/0.html">CLISP</a> and
+    <a href="http://www-2.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/lisp/0.html">Lisp</a></li>
+   <li><a href="http://sal.kachinatech.com/">Scientific Applications on
+     Linux</a> -
+    <a href="http://sal.kachinatech.com/F/1/CLISP.html">CLISP</a></li>
    <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
  <dt><strong>Rate CLISP!</strong></dt>
