@@ -463,8 +463,10 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</h3>
      ><code>*PRINT-CIRCLE*</code></a> is <code>NIL</code>.
   Just set <code>*PRINT-CIRCLE*</code> to <code>T</code>.</li>
  <li>You will always get a stack overflow on infinite recursion.</li>
- <li>Some simple functions (like Ackerman's) recurse more than you
-  expect and can run out of stack on relatively small inputs.</li>
+ <li>Some simple functions (like
+  <a href="http://en.wikipedia.org/wiki/Ackermann_function">Ackermann's</a>)
+  recurse more than you might expect and can run out of stack on
+  relatively small inputs.</li>
  <li>Compiled code uses less stack (and memory) and is faster.</li>
  <li>If you really do need more Lisp stack, you can increase it by
   telling CLISP to <a href="clisp.html#opt-memsize">pre-allocate more
