@@ -71,6 +71,20 @@
   </ul></dd>
 </dl>
 
+<h2>CLISP Performance</h2>
+
+<p>CLISP compares well with other ANSI CL implementations with respect
+to performance in most areas, such as CLOS, I/O, lists, integer
+arithmetics (CLISP's bignum performance is better than that of most
+other CL implementations).
+The worst performance CLISP exhibits is in the area of floating point
+arithmetics.
+While showing nothing spectacularly bad and easily outperforming Java,
+Perl, TCL and any Scheme interpreter, CLISP is slower than another
+open-source CL implementation, <a href="http://www.cons.org/cmucl">CMU
+CL</a>, which outperforms C and FORTRAN.  If your code is heavily
+numeric, you might prefer CMUCL, otherwise CLISP is a wise choice.</p>
+
 <hr/>
 <table width="100%"><tr><td align="left">
  <a href="http://clisp.cons.org"><img src="clisp.png" width="48"
