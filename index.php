@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- <?php $headers = getallheaders(); ?> -->
@@ -55,20 +56,20 @@
  <dt><a href="clisp.html">CLISP manual page for Linux</a></dt>
   <dd>command line options for other platforms are very similar</dd>
  <dt><a href="impnotes.html">CLISP Implementation Notes</a></dt>
-  <dd>How CLISP implements the ANSI standard</dd>
+  <dd>How CLISP implements the ANSI standard X3.226-1994
+   <cite>"Information Technology - Programming Language - Common
+   Lisp"</cite>, available as the <a
+   href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
+   HyperSpec</a>.</dd>
  <dt><a href="clreadline.html">CLISP's line editing facilities</a></dt>
-  <dd>CLISP uses GNU readline</dd>
+  <dd>CLISP uses GNU
+  <a href="http://cnswww.cns.cwru.edu/~chet/readline/rltop.html"
+   >readline</a>.</dd>
  <dt><a href="clash.html">CLISP as a login shell</a></dt>
   <dd>You can use CLISP instead of
    <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
    <a href="http://hpcf.nersc.gov/software/os/shells/tcsh/">tcsh</a>!</dd>
- <dt><a href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
-     HyperSpec</a></dt>
-  <dd>the HTML version of the ANSI standard X3.226-1994
-   <cite>"Information Technology - Programming Language - Common
-   Lisp"</cite></dd>
- <dt><a href="http://sourceforge.net/projects/clisp">Project
-     Home</a></dt>
+ <dt><a href="http://sourceforge.net/projects/clisp">Project Home</a></dt>
   <dd><ul>
    <li><a href="http://sourceforge.net/mail/?group_id=1355">mailing
     lists</a></li>
@@ -76,9 +77,8 @@
     reports</a></li>
    <li><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/clisp">CVS
     browsing</a>
-    [<a
-    href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
-    >tarball</a>]</li>
+    [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
+     >tarball</a>]</li>
    <li><a href="http://sourceforge.net/survey/?group_id=1355">surveys</a></li>
    <li><a href="http://sourceforge.net/project/showfiles.php?group_id=1355"
           >files released</a></li>
