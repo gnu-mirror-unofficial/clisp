@@ -109,6 +109,8 @@
    <li><a href="http://www.gnu.org/software/clisp/">CLISP Home Pages
     Mirrored at GNU</a></li>
    <li><a href="http://freshmeat.net/projects/clisp/">FreshMeat</a></li>
+   <li><a href="http://www.opensourcedirectory.org/projects/clisp/"
+       >Open Source Directory</a></li>
   </ul></dd>
  <dt><strong>Search
    <a href="http://clisp.cons.org"><code>clisp.cons.org</code></a>
