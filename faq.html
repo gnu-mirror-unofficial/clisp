@@ -161,6 +161,7 @@ moved it here.</p>
  <li><a href="#ide">where is the IDE?</a></li>
  <li><a href="#opt">what are the command line arguments?</a></li>
  <li><a href="#enc-err">invalid byte #x94 in CHARSET:ASCII conversion</a></li>
+ <li><a href="#rl-tab">Display all 1259 possibilities? (y or n)</a></li>
 </ol>
 <hr/>
 
@@ -191,6 +192,19 @@ moved it here.</p>
  <a href="impnotes.html#extfmt">STREAM-EXTERNAL-FORMAT</a>.
  The default is described in
  <a href="clisp.html#opt-enc">The Fine Manual</a>.</p>
+
+<p><a href="#run">back to Running</a></p><hr/>
+
+<h3 id="rl-tab">Display all 1259 possibilities? (y or n)</h3>
+
+<p><a href="http://clisp.cons.org">CLISP</a> uses
+ <a href="http://cnswww.cns.cwru.edu/~chet/readline/rltop.html">GNU
+  readline</a> for command line editing and
+ <a href="clisp.html#completion">completion</a>.
+ You get this "Display all 1259 possibilities" message (and sometimes
+ many screens of symbols) when you hit <code>TAB</code> too many times.
+ <a href="clisp.html#opt-ilisp">You can turn this feature off</a>
+ if you are using Emacs.</p>
 
 <p><a href="#run">back to Running</a></p><hr/>
 
