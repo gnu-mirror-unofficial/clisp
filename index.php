@@ -33,7 +33,7 @@
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table align="center" cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.27 (2001-07-17)</th>
+<tr><th>Current version:</th><th>2.28 (2002-03-03)</th>
 <td>sources
  <a href="ftp://cvs2.cons.org/pub/lisp/clisp/source/latest/">FTP</a>/
  <a href="http://cvs2.cons.org/ftp-area/clisp/source/latest/">HTTP</a></td>
@@ -61,7 +61,7 @@
    UN*X</a></strong></dt>
   <dd>command line options for other platforms are very similar</dd>
  <dt><strong><a href="impnotes.html">CLISP Implementation
-   Notes</a></strong></dt>
+   Notes</a> <a href="impnotes/">[TOC]</a></strong></dt>
   <dd>How CLISP implements the <a href="http://www.ansi.org/">ANSI</a>
    standard <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+X3%2E226%2D1994">X3.226-1994</a>
    <cite>"Information Technology - Programming Language - Common
