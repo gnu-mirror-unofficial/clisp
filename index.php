@@ -31,6 +31,9 @@
 <p class="center">
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
+<p class="center"><a href="wanted.html">CLISP project founder Bruno
+ Haible was one of the finalists for the 2002 Free Software Awards!</a></p>
+
 <table cellspacing="5" border="15">
 <tr><th>Current version:</th><th>2.30 (2002-09-15)</th></tr></table>
 
