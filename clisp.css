@@ -1,6 +1,11 @@
-/* to reduce the whitespace in the implotes.html */
+/* CLISP web pages stylesheets
+   Copyright (C) 2001 by Sam Steingold <sds@gnu.org>
+   Covered by the GNU GPL <http://www.gnu.org/copyleft/gpl.html> */
+
+/* reduce the whitespace (see also impnotes.css) */
 li p { margin: 0pt; }
 td p { margin: 0pt; }
+dd p { margin: 0pt }
 
 h1,h2,h3,h4,h5,h6,p.center {
   text-align: center;
