@@ -173,11 +173,11 @@
     <li><a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/lang/clisp/">OpenBSD</a></li>
    </ul></dd>
  <dt><strong><a href="http://fink.sourceforge.net/">Fink</a> -
-   Unix software for your Mac</strong></dt>
+   Unix software for Mac</strong></dt>
  <dd><a href="http://fink.sourceforge.net/pdb/package.php/clisp"
         >CLISP Package</a></dd>
- <dt><strong><a href="http://cygwin.com/">Cygwin</a></strong> -
-  Linux-like environment for Windows</dt>
+ <dt><strong><a href="http://cygwin.com/">Cygwin</a> -
+   Unix environment for Windows</strong></dt>
  <dd><a href="http://www.cygwin.com/packages/clisp/">CLISP Package</a></dd>
  <dt><strong>AIX binaries</strong></dt>
   <dd><a href="http://aixpdslib.seas.ucla.edu/packages/clisp.html"
