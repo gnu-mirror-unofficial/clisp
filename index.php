@@ -202,11 +202,10 @@
 <p class="center"><a href="http://petition.eurolinux.org"><img
 src="patent_button.png" width="88" height="36" alt="no patents"/></a></p>
 
-<hr/>
-<p>This project is hosted by <a href="http://sourceforge.net"><img
-src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=1" width="88"
-height="31" alt="SourceForge Logo"/></a>, which is, in turn,
-supported by <a href="http://www.vasoftware.com">VA Software</a>.</p>
+<hr/><p>This project is hosted by
+ <a href="http://sourceforge.net">SourceForge</a>,
+ which is, in turn, supported by
+ <a href="http://www.vasoftware.com">VA Software</a>.</p>
 
 <p>This project is <strong>NOT</strong> supported by these or any other
 company or organization.</p>
@@ -219,6 +218,9 @@ Free Documentation License</a></p>
 <table width="100%"><tr><td align="left">
  <a href="http://clisp.cons.org"><img src="clisp.png" width="48"
     height="48" alt="[CLISP home]"/></a></td>
+ <td align="right"><a href="http://sourceforge.net"><img
+     src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+     width="125" height="37" alt="SourceForge Logo"/></a></td>
  <td align="right"><a href="http://validator.w3.org/check/referer"><img
      src="http://www.w3.org/Icons/valid-xhtml10"
      alt="Valid XHTML" height="31" width="88"/></a>
