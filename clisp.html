@@ -12,7 +12,7 @@
  <title>CLISP manual page</title>
 </head>
 <body>
-<h1>CLISP manual page</h1>
+<h1>CLISP manual page (version 2.30)</h1>
 
 <ul>
 <li><a href="#name">Name</a></li>
@@ -89,8 +89,12 @@ more efficiently.</p>
 <dd>Displays a help message on how to use <code>clisp</code>.<p/></dd>
 
 <dt id="opt-version"><strong><code>--version</code></strong></dt>
-<dd>Displays the <code>clisp</code> version number, as given by the
- function call <code>(<a href="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html">lisp-implementation-version</a>)</code>.<p/></dd>
+<dd>Displays the <code>clisp</code> version number,
+ as given by the function call
+ <code>(<a href="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html"
+           >lisp-implementation-version</a>)</code>
+ and the values of the variable
+ <a href="impnotes.html#features"><code>*features*</code></a>.<p/></dd>
 
 <dt id="opt-license"><strong><code>--license</code></strong></dt>
 <dd>Displays a summary of the licensing information, the
@@ -119,7 +123,8 @@ symbol-macro <code>*lib-directory*</code>.
 <dd>Specifies the initial memory image.
  This must be a memory dump produced by the
  <code><a href="impnotes.html#image">saveinitmem</a></code> function.
- It may have been compressed using GNU gzip.
+ It may have been compressed using GNU
+ <a href="http://www.gzip.org/">gzip</a>.
 <p/></dd>
 
 <dt id="opt-memsize"><strong><code>-m</code>
@@ -135,7 +140,7 @@ symbol-macro <code>*lib-directory*</code>.
  </ul>
  Default is 2 megabytes.
  The argument is constrained above 100 KB.
--- This version of <code>clisp</code>
+This version of <code>clisp</code>
 eventually uses the entire <var>memsize</var>.
 <p/></dd>
 
@@ -182,7 +187,8 @@ which depends on the environment variables <code>LC_ALL</code>,
      ><code>*misc-encoding*</code></a>.</dd>
   <dt><var>blank</var>,</dt>
    <dd>affecting all of the above.</dd></dl>
- Note that these values cannot be saved in a memory image.
+ <strong>Note</strong> that these values cannot be saved in a
+ <a href="impnotes.html#image">memory image</a>.
  You have to use the <a href="#opt-norc">init file</a>
  to set them on startup.<p/></dd>
 
@@ -361,7 +367,7 @@ EOF (Ctrl-D)
    name functions.</li>
   <li>If you are in the "filename position" (inside a string
    after <code>#P</code>), the completion is done across file names,
-   <a href="http://www.gnu.org/software/bash/">bash</a>-style.
+   <a href="http://www.gnu.org/software/bash/">bash</a>-style.</li>
   <li>If you have not started typing the next symbol (i.e., you are at
    a whitespace), the current function or macro is
    <a href="http://www.lisp.org/HyperSpec/Body/fun_describe.html"
@@ -381,7 +387,7 @@ EOF (Ctrl-D)
 </dt><dd>main executable (runtime)<p/></dd>
 
 <dt><code>lispinit.mem</code></dt>
-<dd>initial memory image<p/></dd>
+<dd>initial <a href="impnotes.html#image">memory image</a><p/></dd>
 
 <dt><code>config.lisp</code></dt>
 <dd>site-dependent configuration<p/></dd>
@@ -437,7 +443,8 @@ EOF (Ctrl-D)
 
  <dt><code>HOME</code> and <code>USER</code> (Unix implementation only)</dt>
   <dd>are used for determining the value of the function
-   <code><a href="http://www.lisp.org/HyperSpec/Body/fun_user-homedir-pathname.html">user-homedir-pathname</a></code><p/></dd>
+   <code><a href="http://www.lisp.org/HyperSpec/Body/fun_user-homedir-pathname.html"
+            >user-homedir-pathname</a></code><p/></dd>
 
  <dt><code>SHELL</code> (Unix implementation only)</dt>
   <dd>is used to find the interactive command interpreter called by
