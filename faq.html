@@ -444,6 +444,14 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</h3>
  The default is described in
  <a href="clisp.html#opt-enc">The Fine Manual</a>.</p>
 
+<p>This may also be caused by filesystem access. If your
+ <a href="impnotes.html#path-enc"><code>CUSTOM:*PATHNAME-ENCODING*</code></a>
+ is set incorrectly, many filesystem accesses
+ (like <code>LOAD</code>, <code>DIRECTORY</code> etc)
+ will raise this error.  Note that <code>LOAD</code> will traverse
+ directories mentioned in
+ <a href="#load-paths"><code>CUSTOM:*LOAD-PATHS*</code></a>.</p>
+
 <p><a href="#trouble">back to Troubles</a></p><hr/>
 
 <h3 id="rl-tab">Display all 1259 possibilities? (y or n)</h3>
