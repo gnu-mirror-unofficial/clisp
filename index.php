@@ -158,14 +158,15 @@
  <dt><strong><a href="http://www.linux.org">Linux</a> packages</strong></dt>
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
-           >Debian GNU/Linux</a></li>
-    <li><a href="http://atrpms.net/name/clisp/">Red Hat Linux</a>,
+           >Debian</a></li>
+    <li><a href="http://atrpms.net/name/clisp/">Red Hat</a>,
      <a href="https://bugzilla.fedora.us/show_bug.cgi?id=843">Fedora</a></li>
-    <li><a href="http://www.novell.com/products/linuxpackages/professional/clisp.html">SuSE Linux</a></li>
-    <li><a href="http://packages.gentoo.org/packages/?category=dev-lisp;name=clisp">Gentoo Linux</a></li>
+    <li><a href="http://www.novell.com/products/linuxpackages/professional/clisp.html">SuSE</a></li>
+    <li><a href="http://packages.gentoo.org/packages/?category=dev-lisp;name=clisp">Gentoo</a></li>
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
-           >ALT Linux</a></li>
-    <li><a href="http://archlinux.org/packages.php?id=4178">Arch Linux</a></li>
+           >ALT</a></li>
+    <li><a href="http://archlinux.org/packages.php?id=4178">Arch</a></li>
+    <li><a href="http://www.mandrakesoft.com/products/101/powerpack-plus/packagesDVD?p=media-main-clisp-2.33.2-1mdk.i586.rpm.html">Mandrake</a></li>
     <li><a href="http://www.slackware.com/pb/searchpkg.php?v=current&amp;string=clisp">Slackware</a></li>
    </ul></dd>
  <dt><strong><a href="http://www.bsd.org/">*BSD</a> ports</strong></dt>
