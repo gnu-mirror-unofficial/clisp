@@ -169,7 +169,7 @@
  <dt><strong>*BSD ports</strong></dt>
   <dd><ul>
     <li><a href="http://www.freshports.org/lang/clisp/">FreeBSD</a></li>
-    <li><a href="ftp://ftp.netbsd.org/pub/NetBSD/packages/pkgsrc/lang/clisp/README.html">NetBSD</a></li>
+    <li><a href="http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/lang/clisp/">NetBSD</a></li>
     <li><a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/lang/clisp/">OpenBSD</a></li>
    </ul></dd>
  <dt><strong><a href="http://fink.sourceforge.net/">Fink</a> -
