@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- <?php $headers = getallheaders(); ?> -->
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -32,11 +32,12 @@
 <p class="center">
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
-<table align="center" cellspacing="5" border="15">
+<table cellspacing="5" border="15">
 <tr><th>Current version:</th><th>2.28 (2002-03-03)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
-<tr><th>About CLISP</th><th>Get CLISP</th></tr>
+ <col width="70%"/><col width="30%"/>
+ <thead><tr><th>About CLISP</th><th>Get CLISP</th></tr></thead>
 <tr valign="top"><td><dl>
  <dt><strong><a href="summary.html">What is CLISP?</a></strong></dt>
   <dd>a feature-loaded implementation of a great language!</dd>
@@ -45,6 +46,23 @@
   <dd>why is ANSI Common Lisp such a great programming environment?</dd>
  <dt><strong><a href="clisp.html">CLISP manual page for UN*X</a></strong></dt>
   <dd>command line options for other platforms are very similar</dd>
+ <dt><strong><a href="impnotes.html">CLISP Implementation
+   Notes</a> <a href="impnotes/">[TOC]</a></strong></dt>
+  <dd>How CLISP implements the <a href="http://www.ansi.org/">ANSI</a>
+   standard <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+X3%2E226%2D1994">X3.226-1994</a>
+   <cite>"Information Technology - Programming Language - Common
+    Lisp"</cite>, available as the
+   <a href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
+    HyperSpec</a>.</dd>
+ <dt><strong><a href="clreadline.html">CLISP's line editing
+   facilities</a></strong></dt>
+  <dd>CLISP uses GNU
+   <a href="http://cnswww.cns.cwru.edu/~chet/readline/rltop.html"
+      >readline</a>.</dd>
+ <dt><strong><a href="clash.html">CLISP as a login shell</a></strong></dt>
+  <dd>You can use CLISP instead of
+   <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
+   <a href="http://hpcf.nersc.gov/software/os/shells/tcsh/">tcsh</a>!</dd>
  <dt><strong><a href="resources.html">Common Lisp on the Web</a></strong></dt>
   <dd>information and software</dd>
  <dt><strong><a href="faq.html">CLISP FAQ list</a></strong></dt>
@@ -125,20 +143,20 @@
  <dt><strong>Debian packages</strong></dt>
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
-        >http://packages.debian.org/unstable/interpreters/clisp.html</a></li>
+           >unstable</a> (current)</li>
     <li><a href="http://packages.debian.org/stable/interpreters/clisp.html"
-          >http://packages.debian.org/stable/interpreters/clisp.html</a></li>
+           >stable</a> (obsolete)</li>
    </ul></dd>
  <dt><strong><a href="http://fink.sourceforge.net/">Fink</a> -
    Unix software for your Mac</strong></dt>
   <dd><a href="http://fink.sourceforge.net/pdb/package.php/clisp"
-              >http://fink.sourceforge.net/pdb/package.php/clisp</a></dd>
+              >Package CLISP</a></dd>
  <dt><strong>AIX binaries</strong></dt>
   <dd><a href="http://aixpdslib.seas.ucla.edu/packages/clisp.html"
-              >http://aixpdslib.seas.ucla.edu/packages/clisp.html</a></dd>
+              >UCLA School of Engineering &amp; Applied Science</a></dd>
 </dl></td></tr></table>
 
-<table align="center" cellpadding="2" border="5">
+<table cellpadding="2" border="5">
 <tr><th colspan="2">Currently active developers:</th></tr>
 <tr><th><a href="http://sf.net/users/haible">Bruno Haible</a></th>
  <td align="center">
