@@ -74,7 +74,9 @@ NIL
 SIGSEGV cannot be cured. Fault address = 0x1a9b2a84.
 Segmentation fault</pre></li>
  <li>SAFETY&lt;=1 builds ==&gt; broken TAB: segfault or SP/program stack
-  overflow instead of a completion</li>
+  overflow instead of a completion
+  (<a href="http://sourceforge.net/mailarchive/message.php?msg_id=3599900"
+      >details</a>)</li>
  <li>GC should make reallocated objects (strings and instances, see
   <code>reallocate_small_string</code> in <code>spvw_typealloc.d</code>
   and <code>CLOS::%CHANGE-CLASS</code> in <code>record.d</code>) into
