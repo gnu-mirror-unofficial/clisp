@@ -44,7 +44,8 @@
    CLISP</a></strong></dt>
   <dd>why is ANSI Common Lisp such a great programming environment?</dd>
  <dt><strong><a href="clisp.html">CLISP manual page for UN*X</a></strong></dt>
-  <dd>command line options for other platforms are very similar</dd>
+  <dd>command line options for other platforms are very similar (see
+   <code>clisp.html</code> in your build directory or binary distribution)</dd>
  <dt><strong><a href="impnotes.html">CLISP Implementation
    Notes</a> <a href="impnotes/">[TOC]</a></strong></dt>
   <dd>How CLISP implements the <a href="http://www.ansi.org/">ANSI</a>
