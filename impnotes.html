@@ -61,7 +61,7 @@ CLASS="command"
 > version 2.31.</H2
 ><SPAN
 CLASS="date"
->Last modified: 2003-09-13<BR></SPAN
+>Last modified: 2003-09-17<BR></SPAN
 ><H3
 CLASS="author"
 ><A
@@ -6261,15 +6261,18 @@ CLASS="constant"
 ></A
 >
  and, if this is the case, returns its value and index in the argument
- list as multiple values, otherwise returns <A
+ list as <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>, otherwise returns <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
->.
-</P
+>.</P
 ></DIV
 ><DIV
 CLASS="section"
@@ -35622,7 +35625,20 @@ TARGET="_top"
 CLASS="function"
 >FILE-POSITION</TT
 ></A
-> works on any buffered file stream.
+> works on any <A
+HREF="#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_file-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FILE-STREAM</TT
+></A
+>.
   When a <SPAN
 CLASS="keysym"
 >#\Newline</SPAN
@@ -35899,6 +35915,15 @@ CLASS="varname"
 >CUSTOM:*DEFAULT-FILE-ENCODING*</TT
 ></A
 >.
+    This argument determines how the lisp <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+> data is
+   converted to/from the 8-bit bytes that the underlying OS uses.
   </P
 ></DD
 ><DT
@@ -35933,6 +35958,16 @@ CLASS="constant"
 CLASS="constant"
 >:DEFAULT</TT
 >.
+    Have <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> manage an internal buffer for input or output (in
+    addition to the buffering that might be used by the underlying OS).
+    Buffering is a known general technique to significantly speed up i/o.
   <P
 ></P
 ><UL
@@ -35952,15 +35987,16 @@ HREF="#pipe"
 >, <TT
 CLASS="constant"
 >:DEFAULT</TT
-> is
-    equivalent to <A
+> is equivalent to
+    <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
->;</P
+>; it you are transmitting a lot of data then using buffering
+    will significantly speed up your i/o;</P
 ></LI
 ><LI
 ><P
@@ -58963,7 +58999,19 @@ CLASS="function"
 >LET*</TT
 ></A
 >, respectively,
- except that they can bind places, even places with multiple values.
+ except that they can bind <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
+TARGET="_top"
+>place</A
+>s, even <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
+TARGET="_top"
+>place</A
+>s with <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>.
  Example:
 
 <TABLE
@@ -59107,7 +59155,11 @@ CLASS="function"
 ></A
 >) which
  collect objects given to it into lists, which are then returned as
- multiple values.  E.g.,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>.  E.g.,
 
 <TABLE
 BORDER="0"
@@ -59132,7 +59184,11 @@ CLASS="sexp"
 <TT
 CLASS="sexp"
 >(0 2 4 6 8)</TT
-> as multiple values.
+> as <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>.
 </P
 ></DIV
 ><DIV
@@ -70009,7 +70065,7 @@ CLASS="constant"
 CLASS="type"
 >extern</SPAN
 >
-   declarations are not <I
+   declarations are <I
 CLASS="emphasis"
 >not</I
 > written; you are encouraged to use
@@ -74128,7 +74184,11 @@ CLASS="constant"
 > and <TT
 CLASS="constant"
 >:IN-OUT</TT
-> parameters are returned as multiple values
+> parameters are returned as <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>
       (gethostname 256)
     (if (zerop success) name
 	(error ...)))) ;; <A
@@ -78069,7 +78129,11 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >A convenience function for looking up a port given
-   the service name.  It returns the servent struct as multiple values
+   the service name.  It returns the servent struct as <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>
    (name, list of aliases, port, protocol) for the given
    <TT
 CLASS="replaceable"
@@ -83530,9 +83594,13 @@ TARGET="_top"
 CLASS="command"
 >Common Lisp</B
 ></A
-> multiple
-values), without consing.  Also, in a world with a compacting
-no-ambiguous-roots garbage collector, <A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>),
+without consing.  Also, in a world with a compacting no-ambiguous-roots
+garbage collector, <A
 HREF="#vm"
 ><TT
 CLASS="literal"
@@ -83545,22 +83613,21 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->
-objects, and <A
+> objects, and <A
 HREF="#vm"
 ><TT
 CLASS="literal"
 >SP</TT
 ></A
-> can hold all the other data belonging to a frame,
-which would not fit into <A
+> can
+hold all the other data belonging to a frame, which would not fit into
+<A
 HREF="#vm"
 ><TT
 CLASS="literal"
 >STACK</TT
 ></A
-> without tagging/untagging
-overhead.</P
+> without tagging/untagging overhead.</P
 ><P
 ALIGN="justify"
 >The scope of <A
@@ -83647,7 +83714,11 @@ TARGET="_top"
 CLASS="command"
 >Common Lisp</B
 ></A
-> multiple values:
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>:
 <P
 ></P
 ><DIV
@@ -88799,7 +88870,14 @@ CLASS="replaceable"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->Destructure a proper list.</TD
+>Destructure a proper <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+>.</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
@@ -88919,7 +88997,14 @@ CLASS="replaceable"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->Destructure a proper or dotted list.</TD
+>Destructure a proper or dotted <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+>.</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
@@ -89277,7 +89362,11 @@ CLASS="section"
 ><A
 NAME="instr-mulval"
 ></A
->33.5.9. Instructions for multiple values</H2
+>33.5.9. Instructions for <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+></H2
 ><DIV
 CLASS="informaltable"
 ><A
@@ -89575,7 +89664,11 @@ CLASS="sexp"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->Convert multiple values into a list.</TD
+>Convert <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+> into a list.</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
@@ -89604,7 +89697,18 @@ CLASS="sexp"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->Convert a list into multiple values.</TD
+>Convert a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+> into <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_m.html#multiple_values"
+TARGET="_top"
+>multiple values</A
+>.</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"

@@ -2947,7 +2947,20 @@ TARGET="_top"
 CLASS="function"
 >FILE-POSITION</TT
 ></A
-> works on any buffered file stream.
+> works on any <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_file-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FILE-STREAM</TT
+></A
+>.
   When a <SPAN
 CLASS="keysym"
 >#\Newline</SPAN
@@ -3224,6 +3237,15 @@ CLASS="varname"
 >CUSTOM:*DEFAULT-FILE-ENCODING*</TT
 ></A
 >.
+    This argument determines how the lisp <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+> data is
+   converted to/from the 8-bit bytes that the underlying OS uses.
   </P
 ></DD
 ><DT
@@ -3258,6 +3280,16 @@ CLASS="constant"
 CLASS="constant"
 >:DEFAULT</TT
 >.
+    Have <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> manage an internal buffer for input or output (in
+    addition to the buffering that might be used by the underlying OS).
+    Buffering is a known general technique to significantly speed up i/o.
   <P
 ></P
 ><UL
@@ -3277,15 +3309,16 @@ HREF="shell.html#pipe"
 >, <TT
 CLASS="constant"
 >:DEFAULT</TT
-> is
-    equivalent to <A
+> is equivalent to
+    <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
->;</P
+>; it you are transmitting a lot of data then using buffering
+    will significantly speed up your i/o;</P
 ></LI
 ><LI
 ><P
