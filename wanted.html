@@ -21,9 +21,9 @@
 <p class="center"><big><strong><cite>"Bruno Haible (known for his work
  on GNU CLISP)"</cite></strong>!</big></p>
 
-<h2>Now it is your chance to get the next Free Software Award!</h2>
+<h2>Now it is your chance to win the next Free Software Award!</h2>
 
-<p>The CLISP project is looking for an excellent C hacker who can handle
+<p>The CLISP project is looking for excellent C hackers who can handle
  some problems in the current
  <a href="http://sourceforge.net/cvs/?group_id=1355">development
  sources</a>.</p>
@@ -53,10 +53,10 @@ members to recruit new members, with the following incentives:</p>
 <p>Any hard crash (segmentation fault, bus error etc) is a bug in CLISP.</p>
 
 <ol>
- <li>edit the initialization form for <code>*DOCUMENTATION*</code>
+ <li id="weak">edit the initialization form for <code>*DOCUMENTATION*</code>
   in <code>src/init.lisp</code> to make it a <strong>weak</strong> hash
-  table, and CLISP will crash during build;</li>
- <li><pre>
+  table, and CLISP will crash during build;<p><br/></p></li>
+ <li id="make-list-gc"><pre>
 [6]&gt; (setq z (make-list 10000000) a nil)
 NIL
 [7]&gt; (time (progn (mapcar #'null z) a))
@@ -73,28 +73,36 @@ NIL
 
 *** - handle_fault error2 ! address = 0x1a9b2a84 not in [0x2026a000,0x20342dcc) !
 SIGSEGV cannot be cured. Fault address = 0x1a9b2a84.
-Segmentation fault</pre></li>
- <li>SAFETY&lt;=1 builds ==&gt; broken TAB: segfault or SP/program stack
-  overflow instead of a completion
+Segmentation fault</pre><p><br/></p></li>
+ <li id="completion">SAFETY&lt;=1 builds ==&gt; broken TAB: segfault
+  or SP/program stack overflow instead of a completion
   (<a href="http://sourceforge.net/mailarchive/message.php?msg_id=3599900"
-      >details</a>)</li>
- <li>GC should make reallocated objects (strings and instances, see
-  <code>reallocate_small_string</code> in <code>spvw_typealloc.d</code>
-  and <code>CLOS::%CHANGE-CLASS</code> in <code>record.d</code>) into
-  regular objects.  <code>spvw_garcol.d:1.47</code> did that, but this
-  lead to a crash in the test suite case that now just fails</li>
+      >details</a>)<p><br/></p></li>
+ <li id="unrealloc">GC should make reallocated objects (strings and
+  instances, see <code>reallocate_small_string</code>
+  in <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/spvw_typealloc.d"><code>src/spvw_typealloc.d</code></a>
+  and <code>CLOS::%CHANGE-CLASS</code>
+  in <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/record.d"><code>src/record.d</code></a>) into regular objects.
+  <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/spvw_garcol.d?rev=1.47"><code>src/spvw_garcol.d:1.47</code></a>
+  did that, but this lead to a crash in
+  the test suite case that now just fails<p><br/></p></li>
 </ol>
 
 <h3 id="new">New features</h3>
 
 <ol>
- <li>multi-threading</li>
- <li>native compilation</li>
- <li>compilation to JVM</li>
+ <li>multi-threading (see
+  <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/xthread.d"><code>src/xthread.d</code></a>,
+  <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/zthread.d"><code>src/zthread.d</code></a>,
+  <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/src/threads.lisp"><code>src/threads.lisp</code></a>,
+  <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/doc/multithread.txt"><code>doc/multithread.txt</code></a>)<p><br/></p></li>
+ <li>native compilation<p><br/></p></li>
+ <li>compilation to JVM<p><br/></p></li>
  <li>making FFI compatible with
-  <a href="http://uffi.med-info.com/">UFFI</a></li>
- <li>adding GUI, e.g., via <a href="http://www.wxlisp.org/">wxLisp</a></li>
- <li>adding SSL bindings</li>
+  <a href="http://uffi.med-info.com/">UFFI</a><p><br/></p></li>
+ <li>adding GUI, e.g., via
+  <a href="http://www.wxlisp.org/">wxLisp</a><p><br/></p></li>
+ <li>adding SSL bindings<p><br/></p></li>
 </ol>
 
 <hr/>
