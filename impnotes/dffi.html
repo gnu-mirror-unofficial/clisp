@@ -4357,11 +4357,19 @@ HREF="dffi.html#def-c-var"
 CLASS="function"
 >FFI:DEF-C-VAR</TT
 ></A
->) into the output
-   <TT
+>) into the output <TT
 CLASS="filename"
 >#P".c"</TT
-> <I
+>
+   (when the Lisp file is compiled with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+>)
+   <I
 CLASS="emphasis"
 >unless</I
 > these variables are <A
@@ -7852,6 +7860,13 @@ CLASS="function"
 >IN-PACKAGE</TT
 ></A
 > "TEST-C-CALL")
+(eval-when (compile) (setq <A
+HREF="dffi.html#ffi-extern-output"
+><TT
+CLASS="varname"
+>FFI:*OUTPUT-C-FUNCTIONS*</TT
+></A
+> t))
 (def-c-struct cfunr (x int) (s c-string))
 (default-foreign-language :stdc)
 (def-call-out cfun
@@ -8066,6 +8081,13 @@ CLASS="function"
 >IN-PACKAGE</TT
 ></A
 > "FFI-TEST")
+(eval-when (compile) (setq <A
+HREF="dffi.html#ffi-extern-output"
+><TT
+CLASS="varname"
+>FFI:*OUTPUT-C-FUNCTIONS*</TT
+></A
+> t))
 (def-call-in lispsort_begin (:arguments (n int))
   (:return-type nil)
   (:language :stdc))
@@ -8099,7 +8121,14 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13;(def-call-out sort10
+>&#13;(eval-when (compile) (setq <A
+HREF="dffi.html#ffi-extern-output"
+><TT
+CLASS="varname"
+>FFI:*OUTPUT-C-FUNCTIONS*</TT
+></A
+> t))
+(def-call-out sort10
   (:name "lispsort_double")
   (:language :stdc)
   (:arguments (n int)
