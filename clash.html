@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="Content-Type" content="text/html"/>
+ <meta http-equiv="description" content="CLISP as a login shell"/>
+ <link rel="stylesheet" href="clisp.css" type="text/css"/>
+ <title>CLASH: CLisp As SHell</title>
+</head>
+<body>
+<h1>CLASH: CLisp As SHell</h1>
+
+<h2>Summary</h2>
+
+<p>Thus document describes how you can make
+ <a href="http://clisp.cons.org">CLISP</a> your login shell on
+ <a href="http://www.gnu.org">Gnu</a>/<a
+ href="http://www.linux.org">Linux</a>.</p>
+
+<p>You can probably use these instructions on other UNIX systems
+too.</p>
+
+<h2>DISCLAIMER</h2>
+
+<ul><li><strong>Use at your own risk.</strong></li>
+<li><strong>Exercise care.</strong></li>
+<li><strong>Backup everything you change on your system.</strong></li>
+<li><strong>If anything goes wrong, do NOT blame us!</strong></li>
+</ul>
+
+<h2>Author</h2>
+
+<address><a href="mailto:peter.wood@worldonline.dk">Peter
+Wood</a></address>
+<p>last modified: 2001-06-01</p>
+
+<p>notes marked "NB from SDS" were added by <a
+href="http://www.podval.org/~sds>">Sam Steingold</a>.</p>
+
+
+<h1>Step 1: Compile CLISP</h1>
+
+<p>On Linux, you need to have built your <a
+href="http://clisp.cons.org">CLISP</a> with the
+<code>--with-modules=bindings/linuxlibc6</code> option,
+and you should make sure that you have it compiled with readline.
+See the CLISP build instructions and Makefile.</p>
+
+<h1>Step 2: Make CLISP a valid shell</h1>
+
+<p>Put <code>/usr/bin/clisp</code> in <code>/etc/shells</code> so it
+looks (something like) this:</p>
+<pre>
+# /etc/shells: valid login shells
+#/bin/ash
+/bin/bash
+/bin/sh
+/usr/bin/clisp
+</pre>
+
+<h1>Step 3: Modify your PATH to be able to run X</h1>
+
+<p>You can set up your <code>$PATH</code> in
+<code>/etc/login.defs</code> by modifying the entry for
+<code>ENV_PATH</code> to look (something) like this:</p>
+
+<pre>
+ENV_PATH        PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+</pre>
+
+<p>Once you have your CLISP shell set up, you can control the
+environment variables (on Linux) via the linuxlibc6 bindings (see
+<code>${clisp-src}/modules/bindings/linuxlibc6/linux.lisp</code>):
+setenv, putenv, getenv, etc.</p>
+
+<h2>NB from SDS</h2>
+
+<p>CLISP has a <code>setf</code>able built-in <code>ext:getenv</code>,
+e.g., <code>(setf (ext:getenv "foo") "bar")</code>.</p>
+
+<h1>Step 4: start X</h1>
+
+<p>The <code>startx</code> command is a shell script, so we cannot use it.
+  As a temporary fix, I have defunned thus:</p>
+<pre>
+(defun startx ()
+  (execute "/usr/X11R6/bin/xinit"))
+</pre>
+
+<p>Which works for me.  Although I haven't investigated all the
+consequences of not going via shell's startx.  Also I do not use
+<a href="http://www.gnome.org/">GNOME</a> or
+<a href="http://www.kde.org/">KDE</a> which may complicate
+things for you if you do.
+I use <a href="http://www.fvwm.org">fvwm2</a>
+and have this in my <code>.xinitrc</code>:</p>
+
+<pre>
+exec fvwm2
+</pre>
+
+<p>Once CLISP is set up, you will also be able to type:</p>
+<pre>
+&gt; #[xinit]
+</pre>
+<p>from Lisp to start X.</p>
+
+<h2>NB from SDS</h2>
+
+<p>You should be able to run a shell script using the
+ CLISP built-in function <code>ext:shell</code>.</p>
+
+<h1>Step 5: set up the reader macro</h1>
+
+<p>For conveniently running external programs (i.e., I do not want to
+have to type <code>(run-program "ls" :arguments '("-lh"))</code> every
+time) I have set up a read macro.
+Put the following in <code>somefile.lisp</code>:</p>
+
+<pre>
+(set-macro-character #\] (get-macro-character #\)))
+(set-dispatch-macro-character #\# #\[
+  (lambda (stream char1 char2)
+    (declare (ignore char1 char2))
+    (setf (readtable-case *readtable*) :preserve)
+    (unwind-protect
+         (let ((command-line (read-delimited-list #\] stream t)))
+           (list 'ext:run-program (princ-to-string (car command-line))
+                 :arguments `',(mapcar #'princ-to-string (rest command-line))))
+      (setf (readtable-case *readtable*) :upcase))))
+</pre>
+
+<h2>NB from SDS</h2>
+
+<p>I heavily modified this macro.</p>
+
+<p>Note that <code>ext:run-program</code> will not execute shell scripts,
+while <code>ext:shell</code> will invoke a shell for each command -
+these are the trade-offs.</p>
+
+<h1>Step 6: set up the readline shortcut</h1>
+
+<p>It's also a PITA to have to type "#[" and "]" everytime you want to
+run a command, so add the following in your
+<code>$HOME/.inputrc</code>:</p>
+
+<pre>
+#for clash: prints the square brackets to run an external command
+"\ec": "#[]\C-b"
+</pre>
+
+<p>When you type ESC-c (or META-c) readline will print "#[]" to the
+console and put the cursor inside the brackets.  If you are running
+CLISP as your shell, and do this, you will then be able to run programs
+(more or less) normally.  You will need to escape the dot in any
+filenames that start with a dot, e.g.,</p>
+
+<pre>
+&gt; #[cat \.xinitrc]
+</pre>
+
+<p>and sometimes (eek) a colon.</p>
+
+<h1>Step 7: try it out</h1>
+
+<p><strong>Do NOT</strong> modify your <code>/etc/passwd</code> yet!</p>
+
+<p>Start up a clisp with</p>
+<pre>
+$ clisp -K full -i somefile.fas
+</pre>
+
+<p>Hit <kbd>ESC c</kbd>, type <kbd>ls -l</kbd>, hit <kbd>Enter</kbd>
+and see if it works.</p>
+
+<p>You <em>do not</em> have command line completion for external
+programs inside the read-macro.  So hitting tab will just give you a
+list of all CLISP's possibilties, which is not much use here.  However,
+<code>ext:run-program</code> (which is part of what's hiding behind the
+read macro) does search your path for executables so you don't have to
+do <code>#[/bin/ls -l]</code></p>
+
+<h2>NB from SDS</h2>
+
+<p>There are CLISP built-ins like <code>ext:dir</code> and
+ <code>ext:cd</code>, and most other shell built-ins can be implemented
+ in CLISP pretty easily.</p>
+
+<h1>Step 8: Dump a memory image</h1>
+
+<p>If you are happy, and think you can live with this setup then you
+must do the following:</p>
+
+<ol>
+<li>Dump a memory image from a CLISP with the read macro and any
+ convenience stuff loaded, as described in <a
+ href="impnotes.html#image">impnotes</a>.</li>
+<li>Make a backup of <code>/usr/[local]/lib/clisp</code>.
+  (wherever your's is installed)</li>
+<li>Rename the "base" directory in <code>/usr/lib/clisp</code>
+ to "orig-base".</li>
+<li>Now rename the "full" directory to "base".</li>
+<li>Replace the memory image in your <strong>new</strong> "base"
+ directory with the one you dumped.</li>
+</ol>
+
+<h1>Step 9: Dive in!</h1>
+
+<p>Change your <code>/etc/passwd</code> to reflect your new shell.</p>
+
+<p>Light 13 candles in a circle round your Linux box,
+Sacrifice a white rooster, invoke Saint IGNUcious and ...
+</p>
+
+<p>Login again.</p>
+
+<p>If you start pining for Bash, you can run:</p>
+<pre>
+&gt; #[bash]
+</pre>
+
+<p>You will have to explicitly source all your configuration files
+ (.profile etc)</p>
+
+<h1>TODO</h1>
+
+<ol>
+<li>Get indentation on the command line.</li>
+<li>Do command redirection.</li>
+<li>Get name completion for arguments which are filenames.</li>
+</ol>
+
+<p>Have fun,</p>
+<p>Peter</p>
+
+<hr/>
+<table width="100%"><tr><td align="left">
+ <a href="http://clisp.cons.org"><img src="clisp.gif" width="48"
+    height="48" alt="[CLISP home]"/></a></td>
+ <td align="right"><a href="http://validator.w3.org/check/referer"><img
+     src="http://www.w3.org/Icons/valid-xhtml10"
+     alt="Valid XHTML" height="31" width="88"/></a>
+ <a href="http://www.w3.org/Style/CSS/Buttons/"><img
+    src="http://www.w3.org/Style/CSS/Buttons/mwcts"
+    alt="Use CSS" height="31" width="88"/></a>
+ <a href="http://jigsaw.w3.org/css-validator/check/referer"><img
+    src="http://jigsaw.w3.org/css-validator/images/vcss"
+    alt="Valid CSS" height="31" width="88"/></a></td>
+</tr></table>
+
+</body>
+</html>

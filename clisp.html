@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+<HEAD>
+<TITLE> CLISP manual page </TITLE>
+</HEAD>
+<BODY>
+<H1>CLISP manual page</H1>
+
+<UL>
+<LI> <A HREF="#Name">Name</A>
+<LI> <A HREF="#Synopsis">Synopsis</A>
+<LI> <A HREF="#Description">Description</A>
+<LI> <A HREF="#Options">Options</A>
+<LI> <A HREF="#Reference">Reference</A>
+<LI> <A HREF="#Use">Use</A>
+<LI> <A HREF="#Files">Files</A>
+<LI> <A HREF="#Environment">Environment</A>
+<LI> <A HREF="#See also">See also</A>
+<LI> <A HREF="#Bugs">Bugs</A>
+<LI> <A HREF="#Projects">Projects</A>
+<LI> <A HREF="#Authors">Authors</A>
+</UL>
+<P>
+
+<HR>
+
+<H2><A NAME="Name">Name</A></H2>
+
+<CODE>clisp</CODE> - Common Lisp language interpreter and compiler
+
+<H2><A NAME="Synopsis">Synopsis</A></H2>
+
+<CODE>clisp</CODE>
+[ <A HREF="#Option -h"><CODE>-h</CODE></A> | <A HREF="#Option -h"><CODE>--help</CODE></A> ]
+[ <A HREF="#Option --version"><CODE>--version</CODE></A> ]
+[ <A HREF="#Option --license"><CODE>--license</CODE></A> ]
+[ <A HREF="#Option -B"><CODE>-B</CODE> <EM>lisplibdir</EM></A> ]
+[ <A HREF="#Option -M"><CODE>-M</CODE> <EM>memfile</EM></A> ]
+[ <A HREF="#Option -m"><CODE>-m</CODE> <EM>memsize</EM></A> ]
+[ <A HREF="#Option -L"><CODE>-L</CODE> <EM>language</EM></A> ]
+[ <A HREF="#Option -N"><CODE>-N</CODE> <EM>localedir</EM></A> ]
+[ <A HREF="#Option -E"><CODE>-E</CODE><EM>domain</EM> <EM>encoding</EM></A> ]
+[ <A HREF="#Option -q"><CODE>-q</CODE></A> | <A HREF="#Option -q"><CODE>--quiet</CODE></A> | <A HREF="#Option -q"><CODE>--silent</CODE></A> ]
+[ <A HREF="#Option -w"><CODE>-w</CODE></A> ]
+[ <A HREF="#Option -I"><CODE>-I</CODE></A> ]
+[ <A HREF="#Option -ansi"><CODE>-ansi</CODE></A> ]
+[ <a href="#Option -traditional"><code>-traditional</code></a> ]
+[ <A HREF="#Option -p"><CODE>-p</CODE> <EM>packagename</EM></A> ]
+[ <A HREF="#Option -C"><CODE>-C</CODE></A> ]
+[ <A HREF="#Option -norc"><CODE>-norc</CODE></A> ]
+[ <A HREF="#Option -i"><CODE>-i</CODE> <EM>initfile</EM> ...</A> ]
+[ <A HREF="#Option -c"><CODE>-c</CODE> [ <CODE>-l</CODE> ] <EM>lispfile</EM> [ <CODE>-o</CODE> <EM>outputfile</EM> ] ...</A> ]
+[ <A HREF="#Option -x"><CODE>-x</CODE> <EM>expression</EM></A> ]
+[ <A HREF="#Option exec"><EM>lispfile</EM></A>
+  [ <A HREF="#Option exec"><EM>argument</EM> ...</A> ] ]
+
+<H2><A NAME="Description">Description</A></H2>
+
+Invokes the common lisp interpreter and compiler. Invoked without
+arguments, executes a read-eval-print loop, in which expressions are in
+turn read from standard input, evaluated by the lisp interpreter, and
+their results output to standard output.
+Invoked with <A HREF="#Option -c"><CODE>-c</CODE></A>, compiles
+the specified lisp files to a bytecode that can be executed
+more efficiently.
+
+<H2><A NAME="Options">Options</A></H2>
+
+<DL>
+
+<DT> <A NAME="Option -h"> <B><CODE>-h</CODE></B>, <B><CODE>--help</CODE></B> </A>
+<DD> Displays a help message on how to use <CODE>clisp</CODE>.
+<P>
+
+<DT> <A NAME="Option --version"> <B><CODE>--version</CODE></B> </A>
+<DD> Displays the <CODE>clisp</CODE> version number, as given by the function
+call <CODE>(<A HREF="CLHSROOT/Body/fun_lisp-impl_tion-version.html">lisp-implementation-version</A>)</CODE>.
+<P>
+
+<DT> <A NAME="Option --license"> <B><CODE>--license</CODE></B> </A>
+<DD> Displays a summary of the licensing information, the GNU GPL.
+<P>
+
+<DT> <A NAME="Option -B"> <B><CODE>-B</CODE> <EM>lisplibdir</EM></B> </A>
+<DD> Specifies the installation directory. This is the directory containing
+the linking sets and other data files.
+<P>
+
+
+<DT> <A NAME="Option -M"> <B><CODE>-M</CODE> <EM>memfile</EM></B> </A>
+<DD> Specifies the initial memory image.
+This must be a memory dump produced by the
+<CODE><A HREF="impnotes.html#image">saveinitmem</A></CODE> function.
+<P>
+
+<DT> <A NAME="Option -m"> <B><CODE>-m</CODE> <EM>memsize</EM></B> </A>
+<DD> Sets the amount of memory <CODE>clisp</CODE> tries to grab
+on startup. The amount may be given as <EM>nnnnnnn</EM> (measured in bytes),
+<EM>nnnn</EM> <CODE>K</CODE> or <EM>nnnn</EM> <CODE>KB</CODE> (measured in kilobytes) or
+<EM>n</EM> <CODE>M</CODE> or <EM>n</EM> <CODE>MB</CODE> (measured in megabytes).
+Default is 2 megabytes.
+The argument is constrained above 100 KB.
+-- This version of <CODE>clisp</CODE>
+is not likely to actually use the entire <EM>memsize</EM>
+since garbage collection will periodically reduce the amount of used memory.
+It is therefore common to specify 10 MB even if only 2 MB are going to be used.
+<P>
+
+
+
+<DT> <A NAME="Option -L"> <B><CODE>-L</CODE> <EM>language</EM></B> </A>
+<DD> Specifies the language <CODE>clisp</CODE>
+uses to communicate with the user. This may be
+<CODE>english</CODE>.
+<P>
+
+<DT> <A NAME="Option -N"> <B><CODE>-N</CODE> <EM>localedir</EM></B> </A>
+<DD> Specifies the base directory of locale files. <CODE>clisp</CODE>
+will search its message catalogs in
+<EM>localedir</EM><CODE>/</CODE><EM>language</EM><CODE>/LC_MESSAGES/clisp.mo</CODE>.
+<P>
+
+<DT> <A NAME="Option -E"> <B><CODE>-E</CODE><EM>domain</EM> <EM>encoding</EM></B> </A>
+<DD> Specifies the encoding used for a given domain, overriding the default
+which depends on the environment variables <CODE>LC_ALL</CODE>,
+<CODE>LC_CTYPE</CODE>, <CODE>LANG</CODE>. <EM>domain</EM> can be
+<CODE>file</CODE>, affecting <CODE>*default-file-encoding*</CODE>, or
+<CODE>pathname</CODE>, affecting <CODE>*pathname-encoding*</CODE>, or
+<CODE>terminal</CODE>, affecting <CODE>*terminal-encoding*</CODE>, or
+<CODE>foreign</CODE>, affecting <CODE>*foreign-encoding*</CODE>, or
+<CODE>misc</CODE>, affecting <CODE>*misc-encoding*</CODE>.
+<P>
+
+<DT> <A NAME="Option -q"> <B><CODE>-q</CODE></B>, <B><CODE>--quiet</CODE></B>, <B><CODE>--silent</CODE></B> </A>
+<DD> Quiet: <CODE>clisp</CODE>
+displays no banner at startup and no good-bye message when quitting.
+<P>
+
+<DT> <A NAME="Option -w"> <B><CODE>-w</CODE></B> </A>
+<DD> Wait for keypress after program termination.
+<P>
+
+<DT> <A NAME="Option -I"> <B><CODE>-I</CODE></B> </A>
+<DD> Be ILISP friendly. ILISP is an alternative Emacs interface to Common Lisp
+systems. With this option,
+<CODE>clisp</CODE>
+interacts in a way that ILISP can deal with.
+Currently the only effect of this is that unnecessary prompts are not
+suppressed.
+<P>
+
+<DT> <A NAME="Option -ansi"> <B><CODE>-ansi</CODE></B> </A>
+<DD> ANSI CL compliant: Comply with the ANSI CL specification even on
+those issues where ANSI CL is broken. This option is provided for maximum
+portability of Lisp programs, and is not useful for actual everyday work.
+It sets the symbol macro <CODE>*ansi*</CODE> to <CODE>t</CODE>.
+See <A HREF="impnotes.html#ansi">impnotes.html,
+section "Maximum ANSI CL compliance"</A>, for details.
+<P>
+
+<dt><a name="Option -traditional"><b><code>-traditional</code></b></a></dt>
+<dd>Traditional: reverses the residual effects of
+    <a href="#Option -ansi"><code>-ansi</code></a>
+    in the saved image.</dd><p>
+
+<DT> <A NAME="Option -p"> <B><CODE>-p</CODE> <EM>packagename</EM></B> </A>
+<DD> At startup the value of the variable <CODE>*package*</CODE> will
+be set to the package named <EM>packagename</EM>. The default is the package
+which was active when the image was <A HREF="impnotes.html#image">saved</A>,
+normally <A HREF="impnotes.html#imppack"><CODE>USER</CODE></A>.
+<P>
+
+<DT> <A NAME="Option -C"> <B><CODE>-C</CODE></B> </A>
+<DD> Compile when load: At startup the value of the variable
+<CODE><A HREF="impnotes.html#loadfile">*load-compiling*</A></CODE>
+will be set to <A HREF="CLHSROOT/Body/convar_t.html"><CODE>t</CODE></A>.
+Code being <CODE>load</CODE>ed will then be compiled on the fly. This results
+in slower loading, but faster execution.
+<P>
+
+<DT> <A NAME="Option -norc"> <B><CODE>-norc</CODE></B> </A>
+<DD> Normally <CODE>clisp</CODE> loads a user run control (RC) file on
+startup (this happens after the <A HREF="#Option -C"><CODE>-C</CODE></A>
+option is processed). The file loaded is
+<CODE>_clisprc.lisp</CODE> or <CODE>_clisprc.fas</CODE> in the home directory
+<CODE>(user-homedir-pathname)</CODE>,
+whichever is newest. This option, <CODE>-norc</CODE>, prevents loading of
+the RC file.
+<P>
+
+<DT> <A NAME="Option -i"> <B><CODE>-i</CODE> <EM>initfile</EM> ...</B> </A>
+<DD> Specifies initialization files to be <CODE>load</CODE>ed
+at startup. These should be lisp files (source or compiled). Several
+<CODE>-i</CODE> options can be given; all the specified files will be loaded
+in order.
+<P>
+
+<DT> <A NAME="Option -c"> <B><CODE>-c</CODE> <EM>lispfile</EM> ...</B> </A>
+<DD> Compiles the specified <EM>lispfile</EM>s to bytecode (*.fas). The
+compiled files can then be <CODE>load</CODE>ed instead of the sources to
+gain efficiency.
+<P>
+
+<DT> <A NAME="Option -o"> <B><CODE>-o</CODE> <EM>outputfile</EM></B> </A>
+<DD> Specifies the output file or directory for the compilation of the last
+specified <EM>lispfile</EM>.
+<P>
+
+<DT> <A NAME="Option -l"> <B><CODE>-l</CODE></B> </A>
+<DD> A bytecode listing (*.lis) of the files being compiled will be produced.
+Useful only for debugging purposes. See the documentation of
+<A HREF="impnotes.html#compilefile"><CODE>compile-file</CODE></A> for details.
+<P>
+
+<DT> <A NAME="Option -x"> <B><CODE>-x</CODE> <EM>expressions</EM></B> </A>
+<DD> Executes a series of arbitrary expressions instead of a read-eval-print loop.
+The values of the expressions will be output to standard output.
+Due to the argument processing done by the shell, the <EM>expressions</EM>
+must be enclosed in double quotes, and double quotes and backslashes must
+be preceded by backslashes.
+<P>
+
+<DT> <A NAME="Option exec"> <B><EM>lispfile</EM> [ <EM>argument</EM> ... ]</B> </A>
+<DD> Loads and executes a <EM>lispfile</EM>. There will be no read-eval-print
+loop. Before <EM>lispfile</EM> is loaded, the variable <CODE>*args*</CODE>
+will be bound to a list of strings, representing the <EM>argument</EM>s.
+If <EM>lispfile</EM> is <CODE>-</CODE>, the standard input is used instead of
+a file.
+This option must be the last one. No <A HREF="#Option -norc">RC file</A>
+will be executed.
+<P>
+
+</DL>
+
+
+<H2><A NAME="Reference">Reference</A></H2>
+
+The language implemented mostly conforms to
+<BLOCKQUOTE>
+      ANSI Common Lisp standard X3.226-1994
+      <A HREF="http://www.x3.org/tc_home/j13sd4.htm">http://www.x3.org/tc_home/j13sd4.htm</A>
+</BLOCKQUOTE>
+
+available online as the
+<BLOCKQUOTE>
+      Common Lisp HyperSpec
+      <A HREF="http://www.lisp.org/HyperSpec/">http://www.lisp.org/HyperSpec/</A>
+      ("CLHS" for short)
+</BLOCKQUOTE>
+
+which supersedes the earlier specifications
+<BLOCKQUOTE>
+      Guy L. Steele Jr.: Common Lisp - The Language.
+      Digital Press. 2nd edition 1990, 1032 pages.
+      <A HREF="http://www.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/html/cltl/cltl2.html">http://www.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/html/cltl/cltl2.html</A>
+      ("CLtL2" for short)
+</BLOCKQUOTE>
+
+and
+<BLOCKQUOTE>
+      Guy L. Steele Jr.: Common Lisp - The Language.
+      Digital Press. 1st edition 1984, 465 pages.
+      ("CLtL1" for short)
+</BLOCKQUOTE>
+
+<H2><A NAME="Use">Use</A></H2>
+
+<DL>
+
+<DT> <CODE>help</CODE>
+<DD> to get some on-line help.
+<P>
+
+<DT> <CODE>(apropos </CODE><EM>name</EM><CODE>)</CODE>
+<DD> lists the symbols relating to <EM>name</EM>.
+<P>
+
+<DT> <CODE>(exit)</CODE> or <CODE>(quit)</CODE> or <CODE>(bye)</CODE>
+<DD> to quit <CODE>clisp</CODE>.
+<P>
+
+
+
+</DL>
+
+<H2><A NAME="Files">Files</A></H2>
+
+<DL>
+
+
+<DT>
+<DD> main executable
+<P>
+
+<DT>
+<CODE>lispinit.mem</CODE>
+<DD> initial memory image
+<P>
+
+<DT>
+<CODE>config.lisp</CODE>
+<DD> site-dependent configuration
+<P>
+
+<DT>
+<CODE>*.lisp</CODE>
+<DD> lisp source
+<P>
+
+<DT>
+<CODE>*.fas</CODE>
+<DD> lisp code, compiled by <CODE>clisp</CODE>
+<P>
+
+<DT>
+<CODE>*.lib</CODE>
+<DD> lisp source library information, generated and used by the
+<CODE>clisp</CODE> compiler
+<P>
+
+<DT>
+<CODE>*.c</CODE>
+<DD> C code, compiled from lisp source by <CODE>clisp</CODE>
+<P>
+
+</DL>
+
+
+<H2><A NAME="Environment">Environment</A></H2>
+
+<DL>
+
+<DT> <CODE>CLISP_LANGUAGE</CODE>
+<DD> specifies the language
+<CODE>clisp</CODE>
+uses to communicate with the user. The value may be
+<CODE>english</CODE>, <CODE>deutsch</CODE>, <CODE>francais</CODE>
+and defaults to <CODE>english</CODE>.
+The <A HREF="#Option -L"><CODE>-L</CODE></A> option can be used to override this environment variable.
+<P>
+
+
+<DT> <CODE>LC_CTYPE</CODE>
+<DD>specifies the locale which determines the character set in use.  The
+value can be of the form <CODE><VAR>language</VAR></CODE> or
+<CODE><VAR>language</VAR>_<VAR>country</VAR></CODE> or
+<CODE><VAR>language</VAR>_<VAR>country</VAR>.<VAR>charset</VAR></CODE>,
+where <VAR>language</VAR> is a two-letter ISO 639 language code (lower case),
+<VAR>country</VAR> is a two-letter ISO 3166 country code (upper case).
+<VAR>charset</VAR> is an optional character set specification, and needs
+normally not be given because the character set can be inferred from the
+language and country.
+<P>
+
+<DT> <CODE>LANG</CODE>
+<DD> specifies the language
+<CODE>clisp</CODE>
+uses to communicate with the user, unless it is already specified through
+the environment variable <CODE>CLISP_LANGUAGE</CODE> or the
+<A HREF="#Option -L"><CODE>-L</CODE></A> option.
+It also specifies the locale determining the character set in use, unless
+already specified through the environment variable <CODE>LC_CTYPE</CODE>.
+The value may begin with a two-letter ISO 639 language code, for example
+<CODE>en</CODE>, <CODE>de</CODE>, <CODE>fr</CODE>.
+<P>
+
+
+
+
+
+
+</DL>
+
+
+<H2><A NAME="See also">See also</A></H2>
+
+<A HREF="impnotes.html">impnotes.html</A>,
+<CODE>cmucl</CODE>(1),
+<CODE>emacs</CODE>(1),
+<CODE>xemacs</CODE>(1).
+
+
+<H2><A NAME="Bugs">Bugs</A></H2>
+
+<UL>
+<LI> Not all extensions from CLtL2 are supported.
+<LI> No on-line documentation beyond <CODE>apropos</CODE>
+ and <CODE>describe</CODE> is available.
+</UL>
+
+<H2><A NAME="Projects">Projects</A></H2>
+
+<UL>
+<LI> Writing on-line documentation.
+<LI> Enhance the compiler so that it can inline local functions.
+<LI> Specify a portable set of window and graphics operations.
+</UL>
+
+<H2><A NAME="Authors">Authors</A></H2>
+
+Bruno Haible and Michael Stoll.
+<P>
+
+<HR>
+
+<ADDRESS>CLISP manual page<BR>
+Bruno Haible &lt;clisp-list@lists.sourceforge.net&gt;
+</ADDRESS>
+<P>
+Last modified: 31 May 2001.
+
+</BODY>
+</HTML>
+
