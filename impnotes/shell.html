@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Extensions-2.10. Shell, Pipes and Printing</TITLE
+>Extensions-2.9. Shell, Pipes and Printing</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
@@ -16,11 +16,12 @@ REL="UP"
 TITLE="Extensions-2: Platform specific Extensions"
 HREF="platform.html"><LINK
 REL="PREVIOUS"
-TITLE="Extensions-2.9. Application delivery with CLISP"
+TITLE="Extensions-2.8. Application delivery with CLISP"
 HREF="app-dev.html"><LINK
 REL="NEXT"
-TITLE="Extensions-2.11. Directory Access"
-HREF="dir-key.html"><LINK
+TITLE="Extensions-2.10. Operating System
+  Environment."
+HREF="getenv.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -61,7 +62,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -83,7 +84,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="dir-key.html"
+HREF="getenv.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -97,13 +98,17 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="shell">30.10. Extensions-2.10. Shell, Pipes and Printing</H1
+NAME="shell"
+></A
+>30.9. Extensions-2.9. Shell, Pipes and Printing</H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="exec">30.10.1. Shell</H2
+NAME="exec"
+></A
+>30.9.1. Shell</H2
 ><P
 ></P
 ><DIV
@@ -332,7 +337,9 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><A
-NAME="run-prog">Platform dependent: <A
+NAME="run-prog"
+></A
+>Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
 ><B
@@ -401,7 +408,7 @@ CLASS="literal"
 >&#38;KEY</TT
 ></A
 >
-   <TT
+    <TT
 CLASS="constant"
 >:INPUT</TT
 > <TT
@@ -468,7 +475,7 @@ CLASS="literal"
 >&#38;KEY</TT
 ></A
 >
-   <TT
+    <TT
 CLASS="constant"
 >:ARGUMENTS</TT
 > <TT
@@ -527,10 +534,13 @@ TARGET="_top"
 > <TT
 CLASS="envar"
 >SHELL</TT
->, which normally
-       is <TT
-CLASS="filename"
->/bin/sh</TT
+>, which normally is <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html"
+TARGET="_top"
+><B
+CLASS="command"
+>/bin/sh</B
+></A
 >.
        The command should be a <SPAN
 CLASS="QUOTE"
@@ -540,11 +550,14 @@ CLASS="QUOTE"
 CLASS="QUOTE"
 >"command list"</SPAN
 > should be enclosed in "{
-       ... ; }" (for <TT
-CLASS="filename"
->/bin/sh</TT
->) or "( ... )" (for
-       <TT
+       ... ; }" (for <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html"
+TARGET="_top"
+><B
+CLASS="command"
+>/bin/sh</B
+></A
+>) or "( ... )" (for <TT
 CLASS="filename"
 >/bin/csh</TT
 >).
@@ -564,13 +577,13 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >the program.  The directories listed in the
-     <TT
-CLASS="envar"
->PATH</TT
-> <A
+     <A
 HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
 TARGET="_top"
 >environment variable</A
+> <TT
+CLASS="envar"
+>PATH</TT
 > will be searched for it.
     </P
 ></DD
@@ -597,11 +610,12 @@ ALIGN="justify"
      <TT
 CLASS="constant"
 >:TERMINAL</TT
-> (the standard input) or <TT
+> (the standard input, default) or
+     <TT
 CLASS="constant"
 >:STREAM</TT
->
-     (a Lisp stream to be created) or a pathname (an input file) or
+> (a Lisp stream to be created) or
+     a pathname (an input file) or
      <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -623,11 +637,12 @@ ALIGN="justify"
      <TT
 CLASS="constant"
 >:TERMINAL</TT
-> (the standard output) or <TT
+> (the standard output, default) or
+     <TT
 CLASS="constant"
 >:STREAM</TT
->
-     (a Lisp stream to be created) or a pathname (an output file) or
+> (a Lisp stream to be created) or
+     a pathname (an output file) or
      <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -648,24 +663,27 @@ ALIGN="justify"
 >what to do if the <TT
 CLASS="constant"
 >:OUTPUT</TT
-> file already
-     exists.  The possible values are <TT
+> file already exists.
+     The possible values are <TT
 CLASS="constant"
 >:OVERWRITE</TT
 >, <TT
 CLASS="constant"
 >:APPEND</TT
->,
-     <TT
+>, <TT
 CLASS="constant"
 >:ERROR</TT
->, with the same meaning as for <A
+>,
+     with the same meaning as for <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >OPEN</TT
 ></A
+>. The default is <TT
+CLASS="constant"
+>:OVERWRITE</TT
 >.
     </P
 ></DD
@@ -677,8 +695,16 @@ CLASS="constant"
 ><DD
 ><P
 ALIGN="justify"
->wether to wait for program termination or not
-     (this is useful when no i/o to the process is needed).
+>whether to wait for program termination or not
+     (this is useful when no i/o to the process is needed);
+     the default is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, i.e., synchronous execution.
     </P
 ></DD
 ><DT
@@ -762,31 +788,49 @@ CLASS="constant"
 CLASS="constant"
 >:OUTPUT</TT
 >, a Lisp
- stream is returned.  If <TT
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> is returned.
+ If <TT
 CLASS="constant"
 >:STREAM</TT
-> was specified for <TT
+> was specified for both <TT
 CLASS="constant"
 >:INPUT</TT
-> and
- <TT
+> and <TT
 CLASS="constant"
 >:OUTPUT</TT
->, three Lisp streams are returned, as for the function
- <A
+>, three
+ Lisp <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>s are returned, as for the function <A
 HREF="shell.html#pipe"
 ><TT
 CLASS="function"
 >EXT:MAKE-PIPE-IO-STREAM</TT
 ></A
->.  This use of <A
+>.
+ This use of <A
 HREF="shell.html#run-prog"
 ><TT
 CLASS="function"
 >EXT:RUN-PROGRAM</TT
 ></A
-> can cause deadlocks, see
+> can cause
  <A
+HREF="shell.html#deadlock"
+>deadlocks</A
+>, see <A
 HREF="shell.html#pipe"
 ><TT
 CLASS="function"
@@ -802,7 +846,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="pipe">30.10.2. Pipes</H2
+NAME="pipe"
+></A
+>30.9.2. Pipes</H2
 ><P
 ></P
 ><DIV
@@ -883,7 +929,18 @@ CLASS="constant"
 ><DD
 ><P
 ALIGN="justify"
->returns an input stream that will supply the output
+>returns an <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#input"
+TARGET="_top"
+>input</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> that will supply the output
   from the execution of the given operating system command.
   </P
 ></DD
@@ -932,7 +989,18 @@ CLASS="constant"
 ><DD
 ><P
 ALIGN="justify"
->returns an output stream that will pass its output as
+>returns an <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> that will pass its output as
    input to the execution of the given operating system command.
   </P
 ></DD
@@ -981,23 +1049,125 @@ CLASS="constant"
 ><DD
 ><P
 ALIGN="justify"
->returns three values.  The first value is a
-  bidirectional stream that will simultaneously pass its output as input
-  to the execution of the given operating system command and supply the
-  output from this command as input. The second and third value will be
-  the input stream and the output stream that make up the I/O stream,
-  respectively.  Note that they must be closed individually.</P
+>returns three values.
+  The first value is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_b.html#bidirectional"
+TARGET="_top"
+>bidirectional</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> that will simultaneously pass its output
+  as input to the execution of the given operating system command and
+  supply the output from this command as input.
+  The second and third value will be the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#input"
+TARGET="_top"
+>input</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> and the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> that
+  make up the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_b.html#bidirectional"
+TARGET="_top"
+>bidirectional</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>, respectively.</P
+><DIV
+CLASS="warning"
+><P
+></P
+><TABLE
+CLASS="warning"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
 ><P
 ALIGN="justify"
->Warning: Improper use of this function can lead to
-  deadlocks.  Use it at your own risk!</P
+>Note that these three streams must be closed
+   individually.</P
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="warning"
+><A
+NAME="deadlock"
+></A
+><P
+></P
+><TABLE
+CLASS="warning"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
 ><P
 ALIGN="justify"
->A deadlock occurs if the command and your program either both
-  try to read from each other at the same time or both try to write to
-  each other at the same time. To avoid deadlocks, it is recommended
-  that you fix a protocol between the command and your program and avoid
-  any hidden buffering: use <A
+>Note that improper use of this function
+   can lead to <I
+CLASS="emphasis"
+>deadlocks</I
+>.
+   Use it at your own risk!</P
+><P
+ALIGN="justify"
+>A deadlock occurs if the command and your Lisp program either
+   both try to read from each other at the same time or both try to
+   write to each other at the same time.</P
+><P
+ALIGN="justify"
+>To avoid deadlocks, it is recommended that you fix a
+   protocol between the command and your program and avoid any hidden
+   buffering: use <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
 TARGET="_top"
 ><TT
@@ -1018,8 +1188,14 @@ TARGET="_top"
 CLASS="function"
 >LISTEN</TT
 ></A
->
-  instead of <A
+>,
+   <A
+HREF="socket.html#so-status"
+><TT
+CLASS="function"
+>SOCKET:SOCKET-STATUS</TT
+></A
+> instead of <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-line.html"
 TARGET="_top"
 ><TT
@@ -1033,16 +1209,21 @@ TARGET="_top"
 CLASS="function"
 >READ</TT
 ></A
-> on the input side, and complete
-  every output operation by a <A
+> on the input side, and
+   complete every output operation by a <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >FINISH-OUTPUT</TT
 ></A
->. The same cautions must
-  apply to the called command as well.</P
+>.
+   The same precautions must apply to the called command as well.
+</P
+></TD
+></TR
+></TABLE
+></DIV
 ></DD
 ></DL
 ></DIV
@@ -1055,15 +1236,24 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="hardcopy">30.10.3. Printing</H2
+NAME="hardcopy"
+></A
+>30.9.3. Printing</H2
 ><P
 ALIGN="justify"
->The macro <B
-CLASS="emphasis"
+>The macro
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="shell.html#hardcopy"
 ><TT
 CLASS="function"
 >EXT:WITH-OUTPUT-TO-PRINTER</TT
-></B
+></A
+></I
+></STRONG
 >:
 <TABLE
 BORDER="0"
@@ -1073,7 +1263,13 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13;(ext:with-output-to-printer (<TT
+>&#13;(<A
+HREF="shell.html#hardcopy"
+><TT
+CLASS="function"
+>EXT:WITH-OUTPUT-TO-PRINTER</TT
+></A
+> (<TT
 CLASS="replaceable"
 ><I
 >variable</I
@@ -1107,7 +1303,18 @@ CLASS="replaceable"
 ><I
 >variable</I
 ></TT
-> to an output stream
+> to an <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>
  that sends its output to the printer.</P
 ></DIV
 ></DIV
@@ -1145,7 +1352,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="dir-key.html"
+HREF="getenv.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -1155,7 +1362,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Extensions-2.9. Application delivery with <A
+>Extensions-2.8. Application delivery with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -1176,7 +1383,8 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Extensions-2.11. Directory Access</TD
+>Extensions-2.10. Operating System
+  Environment.</TD
 ></TR
 ></TABLE
 ></DIV

@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -104,7 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="vm">33.2. The virtual machine</H1
+NAME="vm"
+></A
+>33.2. The virtual machine</H1
 ><P
 ALIGN="justify"
 >The bytecode can be thought of as being interpreted by a virtual
@@ -146,8 +148,11 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> objects and frames.
-  </P
+> objects and frames
+   (<SPAN
+CLASS="QUOTE"
+>"Lisp stack"</SPAN
+>).</P
 ></DD
 ><DT
 ><A
@@ -160,8 +165,11 @@ CLASS="literal"
 ><DD
 ><P
 ALIGN="justify"
->a stack for other data and pointers.
-</P
+>a stack for other data and pointers
+   (<SPAN
+CLASS="QUOTE"
+>"Program stack"</SPAN
+>).</P
 ></DD
 ></DL
 ></DIV
@@ -407,7 +415,7 @@ CLASS="varname"
 >.  This is a CPU-dependent number, the value of
 <TT
 CLASS="varname"
->system::*jmpbuf-size*</TT
+>SYSTEM::*JMPBUF-SIZE*</TT
 >.  In <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"

@@ -21,9 +21,9 @@ TITLE="Symbols in the Package COMMON-LISP
   [CLHS-1.9]"
 HREF="cl-symb.html"><LINK
 REL="NEXT"
-TITLE="Valid Patterns for Tokens
-  [CLHS-2.3.5]"
-HREF="valid-patterns.html"><LINK
+TITLE="Symbols as Tokens
+  [CLHS-2.3.4]"
+HREF="tokens.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -86,7 +86,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="valid-patterns.html"
+HREF="tokens.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="syntax">Chapter 2. Syntax
+NAME="syntax"
+></A
+>Chapter 2. Syntax
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-2.html"
 TARGET="_top"
@@ -114,7 +116,17 @@ CLASS="TOC"
 ></DT
 ><DT
 >2.1. <A
-HREF="syntax.html#tokens"
+HREF="syntax.html#reader-alg"
+>Reader Algorithm
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-2.html"
+TARGET="_top"
+>[CLHS-2.2]</A
+></A
+></DT
+><DT
+>2.2. <A
+HREF="tokens.html"
 >Symbols as Tokens
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-4.html"
@@ -123,7 +135,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.2. <A
+>2.3. <A
 HREF="valid-patterns.html"
 >Valid Patterns for Tokens
   <A
@@ -133,7 +145,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.3. <A
+>2.4. <A
 HREF="double-quote.html"
 >Double-Quote
   <A
@@ -143,7 +155,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.4. <A
+>2.5. <A
 HREF="backquote.html"
 >Backquote
   <A
@@ -153,7 +165,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.5. <A
+>2.6. <A
 HREF="sharpsign.html"
 >Sharpsign
   <A
@@ -169,25 +181,39 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="tokens">2.1. Symbols as Tokens
-  <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-4.html"
+NAME="reader-alg"
+></A
+>2.1. Reader Algorithm
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-2.html"
 TARGET="_top"
->[CLHS-2.3.4]</A
+>[CLHS-2.2]</A
 ></H1
 ><P
 ALIGN="justify"
->A "reserved token", i.e., a <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#token"
+>The requirement of step 4 that a
+ <SPAN
+CLASS="QUOTE"
+>"<A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_r.html#reader_macro_function"
 TARGET="_top"
->token</A
-> that has potential number
- syntax but cannot be interpreted as a number, is interpreted as symbol
- when being read.</P
-><P
-ALIGN="justify"
->When creating a symbol from a token, no character attributes are
- removed.</P
+>reader
+  macro function</A
+> may return zero values or one value"</SPAN
+>
+ <B
+CLASS="emphasis"
+>is</B
+> enforced.
+ You can use the function <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_values.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>VALUES</TT
+></A
+> to control the number of values
+ returned.</P
 ></DIV
 ></DIV
 ><DIV
@@ -224,7 +250,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="valid-patterns.html"
+HREF="tokens.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -237,9 +263,12 @@ VALIGN="top"
 >Symbols in the Package <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 >
   <A
@@ -260,11 +289,11 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Valid Patterns for Tokens
+>Symbols as Tokens
   <A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-5.html"
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-4.html"
 TARGET="_top"
->[CLHS-2.3.5]</A
+>[CLHS-2.3.4]</A
 ></TD
 ></TR
 ></TABLE

@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="arrays">Chapter 15. Arrays
+NAME="arrays"
+></A
+>Chapter 15. Arrays
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-15.html"
 TARGET="_top"
@@ -163,7 +165,7 @@ CLASS="function"
 ></A
 >s
  <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -174,7 +176,7 @@ CLASS="classname"
 > 2)</TT
 >,
  <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -185,7 +187,7 @@ CLASS="classname"
 > 4)</TT
 >,
  <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -195,7 +197,7 @@ CLASS="classname"
 ></A
 > 8)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -205,7 +207,7 @@ CLASS="classname"
 ></A
 > 16)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -215,14 +217,22 @@ CLASS="classname"
 ></A
 > 32)</TT
 >,
- and, of course, <A
+ and, of course, the required specializations <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_nil.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NIL</TT
+></A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_bit.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >BIT</TT
 ></A
-> and <A
+> and
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
 TARGET="_top"
 ><TT
@@ -236,7 +246,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="array-elts">15.1. Array Elements
+NAME="array-elts"
+></A
+>15.1. Array Elements
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_15-1-1.html"
 TARGET="_top"
@@ -245,9 +257,11 @@ TARGET="_top"
 ><DIV
 CLASS="table"
 ><A
-NAME="array-limit-table"><P
+NAME="array-limit-table"
+></A
+><P
 ><B
->Table 15-1. Array limits (platform dependent)</B
+>Table 15-1. Array limits</B
 ></P
 ><TABLE
 BORDER="1"
@@ -291,19 +305,12 @@ CLASS="constant"
 ></A
 ></TD
 ><TD
-COLSPAN="2"
+COLSPAN="3"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >2<SUP
->16</SUP
-> = 65536</TD
-><TD
-WIDTH="25%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->2<SUP
->32</SUP
-> = 4294967296</TD
+>12</SUP
+> = 4096</TD
 ></TR
 ><TR
 ><TD
@@ -366,7 +373,41 @@ VALIGN="MIDDLE"
 ></DIV
 ><P
 ALIGN="justify"
->Note that these constants are not fixnums, contrary to the <A
+>Note that <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_array-_ension-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>ARRAY-DIMENSION-LIMIT</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_array-_l-size-limit.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>ARRAY-TOTAL-SIZE-LIMIT</TT
+></A
+> are
+ not fixnums (they are equal to
+ <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_1plcm_1-.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>1+</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_ative-fixnum.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>MOST-POSITIVE-FIXNUM</TT
+></A
+>)</TT
+>),
+ contrary to the <A
 HREF="references.html#ansi-cl"
 >[<SPAN
 CLASS="citation"
@@ -375,8 +416,7 @@ HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
 >]</A
->
- Issue <A
+> Issue <A
 HREF="http://www.lisp.org/HyperSpec/Issues/iss014.html"
 TARGET="_top"
 >ARRAY-DIMENSION-LIMIT-IMPLICATIONS:ALL-FIXNUM</A

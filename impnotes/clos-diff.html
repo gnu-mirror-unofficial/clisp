@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -105,7 +105,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="clos-diff">4.3. Deviations from <A
+NAME="clos-diff"
+></A
+>4.3. Deviations from <A
 HREF="references.html#ansi-cl"
 >[<SPAN
 CLASS="citation"
@@ -115,32 +117,6 @@ HREF="references.html#ansi-cl"
 ></SPAN
 >]</A
 ></H1
-><DIV
-CLASS="formalpara"
-><P
-><B
->Macro <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
-TARGET="_top"
-><TT
-CLASS="function"
->DEFCLASS</TT
-></A
->. </B
->It <I
-CLASS="emphasis"
->is</I
-> required that the superclasses of a
- class be defined before the <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_defclass.html"
-TARGET="_top"
-><TT
-CLASS="function"
->DEFCLASS</TT
-></A
-> form for the class is evaluated.
- </P
-></DIV
 ><P
 ALIGN="justify"
 ><A
@@ -200,12 +176,19 @@ CLASS="function"
  interpreted code.</P
 ><P
 ALIGN="justify"
->There is a generic function <B
-CLASS="emphasis"
+>There is a generic function
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="clos-diff.html#no-prim"
 ><TT
 CLASS="function"
 >CLOS:NO-PRIMARY-METHOD</TT
-></B
+></A
+></I
+></STRONG
 >
  (similar to <A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_no-_cable-method.html"
@@ -226,36 +209,61 @@ CLASS="classname"
  no primary method on that generic function is applicable.</P
 ><P
 ALIGN="justify"
-><B
-CLASS="emphasis"
+><STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="clos-diff.html#gen-flet"
 ><TT
 CLASS="function"
->clos:generic-flet</TT
-></B
-> and
- <B
-CLASS="emphasis"
+>CLOS:GENERIC-FLET</TT
+></A
+></I
+></STRONG
+>
+ and
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="clos-diff.html#gen-labels"
 ><TT
 CLASS="function"
->clos:generic-labels</TT
-></B
-> are
- implemented as macros, not as special operators.  They are not imported
- into the packages <A
+>CLOS:GENERIC-LABELS</TT
+></A
+></I
+></STRONG
+>
+ are implemented as macros, not as special operators (as permitted by
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-1-2-1-2-2.html"
+TARGET="_top"
+>Section 3.1.2.1.2.2</A
+>).
+ They are not imported into the packages <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP-USER"</SPAN
+></STRONG
 ></A
 > and <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
-> because of the <A
+> because
+ of the <A
 HREF="references.html#ansi-cl"
 >[<SPAN
 CLASS="citation"
@@ -264,23 +272,11 @@ HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
 >]</A
-> issue
- <A
+> issue <A
 HREF="http://www.lisp.org/HyperSpec/Issues/iss181.html"
 TARGET="_top"
 >GENERIC-FLET-POORLY-DESIGNED:DELETE</A
->.
- </P
-><P
-ALIGN="justify"
->The function <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_ensure-ge_ric-function.html"
-TARGET="_top"
-><TT
-CLASS="function"
->ENSURE-GENERIC-FUNCTION</TT
-></A
-> is not implemented.</P
+>.</P
 ><P
 ALIGN="justify"
 ><A
@@ -333,25 +329,6 @@ CLASS="classname"
 >NUMBER</TT
 ></A
 >s, due to the performance concerns.</P
-><P
-ALIGN="justify"
-><A
-HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
-TARGET="_top"
-><TT
-CLASS="function"
->DOCUMENTATION</TT
-></A
-> still has the <A
-HREF="references.html#CLtL1"
->[<SPAN
-CLASS="citation"
-><A
-HREF="references.html#CLtL1"
->CLtL1</A
-></SPAN
->]</A
-> implementation.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

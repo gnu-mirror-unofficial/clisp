@@ -20,8 +20,9 @@ REL="PREVIOUS"
 TITLE="Additional read dispatch macros"
 HREF="read-dispatch-ext.html"><LINK
 REL="NEXT"
-TITLE="Functions LISTEN, READ-CHAR-NO-HANG"
-HREF="listen.html"><LINK
+TITLE="System Construction
+   [CLHS-24]"
+HREF="system.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -62,7 +63,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -89,7 +90,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="listen.html"
+HREF="system.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -103,7 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="rt-case">23.3. Function <A
+NAME="rt-case"
+></A
+>23.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
 TARGET="_top"
 ><TT
@@ -132,7 +135,7 @@ CLASS="replaceable"
 > is
  <TT
 CLASS="constant"
->:invert</TT
+>:INVERT</TT
 >, it applies to the package name and the
  symbol name of a symbol separately (not to the entire token at once).
  An alternative to the use of <A
@@ -143,23 +146,19 @@ CLASS="function"
 >READTABLE-CASE</TT
 ></A
 > is the use of the
- <TT
+ <A
+HREF="pack-dict.html#make-pack"
+><TT
 CLASS="constant"
 >:CASE-SENSITIVE</TT
-> option to <A
+></A
+> option of
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-package.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >MAKE-PACKAGE</TT
-></A
->,
- <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_in-package.html"
-TARGET="_top"
-><TT
-CLASS="function"
->IN-PACKAGE</TT
 ></A
 > and <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html"
@@ -204,7 +203,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="listen.html"
+HREF="system.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -228,20 +227,11 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Functions <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+>System Construction
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-24.html"
 TARGET="_top"
-><TT
-CLASS="function"
->LISTEN</TT
-></A
->, <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READ-CHAR-NO-HANG</TT
-></A
+>[CLHS-24]</A
 ></TD
 ></TR
 ></TABLE

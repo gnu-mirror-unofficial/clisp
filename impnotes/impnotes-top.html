@@ -31,12 +31,16 @@ ALINK="#0000FF"
 ><DIV
 CLASS="BOOK"
 ><A
-NAME="impnotes-top"><DIV
+NAME="impnotes-top"
+></A
+><DIV
 CLASS="TITLEPAGE"
 ><H1
 CLASS="title"
 ><A
-NAME="AEN9">Implementation Notes for <A
+NAME="book-info-title-page"
+></A
+>Implementation Notes for <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
@@ -57,18 +61,22 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</H2
+> version 2.31.</H2
 ><SPAN
 CLASS="date"
->Last modified: 2002-09-13<BR></SPAN
+>Last modified: 2003-09-02<BR></SPAN
 ><H3
 CLASS="author"
 ><A
-NAME="bruno">Dr. Bruno Haible</H3
+NAME="bruno"
+></A
+>Dr. Bruno Haible</H3
 ><H3
 CLASS="author"
 ><A
-NAME="sds">Dr. Sam Steingold</H3
+NAME="sds"
+></A
+>Dr. Sam Steingold</H3
 ><DIV
 CLASS="authorblurb"
 ><P
@@ -80,9 +88,8 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> itself
-     should be reported to the mailing list
-     <TT
+> itself should
+   be reported to the mailing list <TT
 CLASS="email"
 >&#60;<A
 HREF="mailto:clisp-list@sf.net"
@@ -95,14 +102,16 @@ ALIGN="center"
 SRC="clisp.png"
 ALT=""><P
 CLASS="copyright"
->Copyright &copy; 1992-2002 by Bruno Haible</P
+>Copyright &copy; 1992-2003 by Bruno Haible</P
 ><P
 CLASS="copyright"
->Copyright &copy; 1998-2002 by Sam Steingold</P
+>Copyright &copy; 1998-2003 by Sam Steingold</P
 ><DIV
 CLASS="legalnotice"
 ><A
-NAME="legalese"><P
+NAME="legalese"
+></A
+><P
 ></P
 ><P
 ALIGN="justify"
@@ -123,13 +132,13 @@ ALIGN="justify"
 HREF="http://www.gnu.org/copyleft/fdl.html"
 TARGET="_top"
 >GFDL</A
->), Version 1.1 or any later version published by the <A
+>), Version 1.2 or any later version published by the <A
 HREF="http://www.fsf.org"
 TARGET="_top"
 >Free Software Foundation (FSF)</A
 >;
    with no Invariant Sections,
-   with Front-Cover Text being this section, and
+   with no Front-Cover Text, and
    with no Back-Cover Texts.
    A copy of the license is included in the section entitled
    <A
@@ -216,9 +225,12 @@ HREF="cl-symb.html"
 >Symbols in the Package <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 >
   <A
@@ -243,7 +255,17 @@ TARGET="_top"
 ><DL
 ><DT
 >2.1. <A
-HREF="syntax.html#tokens"
+HREF="syntax.html#reader-alg"
+>Reader Algorithm
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_2-2.html"
+TARGET="_top"
+>[CLHS-2.2]</A
+></A
+></DT
+><DT
+>2.2. <A
+HREF="tokens.html"
 >Symbols as Tokens
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_2-3-4.html"
@@ -252,7 +274,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.2. <A
+>2.3. <A
 HREF="valid-patterns.html"
 >Valid Patterns for Tokens
   <A
@@ -262,7 +284,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.3. <A
+>2.4. <A
 HREF="double-quote.html"
 >Double-Quote
   <A
@@ -272,7 +294,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.4. <A
+>2.5. <A
 HREF="backquote.html"
 >Backquote
   <A
@@ -282,7 +304,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->2.5. <A
+>2.6. <A
 HREF="sharpsign.html"
 >Sharpsign
   <A
@@ -499,6 +521,30 @@ TARGET="_top"
 >[CLHS-7]</A
 ></A
 ></DT
+><DD
+><DL
+><DT
+>7.1. <A
+HREF="objects.html#meth-combo"
+>Declarative Method Combination
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_7-6-6-3.html"
+TARGET="_top"
+>[CLHS-7.6.6.3]</A
+></A
+></DT
+><DT
+>7.2. <A
+HREF="obj-dict.html"
+>The Objects Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_7-7.html"
+TARGET="_top"
+>[CLHS-7.7]</A
+></A
+></DT
+></DL
+></DD
 ><DT
 >8. <A
 HREF="structures.html"
@@ -568,8 +614,18 @@ TARGET="_top"
 ><DT
 >11.1. <A
 HREF="packages.html#pack-lock"
->Constraints on the COMMON-LISP Package for
- Conforming Programs - package locking
+>Constraints on the <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></STRONG
+></A
+> Package
+  for Conforming Programs - package locking
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
 TARGET="_top"
@@ -579,8 +635,15 @@ TARGET="_top"
 ><DT
 >11.2. <A
 HREF="clupack.html"
->The COMMON-LISP-USER Package
-   <A
+>The
+  <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></STRONG
+> Package
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
 TARGET="_top"
 >[CLHS-11.1.2.2]</A
@@ -946,11 +1009,21 @@ TARGET="_top"
 ></DT
 ><DT
 >19.2. <A
+HREF="unspecific.html"
+>:UNSPECIFIC as a Component Value
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-2-2-3.html"
+TARGET="_top"
+>[CLHS-19.2.2.2.3]</A
+></A
+></DT
+><DT
+>19.3. <A
 HREF="path-external-notation.html"
 >External notation.</A
 ></DT
 ><DT
->19.3. <A
+>19.4. <A
 HREF="log-path.html"
 >Logical Pathnames
    <A
@@ -960,7 +1033,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->19.4. <A
+>19.5. <A
 HREF="filename-dict.html"
 >The Filenames Dictionary
    <A
@@ -1129,37 +1202,6 @@ TARGET="_top"
 ><TT
 CLASS="function"
 >READTABLE-CASE</TT
-></A
-></A
-></DT
-><DT
->23.4. <A
-HREF="listen.html"
->Functions <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
-TARGET="_top"
-><TT
-CLASS="function"
->LISTEN</TT
-></A
->, <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READ-CHAR-NO-HANG</TT
-></A
-></A
-></DT
-><DT
->23.5. <A
-HREF="read-byte.html"
->Function <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READ-BYTE</TT
 ></A
 ></A
 ></DT
@@ -1338,6 +1380,11 @@ CLASS="command"
 ></A
 > behavior.</A
 ></DT
+><DT
+>29.12. <A
+HREF="code-walk.html"
+>Extensions-1.12. Code Walker</A
+></DT
 ></DL
 ></DD
 ><DT
@@ -1379,13 +1426,20 @@ HREF="socket.html"
 ></DT
 ><DT
 >30.7. <A
-HREF="syscalls.html"
->Extensions-2.7. System Calls</A
+HREF="quickstart.html"
+>Extensions-2.7. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
 ></DT
 ><DT
 >30.8. <A
-HREF="quickstart.html"
->Extensions-2.8. Quickstarting delivery with <A
+HREF="app-dev.html"
+>Extensions-2.8. Application delivery with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -1396,36 +1450,19 @@ CLASS="command"
 ></DT
 ><DT
 >30.9. <A
-HREF="app-dev.html"
->Extensions-2.9. Application delivery with <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-></A
+HREF="shell.html"
+>Extensions-2.9. Shell, Pipes and Printing</A
 ></DT
 ><DT
 >30.10. <A
-HREF="shell.html"
->Extensions-2.10. Shell, Pipes and Printing</A
-></DT
-><DT
->30.11. <A
-HREF="dir-key.html"
->Extensions-2.11. Directory Access</A
-></DT
-><DT
->30.12. <A
 HREF="getenv.html"
->Extensions-2.12. Operating System
+>Extensions-2.10. Operating System
   Environment.</A
 ></DT
 ><DT
->30.13. <A
-HREF="other.html"
->Extensions-2.13. Other</A
+>30.11. <A
+HREF="separate-io.html"
+>Extensions-2.11. Other</A
 ></DT
 ></DL
 ></DD
@@ -1641,11 +1678,17 @@ HREF="gfdl-10.html"
 ></DT
 ><DT
 >A.12. <A
-HREF="gfdl-11.html"
->How to use this License for your documents</A
+HREF="gfdl-addendum.html"
+>ADDENDUM: How to use this License for
+  your documents</A
 ></DT
 ></DL
 ></DD
+><DT
+><A
+HREF="idx.html"
+>Index</A
+></DT
 ><DT
 ><A
 HREF="references.html"

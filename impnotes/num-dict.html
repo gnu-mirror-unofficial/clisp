@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="num-dict">12.3. The Numbers Dictionary
+NAME="num-dict"
+></A
+>12.3. The Numbers Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_numbers_dictionary.html"
 TARGET="_top"
@@ -124,12 +126,10 @@ CLASS="function"
 >UPGRADED-COMPLEX-PART-TYPE</TT
 ></A
 >. </B
->When the argument is not a
- <A
+>When the argument is not a <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_r.html#recognizable_subtype"
 TARGET="_top"
->recognizable
- subtype</A
+>recognizable subtype</A
 > or <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
 TARGET="_top"
@@ -137,22 +137,30 @@ TARGET="_top"
 CLASS="classname"
 >REAL</TT
 ></A
->, <A
+>,
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_upgraded-_ex-part-type.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >UPGRADED-COMPLEX-PART-TYPE</TT
 ></A
-> signals an
- <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_error.html"
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
 TARGET="_top"
 ><TT
 CLASS="function"
+>SIGNAL</TT
+></A
+>s an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
 >ERROR</TT
 ></A
->, otherwise it returns <A
+>,
+ otherwise it returns <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
 TARGET="_top"
 ><TT
@@ -195,7 +203,9 @@ CLASS="function"
 CLASS="formalpara"
 ><P
 ><A
-NAME="default-float-format"><B
+NAME="default-float-format"
+></A
+><B
 >Variable <A
 HREF="num-dict.html#default-float-format"
 ><TT
@@ -238,7 +248,9 @@ CLASS="varname"
 CLASS="formalpara"
 ><P
 ><A
-NAME="no-underflow"><B
+NAME="no-underflow"
+></A
+><B
 >Macro <A
 HREF="num-dict.html#no-underflow"
 ><TT
@@ -275,7 +287,21 @@ CLASS="classname"
 >FLOATING-POINT-UNDERFLOW</TT
 ></A
 > inhibited.  Floating point operations
- will silently return zero instead of signalling an error of type
+ will silently return zero instead of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>ling an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> of type
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/contyp_floati_nt-underflow.html"
 TARGET="_top"
@@ -290,7 +316,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="int-func-ext">12.3.1. Additional Integer Functions</H2
+NAME="int-func-ext"
+></A
+>12.3.1. Additional Integer Functions</H2
 ><DIV
 CLASS="formalpara"
 ><P
@@ -370,8 +398,22 @@ CLASS="replaceable"
 ><I
 >y</I
 ></TT
->, and signals an error when the quotient is not
- integer.  (This is more efficient than <A
+>, and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>s an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> when the quotient
+ is not integer.  (This is more efficient than <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_sl.html"
 TARGET="_top"
 ><TT
@@ -541,10 +583,15 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-notes">12.3.2. Floating Point</H2
+NAME="float-notes"
+></A
+>12.3.2. Floating Point</H2
 ><DIV
 CLASS="formalpara"
 ><P
+><A
+NAME="expt"
+></A
 ><B
 >Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_expcm_expt.html"
@@ -581,12 +628,15 @@ CLASS="replaceable"
 ><I
 >exponent</I
 ></TT
-> has a large absolute
- value.</P
+> has a large absolute value.
+</P
 ></DIV
 ><DIV
 CLASS="formalpara"
 ><P
+><A
+NAME="log"
+></A
 ><B
 >Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_log.html"
@@ -616,8 +666,22 @@ CLASS="replaceable"
 >base</I
 ></TT
 >)</TT
-> signals
- an error if <TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>s
+ an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> if <TT
 CLASS="literal"
 ><TT
 CLASS="replaceable"
@@ -630,6 +694,9 @@ CLASS="replaceable"
 ><DIV
 CLASS="formalpara"
 ><P
+><A
+NAME="pi"
+></A
 ><B
 >Constant <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
@@ -654,7 +721,7 @@ CLASS="classname"
 >LONG-FLOAT</TT
 ></A
 > with the precision given
- by <TT
+  by <TT
 CLASS="sexp"
 >(<A
 HREF="num-concepts.html#lfd"
@@ -671,25 +738,22 @@ CLASS="constant"
 >PI</TT
 ></A
 > is
- automatically recomputed.  Therefore <A
+  automatically recomputed.  Therefore <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >PI</TT
 ></A
-> is
- a <I
+> is <I
 CLASS="emphasis"
->variable</I
->, <B
-CLASS="emphasis"
->not</B
->
- a <I
-CLASS="emphasis"
->constant</I
->.</P
+>not</I
+> a <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_c.html#constant_variable"
+TARGET="_top"
+>constant variable</A
+>.
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -697,8 +761,10 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-decode">12.3.3. Float Decoding
-   <A
+NAME="float-decode"
+></A
+>12.3.3. Float Decoding
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_decode-fl_decode-float.html"
 TARGET="_top"
 >[CLHS]</A
@@ -733,7 +799,7 @@ CLASS="replaceable"
 >number</I
 ></TT
 >
- <TT
+   <TT
 CLASS="replaceable"
 ><I
 >digits</I
@@ -752,13 +818,13 @@ CLASS="classname"
 >REAL</TT
 ></A
 > number) to a
- floating point number with at least <TT
+  floating point number with at least <TT
 CLASS="replaceable"
 ><I
 >digits</I
 ></TT
 > mantissa digits.
- The following always evaluates to <A
+  The following always evaluates to <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
 ><TT
@@ -766,7 +832,7 @@ CLASS="constant"
 >T</TT
 ></A
 >:
-<TABLE
+  <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -774,7 +840,7 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13; (<A
+>&#13;   (<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_eqcm_sleq__lteqcm_gteq.html"
 TARGET="_top"
 ><TT
@@ -811,7 +877,7 @@ CLASS="replaceable"
 >digits</I
 ></TT
 >)
-</PRE
+ </PRE
 ></TD
 ></TR
 ></TABLE
@@ -822,8 +888,10 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="bool-ops">12.3.4. Boolean Operations
-   <A
+NAME="bool-ops"
+></A
+>12.3.4. Boolean Operations
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_boole-_cm_boole-xor.html"
 TARGET="_top"
 >[CLHS]</A
@@ -831,9 +899,11 @@ TARGET="_top"
 ><DIV
 CLASS="table"
 ><A
-NAME="bool-op-table"><P
+NAME="bool-op-table"
+></A
+><P
 ><B
->Table 12-2. Boolean Operations</B
+>Table 12-1. Boolean Operations</B
 ></P
 ><TABLE
 BORDER="1"
@@ -1132,8 +1202,10 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="fixnum-lim">12.3.5. Fixnum Limits
-<A
+NAME="fixnum-lim"
+></A
+>12.3.5. Fixnum Limits
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_ative-fixnum.html"
 TARGET="_top"
 >[CLHS]</A
@@ -1141,9 +1213,11 @@ TARGET="_top"
 ><DIV
 CLASS="table"
 ><A
-NAME="fixnum-lim-table"><P
+NAME="fixnum-lim-table"
+></A
+><P
 ><B
->Table 12-3. Fixnum limits (platform dependent)</B
+>Table 12-2. Fixnum limits</B
 ></P
 ><TABLE
 BORDER="1"
@@ -1238,8 +1312,10 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-lim">12.3.6. Float Limits
-<A
+NAME="float-lim"
+></A
+>12.3.6. Float Limits
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
 TARGET="_top"
 >[CLHS]</A
@@ -1254,7 +1330,7 @@ CLASS="constant"
 >PI</TT
 ></A
 >, the other long float constants
- <A
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
 TARGET="_top"
 ><TT
@@ -1269,7 +1345,7 @@ CLASS="constant"
 >LEAST-NEGATIVE-NORMALIZED-LONG-FLOAT</TT
 ></A
 >
- <A
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
 TARGET="_top"
 ><TT
@@ -1284,7 +1360,7 @@ CLASS="constant"
 >LEAST-POSITIVE-NORMALIZED-LONG-FLOAT</TT
 ></A
 >
- <A
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_short-_tive-epsilon.html"
 TARGET="_top"
 ><TT
@@ -1299,7 +1375,7 @@ CLASS="constant"
 >LONG-FLOAT-NEGATIVE-EPSILON</TT
 ></A
 >
- <A
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_most-p_d-long-float.html"
 TARGET="_top"
 ><TT
@@ -1314,7 +1390,7 @@ CLASS="constant"
 >MOST-POSITIVE-LONG-FLOAT</TT
 ></A
 > are recomputed
- whenever <TT
+  whenever <TT
 CLASS="sexp"
 >(<A
 HREF="num-concepts.html#lfd"
@@ -1332,22 +1408,21 @@ CLASS="function"
 ></A
 >ed.  They are <I
 CLASS="emphasis"
->variables</I
->,
- <B
-CLASS="emphasis"
->not</B
-> <I
-CLASS="emphasis"
->constants</I
->.</P
+>not</I
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_c.html#constant_variable"
+TARGET="_top"
+>constant variable</A
+>s.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-invalid-op">12.3.7. Condition <A
+NAME="float-invalid-op"
+></A
+>12.3.7. Condition <A
 HREF="http://www.lisp.org/HyperSpec/Body/contyp_floati_id-operation.html"
 TARGET="_top"
 ><TT
@@ -1357,7 +1432,21 @@ CLASS="classname"
 ></H2
 ><P
 ALIGN="justify"
->This condition is never signaled by <A
+>This <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_condition.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONDITION</TT
+></A
+> is never <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>ed by <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -1371,7 +1460,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-inexact">12.3.8. Condition <A
+NAME="float-inexact"
+></A
+>12.3.8. Condition <A
 HREF="http://www.lisp.org/HyperSpec/Body/contyp_floati_oint-inexact.html"
 TARGET="_top"
 ><TT
@@ -1381,7 +1472,21 @@ CLASS="classname"
 ></H2
 ><P
 ALIGN="justify"
->This condition is never signaled by <A
+>This <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_condition.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONDITION</TT
+></A
+> is never <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>ed by <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B

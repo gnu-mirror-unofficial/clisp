@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="final">29.7. Extensions-1.7. Finalization</H1
+NAME="final"
+></A
+>29.7. Extensions-1.7. Finalization</H1
 ><P
 ALIGN="justify"
 >Calling
@@ -176,11 +178,17 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >
- has a similar effect, but only as long as the "guardian" has not been
- <A
+ has a similar effect, but only as long as the
+ <TT
+CLASS="replaceable"
+><I
+>guardian</I
+></TT
+> has not been <A
 HREF="gc.html"
 >garbage-collect</A
->ed: when <TT
+>ed:
+ when <TT
 CLASS="replaceable"
 ><I
 >object</I
@@ -217,7 +225,12 @@ CLASS="replaceable"
 >)</TT
 >
  will be executed.
- If the guardian is <A
+ If the <TT
+CLASS="replaceable"
+><I
+>guardian</I
+></TT
+> is <A
 HREF="gc.html"
 >garbage-collect</A
 >ed before <TT
@@ -225,7 +238,8 @@ CLASS="replaceable"
 ><I
 >object</I
 ></TT
-> is, nothing happens.</P
+>
+ is, nothing happens.</P
 ><P
 ALIGN="justify"
 >Note: The time when <SPAN

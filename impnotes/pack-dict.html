@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="pack-dict">11.4. The Packages Dictionary
+NAME="pack-dict"
+></A
+>11.4. The Packages Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_packa_s_dictionary.html"
 TARGET="_top"
@@ -117,7 +119,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="make-pack">11.4.1. Function <A
+NAME="make-pack"
+></A
+>11.4.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-package.html"
 TARGET="_top"
 ><TT
@@ -143,9 +147,12 @@ CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 >)</TT
 >.
@@ -204,18 +211,21 @@ CLASS="varname"
 >)</TT
 >,
  though.</P
+></DIV
 ><DIV
 CLASS="section"
-><H3
+><H2
 CLASS="section"
 ><A
-NAME="re-export">11.4.1.1. Function <A
+NAME="re-export"
+></A
+>11.4.2. Function <A
 HREF="pack-dict.html#re-export"
 ><TT
 CLASS="function"
 >EXT:RE-EXPORT</TT
 ></A
-></H3
+></H2
 ><P
 ALIGN="justify"
 >The function <TT
@@ -239,7 +249,21 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >
- re-exports all external symbols from
+ re-<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EXPORT</TT
+></A
+>s all external <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+>s from
  <TT
 CLASS="replaceable"
 ><I
@@ -257,9 +281,22 @@ CLASS="replaceable"
 ><I
 >FROM-PACK</I
 ></TT
->; and signals an error otherwise.
+>; and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>s an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> otherwise.
 </P
-></DIV
 ></DIV
 ></DIV
 ><DIV

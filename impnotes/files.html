@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="files">Chapter 20. Files
+NAME="files"
+></A
+>Chapter 20. Files
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-20.html"
 TARGET="_top"
@@ -129,7 +131,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="file-dict">20.1. The Files Dictionary
+NAME="file-dict"
+></A
+>20.1. The Files Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_files_dictionary.html"
 TARGET="_top"
@@ -177,21 +181,20 @@ CLASS="function"
 >PROBE-FILE</TT
 ></A
 > cannot be used to check whether a directory exists.
- Use the function <A
+ Use functions <A
 HREF="files.html#probe-dir"
 ><TT
 CLASS="function"
 >EXT:PROBE-DIRECTORY</TT
 ></A
-> or the function <A
+> or <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >DIRECTORY</TT
 ></A
-> for this
- purpose.</P
+> for this.</P
 ></DIV
 ><DIV
 CLASS="formalpara"
@@ -259,7 +262,9 @@ CLASS="emphasis"
 CLASS="formalpara"
 ><P
 ><A
-NAME="probe-dir"><B
+NAME="probe-dir"
+></A
+><B
 >Function <A
 HREF="files.html#probe-dir"
 ><TT
@@ -302,8 +307,22 @@ TARGET="_top"
 CLASS="function"
 >TRUENAME</TT
 ></A
->, not signal an error if the
- parent directory of <TT
+>, not <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+> an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+>
+ if the parent directory of <TT
 CLASS="replaceable"
 ><I
 >pathname</I
@@ -311,11 +330,99 @@ CLASS="replaceable"
 > does not exist.</P
 ></DIV
 ><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="del-file"
+></A
+><B
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_delete-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DELETE-FILE</TT
+></A
+>. </B
+><TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_delete-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DELETE-FILE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>)</TT
+> deletes
+ the pathname <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>, not its <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_truename.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TRUENAME</TT
+></A
+>, and returns the absolute
+ pathname it actually removed or <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> did not exist.
+ When <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> points to a file which is currently open in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>, an
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>led.</P
+></DIV
+><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="dir">20.1.1. Function <A
+NAME="dir"
+></A
+>20.1.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
 TARGET="_top"
 ><TT
@@ -346,15 +453,18 @@ CLASS="replaceable"
 ><I
 >pathname</I
 ></TT
->
- <A
+> <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
 ><TT
 CLASS="literal"
 >&#38;KEY</TT
 ></A
-> :full :circle)</TT
+>
+  :FULL :CIRCLE <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+>)</TT
 > can run in two modes:
 <P
 ></P
@@ -407,7 +517,7 @@ CLASS="filename"
 >.
   If the <TT
 CLASS="constant"
->:full</TT
+>:FULL</TT
 > argument is non-<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -548,7 +658,7 @@ CLASS="emphasis"
 ALIGN="justify"
 >If the <TT
 CLASS="constant"
->:circle</TT
+>:CIRCLE</TT
 > argument is
  non-<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
@@ -559,6 +669,136 @@ CLASS="constant"
 ></A
 >, the function avoids endless loops that may result from
  symbolic links.</P
+></DD
+></DL
+></DIV
+>
+
+
+The argument <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+> controls the treatment of links
+pointing to non-existent files and can take the following values:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="constant"
+>:DISCARD</TT
+> (default)</DT
+><DD
+><P
+ALIGN="justify"
+>discard the bad directory entries
+</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:ERROR</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+> an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> on bad directory entries
+   (this corresponds to the default behavior of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+> in <A
+HREF="http://www.cons.org/cmucl"
+TARGET="_top"
+><B
+CLASS="command"
+>CMU CL</B
+></A
+>)
+</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:KEEP</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>keep bad directory entries in the returned list
+   (this roughly corresponds to the <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_directory.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DIRECTORY</TT
+></A
+>
+    ... <TT
+CLASS="constant"
+>:TRUNAMEP</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>)</TT
+> call in <A
+HREF="http://www.cons.org/cmucl"
+TARGET="_top"
+><B
+CLASS="command"
+>CMU CL</B
+></A
+>)
+</P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:IGNORE</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Similar to <TT
+CLASS="constant"
+>:DISCARD</TT
+>, but also
+   do not signal an error when a directory is unaccessible (contrary to
+   the <A
+HREF="references.html#ansi-cl"
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+> specification).</P
 ></DD
 ></DL
 ></DIV
@@ -610,7 +850,9 @@ CLASS="sexp"
 CLASS="formalpara"
 ><P
 ><A
-NAME="cd"><B
+NAME="cd"
+></A
+><B
 >Function <A
 HREF="files.html#cd"
 ><TT

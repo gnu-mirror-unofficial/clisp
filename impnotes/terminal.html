@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -105,7 +105,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="terminal">21.2. Terminal interaction.</H1
+NAME="terminal"
+></A
+>21.2. Terminal interaction.</H1
 ><P
 ></P
 ><DIV
@@ -328,15 +330,19 @@ CLASS="replaceable"
 >body</I
 ></TT
 >)</TT
-> form, <B
-CLASS="emphasis"
+> form,
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
 ><A
 HREF="terminal.html"
 ><TT
 CLASS="varname"
 >EXT:*KEYBOARD-INPUT*</TT
 ></A
-></B
+></I
+></STRONG
 > is the stream that reads the
  keystrokes from the keyboard.
  It returns every keystroke in detail, as <A
@@ -402,10 +408,9 @@ CLASS="emphasis"
 >
    if a non-standard key.  These keys are:
 
-   Function keys, cursor keypads, numeric keypad <I
+   <I
 CLASS="emphasis"
->(Platform
-   dependent: <A
+>[<A
 HREF="http://www.freedos.org/"
 TARGET="_top"
 ><B
@@ -426,22 +431,22 @@ TARGET="_top"
 CLASS="emphasis"
 >Win32</B
 ></A
-> platforms only)</I
->.
+>]:</I
+>
+   Function keys, cursor keypads, numeric keypad.
 
 
-     Function keys, cursor keypad <I
+   <I
 CLASS="emphasis"
->(Platform dependent:
-     <A
+>[<A
 HREF="http://www.amiga.org/"
 TARGET="_top"
 ><B
 CLASS="emphasis"
 >Amiga</B
 ></A
-> platforms only)</I
->.
+>]:</I
+>Function keys, cursor keypad.
 
    </P
 ></DD
@@ -480,11 +485,11 @@ CLASS="emphasis"
           platforms only.</DT
 ><DD
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="dos-kbd-keys"><P
-><B
->Table 21-1. </B
+NAME="dos-kbd-keys"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -646,6 +651,8 @@ CLASS="constant"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -667,11 +674,11 @@ CLASS="emphasis"
          platforms only.</DT
 ><DD
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="unix-kbd-keys"><P
-><B
->Table 21-2. </B
+NAME="unix-kbd-keys"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -849,6 +856,8 @@ CLASS="constant"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -862,11 +871,11 @@ CLASS="emphasis"
 > platforms only.</DT
 ><DD
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="amiga-kbd-keys"><P
-><B
->Table 21-3. </B
+NAME="amiga-kbd-keys"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -948,6 +957,8 @@ CLASS="constant"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ></DL

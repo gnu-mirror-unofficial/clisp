@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="types-classes">Chapter 4. Types and Classes
+NAME="types-classes"
+></A
+>Chapter 4. Types and Classes
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-4.html"
 TARGET="_top"
@@ -203,7 +205,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="types">4.1. Types
+NAME="types"
+></A
+>4.1. Types
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2.html"
 TARGET="_top"
@@ -214,7 +218,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="type-spec">4.1.1. Type Specifiers
+NAME="type-spec"
+></A
+>4.1.1. Type Specifiers
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_4-2-3.html"
 TARGET="_top"
@@ -230,7 +236,7 @@ CLASS="classname"
 >COMPLEX</TT
 ></A
 > type specifier is <TT
-CLASS="sexp"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -252,7 +258,7 @@ CLASS="replaceable"
 >)</TT
 >.  The type
  specifier <TT
-CLASS="sexp"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -268,7 +274,7 @@ CLASS="replaceable"
 >)</TT
 > is
  equivalent to <TT
-CLASS="sexp"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_complex.html"
 TARGET="_top"
@@ -301,7 +307,7 @@ HREF="references.html#ansi-cl"
 ></SPAN
 >]</A
 > type specifier <TT
-CLASS="sexp"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_real.html"
 TARGET="_top"
@@ -586,7 +592,7 @@ CLASS="classname"
 ><P
 ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
 TARGET="_top"
@@ -607,7 +613,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-array.html"
 TARGET="_top"
@@ -633,7 +639,7 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"
@@ -656,7 +662,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
 TARGET="_top"
@@ -677,7 +683,7 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
 TARGET="_top"
@@ -693,7 +699,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
 TARGET="_top"
@@ -714,7 +720,7 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_base-string.html"
 TARGET="_top"
@@ -730,7 +736,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-base-string.html"
 TARGET="_top"
@@ -751,7 +757,7 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_bit-vector.html"
 TARGET="_top"
@@ -767,7 +773,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-bit-vector.html"
 TARGET="_top"
@@ -925,11 +931,11 @@ CLASS="type"
 ALIGN="justify"
 ><TT
 CLASS="classname"
->special-operator</TT
+>SPECIAL-OPERATOR</TT
 >,
   <TT
 CLASS="classname"
->load-time-eval</TT
+>LOAD-TIME-EVAL</TT
 >, <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
@@ -944,20 +950,31 @@ CLASS="classname"
 >EXT:ENCODING</TT
 ></A
 >,
-  <TT
+  <A
+HREF="dffi.html#fptr"
+><TT
 CLASS="classname"
 >FFI:FOREIGN-POINTER</TT
->, <TT
+></A
+>, <A
+HREF="dffi.html#faddr"
+><TT
 CLASS="classname"
->foreign-address</TT
+>FFI:FOREIGN-ADDRESS</TT
+></A
 >,
-  <TT
+  <A
+HREF="dffi.html#dffi-variables"
+><TT
 CLASS="classname"
->foreign-variable</TT
->,
-  <TT
+>FFI:FOREIGN-VARIABLE</TT
+></A
+>;, <A
+HREF="dffi.html"
+><TT
 CLASS="classname"
->foreign-function</TT
+>FFI:FOREIGN-FUNCTION</TT
+></A
 ></P
 ></LI
 ><LI
@@ -970,23 +987,23 @@ CLASS="classname"
 >EXT:WEAK-POINTER</TT
 ></A
 >,
-          <A
+   <A
 HREF="reader.html"
 ><TT
 CLASS="classname"
->read-label</TT
+>READ-LABEL</TT
 ></A
 >,
-          <A
+   <A
 HREF="reader.html"
 ><TT
 CLASS="classname"
->frame-pointer</TT
+>FRAME-POINTER</TT
 ></A
 >,
-      <TT
+   <TT
 CLASS="classname"
->system-internal</TT
+>SYSTEM-INTERNAL</TT
 ></P
 ></LI
 ><LI
@@ -994,14 +1011,21 @@ CLASS="classname"
 ALIGN="justify"
 ><TT
 CLASS="classname"
->address</TT
+>ADDRESS</TT
 > (should not
   occur)</P
 ></LI
 ><LI
 ><P
 ALIGN="justify"
->any other symbol (structure types or <B
+>any other <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+> (structure types or <B
 CLASS="command"
 >CLOS</B
 >
@@ -1010,10 +1034,10 @@ CLASS="command"
 ><LI
 ><P
 ALIGN="justify"
->a class (<B
+>a class object (<B
 CLASS="command"
 >CLOS</B
-> classes without proper
+> classes without a proper
   name)</P
 ></LI
 ></UL

@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="macros3">29.10. Extensions-1.10. Additional Fancy Macros</H1
+NAME="macros3"
+></A
+>29.10. Extensions-1.10. Additional Fancy Macros</H1
 ><P
 ALIGN="justify"
 ><A
@@ -107,8 +109,8 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> comes with some extension macros, defined in the file
- <TT
+> comes with some extension macros, mostly defined in the
+ file <TT
 CLASS="filename"
 >macros3.lisp</TT
 > and loaded from the file
@@ -123,7 +125,9 @@ CLASS="command"
 CLASS="formalpara"
 ><P
 ><A
-NAME="ethe"><B
+NAME="ethe"
+></A
+><B
 >Macro <A
 HREF="macros3.html#ethe"
 ><TT
@@ -158,7 +162,9 @@ CLASS="replaceable"
 CLASS="formalpara"
 ><P
 ><A
-NAME="letf"><B
+NAME="letf"
+></A
+><B
 >Macros <A
 HREF="macros3.html#letf"
 ><TT
@@ -298,7 +304,9 @@ CLASS="function"
 CLASS="formalpara"
 ><P
 ><A
-NAME="with-collect"><B
+NAME="with-collect"
+></A
+><B
 >Macro <TT
 CLASS="function"
 >EXT:WITH-COLLECT</TT
@@ -356,6 +364,206 @@ CLASS="sexp"
 >(0 2 4 6 8)</TT
 > as multiple values.
 </P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="with-gensyms"
+></A
+><B
+>Macro <TT
+CLASS="function"
+>EXT:WITH-GENSYMS</TT
+>. </B
+>Similar to its namesake from
+ <A
+HREF="http://www.paulgraham.com/"
+TARGET="_top"
+>Paul Graham</A
+>'s book
+ <A
+HREF="http://www.paulgraham.com/onlisp.html"
+TARGET="_top"
+><SPAN
+CLASS="QUOTE"
+>"On
+  Lisp"</SPAN
+></A
+>, this macro is useful for writing other macros:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (with-gensyms ("FOO-" bar baz zot) ...)
+</PRE
+></TD
+></TR
+></TABLE
+>
+expands to
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (let ((bar (gensym "FOO-BAR-"))
+       (baz (gensym "FOO-BAZ-"))
+       (zot (gensym "FOO-ZOT-")))
+   ...)
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="remove-plist"
+></A
+><B
+>Function <TT
+CLASS="function"
+>EXT:REMOVE-PLIST</TT
+>. </B
+>Similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_removecm__elete-if-not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REMOVE</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_remf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>REMF</TT
+></A
+>, this function removes some
+ properties from a property list.  It is non-destructve and thus can be
+ used on <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+> arguments to remove some keyword parameters, e.g.,
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (defmacro with-foo ((<A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> foo1 foo2) <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> body)
+   `(... ,foo1 ... ,foo2 ... ,@body))
+ (defmacro with-foo-bar ((<A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+> opts <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> bar1 bar2
+                          <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;ALLOW-OTHER-KEYS</TT
+></A
+>)
+                         <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> body)
+   `(with-foo (,@(remove-plist opts :bar1 :bar2)
+      ... ,bar1 ... ,bar2 ... ,@body)))
+ (defun foo-bar ()
+   (with-foo-bar (:bar1 1 :foo2 2) ...))
+</PRE
+></TD
+></TR
+></TABLE
+>
+here <TT
+CLASS="function"
+>WITH-FOO</TT
+> does not receive the
+<TT
+CLASS="literal"
+>:BAR1 1</TT
+> argument from <TT
+CLASS="function"
+>FOO-BAR</TT
+>.
+</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="html-http-output"
+></A
+><B
+>Macros <TT
+CLASS="function"
+>EXT:WITH-HTML-OUTPUT</TT
+> and
+                   <TT
+CLASS="function"
+>EXT:WITH-HTTP-OUTPUT</TT
+>. </B
+>Defined in <TT
+CLASS="filename"
+>inspect.lisp</TT
+>, these macros are useful
+ for the rudimentary <A
+HREF="http://www.w3.org/Protocols/"
+TARGET="_top"
+><B
+CLASS="command"
+>HTTP</B
+></A
+> server defined there.</P
 ></DIV
 ></DIV
 ><DIV

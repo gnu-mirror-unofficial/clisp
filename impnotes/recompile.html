@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -104,32 +104,34 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="recompile">32.3. Recompilation.</H1
+NAME="recompile"
+></A
+>32.3. Recompilation.</H1
 ><P
 ALIGN="justify"
 ><I
 CLASS="emphasis"
 >Any</I
-> that makes <B
+> change that forces <B
 CLASS="command"
 >make</B
 >
- remake <TT
+ to remake <TT
 CLASS="filename"
 >#P"lisp.run"</TT
->, will make it recompile all
- <TT
+>, will force recompilation
+ of all <TT
 CLASS="filename"
 >#P".lisp"</TT
-> files and re-dump <A
+> files and re-dumping of <A
 HREF="p-indep.html#image"
 ><TT
 CLASS="filename"
 >#P"lispinit.mem"</TT
 ></A
->, which may be time-consuming.
- This is not always necessary, depending on what kind of change you
- introduced.</P
+>, which may be
+ time-consuming.  This is not always necessary, depending on what kind
+ of change you introduced.</P
 ><P
 ALIGN="justify"
 >On the other hand, if you change any of the following files:
@@ -188,17 +190,44 @@ CLASS="filename"
 CLASS="emphasis"
 >have</I
 > to be re-dumped.</P
+><DIV
+CLASS="warning"
+><A
+NAME="byte-version"
+></A
+><P
+></P
+><TABLE
+CLASS="warning"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
 ><P
 ALIGN="justify"
->If you change the signature of any system function in the FUNTAB
- array in file <TT
+>If you change the signature of any
+ system function mentioned in the <TT
+CLASS="varname"
+>FUNTAB</TT
+> arrays in
+ file <TT
 CLASS="filename"
 >#P"eval.d"</TT
 >, all the <TT
 CLASS="filename"
 >#P".fas"</TT
-> files
- will become obsolete and will need to be recompiled.
+> files will
+ become obsolete and will need to be recompiled.
  You will need to add a note to that effect to
  the <TT
 CLASS="filename"
@@ -211,15 +240,11 @@ CLASS="literal"
  file <TT
 CLASS="filename"
 >#P"constsym.d"</TT
->.
- Then you will need to remove all the <TT
-CLASS="filename"
->#P".fas"</TT
-> files in your build
- directory with <B
-CLASS="command"
->make clean</B
 >.</P
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

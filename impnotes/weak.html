@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="weak">29.6. Extensions-1.6. Weak Pointers</H1
+NAME="weak"
+></A
+>29.6. Extensions-1.6. Weak Pointers</H1
 ><P
 ALIGN="justify"
 >A weak pointer is an object holding a reference to a given object,
@@ -127,7 +129,11 @@ CLASS="replaceable"
 ><DD
 ><P
 ALIGN="justify"
->returns a fresh weak pointer referring to
+>returns a <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_f.html#fresh"
+TARGET="_top"
+>fresh</A
+> weak pointer referring to
   <TT
 CLASS="replaceable"
 ><I
@@ -157,14 +163,14 @@ CLASS="replaceable"
 ><I
 >object</I
 ></TT
-> is of type <A
+> is of type
+   <A
 HREF="weak.html"
 ><TT
 CLASS="classname"
 >EXT:WEAK-POINTER</TT
 ></A
->.
- </P
+>.</P
 ></DD
 ><DT
 ><TT
@@ -173,7 +179,7 @@ CLASS="sexp"
 CLASS="function"
 >EXT:WEAK-POINTER-VALUE</TT
 >
-    <TT
+   <TT
 CLASS="replaceable"
 ><I
 >weak-pointer</I
@@ -190,8 +196,8 @@ TARGET="_top"
 CLASS="constant"
 >T</TT
 ></A
->, if
-    the value has not yet been <A
+>,
+   if the value has not yet been <A
 HREF="gc.html"
 >garbage-collect</A
 >ed, else <A
@@ -209,10 +215,39 @@ CLASS="constant"
 >NIL</TT
 ></A
 >.
-  </P
+   It is <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>-able: you can change the value that the weak pointer
+   points to.</P
 ></DD
 ></DL
 ></DIV
+><P
+ALIGN="justify"
+><A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> also has <A
+HREF="hash.html#make-hash"
+>weak</A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>HASH-TABLE</TT
+></A
+>.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Extensions-2.8. Quickstarting delivery with CLISP</TITLE
+>Extensions-2.7. Quickstarting delivery with CLISP</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
@@ -16,10 +16,10 @@ REL="UP"
 TITLE="Extensions-2: Platform specific Extensions"
 HREF="platform.html"><LINK
 REL="PREVIOUS"
-TITLE="Extensions-2.7. System Calls"
-HREF="syscalls.html"><LINK
+TITLE="Extensions-2.6. Socket Streams"
+HREF="socket.html"><LINK
 REL="NEXT"
-TITLE="Extensions-2.9. Application delivery with CLISP"
+TITLE="Extensions-2.8. Application delivery with CLISP"
 HREF="app-dev.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -69,7 +69,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="syscalls.html"
+HREF="socket.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="quickstart">30.8. Extensions-2.8. Quickstarting delivery with <A
+NAME="quickstart"
+></A
+>30.7. Extensions-2.7. Quickstarting delivery with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -183,7 +185,14 @@ CLASS="command"
    execute the appropriate code.</P
 ></DD
 ><DT
->Linux kernel with
+><A
+HREF="http://www.linux.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Linux</B
+></A
+> kernel with
                <TT
 CLASS="option"
 >CONFIG_BINFMT_MISC=y</TT
@@ -280,6 +289,9 @@ CLASS="command"
 CLASS="variablelist"
 ><DL
 ><DT
+><A
+NAME="quickstart-unix"
+></A
 >Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
 TARGET="_top"
@@ -457,7 +469,14 @@ ALIGN="justify"
 ><LI
 ><P
 ALIGN="justify"
->max. 127 characters on Linux.</P
+>max. 127 characters on <A
+HREF="http://www.linux.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Linux</B
+></A
+>.</P
 ></LI
 ></UL
 >
@@ -481,12 +500,11 @@ CLASS="replaceable"
 ><I
 >interpreter</I
 ></TT
->.  In order to pass more than one
- option (for example, <TT
+>.  In order to pass more than one option (for example,
+ <TT
 CLASS="option"
 >-Msomewhere.mem</TT
-> and
- <TT
+> and <TT
 CLASS="option"
 >-C</TT
 >) to <A
@@ -496,9 +514,9 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->, separate them by hard spaces (ISO
- Latin-1 character 160) instead of normal spaces.  (But the separator
- between <TT
+>,
+ separate them by hard spaces (ISO Latin-1 character 160) instead of
+ normal spaces.  (But the separator between <TT
 CLASS="replaceable"
 ><I
 >interpreter</I
@@ -508,8 +526,8 @@ CLASS="replaceable"
 ><I
 >interpreter-arguments</I
 ></TT
-> must still be a normal space!)
- <A
+>
+ must still be a normal space!) <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -521,34 +539,112 @@ CLASS="replaceable"
 ><I
 >interpreter-arguments</I
 ></TT
-> at hard spaces and at normal
- spaces.</P
+> at
+ hard spaces and at normal spaces.</P
 ></LI
 ></UL
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="script-exec"
+></A
+><B
+>Script execution. </B
+><P
+></P
+><UL
+><LI
 ><P
 ALIGN="justify"
->The script should contain Lisp forms, except in the
- <TT
+>The script should contain Lisp
+   forms, except in the <TT
 CLASS="literal"
 >#!</TT
-> line.
- The file is loaded normally, through the function <A
+> line.</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>The file is loaded normally, through the function
+   <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >LOAD</TT
 ></A
->.
- Before it is loaded, the variable <B
-CLASS="emphasis"
+> (in particular, the name of the script file, which
+   is <TT
+CLASS="envar"
+>$0</TT
+> in <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html"
+TARGET="_top"
+><B
+CLASS="command"
+>/bin/sh</B
+></A
+>, can be found in <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stload-pa_d-truenamest.html"
+TARGET="_top"
 ><TT
 CLASS="varname"
->ext:*args*</TT
-></B
-> is bound to a
- list of strings, representing the arguments given to the Lisp script.
- <A
+>*LOAD-TRUENAME*</TT
+></A
+> and
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stload-pa_d-truenamest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*LOAD-PATHNAME*</TT
+></A
+>).</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>Before it is loaded, the variable <A
+HREF="quickstart.html#script-exec"
+><TT
+CLASS="varname"
+>EXT:*ARGS*</TT
+></A
+> is bound
+   to a list of strings, representing the arguments given to the Lisp
+   script (i.e., <TT
+CLASS="envar"
+>$1</TT
+> in <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html"
+TARGET="_top"
+><B
+CLASS="command"
+>/bin/sh</B
+></A
+> becomes <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CAR</TT
+></A
+> <A
+HREF="quickstart.html#script-exec"
+><TT
+CLASS="varname"
+>EXT:*ARGS*</TT
+></A
+>)</TT
+> etc).</P
+></LI
+><LI
+><P
+ALIGN="justify"
+><A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
 TARGET="_top"
 ><TT
@@ -562,27 +658,55 @@ TARGET="_top"
 CLASS="varname"
 >*STANDARD-OUTPUT*</TT
 ></A
-> are bound, as usual, to
- the Unix standard input and output.  <A
+> are
+   bound, as usual, to the Unix standard input and output.
+   <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
 TARGET="_top"
 ><TT
 CLASS="varname"
 >*ERROR-OUTPUT*</TT
 ></A
-> is bound to the
- Unix error output.  Continuable errors will be turned to warnings.
- Non-continuable errors and
- <B
+> is bound to the Unix error output.</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>Continuable errors will be turned to warnings
+   (using <A
+HREF="conditions.html#appease-cerrors"
+><TT
+CLASS="function"
+>EXT:APPEASE-CERRORS</TT
+></A
+>).</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>Non-continuable errors and
+   <B
 CLASS="keycap"
 >Control</B
 >-<SPAN
 CLASS="keysym"
 >C</SPAN
-> interrupts
- will terminate the execution of the Lisp script with an error status.
- If you wish the script's contents to be compiled during loading, add
-   <A
+> interrupts will
+   terminate the execution of the Lisp script with an error status
+   (using <A
+HREF="conditions.html#exit-on-error"
+><TT
+CLASS="function"
+>EXT:EXIT-ON-ERROR</TT
+></A
+>).</P
+></LI
+><LI
+><P
+ALIGN="justify"
+>If you wish the script's contents to be compiled
+  during loading, add
+  <A
 HREF="clisp.html#opt-load-comp"
 TARGET="_top"
 ><TT
@@ -590,17 +714,33 @@ CLASS="option"
 >-C</TT
 ></A
 >
- to the <TT
+  to the <TT
 CLASS="replaceable"
 ><I
 >interpreter-arguments</I
 ></TT
 >.</P
+></LI
+></UL
+>
+ See also <A
+HREF="clisp.html#opt-exec-file"
+TARGET="_top"
+>the manual</A
+>.
+</P
+></DIV
+><DIV
+CLASS="formalpara"
 ><P
-ALIGN="justify"
+><A
+NAME="script-bad"
+></A
+><B
+>If nothing works. </B
 >Another, quite inferior, alternative is to put the following into
- a file:</P
-><TABLE
+ a file:
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -618,13 +758,16 @@ EOF
 ></TD
 ></TR
 ></TABLE
-><P
-ALIGN="justify"
->The problem with this approach is that the return values of each form
+>
+The problem with this approach is that the return values of each form
 will be printed to the standard output.  Another problem is that no user
 input will be available.</P
+></DIV
 ></DD
 ><DT
+><A
+NAME="quickstart-win32"
+></A
 >Platform dependent: <A
 HREF="http://www.willows.com/"
 TARGET="_top"
@@ -754,6 +897,9 @@ CLASS="command"
 >.</P
 ></DD
 ><DT
+><A
+NAME="quickstart-linux"
+></A
 >Platform dependent: <A
 HREF="http://www.linux.org/"
 TARGET="_top"
@@ -795,8 +941,8 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;bash# echo ":CLISP:E::fas::/usr/bin/clisp:" &#62;&#62; /proc/sys/fs/binfmt_misc/register
-bash# echo ":CLISP:E::lisp::/usr/bin/clisp:" &#62;&#62; /proc/sys/fs/binfmt_misc/register
+>&#13;bash# echo ":CLISP:E::fas::/usr/local/bin/clisp:" &#62;&#62; /proc/sys/fs/binfmt_misc/register
+bash# echo ":CLISP:E::lisp::/usr/local/bin/clisp:" &#62;&#62; /proc/sys/fs/binfmt_misc/register
 </PRE
 ></TD
 ></TR
@@ -842,6 +988,9 @@ CLASS="filename"
  details.</P
 ></DD
 ><DT
+><A
+NAME="quickstart-amiga"
+></A
 >Platform dependent: <A
 HREF="http://www.amiga.org/"
 TARGET="_top"
@@ -1015,7 +1164,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="syscalls.html"
+HREF="socket.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -1043,7 +1192,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Extensions-2.7. System Calls</TD
+>Extensions-2.6. Socket Streams</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -1057,7 +1206,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Extensions-2.9. Application delivery with <A
+>Extensions-2.8. Application delivery with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B

@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="cond-dict">9.2. The Conditions Dictionary
+NAME="cond-dict"
+></A
+>9.2. The Conditions Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_condi_s_dictionary.html"
 TARGET="_top"
@@ -259,19 +261,25 @@ HREF="references.html#ansi-cl"
 >ANSI CL standard</A
 ></SPAN
 >]</A
->: If the optional condition argument is non-<A
+>: If the optional <TT
+CLASS="replaceable"
+><I
+>condition</I
+></TT
+>
+ argument is non-<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
->, only
- restarts associated with that condition and restarts associated to no
- condition at all are considered.  Therefore the effect of associating a
- restart to a condition is not to activate it, but to hide it from other
- conditions.  This makes the syntax dependent implicit association
- performed by <A
+>, only restarts associated with that condition and
+ restarts associated with no condition at all are considered.
+ Therefore the effect of associating a restart to a condition is not to
+ activate it, but to hide it from other conditions.
+ This makes the syntax dependent implicit association performed by
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_restart-case.html"
 TARGET="_top"
 ><TT

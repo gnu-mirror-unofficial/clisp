@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -105,7 +105,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="classes">4.2. Classes
+NAME="classes"
+></A
+>4.2. Classes
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3.html"
 TARGET="_top"
@@ -125,17 +127,23 @@ CLASS="function"
 ></A
 >ed from the package <A
 HREF="classes.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CLOS"</SPAN
+></STRONG
 ></A
 >.
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 > uses (as in <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_use-package.html"
@@ -146,9 +154,12 @@ CLASS="function"
 ></A
 >) <A
 HREF="classes.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CLOS"</SPAN
+></STRONG
 ></A
 > and <A
 HREF="pack-dict.html#re-export"
@@ -156,8 +167,40 @@ HREF="pack-dict.html#re-export"
 CLASS="function"
 >EXT:RE-EXPORT</TT
 ></A
->s all its
- exported symbols.
+>s the
+ <A
+HREF="references.html#ansi-cl"
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+> standard exported symbols (the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extensions, e.g.,
+ <A
+HREF="obj-dict.html#class-proto"
+><TT
+CLASS="function"
+>CLOS:CLASS-PROTOTYPE</TT
+></A
+>, are <I
+CLASS="emphasis"
+>not</I
+> <A
+HREF="pack-dict.html#re-export"
+><TT
+CLASS="function"
+>EXT:RE-EXPORT</TT
+></A
+>ed).
  Since <A
 HREF="pack-dict.html#make-pack"
 >the default <TT
@@ -175,15 +218,18 @@ CLASS="function"
 > is <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
->, the <B
+>, the standard <B
 CLASS="command"
 >CLOS</B
-> symbols are normally visible
- in all user-defined packages.
+> symbols are normally
+ visible in all user-defined packages.
  If you do not want them (for example, if you want to use the
  <A
 HREF="ftp://cvs2.cons.org/pub/lisp/clisp/packages/pcl.sept92f.clisp.tar.gz"
@@ -225,9 +271,12 @@ CLASS="replaceable"
 > <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 >)
   (<A

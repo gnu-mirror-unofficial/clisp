@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="eval-comp">3.5. The Evaluation and Compilation Dictionary
+NAME="eval-comp"
+></A
+>3.5. The Evaluation and Compilation Dictionary
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_evalu_n_dictionary.html"
 TARGET="_top"
@@ -117,7 +119,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="spec-decl">3.5.1. Declaration <A
+NAME="spec-decl"
+></A
+>3.5.1. Declaration <A
 HREF="http://www.lisp.org/HyperSpec/Body/dec_special.html"
 TARGET="_top"
 ><TT
@@ -150,7 +154,7 @@ CLASS="replaceable"
 >variable</I
 ></TT
 >))</TT
-> declarations may not be undone.  The same holds for
+> declarations cannot be undone.  The same holds for
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_defparametercm_defvar.html"
 TARGET="_top"
@@ -201,14 +205,199 @@ CLASS="function"
  this.</P
 ><P
 ALIGN="justify"
->Constants may not be bound dynamically or lexically.</P
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_c.html#constant_variable"
+TARGET="_top"
+>constant variable</A
+>s may not be bound dynamically or lexically.</P
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="spe-var-p"
+></A
+><B
+>Function <A
+HREF="eval-comp.html#spe-var-p"
+><TT
+CLASS="function"
+>EXT:SPECIAL-VARIABLE-P</TT
+></A
+>. </B
+>You can use the function <TT
+CLASS="sexp"
+>(<A
+HREF="eval-comp.html#spe-var-p"
+><TT
+CLASS="function"
+>EXT:SPECIAL-VARIABLE-P</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>symbol</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+>)</TT
+> to check whether the
+ symbol is a special variable.  <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+> of <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> or omitted means use
+ the global environment, <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> means use current lexical environment.
+ You can also obtain the current lexical environment using the macro
+ <A
+HREF="eval.html#the-env"
+><TT
+CLASS="function"
+>EXT:THE-ENVIRONMENT</TT
+></A
+> (interpreted code only).
+ This function will always return <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> for global special
+ variables and constants.
+ Note that this function will not work in compiled code as you expect:
+ when called with <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+>, it will be called at <I
+CLASS="emphasis"
+>run
+  time</I
+> and check for globally special variables,
+ but when <TT
+CLASS="replaceable"
+><I
+>env</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, it will be called at <I
+CLASS="emphasis"
+>compile
+  time</I
+> and the value will be used as a constant in the
+ code.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="eval-when">3.5.2. Macro <A
+NAME="constantp"
+></A
+>3.5.2. Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_constantp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONSTANTP</TT
+></A
+>.</H2
+><P
+ALIGN="justify"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_constantp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONSTANTP</TT
+></A
+> fully complies with <A
+HREF="references.html#ansi-cl"
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#ansi-cl"
+>ANSI CL standard</A
+></SPAN
+>]</A
+>.
+Additionally, some non-trivial forms are identified as constants, e.g.,
+<TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_constantp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CONSTANTP</TT
+></A
+> '(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_pl.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>+</TT
+></A
+> 1 2 3))</TT
+> returns
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="eval-when"
+></A
+>3.5.3. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
 TARGET="_top"
 ><TT
@@ -233,28 +422,60 @@ CLASS="sexp"
 CLASS="sexp"
 >(NOT COMPILE)</TT
 >.</P
+><DIV
+CLASS="warning"
+><P
+></P
+><TABLE
+CLASS="warning"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
 ><P
 ALIGN="justify"
 >Note that the situations <TT
 CLASS="constant"
->LOAD</TT
-> and
+>EVAL</TT
+>,
  <TT
 CLASS="constant"
+>LOAD</TT
+> and <TT
+CLASS="constant"
 >COMPILE</TT
-> are deprecated by the spec,
- and they are <I
+> are
+ deprecated by the spec, and they are <I
 CLASS="emphasis"
 >not</I
 > equivalent to the new
  standard situations <TT
+CLASS="constant"
+>:EXECUTE</TT
+>,
+ <TT
 CLASS="constant"
 >:LOAD-TOPLEVEL</TT
 >
  and <TT
 CLASS="constant"
 >:COMPILE-TOPLEVEL</TT
->.</P
+> in that they ignore the
+ top-level versus non-top-level distinction.</P
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ></DIV
 ><DIV

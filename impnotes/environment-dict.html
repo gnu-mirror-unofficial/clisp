@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="environment-dict">25.2. The Environment Dictionary
+NAME="environment-dict"
+></A
+>25.2. The Environment Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_envir_t_dictionary.html"
 TARGET="_top"
@@ -117,7 +119,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="disassemble">25.2.1. Function <A
+NAME="disassemble"
+></A
+>25.2.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
 TARGET="_top"
 ><TT
@@ -150,21 +154,30 @@ CLASS="function"
 >DISASSEMBLE</TT
 ></A
 > can disassemble to machine code,
- provided that <A
+   provided that <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
-> gdb is present.  In that case the argument may be a
- <TT
+>
+   <A
+HREF="http://sources.redhat.com/gdb/"
+TARGET="_top"
+>gdb</A
+> is present.
+   In that case the argument may be a
+   <TT
 CLASS="classname"
->system-function</TT
+>EXT:SYSTEM-FUNCTION</TT
 >, a
- <TT
+   <A
+HREF="dffi.html"
+><TT
 CLASS="classname"
->foreign-function</TT
+>FFI:FOREIGN-FUNCTION</TT
+></A
 >, a special operator indicator,
- a symbol denoting one of these, a number, or a string.
- </P
+   a symbol denoting one of these, a number, or a string.
+</P
 ></DD
 ></DL
 ></DIV
@@ -174,7 +187,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="uncompile">25.2.2. Function <A
+NAME="uncompile"
+></A
+>25.2.2. Function <A
 HREF="environment-dict.html#uncompile"
 ><TT
 CLASS="function"
@@ -224,7 +239,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="documentation">25.2.3. Function <A
+NAME="documentation"
+></A
+>25.2.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
 TARGET="_top"
 ><TT
@@ -235,28 +252,14 @@ CLASS="function"
 ><P
 ALIGN="justify"
 >No on-line documentation is available for the system functions
- (yet).  <A
-HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_doc_umentationcp.html"
-TARGET="_top"
-><TT
-CLASS="function"
->DOCUMENTATION</TT
-></A
-> still has the <A
-HREF="references.html#CLtL1"
->[<SPAN
-CLASS="citation"
-><A
-HREF="references.html#CLtL1"
->CLtL1</A
-></SPAN
->]</A
-> implementation.</P
+ (yet).</P
 ><DIV
 CLASS="formalpara"
 ><P
 ><A
-NAME="browser"><B
+NAME="browser"
+></A
+><B
 >Function <TT
 CLASS="function"
 >EXT:CLHS</TT
@@ -295,17 +298,25 @@ CLASS="constant"
 >:BROWSER</TT
 ></A
 >)</TT
->
-  function, which uses your web browser.
+> function, which uses your web browser.
   <TT
 CLASS="replaceable"
 ><I
 >browser</I
 ></TT
-> should be a valid
-  keyword in the <TT
-CLASS="varname"
+> (defaults to <A
+HREF="environment-dict.html#browser"
+><TT
+CLASS="constant"
+>CUSTOM:*BROWSER*</TT
+></A
+>) should be a
+  valid keyword in the <A
+HREF="environment-dict.html#browser"
+><TT
+CLASS="constant"
 >CUSTOM:*BROWSERS*</TT
+></A
 > <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_a.html#association_list"
 TARGET="_top"
@@ -319,7 +330,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="trace">25.2.4. Macro <A
+NAME="trace"
+></A
+>25.2.4. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
 TARGET="_top"
 ><TT
@@ -643,7 +656,9 @@ ALIGN="justify"
 ></DD
 ><DT
 ><A
-NAME="trace-val"><A
+NAME="trace-val"
+></A
+><A
 HREF="environment-dict.html#trace-val"
 ><TT
 CLASS="varname"
@@ -704,10 +719,16 @@ CLASS="replaceable"
 ><DIV
 CLASS="formalpara"
 ><P
+><A
+NAME="trace-indent"
+></A
 ><B
->Variable <TT
+>Variable <A
+HREF="environment-dict.html#trace-indent"
+><TT
 CLASS="varname"
 >CUSTOM:*TRACE-INDENT*</TT
+></A
 >. </B
 >If you want the <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_tracecm_untrace.html"
@@ -717,10 +738,12 @@ CLASS="function"
 >TRACE</TT
 ></A
 > level to be indicated by the indentation
-in addition to the printed numbers,
-set <TT
+in addition to the printed numbers, set <A
+HREF="environment-dict.html#trace-indent"
+><TT
 CLASS="varname"
 >CUSTOM:*TRACE-INDENT*</TT
+></A
 > to non-<A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -745,7 +768,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="inspect">25.2.5. Function <A
+NAME="inspect"
+></A
+>25.2.5. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_inspect.html"
 TARGET="_top"
 ><TT
@@ -855,8 +880,15 @@ HREF="socket.html"
 CLASS="classname"
 >SOCKET:SOCKET-STREAM</TT
 ></A
->, using the HTTP protocol.  You should be
-   able to use all the standard browser features.</P
+>, using the <A
+HREF="http://www.w3.org/Protocols/"
+TARGET="_top"
+><B
+CLASS="command"
+>HTTP</B
+></A
+> protocol.
+   You should be able to use all the standard browser features.</P
 ><P
 ALIGN="justify"
 >Since <A
@@ -917,64 +949,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="space">25.2.6. Macro <A
-HREF="environment-dict.html#space"
-><TT
-CLASS="function"
->EXT:SPACE</TT
+NAME="room"
 ></A
-></H2
-><P
-ALIGN="justify"
->The macro <A
-HREF="environment-dict.html#space"
-><TT
-CLASS="function"
->EXT:SPACE</TT
-></A
-> is like the macro <A
-HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
-TARGET="_top"
-><TT
-CLASS="function"
->TIME</TT
-></A
->: <TT
-CLASS="sexp"
->(<A
-HREF="environment-dict.html#space"
-><TT
-CLASS="function"
->EXT:SPACE</TT
-></A
-> <TT
-CLASS="replaceable"
-><I
->form</I
-></TT
->)</TT
->
- evaluates the <TT
-CLASS="replaceable"
-><I
->form</I
-></TT
->, and, as a side effect, outputs information
- about the memory allocations caused by this evaluation.
- It also prints everything printed by <A
-HREF="environment-dict.html#time"
-><TT
-CLASS="function"
->TIME</TT
-></A
->.</P
-></DIV
-><DIV
-CLASS="section"
-><H2
-CLASS="section"
-><A
-NAME="room">25.2.7. Function <A
+>25.2.6. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_room.html"
 TARGET="_top"
 ><TT
@@ -999,18 +976,26 @@ HREF="gc.html"
 >ion occurs.</P
 ><P
 ALIGN="justify"
->The function <B
-CLASS="emphasis"
+>The function
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="gc.html"
 ><TT
 CLASS="function"
 >EXT:GC</TT
-></B
-> starts a
- global <A
+></A
+>
+  </I
+></STRONG
+>
+ starts a global <A
 HREF="gc.html"
 >garbage-collect</A
->ion and its return value has the same meaning as the
- second value of <A
+>ion and its return value has the same meaning as
+ the second value of <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_room.html"
 TARGET="_top"
 ><TT
@@ -1024,7 +1009,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="time">25.2.8. Macro <A
+NAME="time"
+></A
+>25.2.7. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
 TARGET="_top"
 ><TT
@@ -1041,26 +1028,97 @@ TARGET="_top"
 CLASS="function"
 >TIME</TT
 ></A
-> includes: The real
- time (elapsed time), the run time (processor time for this process),
- the number of bytes allocated (use the <A
-HREF="environment-dict.html#space"
-><TT
-CLASS="function"
->EXT:SPACE</TT
-></A
-> macro for more
- detailed analysis), and the number of <A
+> includes:
+ <P
+></P
+><TABLE
+BORDER="0"
+><TBODY
+><TR
+><TD
+>the real time ("wall" time),</TD
+></TR
+><TR
+><TD
+>the run time (processor time for this process),</TD
+></TR
+><TR
+><TD
+>the number of bytes allocated, and</TD
+></TR
+><TR
+><TD
+>the number of <A
 HREF="gc.html"
 >garbage-collect</A
->ions performed, if any.</P
+>ions performed, if any.</TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+></P
+><P
+ALIGN="justify"
+>The macro <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="environment-dict.html#time"
+><TT
+CLASS="function"
+>EXT:TIMES</TT
+></A
+></I
+></STRONG
+> (mnemonic: "TIME
+ and Space") is like the macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TIME</TT
+></A
+>: <TT
+CLASS="sexp"
+>(<A
+HREF="environment-dict.html#time"
+><TT
+CLASS="function"
+>EXT:TIMES</TT
+></A
+>
+  <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>)</TT
+> evaluates the <TT
+CLASS="replaceable"
+><I
+>form</I
+></TT
+>, and, as a side effect,
+ outputs detailed information about the memory allocations caused by
+ this evaluation.  It also prints everything printed by <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_time.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TIME</TT
+></A
+>.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="ed">25.2.9. Function <A
+NAME="ed"
+></A
+>25.2.8. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_ed.html"
 TARGET="_top"
 ><TT
@@ -1077,28 +1135,50 @@ TARGET="_top"
 CLASS="function"
 >ED</TT
 ></A
-> calls the external editor specified by the
- variable <B
-CLASS="emphasis"
+> calls the external editor specified by the value
+ of <TT
+CLASS="sexp"
+>(<A
+HREF="getenv.html"
+><TT
+CLASS="function"
+>EXT:GETENV</TT
+></A
+> "EDITOR")</TT
+>
+ or, failing that, the value of the variable
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="environment-dict.html#ed"
 ><TT
 CLASS="varname"
 >CUSTOM:*EDITOR*</TT
-></B
-> (see
- <TT
+></A
+></I
+></STRONG
+> (see <A
+HREF="customize.html"
+><TT
 CLASS="filename"
 >#P"config.lisp"</TT
->).  If the argument is a function name which was defined
- in the current session (not loaded from a file), the program text to be
- edited is a pretty-printed version (without comments) of the text which
- was used to define the function.</P
+></A
+>).
+ If the argument is a function name which was defined in the current
+ session (not loaded from a file), the program text to be edited is a
+ pretty-printed version (without comments) of the text which was used to
+ define the function.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="clock">25.2.10. Clock Time</H2
+NAME="clock"
+></A
+>25.2.9. Clock Time</H2
 ><P
 ></P
 ><DIV
@@ -1134,16 +1214,22 @@ CLASS="emphasis"
 >OS/2</B
 ></A
 >
-   platforms only.</DT
+  platforms only.</DT
 ><DD
 ><P
 ALIGN="justify"
->The variable <B
-CLASS="emphasis"
+>The variable <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="environment-dict.html#default-tz"
 ><TT
 CLASS="varname"
 >CUSTOM:*DEFAULT-TIME-ZONE*</TT
-></B
+></A
+></I
+></STRONG
 >
    contains the default time zone used by <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_encode-universal-time.html"
@@ -1160,9 +1246,9 @@ TARGET="_top"
 CLASS="function"
 >DECODE-UNIVERSAL-TIME</TT
 ></A
->.  It is initially set to -1 (which
-   means 1 hour east of Greenwich, i.e., Mid European Time).
-   </P
+>.  It is initially set to -1
+   (which means 1 hour east of Greenwich, i.e., Mid European Time).
+</P
 ></DD
 ></DL
 ></DIV
@@ -1203,9 +1289,11 @@ CLASS="literal"
 ><DIV
 CLASS="table"
 ><A
-NAME="internal-time-units-table"><P
+NAME="internal-time-units-table"
+></A
+><P
 ><B
->Table 25-7. Platform dependent</B
+>Table 25-7. Time granularity</B
 ></P
 ><TABLE
 BORDER="1"
@@ -1333,7 +1421,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="machine">25.2.11. Machine</H2
+NAME="machine"
+></A
+>25.2.10. Machine</H2
 ><P
 ></P
 ><DIV
@@ -1347,14 +1437,7 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
->, <A
-HREF="http://www.willows.com/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->Win32</B
-></A
-> platforms only.</DT
+> platform only.</DT
 ><DD
 ><P
 ALIGN="justify"
@@ -1373,11 +1456,67 @@ CLASS="function"
 >LONG-SITE-NAME</TT
 ></A
 >
-  should be defined in a site-specific <TT
+   should be defined in a site-specific <A
+HREF="customize.html"
+><TT
 CLASS="filename"
 >#P"config.lisp"</TT
+></A
 > file.
-  </P
+   The default implementations try to read the value of the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html"
+TARGET="_top"
+>environment variable</A
+>
+   <TT
+CLASS="envar"
+>ORGANIZATION</TT
+>, and, failing that, call <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/uname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>uname</TT
+></A
+>.
+</P
+></DD
+><DT
+>Platform dependent: <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> platform only.</DT
+><DD
+><P
+ALIGN="justify"
+>The functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_short-sit_ng-site-name.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SHORT-SITE-NAME</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_short-sit_ng-site-name.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LONG-SITE-NAME</TT
+></A
+>
+   should be defined in a site-specific <A
+HREF="customize.html"
+><TT
+CLASS="filename"
+>#P"config.lisp"</TT
+></A
+> file.
+   The default implementations try to read the registry.
+</P
 ></DD
 ><DT
 >Platform dependent: <A
@@ -1409,7 +1548,7 @@ CLASS="emphasis"
 >OS/2</B
 ></A
 >
-    platforms only.</DT
+  platforms only.</DT
 ><DD
 ><P
 ALIGN="justify"
@@ -1428,7 +1567,7 @@ CLASS="function"
 >MACHINE-VERSION</TT
 ></A
 >,
-  <A
+   <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_machine-instance.html"
 TARGET="_top"
 ><TT
@@ -1450,11 +1589,14 @@ CLASS="function"
 >LONG-SITE-NAME</TT
 ></A
 > should be
-  defined by every user in his user-specific <TT
+   defined by every user in his user-specific <A
+HREF="customize.html"
+><TT
 CLASS="filename"
 >#P"config.lisp"</TT
+></A
 > file.
-  </P
+</P
 ></DD
 ></DL
 ></DIV
@@ -1464,7 +1606,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="apropos">25.2.12. Functions <A
+NAME="apropos"
+></A
+>25.2.11. Functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_aproposcm_apropos-list.html"
 TARGET="_top"
 ><TT
@@ -1503,7 +1647,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="dribble">25.2.13. Function <A
+NAME="dribble"
+></A
+>25.2.12. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_dribble.html"
 TARGET="_top"
 ><TT
@@ -1523,13 +1669,654 @@ CLASS="function"
 > is called with an argument, and dribbling is already
  enabled, a warning is printed, and the new dribbling request is
  ignored.</P
+><P
+ALIGN="justify"
+>Dribbling is implemented via a kind (but <I
+CLASS="emphasis"
+>not</I
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_r.html#recognizable_subtype"
+TARGET="_top"
+>recognizable subtype</A
+>) of
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_two-way-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>TWO-WAY-STREAM</TT
+></A
+>, named <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+>.
+ If you have a <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_b.html#bidirectional"
+TARGET="_top"
+>bidirectional</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> and you want all transactions
+ (input and output) on <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> to be copied to the <TT
+CLASS="replaceable"
+><I
+>target</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>,
+ you can do
+ <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defparametercm_defvar.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFVAR</TT
+></A
+> *loggable* <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>)
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/spefor_setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETQ</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-synonym-stream.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-SYNONYM-STREAM</TT
+></A
+> '*loggable*))
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defun.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFUN</TT
+></A
+> toggle-logging (<A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> s)
+    (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_multiple-value-bind.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MULTIPLE-VALUE-BIND</TT
+></A
+> (so ta) (dribble-toggle *loggable* s)
+      (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_whencm_unless.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WHEN</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_streamp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAMP</TT
+></A
+> so) (<A
+HREF="http://www.lisp.org/HyperSpec/Body/spefor_setq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETQ</TT
+></A
+> *loggable* so))
+      ta))
+  (toggle-logging <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>)     ; start logging
+  ...
+  (toggle-logging)       ; finish logging
+  ...
+  (toggle-logging <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>)     ; restart logging
+  ...
+  (toggle-logging)       ; finish logging
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>)
+ </PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="drist"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>EXT:DRIBBLE-STREAM</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>When <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is a <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+>, returns two values:
+    the <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+> and the <TT
+CLASS="replaceable"
+><I
+>target</I
+></TT
+> streams.  Otherwise returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+ </P
+></DD
+><DT
+><A
+NAME="drist-p"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>EXT:DRIBBLE-STREAM-P</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>When <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is a <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+>, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, otherwise
+    returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="drist-so"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>EXT:DRIBBLE-STREAM-SOURCE</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>When <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is a <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+>, returns its
+    <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+> stream, otherwise signals a <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_type-error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>TYPE-ERROR</TT
+></A
+>.
+ </P
+></DD
+><DT
+><A
+NAME="drist-ta"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>EXT:DRIBBLE-STREAM-TARGET</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>When <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is a <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+>, returns its
+    <TT
+CLASS="replaceable"
+><I
+>target</I
+></TT
+> stream, otherwise signals a <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_type-error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>TYPE-ERROR</TT
+></A
+>.
+ </P
+></DD
+><DT
+><A
+NAME="mk-drist"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>EXT:MAKE-DRIBBLE-STREAM</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>target</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Create a new <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+>.
+ </P
+></DD
+><DT
+><A
+NAME="dri-toggle"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>EXT:DRIBBLE-TOGGLE</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+     <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>When <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is a <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+> and <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+    writes a dribble termination note to the <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s <TT
+CLASS="replaceable"
+><I
+>target</I
+></TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> and returns <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s <TT
+CLASS="replaceable"
+><I
+>source</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>target</I
+></TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>s;
+    when <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is not a <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+> and <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+    creates a new <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+>, dribbling from <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> to <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>,
+    writes a dribble initialization note to <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>,
+    and return the <A
+HREF="environment-dict.html#dribble"
+><TT
+CLASS="classname"
+>EXT:DRIBBLE-STREAM</TT
+></A
+> (the second value is the <TT
+CLASS="replaceable"
+><I
+>target</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>);
+    otherwise <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_warn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WARN</TT
+></A
+> that no appropriate action may be taken.
+    <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> may be an open <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> or a <A
+HREF="filename-dict.html#path-des"
+>pathname designator</A
+>.
+    See <A
+HREF="environment-dict.html#dribble-example"
+>above</A
+> for the sample usage.
+    See also <TT
+CLASS="filename"
+>#P"src/dribble.lisp"</TT
+> in the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+    source tree.
+</P
+></DD
+></DL
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="version">25.2.14. Function <A
+NAME="version"
+></A
+>25.2.13. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_lisp-impl_tion-version.html"
 TARGET="_top"
 ><TT

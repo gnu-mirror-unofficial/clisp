@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -96,7 +96,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="p-indep">Chapter 29. Extensions-1: Platform independent Extensions</H1
+NAME="p-indep"
+></A
+>Chapter 29. Extensions-1: Platform independent Extensions</H1
 ><DIV
 CLASS="TOC"
 ><DL
@@ -173,6 +175,11 @@ CLASS="command"
 ></A
 > behavior.</A
 ></DT
+><DT
+>29.12. <A
+HREF="code-walk.html"
+>Extensions-1.12. Code Walker</A
+></DT
 ></DL
 ></DIV
 ><DIV
@@ -180,7 +187,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="image">29.1. Extensions-1.1. Saving an Image</H1
+NAME="image"
+></A
+>29.1. Extensions-1.1. Saving an Image</H1
 ><P
 ALIGN="justify"
 >The function
@@ -276,7 +285,7 @@ ALIGN="justify"
 HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-1.html"
 TARGET="_top"
 >read-eval-print loop</A
->, thus, if you want to avoid the <A
+>; thus, if you want to avoid the <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_25-1-1.html"
 TARGET="_top"
 >read-eval-print loop</A
@@ -289,6 +298,15 @@ CLASS="function"
 ></A
 > at the end
    of the init function yourself.</P
+><P
+ALIGN="justify"
+>See <A
+HREF="clisp.html#opt-exec-file"
+TARGET="_top"
+>the
+   manual</A
+> for passing command line arguments to this function.
+ </P
 ></DD
 ><DT
 ><TT
@@ -341,7 +359,7 @@ CLASS="varname"
 >
 You can use this memory image with the
 <A
-HREF="clisp.html#opt-lang"
+HREF="clisp.html#opt-memfile"
 TARGET="_top"
 ><TT
 CLASS="option"

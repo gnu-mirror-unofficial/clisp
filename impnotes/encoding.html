@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,13 +97,17 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="encoding">29.4. Extensions-1.4. Encodings</H1
+NAME="encoding"
+></A
+>29.4. Extensions-1.4. Encodings</H1
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="encodings-intro">29.4.1. Introduction</H2
+NAME="encodings-intro"
+></A
+>29.4.1. Introduction</H2
 ><P
 ALIGN="justify"
 >An <I
@@ -183,13 +187,36 @@ ALIGN="justify"
 ></DL
 ></DIV
 ></P
+><P
+ALIGN="justify"
+>Encodings are also types.  As such, they represent the set of
+ characters encodable in the character set.  In this context, the way
+ characters are translated into raw bytes is ignored, and the line
+ terminator mode is ignored as well.  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_typep.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>TYPEP</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_subtypep.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SUBTYPEP</TT
+></A
+> can be used
+ on encodings.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="charset">29.4.2. Character Sets</H2
+NAME="charset"
+></A
+>29.4.2. Character Sets</H2
 ><P
 ></P
 ><DIV
@@ -227,7 +254,9 @@ HREF="characters.html"
 ></DD
 ><DT
 ><A
-NAME="charset-symbols">Platform dependent:
+NAME="charset-symbols"
+></A
+>Platform dependent:
   Only in <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
@@ -252,9 +281,12 @@ ALIGN="justify"
 >The following character sets are supported, as values
  of the corresponding (constant) symbol in the <A
 HREF="encoding.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CHARSET"</SPAN
+></STRONG
 ></A
 > package:
 <P
@@ -262,7 +294,9 @@ CLASS="QUOTE"
 ><UL
 ><LI
 ><A
-NAME="charset-UCS-2"><P
+NAME="charset-UCS-2"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -287,7 +321,9 @@ CLASS="emphasis"
 ></LI
 ><LI
 ><A
-NAME="charset-UNICODE-16-LITTLE-ENDIAN"><P
+NAME="charset-UNICODE-16-LITTLE-ENDIAN"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -297,7 +333,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-UCS-4"><P
+NAME="charset-UCS-4"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -322,7 +360,9 @@ CLASS="emphasis"
 ></LI
 ><LI
 ><A
-NAME="charset-UNICODE-32-LITTLE-ENDIAN"><P
+NAME="charset-UNICODE-32-LITTLE-ENDIAN"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -332,7 +372,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-UTF-8"><P
+NAME="charset-UTF-8"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -363,7 +405,9 @@ CLASS="emphasis"
 ></LI
 ><LI
 ><A
-NAME="charset-UTF-16"><P
+NAME="charset-UTF-16"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -400,7 +444,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-UTF-7"><P
+NAME="charset-UTF-7"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -443,7 +489,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-JAVA"><P
+NAME="charset-JAVA"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -522,7 +570,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-ASCII"><P
+NAME="charset-ASCII"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -540,7 +590,9 @@ CLASS="emphasis"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-1"><P
+NAME="charset-ISO-8859-1"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -557,7 +609,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-2"><P
+NAME="charset-ISO-8859-2"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -571,7 +625,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-3"><P
+NAME="charset-ISO-8859-3"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -584,7 +640,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-4"><P
+NAME="charset-ISO-8859-4"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -598,7 +656,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-5"><P
+NAME="charset-ISO-8859-5"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -612,7 +672,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-6"><P
+NAME="charset-ISO-8859-6"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -622,7 +684,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-7"><P
+NAME="charset-ISO-8859-7"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -635,7 +699,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-8"><P
+NAME="charset-ISO-8859-8"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -649,7 +715,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-9"><P
+NAME="charset-ISO-8859-9"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -662,7 +730,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-10"><P
+NAME="charset-ISO-8859-10"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -676,7 +746,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-13"><P
+NAME="charset-ISO-8859-13"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -690,7 +762,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-14"><P
+NAME="charset-ISO-8859-14"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -704,7 +778,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-15"><P
+NAME="charset-ISO-8859-15"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -718,7 +794,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-8859-16"><P
+NAME="charset-ISO-8859-16"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -731,7 +809,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-KOI8-R"><P
+NAME="charset-KOI8-R"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -745,7 +825,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-KOI8-U"><P
+NAME="charset-KOI8-U"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -759,7 +841,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-KOI8-RU"><P
+NAME="charset-KOI8-RU"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -790,7 +874,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ARABIC"><P
+NAME="charset-MAC-ARABIC"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -803,7 +889,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-CENTRAL-EUROPE"><P
+NAME="charset-MAC-CENTRAL-EUROPE"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -816,7 +904,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-CROATIAN"><P
+NAME="charset-MAC-CROATIAN"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -829,7 +919,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-CYRILLIC"><P
+NAME="charset-MAC-CYRILLIC"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -842,7 +934,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-DINGBAT"><P
+NAME="charset-MAC-DINGBAT"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -853,7 +947,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-GREEK"><P
+NAME="charset-MAC-GREEK"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -866,7 +962,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-HEBREW"><P
+NAME="charset-MAC-HEBREW"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -879,7 +977,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ICELAND"><P
+NAME="charset-MAC-ICELAND"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -892,7 +992,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ROMAN"><P
+NAME="charset-MAC-ROMAN"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -909,7 +1011,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-ROMANIA"><P
+NAME="charset-MAC-ROMANIA"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -922,7 +1026,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-SYMBOL"><P
+NAME="charset-MAC-SYMBOL"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -932,7 +1038,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-THAI"><P
+NAME="charset-MAC-THAI"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -945,7 +1053,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-TURKISH"><P
+NAME="charset-MAC-TURKISH"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -958,7 +1068,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-MAC-UKRAINE"><P
+NAME="charset-MAC-UKRAINE"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -971,7 +1083,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP437"><P
+NAME="charset-CP437"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -984,7 +1098,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP437-IBM"><P
+NAME="charset-CP437-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -998,7 +1114,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP737"><P
+NAME="charset-CP737"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1012,7 +1130,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP775"><P
+NAME="charset-CP775"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1026,7 +1146,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP850"><P
+NAME="charset-CP850"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1039,7 +1161,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP852"><P
+NAME="charset-CP852"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1052,7 +1176,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP852-IBM"><P
+NAME="charset-CP852-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1065,7 +1191,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP855"><P
+NAME="charset-CP855"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1079,7 +1207,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP857"><P
+NAME="charset-CP857"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1093,7 +1223,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP860"><P
+NAME="charset-CP860"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1107,7 +1239,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP860-IBM"><P
+NAME="charset-CP860-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1121,7 +1255,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP861"><P
+NAME="charset-CP861"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1135,7 +1271,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP861-IBM"><P
+NAME="charset-CP861-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1149,7 +1287,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP862"><P
+NAME="charset-CP862"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1163,7 +1303,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP862-IBM"><P
+NAME="charset-CP862-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1177,7 +1319,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP863"><P
+NAME="charset-CP863"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1190,7 +1334,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP863-IBM"><P
+NAME="charset-CP863-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1204,7 +1350,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP864"><P
+NAME="charset-CP864"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1215,7 +1363,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP864-IBM"><P
+NAME="charset-CP864-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1229,7 +1379,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP865"><P
+NAME="charset-CP865"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1243,7 +1395,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP865-IBM"><P
+NAME="charset-CP865-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1257,7 +1411,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP866"><P
+NAME="charset-CP866"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1271,7 +1427,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP869"><P
+NAME="charset-CP869"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1285,7 +1443,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP869-IBM"><P
+NAME="charset-CP869-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1299,7 +1459,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-CP874"><P
+NAME="charset-CP874"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1313,7 +1475,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-CP874-IBM"><P
+NAME="charset-CP874-IBM"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1327,7 +1491,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1250"><P
+NAME="charset-WINDOWS-1250"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1345,7 +1511,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1251"><P
+NAME="charset-WINDOWS-1251"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1364,7 +1532,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1252"><P
+NAME="charset-WINDOWS-1252"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1379,7 +1549,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1253"><P
+NAME="charset-WINDOWS-1253"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1398,7 +1570,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1254"><P
+NAME="charset-WINDOWS-1254"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1413,7 +1587,9 @@ CLASS="literal"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1255"><P
+NAME="charset-WINDOWS-1255"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1449,7 +1625,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1256"><P
+NAME="charset-WINDOWS-1256"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1467,7 +1645,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1257"><P
+NAME="charset-WINDOWS-1257"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1484,7 +1664,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-WINDOWS-1258"><P
+NAME="charset-WINDOWS-1258"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1519,7 +1701,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-HP-ROMAN8"><P
+NAME="charset-HP-ROMAN8"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1532,7 +1716,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-NEXTSTEP"><P
+NAME="charset-NEXTSTEP"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1545,7 +1731,9 @@ HREF="encoding.html#charset-ASCII"
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-JP"><P
+NAME="charset-EUC-JP"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1573,7 +1761,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-SHIFT-JIS"><P
+NAME="charset-SHIFT-JIS"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1601,7 +1791,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-CP932"><P
+NAME="charset-CP932"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1632,7 +1824,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-JP"><P
+NAME="charset-ISO-2022-JP"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1660,7 +1854,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-JP-2"><P
+NAME="charset-ISO-2022-JP-2"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1688,7 +1884,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-JP-1"><P
+NAME="charset-ISO-2022-JP-1"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1708,7 +1906,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-CN"><P
+NAME="charset-EUC-CN"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1736,7 +1936,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-HZ"><P
+NAME="charset-HZ"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1756,7 +1958,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-GBK"><P
+NAME="charset-GBK"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1784,7 +1988,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-CP936"><P
+NAME="charset-CP936"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1815,7 +2021,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-GB18030"><P
+NAME="charset-GB18030"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1843,7 +2051,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-TW"><P
+NAME="charset-EUC-TW"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1871,7 +2081,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-BIG5"><P
+NAME="charset-BIG5"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1899,7 +2111,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-CP950"><P
+NAME="charset-CP950"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1930,7 +2144,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-BIG5-HKSCS"><P
+NAME="charset-BIG5-HKSCS"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1958,7 +2174,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-CN"><P
+NAME="charset-ISO-2022-CN"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -1986,7 +2204,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-CN-EXT"><P
+NAME="charset-ISO-2022-CN-EXT"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2014,7 +2234,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-EUC-KR"><P
+NAME="charset-EUC-KR"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2042,7 +2264,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-CP949"><P
+NAME="charset-CP949"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2073,7 +2297,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-ISO-2022-KR"><P
+NAME="charset-ISO-2022-KR"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2101,7 +2327,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-JOHAB"><P
+NAME="charset-JOHAB"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2136,7 +2364,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-ARMSCII-8"><P
+NAME="charset-ARMSCII-8"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2166,7 +2396,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-GEORGIAN-ACADEMY"><P
+NAME="charset-GEORGIAN-ACADEMY"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2196,7 +2428,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-GEORGIAN-PS"><P
+NAME="charset-GEORGIAN-PS"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2226,7 +2460,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-TIS-620"><P
+NAME="charset-TIS-620"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2256,7 +2492,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-MULELAO-1"><P
+NAME="charset-MULELAO-1"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2278,7 +2516,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-CP1133"><P
+NAME="charset-CP1133"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2308,7 +2548,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-VISCII"><P
+NAME="charset-VISCII"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2338,7 +2580,9 @@ TARGET="_top"
 ></LI
 ><LI
 ><A
-NAME="charset-TCVN"><P
+NAME="charset-TCVN"
+></A
+><P
 ALIGN="justify"
 ><TT
 CLASS="literal"
@@ -2377,7 +2621,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="iconv">Platform dependent: Only on <A
+NAME="iconv"
+></A
+>Platform dependent: Only on <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
@@ -2446,6 +2692,30 @@ CLASS="constant"
 > argument.</P
 ><P
 ALIGN="justify"
+>When an <A
+HREF="encoding.html"
+><TT
+CLASS="classname"
+>EXT:ENCODING</TT
+></A
+> is available both as a <A
+HREF="encoding.html#charset-symbols"
+>built-in</A
+> and
+ through <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>iconv</TT
+></A
+>, the <A
+HREF="encoding.html#charset-symbols"
+>built-in</A
+> is used, because it is more
+ efficient and available across all platforms.</P
+><P
+ALIGN="justify"
 >These encodings are not assigned to global variables, since
  there is no portable way to get the list of all character sets
  supported by <A
@@ -2462,8 +2732,30 @@ ALIGN="justify"
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
-> systems (such as GNU/Linux and GNU/Hurd) and on
- systems with <A
+> systems (such as <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+>/<A
+HREF="http://www.linux.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Linux</B
+></A
+> and <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+>/<A
+HREF="http://www.gnu.org/software/hurd/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Hurd</B
+></A
+>)
+ and on systems with <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
@@ -2487,24 +2779,6 @@ CLASS="command"
 >iconv -l</B
 >.
  </P
-><P
-ALIGN="justify"
->When an encoding is available both as a <A
-HREF="encoding.html#charset-symbols"
->built-in</A
-> and
- through <A
-HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
-TARGET="_top"
-><TT
-CLASS="function"
->iconv</TT
-></A
->, the <A
-HREF="encoding.html#charset-symbols"
->built-in</A
-> is used, because it is more
- efficient and available across all platforms.</P
 ><P
 ALIGN="justify"
 >The reason we use only <A
@@ -2532,7 +2806,7 @@ CLASS="function"
 >iconv</TT
 ></A
 > implementations are broken in various ways and
- we do not want deal with random <A
+ we do not want to deal with random <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -2556,22 +2830,21 @@ TARGET="_top"
 HREF="http://www.gnu.org/software/libiconv/"
 TARGET="_top"
 >libiconv</A
->'s test suite, please report that to
- <TT
+>'s test suite, please report that to <TT
 CLASS="email"
 >&#60;<A
 HREF="mailto:clisp-list@sf.net"
 >clisp-list@sf.net</A
 >&#62;</TT
-> and a future <A
+> and a
+ future <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
-> version will use
- <A
+> version will use <A
 HREF="http://www.opengroup.org/onlinepubs/007904975/functions/iconv.html"
 TARGET="_top"
 ><TT
@@ -2594,14 +2867,18 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="newline">29.4.3. Line Terminators</H2
-><DIV
-CLASS="table"
+NAME="newline"
+></A
+>29.4.3. Line Terminators</H2
+><P
+ALIGN="justify"
+>The line terminator mode can be one of the following three keywords:
+<DIV
+CLASS="informaltable"
 ><A
-NAME="newline-table"><P
-><B
->Table 29-1. The line terminator mode
-  can be one of the following three keywords</B
+NAME="newline-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -2709,7 +2986,10 @@ CLASS="keycode"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
+></P
 ><P
 ALIGN="justify"
 >Windows programs typically use the <TT
@@ -2772,7 +3052,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="make-encoding">29.4.4. Function <A
+NAME="make-encoding"
+></A
+>29.4.4. Function <A
 HREF="encoding.html#make-encoding"
 ><TT
 CLASS="function"
@@ -2797,8 +3079,8 @@ TARGET="_top"
 CLASS="literal"
 >&#38;KEY</TT
 ></A
-> :charset
-     :line-terminator :input-error-action :output-error-action)</TT
+> :CHARSET
+     :LINE-TERMINATOR :INPUT-ERROR-ACTION :OUTPUT-ERROR-ACTION)</TT
 >
  returns an <A
 HREF="encoding.html"
@@ -2808,7 +3090,7 @@ CLASS="classname"
 ></A
 >. The <TT
 CLASS="constant"
->:charset</TT
+>:CHARSET</TT
 > argument may be
  an encoding, a string, or <TT
 CLASS="constant"
@@ -2832,17 +3114,17 @@ CLASS="constant"
 ALIGN="justify"
 >The <TT
 CLASS="constant"
->:input-error-action</TT
-> specifies what
- happens when an invalid byte sequence is encountered while converting
- bytes to characters.  Its value can be <TT
+>:INPUT-ERROR-ACTION</TT
+> argument specifies
+ what happens when an invalid byte sequence is encountered while
+ converting bytes to characters.  Its value can be <TT
 CLASS="constant"
 >:ERROR</TT
 >, <TT
 CLASS="constant"
 >:IGNORE</TT
-> or a
- character to be used instead.  The <A
+>
+ or a character to be used instead.  The <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
 ><B
@@ -2859,9 +3141,9 @@ CLASS="keysym"
 ALIGN="justify"
 >The <TT
 CLASS="constant"
->:output-error-action</TT
-> specifies what
- happens when an invalid character is encountered while converting
+>:OUTPUT-ERROR-ACTION</TT
+> argument specifies
+ what happens when an invalid character is encountered while converting
  characters to bytes.  Its value can be <TT
 CLASS="constant"
 >:ERROR</TT
@@ -2882,40 +3164,42 @@ CLASS="keysym"
 >#\uFFFD</SPAN
 > can be used here only if it is
  encodable in the character set.</P
-><P
-ALIGN="justify"
->Encodings are types.  As such, they represent the set of
- characters encodable in the character set.  In this context, the way
- characters are translated into raw bytes is ignored, and the line
- terminator mode is ignored as well.  <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_typep.html"
-TARGET="_top"
-><TT
-CLASS="function"
->TYPEP</TT
-></A
-> and <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_subtypep.html"
-TARGET="_top"
-><TT
-CLASS="function"
->SUBTYPEP</TT
-></A
-> can be used
- on encodings.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="enc-charset">29.4.5. Function <A
+NAME="enc-charset"
+></A
+>29.4.5. Function <A
 HREF="encoding.html#enc-charset"
 ><TT
 CLASS="function"
 >EXT:ENCODING-CHARSET</TT
 ></A
 >.</H2
+><FONT
+COLOR="RED"
+>Platform dependent: Only in <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> built
+ <B
+CLASS="emphasis"
+>with</B
+> compile-time flag <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNICODE</B
+></A
+>.</FONT
 ><P
 ALIGN="justify"
 >The function <TT
@@ -2938,7 +3222,21 @@ CLASS="replaceable"
 ><I
 >encoding</I
 ></TT
->, as a symbol or a string.
+>, as a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+> or a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>.
  Note that <TT
 CLASS="sexp"
 >(<A
@@ -2968,7 +3266,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="enc-dflt">29.4.6. Default encodings.</H2
+NAME="enc-dflt"
+></A
+>29.4.6. Default encodings.</H2
 ><P
 ALIGN="justify"
 >Besides every <A
@@ -2999,7 +3299,9 @@ CLASS="classname"
 CLASS="formalpara"
 ><P
 ><A
-NAME="def-file-enc"><B
+NAME="def-file-enc"
+></A
+><B
 >Macro <A
 HREF="encoding.html#def-file-enc"
 ><TT
@@ -3014,7 +3316,11 @@ TARGET="_top"
 CLASS="classname"
 >SYMBOL-MACRO</TT
 ></A
-> place <A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
+TARGET="_top"
+>place</A
+> <A
 HREF="encoding.html#def-file-enc"
 ><TT
 CLASS="varname"
@@ -3082,7 +3388,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="path-enc"><A
+NAME="path-enc"
+></A
+><A
 HREF="encoding.html#path-enc"
 ><TT
 CLASS="varname"
@@ -3101,7 +3409,9 @@ HREF="encoding.html#newline"
 ></DD
 ><DT
 ><A
-NAME="term-enc"><A
+NAME="term-enc"
+></A
+><A
 HREF="encoding.html#term-enc"
 ><TT
 CLASS="varname"
@@ -3124,7 +3434,9 @@ CLASS="varname"
 ></DD
 ><DT
 ><A
-NAME="misc-enc"><A
+NAME="misc-enc"
+></A
+><A
 HREF="encoding.html#misc-enc"
 ><TT
 CLASS="varname"
@@ -3147,7 +3459,9 @@ HREF="encoding.html#newline"
 ></DD
 ><DT
 ><A
-NAME="foreign-enc"><A
+NAME="foreign-enc"
+></A
+><A
 HREF="encoding.html#foreign-enc"
 ><TT
 CLASS="varname"
@@ -3160,9 +3474,12 @@ ALIGN="justify"
 >is the encoding for characters and strings passed
  through the <A
 HREF="dffi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"FFI"</SPAN
+></STRONG
 ></A
 > (some plaforms only).
  Its value must be a 1:1 encoding, i.e., an encoding in which every
@@ -3195,7 +3512,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="string-byte">29.4.7. Converting between strings and byte vectors</H2
+NAME="string-byte"
+></A
+>29.4.7. Converting between strings and byte vectors</H2
 ><P
 ALIGN="justify"
 >Encodings can also be used to convert directly between strings and
@@ -3209,11 +3528,11 @@ CLASS="variablelist"
 ><DT
 ><TT
 CLASS="sexp"
->&#13; (<TT
+>(<TT
 CLASS="function"
 >EXT:CONVERT-STRING-FROM-BYTES</TT
 >
-  <TT
+      <TT
 CLASS="replaceable"
 ><I
 >byte-vector</I
@@ -3224,7 +3543,7 @@ CLASS="replaceable"
 >encoding</I
 ></TT
 >
-  <A
+      <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
 ><TT
@@ -3259,22 +3578,29 @@ CLASS="replaceable"
 >end</I
 ></TT
 > to a
-  string, according to the given <TT
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>, according to the given <TT
 CLASS="replaceable"
 ><I
 >encoding</I
 ></TT
->, and returns the resulting
-  string.</P
+>, and returns the
+  resulting string.</P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
->&#13; (<TT
+>(<TT
 CLASS="function"
 >EXT:CONVERT-STRING-TO-BYTES</TT
 >
-  <TT
+      <TT
 CLASS="replaceable"
 ><I
 >string</I
@@ -3319,7 +3645,7 @@ CLASS="replaceable"
 >end</I
 ></TT
 > to a <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"

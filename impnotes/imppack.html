@@ -18,8 +18,9 @@ TITLE="Packages
    [CLHS-11]"
 HREF="packages.html"><LINK
 REL="PREVIOUS"
-TITLE="The COMMON-LISP-USER Package
-   [CLHS-11.1.2.2]"
+TITLE="The
+  COMMON-LISP-USER Package
+  [CLHS-11.1.2.2]"
 HREF="clupack.html"><LINK
 REL="NEXT"
 TITLE="The Packages Dictionary
@@ -65,7 +66,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +107,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="imppack">11.3. Implementation-Defined Packages
+NAME="imppack"
+></A
+>11.3. Implementation-Defined Packages
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-4.html"
 TARGET="_top"
@@ -127,9 +130,12 @@ CLASS="variablelist"
 ><DT
 ><A
 HREF="classes.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CLOS"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
@@ -146,38 +152,44 @@ CLASS="function"
 CLASS="command"
 >CLOS</B
 >-specific symbols, including some
-   <A
+    <A
 HREF="clos-diff.html"
 >additional symbols</A
 >.
-   </P
+ </P
 ></DD
 ><DT
 ><A
-NAME="sys-pac"><A
+NAME="sys-pac"
+></A
+><A
 HREF="imppack.html#sys-pac"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"SYSTEM"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
 ><P
 ALIGN="justify"
->has the nicknames <B
-CLASS="emphasis"
+>has the nicknames <STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"SYS"</SPAN
-></B
-> and <B
-CLASS="emphasis"
+></STRONG
+>
+    and <STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMPILER"</SPAN
-></B
+></STRONG
 >, and has no
-   <A
+    <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
 TARGET="_top"
 ><TT
@@ -185,25 +197,33 @@ CLASS="function"
 >EXPORT</TT
 ></A
 >ed symbols.  It defines many system internals.
-   </P
+ </P
 ></DD
 ><DT
 ><A
-NAME="ext-pac"><SPAN
+NAME="ext-pac"
+></A
+><A
+HREF="imppack.html#ext-pac"
+><STRONG
+CLASS="package"
+><SPAN
 CLASS="QUOTE"
 >"EXT"</SPAN
+></STRONG
+></A
 ></DT
 ><DD
 ><P
 ALIGN="justify"
->&#13;   is the umbrella package for all extensions: it imports and <A
+>&#13;    is the umbrella package for all extensions: it imports and <A
 HREF="pack-dict.html#re-export"
 ><TT
 CLASS="function"
 >EXT:RE-EXPORT</TT
 ></A
 >s
-   all the external symbols in all <A
+    all the external symbols in all <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -211,7 +231,7 @@ CLASS="command"
 >CLISP</B
 ></A
 > extensions, so a simple
-   <TT
+    <TT
 CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_use-package.html"
@@ -222,66 +242,93 @@ CLASS="function"
 ></A
 > "EXT")</TT
 > is enough to
-   make all the extensions available in the current package.
-   This package uses packages (in addition to <A
+    make all the extensions available in the current package.
+    This package uses packages (in addition to <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 >):
-   <A
-HREF="dir-key.html"
+    <A
+HREF="modules.html#dir-key"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"LDAP"</SPAN
+></STRONG
 ></A
-> <A
-HREF="syscalls.html"
+>, <A
+HREF="modules.html#syscalls"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"POSIX"</SPAN
+></STRONG
 ></A
-> <A
+>, <A
 HREF="socket.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"SOCKET"</SPAN
+></STRONG
 ></A
-> <A
+>, <A
 HREF="clos-stream.html#gstream"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"GSTREAM"</SPAN
+></STRONG
 ></A
-> <A
+>, <A
 HREF="clos-stream.html#gray"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"GRAY"</SPAN
+></STRONG
 ></A
->
-   <A
+>,
+    <A
 HREF="i18n.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"I18N"</SPAN
+></STRONG
 ></A
-> <A
+>, <A
 HREF="customize.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CUSTOM"</SPAN
+></STRONG
 ></A
 >.</P
 ></DD
 ><DT
 ><A
 HREF="encoding.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CHARSET"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
@@ -295,7 +342,7 @@ CLASS="function"
 >EXPORT</TT
 ></A
 >s some character sets, for use with
-   <A
+    <A
 HREF="encoding.html#make-encoding"
 ><TT
 CLASS="function"
@@ -308,14 +355,17 @@ CLASS="constant"
 >:EXTERNAL-FORMAT</TT
 ></A
 > argument.
-   </P
+ </P
 ></DD
 ><DT
 ><A
 HREF="dffi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"FFI"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
@@ -324,16 +374,19 @@ ALIGN="justify"
 >implements the <A
 HREF="dffi.html"
 >foreign function
-   interface</A
+     interface</A
 >.  Some platforms only.
-   </P
+ </P
 ></DD
 ><DT
 ><A
 HREF="platform.html#screen"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"SCREEN"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
@@ -342,9 +395,9 @@ ALIGN="justify"
 >defines an API for <A
 HREF="platform.html#screen"
 >random screen
-   access</A
+     access</A
 >.  Some platforms only.
-   </P
+ </P
 ></DD
 ></DL
 ></DIV
@@ -353,18 +406,31 @@ ALIGN="justify"
 >All pre-existing packages except <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP-USER"</SPAN
+></STRONG
 ></A
 > belong to the
  implementation, in the sense that the programs that do not follow
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
 TARGET="_top"
->Section 11.1.2.1.2
- Constraints on the COMMON-LISP Package for Conforming Programs</A
+>Section 11.1.2.1.2</A
 >
+ ("Constraints on the <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></STRONG
+></A
+> Package for Conforming Programs")
  cause undefined behavior.</P
 ></DIV
 ><DIV
@@ -411,8 +477,15 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->The COMMON-LISP-USER Package
-   <A
+>The
+  <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></STRONG
+> Package
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
 TARGET="_top"
 >[CLHS-11.1.2.2]</A

@@ -21,8 +21,9 @@ TITLE="Hash Tables
    [CLHS-18]"
 HREF="hash.html"><LINK
 REL="NEXT"
-TITLE="External notation."
-HREF="path-external-notation.html"><LINK
+TITLE=":UNSPECIFIC as a Component Value
+ [CLHS-19.2.2.2.3]"
+HREF="unspecific.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -63,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -85,7 +86,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="path-external-notation.html"
+HREF="unspecific.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -98,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="filenames">Chapter 19. Filenames
+NAME="filenames"
+></A
+>Chapter 19. Filenames
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-19.html"
 TARGET="_top"
@@ -123,11 +126,21 @@ TARGET="_top"
 ></DT
 ><DT
 >19.2. <A
+HREF="unspecific.html"
+>:UNSPECIFIC as a Component Value
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-2-2-3.html"
+TARGET="_top"
+>[CLHS-19.2.2.2.3]</A
+></A
+></DT
+><DT
+>19.3. <A
 HREF="path-external-notation.html"
 >External notation.</A
 ></DT
 ><DT
->19.3. <A
+>19.4. <A
 HREF="log-path.html"
 >Logical Pathnames
    <A
@@ -137,7 +150,7 @@ TARGET="_top"
 ></A
 ></DT
 ><DT
->19.4. <A
+>19.5. <A
 HREF="filename-dict.html"
 >The Filenames Dictionary
    <A
@@ -289,7 +302,9 @@ CLASS="filename"
 ></DD
 ><DT
 ><A
-NAME="device-prefix">Platform dependent: <A
+NAME="device-prefix"
+></A
+>Platform dependent: <A
 HREF="http://www.willows.com/"
 TARGET="_top"
 ><B
@@ -308,14 +323,20 @@ CLASS="emphasis"
 ><DD
 ><P
 ALIGN="justify"
->User variable <B
-CLASS="emphasis"
+>User variable <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="filenames.html#device-prefix"
 ><TT
 CLASS="varname"
 >CUSTOM:*DEVICE-PREFIX*</TT
-></B
-> controls translation
-  between <A
+></A
+></I
+></STRONG
+>
+  controls translation between <A
 HREF="http://cygwin.com/"
 TARGET="_top"
 ><B
@@ -428,9 +449,12 @@ CLASS="sexp"
 CLASS="literal"
 >"cygdrive"</TT
 >, you should edit
-  <TT
+  <A
+HREF="customize.html"
+><TT
 CLASS="filename"
 >#P"config.lisp"</TT
+></A
 > to change it.</P
 ></DD
 ></DL
@@ -445,7 +469,9 @@ HREF="files.html#dir"
 ><DIV
 CLASS="table"
 ><A
-NAME="min-filename-syntax-table"><P
+NAME="min-filename-syntax-table"
+></A
+><P
 ><B
 >Table 19-1. The minimum filename syntax that may be used portably</B
 ></P
@@ -524,7 +550,19 @@ CLASS="replaceable"
 >yy</I
 ></TT
 > and no
-   name specified</TD
+    name or with name <TT
+CLASS="replaceable"
+><I
+>.yy</I
+></TT
+> and no type,
+    depending on the value of <A
+HREF="filenames.html#name-type-split"
+><TT
+CLASS="varname"
+>CUSTOM:*PARSE-NAMESTRING-DOT-FILE*</TT
+></A
+>.</TD
 ></TR
 ></TBODY
 ></TABLE
@@ -554,7 +592,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="path-components">19.1. Pathname Components
+NAME="path-components"
+></A
+>19.1. Pathname Components
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-1.html"
 TARGET="_top"
@@ -663,20 +703,13 @@ CLASS="classname"
 ></DD
 ><DT
 ><TT
+CLASS="sexp"
+><TT
 CLASS="replaceable"
 ><I
 >directory</I
 ></TT
-></DT
-><DD
-><DIV
-CLASS="table"
-><A
-NAME="amiga-dir-table"><P
-><B
->Table 19-2. <TT
-CLASS="sexp"
->Directory = (<TT
+> = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -688,7 +721,14 @@ CLASS="replaceable"
 >subdirs</I
 ></TT
 >)</TT
-></B
+></DT
+><DD
+><DIV
+CLASS="informaltable"
+><A
+NAME="amiga-dir-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -859,6 +899,8 @@ CLASS="filename"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -1005,11 +1047,11 @@ ALIGN="justify"
 >Case is ignored in the strings on comparison.
   No case conversions are performed.</P
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="pathnames-externally-amiga"><P
-><B
->Table 19-3. filename notations</B
+NAME="pathnames-externally-amiga"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -1079,6 +1121,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ><P
 ></P
@@ -1111,11 +1155,11 @@ ALIGN="justify"
 ALIGN="justify"
 >[ &#60;empty&#62; | ':' | name ':' ]
     <DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="amiga-dev"><P
-><B
->Table 19-4. </B
+NAME="amiga-dev"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -1156,6 +1200,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></P
 ></DD
@@ -1166,11 +1212,11 @@ VALIGN="MIDDLE"
 ALIGN="justify"
 >[ &#60;empty&#62; | name ]
     <DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="amifa-subdir"><P
-><B
->Table 19-5. </B
+NAME="amifa-subdir"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -1188,6 +1234,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></P
 ></DD
@@ -1201,12 +1249,15 @@ ALIGN="justify"
 ></DD
 ></DL
 ></DIV
-><DIV
-CLASS="table"
+><P
+ALIGN="justify"
+>Examples:
+<DIV
+CLASS="informaltable"
 ><A
-NAME="amiga-path-examples-table"><P
-><B
->Table 19-6. Examples</B
+NAME="amiga-path-examples-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -1598,7 +1649,10 @@ CLASS="constant"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
+></P
 ><P
 ALIGN="justify"
 >Appending a <TT
@@ -1723,20 +1777,13 @@ CLASS="constant"
 ></DD
 ><DT
 ><TT
+CLASS="sexp"
+><TT
 CLASS="replaceable"
 ><I
 >directory</I
 ></TT
-></DT
-><DD
-><DIV
-CLASS="table"
-><A
-NAME="unix-dir-table"><P
-><B
->Table 19-7. <TT
-CLASS="sexp"
->Directory = (<TT
+> = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -1748,7 +1795,14 @@ CLASS="replaceable"
 >subdirs</I
 ></TT
 >)</TT
-></B
+></DT
+><DD
+><DIV
+CLASS="informaltable"
+><A
+NAME="unix-dir-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -1891,6 +1945,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -2009,11 +2065,11 @@ HREF="filenames.html#name-type-split"
 >split into name and type</A
 >.</P
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="unix-filename-table"><P
-><B
->Table 19-8. filename notations</B
+NAME="unix-filename-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -2083,6 +2139,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ></DL
@@ -2161,20 +2219,13 @@ CLASS="filename"
 ></DD
 ><DT
 ><TT
+CLASS="sexp"
+><TT
 CLASS="replaceable"
 ><I
 >directory</I
 ></TT
-></DT
-><DD
-><DIV
-CLASS="table"
-><A
-NAME="os2-dir-table"><P
-><B
->Table 19-9. <TT
-CLASS="sexp"
->Directory = (<TT
+> = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -2186,7 +2237,14 @@ CLASS="replaceable"
 >subdirs</I
 ></TT
 >)</TT
-></B
+></DT
+><DD
+><DIV
+CLASS="informaltable"
+><A
+NAME="os2-dir-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -2329,6 +2387,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -2447,11 +2507,11 @@ HREF="filenames.html#name-type-split"
 >split into name and type</A
 >.</P
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="os2-filename-table"><P
-><B
->Table 19-10. filename notations</B
+NAME="os2-filename-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -2521,6 +2581,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ><P
 ALIGN="justify"
@@ -2624,20 +2686,13 @@ CLASS="filename"
 ></DD
 ><DT
 ><TT
+CLASS="sexp"
+><TT
 CLASS="replaceable"
 ><I
 >directory</I
 ></TT
-></DT
-><DD
-><DIV
-CLASS="table"
-><A
-NAME="win32-dir-table"><P
-><B
->Table 19-11. <TT
-CLASS="sexp"
->Directory = (<TT
+> = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -2649,7 +2704,14 @@ CLASS="replaceable"
 >subdirs</I
 ></TT
 >)</TT
-></B
+></DT
+><DD
+><DIV
+CLASS="informaltable"
+><A
+NAME="win32-dir-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -2792,6 +2854,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -2937,11 +3001,11 @@ HREF="filenames.html#name-type-split"
 >split into name and type</A
 >.</P
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="win32-filename-table"><P
-><B
->Table 19-12. filename notations</B
+NAME="win32-filename-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -3011,6 +3075,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ><P
 ALIGN="justify"
@@ -3137,7 +3203,9 @@ CLASS="filename"
 CLASS="formalpara"
 ><P
 ><A
-NAME="name-type-split"><B
+NAME="name-type-split"
+></A
+><B
 >Name/type namestring split. </B
 ><P
 ></P
@@ -3235,12 +3303,18 @@ CLASS="filename"
 >"."</TT
 > is the first character, then
    the behavior depends on the value of the user variable
-   <B
-CLASS="emphasis"
+    <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="filenames.html#name-type-split"
 ><TT
 CLASS="varname"
 >CUSTOM:*PARSE-NAMESTRING-DOT-FILE*</TT
-></B
+></A
+></I
+></STRONG
 >
    which can be either
    <P
@@ -3730,11 +3804,11 @@ ALIGN="justify"
   file will be looked for, according to the operation being performed on
   it.</P
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="acorn-path-vars"><P
-><B
->Table 19-13. </B
+NAME="acorn-path-vars"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -3774,6 +3848,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ><P
 ALIGN="justify"
@@ -3844,7 +3920,9 @@ CLASS="command"
 ></DD
 ><DT
 ><A
-NAME="pathnames-externally-acorn">from Lisp-string
+NAME="pathnames-externally-acorn"
+></A
+>from Lisp-string
   notation to internal representation</DT
 ><DD
 ><P
@@ -3920,11 +3998,11 @@ ALIGN="justify"
 > { '$' | '&#38;' | '@' | '%' | '\' } '.'
     { subdirectory }* | { subdirectory }+ | empty
     <DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="acorn-directory"><P
-><B
->Table 19-14. </B
+NAME="acorn-directory"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -4025,6 +4103,8 @@ CLASS="constant"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></P
 ></DD
@@ -4035,11 +4115,11 @@ CLASS="constant"
 ALIGN="justify"
 >{ '^' | { legal-wild char }+ } '.'
    <DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="acorn-subdirectory"><P
-><B
->Table 19-15. </B
+NAME="acorn-subdirectory"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -4060,6 +4140,8 @@ CLASS="constant"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></P
 ></DD
@@ -4089,12 +4171,15 @@ ALIGN="justify"
 ></DD
 ></DL
 ></DIV
-><DIV
-CLASS="table"
+><P
+ALIGN="justify"
+>Examples:
+<DIV
+CLASS="informaltable"
 ><A
-NAME="acorn-path-example-table"><P
-><B
->Table 19-16. Examples</B
+NAME="acorn-path-example-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -4872,7 +4957,10 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
+></P
 ></DD
 ><DT
 >From internal representation to RISCOS string</DT
@@ -4885,11 +4973,11 @@ CLASS="emphasis"
 > of name/type
   components.</P
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="acorn-name-type-swap"><P
-><B
->Table 19-17. </B
+NAME="acorn-name-type-swap"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -5879,6 +5967,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ><P
 ALIGN="justify"
@@ -5982,20 +6072,13 @@ CLASS="classname"
 ></DD
 ><DT
 ><TT
+CLASS="sexp"
+><TT
 CLASS="replaceable"
 ><I
 >directory</I
 ></TT
-></DT
-><DD
-><DIV
-CLASS="table"
-><A
-NAME="acorn-dir-table"><P
-><B
->Table 19-18. <TT
-CLASS="sexp"
->Directory = (<TT
+> = (<TT
 CLASS="replaceable"
 ><I
 >startpoint</I
@@ -6007,7 +6090,14 @@ CLASS="replaceable"
 >subdirs</I
 ></TT
 >)</TT
-></B
+></DT
+><DD
+><DIV
+CLASS="informaltable"
+><A
+NAME="acorn-dir-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -6167,6 +6257,8 @@ CLASS="filename"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -6401,7 +6493,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="path-external-notation.html"
+HREF="unspecific.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -6430,7 +6522,12 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->External notation.</TD
+>:UNSPECIFIC as a Component Value
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_19-2-2-2-3.html"
+TARGET="_top"
+>[CLHS-19.2.2.2.3]</A
+></TD
 ></TR
 ></TABLE
 ></DIV

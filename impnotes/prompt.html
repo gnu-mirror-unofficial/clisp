@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,15 +97,23 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="prompt">29.8. Extensions-1.8. The Prompt</H1
+NAME="prompt"
+></A
+>29.8. Extensions-1.8. The Prompt</H1
 ><P
 ALIGN="justify"
->The variable <B
-CLASS="emphasis"
+>The variable <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="prompt.html"
 ><TT
 CLASS="varname"
 >CUSTOM:*PROMPT*</TT
-></B
+></A
+></I
+></STRONG
 > controls
  the appearance of the prompt.  When its value is a function, it is
  called and its value is printed with <A
@@ -123,39 +131,43 @@ TARGET="_top"
 CLASS="function"
 >PRINC</TT
 ></A
->.  The default value of
- <TT
+>.  The default value of <A
+HREF="prompt.html"
+><TT
 CLASS="varname"
 >CUSTOM:*PROMPT*</TT
+></A
 > prints
  <TT
 CLASS="prompt"
 >"package[n]&#62; "</TT
-> where
- <TT
+> where <TT
 CLASS="replaceable"
 ><I
 >package</I
 ></TT
-> is the shortest (nick)name of the
- current package <A
+> is the shortest
+ (nick)name of the current package <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stpackagest.html"
 TARGET="_top"
 ><TT
 CLASS="varname"
 >*PACKAGE*</TT
 ></A
-> if it is the same as it was in the
- beginning or if it does not contain symbol <A
+> if it is <I
+CLASS="emphasis"
+>not</I
+> the
+ same as it was in the beginning or if it does not contain symbol <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >T</TT
 ></A
-> (it is assumed that in
- the latter case you would want to keep in mind that your current
- package is something weird);
+>
+ (it is assumed that in the latter case you would want to keep in mind
+ that your current package is something weird);
  and <TT
 CLASS="replaceable"
 ><I

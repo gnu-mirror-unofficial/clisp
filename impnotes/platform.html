@@ -16,8 +16,8 @@ REL="UP"
 TITLE="Extensions"
 HREF="extensions.html"><LINK
 REL="PREVIOUS"
-TITLE="Extensions-1.11. Customizing CLISP behavior."
-HREF="customize.html"><LINK
+TITLE="Extensions-1.12. Code Walker"
+HREF="code-walk.html"><LINK
 REL="NEXT"
 TITLE="Extensions-2.2. External Modules"
 HREF="modules.html"><LINK
@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -69,7 +69,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="customize.html"
+HREF="code-walk.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -96,7 +96,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="platform">Chapter 30. Extensions-2: Platform specific Extensions</H1
+NAME="platform"
+></A
+>Chapter 30. Extensions-2: Platform specific Extensions</H1
 ><DIV
 CLASS="TOC"
 ><DL
@@ -136,13 +138,20 @@ HREF="socket.html"
 ></DT
 ><DT
 >30.7. <A
-HREF="syscalls.html"
->Extensions-2.7. System Calls</A
+HREF="quickstart.html"
+>Extensions-2.7. Quickstarting delivery with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+></A
 ></DT
 ><DT
 >30.8. <A
-HREF="quickstart.html"
->Extensions-2.8. Quickstarting delivery with <A
+HREF="app-dev.html"
+>Extensions-2.8. Application delivery with <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -153,36 +162,19 @@ CLASS="command"
 ></DT
 ><DT
 >30.9. <A
-HREF="app-dev.html"
->Extensions-2.9. Application delivery with <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-></A
+HREF="shell.html"
+>Extensions-2.9. Shell, Pipes and Printing</A
 ></DT
 ><DT
 >30.10. <A
-HREF="shell.html"
->Extensions-2.10. Shell, Pipes and Printing</A
-></DT
-><DT
->30.11. <A
-HREF="dir-key.html"
->Extensions-2.11. Directory Access</A
-></DT
-><DT
->30.12. <A
 HREF="getenv.html"
->Extensions-2.12. Operating System
+>Extensions-2.10. Operating System
   Environment.</A
 ></DT
 ><DT
->30.13. <A
-HREF="other.html"
->Extensions-2.13. Other</A
+>30.11. <A
+HREF="separate-io.html"
+>Extensions-2.11. Other</A
 ></DT
 ></DL
 ></DIV
@@ -191,7 +183,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="screen">30.1. Extensions-2.1. Random Screen Access</H1
+NAME="screen"
+></A
+>30.1. Extensions-2.1. Random Screen Access</H1
 ><FONT
 COLOR="RED"
 >Platform dependent: <A
@@ -241,23 +235,26 @@ CLASS="variablelist"
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:make-window</TT
+>SCREEN:MAKE-WINDOW</TT
 >)</TT
 ></DT
 ><DD
 ><P
 ALIGN="justify"
->returns a "window stream".  As long as this stream
-   is open, the terminal is in cbreak/noecho mode.  <A
+>returns a <SPAN
+CLASS="type"
+>WINDOW-STREAM</SPAN
+>.
+    As long as this stream is open, the terminal is in cbreak/noecho mode.
+    <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
 TARGET="_top"
 ><TT
 CLASS="varname"
 >*TERMINAL-IO*</TT
 ></A
->
-   should not be used for input or output during this time.
-   (Use <A
+> should not be used for input or output during this
+    time.  (Use <A
 HREF="terminal.html"
 ><TT
 CLASS="function"
@@ -277,9 +274,8 @@ CLASS="varname"
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:with-window</TT
->
-                 . <TT
+>SCREEN:WITH-WINDOW</TT
+> . <TT
 CLASS="replaceable"
 ><I
 >body</I
@@ -289,21 +285,31 @@ CLASS="replaceable"
 ><DD
 ><P
 ALIGN="justify"
->binds <B
-CLASS="emphasis"
+>binds
+    <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="platform.html#screen"
 ><TT
 CLASS="varname"
->screen:*window*</TT
-></B
-> to a
-   window stream and executes <TT
+>SCREEN:*WINDOW*</TT
+></A
+></I
+></STRONG
+>
+    to a <SPAN
+CLASS="type"
+>WINDOW-STREAM</SPAN
+> and executes <TT
 CLASS="replaceable"
 ><I
 >body</I
 ></TT
->.  The stream is guaranteed to be
-   closed when the body is left.  During its execution,
-   <A
+>.
+    The stream is guaranteed to be closed when the body is left.
+    During its execution, <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
 TARGET="_top"
 ><TT
@@ -318,9 +324,8 @@ CLASS="varname"
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:window-size</TT
->
-                 <TT
+>SCREEN:WINDOW-SIZE</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -344,9 +349,8 @@ ALIGN="justify"
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:window-cursor-position</TT
->
-                 <TT
+>SCREEN:WINDOW-CURSOR-POSITION</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -370,21 +374,20 @@ ALIGN="justify"
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:set-window-cursor-position</TT
+>SCREEN:SET-WINDOW-CURSOR-POSITION</TT
 >
-                 <TT
+      <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
 ></TT
->
-                 <TT
+> <TT
 CLASS="replaceable"
 ><I
 >line</I
 ></TT
 >
-                 <TT
+      <TT
 CLASS="replaceable"
 ><I
 >column</I
@@ -402,9 +405,8 @@ ALIGN="justify"
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:clear-window</TT
->
-                 <TT
+>SCREEN:CLEAR-WINDOW</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -414,39 +416,16 @@ CLASS="replaceable"
 ><DD
 ><P
 ALIGN="justify"
->clears the window's contents and puts the cursor in
-   the upper left corner.
-  </P
+>clears the window's contents and puts the cursor
+    in the upper left corner.</P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:clear-window-to-eot</TT
->
-                 <TT
-CLASS="replaceable"
-><I
->window-stream</I
-></TT
->)</TT
-></DT
-><DD
-><P
-ALIGN="justify"
->clears the window's contents from the cursor
-   position to the end of window.
-  </P
-></DD
-><DT
-><TT
-CLASS="sexp"
->(<TT
-CLASS="function"
->screen:clear-window-to-eol</TT
->
-                 <TT
+>SCREEN:CLEAR-WINDOW-TO-EOT</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -457,17 +436,15 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >clears the window's contents from the cursor
-   position to the end of line.
-  </P
+    position to the end of window.</P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:delete-window-line</TT
->
-                 <TT
+>SCREEN:CLEAR-WINDOW-TO-EOL</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -477,18 +454,36 @@ CLASS="replaceable"
 ><DD
 ><P
 ALIGN="justify"
->removes the cursor's line, moves the lines below it
-   up by one line and clears the window's last line.
-  </P
+>clears the window's contents from the cursor
+    position to the end of line.</P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:insert-window-line</TT
->
-                 <TT
+>SCREEN:DELETE-WINDOW-LINE</TT
+> <TT
+CLASS="replaceable"
+><I
+>window-stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>removes the cursor's line, moves the lines below
+    it up by one line and clears the window's last line.
+ </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>SCREEN:INSERT-WINDOW-LINE</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -499,17 +494,15 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >inserts a line at the cursor's line, moving the
-   lines below it down by one line.
-  </P
+    lines below it down by one line.</P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:highlight-on</TT
->
-                 <TT
+>SCREEN:HIGHLIGHT-ON</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -520,16 +513,15 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >switches highlighted output on.
-  </P
+ </P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:highlight-off</TT
->
-                 <TT
+>SCREEN:HIGHLIGHT-OFF</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -540,16 +532,15 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >switches highlighted output off.
-  </P
+ </P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:window-cursor-on</TT
->
-                 <TT
+>SCREEN:WINDOW-CURSOR-ON</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -560,17 +551,15 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >makes the cursor visible, a cursor block in most
-   implementations.
-  </P
+    implementations.</P
 ></DD
 ><DT
 ><TT
 CLASS="sexp"
 >(<TT
 CLASS="function"
->screen:window-cursor-off</TT
->
-                 <TT
+>SCREEN:WINDOW-CURSOR-OFF</TT
+> <TT
 CLASS="replaceable"
 ><I
 >window-stream</I
@@ -581,8 +570,7 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >makes the cursor invisible, in implementations
-   where this is possible.
-  </P
+    where this is possible.</P
 ></DD
 ></DL
 ></DIV
@@ -604,7 +592,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="customize.html"
+HREF="code-walk.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -632,14 +620,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Extensions-1.11. Customizing <A
-HREF="http://clisp.cons.org"
-TARGET="_top"
-><B
-CLASS="command"
->CLISP</B
-></A
-> behavior.</TD
+>Extensions-1.12. Code Walker</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"

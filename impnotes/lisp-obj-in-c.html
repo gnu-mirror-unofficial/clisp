@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -104,7 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="lisp-obj-in-c">31.2. Lisp objects in <A
+NAME="lisp-obj-in-c"
+></A
+>31.2. Lisp objects in <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -188,25 +190,40 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> object is one word, containing a tag (partial type
-information) and either immediate data (e.g. fixnums or short floats) or
-a pointer to storage.  Pointers to <A
+> object is one word, containing a tag
+ (partial type information) and either immediate data
+ (e.g. <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_fixnum.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FIXNUM</TT
+></A
+>s or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>s) or a pointer to storage.
+Pointers to <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
 CLASS="command"
 >C</B
 ></A
-> data have tag = machine_type
-= 0, pointers to <A
+> data have tag = machine_type = 0,
+pointers to <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
-> stack have tag = system_type, most other pointers
-point to <A
+> stack have tag = system_type,
+most other pointers point to <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -302,11 +319,11 @@ not a fixed length) and include a word for garbage collection purposes
 at their beginning.</P
 ><P
 ALIGN="justify"
->The garbage collector is invoked when an
-<TT
+>The garbage collector is invoked by
+ <TT
 CLASS="function"
 >allocate_*()</TT
-> request cannot be fulfilled.
+> calls according to certain heuristics.
 It marks all objects which are "live" (may be reached from the "roots"),
 compacts these objects and unmarks them.  Non-live objects are lost;
 their storage is reclaimed.</P

@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="hash">Chapter 18. Hash Tables
+NAME="hash"
+></A
+>Chapter 18. Hash Tables
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-18.html"
 TARGET="_top"
@@ -129,7 +131,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="hash-dict">18.1. The Hash Tables Dictionary
+NAME="hash-dict"
+></A
+>18.1. The Hash Tables Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_hash__s_dictionary.html"
 TARGET="_top"
@@ -140,7 +144,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="make-hash">18.1.1. Function <A
+NAME="make-hash"
+></A
+>18.1.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_make-hash-table.html"
 TARGET="_top"
 ><TT
@@ -160,11 +166,11 @@ CLASS="function"
 > supports additional keywords
  <TT
 CLASS="constant"
->:initial-contents</TT
+>:INITIAL-CONTENTS</TT
 >
  and <TT
 CLASS="constant"
->:weak</TT
+>:WEAK</TT
 >:</P
 ><TABLE
 BORDER="0"
@@ -198,7 +204,7 @@ CLASS="literal"
 ALIGN="justify"
 >The <TT
 CLASS="constant"
->:initial-contents</TT
+>:INITIAL-CONTENTS</TT
 > argument is an
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_a.html#association_list"
@@ -207,20 +213,62 @@ TARGET="_top"
 > that is used to initialize the new hash table.
  The <TT
 CLASS="constant"
->:rehash-threshold</TT
+>:REHASH-THRESHOLD</TT
 > argument is ignored.</P
 ><P
 ALIGN="justify"
->The boolean <TT
+>The <TT
 CLASS="constant"
->:weak</TT
-> argument defaults to <A
+>:WEAK</TT
+> can take the following values:
+ <P
+></P
+><TABLE
+BORDER="0"
+><TBODY
+><TR
+><TD
+><A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
+> (default)</TD
+></TR
+><TR
+><TD
+><TT
+CLASS="constant"
+>:KEY</TT
+></TD
+></TR
+><TR
+><TD
+><TT
+CLASS="constant"
+>:VALUE</TT
+></TD
+></TR
+><TR
+><TD
+><TT
+CLASS="constant"
+>:EITHER</TT
+></TD
+></TR
+><TR
+><TD
+><TT
+CLASS="constant"
+>:BOTH</TT
+></TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
 >
 and specifies whether the <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
@@ -233,22 +281,29 @@ CLASS="classname"
 CLASS="emphasis"
 >weak</I
 >:
-the key is not considered accessible for the <A
+if the key, value, either or both are not accessible for the <A
 HREF="gc.html"
 >garbage-collect</A
->ion purposes, i.e., if
-it is only accessible in the weak <A
+>ion
+purposes, i.e., if they are only accessible via weak <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >HASH-TABLE</TT
 ></A
->, it is <A
+>s
+and <A
+HREF="weak.html"
+><TT
+CLASS="classname"
+>EXT:WEAK-POINTER</TT
+></A
+>s, it is <A
 HREF="gc.html"
 >garbage-collect</A
->ed and
-removed from the weak <A
+>ed and removed from the weak
+<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
 TARGET="_top"
 ><TT
@@ -300,28 +355,535 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="hash-ext">18.1.2. Additional Macros</H2
-><DIV
-CLASS="section"
-><H3
-CLASS="section"
-><A
-NAME="dohash">18.1.2.1. Macro <A
-HREF="hash.html#dohash"
+NAME="defhash"
+></A
+>18.1.2. Macro <A
+HREF="hash.html#defhash"
 ><TT
 CLASS="function"
->EXT:DOHASH</TT
+>EXT:DEFINE-HASH-TABLE-TEST</TT
 ></A
-></H3
+></H2
 ><P
 ALIGN="justify"
->For iteration through a hash table, a macro <A
+>You can define a new hash table test using the macro
+ <A
+HREF="hash.html#defhash"
+><TT
+CLASS="function"
+>EXT:DEFINE-HASH-TABLE-TEST</TT
+></A
+>: <TT
+CLASS="sexp"
+>(<A
+HREF="hash.html#defhash"
+><TT
+CLASS="function"
+>EXT:DEFINE-HASH-TABLE-TEST</TT
+></A
+> test-name <TT
+CLASS="replaceable"
+><I
+>test-function</I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>hash-function</I
+></TT
+>)</TT
+>, after which <TT
+CLASS="replaceable"
+><I
+>test-name</I
+></TT
+>
+ can be passed as the <TT
+CLASS="constant"
+>:TEST</TT
+> argument to
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-hash-table.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-HASH-TABLE</TT
+></A
+>.  E.g.: <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13; (<A
+HREF="hash.html#defhash"
+><TT
+CLASS="function"
+>EXT:DEFINE-HASH-TABLE-TEST</TT
+></A
+> string <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stringeqc_ng-not-lessp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STRING=</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sxhash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SXHASH</TT
+></A
+>)
+ (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-hash-table.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-HASH-TABLE</TT
+></A
+> :test 'string)
+</PRE
+></TD
+></TR
+></TABLE
+>
+(which is not too useful because it is equivalent to an <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_equal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQUAL</TT
+></A
+>
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>HASH-TABLE</TT
+></A
+> but less efficient).</P
+><P
+ALIGN="justify"
+>The fundamental requirement is that the <TT
+CLASS="replaceable"
+><I
+>test-function</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>hash-function</I
+></TT
+> are
+ consistent: <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>test-function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>) ==&#62;
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eqcm_sleq__lteqcm_gteq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>=</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>hash-function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>) (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_funcall.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCALL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>hash-function</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>y</I
+></TT
+>))
+ </PRE
+></TD
+></TR
+></TABLE
+>
+ This means that the following definition: <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;  (<A
+HREF="hash.html#defhash"
+><TT
+CLASS="function"
+>EXT:DEFINE-HASH-TABLE-TEST</TT
+></A
+> number <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eqcm_sleq__lteqcm_gteq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>=</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sxhash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SXHASH</TT
+></A
+>) ; <B
+CLASS="emphasis"
+>BAD!</B
+>
+ </PRE
+></TD
+></TR
+></TABLE
+>
+ is <I
+CLASS="emphasis"
+>not</I
+> correct because <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eqcm_sleq__lteqcm_gteq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>=</TT
+></A
+> 1 1d0)</TT
+> is
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> but <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eqcm_sleq__lteqcm_gteq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>=</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sxhash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SXHASH</TT
+></A
+> 1) (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sxhash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SXHASH</TT
+></A
+> 1d0))</TT
+>
+ is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.  The correct way is, e.g.: <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;  (<A
+HREF="hash.html#defhash"
+><TT
+CLASS="function"
+>EXT:DEFINE-HASH-TABLE-TEST</TT
+></A
+> number <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eqcm_sleq__lteqcm_gteq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>=</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LAMBDA</TT
+></A
+> (x) (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_sxhash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SXHASH</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+> x '<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>))))
+ </PRE
+></TD
+></TR
+></TABLE
+>
+ (note that
+ <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>)</TT
+>
+ does <I
+CLASS="emphasis"
+>not</I
+> cons while
+ <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_coerce.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COERCE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>DOUBLE-FLOAT</TT
+></A
+>)</TT
+>
+ does).</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="ht-test"
+></A
+>18.1.3. Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_hash-table-test.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>HASH-TABLE-TEST</TT
+></A
+></H2
+><P
+ALIGN="justify"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_hash-table-test.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>HASH-TABLE-TEST</TT
+></A
+> returns either one of the four standard
+ symbols <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQ</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_eql.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_equal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQUAL</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_equalp.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EQUALP</TT
+></A
+>, or, for <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>HASH-TABLE</TT
+></A
+>s
+ created with a user-defined <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_hash-table-test.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>HASH-TABLE-TEST</TT
+></A
+> (see macro <A
+HREF="hash.html#defhash"
+><TT
+CLASS="function"
+>EXT:DEFINE-HASH-TABLE-TEST</TT
+></A
+>),
+ a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+> cell <TT
+CLASS="sexp"
+>(<TT
+CLASS="replaceable"
+><I
+>test-function</I
+></TT
+> . <TT
+CLASS="replaceable"
+><I
+>hash-function</I
+></TT
+>)</TT
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="dohash"
+></A
+>18.1.4. Macro <A
 HREF="hash.html#dohash"
 ><TT
 CLASS="function"
 >EXT:DOHASH</TT
 ></A
->
+></H2
+><P
+ALIGN="justify"
+>For iteration through a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>HASH-TABLE</TT
+></A
+>, a macro <A
+HREF="hash.html#dohash"
+><TT
+CLASS="function"
+>EXT:DOHASH</TT
+></A
+>,
  similar to <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_dolist.html"
 TARGET="_top"
@@ -404,12 +966,8 @@ CLASS="function"
 > forms are <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#iteration_form"
 TARGET="_top"
-><SPAN
-CLASS="QUOTE"
->"iteration forms"</SPAN
-></A
->.</P
-></DIV
+>iteration form</A
+>s.</P
 ></DIV
 ></DIV
 ></DIV

@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="redef-class">4.6. Redefining Classes
+NAME="redef-class"
+></A
+>4.6. Redefining Classes
   <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_4-3-6.html"
 TARGET="_top"
@@ -114,15 +116,49 @@ TARGET="_top"
 ></H1
 ><P
 ALIGN="justify"
->Redefining classes is not supported.  The function
- <A
+>Trivial changes, e.g., those that can occur when doubly loading
+ the same code, do not require updating the instances.
+ These are the changes that do not modify the set of local slots
+ accessible in instances, e.g., changes to slot options
+ <TT
+CLASS="constant"
+>:INITFORM</TT
+>, <TT
+CLASS="constant"
+>:DOCUMENTATION</TT
+>,
+ and changes to class options <TT
+CLASS="constant"
+>:DEFAULT-INITARGS</TT
+>,
+ <TT
+CLASS="constant"
+>:DOCUMENTATION</TT
+>.</P
+><P
+ALIGN="justify"
+>The instances are updated when they are first accessed, <I
+CLASS="emphasis"
+>not</I
+> at
+ the time when the class is redefined or <A
+HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_mak_ces-obsolete.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-INSTANCES-OBSOLETE</TT
+></A
+> is
+ called.  When the class has been redefined several times since the
+ instance was last accessed, <A
 HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_upd_efined-class.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >UPDATE-INSTANCE-FOR-REDEFINED-CLASS</TT
 ></A
-> is not implemented.</P
+> is
+ still called just once.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

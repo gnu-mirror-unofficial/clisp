@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="num-concepts">12.2. Number Concepts
+NAME="num-concepts"
+></A
+>12.2. Number Concepts
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1.html"
 TARGET="_top"
@@ -117,7 +119,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="byte-type">12.2.1. Byte Operations on Integers
+NAME="byte-type"
+></A
+>12.2.1. Byte Operations on Integers
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-1-3-2.html"
 TARGET="_top"
@@ -146,7 +150,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-subst">12.2.2. Rule of Float Substitutability
+NAME="float-subst"
+></A
+>12.2.2. Rule of Float Substitutability
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-3-3.html"
 TARGET="_top"
@@ -162,7 +168,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="float-comp">12.2.3. Floating-point Computations
+NAME="float-comp"
+></A
+>12.2.3. Floating-point Computations
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-4.html"
 TARGET="_top"
@@ -199,13 +207,13 @@ TARGET="_top"
 CLASS="classname"
 >LONG-FLOAT</TT
 ></A
->:</P
-><DIV
-CLASS="table"
+>:
+<DIV
+CLASS="informaltable"
 ><A
-NAME="floating-types-table"><P
-><B
->Table 12-1. floating point types</B
+NAME="floating-types-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -362,7 +370,10 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
+></P
 ><P
 ALIGN="justify"
 >The single and double float formats are those of the <A
@@ -417,12 +428,18 @@ CLASS="constant"
 CLASS="formalpara"
 ><P
 ><A
-NAME="lfd"><B
+NAME="lfd"
+></A
+><B
 >Arbitrary Precision Floats. </B
 >Long floats have variable mantissa length, which is a
  multiple of 16 (or 32, depending on the word size of the processor).
- The default length used when long floats are read is given by the place
- <TT
+ The default length used when long floats are read is given by the
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
+TARGET="_top"
+>place</A
+> <TT
 CLASS="sexp"
 >(<A
 HREF="num-concepts.html#lfd"
@@ -440,14 +457,14 @@ TARGET="_top"
 CLASS="function"
 >SETF</TT
 ></A
-> (<A
+>
+ (<A
 HREF="num-concepts.html#lfd"
 ><TT
 CLASS="function"
 >EXT:LONG-FLOAT-DIGITS</TT
 ></A
->)
- <TT
+>) <TT
 CLASS="replaceable"
 ><I
 >n</I
@@ -458,7 +475,8 @@ CLASS="replaceable"
 ><I
 >n</I
 ></TT
-> is a positive integer.  E.g., <TT
+> is a positive integer.
+ E.g., <TT
 CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
@@ -474,15 +492,18 @@ CLASS="function"
 >EXT:LONG-FLOAT-DIGITS</TT
 ></A
 >) 3322)</TT
-> sets the default precision
- of long floats to about 1000 decimal digits.</P
+> sets the
+ default precision of long floats to about 1000 decimal digits.
+</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="flocont">12.2.3.1. Rule of Float Precision Contagion
+NAME="flocont"
+></A
+>12.2.3.1. Rule of Float Precision Contagion
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-4-4.html"
 TARGET="_top"
@@ -610,7 +631,7 @@ HREF="references.html#ansi-cl"
 CLASS="sexp"
 >(+ 1.5 1.75)</TT
 >
-  returns <TT
+  return <TT
 CLASS="literal"
 >3.25</TT
 >, while traditional <A
@@ -866,19 +887,55 @@ CLASS="literal"
 ><DD
 ><P
 ALIGN="justify"
->If in a computation using thousands of short floats,
-  a long float (like <A
+>If in a computation using thousands of <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>s,
+  a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+> (like <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >PI</TT
 ></A
->) happens to be used, the long precision should
-  not propagate throughout all the intermediate values. Otherwise, the
-  long result would look precise, but its accuracy is only that of a
-  short float; furthermore much computation time would be lost by
-  calculating with long floats when only short floats would be needed.
+>) happens to be used, the long precision
+  should not propagate throughout all the intermediate values.
+  Otherwise, the long result would look precise, but its accuracy is
+  only that of a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>; furthermore much computation time
+  would be lost by calculating with <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LONG-FLOAT</TT
+></A
+>s when only
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_short-flo_m_long-float.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SHORT-FLOAT</TT
+></A
+>s would be needed.
   </P
 ></DD
 ></DL
@@ -887,7 +944,9 @@ CLASS="constant"
 CLASS="formalpara"
 ><P
 ><A
-NAME="warn-fpc"><B
+NAME="warn-fpc"
+></A
+><B
 >Variable <A
 HREF="num-concepts.html#warn-fpc"
 ><TT
@@ -910,7 +969,68 @@ CLASS="constant"
 ></A
 >, a warning is emitted for
  every coercion involving different floating-point types.
-</P
+ As explained above, float precision contagion is not a good idea,
+ this is why <A
+HREF="num-concepts.html#warn-fpc"
+><TT
+CLASS="varname"
+>CUSTOM:*WARN-ON-FLOATING-POINT-CONTAGION*</TT
+></A
+> is set to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> initially.
+ You can avoid the contagion by doing all your computations with the
+ same floating-point type (and using <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_float.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FLOAT</TT
+></A
+> to convert all constants,
+ e.g., <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>PI</TT
+></A
+>, to your preferred type).
+ Set it to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_error.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>ERROR</TT
+></A
+> to have <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+> an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> on float
+ precision contagion.</P
 ></DIV
 ></DIV
 ></DIV
@@ -919,7 +1039,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="complex-comp">12.2.4. Complex Computations
+NAME="complex-comp"
+></A
+>12.2.4. Complex Computations
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-5.html"
 TARGET="_top"
@@ -1041,7 +1163,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="complex-rational">12.2.5. Rule of
+NAME="complex-rational"
+></A
+>12.2.5. Rule of
    Canonical Representation for Complex Rationals
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_12-1-5-3.html"
@@ -1058,12 +1182,11 @@ TARGET="_top"
 CLASS="function"
 >EQL</TT
 ></A
-> to
- <TT
+> to <TT
 CLASS="literal"
 >0</TT
->, the number is automatically converted to a real
- number.</P
+>,
+ the number is automatically converted to a real number.</P
 ><P
 ALIGN="justify"
 >This has the advantage that

@@ -17,9 +17,9 @@ REL="UP"
 TITLE="Chapters or the Common Lisp HyperSpec"
 HREF="clhs-chapters.html"><LINK
 REL="PREVIOUS"
-TITLE="Objects
-   [CLHS-7]"
-HREF="objects.html"><LINK
+TITLE="The Objects Dictionary
+  [CLHS-7.7]"
+HREF="obj-dict.html"><LINK
 REL="NEXT"
 TITLE="Conditions
    [CLHS-9]"
@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -72,7 +72,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="objects.html"
+HREF="obj-dict.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="structures">Chapter 8. Structures
+NAME="structures"
+></A
+>Chapter 8. Structures
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-8.html"
 TARGET="_top"
@@ -124,16 +126,48 @@ TARGET="_top"
 CLASS="function"
 >LAMBDA</TT
 ></A
-> (structure stream depth) (declare
+> (object stream depth) (declare
  (ignore depth)) ...)</TT
-> This <A
+>
+ This <A
 HREF="http://www.lisp.org/HyperSpec/Body/glo_l.html#lambda_expression"
 TARGET="_top"
 >lambda expression</A
-> names a function
- whose task is to output the external representation of structure onto
- the stream. This may be done by outputting text onto the stream using
+> names a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+> whose task is to output the
+ external representation of the <A
+HREF="http://www.lisp.org/HyperSpec/Body/cla_structure-object.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRUCTURE-OBJECT</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> onto the
  <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>. This may be done by outputting text onto the
+ stream using <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-char.html"
 TARGET="_top"
 ><TT
@@ -168,15 +202,15 @@ TARGET="_top"
 CLASS="function"
 >PRINC</TT
 ></A
->, <A
+>,
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >PRINT</TT
 ></A
->,
- <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_writecm_p_rintcm_princ.html"
 TARGET="_top"
 ><TT
@@ -190,8 +224,8 @@ TARGET="_top"
 CLASS="function"
 >FORMAT</TT
 ></A
-> and the like. The following rules must be
- obeyed:</P
+> and the like.
+ The following rules must be obeyed:</P
 ><P
 ></P
 ><UL
@@ -211,16 +245,15 @@ CLASS="varname"
 ><LI
 ><P
 ALIGN="justify"
->The value of <A
+>The treatment of <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-prettyst.html"
 TARGET="_top"
 ><TT
 CLASS="varname"
 >*PRINT-PRETTY*</TT
 ></A
-> should not and
-  cannot be respected, since the pretty-print mechanism is not
-  accessible from outside.</P
+> is up to you.
+ </P
 ></LI
 ><LI
 ><P
@@ -234,8 +267,8 @@ CLASS="varname"
 ></A
 > need not be
   respected.  This is managed by the system.  (But the print-circle
-  mechanism handles only those objects that are (direct or indirect)
-  components of structure.)</P
+  mechanism handles only those objects that are direct or indirect
+  components of the structure.)</P
 ></LI
 ><LI
 ><P
@@ -403,7 +436,7 @@ CLASS="varname"
 ></A
 > must be respected,
   especially if you are outputting an arbitrary number of components.
-  </P
+ </P
 ></LI
 ><LI
 ><P
@@ -680,7 +713,15 @@ CLASS="constant"
 CLASS="constant"
 >:INCLUDE</TT
 > except that it
- does not create new accessors for the inherited slots.</P
+ does not create new accessors for the inherited slots (this is a
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension).</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -698,7 +739,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="objects.html"
+HREF="obj-dict.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -726,11 +767,11 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Objects
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-7.html"
+>The Objects Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_7-7.html"
 TARGET="_top"
->[CLHS-7]</A
+>[CLHS-7.7]</A
 ></TD
 ><TD
 WIDTH="34%"

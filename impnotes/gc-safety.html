@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -104,7 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="gc-safety">31.4. The burden of <A
+NAME="gc-safety"
+></A
+>31.4. The burden of <A
 HREF="gc.html"
 >garbage-collect</A
 >ion upon the rest of <A
@@ -227,6 +229,48 @@ without calling unsafe routines, and without worrying about <A
 HREF="gc.html"
 >garbage-collect</A
 >.</P
+><P
+ALIGN="justify"
+>Run-time GC-safety checking is available when you build <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>
+ with a C++ compiler, e.g.:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;bash$ CC=g++ ./configure --with-debug build-g-gxx
+</PRE
+></TD
+></TR
+></TABLE
+>
+When built like this, <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> will abort when you reference GC-unsafe
+data after an allocation (which could have triggered a <A
+HREF="gc.html"
+>garbage-collect</A
+>ion),
+and <B
+CLASS="command"
+>gdb</B
+> will pinpoint the trouble spot.
+</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="modules">30.2. Extensions-2.2. External Modules</H1
+NAME="modules"
+></A
+>30.2. Extensions-2.2. External Modules</H1
 ><FONT
 COLOR="RED"
 >Platform dependent: <A
@@ -107,7 +109,147 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
+> and <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
 > platforms only.</FONT
+><DIV
+CLASS="note"
+><A
+NAME="mod-win32"
+></A
+><P
+></P
+><TABLE
+CLASS="note"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/note.gif"
+HSPACE="5"
+ALT="Note"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="CENTER"
+><B
+>Modules on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>.</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>Everything described in the section will work verbatim on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>
+  when using <A
+HREF="http://cygwin.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Cygwin</B
+></A
+> or <A
+HREF="http://www.mingw.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>MinGW</B
+></A
+>, <I
+CLASS="emphasis"
+>except</I
+> for one
+  thing - you will need to replace the <TT
+CLASS="filename"
+>run</TT
+>
+  extension in <TT
+CLASS="filename"
+>lisp.run</TT
+> with the <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> executable
+  extension <TT
+CLASS="filename"
+>exe</TT
+>.</P
+><P
+>For historical reasons, all examples appear to assume <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> and
+  use the <TT
+CLASS="filename"
+>run</TT
+> file type (<SPAN
+CLASS="QUOTE"
+>"extension"</SPAN
+>)
+  for the <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> run-time.
+  This does <I
+CLASS="emphasis"
+>not</I
+> mean that they will not work on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>.</P
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="mod-overview"
+></A
+>30.2.1. Overview</H2
 ><P
 ALIGN="justify"
 ><A
@@ -132,9 +274,16 @@ CLASS="command"
 >.</P
 ><P
 ALIGN="justify"
->A module is a piece of external code which defines extra Lisp
- objects, symbols and functions.  A module name must consist of the
- characters <TT
+>A <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+>module</I
+></STRONG
+> is a
+ piece of external code which defines extra Lisp objects, symbols and
+ functions.  A module name must consist of the characters
+ <TT
 CLASS="filename"
 >A</TT
 >-<TT
@@ -157,12 +306,12 @@ CLASS="filename"
 >-<TT
 CLASS="filename"
 >9</TT
->.  The module name
- <SPAN
+>.
+ The module name <SPAN
 CLASS="QUOTE"
 >"clisp"</SPAN
-> is reserved.  Normally a module name is derived
- from the corresponding file name.</P
+> is reserved.
+ Normally a module name is derived from the corresponding file name.</P
 ><P
 ALIGN="justify"
 ><B
@@ -227,21 +376,36 @@ CLASS="command"
 >CLISP</B
 ></A
 > <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >s and
- on module sets.</P
+ on <A
+HREF="modules.html#modset"
+>module set</A
+>s.</P
+><DIV
+CLASS="formalpara"
 ><P
-ALIGN="justify"
->A <B
-CLASS="emphasis"
 ><A
-HREF="modules.html"
+NAME="linkset"
+></A
+><B
+><A
+HREF="modules.html#linkset"
 >linking set</A
-></B
-> is a directory
- containing:</P
-><P
+>. </B
+>A <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="modules.html#linkset"
+>linking set</A
+></I
+></STRONG
+>
+   is a directory containing:
+<P
 ></P
 ><DIV
 CLASS="variablelist"
@@ -254,11 +418,14 @@ CLASS="filename"
 ><DD
 ><P
 ALIGN="justify"
->some <B
+>some <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html"
+TARGET="_top"
+><B
 CLASS="command"
 >/bin/sh</B
-> commands, setting
-  the variables
+></A
+> commands, setting the variables
 <P
 ></P
 ><DIV
@@ -337,7 +504,11 @@ CLASS="envar"
 ><DD
 ><P
 ALIGN="justify"
->additional X window system libraries to use
+>additional <A
+HREF="http://www.x.org/"
+TARGET="_top"
+>X Window System</A
+> libraries to use
    </P
 ></DD
 ><DT
@@ -375,7 +546,7 @@ CLASS="filename"
 ><P
 ALIGN="justify"
 >the list of modules contained in this <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >
   </P
@@ -389,7 +560,7 @@ CLASS="filename"
 ><P
 ALIGN="justify"
 >the compiled list of modules contained in this <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >
   </P
@@ -436,6 +607,8 @@ HREF="p-indep.html#image"
 ></DD
 ></DL
 ></DIV
+></P
+></DIV
 ><P
 ALIGN="justify"
 >To run a <A
@@ -446,7 +619,7 @@ CLASS="command"
 >CLISP</B
 ></A
 > contained in some <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >
  <TT
@@ -468,14 +641,29 @@ CLASS="replaceable"
 ></TT
 >/lispinit.mem</B
 ></P
+><DIV
+CLASS="formalpara"
 ><P
-ALIGN="justify"
->A <B
-CLASS="emphasis"
->module set</B
-> is a directory
-containing:</P
-><P
+><A
+NAME="modset"
+></A
+><B
+><A
+HREF="modules.html#modset"
+>module set</A
+>. </B
+>A <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="modules.html#modset"
+>module set</A
+></I
+></STRONG
+>
+   is a directory containing:
+<P
 ></P
 ><DIV
 CLASS="variablelist"
@@ -488,26 +676,29 @@ CLASS="command"
 ><DD
 ><P
 ALIGN="justify"
->some <B
+>some <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html"
+TARGET="_top"
+><B
 CLASS="command"
 >/bin/sh</B
-> commands, which
-  prepare the directory before linking, and set the variables
-  <TT
+></A
+> commands, which prepare the directory
+  before linking, and set the variables <TT
 CLASS="envar"
 >NEW_FILES</TT
->, <TT
-CLASS="envar"
->NEW_LIBS</TT
 >,
   <TT
+CLASS="envar"
+>NEW_LIBS</TT
+>, <TT
 CLASS="envar"
 >NEW_MODULES</TT
 >, <TT
 CLASS="envar"
 >TO_LOAD</TT
-> and optionally
-  <TT
+>
+  and optionally <TT
 CLASS="envar"
 >TO_PRELOAD</TT
 ></P
@@ -525,12 +716,17 @@ CLASS="command"
 ></DD
 ></DL
 ></DIV
+></P
+></DIV
 ><P
 ALIGN="justify"
 >Note that in <B
 CLASS="command"
 >link.sh</B
-> the module set directory
+> the <A
+HREF="modules.html#modset"
+>module set</A
+> directory
  is referred to as <TT
 CLASS="varname"
 >$modulename/</TT
@@ -549,8 +745,11 @@ CLASS="envar"
 ><P
 ALIGN="justify"
 >the space-separated list of files that
-  belong to the module set and will belong to every new <A
-HREF="modules.html"
+  belong to the <A
+HREF="modules.html#modset"
+>module set</A
+> and will belong to every new <A
+HREF="modules.html#linkset"
 >linking set</A
 >.
  </P
@@ -580,7 +779,7 @@ CLASS="command"
 ></A
 >
   compiler when linking the lisp.run belonging to a new <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >.
  </P
@@ -594,11 +793,17 @@ CLASS="envar"
 ><P
 ALIGN="justify"
 >the space-separated list of the module names
-  belonging to the module set.  Normally, every <TT
+  belonging to the <A
+HREF="modules.html#modset"
+>module set</A
+>.  Normally, every <TT
 CLASS="filename"
 >#P".c"</TT
 > file in the
-  module set defines a module of its own.  The module name is derived
+  <A
+HREF="modules.html#modset"
+>module set</A
+> defines a module of its own.  The module name is derived
   from the file name.</P
 ></DD
 ><DT
@@ -617,7 +822,7 @@ CLASS="filename"
 >#P"lispinit.mem"</TT
 ></A
 > belonging to a new <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >.
  </P
@@ -645,7 +850,7 @@ CLASS="filename"
 ></A
 >
   belonging to a new <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >.
   This variable is usually used for defining Lisp packages which must be
@@ -685,7 +890,10 @@ CLASS="replaceable"
 >file1.c</I
 ></TT
 > ...</B
-> creates a module set
+> creates a <A
+HREF="modules.html#modset"
+>module set</A
+>
  in <TT
 CLASS="replaceable"
 ><I
@@ -724,7 +932,7 @@ CLASS="replaceable"
 ></B
 > combines a
  <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 > in <TT
 CLASS="replaceable"
@@ -738,7 +946,7 @@ CLASS="replaceable"
 >module-dir</I
 ></TT
 > to a new <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >, in a
  directory <TT
@@ -765,7 +973,7 @@ CLASS="replaceable"
 ></TT
 > ...</B
 > runs the <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >
  in <TT
@@ -794,7 +1002,7 @@ CLASS="option"
 >, the loading will be performed
  through dynamic loading.  Otherwise - this is much slower - a temporary
  <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 > will be created and deleted afterwards.  Note that dynamic
  loading does not work on all operating systems, and that
@@ -803,21 +1011,289 @@ CLASS="option"
 >--with-dynamic-modules</TT
 > precludes some efficiency
  optimizations which are on by default.</P
+></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="mod-set-example">30.2.1. Example</H2
+NAME="modinfo"
+></A
+>30.2.2. Function <A
+HREF="modules.html#modinfo"
+><TT
+CLASS="function"
+>EXT:MODULE-INFO</TT
+></A
+></H2
+><P
+ALIGN="justify"
+>Function <TT
+CLASS="sexp"
+>(<A
+HREF="modules.html#modinfo"
+><TT
+CLASS="function"
+>EXT:MODULE-INFO</TT
+></A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>verbose</I
+></TT
+>)</TT
+> allows one to inquire
+ about what modules are available in the currently running image.
+ When called without arguments, it returns the list of module names,
+ starting with <SPAN
+CLASS="QUOTE"
+>"clisp"</SPAN
+>.  When <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> is supplied and
+ names a module, 3 values are returned - <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>,
+ <TT
+CLASS="replaceable"
+><I
+>subr-count</I
+></TT
+>,
+ <TT
+CLASS="replaceable"
+><I
+>object-count</I
+></TT
+>.
+ When <TT
+CLASS="replaceable"
+><I
+>verbose</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the full list of
+ module lisp function names written in <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> (<SPAN
+CLASS="type"
+>Subr</SPAN
+>s) and
+ the full list of internal lisp objects available in <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> code
+ are additionally returned for the total of 5 values.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="mod-dynload"
+></A
+>30.2.3. Function <A
+HREF="modules.html#mod-dynload"
+><TT
+CLASS="function"
+>SYS::DYNLOAD-MODULES</TT
+></A
+></H2
+><FONT
+COLOR="RED"
+>Platform dependent: some <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> platforms only, compiled <B
+CLASS="emphasis"
+>with</B
+>
+ compile-time flag <TT
+CLASS="option"
+>--with-dynamic-modules</TT
+>.</FONT
+><P
+ALIGN="justify"
+>Note that dynamic loading does not work on all operating systems
+ (<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/dlopen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>dlopen</TT
+></A
+> is required), and that <TT
+CLASS="option"
+>--with-dynamic-modules</TT
+>
+ precludes some efficiency optimizations which are on by default.</P
+><P
+ALIGN="justify"
+>Function <TT
+CLASS="sexp"
+>(<A
+HREF="modules.html#mod-dynload"
+><TT
+CLASS="function"
+>SYS::DYNLOAD-MODULES</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>filename</I
+></TT
+>
+ ({<TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>}+))</TT
+> loads a shared object file or library
+ containing a number of named external <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> modules.
+ This facility cannot be used to <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/dlopen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>dlopen</TT
+></A
+> and access arbitrary shared
+ libraries.</P
+><P
+ALIGN="justify"
+>External modules for <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> are those which contain a
+ <TT
+CLASS="literal"
+>module__<TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>__subr_tab</TT
+>, among others.
+ This serves to register external functions which operate on
+ Lisp-level structures with <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.</P
+><P
+ALIGN="justify"
+>To use <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/dlopen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>dlopen</TT
+></A
+> with modules, you should add
+ <TT
+CLASS="option"
+>-fPIC</TT
+> to the module's compilation options.
+ Something like <B
+CLASS="command"
+>cc -shared -o <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>.so <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+>.o</B
+>
+ may be needed to produce the shared object file.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="mod-set-example"
+></A
+>30.2.4. Example</H2
 ><P
 ALIGN="justify"
 >To link in the <A
 HREF="dffi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"FFI"</SPAN
+></STRONG
 ></A
-> bindings for the GNU/Linux operating
+> bindings for the <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+>/<A
+HREF="http://www.linux.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Linux</B
+></A
+> operating
  system, the following steps are needed.  (Step 1 and step 2 need not be
  executed in this order.)</P
 ><P
@@ -827,7 +1303,10 @@ TYPE="1"
 ><LI
 ><P
 ALIGN="justify"
->Create a new module set:
+>Create a new <A
+HREF="modules.html#modset"
+>module set</A
+>:
 
 <TABLE
 BORDER="0"
@@ -964,7 +1443,7 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >Create a new <A
-HREF="modules.html"
+HREF="modules.html#linkset"
 >linking set</A
 >:
 <TABLE
@@ -1007,7 +1486,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="included-modules">30.2.2. Modules included in the distribution.</H2
+NAME="included-modules"
+></A
+>30.2.5. Modules included in the distribution.</H2
 ><P
 ALIGN="justify"
 >The following modules come with the distribution of
@@ -1036,43 +1517,84 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->.  The
-   following platforms are supported:
+>.
+    The following platforms are supported:
    <P
 ></P
 ><UL
 ><LI
 ><P
 ALIGN="justify"
->AmigaOS</P
+><A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Amiga</B
+></A
+></P
 ></LI
 ><LI
 ><P
 ALIGN="justify"
->Linux/libc5</P
+><A
+HREF="http://www.linux.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Linux</B
+></A
+>/<A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://www.gnu.org/software/libc/"
+TARGET="_top"
+>libc</A
+></P
 ></LI
 ><LI
 ><P
 ALIGN="justify"
->Linux/libc6</P
+><A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+></P
 ></LI
 ></UL
 ></P
 ></DD
 ><DT
->CLX</DT
+><A
+HREF="http://www.cliki.net/CLX"
+TARGET="_top"
+><B
+CLASS="command"
+>CLX</B
+></A
+></DT
 ><DD
 ><P
 ALIGN="justify"
->Call Xlib functions from <A
+>Call
+    <A
+HREF="http://www.the-labs.com/X11/XLib-Manual/"
+TARGET="_top"
+>Xlib</A
+>
+    functions from <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
 CLASS="command"
 >CLISP</B
 ></A
->.  Two
-   implementations are supplied:
+>.  Two implementations are supplied:
    <P
 ></P
 ><UL
@@ -1085,22 +1607,14 @@ HREF="ftp://ftp.x.org/R5contrib/CLX.R5.02.tar.Z"
 TARGET="_top"
 >ftp://ftp.x.org/R5contrib/CLX.R5.02.tar.Z</A
 >
-    </P
+     - the standard implementation</P
 ></LI
 ><LI
 ><P
 ALIGN="justify"
 >new-clx, by
-      <A
-HREF="http://www.uni-karlsruhe.de/~unk6/"
-TARGET="_top"
->Gilbert Baumann</A
->
-      <A
-HREF="mailto:unk6@rz.uni-karlsruhe.de"
-TARGET="_top"
->&#60;unk6@rz.uni-karlsruhe.de&#62;</A
->.
+      Gilbert Baumann
+      - faster, with additional features, but not quite complete yet.
     </P
 ></LI
 ></UL
@@ -1123,21 +1637,12 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
->;
-    by <A
-HREF="http://www.alma.com/staff/hin"
-TARGET="_top"
->John Hinsdale</A
->
-    <A
-HREF="mailto:hin@alma.com"
-TARGET="_top"
->&#60;hin@alma.com&#62;</A
->.
+>; by
+    John Hinsdale.
   </P
 ></DD
 ><DT
->postgresql632, postgresql642</DT
+>postgresql</DT
 ><DD
 ><P
 ALIGN="justify"
@@ -1162,8 +1667,18 @@ CLASS="command"
 ><P
 ALIGN="justify"
 >Compute the number of solutions to the n-queens
-   problem on a n*n checkboard.
-  </P
+    problem on a n*n checkboard (a toy example for the users to
+    explore).</P
+></DD
+><DT
+><A
+HREF="modules.html#dir-key"
+>dirkey</A
+></DT
+><DD
+><P
+ALIGN="justify"
+>Directory Access</P
 ></DD
 ><DT
 ><A
@@ -1179,7 +1694,18 @@ TARGET="_top"
 >POSIX Regular
    Expressions</A
 > matching, compiling, executing.
-  </P
+ </P
+></DD
+><DT
+><A
+HREF="modules.html#syscalls"
+>syscalls</A
+></DT
+><DD
+><P
+ALIGN="justify"
+>Use some system calls in a platform-independent way.
+ </P
 ></DD
 ><DT
 ><A
@@ -1190,7 +1716,14 @@ TARGET="_top"
 ><DD
 ><P
 ALIGN="justify"
->Shell globbing</P
+>Shell (<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html"
+TARGET="_top"
+><B
+CLASS="command"
+>/bin/sh</B
+></A
+>) globbing</P
 ></DD
 ></DL
 ></DIV
@@ -1199,7 +1732,767 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="regexp">30.2.2.1. <A
+NAME="dir-key"
+></A
+>30.2.5.1. Directory Access</H3
+><P
+ALIGN="justify"
+>This module provides some directory access from lisp,
+ in package <A
+HREF="modules.html#dir-key"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"LDAP"</SPAN
+></STRONG
+></A
+>.  3 types of directory keys
+ may exist, depending on the compilation environment.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><P
+><B
+>valid directory key types</B
+></P
+><DL
+><DT
+>:win32</DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> registry access
+  </P
+></DD
+><DT
+>:gnome</DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="http://developer.gnome.org/doc/API/libgnome/gnome-gnome-config.html"
+TARGET="_top"
+>gnome-config</A
+> access
+  </P
+></DD
+><DT
+>:ldap</DT
+><DD
+><P
+ALIGN="justify"
+>LDAP interface via
+   <A
+HREF="http://www.openldap.org"
+TARGET="_top"
+>OpenLDAP</A
+> or compatible
+  </P
+></DD
+></DL
+></DIV
+><P
+ALIGN="justify"
+>The following functions and macros are exported (please note that
+these features are experimental and the API may be modified in the
+future).</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="dir-key-open"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="modules.html#dir-key-open"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-OPEN</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> (<TT
+CLASS="constant"
+>:DIRECTION</TT
+> <TT
+CLASS="constant"
+>:INPUT</TT
+>)
+   <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Open the directory key under <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>, which should
+   be either an open directory key or a valid <A
+HREF="modules.html#dir-key-type"
+>directory key type</A
+>.
+   The meaning of the <TT
+CLASS="constant"
+>:DIRECTION</TT
+> and <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+> keyword
+   arguments is the same as for <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN</TT
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="dir-key-close"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="modules.html#dir-key-close"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-CLOSE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Close the directory key.  The preferred way is to
+   use the <A
+HREF="modules.html#with-dir-key-open"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-OPEN</TT
+></A
+> macro.</P
+></DD
+><DT
+><A
+NAME="with-dir-key-open"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="modules.html#with-dir-key-open"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-OPEN</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;REST</TT
+></A
+>
+    {<TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>}*) <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Open the directory key (by calling <A
+HREF="modules.html#dir-key-open"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-OPEN</TT
+></A
+>
+   on <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>option</I
+></TT
+>s), bind it to <TT
+CLASS="replaceable"
+><I
+>variable</I
+></TT
+>,
+   execute <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>, then close it with <A
+HREF="modules.html#dir-key-close"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-CLOSE</TT
+></A
+>.
+ </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-TYPE</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return the <A
+HREF="modules.html#dir-key-type"
+>directory key type</A
+> of the directory key
+  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-PATH</TT
+>
+                <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return the path of this directory key, which is the
+   <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> argument of <A
+HREF="modules.html#dir-key-open"
+><TT
+CLASS="function"
+>LDAP:DIR-KEY-OPEN</TT
+></A
+> if <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> was a <A
+HREF="modules.html#dir-key-type"
+>directory key type</A
+> or the
+   concatenation of the <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> argument and the
+   <TT
+CLASS="function"
+>ldap:dir-key-path</TT
+> of <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>.
+   </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-DIRECTION</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>One of <TT
+CLASS="constant"
+>:INPUT</TT
+>, <TT
+CLASS="constant"
+>:OUTPUT</TT
+> and <TT
+CLASS="constant"
+>:IO</TT
+>, indicating
+   the permitted operation on this key and its derivatives.
+   </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-CLOSED-P</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Check whether the key has been closed.
+   It is not an error to close a closed key.
+   </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-SUBKEY-DELETE</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>subkey</I
+></TT
+>)</TT
+>
+   <TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-VALUE-DELETE</TT
+>
+     <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>attribute</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Delete the specified subkey or attribute.
+  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-SUBKEY</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+>
+  <TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-ATTRIBUTES</TT
+>
+                <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return the list of the subkeys or attributes.
+  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-VALUE</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>attribute</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>default</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return the value of the specified attribute,
+   similar to <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_gethash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GETHASH</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>able just like <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_gethash.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>GETHASH</TT
+></A
+>.
+   </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>LDAP:DIR-KEY-INFO</TT
+> <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return some information about the directory key.
+   This is highly platform-dependent and will probably be removed or
+   replaced or modified in the future.</P
+></DD
+><DT
+><A
+NAME="with-dir-key-search"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="modules.html#with-dir-key-search"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-SEARCH</TT
+></A
+> (<TT
+CLASS="replaceable"
+><I
+>key-iter</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>atribute-iter</I
+></TT
+>
+                 <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> <TT
+CLASS="constant"
+>:scope</TT
+>)
+                 <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;BODY</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>body</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This is the main way to iterate over the subtree
+   under the key <TT
+CLASS="replaceable"
+><I
+>dkey</I
+></TT
+>+<TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>.</P
+><P
+ALIGN="justify"
+><TT
+CLASS="replaceable"
+><I
+>key-iter</I
+></TT
+> is a non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> symbol
+    and is bound via <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MACROLET</TT
+></A
+> to a macro, each call of which returns
+    the next subkey.</P
+><P
+ALIGN="justify"
+><TT
+CLASS="replaceable"
+><I
+>atribute-iter</I
+></TT
+> is a symbol and is
+    bound, when non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, to a macro, each call of which returns two
+   values - the next attribute and its value.</P
+><P
+ALIGN="justify"
+>The <TT
+CLASS="constant"
+>:scope</TT
+> keyword argument specifies the
+    scope of the search and can be
+   <P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="constant"
+>:self</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>iterate over the key itself
+     </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:level</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>iterate over the children of the key
+     </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:tree</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>iterate over the subtree
+     </P
+></DD
+></DL
+></DIV
+></P
+><P
+ALIGN="justify"
+><A
+HREF="modules.html#with-dir-key-search"
+><TT
+CLASS="function"
+>LDAP:WITH-DIR-KEY-SEARCH</TT
+></A
+> is used to implement
+    <TT
+CLASS="function"
+>LDAP:DIR-KEY-VALUES</TT
+>,
+    <TT
+CLASS="function"
+>LDAP:DIR-KEY-CHILDREN</TT
+> and
+    <TT
+CLASS="function"
+>LDAP:DIR-KEY-DUMP-TREE</TT
+> in
+    <TT
+CLASS="filename"
+>dirkey.lisp</TT
+>.
+    </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="regexp"
+></A
+>30.2.5.2. <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -1208,18 +2501,24 @@ CLASS="command"
 ></A
 > <A
 HREF="modules.html#regexp"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"REGEXP"</SPAN
+></STRONG
 ></A
 > module</H3
 ><P
 ALIGN="justify"
 >The <A
 HREF="modules.html#regexp"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"REGEXP"</SPAN
+></STRONG
 ></A
 > module implements the
  <A
@@ -1227,13 +2526,7 @@ HREF="regexp.html"
 TARGET="_top"
 >POSIX regular expressions</A
 >
-via an <A
-HREF="dffi.html"
-><SPAN
-CLASS="QUOTE"
->"FFI"</SPAN
-></A
-> call to the standard <A
+by calling the standard <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
@@ -1258,9 +2551,12 @@ TARGET="_top"
 ALIGN="justify"
 >The <A
 HREF="modules.html#regexp"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"REGEXP"</SPAN
+></STRONG
 ></A
 > package exports the following 9 symbols:</P
 ><P
@@ -1361,7 +2657,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="re-match"><TT
+NAME="re-match"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-match"
@@ -1387,23 +2685,44 @@ CLASS="literal"
 >&#38;KEY</TT
 ></A
 >
-     (<TT
+   (<TT
 CLASS="constant"
 >:START</TT
 > 0) <TT
 CLASS="constant"
 >:END</TT
-> (<TT
+> <A
+HREF="modules.html#re-cflags"
+><TT
 CLASS="constant"
->:CASE-SENSITIVE</TT
-> t))</TT
+>:EXTENDED</TT
+> <TT
+CLASS="constant"
+>:IGNORE-CASE</TT
+> <TT
+CLASS="constant"
+>:NEWLINE</TT
+> <TT
+CLASS="constant"
+>:NOSUB</TT
+></A
+> <A
+HREF="modules.html#re-eflags"
+><TT
+CLASS="constant"
+>:NOTBOL</TT
+> <TT
+CLASS="constant"
+>:NOTEOL</TT
+></A
+>)</TT
 ></DT
 ><DD
 ><P
 ALIGN="justify"
 >This macro returns as first value a <TT
 CLASS="classname"
->REGEXP::REGMATCH_T</TT
+>REGEXP:MATCH</TT
 > structure
   containing the indices of the start and end of the first match for the
   regular expression <TT
@@ -1427,7 +2746,7 @@ CLASS="constant"
 > if there is no match.
   Additionally, a <TT
 CLASS="classname"
->REGEXP::REGMATCH_T</TT
+>REGEXP:MATCH</TT
 > structure is returned for every matched
   <TT
 CLASS="literal"
@@ -1504,7 +2823,9 @@ CLASS="replaceable"
   <DIV
 CLASS="example"
 ><A
-NAME="ex-re-match"><P
+NAME="ex-re-match"
+></A
+><P
 ><B
 >Example 30-1. <A
 HREF="modules.html#re-match"
@@ -1533,8 +2854,8 @@ CLASS="function"
 CLASS="sexp"
 >#S(<TT
 CLASS="classname"
->REGEXP::REGMATCH_T</TT
-> :RM_SO 4 :RM_EO 9)</TT
+>REGEXP:MATCH</TT
+> :START 4 :END 9)</TT
 >
     (<A
 HREF="modules.html#re-match"
@@ -1547,8 +2868,8 @@ CLASS="function"
 CLASS="sexp"
 >#S(<TT
 CLASS="classname"
->REGEXP::REGMATCH_T</TT
-> :RM_SO 27 :RM_EO 32)</TT
+>REGEXP:MATCH</TT
+> :START 27 :END 32)</TT
 >
     (<A
 HREF="modules.html#re-match"
@@ -1576,34 +2897,36 @@ CLASS="function"
 CLASS="sexp"
 >#S(<TT
 CLASS="classname"
->REGEXP::REGMATCH_T</TT
-> :RM_SO 0 :RM_EO 8) ;</TT
+>REGEXP:MATCH</TT
+> :START 0 :END 8) ;</TT
 >
      <TT
 CLASS="sexp"
 >#S(<TT
 CLASS="classname"
->REGEXP::REGMATCH_T</TT
-> :RM_SO 0 :RM_EO 3) ;</TT
+>REGEXP:MATCH</TT
+> :START 0 :END 3) ;</TT
 >
      <TT
 CLASS="sexp"
 >#S(<TT
 CLASS="classname"
->REGEXP::REGMATCH_T</TT
-> :RM_SO 5 :RM_EO 8)</TT
+>REGEXP:MATCH</TT
+> :START 5 :END 8)</TT
 >
-   </PRE
+  </PRE
 ></TD
 ></TR
 ></TABLE
 ></DIV
 >
- </P
+</P
 ></DD
 ><DT
 ><A
-NAME="re-match-start"><TT
+NAME="re-match-start"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-match-start"
@@ -1626,12 +2949,21 @@ CLASS="replaceable"
 ><I
 >match</I
 ></TT
->.
+>; <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>-able.
  </P
 ></DD
 ><DT
 ><A
-NAME="re-match-end"><TT
+NAME="re-match-end"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-match-end"
@@ -1654,12 +2986,21 @@ CLASS="replaceable"
 ><I
 >match</I
 ></TT
->.
- </P
+>; <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>-able.
+</P
 ></DD
 ><DT
 ><A
-NAME="re-match-string"><TT
+NAME="re-match-string"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-match-string"
@@ -1740,11 +3081,13 @@ CLASS="classname"
 ></A
 >)</TT
 >.
- </P
+</P
 ></DD
 ><DT
 ><A
-NAME="re-regexp-quote"><TT
+NAME="re-regexp-quote"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-quote"
@@ -1756,6 +3099,19 @@ CLASS="function"
 CLASS="replaceable"
 ><I
 >string</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+>
+   <TT
+CLASS="replaceable"
+><I
+>extended</I
 ></TT
 >)</TT
 ></DT
@@ -1774,7 +3130,9 @@ CLASS="replaceable"
   <DIV
 CLASS="example"
 ><A
-NAME="ex-re-quote"><P
+NAME="ex-re-quote"
+></A
+><P
 ><B
 >Example 30-2. <A
 HREF="modules.html#re-regexp-quote"
@@ -1810,11 +3168,34 @@ CLASS="function"
 >REGEXP:REGEXP-QUOTE</TT
 ></A
 > is to combine an exact string match with
-  context described as a regular expression.</P
+  context described as a regular expression.
+  When <TT
+CLASS="replaceable"
+><I
+>extended</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, also
+  quote <SPAN
+CLASS="keysym"
+>#\+</SPAN
+> and <SPAN
+CLASS="keysym"
+>#\?</SPAN
+>.
+</P
 ></DD
 ><DT
 ><A
-NAME="re-regexp-compile"><TT
+NAME="re-regexp-compile"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-compile"
@@ -1832,15 +3213,25 @@ HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
 ><TT
 CLASS="literal"
->&#38;OPTIONAL</TT
+>&#38;KEY</TT
 ></A
 >
-     (<TT
-CLASS="replaceable"
-><I
->case-sensitive</I
-></TT
-> t))</TT
+   <A
+HREF="modules.html#re-cflags"
+><TT
+CLASS="constant"
+>:EXTENDED</TT
+> <TT
+CLASS="constant"
+>:IGNORE-CASE</TT
+> <TT
+CLASS="constant"
+>:NEWLINE</TT
+> <TT
+CLASS="constant"
+>:NOSUB</TT
+></A
+>)</TT
 ></DT
 ><DD
 ><P
@@ -1861,7 +3252,9 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="re-regexp-exec"><TT
+NAME="re-regexp-exec"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-exec"
@@ -1893,6 +3286,15 @@ CLASS="constant"
 > 0) <TT
 CLASS="constant"
 >:END</TT
+> <A
+HREF="modules.html#re-eflags"
+><TT
+CLASS="constant"
+>:NOTBOL</TT
+> <TT
+CLASS="constant"
+>:NOTEOL</TT
+></A
 >)</TT
 ></DT
 ><DD
@@ -1956,7 +3358,9 @@ CLASS="replaceable"
 ></DD
 ><DT
 ><A
-NAME="re-regexp-split"><TT
+NAME="re-regexp-split"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-regexp-split"
@@ -1988,10 +3392,31 @@ CLASS="constant"
 > 0) <TT
 CLASS="constant"
 >:END</TT
-> (<TT
+> <A
+HREF="modules.html#re-cflags"
+><TT
 CLASS="constant"
->:CASE-SENSITIVE</TT
-> t))</TT
+>:EXTENDED</TT
+> <TT
+CLASS="constant"
+>:IGNORE-CASE</TT
+> <TT
+CLASS="constant"
+>:NEWLINE</TT
+> <TT
+CLASS="constant"
+>:NOSUB</TT
+></A
+> <A
+HREF="modules.html#re-eflags"
+><TT
+CLASS="constant"
+>:NOTBOL</TT
+> <TT
+CLASS="constant"
+>:NOTEOL</TT
+></A
+>)</TT
 ></DT
 ><DD
 ><P
@@ -2024,7 +3449,9 @@ CLASS="function"
 ></DD
 ><DT
 ><A
-NAME="re-with-loop-split"><TT
+NAME="re-with-loop-split"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="modules.html#re-with-loop-split"
@@ -2061,10 +3488,31 @@ CLASS="constant"
 > 0) <TT
 CLASS="constant"
 >:END</TT
-> (<TT
+> <A
+HREF="modules.html#re-cflags"
+><TT
 CLASS="constant"
->:CASE-SENSITIVE</TT
-> t))
+>:EXTENDED</TT
+> <TT
+CLASS="constant"
+>:IGNORE-CASE</TT
+> <TT
+CLASS="constant"
+>:NEWLINE</TT
+> <TT
+CLASS="constant"
+>:NOSUB</TT
+></A
+> <A
+HREF="modules.html#re-eflags"
+><TT
+CLASS="constant"
+>:NOTBOL</TT
+> <TT
+CLASS="constant"
+>:NOTEOL</TT
+></A
+>)
      <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html"
 TARGET="_top"
@@ -2107,6 +3555,104 @@ CLASS="replaceable"
 ></TT
 >.</P
 ></DD
+><DT
+><A
+NAME="re-cflags"
+></A
+><A
+HREF="modules.html#re-cflags"
+><TT
+CLASS="constant"
+>:EXTENDED</TT
+> <TT
+CLASS="constant"
+>:IGNORE-CASE</TT
+> <TT
+CLASS="constant"
+>:NEWLINE</TT
+> <TT
+CLASS="constant"
+>:NOSUB</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>These options control compilation of a pattern.
+   You can specify <TT
+CLASS="replaceable"
+><I
+>cflags</I
+></TT
+> directly by
+   combining <TT
+CLASS="constant"
+>REGEXP::REG_EXTENDED</TT
+>,
+   <TT
+CLASS="constant"
+>REGEXP::REG_ICACE</TT
+>,
+   <TT
+CLASS="constant"
+>REGEXP::REG_NEWLINE</TT
+>, and
+   <TT
+CLASS="constant"
+>REGEXP::REG_NOSUB</TT
+>.
+   See <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/regex.h.html"
+TARGET="_top"
+><TT
+CLASS="filename"
+>regex.h</TT
+></A
+> for their meaning.
+</P
+></DD
+><DT
+><A
+NAME="re-eflags"
+></A
+><A
+HREF="modules.html#re-eflags"
+><TT
+CLASS="constant"
+>:NOTBOL</TT
+> <TT
+CLASS="constant"
+>:NOTEOL</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>These options constrol execution of a pattern.
+   You can specify <TT
+CLASS="replaceable"
+><I
+>eflags</I
+></TT
+> directly by
+   combining <TT
+CLASS="constant"
+>REGEXP::REG_NOTBOL</TT
+>, and
+   <TT
+CLASS="constant"
+>REGEXP::REG_NOTEOL</TT
+>.
+   See <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/regex.h.html"
+TARGET="_top"
+><TT
+CLASS="filename"
+>regex.h</TT
+></A
+> for their meaning.
+</P
+></DD
 ></DL
 ></DIV
 ><P
@@ -2140,10 +3686,7 @@ CLASS="function"
 (let ((h (make-hash-table :test #'equal :size 10)) (n 0))
   (with-open-file (f "/etc/passwd")
     (with-loop-split (s f ":")
-      (let ((sh (seventh s)))
-        (if (gethash sh h)
-            (incf (gethash sh h))
-            (setf (gethash sh h) 1)))))
+      (incf (gethash (seventh s) h 0))))
   (with-hash-table-iterator (i h)
     (loop (multiple-value-bind (r k v) (i)
             (unless r (return))
@@ -2190,11 +3733,974 @@ my $ii = 0;
 for my $kk (keys(%hash)) {
   print "[",++$ii,"] \"",$kk,"\"  --  ",$hash{$kk},"\n";
 }
+close(INF);
 </PRE
 ></TD
 ></TR
 ></TABLE
 ></P
+></DIV
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="syscalls"
+></A
+>30.2.5.3. System Calls</H3
+><P
+ALIGN="justify"
+>The <A
+HREF="modules.html#syscalls"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"POSIX"</SPAN
+></STRONG
+></A
+> module makes some system calls
+ available from lisp.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:RESOLVE-HOST-IPADDR</TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Returns the <SPAN
+CLASS="type"
+>hostent</SPAN
+> struct (name,
+   list of aliases, list of IP addresses as dotted quads (for IPv4) or
+   coloned octets (for IPv6), address type - IPv4 or IPv6).
+   When <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is omitted or <TT
+CLASS="constant"
+>:DEFAULT</TT
+>, return the data for the
+   current host. When <TT
+CLASS="replaceable"
+><I
+>host</I
+></TT
+> is given and is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, all the
+   host database is returned as a list (this would be the contents of the
+   <TT
+CLASS="filename"
+>/etc/hosts</TT
+> file on a <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> system or
+   <TT
+CLASS="filename"
+>${windir}/system32/etc/hosts</TT
+> on a Win32 system).
+   This is an interface to <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/gethostbyname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>gethostbyname</TT
+></A
+>/<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/gethostbyaddr.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>gethostbyaddr</TT
+></A
+>.
+  </P
+></DD
+><DT
+><A
+NAME="file-stat"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:FILE-STAT</TT
+> <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>
+      <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>link-p</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return the <SPAN
+CLASS="type"
+>file-stat</SPAN
+> struct.
+   <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> can be a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>, a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PATHNAME</TT
+></A
+>, a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+> or a
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_number.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>NUMBER</TT
+></A
+> (on a <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> system, meaning <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap03.html#tag_03_165"
+TARGET="_top"
+>file descriptor</A
+>).
+   The first slot of the struct returned is the string or the number on
+   which <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/stat.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>stat</TT
+></A
+>/<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/fstat.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>fstat</TT
+></A
+>/<A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/lstat.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>lstat</TT
+></A
+> was called.  The other 13 slots are
+   numbers, members of the stat struct: device, inode, protection,
+   number of hard links, owner's UID, owner's GID, device type, total
+   size (bytes), blocksize for filesystem I/O, number of blocks
+   allocated, atime, mtime, ctime (as the number of seconds since
+   1900-01-01).  If the system does not support a particular field
+   (e.g., Win32 does not have hard links), <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (or the default, like 1
+   for the number of hard links for Win32 or DOS) is returned.
+   </P
+><P
+ALIGN="justify"
+>[<A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems only at this time, patches are welcome.]
+  </P
+></DD
+><DT
+><A
+NAME="file-info"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:FILE-INFO</TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return the <SPAN
+CLASS="type"
+>file-info</SPAN
+> struct.
+   <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> should be a <A
+HREF="filename-dict.html#path-des"
+>pathname designator</A
+>. The 8 slots are attributes, ctime,
+   atime, wtime, high and low sizes, name and short name.
+   </P
+><P
+ALIGN="justify"
+>[<A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> systems only at this time, patches are welcome.]
+  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:USER-DATA</TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>user</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return the <SPAN
+CLASS="type"
+>passwd</SPAN
+> struct (name, encoded
+   password, UID, GID, full name, home directory, shell).
+   When <TT
+CLASS="replaceable"
+><I
+>user</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, return all users.
+   When <TT
+CLASS="replaceable"
+><I
+>user</I
+></TT
+> is <TT
+CLASS="constant"
+>:DEFAULT</TT
+> or
+   not supplied, return the information about the current user.
+   If the system does not support a particular field (e.g., Win32 does
+   not have a concept of a shell), <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (or the default, like
+   <TT
+CLASS="filename"
+>c:\command.com</TT
+> for DOS) is returned.
+   </P
+><P
+ALIGN="justify"
+>[<A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems only at this time, patches are welcome.]
+  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:UNAME</TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return a struct describing the OS, derived from
+    <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/uname.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>uname</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:SYSCONF</TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return a struct describing the system
+    configuration, derived from <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/sysconf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>sysconf</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:LIMITS</TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return a struct describing the resource limits,
+    derived from <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/getrlimit.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>getrlimit</TT
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:USAGE</TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return 2 structs describing the resource usage by
+    the lisp process its children, derived from <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/getrusage.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>getrusage</TT
+></A
+>.
+  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:ERF</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:ERFC</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:J0</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:J1</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:JN</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:Y0</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:Y1</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:YN</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>integer</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:GAMMA</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+><BR><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:LGAMMA</TT
+>
+       <TT
+CLASS="replaceable"
+><I
+>real</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Compute the error functions, Bessel functions and
+   Gamma.  These functions are required by the POSIX standard and should
+   be available in libm.so.  Please note that these functions do not
+   provide lisp-style error handling and precision, and do all the
+   computations at the double float level.
+ </P
+></DD
+><DT
+><A
+NAME="stream-lock"
+></A
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:STREAM-LOCK</TT
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>lock-p</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+>
+    (:BLOCK <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>) (:SHARED <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>) (:START 0) (:END <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>))</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This is an interface to the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/fcntl.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>fcntl</TT
+></A
+> system call.
+   It sets or removes a file lock for the (portion of the) file associated
+   with <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>, depending on <TT
+CLASS="replaceable"
+><I
+>lock-p</I
+></TT
+>.
+   When <TT
+CLASS="replaceable"
+><I
+>block</I
+></TT
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, the call is non-blocking,
+   and when the file is already locked, it <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>s an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+>.
+   When <TT
+CLASS="replaceable"
+><I
+>shared</I
+></TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+   then lock can be shared between several callers.
+   Several processes can set a <TT
+CLASS="replaceable"
+><I
+>shared</I
+></TT
+>
+   (i.e., <I
+CLASS="emphasis"
+>read</I
+>) lock, but only one can set
+   an <I
+CLASS="emphasis"
+>exclusive</I
+> (i.e., <I
+CLASS="emphasis"
+>write</I
+>,
+   or non-<TT
+CLASS="replaceable"
+><I
+>shared</I
+></TT
+>) lock.
+ </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:COPY-FILE</TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>source-path</I
+></TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>destination-path</I
+></TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :METHOD :PRESERVE :IF-EXISTS :IF-DOES-NOT-EXIST)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This is an interface to the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/symlink.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>symlink</TT
+></A
+>
+    (when <TT
+CLASS="replaceable"
+><I
+>method</I
+></TT
+> is <TT
+CLASS="constant"
+>:SYMLINK</TT
+>),
+    <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/link.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>link</TT
+></A
+> (when it is <TT
+CLASS="constant"
+>:HARDLINK</TT
+>), and <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/rename.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>rename</TT
+></A
+>
+    (when it is <TT
+CLASS="constant"
+>:RENAME</TT
+>) system calls, as well as,
+    you guessed it, a generic file copy utility
+    (when <TT
+CLASS="replaceable"
+><I
+>method</I
+></TT
+> is <TT
+CLASS="constant"
+>:COPY</TT
+>).
+   </P
+><P
+ALIGN="justify"
+>Both <TT
+CLASS="replaceable"
+><I
+>source-path</I
+></TT
+> and
+    <TT
+CLASS="replaceable"
+><I
+>destination-path</I
+></TT
+> may be wild.
+ </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(<TT
+CLASS="function"
+>POSIX:DUPLICATE-HANDLE</TT
+>
+    <TT
+CLASS="replaceable"
+><I
+>fd1</I
+></TT
+>
+    <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>fd2</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>This is an interface to the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/dup.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>dup/dup2</TT
+></A
+> system calls on
+   <A
+HREF="http://www.UNIX-systems.org/online.html"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNIX</B
+></A
+> systems and to <TT
+CLASS="function"
+>DuplicateHandle</TT
+> system
+   call on <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+>.</P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(POSIX:SHORTCUT-INFO
+    <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Return information about a <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> shortcut
+    (<TT
+CLASS="filename"
+>#P".lnk"</TT
+>) file contents in
+    a <SPAN
+CLASS="type"
+>shortcut-info</SPAN
+> struct.
+  </P
+></DD
+><DT
+><TT
+CLASS="sexp"
+>(POSIX:MAKE-SHORTCUT
+    <TT
+CLASS="replaceable"
+><I
+>pathname</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;KEY</TT
+></A
+> :WORKING-DIRECTORY :ARGUMENTS :SHOW-COMMAND :ICON
+    :DESCRIPTION :HOT-KEY :PATH)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>Create (or modify the properties of an existing one)
+    a <A
+HREF="http://www.willows.com/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Win32</B
+></A
+> shortcut (<TT
+CLASS="filename"
+>#P".lnk"</TT
+>) file.
+ </P
+></DD
+></DL
+></DIV
 ></DIV
 ></DIV
 ></DIV

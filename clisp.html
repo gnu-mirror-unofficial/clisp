@@ -12,7 +12,7 @@
  <title>CLISP manual page</title>
 </head>
 <body>
-<h1>CLISP manual page (version 2.30)</h1>
+<h1>CLISP manual page (version 2.31)</h1>
 
 <ul>
 <li><a href="#name">Name</a></li>
@@ -34,7 +34,7 @@
 <h2 id="name">Name</h2>
 
 <p><code>CLISP</code> -
-   ANSI Common Lisp compiler, debugger and interpreter.</p>
+   ANSI Common Lisp compiler, interpreter and debugger.</p>
 
 <h2 id="synopsis">Synopsis</h2>
 
@@ -55,19 +55,23 @@
     <a href="#opt-quiet"><code>--quiet</code></a> |
     <a href="#opt-quiet"><code>--silent</code></a> ]
   [ <a href="#opt-interactive-debug"><code>-interactive-debug</code></a> ]
+  [ <a href="#opt-repl"><code>-repl</code></a> ]
   [ <a href="#opt-wait"><code>-w</code></a> ]
   [ <a href="#opt-ilisp"><code>-I</code></a> ]
   [ <a href="#opt-ansi"><code>-ansi</code></a> ]
   [ <a href="#opt-traditional"><code>-traditional</code></a> ]
   [ <a href="#opt-pack"><code>-p</code> <var>packagename</var></a> ]
   [ <a href="#opt-load-comp"><code>-C</code></a> ]
+  [ <a href="#opt-verbose"><code>-v</code></a> |
+    <a href="#opt-verbose"><code>-verbose</code></a> |
+    <a href="#opt-verbose"><code>--verbose</code></a> ]
   [ <a href="#opt-norc"><code>-norc</code></a> ]
   [ <a href="#opt-init"><code>-i</code> <var>initfile</var> ...</a> ]
   [ <a href="#opt-compile"><code>-c</code></a>
     [ <a href="#opt-list"><code>-l</code></a> ]
     <var>lispfile</var>
     [ <a href="#opt-out"><code>-o</code></a> <var>outputfile</var> ] ... ]
-  [ <a href="#opt-exec-expr"><code>-x</code> <var>expression</var></a> ]
+  [ <a href="#opt-exec-expr"><code>-x</code> <var>expressions</var></a> ]
   [ <a href="#opt-exec-file"><var>lispfile</var></a>
     [ <a href="#opt-exec-file"><var>argument</var> ...</a> ] ]</p>
 
@@ -113,16 +117,19 @@ symbol-macro <code>*lib-directory*</code>.
 <dt id="opt-link-set"><strong><code>-K</code>
     <var>linking-set</var></strong></dt>
 <dd>Specifies the linking set to be run.
- This is a directory containing at least a main executable and an
- initial memory image.  Possible values are <code>base</code>,
- <code>full</code>.  The default is <code>base</code>.
+ This is a directory (relative to
+ <a href="#opt-libdir"><var>lisplibdir</var></a>) containing at least a
+ main executable (runtime) and an initial memory image.
+ Possible values are <code>base</code>, <code>full</code>.
+ The default is <code>base</code>.
 <p/></dd>
 
 <dt id="opt-memfile"><strong><code>-M</code>
     <var>memfile</var></strong></dt>
 <dd>Specifies the initial memory image.
  This must be a memory dump produced by the
- <code><a href="impnotes.html#image">saveinitmem</a></code> function.
+ <code><a href="impnotes.html#image">saveinitmem</a></code> function by
+ this <code>clisp</code> <a href="#runtime">runtime</a>.
  It may have been compressed using GNU
  <a href="http://www.gzip.org/">gzip</a>.
 <p/></dd>
@@ -151,7 +158,11 @@ eventually uses the entire <var>memsize</var>.
 <dd>Specifies the language <code>clisp</code>
 uses to communicate with the user.
 This may be
-<code>english</code>.
+<code>english</code>, <code>german</code>, <code>french</code>,
+<code>spanish</code>, <code>dutch</code>, <code>russian</code>.
+Other languages may be specified through the environment variable
+<code>LANG</code>,
+provided the corresponding message catalog is installed.
 The language may be changed dynamically using the symbol macro
 <a href="impnotes.html#language"><code>*current-language*</code></a>,
 <p/></dd>
@@ -190,6 +201,7 @@ which depends on the environment variables <code>LC_ALL</code>,
  <strong>Note</strong> that these values cannot be saved in a
  <a href="impnotes.html#image">memory image</a>.
  You have to use the <a href="#opt-norc">init file</a>
+ or <a href="impnotes.html#image">init-function</a>
  to set them on startup.<p/></dd>
 
 <dt id="opt-quiet"><strong><code>-q</code></strong>,
@@ -205,6 +217,13 @@ which depends on the environment variables <code>LC_ALL</code>,
   <a href="#opt-exec-file"><var>lispfile</var></a>
 and allow interactive handling of <code>ASSERT</code> and friends.</dd>
 
+<dt id="opt-repl"><code>-repl</code></dt>
+<dd>Start an interactive read-eval-print loop after processing the
+  <a href="#opt-compile"><code>-c</code></a>,
+  <a href="#opt-exec-expr"><code>-x</code></a>, and
+  <a href="#opt-exec-file"><var>lispfile</var></a>
+options.</dd>
+
 <dt id="opt-wait"><strong><code>-w</code></strong></dt>
 <dd>Wait for a keypress after program termination.<p/></dd>
 
@@ -217,7 +236,9 @@ and allow interactive handling of <code>ASSERT</code> and friends.</dd>
  interacts in a way that ILISP can deal with.
  Currently the only effect of this is that unnecessary prompts are not
  suppressed.
- Furthermore, the GNU readline library treats
+ Furthermore, the
+ <a href="http://cnswww.cns.cwru.edu/~chet/readline/rluserman.html">GNU
+ readline</a> library treats
  <a href="#completion">Tab</a> as a normal self-inserting character,
  so you should always use this option when you invoke CLISP from Emacs.
 <p/></dd>
@@ -226,7 +247,7 @@ and allow interactive handling of <code>ASSERT</code> and friends.</dd>
 <dd>ANSI CL compliant: comply with the ANSI CL specification
 even where <code>clisp</code> has been traditionally different.
 It sets the symbol macro <code>*ansi*</code> to <code>t</code>.
-See <a href="impnotes.html#ansi">"Maximum ANSI CL compliance"</a>,
+See <a href="impnotes.html#ansi">"Maximum ANSI CL compliance"</a>
 for details.<p/></dd>
 
 <dt id="opt-traditional"><strong><code>-traditional</code></strong></dt>
@@ -240,14 +261,27 @@ for details.<p/></dd>
 be set to the package named <var>packagename</var>.
 The default is the package which was active when the image was
  <a href="impnotes.html#image">saved</a>, normally
- <a href="impnotes.html#imppack"><code>USER</code></a>.<p/></dd>
+ <a href="impnotes.html#imppack"><code>COMMON-LISP-USER</code></a>.<p/></dd>
 
 <dt id="opt-load-comp"><strong><code>-C</code></strong></dt>
 <dd>Compile when loading: At startup the value of the variable
-<code><a href="impnotes.html#loadfile">*load-compiling*</a></code>
+<a href="impnotes.html#loadfile"><code>*load-compiling*</code></a>
 will be set to <code>t</code>.
 Code being <code>load</code>ed will then be compiled on the fly.
 This results in slower loading, but faster execution.<p/></dd>
+
+<dt id="opt-verbose"><strong><code>-v</code></strong>,
+ <strong><code>-verbose</code></strong>,
+ <strong><code>--verbose</code></strong></dt>
+<dd>Verbose loading (with <a href="#opt-init"><code>-i</code></a>)
+ and compiling (with <a href="#opt-compile"><code>-c</code></a>);
+ this sets variables
+ <a href="http://www.lisp.org/HyperSpec/Body/var_stload-pr_ad-verbosest.html"
+    ><code>*load-print*</code></a> and
+ <a href="http://www.lisp.org/HyperSpec/Body/var_stcompile_le-verbosest.html"
+    ><code>*compile-print*</code></a>
+ to <code>t</code>.
+ Note that this setting persists into the read-eval-print loop.</dd>
 
 <dt id="opt-norc"><strong><code>-norc</code></strong></dt>
 <dd>Normally <code>clisp</code> loads a user run control (RC) file on
@@ -293,7 +327,8 @@ be preceded by backslashes.<p/></dd>
 
 <dt id="opt-exec-file"><strong><var>lispfile</var>
     [ <var>argument</var> ... ]</strong></dt>
-<dd>Loads and executes a <var>lispfile</var>.
+<dd>Loads and executes a <var>lispfile</var>, as described in the
+ <a href="impnotes.html#script-exec">implementation notes</a>.
 There will be no read-eval-print loop.
 Before <var>lispfile</var> is loaded, the variable <code>*args*</code>
 will be bound to a list of strings, representing the <var>argument</var>s.
@@ -301,7 +336,7 @@ The first line of <var>lispfile</var> may start with <code>#!</code>,
 thus permitting <code>clisp</code> to be used as a script interpreter.
 If <var>lispfile</var> is <code>-</code>,
 the standard input is used instead of a file.
-If <var>lispfile</var> is an empty string <code>""</code>,
+If <var>lispfile</var> is the empty string <code>""</code> or <code>"--"</code>
 the rest of the arguments is still available in <code>*args*</code>,
 for parsing by the <code><a href="impnotes.html#image">init-function</a></code>
 of the current image.
@@ -348,16 +383,16 @@ No <a href="#opt-norc">RC file</a> will be executed.<p/></dd>
  to <var>name</var>.<p/></dd>
 
 <dt><code>(exit)</code> or <code>(quit)</code> or <code>(bye)</code></dt>
-<dd>to <a href="quit">quit</a> <code>clisp</code>.<p/></dd>
+<dd>to <a href="impnotes.html#quit">quit</a> <code>clisp</code>.<p/></dd>
 
 <dt>
 EOF (Ctrl-D)
 </dt><dd>to leave the current read-eval-print loop.<p/></dd>
 
 <dt>arrow keys</dt>
-<dd>for editing and viewing the input history, using
+<dd>for editing and viewing the input history, using the
  <a href="http://cnswww.cns.cwru.edu/~chet/readline/rluserman.html">GNU
- readline</a>.<p/></dd>
+ readline</a> library.<p/></dd>
 
 <dt id="completion">Tab key</dt>
 <dd>Context sensitive:
@@ -368,6 +403,10 @@ EOF (Ctrl-D)
   <li>If you are in the "filename position" (inside a string
    after <code>#P</code>), the completion is done across file names,
    <a href="http://www.gnu.org/software/bash/">bash</a>-style.</li>
+  <li>If you have not typed anything yet, you will get a help message,
+   as if by the
+   <a href="impnotes.html#debugger-main-deb-step"><code>Help</code></a>
+   command.</li>
   <li>If you have not started typing the next symbol (i.e., you are at
    a whitespace), the current function or macro is
    <a href="http://www.lisp.org/HyperSpec/Body/fun_describe.html"
@@ -390,7 +429,12 @@ EOF (Ctrl-D)
 <dd>initial <a href="impnotes.html#image">memory image</a><p/></dd>
 
 <dt><code>config.lisp</code></dt>
-<dd>site-dependent configuration<p/></dd>
+<dd>site-dependent configuration (should have been customized before
+ <code>clisp</code> was built).<p/></dd>
+
+<dt><code>config.lisp</code></dt>
+<dd>site-dependent configuration (should have been modified before
+ building <code>clisp</code>).<p/></dd>
 
 <dt><code>*.lisp</code></dt>
 <dd>lisp source<p/></dd>
@@ -399,8 +443,9 @@ EOF (Ctrl-D)
 <dd>lisp code, compiled by <code>clisp</code><p/></dd>
 
 <dt><code>*.lib</code></dt>
-<dd>lisp source library information, generated and used by the
-<code>clisp</code> compiler<p/></dd>
+<dd>lisp source library information, generated by
+ <a href="impnotes.html#compilefile"><code>compile-file</code></a> and
+ used by <a href="impnotes.html#require"><code>require</code></a>.<p/></dd>
 
 <dt><code>*.c</code></dt>
 <dd>C code, compiled from lisp source by <code>clisp</code>
@@ -409,6 +454,9 @@ EOF (Ctrl-D)
 
 
 <h2 id="environment">Environment</h2>
+
+<p>All environment variables that <code>clisp</code> uses are read
+ at most once.</p>
 
 <dl>
  <dt><code>CLISP_LANGUAGE</code></dt>
@@ -429,7 +477,9 @@ EOF (Ctrl-D)
    (lower case), <var>country</var> is a two-letter ISO 3166 country
    code (upper case).  <var>charset</var> is an optional character set
    specification, and needs normally not be given because the character
-   set can be inferred from the language and country.<p/></dd>
+   set can be inferred from the language and country.
+   This environment variable can be overridden with the
+   <a href="#opt-enc"><code>-E</code></a> option.<p/></dd>
 
  <dt><code>LANG</code></dt>
   <dd>specifies the language <code>clisp</code>
@@ -453,6 +503,21 @@ EOF (Ctrl-D)
  <dt><code>TERM</code></dt>
   <dd>determines the screen size recognized by the pretty printer.<p/></dd>
 
+
+
+ <dt><code>ORGANIZATION</code></dt>
+  <dd>for <code>short-site-name</code> and
+   <code>long-site-name</code> in <code>config.lisp</code>.<p/></dd>
+ <dt><code>CLHSROOT</code></dt>
+  <dd>for <code>clhs-root</code> in <code>config.lisp</code>.<p/></dd>
+ <dt><code>EDITOR</code></dt>
+  <dd>for <code>editor-name</code> in <code>config.lisp</code>.<p/></dd>
+
+ <dt><code>LOGICAL_HOST_<var>host</var>_FROM</code><br/>
+  <code>LOGICAL_HOST_<var>host</var>_TO</code><br/>
+  <code>LOGICAL_HOST_<var>host</var></code><br/></dt>
+ <dd>for <a href="impnotes.html#load-lpt"
+            ><code>load-logical-pathname-translations</code></a><p/></dd>
 
 </dl>
 
@@ -499,7 +564,8 @@ following information:</p>
 
 <p>Known bugs, some of which may be platform-dependent, include</p>
 <ul>
-<li>Not all extensions from ANSI CL are supported.</li>
+<li><a href="impnotes.html#cl-symb">Some</a> ANSI CL features are not
+ supported yet.</li>
 <li>No on-line documentation beyond <code>apropos</code>
  and <code>describe</code> is available.</li>
 </ul>
@@ -518,13 +584,15 @@ following information:</p>
 <p>Bruno Haible and Michael Stoll.</p>
 
 <p>See <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/clisp/clisp/COPYRIGHT?rev=HEAD&amp;content-type=text/plain">COPYRIGHT</a>
-for the list of other contributors.</p>
+for the list of other contributors and the license.</p>
 
 
 <hr/>
 
 <address>CLISP manual page<br/>
-Bruno Haible &lt;clisp-list@lists.sourceforge.net&gt;
+Bruno Haible
+&lt;<a href="http://lists.sourceforge.net/lists/listinfo/clisp-list"
+       >clisp-list@lists.sourceforge.net</a>&gt;
 </address>
 
 <hr/>

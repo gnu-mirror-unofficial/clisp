@@ -21,9 +21,9 @@ TITLE="Iteration
    [CLHS-6]"
 HREF="iteration.html"><LINK
 REL="NEXT"
-TITLE="Structures
-   [CLHS-8]"
-HREF="structures.html"><LINK
+TITLE="The Objects Dictionary
+  [CLHS-7.7]"
+HREF="obj-dict.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="impnotes.css"></HEAD
@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -86,7 +86,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="structures.html"
+HREF="obj-dict.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -99,43 +99,43 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="objects">Chapter 7. Objects
+NAME="objects"
+></A
+>Chapter 7. Objects
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-7.html"
 TARGET="_top"
 >[CLHS-7]</A
 ></H1
-><P
-ALIGN="justify"
-><A
-HREF="http://www.lisp.org/HyperSpec/Body/sec_7-2.html"
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>7.1. <A
+HREF="objects.html#meth-combo"
+>Declarative Method Combination
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_7-6-6-3.html"
 TARGET="_top"
->Changing the class of a given
- instance</A
-> is not supported.  The functions <A
-HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_change-class.html"
-TARGET="_top"
-><TT
-CLASS="function"
->CHANGE-CLASS</TT
+>[CLHS-7.6.6.3]</A
 ></A
->,
- <A
-HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_upd_ferent-class.html"
+></DT
+><DT
+>7.2. <A
+HREF="obj-dict.html"
+>The Objects Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_7-7.html"
 TARGET="_top"
-><TT
-CLASS="function"
->UPDATE-INSTANCE-FOR-DIFFERENT-CLASS</TT
+>[CLHS-7.7]</A
 ></A
->, <A
-HREF="http://www.lisp.org/HyperSpec/Body/stagenfun_mak_ces-obsolete.html"
-TARGET="_top"
-><TT
-CLASS="function"
->MAKE-INSTANCES-OBSOLETE</TT
-></A
-> are
- not implemented.</P
+></DT
+></DL
+></DIV
 ><P
 ALIGN="justify"
 >Only the <A
@@ -146,15 +146,23 @@ CLASS="function"
 >STANDARD</TT
 ></A
 > method combination is implemented.</P
-><P
-ALIGN="justify"
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
 ><A
+NAME="meth-combo"
+></A
+>7.1. Declarative Method Combination
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_7-6-6-3.html"
 TARGET="_top"
->User-defined method
- combination</A
-> is not supported.  The macros
- <A
+>[CLHS-7.6.6.3]</A
+></H1
+><P
+ALIGN="justify"
+>User-defined method combination is not supported.
+ The macros <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-me_-combination.html"
 TARGET="_top"
 ><TT
@@ -168,8 +176,8 @@ TARGET="_top"
 CLASS="function"
 >CALL-METHOD</TT
 ></A
-> and the functions
- <A
+> and the
+ functions <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_invalid-method-error.html"
 TARGET="_top"
 ><TT
@@ -183,8 +191,9 @@ TARGET="_top"
 CLASS="function"
 >METHOD-COMBINATION-ERROR</TT
 ></A
-> are not
- implemented.</P
+> are
+ not implemented.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -220,7 +229,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="structures.html"
+HREF="obj-dict.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -249,11 +258,11 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Structures
-   <A
-HREF="http://www.lisp.org/HyperSpec/Body/chap-8.html"
+>The Objects Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_7-7.html"
 TARGET="_top"
->[CLHS-8]</A
+>[CLHS-7.7]</A
 ></TD
 ></TR
 ></TABLE

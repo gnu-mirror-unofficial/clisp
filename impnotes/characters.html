@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="characters">Chapter 13. Characters
+NAME="characters"
+></A
+>Chapter 13. Characters
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-13.html"
 TARGET="_top"
@@ -287,15 +289,15 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> uses the 16-bit <A
+> uses the 21-bit <A
 HREF="http://www.unicode.org/"
 TARGET="_top"
 ><B
 CLASS="emphasis"
 >UNICODE</B
 ></A
->
- character set (ISO 10646, also known as UCS-2).
+> 3.2
+ character set (ISO 10646, also known as UCS-4).
 </P
 ></DD
 ></DL
@@ -352,11 +354,11 @@ CLASS="command"
 > uses the IBM PC character set
  (code page 437):
 <DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="ibmpc-charset-table"><P
-><B
->Table 13-1. the IBM PC character set (code page 437)</B
+NAME="ibmpc-charset-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -1182,14 +1184,7 @@ VALIGN="MIDDLE"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
-><A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_not.html"
-TARGET="_top"
-><TT
-CLASS="function"
->NOT</TT
-></A
-></TD
+>¬</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
@@ -1441,14 +1436,7 @@ VALIGN="MIDDLE"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
-><A
-HREF="http://www.lisp.org/HyperSpec/Body/convar_pi.html"
-TARGET="_top"
-><TT
-CLASS="constant"
->PI</TT
-></A
-></TD
+>&#960;</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
@@ -1570,6 +1558,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 >
  Here ** are control characters, not graphic
@@ -1653,11 +1643,11 @@ CLASS="command"
 > uses the ISO Latin-1 (ISO
  8859-1) character set:
 <DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="latin-1-table"><P
-><B
->Table 13-2. the ISO Latin-1 (ISO 8859-1) character set</B
+NAME="latin-1-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -2491,14 +2481,7 @@ VALIGN="MIDDLE"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
-><A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_not.html"
-TARGET="_top"
-><TT
-CLASS="function"
->NOT</TT
-></A
-></TD
+>¬</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
@@ -2864,6 +2847,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 >
 Here ** are control characters, not graphic
@@ -2924,18 +2909,11 @@ CLASS="emphasis"
 ></A
 > character set:
 <DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="next-charset-table"><P
-><B
->Table 13-3. the <A
-HREF="http://www.next.com/"
-TARGET="_top"
-><B
-CLASS="emphasis"
->NeXTstep</B
+NAME="next-charset-table"
 ></A
-> character set</B
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -3847,14 +3825,7 @@ VALIGN="MIDDLE"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
-><A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_not.html"
-TARGET="_top"
-><TT
-CLASS="function"
->NOT</TT
-></A
-></TD
+>¬</TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
@@ -4142,6 +4113,8 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 >
 Here ** are control characters, not graphic
@@ -4154,9 +4127,11 @@ Here ** are control characters, not graphic
 ><DIV
 CLASS="table"
 ><A
-NAME="standard-char-table"><P
+NAME="standard-char-table"
+></A
+><P
 ><B
->Table 13-4. Standard characters:</B
+>Table 13-1. Standard characters</B
 ></P
 ><TABLE
 BORDER="1"
@@ -4212,9 +4187,11 @@ CLASS="keycode"
 ><DIV
 CLASS="table"
 ><A
-NAME="semi-standard-char-table"><P
+NAME="semi-standard-char-table"
+></A
+><P
 ><B
->Table 13-5. Semi-standard characters:</B
+>Table 13-2. Semi-standard characters</B
 ></P
 ><TABLE
 BORDER="1"
@@ -4327,9 +4304,11 @@ HREF="encoding.html#newline"
 ><DIV
 CLASS="table"
 ><A
-NAME="extra-named-chars-table"><P
+NAME="extra-named-chars-table"
+></A
+><P
 ><B
->Table 13-6. Additional Named Characters</B
+>Table 13-3. Additional Named Characters</B
 ></P
 ><TABLE
 BORDER="1"
@@ -4401,9 +4380,11 @@ CLASS="keycode"
 ><DIV
 CLASS="table"
 ><A
-NAME="ctrl-char-table"><P
+NAME="ctrl-char-table"
+></A
+><P
 ><B
->Table 13-7. Additional syntax for characters with code from
+>Table 13-4. Additional syntax for characters with code from
    <SPAN
 CLASS="keycode"
 >#x00</SPAN
@@ -4562,7 +4543,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="input-char">13.1. Attributes</H1
+NAME="input-char"
+></A
+>13.1. Attributes</H1
 ><P
 ALIGN="justify"
 >Characters do not have the <A
@@ -4642,12 +4625,15 @@ CLASS="constant"
 >ext:char-bits-limit</TT
 > = 16</DT
 ><DD
-><DIV
-CLASS="table"
+><P
+ALIGN="justify"
+>Character bits:
+    <DIV
+CLASS="informaltable"
 ><A
-NAME="bit-table"><P
-><B
->Table 13-8. Character bits</B
+NAME="bit-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -4743,7 +4729,10 @@ CLASS="constant"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
+></P
 ></DD
 ><DT
 ><TT

@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -104,7 +104,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="memory-models">31.3. Memory Models</H1
+NAME="memory-models"
+></A
+>31.3. Memory Models</H1
 ><P
 ALIGN="justify"
 >There are 6 memory models. Which one is used, depends on the
@@ -443,15 +445,24 @@ only object carried by its pages.
 There are no small objects in pages belonging to a big object.</P
 ><P
 ALIGN="justify"
->The following combinations of memory model and mmap tricks are
-possible:</P
+>The following combinations of memory model and <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/mmap.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>mmap</TT
+></A
+> tricks are
+possible (the number indicates the order in which the respective models
+have been developed):</P
 ><DIV
 CLASS="table"
 ><A
-NAME="mem-models-comb-typecodes"><P
+NAME="mem-models-comb-typecodes"
+></A
+><P
 ><B
->Table 31-1. With TYPECODES (the number indicates the order
-  in which the respective models have been developed:</B
+>Table 31-1. Memory models with TYPECODES</B
 ></P
 ><TABLE
 BORDER="1"
@@ -621,9 +632,11 @@ VALIGN="MIDDLE"
 ><DIV
 CLASS="table"
 ><A
-NAME="mem-models-comb-no-typecodes"><P
+NAME="mem-models-comb-no-typecodes"
+></A
+><P
 ><B
->Table 31-2. With no TYPECODES</B
+>Table 31-2. Memory models with no TYPECODES</B
 ></P
 ><TABLE
 BORDER="1"

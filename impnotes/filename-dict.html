@@ -65,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -106,7 +106,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="filename-dict">19.4. The Filenames Dictionary
+NAME="filename-dict"
+></A
+>19.5. The Filenames Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_filen_s_dictionary.html"
 TARGET="_top"
@@ -115,6 +117,9 @@ TARGET="_top"
 ><DIV
 CLASS="formalpara"
 ><P
+><A
+NAME="path-des"
+></A
 ><B
 >Pathname Designators. </B
 >When <A
@@ -201,7 +206,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="translate-pathname">19.4.1. Function <A
+NAME="translate-pathname"
+></A
+>19.5.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_translate-pathname.html"
 TARGET="_top"
 ><TT
@@ -324,7 +331,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="parsename">19.4.2. Function <A
+NAME="parsename"
+></A
+>19.5.2. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-namestring.html"
 TARGET="_top"
 ><TT
@@ -501,7 +510,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="pathmerge">19.4.3. Function <A
+NAME="pathmerge"
+></A
+>19.5.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
 ><TT
@@ -599,21 +610,21 @@ CLASS="function"
 CLASS="filename"
 >#P"x/"</TT
 ></P
+><DIV
+CLASS="formalpara"
 ><P
-ALIGN="justify"
 ><B
-CLASS="emphasis"
->Rationale</B
->: <A
+>Rationale. </B
+><A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
-> is
- used to specify default components for pathnames, so there is some
- analogy between <TT
+> is used to specify default components for
+ pathnames, so there is some analogy between
+ <TT
 CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_merge-pathnames.html"
@@ -623,19 +634,40 @@ CLASS="function"
 >MERGE-PATHNAMES</TT
 ></A
 > a b)</TT
->
- and <TT
+> and
+ <TT
 CLASS="sexp"
->(or a b)</TT
->.  Obviously putting in the
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_or.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OR</TT
+></A
+> a b)</TT
+>.  Obviously, putting in the
  same default a second time should do the same as putting it in once:
  <TT
 CLASS="sexp"
->(or a b b)</TT
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_or.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OR</TT
+></A
+> a b b)</TT
 > is the same as
  <TT
 CLASS="sexp"
->(or a b)</TT
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_or.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OR</TT
+></A
+> a b)</TT
 >, so
  <TT
 CLASS="sexp"
@@ -667,9 +699,10 @@ CLASS="function"
 ></A
 > a b)</TT
 >.</P
+></DIV
 ><P
 ALIGN="justify"
->(This question actually matters because in <A
+>(This question actually does matter because in <A
 HREF="http://www.lisp.org"
 TARGET="_top"
 ><B
@@ -803,29 +836,32 @@ CLASS="function"
 CLASS="filename"
 >#P"y/x/"</TT
 >.</P
+><DIV
+CLASS="formalpara"
 ><P
-ALIGN="justify"
 ><B
-CLASS="emphasis"
->Rationale</B
->: <SPAN
+>Rationale. </B
+><SPAN
 CLASS="QUOTE"
 >"merge"</SPAN
->
-is <I
+> is <I
 CLASS="emphasis"
 >merge</I
-> and not <I
+> and
+ not <I
 CLASS="emphasis"
 >or</I
 >.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="load-lpt">19.4.4. Function <A
+NAME="load-lpt"
+></A
+>19.5.4. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load-logi_translations.html"
 TARGET="_top"
 ><TT

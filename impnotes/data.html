@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -99,7 +99,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="data">Chapter 5. Data and Control Flow
+NAME="data"
+></A
+>Chapter 5. Data and Control Flow
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-5.html"
 TARGET="_top"
@@ -129,12 +131,59 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="flow-dict">5.1. The Data and Control Flow Dictionary
+NAME="flow-dict"
+></A
+>5.1. The Data and Control Flow Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_data__w_dictionary.html"
 TARGET="_top"
 >[CLHS-5.3]</A
 ></H1
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="fle"
+></A
+><B
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_function-_a-expression.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FUNCTION-LAMBDA-EXPRESSION</TT
+></A
+>. </B
+>The <TT
+CLASS="replaceable"
+><I
+>name</I
+></TT
+> of a <A
+HREF="dffi.html"
+><TT
+CLASS="classname"
+>FFI:FOREIGN-FUNCTION</TT
+></A
+> is a <I
+CLASS="emphasis"
+>string</I
+>
+(the name of the underlying <A
+HREF="http://www.eskimo.com/~scs/C-faq/top.html"
+TARGET="_top"
+><B
+CLASS="command"
+>C</B
+></A
+> function), not a lisp
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_f.html#function_name"
+TARGET="_top"
+>function name</A
+>.
+</P
+></DIV
 ><DIV
 CLASS="formalpara"
 ><P
@@ -147,13 +196,13 @@ CLASS="function"
 >DESTRUCTURING-BIND</TT
 ></A
 >. </B
->does not perform full error checking.</P
+>This macro does not perform full error checking.</P
 ></DIV
 ><DIV
 CLASS="formalpara"
 ><P
 ><B
-><A
+>Macros <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_prog1cm_prog2.html"
 TARGET="_top"
 ><TT
@@ -188,15 +237,15 @@ TARGET="_top"
 CLASS="function"
 >PSETQ</TT
 ></A
->, <A
+>,
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_whencm_unless.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >WHEN</TT
 ></A
->,
- <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_whencm_unless.html"
 TARGET="_top"
 ><TT
@@ -224,15 +273,15 @@ TARGET="_top"
 CLASS="function"
 >MULTIPLE-VALUE-LIST</TT
 ></A
->, <A
+>,
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_multiple-value-bind.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >MULTIPLE-VALUE-BIND</TT
 ></A
->,
- <A
+>, <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_multiple-value-setq.html"
 TARGET="_top"
 ><TT
@@ -240,15 +289,62 @@ CLASS="function"
 >MULTIPLE-VALUE-SETQ</TT
 ></A
 >. </B
->are implemented as special operators and, as
- such, are rather efficient.</P
+>These macros are implemented as special operators (as permitted by
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-1-2-1-2-2.html"
+TARGET="_top"
+>Section 3.1.2.1.2.2</A
+>)
+ and, as such, are rather efficient.</P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><B
+>Macro <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defconstant.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFCONSTANT</TT
+></A
+>. </B
+>The initial value is <I
+CLASS="emphasis"
+>not</I
+> evaluated at compile time,
+ just like with <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defparametercm_defvar.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFVAR</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defparametercm_defvar.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFPARAMETER</TT
+></A
+>.
+ Use <A
+HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>EVAL-WHEN</TT
+></A
+> if you need the value at compile time.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="fcase">5.1.1. Macro <TT
+NAME="fcase"
+></A
+>5.1.1. Macro <TT
 CLASS="function"
 >EXT:FCASE</TT
 ></H2
@@ -306,7 +402,41 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="eq">5.1.2. Function <A
+NAME="xor"
+></A
+>5.1.2. Function <TT
+CLASS="function"
+>EXT:XOR</TT
+></H2
+><P
+ALIGN="justify"
+>This function checks that exactly one of its arguments is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>
+ and, if this is the case, returns its value and index in the argument
+ list as multiple values, otherwise returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.
+</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="eq"
+></A
+>5.1.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_eq.html"
 TARGET="_top"
 ><TT
@@ -395,13 +525,40 @@ CLASS="replaceable"
 >y</I
 ></TT
 >.</P
+><P
+ALIGN="justify"
+>Note that <TT
+CLASS="sexp"
+>(eq x x)</TT
+> might not be
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> for a <A
+HREF="dffi.html#dffi-variables"
+><TT
+CLASS="classname"
+>FFI:FOREIGN-VARIABLE</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>x</I
+></TT
+>.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="sym-fun">5.1.3. Function <A
+NAME="sym-fun"
+></A
+>5.1.4. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_symbol-function.html"
 TARGET="_top"
 ><TT
@@ -475,7 +632,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="setf">5.1.4. Macro <A
+NAME="setf"
+></A
+>5.1.5. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
 TARGET="_top"
 ><TT
@@ -485,7 +644,11 @@ CLASS="function"
 ></H2
 ><P
 ALIGN="justify"
->Additional places:
+>Additional <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
+TARGET="_top"
+>place</A
+>s:
 <P
 ></P
 ><DIV
@@ -724,13 +887,17 @@ CLASS="replaceable"
                                   <TT
 CLASS="replaceable"
 ><I
->place1</I
+>place<SUB
+>1</SUB
+></I
 ></TT
 >
                                   <TT
 CLASS="replaceable"
 ><I
->place2</I
+>place<SUB
+>2</SUB
+></I
 ></TT
 >)
                                 <TT
@@ -1048,10 +1215,24 @@ CLASS="function"
  done, even local macros will be interpreted as places correctly.</P
 ><P
 ALIGN="justify"
->Attempts to modify read-only data will signal an error.  Program
- text and quoted constants loaded from files are considered read-only
- data.  This check is only performed for strings, not for conses, other
- kinds of arrays, and user-defined data types.</P
+>Attempts to modify read-only data will <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+> an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+>.
+ Program text and quoted constants loaded from files are considered
+ read-only data.  This check is only performed for strings, not for
+ conses, other kinds of arrays, and user-defined data types.</P
 ><P
 ALIGN="justify"
 >See also the <A
@@ -1073,7 +1254,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="func">5.1.5. Special Operator <A
+NAME="func"
+></A
+>5.1.6. Special Operator <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_function.html"
 TARGET="_top"
 ><TT
@@ -1177,7 +1360,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="def-sym-mac">5.1.6. Macro <A
+NAME="def-sym-mac"
+></A
+>5.1.7. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
 ><TT
@@ -1242,12 +1427,19 @@ CLASS="replaceable"
 >.</P
 ><P
 ALIGN="justify"
->The function <B
-CLASS="emphasis"
+>The function
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="data.html#symbol-mex"
 ><TT
 CLASS="function"
 >EXT:SYMBOL-MACRO-EXPAND</TT
-></B
+></A
+></I
+></STRONG
 >
  tests for a <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
@@ -1261,32 +1453,37 @@ CLASS="replaceable"
 ><I
 >symbol</I
 ></TT
-> is defined as
- a <A
+> is defined as a <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html"
 TARGET="_top"
 ><TT
 CLASS="classname"
 >SYMBOL-MACRO</TT
 ></A
->, <TT
-CLASS="sexp"
->(EXT:SYMBOL-MACRO-EXPAND
+>,
  <TT
+CLASS="sexp"
+>(<A
+HREF="data.html#symbol-mex"
+><TT
+CLASS="function"
+>EXT:SYMBOL-MACRO-EXPAND</TT
+></A
+> <TT
 CLASS="replaceable"
 ><I
 >symbol</I
 ></TT
 >)</TT
-> returns two values, <A
+> returns two
+ values, <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >T</TT
 ></A
-> and the
- expansion, otherwise it returns <A
+> and the expansion; otherwise it returns <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -1390,7 +1587,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="lambda">5.1.7. Macro <A
+NAME="lambda"
+></A
+>5.1.8. Macro <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_lambda.html"
 TARGET="_top"
 ><TT
@@ -1476,41 +1675,18 @@ CLASS="literal"
 ><DIV
 CLASS="table"
 ><A
-NAME="values-limits-table"><P
+NAME="values-limits-table"
+></A
+><P
 ><B
->Table 5-1. Function call limits (platform dependent)</B
+>Table 5-1. Function call limits</B
 ></P
 ><TABLE
 BORDER="1"
 CLASS="CALSTABLE"
-><THEAD
-><TR
-><TH
-WIDTH="25%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->CPU type</TH
-><TH
-WIDTH="25%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->16-bit CPU</TH
-><TH
-WIDTH="25%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->32-bit CPU</TH
-><TH
-WIDTH="25%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->64-bit CPU</TH
-></TR
-></THEAD
 ><TBODY
 ><TR
 ><TD
-WIDTH="25%"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><A
@@ -1522,23 +1698,14 @@ CLASS="constant"
 ></A
 ></TD
 ><TD
-WIDTH="25%"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >2<SUP
->16</SUP
->=65536</TD
-><TD
-COLSPAN="2"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->2<SUP
->32</SUP
->=4294967296</TD
+>12</SUP
+>=4096</TD
 ></TR
 ><TR
 ><TD
-WIDTH="25%"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><A
@@ -1550,7 +1717,6 @@ CLASS="constant"
 ></A
 ></TD
 ><TD
-COLSPAN="3"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >2<SUP
@@ -1559,7 +1725,6 @@ VALIGN="MIDDLE"
 ></TR
 ><TR
 ><TD
-WIDTH="25%"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><A
@@ -1571,19 +1736,11 @@ CLASS="constant"
 ></A
 ></TD
 ><TD
-WIDTH="25%"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >2<SUP
->16</SUP
->=65536</TD
-><TD
-COLSPAN="2"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->2<SUP
->32</SUP
->=4294967296</TD
+>12</SUP
+>=4096</TD
 ></TR
 ></TBODY
 ></TABLE
@@ -1594,7 +1751,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="defun">5.1.8. Macros <A
+NAME="defun"
+></A
+>5.1.9. Macros <A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_defun.html"
 TARGET="_top"
 ><TT
@@ -1671,6 +1830,69 @@ CLASS="programlisting"
 ></TD
 ></TR
 ></TABLE
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="suppress-check-redef"
+></A
+><B
+>Variable <A
+HREF="data.html#suppress-check-redef"
+><TT
+CLASS="varname"
+>CUSTOM:*SUPPRESS-CHECK-REDEFINITION*</TT
+></A
+>. </B
+>When <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="data.html#suppress-check-redef"
+><TT
+CLASS="varname"
+>CUSTOM:*SUPPRESS-CHECK-REDEFINITION*</TT
+></A
+></I
+></STRONG
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> issues a <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_warning.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>WARNING</TT
+></A
+> when a function (macro, variable, class,
+ etc) is redefined in a different file than its original definition.
+ It is <I
+CLASS="emphasis"
+>not</I
+> a good idea to set this variable to <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.
+</P
+></DIV
 ></DIV
 ></DIV
 ></DIV

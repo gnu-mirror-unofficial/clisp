@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="i18n">29.3. Extensions-1.3. Internationalization</H1
+NAME="i18n"
+></A
+>29.3. Extensions-1.3. Internationalization</H1
 ><P
 ALIGN="justify"
 >"Internationalization" means to prepare a program so that it can
@@ -139,7 +141,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="ggettext">29.3.1. The <A
+NAME="ggettext"
+></A
+>29.3.1. The <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
@@ -197,9 +201,12 @@ CLASS="command"
 > in the
 <A
 HREF="i18n.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"I18N"</SPAN
+></STRONG
 ></A
 > package, which is <A
 HREF="pack-dict.html#re-export"
@@ -209,9 +216,12 @@ CLASS="function"
 ></A
 >ed from the <A
 HREF="imppack.html#ext-pac"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"EXT"</SPAN
+></STRONG
 ></A
 >
 package.</P
@@ -222,7 +232,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="gettext"><TT
+NAME="gettext"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="i18n.html#gettext"
@@ -304,7 +316,9 @@ CLASS="emphasis"
 ></DD
 ><DT
 ><A
-NAME="ngettext"><TT
+NAME="ngettext"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="i18n.html#ngettext"
@@ -414,7 +428,9 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="domain">29.3.1.1. Domain</H3
+NAME="domain"
+></A
+>29.3.1.1. Domain</H3
 ><P
 ALIGN="justify"
 >The <A
@@ -460,7 +476,9 @@ image to request translations independently of each other.</P
 CLASS="formalpara"
 ><P
 ><A
-NAME="textdomain"><B
+NAME="textdomain"
+></A
+><B
 >Function <A
 HREF="i18n.html#textdomain"
 ><TT
@@ -478,7 +496,11 @@ CLASS="function"
 ></A
 >)</TT
 > is a
-place that returns the default <A
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
+TARGET="_top"
+>place</A
+> that returns the default <A
 HREF="i18n.html#domain"
 ><TT
 CLASS="replaceable"
@@ -578,7 +600,9 @@ CLASS="replaceable"
 CLASS="formalpara"
 ><P
 ><A
-NAME="textdomaindir"><B
+NAME="textdomaindir"
+></A
+><B
 >Function <A
 HREF="i18n.html#textdomaindir"
 ><TT
@@ -604,7 +628,11 @@ CLASS="replaceable"
 ></A
 >)</TT
 >
-is a place that returns the base directory, called
+is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_p.html#place"
+TARGET="_top"
+>place</A
+> that returns the base directory, called
 <TT
 CLASS="filename"
 >TEXTDOMAINDIR</TT
@@ -660,7 +688,9 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="category">29.3.1.2. Category</H3
+NAME="category"
+></A
+>29.3.1.2. Category</H3
 ><P
 ALIGN="justify"
 >The <A
@@ -735,7 +765,9 @@ CLASS="section"
 ><H3
 CLASS="section"
 ><A
-NAME="i18n-example">29.3.1.3. Example</H3
+NAME="i18n-example"
+></A
+>29.3.1.3. Example</H3
 ><P
 ALIGN="justify"
 >A non-internationalized program simulating a restaurant dialogue
@@ -743,7 +775,9 @@ might look as follows.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="i18n-non-i"><P
+NAME="i18n-non-i"
+></A
+><P
 ><B
 >Example 29-1. prog.lisp</B
 ></P
@@ -755,7 +789,13 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13;(setq n (parse-integer (first *args*)))
+>&#13;(setq n (parse-integer (first <A
+HREF="quickstart.html#script-exec"
+><TT
+CLASS="varname"
+>EXT:*ARGS*</TT
+></A
+>)))
 
 (format t "~A~%" "'Your command, please?', asked the waiter.")
 
@@ -794,7 +834,9 @@ the current directory.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="i18n-i"><P
+NAME="i18n-i"
+></A
+><P
 ><B
 >Example 29-2. prog.lisp</B
 ></P
@@ -809,7 +851,13 @@ CLASS="programlisting"
 >&#13;(setf (textdomain) "prog")
 (setf (textdomaindir "prog") "./")
 
-(setq n (parse-integer (first *args*)))
+(setq n (parse-integer (first <A
+HREF="quickstart.html#script-exec"
+><TT
+CLASS="varname"
+>EXT:*ARGS*</TT
+></A
+>)))
 
 (format t "~A~%"
           (gettext "'Your command, please?', asked the waiter."))
@@ -835,7 +883,9 @@ CLASS="function"
 ><DIV
 CLASS="example"
 ><A
-NAME="i18n-i-abbrev"><P
+NAME="i18n-i-abbrev"
+></A
+><P
 ><B
 >Example 29-3. prog.lisp</B
 ></P
@@ -850,7 +900,13 @@ CLASS="programlisting"
 >&#13;(setf (textdomaindir "prog") "./")
 (defun _ (msgid) (gettext msgid "prog"))
 
-(setq n (parse-integer (first *args*)))
+(setq n (parse-integer (first <A
+HREF="quickstart.html#script-exec"
+><TT
+CLASS="varname"
+>EXT:*ARGS*</TT
+></A
+>)))
 
 (format t "~A~%"
           (_"'Your command, please?', asked the waiter."))
@@ -890,7 +946,9 @@ ALIGN="justify"
 ><DIV
 CLASS="example"
 ><A
-NAME="i18n-pot"><P
+NAME="i18n-pot"
+></A
+><P
 ><B
 >Example 29-4. prog.pot</B
 ></P
@@ -920,7 +978,9 @@ ALIGN="justify"
 ><DIV
 CLASS="example"
 ><A
-NAME="i18n-fr-po"><P
+NAME="i18n-fr-po"
+></A
+><P
 ><B
 >Example 29-5. prog.fr.po</B
 ></P
@@ -1016,11 +1076,33 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="language">29.3.2. The Language</H2
+NAME="language"
+></A
+>29.3.2. The Language</H2
+><DIV
+CLASS="warning"
+><P
+></P
+><TABLE
+CLASS="warning"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/dsssl-stylesheets/images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
 ><P
 ALIGN="justify"
->Warning: The facilities described in this section will work
-only for the languages for which <A
+>Note that the facilities described in this section will
+  work only for the languages for which <A
 HREF="http://clisp.cons.org"
 TARGET="_top"
 ><B
@@ -1028,7 +1110,11 @@ CLASS="command"
 >CLISP</B
 ></A
 > itself is already
-localized.</P
+  localized.</P
+></TD
+></TR
+></TABLE
+></DIV
 ><P
 ALIGN="justify"
 >The language <A
@@ -1101,12 +1187,19 @@ TARGET="_top"
 CLASS="classname"
 >SYMBOL-MACRO</TT
 ></A
-> <B
-CLASS="emphasis"
+>
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="i18n.html#language"
 ><TT
 CLASS="varname"
 >CUSTOM:*CURRENT-LANGUAGE*</TT
-></B
+></A
+></I
+></STRONG
 >,
  which can be set at run time as well as using <A
 HREF="clisp.html#opt-lang"
@@ -1122,18 +1215,35 @@ TARGET="_top"
 >locale
  directory</A
 > at run time too, you can do that by
- setting <TT
+ setting <A
+HREF="i18n.html#language"
+><TT
 CLASS="varname"
 >CUSTOM:*CURRENT-LANGUAGE*</TT
-> to a cons cell,
- whose <A
+></A
+> to a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_cons.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CONS</TT
+></A
+> cell, whose <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >CAR</TT
 ></A
-> is the language (a symbol, one of the above), and whose
+> is the language
+ (a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYMBOL</TT
+></A
+>, one of the above), and whose
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html"
 TARGET="_top"
@@ -1144,28 +1254,38 @@ CLASS="function"
 > is the new locale directory.</P
 ><P
 ALIGN="justify"
->More languages can be defined through the macro <B
-CLASS="emphasis"
+>More languages can be defined through the macro
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="i18n.html#deflang"
 ><TT
 CLASS="function"
 >I18N:DEFLANGUAGE</TT
-></B
+></A
+></I
+></STRONG
 >:
  <TT
 CLASS="sexp"
->(<TT
+>(<A
+HREF="i18n.html#deflang"
+><TT
 CLASS="function"
 >I18N:DEFLANGUAGE</TT
->
- <TT
+></A
+> <TT
 CLASS="replaceable"
 ><I
->lang</I
+>language</I
 ></TT
 >)</TT
->.  For such an additional
- language to take effect, you must install the corresponding message
- catalog, or translate the messages yourself, using <A
+>.
+ For such an additional language to take effect, you must install the
+ corresponding message catalog, or translate the messages yourself,
+ using <A
 HREF="http://www.gnu.org"
 TARGET="_top"
 >GNU</A
@@ -1173,8 +1293,7 @@ TARGET="_top"
 HREF="http://www.gnu.org/software/gettext/gettext.html"
 TARGET="_top"
 >gettext</A
-> and
- <A
+> and <A
 HREF="http://www.gnu.org/software/emacs/"
 TARGET="_top"
 >Emacs</A
@@ -1186,20 +1305,29 @@ TARGET="_top"
 ><P
 ALIGN="justify"
 >This works only for strings.  For arbitrary language-dependent
- Lisp objects, you define one through the macro <B
-CLASS="emphasis"
+ Lisp objects, you define one through the macro
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="i18n.html#def-i-l"
 ><TT
 CLASS="function"
 >I18N:DEFINTERNATIONAL</TT
-></B
+></A
+></I
+></STRONG
 >:
  <TT
 CLASS="sexp"
->(<TT
+>(<A
+HREF="i18n.html#def-i-l"
+><TT
 CLASS="function"
 >I18N:DEFINTERNATIONAL</TT
->
- <TT
+></A
+> <TT
 CLASS="replaceable"
 ><I
 >symbol</I
@@ -1226,20 +1354,29 @@ CLASS="constant"
 ></A
 >))</TT
 > and add
- language-dependent values through the macro <B
-CLASS="emphasis"
+ language-dependent values through the macro
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="i18n.html#defloc"
 ><TT
 CLASS="function"
 >I18N:DEFLOCALIZED</TT
-></B
+></A
+></I
+></STRONG
 >:
  <TT
 CLASS="sexp"
->(<TT
+>(<A
+HREF="i18n.html#defloc"
+><TT
 CLASS="function"
 >I18N:DEFLOCALIZED</TT
->
- <TT
+></A
+> <TT
 CLASS="replaceable"
 ><I
 >symbol</I
@@ -1249,30 +1386,39 @@ CLASS="replaceable"
 ><I
 >language</I
 ></TT
-> <TT
+>
+  <TT
 CLASS="replaceable"
 ><I
 >value-form</I
 ></TT
 >)</TT
-></P
-><P
-ALIGN="justify"
->(One such form for each language.  Languages without an assigned
- value will be treated like the default-language.)  You can then access
- the localized value by calling <B
-CLASS="emphasis"
+>
+ (One such form for each language.  Languages without an assigned
+ value will be treated like the default-language.)
+ You can then access the localized value by calling
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="i18n.html#localized"
 ><TT
 CLASS="function"
 >I18N:LOCALIZED</TT
-></B
->: <TT
+></A
+></I
+></STRONG
+>:
+ <TT
 CLASS="sexp"
->(<TT
+>(<A
+HREF="i18n.html#localized"
+><TT
 CLASS="function"
 >I18N:LOCALIZED</TT
->
- <TT
+></A
+> <TT
 CLASS="replaceable"
 ><I
 >symbol</I
@@ -1284,7 +1430,8 @@ TARGET="_top"
 CLASS="literal"
 >&#38;OPTIONAL</TT
 ></A
-> <TT
+>
+  <TT
 CLASS="replaceable"
 ><I
 >language</I

@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>The Objects Dictionary
+  [CLHS-7.7]</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REV="MADE"
+HREF="mailto:clisp-list@sf.net"><LINK
+REL="HOME"
+TITLE="Implementation Notes for GNU CLISP."
+HREF="impnotes-top.html"><LINK
+REL="UP"
+TITLE="Objects
+   [CLHS-7]"
+HREF="objects.html"><LINK
+REL="PREVIOUS"
+TITLE="Objects
+   [CLHS-7]"
+HREF="objects.html"><LINK
+REL="NEXT"
+TITLE="Structures
+   [CLHS-8]"
+HREF="structures.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="impnotes.css"></HEAD
+><BODY
+CLASS="section"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Implementation Notes for <A
+HREF="http://www.gnu.org"
+TARGET="_top"
+>GNU</A
+> <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+>.: These notes document <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version 2.31.</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="objects.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 7. Objects
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-7.html"
+TARGET="_top"
+>[CLHS-7]</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="structures.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="section"
+><H1
+CLASS="section"
+><A
+NAME="obj-dict"
+></A
+>7.2. The Objects Dictionary
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_7-7.html"
+TARGET="_top"
+>[CLHS-7.7]</A
+></H1
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="class-proto"
+></A
+>7.2.1. Generic function <A
+HREF="obj-dict.html#class-proto"
+><TT
+CLASS="function"
+>CLOS:CLASS-PROTOTYPE</TT
+></A
+>.</H2
+><P
+ALIGN="justify"
+>The <A
+HREF="references.html#amop"
+>[<SPAN
+CLASS="citation"
+><A
+HREF="references.html#amop"
+>Metaobject Protocol</A
+></SPAN
+>]</A
+> generic function <A
+HREF="obj-dict.html#class-proto"
+><TT
+CLASS="function"
+>CLOS:CLASS-PROTOTYPE</TT
+></A
+> is implemented.
+ This allows non-consing access to slots with
+ allocation <TT
+CLASS="constant"
+>:CLASS</TT
+>:
+ <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;  (defclass counter ()
+    ((count :allocation :class :initform 0 :reader how-many)))
+  (defmethod initialize-instance :after ((obj counter) &#38;rest args)
+    (incf (slot-value obj 'count)))
+  (defclass counted-object (counter) ((name :initarg :name)))
+ </PRE
+></TD
+></TR
+></TABLE
+>
+ Now you can find out how many <TT
+CLASS="classname"
+>COUNTED-OBJECT</TT
+>s
+ have been created by using
+ <TT
+CLASS="sexp"
+>(HOW-MANY (<A
+HREF="obj-dict.html#class-proto"
+><TT
+CLASS="function"
+>CLOS:CLASS-PROTOTYPE</TT
+></A
+> 'COUNTER))</TT
+>:
+ <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;  (make-instance 'counted-object :name 'foo)
+    <SPAN
+CLASS="returnvalue"
+>#&#60;COUNTED-OBJECT #x203028C9&#62;</SPAN
+>
+  (how-many (clos:class-prototype 'counter))
+    <SPAN
+CLASS="returnvalue"
+>1</SPAN
+>
+  (make-instance 'counted-object :name 'bar)
+    <SPAN
+CLASS="returnvalue"
+>#&#60;COUNTED-OBJECT #x20306CB1&#62;</SPAN
+>
+  (how-many (clos:class-prototype 'counter))
+    <SPAN
+CLASS="returnvalue"
+>2</SPAN
+>
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="objects.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="impnotes-top.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="structures.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Objects
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-7.html"
+TARGET="_top"
+>[CLHS-7]</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="objects.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Structures
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/chap-8.html"
+TARGET="_top"
+>[CLHS-8]</A
+></TD
+></TR
+></TABLE
+></DIV
+><div
+class="custom-footer"
+><hr
+width="100%"><table
+width="100%"
+><tr
+><td
+align="left"
+><a
+href="http://clisp.cons.org"
+><img
+src="clisp.png"
+width="48"
+height="48"
+alt="[CLISP home]"></a
+></td
+><td
+align="center"
+><a
+href="http://www.gnu.org"
+><img
+src="http://www.gnu.org/graphics/gnubanner.jpg"
+width="468"
+height="60"
+alt="[Come and see what GNU creates for YOU]"></a
+></td
+><td
+align="right"
+><a
+href="http://sourceforge.net"
+><img
+src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+width="125"
+height="37"
+alt="[SourceForge]"></a
+></td
+></tr
+></table
+></div
+></BODY
+></HTML
+>

@@ -21,8 +21,9 @@ TITLE="Symbols
    [CLHS-10]"
 HREF="symbols.html"><LINK
 REL="NEXT"
-TITLE="The COMMON-LISP-USER Package
-   [CLHS-11.1.2.2]"
+TITLE="The
+  COMMON-LISP-USER Package
+  [CLHS-11.1.2.2]"
 HREF="clupack.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
@@ -64,7 +65,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -99,7 +100,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="packages">Chapter 11. Packages
+NAME="packages"
+></A
+>Chapter 11. Packages
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-11.html"
 TARGET="_top"
@@ -115,8 +118,18 @@ CLASS="TOC"
 ><DT
 >11.1. <A
 HREF="packages.html#pack-lock"
->Constraints on the COMMON-LISP Package for
- Conforming Programs - package locking
+>Constraints on the <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></STRONG
+></A
+> Package
+  for Conforming Programs - package locking
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
 TARGET="_top"
@@ -126,8 +139,15 @@ TARGET="_top"
 ><DT
 >11.2. <A
 HREF="clupack.html"
->The COMMON-LISP-USER Package
-   <A
+>The
+  <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></STRONG
+> Package
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
 TARGET="_top"
 >[CLHS-11.1.2.2]</A
@@ -184,79 +204,83 @@ CLASS="command"
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
 ><P
 ALIGN="justify"
->with the nicknames
-   <B
-CLASS="emphasis"
-><TT
-CLASS="constant"
->"CL"</TT
-></B
-> and
-   <B
-CLASS="emphasis"
-><TT
-CLASS="constant"
->"LISP"</TT
-></B
+>with the nicknames <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"CL"</SPAN
+></STRONG
 >
-  </P
+    and <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"LISP"</SPAN
+></STRONG
+></P
 ></DD
 ><DT
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP-USER"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
 ><P
 ALIGN="justify"
->with the nicknames
-   <B
-CLASS="emphasis"
-><TT
-CLASS="constant"
->"CL-USER"</TT
-></B
-> and
-   <B
-CLASS="emphasis"
-><TT
-CLASS="constant"
->"USER"</TT
-></B
+>with the nicknames <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"CL-USER"</SPAN
+></STRONG
 >
-  </P
+    and <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"USER"</SPAN
+></STRONG
+></P
 ></DD
 ><DT
 ><A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-3.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"KEYWORD"</SPAN
+></STRONG
 ></A
 ></DT
 ><DD
 ><P
 ALIGN="justify"
->with the nickname
-   <B
-CLASS="emphasis"
-><TT
-CLASS="constant"
->""</TT
-></B
+>with the nickname <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>""</SPAN
+></STRONG
 >
   </P
 ></DD
@@ -267,9 +291,12 @@ ALIGN="justify"
 >The package <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"COMMON-LISP"</SPAN
+></STRONG
 ></A
 > <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_export.html"
@@ -294,8 +321,20 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="pack-lock">11.1. Constraints on the COMMON-LISP Package for
- Conforming Programs - package locking
+NAME="pack-lock"
+></A
+>11.1. Constraints on the <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html"
+TARGET="_top"
+><STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP"</SPAN
+></STRONG
+></A
+> Package
+  for Conforming Programs - package locking
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1-2.html"
 TARGET="_top"
@@ -312,13 +351,53 @@ CLASS="function"
 >EXT:PACKAGE-LOCK</TT
 ></A
 >. </B
->Packages can be <SPAN
+>
+ Packages can be <SPAN
 CLASS="QUOTE"
 >"locked"</SPAN
 >.
 When a package is locked, attempts to change its symbol table or
-redefine functions which its symbols name result in a continuable error
-(continuing overrides locking for this operation).
+redefine functions which its symbols name result in a continuable
+<A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> (continuing overrides locking for this operation).
+When <A
+HREF="data.html#suppress-check-redef"
+><TT
+CLASS="varname"
+>CUSTOM:*SUPPRESS-CHECK-REDEFINITION*</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> (<I
+CLASS="emphasis"
+>not</I
+> a good idea!), the <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+>
+is not <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>ed for redefine operations.
 Function <TT
 CLASS="sexp"
 >(<A
@@ -327,16 +406,20 @@ HREF="packages.html#pack-lock"
 CLASS="function"
 >EXT:PACKAGE-LOCK</TT
 ></A
->
- <TT
+> <TT
 CLASS="replaceable"
 ><I
 >package</I
 ></TT
 >)</TT
-> returns the
-generalized boolean indicating whether the package is locked.
-A package (or list thereof) can be locked using <TT
+>
+returns the generalized boolean indicating whether the <TT
+CLASS="replaceable"
+><I
+>package</I
+></TT
+> is locked.
+A package (or a list thereof) can be locked using <TT
 CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
@@ -386,14 +469,28 @@ CLASS="varname"
 CLASS="formalpara"
 ><P
 ><B
->Macro <TT
+>Macro <A
+HREF="packages.html#without-pack-lock"
+><TT
 CLASS="function"
 >EXT:WITHOUT-PACKAGE-LOCK</TT
+></A
 >. </B
 >If you want to evaluate some forms with certain packages unlocked,
- you can use <TT
+ you can use
+ <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="packages.html#without-pack-lock"
+><TT
 CLASS="function"
 >EXT:WITHOUT-PACKAGE-LOCK</TT
+></A
+>
+  </I
+></STRONG
 >:
 <TABLE
 BORDER="0"
@@ -403,7 +500,13 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13;(without-package-lock ("LISP" "EXT" "CLOS")
+>&#13;(<A
+HREF="packages.html#without-pack-lock"
+><TT
+CLASS="function"
+>EXT:WITHOUT-PACKAGE-LOCK</TT
+></A
+> ("LISP" "EXT" "CLOS")
   (defun restart () ...))
 </PRE
 ></TD
@@ -419,7 +522,13 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13;(without-package-lock ("LISP") (trace read-line))
+>&#13;(<A
+HREF="packages.html#without-pack-lock"
+><TT
+CLASS="function"
+>EXT:WITHOUT-PACKAGE-LOCK</TT
+></A
+> ("LISP") (trace read-line))
 </PRE
 ></TD
 ></TR
@@ -427,7 +536,13 @@ CLASS="programlisting"
 >
 <TT
 CLASS="sexp"
->(without-package-lock () ...)</TT
+>(<A
+HREF="packages.html#without-pack-lock"
+><TT
+CLASS="function"
+>EXT:WITHOUT-PACKAGE-LOCK</TT
+></A
+> () ...)</TT
 >
 temporarily unlocks all packages in <A
 HREF="packages.html#pack-lock"
@@ -447,11 +562,7 @@ HREF="http://groups.google.com/groups?hl=en&lr=&ie=UTF-8&selm=3C3E7F57.7F80395%4
 TARGET="_top"
 >the USENET posting</A
 > by
-<A
-HREF="mailto:haflich@pacbell.net"
-TARGET="_top"
->Steven M. Haflich</A
->. </B
+  Steven M. Haflich. </B
 >This should prevent you from accidentally hosing yourself with
 <TABLE
 BORDER="0"
@@ -461,7 +572,14 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13; (defstruct instance ...)
+>&#13; (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defstruct.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFSTRUCT</TT
+></A
+> instance ...)
 </PRE
 ></TD
 ></TR
@@ -562,8 +680,15 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->The COMMON-LISP-USER Package
-   <A
+>The
+  <STRONG
+CLASS="package"
+><SPAN
+CLASS="QUOTE"
+>"COMMON-LISP-USER"</SPAN
+></STRONG
+> Package
+  <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-2.html"
 TARGET="_top"
 >[CLHS-11.1.2.2]</A

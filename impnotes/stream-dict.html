@@ -64,7 +64,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -105,7 +105,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="stream-dict">21.3. The Streams Dictionary
+NAME="stream-dict"
+></A
+>21.3. The Streams Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_streams_dictionary.html"
 TARGET="_top"
@@ -116,7 +118,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="stream-eltype">21.3.1. Function <A
+NAME="stream-eltype"
+></A
+>21.3.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
 TARGET="_top"
 ><TT
@@ -217,7 +221,7 @@ CLASS="classname"
 ></A
 > or
       <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -227,7 +231,7 @@ CLASS="classname"
 ></A
 > 8)</TT
 > or <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -242,7 +246,7 @@ CLASS="classname"
 ><P
 ALIGN="justify"
 >both equivalent to <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -258,7 +262,7 @@ CLASS="replaceable"
 >)</TT
 > or
       <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -283,6 +287,60 @@ CLASS="replaceable"
 ></P
 ><P
 ALIGN="justify"
+>Functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> and <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>)</TT
+> are <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_generic-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>GENERIC-FUNCTION</TT
+></A
+>s, see
+ section <A
+HREF="clos-stream.html#gray"
+>"Gray streams"</A
+>.</P
+><DIV
+CLASS="section"
+><H3
+CLASS="section"
+><A
+NAME="bin-stdio"
+></A
+>21.3.1.1. Binary input from <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*STANDARD-INPUT*</TT
+></A
+></H3
+><P
+ALIGN="justify"
 >Note that you cannot change <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
 TARGET="_top"
@@ -291,22 +349,427 @@ CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
 > for some
-built-in streams, such as terminal streams (which is normally the
-value of <A
+ built-in streams, such as <A
+HREF="terminal.html"
+>terminal streams</A
+>,
+ which is normally the value of <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
 TARGET="_top"
 ><TT
 CLASS="varname"
 >*TERMINAL-IO*</TT
 ></A
->).</P
+>.
+ Since <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stdebug-i_ace-outputst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*STANDARD-INPUT*</TT
+></A
+> normally is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_synonym-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SYNONYM-STREAM</TT
+></A
+> pointing
+ to <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stterminal-iost.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*TERMINAL-IO*</TT
+></A
+>, you cannot use <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+> in the it.</P
+><P
+ALIGN="justify"
+>Since <A
+HREF="http://hoohoo.ncsa.uiuc.edu/cgi/"
+TARGET="_top"
+>CGI</A
+>
+ (Common Gateway Interface) provides the form data for
+ <B
+CLASS="command"
+>METHOD="POST"</B
+> on the stdin,
+ and the server will <I
+CLASS="emphasis"
+>not</I
+> send you an <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+> on the end of the data,
+ you will need to use
+ <TT
+CLASS="sexp"
+>(<A
+HREF="getenv.html"
+><TT
+CLASS="function"
+>EXT:GETENV</TT
+></A
+> <TT
+CLASS="envar"
+>"CONTENT_LENGTH"</TT
+>)</TT
+>
+ to determine how much data you should read from stdin.
+ <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> will detect that stdin is not a terminal and create a regular
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_file-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FILE-STREAM</TT
+></A
+> which can be passed to <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SETF</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+>)</TT
+>.
+ To test this functionality interactively,
+ you will need to open the standard input in the binary mode:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;(let ((buf (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_make-array.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>MAKE-ARRAY</TT
+></A
+> (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_parse-integer.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PARSE-INTEGER</TT
+></A
+> (<A
+HREF="getenv.html"
+><TT
+CLASS="function"
+>EXT:GETENV</TT
+></A
+> "CONTENT_LENGTH"))
+                       :element-type <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>)))
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_with-open-stream.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WITH-OPEN-STREAM</TT
+></A
+> (in (<A
+HREF="stream-dict.html#make-stream"
+><TT
+CLASS="function"
+>EXT:MAKE-STREAM</TT
+></A
+> <TT
+CLASS="constant"
+>:INPUT</TT
+> <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+>))
+    (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-SEQUENCE</TT
+></A
+> buf in))
+  buf)
+</PRE
+></TD
+></TR
+></TABLE
+></P
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="bin-input">21.3.2. Binary input, <A
+NAME="make-stream"
+></A
+>21.3.2. Function <A
+HREF="stream-dict.html#make-stream"
+><TT
+CLASS="function"
+>EXT:MAKE-STREAM</TT
+></A
+></H2
+><P
+ALIGN="justify"
+>Function <A
+HREF="stream-dict.html#make-stream"
+><TT
+CLASS="function"
+>EXT:MAKE-STREAM</TT
+></A
+> creates a Lisp stream out of an OS file
+ handle: <TT
+CLASS="sexp"
+>(<A
+HREF="stream-dict.html#make-stream"
+><TT
+CLASS="function"
+>EXT:MAKE-STREAM</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> <TT
+CLASS="constant"
+>:DIRECTION</TT
+>
+  <A
+HREF="stream-dict.html#eltype"
+><TT
+CLASS="constant"
+>:ELEMENT-TYPE</TT
+></A
+> <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
+> <A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>)</TT
+></P
+><P
+ALIGN="justify"
+><TT
+CLASS="replaceable"
+><I
+>object</I
+></TT
+> designates an OS handle (a <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap03.html#tag_03_165"
+TARGET="_top"
+>file descriptor</A
+>),
+ and should be one of the following:
+ <P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>number</DT
+><DD
+><P
+ALIGN="justify"
+>denotes the <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap03.html#tag_03_165"
+TARGET="_top"
+>file descriptor</A
+> of this value
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:INPUT</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>denotes <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> process standard input
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:OUTPUT</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>denotes <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> process standard output
+  </P
+></DD
+><DT
+><TT
+CLASS="constant"
+>:ERROR</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>denotes <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> process standard error
+  </P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>denotes the handle of this stream, which should be
+    a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_file-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FILE-STREAM</TT
+></A
+> or a <A
+HREF="socket.html"
+><TT
+CLASS="classname"
+>SOCKET:SOCKET-STREAM</TT
+></A
+>
+  </P
+></DD
+></DL
+></DIV
+></P
+><P
+ALIGN="justify"
+>The handle is duplicated (with <A
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/dup.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>dup/dup2</TT
+></A
+>), so it is safe to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+>
+ a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> returned by <A
+HREF="stream-dict.html#make-stream"
+><TT
+CLASS="function"
+>EXT:MAKE-STREAM</TT
+></A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="bin-input"
+></A
+>21.3.3. Binary input, <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
 TARGET="_top"
 ><TT
@@ -402,7 +865,7 @@ CLASS="function"
 ></A
 >
  <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -422,7 +885,7 @@ HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#type_equivalent"
 TARGET="_top"
 >type equivalent</A
 > to <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -625,7 +1088,7 @@ CLASS="function"
 ></A
 >
  <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -664,7 +1127,9 @@ CLASS="classname"
 CLASS="formalpara"
 ><P
 ><A
-NAME="endianness"><B
+NAME="endianness"
+></A
+><B
 >Endianness. </B
 ><A
 HREF="stream-dict.html#endianness"
@@ -708,7 +1173,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="bin-output">21.3.3. Binary output, <A
+NAME="bin-output"
+></A
+>21.3.4. Binary output, <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-byte.html"
 TARGET="_top"
 ><TT
@@ -799,7 +1266,7 @@ CLASS="function"
 ></A
 >
  <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -819,7 +1286,7 @@ HREF="http://www.lisp.org/HyperSpec/Body/glo_t.html#type_equivalent"
 TARGET="_top"
 >type equivalent</A
 > to <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1035,7 +1502,7 @@ CLASS="function"
 ></A
 >
  <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1076,16 +1543,24 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="read-seq">21.3.4. Function <A
+NAME="bulk-io"
+></A
+>21.3.5. Bulk Input and Output</H2
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="read-seq"
+></A
+><B
+>Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >READ-SEQUENCE</TT
 ></A
-></H2
-><P
-ALIGN="justify"
+>. </B
 >In addition to <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
 TARGET="_top"
@@ -1094,15 +1569,17 @@ CLASS="function"
 >READ-SEQUENCE</TT
 ></A
 >, the following two
- functions are provided:</P
-><P
+ functions are provided:
+<P
 ></P
 ><DIV
 CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="rd-by-seq"><A
+NAME="rd-by-seq"
+></A
+><A
 HREF="stream-dict.html#rd-by-seq"
 ><TT
 CLASS="function"
@@ -1152,7 +1629,7 @@ CLASS="constant"
 > <TT
 CLASS="constant"
 >:END</TT
->)</TT
+> :NO-HANG)</TT
 > fills the
    subsequence of <TT
 CLASS="replaceable"
@@ -1200,7 +1677,26 @@ CLASS="replaceable"
 ><I
 >stream</I
 ></TT
-> reached its end).</P
+> reached its end).
+   When <TT
+CLASS="constant"
+>:NO-HANG</TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, does not block:
+   treat input unavailability as <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+>.</P
 ><P
 ALIGN="justify"
 >This function is especially efficient if <TT
@@ -1210,7 +1706,7 @@ CLASS="replaceable"
 ></TT
 > is a
    <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"
@@ -1256,7 +1752,7 @@ CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
 > <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1270,7 +1766,9 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="rd-ch-seq"><A
+NAME="rd-ch-seq"
+></A
+><A
 HREF="stream-dict.html#rd-ch-seq"
 ><TT
 CLASS="function"
@@ -1409,30 +1907,34 @@ HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#input"
 TARGET="_top"
 >input</A
 > <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_s.html#string_stream"
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string-stream.html"
 TARGET="_top"
->string stream</A
+><TT
+CLASS="classname"
+>STRING-STREAM</TT
+></A
 >.
   </P
 ></DD
 ></DL
 ></DIV
+></P
 ></DIV
 ><DIV
-CLASS="section"
-><H2
-CLASS="section"
+CLASS="formalpara"
+><P
 ><A
-NAME="write-seq">21.3.5. Function <A
+NAME="write-seq"
+></A
+><B
+>Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-sequence.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >WRITE-SEQUENCE</TT
 ></A
-></H2
-><P
-ALIGN="justify"
+>. </B
 >In addition to <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_write-sequence.html"
 TARGET="_top"
@@ -1441,15 +1943,17 @@ CLASS="function"
 >WRITE-SEQUENCE</TT
 ></A
 >, the following two
-functions are provided:</P
-><P
+functions are provided:
+<P
 ></P
 ><DIV
 CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="wr-by-seq"><A
+NAME="wr-by-seq"
+></A
+><A
 HREF="stream-dict.html#wr-by-seq"
 ><TT
 CLASS="function"
@@ -1482,8 +1986,10 @@ CLASS="replaceable"
 ></TT
 >
   <TT
-CLASS="constant"
->:STREAM</TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
 > <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -1536,7 +2042,7 @@ CLASS="replaceable"
 ></TT
 > is a
   <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"
@@ -1582,7 +2088,7 @@ CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
 > <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1596,7 +2102,9 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="wr-ch-seq"><A
+NAME="wr-ch-seq"
+></A
+><A
 HREF="stream-dict.html#wr-ch-seq"
 ><TT
 CLASS="function"
@@ -1629,8 +2137,10 @@ CLASS="replaceable"
 ></TT
 >
   <TT
-CLASS="constant"
->:STREAM</TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
 > <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
 TARGET="_top"
@@ -1721,13 +2231,676 @@ CLASS="classname"
 ></DD
 ></DL
 ></DIV
+></P
+></DIV
+><DIV
+CLASS="formalpara"
+><P
+><A
+NAME="bulk-io-rationale"
+></A
+><B
+>Rationale. </B
+>The rationale for <A
+HREF="stream-dict.html#rd-ch-seq"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-SEQUENCE</TT
+></A
+>, <A
+HREF="stream-dict.html#rd-by-seq"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-SEQUENCE</TT
+></A
+>, <A
+HREF="stream-dict.html#wr-ch-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-CHAR-SEQUENCE</TT
+></A
+> and
+ <A
+HREF="stream-dict.html#wr-by-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-BYTE-SEQUENCE</TT
+></A
+> is that some <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>s support both character and binary
+ i/o, and when you read into a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_sequence.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SEQUENCE</TT
+></A
+> that can hold both (e.g.,
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+> or <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-vector.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-VECTOR</TT
+></A
+>) you cannot determine which kind of
+ input to use.  In such situation <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-sequence.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-SEQUENCE</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-sequence.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-SEQUENCE</TT
+></A
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+> an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+>, while <A
+HREF="stream-dict.html#rd-ch-seq"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-SEQUENCE</TT
+></A
+>, <A
+HREF="stream-dict.html#rd-by-seq"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-SEQUENCE</TT
+></A
+>, <A
+HREF="stream-dict.html#wr-ch-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-CHAR-SEQUENCE</TT
+></A
+> and
+ <A
+HREF="stream-dict.html#wr-by-seq"
+><TT
+CLASS="function"
+>EXT:WRITE-BYTE-SEQUENCE</TT
+></A
+> work just fine.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="file-pos">21.3.6. Function <A
+NAME="non-block-io"
+></A
+>21.3.6. Non-Blocking Input and Output</H2
+><P
+ALIGN="justify"
+>In addition to the standard functions <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+> and
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR-NO-HANG</TT
+></A
+>, <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> provides the following functionality
+ facilitating non-blocking input and output, both binary and
+ character.</P
+><P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+NAME="rcwhp"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="stream-dict.html#rcwhp"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-WILL-HANG-P</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+><A
+HREF="stream-dict.html#rcwhp"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-WILL-HANG-P</TT
+></A
+> queries the stream's input status.
+  It returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_peek-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>PEEK-CHAR</TT
+></A
+> with a
+  <TT
+CLASS="replaceable"
+><I
+>peek-type</I
+></TT
+> of <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> will return immediately.
+  Otherwise it returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>.  (In the latter case the standard
+  <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+> function would return <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.)</P
+><P
+ALIGN="justify"
+>Note the difference with <TT
+CLASS="sexp"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_not.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>NOT</TT
+></A
+>
+  (<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>))</TT
+>: When the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+> is reached, <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+>
+  returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, whereas <A
+HREF="stream-dict.html#rcwhp"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-WILL-HANG-P</TT
+></A
+> returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+><P
+ALIGN="justify"
+>Note also that <A
+HREF="stream-dict.html#rcwhp"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-WILL-HANG-P</TT
+></A
+> is not a good way to test for <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+>:
+  If <A
+HREF="stream-dict.html#rcwhp"
+><TT
+CLASS="function"
+>EXT:READ-CHAR-WILL-HANG-P</TT
+></A
+> returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+>, this does not mean that the <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> will
+  deliver more characters.  It only means that it is not known at this
+  moment whether the <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> is already at <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+>, or will deliver
+  more characters.</P
+></DD
+><DT
+><A
+NAME="rbla"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="stream-dict.html#rbla"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-LOOKAHEAD</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+> if <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+> would return immediately with an
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> result.
+   Returns <TT
+CLASS="constant"
+>:EOF</TT
+> if the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+> is already known to be reached.
+   If <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>'s value is not available immediately, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>
+   instead of waiting.</P
+></DD
+><DT
+><A
+NAME="rbwhp"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="stream-dict.html#rbwhp"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-WILL-HANG-P</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> if <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+> will return immediately.
+   Otherwise it returns true.</P
+></DD
+><DT
+><A
+NAME="rbnh"
+></A
+><TT
+CLASS="sexp"
+>(<A
+HREF="stream-dict.html#rbnh"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-NO-HANG</TT
+></A
+>
+    <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html"
+TARGET="_top"
+><TT
+CLASS="literal"
+>&#38;OPTIONAL</TT
+></A
+> <TT
+CLASS="replaceable"
+><I
+>eof-error-p</I
+></TT
+> <TT
+CLASS="replaceable"
+><I
+>eof-value</I
+></TT
+>)</TT
+></DT
+><DD
+><P
+ALIGN="justify"
+>To be called only if <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>'s
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_stream-element-type.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>STREAM-ELEMENT-TYPE</TT
+></A
+> is <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>UNSIGNED-BYTE</TT
+></A
+> 8)</TT
+> or <TT
+CLASS="type"
+>(<A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIGNED-BYTE</TT
+></A
+> 8)</TT
+>.
+   Returns an <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> or does <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+> handling, like <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>,
+   if that would return immediately.
+   If <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-BYTE</TT
+></A
+>'s value is not available immediately, returns <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>
+   instead of waiting.</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="file-pos"
+></A
+>21.3.7. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_file-position.html"
 TARGET="_top"
 ><TT
@@ -1800,7 +2973,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="open">21.3.7. Function  <A
+NAME="open"
+></A
+>21.3.8. Function  <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_open.html"
 TARGET="_top"
 ><TT
@@ -1827,20 +3002,7 @@ TARGET="_top"
 CLASS="function"
 >OPEN</TT
 ></A
-> accepts three additional keywords: <A
-HREF="stream-dict.html#eltype"
-><TT
-CLASS="constant"
->:ELEMENT-TYPE</TT
-></A
->, <A
-HREF="stream-dict.html#extfmt"
-><TT
-CLASS="constant"
->:EXTERNAL-FORMAT</TT
-></A
->,
-   <A
+> accepts an additional keyword <A
 HREF="stream-dict.html#buffered"
 ><TT
 CLASS="constant"
@@ -1853,7 +3015,7 @@ CLASS="constant"
 CLASS="variablelist"
 ><P
 ><B
->The acceptable values for the
+>The acceptable values for the arguments to the
    <A
 HREF="stream-dict.html#open"
 >file</A
@@ -1868,7 +3030,9 @@ HREF="socket.html"
 ><DL
 ><DT
 ><A
-NAME="eltype"><A
+NAME="eltype"
+></A
+><A
 HREF="stream-dict.html#eltype"
 ><TT
 CLASS="constant"
@@ -1887,7 +3051,7 @@ CLASS="classname"
 ></A
 > or
     <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1902,7 +3066,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >, <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -1917,7 +3081,13 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >; if the stream is to be
-    unbuffered, <TT
+    un<A
+HREF="stream-dict.html#buffered"
+><TT
+CLASS="constant"
+>:BUFFERED</TT
+></A
+>, <TT
 CLASS="replaceable"
 ><I
 >n</I
@@ -1947,15 +3117,15 @@ CLASS="replaceable"
 >-bit bytes) in the preamble.</P
 ><P
 ALIGN="justify"
->This is done to ensure the input/output consistency.
-    Suppose you open a file with <A
+>This is done to ensure the input/output consistency:
+    suppose you open a file with <A
 HREF="stream-dict.html#eltype"
 ><TT
 CLASS="constant"
 >:ELEMENT-TYPE</TT
 ></A
 > of <TT
-CLASS="sexp"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1981,7 +3151,9 @@ CLASS="command"
 ></DD
 ><DT
 ><A
-NAME="extfmt"><A
+NAME="extfmt"
+></A
+><A
 HREF="stream-dict.html#extfmt"
 ><TT
 CLASS="constant"
@@ -2007,9 +3179,12 @@ CLASS="classname"
 >s in the
    <A
 HREF="encoding.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CHARSET"</SPAN
+></STRONG
 ></A
 > package, <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
@@ -2053,7 +3228,9 @@ CLASS="varname"
 ></DD
 ><DT
 ><A
-NAME="buffered"><A
+NAME="buffered"
+></A
+><A
 HREF="stream-dict.html#buffered"
 ><TT
 CLASS="constant"
@@ -2175,7 +3352,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="close">21.3.8. Function <A
+NAME="close"
+></A
+>21.3.9. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
 TARGET="_top"
 ><TT
@@ -2183,6 +3362,27 @@ CLASS="function"
 >CLOSE</TT
 ></A
 ></H2
+><P
+ALIGN="justify"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+> is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_generic-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>GENERIC-FUNCTION</TT
+></A
+>, see section
+ <A
+HREF="clos-stream.html#gray"
+>"Gray streams"</A
+>.</P
 ><P
 ALIGN="justify"
 ><A
@@ -2223,21 +3423,101 @@ TARGET="_top"
 CLASS="function"
 >CLOSE</TT
 ></A
-> on already closed stream does nothing and returns <A
+> on an already closed <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> does nothing and returns
+ <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >T</TT
 ></A
-></P
+>.</P
+><P
+ALIGN="justify"
+>If you do not <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_close.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLOSE</TT
+></A
+> your <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+> explicitly, it will be
+ closed at <A
+HREF="gc.html"
+>garbage-collect</A
+>ion time automatically.
+ This is not recommended though because <A
+HREF="gc.html"
+>garbage-collect</A
+>ion is not deterministic.
+ Please use <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_with-open-stream.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WITH-OPEN-STREAM</TT
+></A
+> etc.</P
 ></DIV
 ><DIV
 CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="broadcast-stream">21.3.9. Class <A
+NAME="open-stream-p"
+></A
+>21.3.10. Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN-STREAM-P</TT
+></A
+></H2
+><P
+ALIGN="justify"
+>Function <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_open-stream-p.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>OPEN-STREAM-P</TT
+></A
+> is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_generic-function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>GENERIC-FUNCTION</TT
+></A
+>, see section
+ <A
+HREF="clos-stream.html#gray"
+>"Gray streams"</A
+>.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="broadcast-stream"
+></A
+>21.3.11. Class <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_broadcast-stream.html"
 TARGET="_top"
 ><TT
@@ -2263,11 +3543,430 @@ CLASS="function"
 ></A
 > return false for
  <A
-HREF="http://www.lisp.org/HyperSpec/Body/glo_b.html#broadcast_stream"
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_broadcast-stream.html"
 TARGET="_top"
->broadcast
- streams</A
->.</P
+><TT
+CLASS="classname"
+>BROADCAST-STREAM</TT
+></A
+>s.</P
+></DIV
+><DIV
+CLASS="section"
+><H2
+CLASS="section"
+><A
+NAME="stream-buffer"
+></A
+>21.3.12. Functions
+  <TT
+CLASS="function"
+>EXT:MAKE-BUFFERED-INPUT-STREAM</TT
+> and
+  <TT
+CLASS="function"
+>EXT:MAKE-BUFFERED-OUTPUT-STREAM</TT
+></H2
+><P
+ALIGN="justify"
+><TT
+CLASS="sexp"
+>(EXT:MAKE-BUFFERED-OUTPUT-STREAM <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>)</TT
+>
+ returns a buffered <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>.
+ <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+> expecting one argument, a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+>.
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_write-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WRITE-CHAR</TT
+></A
+> collects the <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s in a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>, until a
+ newline character is written or <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FORCE-OUTPUT</TT
+></A
+>/<A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>FINISH-OUTPUT</TT
+></A
+> is called.
+ Then <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> is called with a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_simple-string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>SIMPLE-STRING</TT
+></A
+> as argument,
+ that contains the characters collected so far.
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLEAR-OUTPUT</TT
+></A
+> dicards the characters collected so far.</P
+><P
+ALIGN="justify"
+><TT
+CLASS="sexp"
+>(EXT:MAKE-BUFFERED-INPUT-STREAM <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>
+  <TT
+CLASS="replaceable"
+><I
+>mode</I
+></TT
+>)</TT
+> returns a buffered <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#input"
+TARGET="_top"
+>input</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>.
+ <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> is a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+> of 0 arguments that returns
+ either <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+> (stands for <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+>) or up to three values
+ <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+>, <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>.
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+> returns the <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s of the current <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> one
+ after another, as delimited by <TT
+CLASS="replaceable"
+><I
+>start</I
+></TT
+> and <TT
+CLASS="replaceable"
+><I
+>end</I
+></TT
+>, which default to
+ <TT
+CLASS="literal"
+>0</TT
+> and <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>, respectively.
+ When the <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> is consumed, <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> is called again.
+ The <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> returned by <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> should not be changed,
+ otherwise <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> should copy the <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> with <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_copy-seq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COPY-SEQ</TT
+></A
+>
+ or <A
+HREF="http://www.lisp.org/HyperSpec/Body/acc_subseq.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SUBSEQ</TT
+></A
+> beforehand.
+ <TT
+CLASS="replaceable"
+><I
+>mode</I
+></TT
+> determines the behavior of <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LISTEN</TT
+></A
+>
+ when the current <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+> buffer is empty:
+ <P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>the stream acts like a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_file-stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FILE-STREAM</TT
+></A
+>,
+     i.e. <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> is called</P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>T</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>the stream acts like an interactive stream without
+     <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
+CLASS="literal"
+>end-of-stream</TT
+></A
+>, i.e. one can assume that further characters will always
+     arrive, without calling <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+></P
+></DD
+><DT
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>this <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_function.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>FUNCTION</TT
+></A
+> tells, upon call, if further
+     non-empty <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>s are to be expected.</P
+></DD
+></DL
+></DIV
+>
+ <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_clear-input.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>CLEAR-INPUT</TT
+></A
+> discards the rest of the current <TT
+CLASS="replaceable"
+><I
+>string</I
+></TT
+>,
+ so <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+> will be called upon the next <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>READ-CHAR</TT
+></A
+> operation.
+</P
 ></DIV
 ></DIV
 ><DIV

@@ -63,7 +63,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -98,7 +98,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="reader">Chapter 23. Reader
+NAME="reader"
+></A
+>Chapter 23. Reader
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-23.html"
 TARGET="_top"
@@ -133,37 +135,6 @@ CLASS="function"
 ></A
 ></A
 ></DT
-><DT
->23.4. <A
-HREF="listen.html"
->Functions <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_listen.html"
-TARGET="_top"
-><TT
-CLASS="function"
->LISTEN</TT
-></A
->, <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READ-CHAR-NO-HANG</TT
-></A
-></A
-></DT
-><DT
->23.5. <A
-HREF="read-byte.html"
->Function <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
-TARGET="_top"
-><TT
-CLASS="function"
->READ-BYTE</TT
-></A
-></A
-></DT
 ></DL
 ></DIV
 ><P
@@ -173,9 +144,11 @@ ALIGN="justify"
 <DIV
 CLASS="table"
 ><A
-NAME="unreadable-objects-table"><P
+NAME="unreadable-objects-table"
+></A
+><P
 ><B
->Table 23-1. unreadable objects</B
+>Table 23-1. Unreadable objects</B
 ></P
 ><TABLE
 BORDER="1"
@@ -209,7 +182,14 @@ CLASS="replaceable"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->all structures lacking a keyword constructor</TD
+>all <A
+HREF="http://www.lisp.org/HyperSpec/Body/cla_structure-object.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRUCTURE-OBJECT</TT
+></A
+>s lacking a keyword constructor</TD
 ></TR
 ><TR
 ><TD
@@ -232,7 +212,21 @@ CLASS="replaceable"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->all arrays except strings, if <A
+>all <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ARRAY</TT
+></A
+>s except <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>s, if <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-arrayst.html"
 TARGET="_top"
 ><TT
@@ -240,7 +234,7 @@ CLASS="varname"
 >*PRINT-ARRAY*</TT
 ></A
 > is
-       <A
+   <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -255,8 +249,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;SYSTEM-FUNCTION
-       <TT
+>#&#60;SYSTEM-FUNCTION <TT
 CLASS="replaceable"
 ><I
 >name</I
@@ -282,7 +275,7 @@ VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
 >#&#60;ADD-ON-SYSTEM-FUNCTION
-       <TT
+    <TT
 CLASS="replaceable"
 ><I
 >name</I
@@ -307,8 +300,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;SPECIAL-OPERATOR
-       <TT
+>#&#60;SPECIAL-OPERATOR <TT
 CLASS="replaceable"
 ><I
 >name</I
@@ -326,8 +318,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;COMPILED-CLOSURE
-       <TT
+>#&#60;COMPILED-CLOSURE <TT
 CLASS="replaceable"
 ><I
 >name</I
@@ -363,8 +354,7 @@ CLASS="replaceable"
 ><I
 >name</I
 ></TT
->
-       ...&#62;</TT
+> ...&#62;</TT
 ></TD
 ><TD
 ALIGN="CENTER"
@@ -396,7 +386,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >frame pointer which has become invalid on exit from the
-       corresponding <A
+   corresponding <A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_block.html"
 TARGET="_top"
 ><TT
@@ -418,12 +408,19 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;...-STREAM ...&#62;</TT
+>#&#60;...STREAM...&#62;</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->stream</TD
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+></TD
 ></TR
 ><TR
 ><TD
@@ -431,8 +428,7 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;PACKAGE
-       <TT
+>#&#60;PACKAGE <TT
 CLASS="replaceable"
 ><I
 >name</I
@@ -442,7 +438,14 @@ CLASS="replaceable"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->package</TD
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_package.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PACKAGE</TT
+></A
+></TD
 ></TR
 ><TR
 ><TD
@@ -455,7 +458,14 @@ CLASS="literal"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->hash table, if <A
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_hash-table.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>HASH-TABLE</TT
+></A
+>, if <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stprint-arrayst.html"
 TARGET="_top"
 ><TT
@@ -482,7 +492,14 @@ CLASS="literal"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->readtable</TD
+><A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_readtable.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>READTABLE</TT
+></A
+></TD
 ></TR
 ><TR
 ><TD
@@ -515,13 +532,43 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;FOREIGN-POINTER #x...&#62;</TT
+>#&#60;MACRO <TT
+CLASS="replaceable"
+><I
+>function</I
+></TT
+>&#62;</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->foreign pointer
-      <I
+>macro expander (defined by <A
+HREF="http://www.lisp.org/HyperSpec/Body/mac_defmacro.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>DEFMACRO</TT
+></A
+> and friends)</TD
+></TR
+><TR
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+><TT
+CLASS="literal"
+>#&#60;<A
+HREF="dffi.html#fptr"
+><TT
+CLASS="classname"
+>FFI:FOREIGN-POINTER</TT
+></A
+> #x...&#62;</TT
+></TD
+><TD
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>foreign pointer <I
 CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
@@ -530,7 +577,8 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
->, <A
+>,
+    <A
 HREF="http://www.willows.com/"
 TARGET="_top"
 ><B
@@ -544,10 +592,9 @@ TARGET="_top"
 CLASS="emphasis"
 >Amiga</B
 ></A
+> platforms only.)</I
 >
-         platforms only.)</I
->
-     </TD
+ </TD
 ></TR
 ><TR
 ><TD
@@ -555,13 +602,18 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;FOREIGN-ADDRESS #x...&#62;</TT
+>#&#60;<A
+HREF="dffi.html#faddr"
+><TT
+CLASS="classname"
+>FFI:FOREIGN-ADDRESS</TT
+></A
+> #x...&#62;</TT
 ></TD
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->foreign address
-     <I
+>foreign address <I
 CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
@@ -570,16 +622,23 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
->, <A
+>,
+    <A
 HREF="http://www.willows.com/"
 TARGET="_top"
 ><B
 CLASS="emphasis"
 >Win32</B
 ></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Amiga</B
+></A
 > platforms only.)</I
->
-    </TD
+></TD
 ></TR
 ><TR
 ><TD
@@ -587,8 +646,14 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;FOREIGN-VARIABLE
-       <TT
+>#&#60;<A
+HREF="dffi.html#dffi-variables"
+><TT
+CLASS="classname"
+>FFI:FOREIGN-VARIABLE</TT
+></A
+>
+    <TT
 CLASS="replaceable"
 ><I
 >name</I
@@ -598,8 +663,7 @@ CLASS="replaceable"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->foreign variable
-     <I
+>foreign variable <I
 CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
@@ -608,16 +672,23 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
->, <A
+>,
+    <A
 HREF="http://www.willows.com/"
 TARGET="_top"
 ><B
 CLASS="emphasis"
 >Win32</B
 ></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Amiga</B
+></A
 > platforms only.)</I
->
-    </TD
+></TD
 ></TR
 ><TR
 ><TD
@@ -625,8 +696,14 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
 CLASS="literal"
->#&#60;FOREIGN-FUNCTION
-       <TT
+>#&#60;<A
+HREF="dffi.html"
+><TT
+CLASS="classname"
+>FFI:FOREIGN-FUNCTION</TT
+></A
+>
+    <TT
 CLASS="replaceable"
 ><I
 >name</I
@@ -636,8 +713,7 @@ CLASS="replaceable"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->foreign function
-     <I
+>foreign function <I
 CLASS="emphasis"
 >(Platform dependent: <A
 HREF="http://www.UNIX-systems.org/online.html"
@@ -646,16 +722,23 @@ TARGET="_top"
 CLASS="emphasis"
 >UNIX</B
 ></A
->, <A
+>,
+    <A
 HREF="http://www.willows.com/"
 TARGET="_top"
 ><B
 CLASS="emphasis"
 >Win32</B
 ></A
+>, <A
+HREF="http://www.amiga.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>Amiga</B
+></A
 > platforms only.)</I
->
-    </TD
+></TD
 ></TR
 ><TR
 ><TD
@@ -669,7 +752,7 @@ CLASS="literal"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >"value" of a symbol without value, "value" of an unsupplied
-      optional or keyword argument</TD
+   optional or keyword argument</TD
 ></TR
 ><TR
 ><TD
@@ -690,7 +773,7 @@ CLASS="literal"
 >SPECIAL</TT
 ></A
 >
-      </TD
+ </TD
 ></TR
 ><TR
 ><TD
@@ -731,7 +814,7 @@ CLASS="function"
 >READ</TT
 ></A
 > result, when the end of file is reached
-      </TD
+ </TD
 ></TR
 ><TR
 ><TD
@@ -755,7 +838,7 @@ CLASS="function"
 CLASS="literal"
 >#n#</TT
 >
-      </TD
+ </TD
 ></TR
 ><TR
 ><TD
@@ -792,7 +875,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="chario">23.1. characters</H1
+NAME="chario"
+></A
+>23.1. characters</H1
 ><P
 ALIGN="justify"
 ><SPAN

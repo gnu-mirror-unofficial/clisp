@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="clos-stream">29.5. Extensions-1.5. Defining new kinds of Streams</H1
+NAME="clos-stream"
+></A
+>29.5. Extensions-1.5. Defining new kinds of Streams</H1
 ><P
 ALIGN="justify"
 >Two mechanisms are supported for creating new streams with
@@ -125,7 +127,7 @@ ALIGN="justify"
 >You can create a new subclass of
   <TT
 CLASS="classname"
->gstream:generic-stream-controller</TT
+>GSTREAM:GENERIC-STREAM-CONTROLLER</TT
 > and define
   methods for the elementary stream operations on it.  These generic
   functions all have a name starting with the prefix
@@ -142,7 +144,7 @@ CLASS="function"
 ALIGN="justify"
 >The <TT
 CLASS="classname"
->fundamental-stream</TT
+>FUNDAMENTAL-STREAM</TT
 > API is based on the
  <A
 HREF="ftp://parcftp.xerox.com/pub/cl/cleanup/mail/stream-definition-by-user.mail"
@@ -159,7 +161,7 @@ CLASS="command"
  implementations currently in use.
  The <TT
 CLASS="classname"
->gstream:generic-stream-controller</TT
+>GSTREAM:GENERIC-STREAM-CONTROLLER</TT
 >
  API is <A
 HREF="http://clisp.cons.org"
@@ -174,7 +176,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="gray">29.5.1. Gray streams</H2
+NAME="gray"
+></A
+>29.5.1. Gray streams</H2
 ><P
 ALIGN="justify"
 >This interface permits the definition of new classes of streams,
@@ -191,15 +195,21 @@ ALIGN="justify"
  "fundamental-" or "stream-", are exported from the package
  <A
 HREF="clos-stream.html#gray"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"GRAY"</SPAN
+></STRONG
 ></A
 > and re-exported from <A
 HREF="imppack.html#ext-pac"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"EXT"</SPAN
+></STRONG
 ></A
 >.</P
 ><P
@@ -213,7 +223,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="fu-st"><A
+NAME="fu-st"
+></A
+><A
 HREF="clos-stream.html#fu-st"
 ><TT
 CLASS="classname"
@@ -250,7 +262,9 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="fu-st-in"><A
+NAME="fu-st-in"
+></A
+><A
 HREF="clos-stream.html#fu-st-in"
 ><TT
 CLASS="classname"
@@ -260,7 +274,18 @@ CLASS="classname"
 ><DD
 ><P
 ALIGN="justify"
->This is a superclass of all user-defined input streams.
+>This is a superclass of all user-defined <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_i.html#input"
+TARGET="_top"
+>input</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>s.
    It is a subclass of <A
 HREF="clos-stream.html#fu-st"
 ><TT
@@ -287,7 +312,9 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="fu-st-out"><A
+NAME="fu-st-out"
+></A
+><A
 HREF="clos-stream.html#fu-st-out"
 ><TT
 CLASS="classname"
@@ -297,7 +324,18 @@ CLASS="classname"
 ><DD
 ><P
 ALIGN="justify"
->This is a superclass of all user-defined output streams.
+>This is a superclass of all user-defined <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>s.
    It is a subclass of <A
 HREF="clos-stream.html#fu-st"
 ><TT
@@ -324,7 +362,9 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="fu-st-char"><A
+NAME="fu-st-char"
+></A
+><A
 HREF="clos-stream.html#fu-st-char"
 ><TT
 CLASS="classname"
@@ -375,7 +415,9 @@ CLASS="classname"
 ></DD
 ><DT
 ><A
-NAME="fu-st-bin"><A
+NAME="fu-st-bin"
+></A
+><A
 HREF="clos-stream.html#fu-st-bin"
 ><TT
 CLASS="classname"
@@ -618,7 +660,21 @@ ALIGN="justify"
 >Changes the stream's element type.</P
 ><P
 ALIGN="justify"
->The default method signals an error.</P
+>The default method <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>s an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+>.</P
 ><P
 ALIGN="justify"
 >This function is a <A
@@ -638,7 +694,7 @@ CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
 ></A
->)</P
+>).</P
 ></DD
 ><DT
 ><TT
@@ -733,7 +789,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="st-rc"><TT
+NAME="st-rc"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="clos-stream.html#st-rc"
@@ -762,9 +820,13 @@ CLASS="function"
    character from the stream. Returns <TT
 CLASS="constant"
 >:EOF</TT
-> if the <TT
+> if the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
 CLASS="literal"
 >end-of-stream</TT
+></A
 > is reached.
    </P
 ><P
@@ -773,7 +835,9 @@ ALIGN="justify"
 ></DD
 ><DT
 ><A
-NAME="st-uc"><TT
+NAME="st-uc"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="clos-stream.html#st-uc"
@@ -820,7 +884,9 @@ ALIGN="justify"
 ></DD
 ><DT
 ><A
-NAME="st-rcnh"><TT
+NAME="st-rcnh"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="clos-stream.html#st-rcnh"
@@ -914,9 +980,13 @@ CLASS="function"
 CLASS="constant"
 >:EOF</TT
 > if the
-   <TT
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
 CLASS="literal"
 >end-of-stream</TT
+></A
 > is reached.</P
 ><P
 ALIGN="justify"
@@ -967,9 +1037,13 @@ CLASS="function"
 >,
    returns it.  Otherwise returns the next character from the stream, if
    already available.  If no character is available immediately, or if
-   <TT
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
 CLASS="literal"
 >end-of-stream</TT
+></A
 > is reached, returns <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1066,7 +1140,7 @@ CLASS="command"
 >CLISP</B
 ></A
 > extension (see <A
-HREF="listen.html#rcwhp"
+HREF="stream-dict.html#rcwhp"
 ><TT
 CLASS="function"
 >EXT:READ-CHAR-WILL-HANG-P</TT
@@ -1146,8 +1220,7 @@ CLASS="replaceable"
 ><I
 >end</I
 ></TT
-> if the stream reached its end).
-   </P
+> if the stream reached its end).</P
 ><P
 ALIGN="justify"
 ><TT
@@ -1155,19 +1228,57 @@ CLASS="replaceable"
 ><I
 >sequence</I
 ></TT
-> is an array of characters, i.e. a
-   string.  <TT
+> is an <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ARRAY</TT
+></A
+> of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s, i.e. a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>.
+   <TT
 CLASS="replaceable"
 ><I
 >start</I
 ></TT
-> is a nonnegative integer and default to 0.
+> is a nonnegative <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> and defaults to <TT
+CLASS="literal"
+>0</TT
+>.
    <TT
 CLASS="replaceable"
 ><I
 >end</I
 ></TT
-> is a nonnegative integer or <A
+> is a nonnegative <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> or <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -1198,7 +1309,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >.
-   </P
+  </P
 ><P
 ALIGN="justify"
 >The default method repeatedly calls <A
@@ -1219,13 +1330,13 @@ CLASS="command"
 >CLISP</B
 ></A
 > extension (see
-    <A
+   <A
 HREF="stream-dict.html#rd-ch-seq"
 ><TT
 CLASS="function"
 >EXT:READ-CHAR-SEQUENCE</TT
 ></A
->)</P
+>).</P
 ></DD
 ><DT
 ><TT
@@ -1243,19 +1354,37 @@ CLASS="replaceable"
 ><DD
 ><P
 ALIGN="justify"
->Reads a line of characters, and return two values: the
-   line (a string, without the terminating <SPAN
+>Reads a line of characters, and return two values:
+   the line (a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>, without the terminating <SPAN
 CLASS="keysym"
 >#\Newline</SPAN
-> character), and a boolean
-   value which is true if the line was terminated by <TT
+> character),
+   and a <A
+HREF="http://www.lisp.org/HyperSpec/Body/typ_boolean.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>BOOLEAN</TT
+></A
+> value which is true if the line was terminated by
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
 CLASS="literal"
 >end-of-stream</TT
+></A
 > instead of <SPAN
 CLASS="keysym"
 >#\Newline</SPAN
->.
-   </P
+>.</P
 ><P
 ALIGN="justify"
 >The default method repeatedly calls <A
@@ -1272,7 +1401,7 @@ CLASS="function"
 CLASS="sexp"
 >(<TT
 CLASS="function"
->gray:stream-clear-input</TT
+>GRAY:STREAM-CLEAR-INPUT</TT
 >
                  <TT
 CLASS="replaceable"
@@ -1285,7 +1414,12 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >Clears all pending interactive input from the
-   stream, and returns true if some pending input was removed.</P
+   <TT
+CLASS="replaceable"
+><I
+>stream</I
+></TT
+>, and returns true if some pending input was removed.</P
 ><P
 ALIGN="justify"
 >The default method does nothing and returns <A
@@ -1311,7 +1445,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="st-wc"><TT
+NAME="st-wc"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="clos-stream.html#st-wc"
@@ -1347,7 +1483,9 @@ ALIGN="justify"
 ></DD
 ><DT
 ><A
-NAME="st-lc"><TT
+NAME="st-lc"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="clos-stream.html#st-lc"
@@ -1366,15 +1504,18 @@ CLASS="replaceable"
 ><P
 ALIGN="justify"
 >Returns the column number where the next character
-   would be written (0 stands for the first column), or <A
+   would be written (<TT
+CLASS="literal"
+>0</TT
+> stands for the first column),
+    or <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
-> if that is
-   not meaningful for this stream.
+> if that is not meaningful for this stream.
    </P
 ><P
 ALIGN="justify"
@@ -1489,19 +1630,47 @@ CLASS="replaceable"
 ><I
 >sequence</I
 ></TT
-> is an array of characters, i.e. a string.
+> is an <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ARRAY</TT
+></A
+> of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_character.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>CHARACTER</TT
+></A
+>s, i.e. a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STRING</TT
+></A
+>.
    <TT
 CLASS="replaceable"
 ><I
 >start</I
 ></TT
-> is a nonnegative integer and default to 0.  <TT
+> is a nonnegative <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> and defaults to 0.
+   <TT
 CLASS="replaceable"
 ><I
 >end</I
 ></TT
-> is a
-   nonnegative integer or <A
+> is a nonnegative integer or <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -1515,8 +1684,8 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
->, which stands
-   for <TT
+>,
+   which stands for <TT
 CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
@@ -1532,7 +1701,7 @@ CLASS="replaceable"
 ></TT
 >)</TT
 >.
-   </P
+  </P
 ><P
 ALIGN="justify"
 >The default method repeatedly calls <A
@@ -1543,7 +1712,7 @@ CLASS="function"
 ></A
 >; this
    is always sufficient if speed does not matter.
-   </P
+  </P
 ><P
 ALIGN="justify"
 >This function is a <A
@@ -1554,13 +1723,13 @@ CLASS="command"
 >CLISP</B
 ></A
 > extension
-    (see <A
+   (see <A
 HREF="stream-dict.html#wr-ch-seq"
 ><TT
 CLASS="function"
 >EXT:WRITE-CHAR-SEQUENCE</TT
 ></A
->)</P
+>).</P
 ></DD
 ><DT
 ><TT
@@ -1872,7 +2041,9 @@ CLASS="variablelist"
 ><DL
 ><DT
 ><A
-NAME="st-rb"><TT
+NAME="st-rb"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="clos-stream.html#st-rb"
@@ -1894,9 +2065,13 @@ ALIGN="justify"
    stream. Returns <TT
 CLASS="constant"
 >:EOF</TT
-> if the <TT
+> if the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
 CLASS="literal"
 >end-of-stream</TT
+></A
 > is reached.</P
 ><P
 ALIGN="justify"
@@ -1904,7 +2079,9 @@ ALIGN="justify"
 ></DD
 ><DT
 ><A
-NAME="st-rbla"><TT
+NAME="st-rbla"
+></A
+><TT
 CLASS="sexp"
 >(<A
 HREF="clos-stream.html#st-rbla"
@@ -1936,7 +2113,7 @@ CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
 > is <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1946,7 +2123,7 @@ CLASS="classname"
 ></A
 > 8)</TT
 > or <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -1980,9 +2157,13 @@ CLASS="classname"
 > result.  Returns <TT
 CLASS="constant"
 >:EOF</TT
-> if the <TT
+> if the <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_e.html#end_of_file"
+TARGET="_top"
+><TT
 CLASS="literal"
 >end-of-stream</TT
+></A
 > is already
    known to be reached.  If <A
 HREF="clos-stream.html#st-rb"
@@ -2013,7 +2194,7 @@ CLASS="command"
 ></A
 > extension (see
    <A
-HREF="read-byte.html#rbla"
+HREF="stream-dict.html#rbla"
 ><TT
 CLASS="function"
 >EXT:READ-BYTE-LOOKAHEAD</TT
@@ -2051,7 +2232,7 @@ CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
 > is <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -2061,7 +2242,7 @@ CLASS="classname"
 ></A
 > 8)</TT
 > or <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -2095,7 +2276,24 @@ CLASS="function"
 >GRAY:STREAM-READ-BYTE-LOOKAHEAD</TT
 ></A
 >; this is always sufficient.
-  </P
+   </P
+><P
+ALIGN="justify"
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see <A
+HREF="stream-dict.html#rbwhp"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-WILL-HANG-P</TT
+></A
+>).
+ </P
 ></DD
 ><DT
 ><TT
@@ -2128,7 +2326,7 @@ CLASS="function"
 >STREAM-ELEMENT-TYPE</TT
 ></A
 > is <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -2138,7 +2336,7 @@ CLASS="classname"
 ></A
 > 8)</TT
 > or <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -2195,7 +2393,24 @@ CLASS="function"
 >GRAY:STREAM-READ-BYTE-LOOKAHEAD</TT
 ></A
 > returns true;
-   this is always sufficient.</P
+    this is always sufficient.</P
+><P
+ALIGN="justify"
+>This function is a <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> extension (see <A
+HREF="stream-dict.html#rbnh"
+><TT
+CLASS="function"
+>EXT:READ-BYTE-NO-HANG</TT
+></A
+>).
+ </P
 ></DD
 ><DT
 ><TT
@@ -2249,19 +2464,19 @@ CLASS="constant"
 > and <TT
 CLASS="constant"
 >:END</TT
-> with integers consecutively read from
-   <TT
+> with integers consecutively read from <TT
 CLASS="replaceable"
 ><I
 >stream</I
 ></TT
->.  Returns the index of the first element of <TT
+>.
+   Returns the index of the first element of <TT
 CLASS="replaceable"
 ><I
 >sequence</I
 ></TT
->
-   that was not updated (= <TT
+> that was not
+   updated (= <TT
 CLASS="replaceable"
 ><I
 >end</I
@@ -2271,8 +2486,7 @@ CLASS="replaceable"
 ><I
 >end</I
 ></TT
-> if the stream reached
-   its end).</P
+> if the stream reached its end).</P
 ><P
 ALIGN="justify"
 ><TT
@@ -2280,19 +2494,47 @@ CLASS="replaceable"
 ><I
 >sequence</I
 ></TT
-> is an array of integers.  <TT
+> is an <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ARRAY</TT
+></A
+> of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>s.
+   <TT
 CLASS="replaceable"
 ><I
 >start</I
 ></TT
-> is a
-   nonnegative integer and default to 0.  <TT
+> is a nonnegative <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> and defaults to 0.
+   <TT
 CLASS="replaceable"
 ><I
 >end</I
 ></TT
-> is a nonnegative
-   integer or <A
+> is a nonnegative <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> or <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -2306,7 +2548,8 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
->, which stands for <TT
+>,
+   which stands for <TT
 CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
@@ -2321,7 +2564,8 @@ CLASS="replaceable"
 >sequence</I
 ></TT
 >)</TT
->.</P
+>.
+  </P
 ><P
 ALIGN="justify"
 >The default method repeatedly calls <A
@@ -2330,8 +2574,8 @@ HREF="clos-stream.html#st-rb"
 CLASS="function"
 >GRAY:STREAM-READ-BYTE</TT
 ></A
->; this is always
-   sufficient if speed does not matter.</P
+>; this
+   is always sufficient if speed does not matter.</P
 ><P
 ALIGN="justify"
 >This function is a <A
@@ -2458,19 +2702,47 @@ CLASS="replaceable"
 ><I
 >sequence</I
 ></TT
-> is an array of integers.  <TT
+> is an <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_array.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ARRAY</TT
+></A
+> of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+>s.
+   <TT
 CLASS="replaceable"
 ><I
 >start</I
 ></TT
-> is a
-   nonnegative integer and default to 0.  <TT
+> is a nonnegative <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> and defaults to 0.
+   <TT
 CLASS="replaceable"
 ><I
 >end</I
 ></TT
-> is a nonnegative
-   integer or <A
+> is a nonnegative <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_integer.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>INTEGER</TT
+></A
+> or <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
@@ -2484,7 +2756,8 @@ TARGET="_top"
 CLASS="constant"
 >NIL</TT
 ></A
->, which stands for <TT
+>,
+   which stands for <TT
 CLASS="sexp"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_length.html"
@@ -2499,7 +2772,8 @@ CLASS="replaceable"
 >sequence</I
 ></TT
 >)</TT
->.</P
+>.
+  </P
 ><P
 ALIGN="justify"
 >The default method repeatedly calls
@@ -2534,7 +2808,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="gstream">29.5.2. Generic streams</H2
+NAME="gstream"
+></A
+>29.5.2. Generic streams</H2
 ><P
 ALIGN="justify"
 >This interface is <A
@@ -2544,7 +2820,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> specific and now obsolete.  Please use
+>-specific and now obsolete.  Please use
  the <A
 HREF="clos-stream.html#gray"
 >Gray streams</A

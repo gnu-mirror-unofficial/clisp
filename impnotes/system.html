@@ -17,8 +17,8 @@ REL="UP"
 TITLE="Chapters or the Common Lisp HyperSpec"
 HREF="clhs-chapters.html"><LINK
 REL="PREVIOUS"
-TITLE="Function READ-BYTE"
-HREF="read-byte.html"><LINK
+TITLE="Function READTABLE-CASE"
+HREF="rt-case.html"><LINK
 REL="NEXT"
 TITLE="Environment
    [CLHS-25]"
@@ -63,7 +63,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -71,7 +71,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="read-byte.html"
+HREF="rt-case.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -98,7 +98,9 @@ WIDTH="100%"></DIV
 CLASS="chapter"
 ><H1
 ><A
-NAME="system">Chapter 24. System Construction
+NAME="system"
+></A
+>Chapter 24. System Construction
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/chap-24.html"
 TARGET="_top"
@@ -128,7 +130,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="system-dict">24.1. The System Construction Dictionary
+NAME="system-dict"
+></A
+>24.1. The System Construction Dictionary
    <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_the_syste_n_dictionary.html"
 TARGET="_top"
@@ -170,7 +174,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="compilefile">24.1.1. Function <A
+NAME="compilefile"
+></A
+>24.1.1. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
 TARGET="_top"
 ><TT
@@ -190,7 +196,7 @@ CLASS="function"
 >COMPILE-FILE</TT
 ></A
 >
-          <TT
+  <TT
 CLASS="replaceable"
 ><I
 >input-file</I
@@ -202,8 +208,11 @@ TARGET="_top"
 CLASS="literal"
 >&#38;KEY</TT
 ></A
-> :OUTPUT-FILE
-          :LISTING <TT
+> <TT
+CLASS="constant"
+>:OUTPUT-FILE</TT
+>
+  :LISTING <TT
 CLASS="constant"
 >:WARNINGS</TT
 > <TT
@@ -212,6 +221,12 @@ CLASS="constant"
 > <TT
 CLASS="constant"
 >:PRINT</TT
+> <A
+HREF="stream-dict.html#extfmt"
+><TT
+CLASS="constant"
+>:EXTERNAL-FORMAT</TT
+></A
 >)</TT
 >
 compiles a file to platform-independent bytecode.</P
@@ -230,7 +245,10 @@ CLASS="replaceable"
 ><DD
 ><P
 ALIGN="justify"
->should be a pathname/string/symbol.
+>should be a <A
+HREF="filename-dict.html#path-des"
+>pathname designator</A
+>.
  </P
 ></DD
 ><DT
@@ -255,16 +273,29 @@ TARGET="_top"
 CLASS="constant"
 >T</TT
 ></A
-> or a pathname/string/symbol
- or an output-stream.  The default is <A
+> or a <A
+HREF="filename-dict.html#path-des"
+>pathname designator</A
+> or an
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>.  The default is <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_t.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >T</TT
 ></A
->.
- </P
+>.</P
 ></DD
 ><DT
 ><TT
@@ -288,16 +319,29 @@ TARGET="_top"
 CLASS="constant"
 >T</TT
 ></A
-> or a pathname/string/symbol
- or an output-stream.  The default is <A
+> or a <A
+HREF="filename-dict.html#path-des"
+>pathname designator</A
+> or an
+   <A
+HREF="http://www.lisp.org/HyperSpec/Body/glo_o.html#output"
+TARGET="_top"
+>output</A
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_stream.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>STREAM</TT
+></A
+>.  The default is <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
 ><TT
 CLASS="constant"
 >NIL</TT
 ></A
->.
- </P
+>.</P
 ></DD
 ><DT
 ><TT
@@ -308,7 +352,7 @@ CLASS="constant"
 ><P
 ALIGN="justify"
 >specifies whether warnings should also appear on the
- screen.</P
+   screen.</P
 ></DD
 ><DT
 ><TT
@@ -319,7 +363,7 @@ CLASS="constant"
 ><P
 ALIGN="justify"
 >specifies whether error messages should also appear
- on the screen.</P
+   on the screen.</P
 ></DD
 ><DT
 ><TT
@@ -330,19 +374,25 @@ CLASS="constant"
 ><P
 ALIGN="justify"
 >specifies whether an indication which forms are
- being compiled should appear on the screen.
- </P
+   being compiled should appear on the screen.
+</P
 ></DD
 ></DL
 ></DIV
 ><P
 ALIGN="justify"
->The variables <B
-CLASS="emphasis"
+>The variables <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="system.html#compilefile"
 ><TT
 CLASS="varname"
 >CUSTOM:*COMPILE-WARNINGS*</TT
-></B
+></A
+></I
+></STRONG
 >,
  <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stcompile_le-verbosest.html"
@@ -368,18 +418,29 @@ CLASS="constant"
 >, <TT
 CLASS="constant"
 >:PRINT</TT
-> keyword arguments, respectively.
- For each input file (default file type: <TT
+> keyword arguments, respectively,
+ and are bound by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+> to the values of the arguments, i.e.,
+ these arguments are recursive.</P
+><P
+ALIGN="justify"
+>For each input file (default file type: <TT
 CLASS="filename"
 >#P".lisp"</TT
 >)
- the following files are generated:</P
-><DIV
-CLASS="table"
+ the following files are generated:
+<DIV
+CLASS="informaltable"
 ><A
-NAME="compile-file-new-files-table"><P
-><B
->Table 24-1. </B
+NAME="compile-file-new-files-table"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -564,7 +625,10 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
+></P
 ><DIV
 CLASS="warning"
 ><P
@@ -608,9 +672,12 @@ CLASS="emphasis"
 >clobbered</I
 > if you have any <A
 HREF="dffi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"FFI"</SPAN
+></STRONG
 ></A
 > forms in
 the first one!</P
@@ -624,7 +691,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="compile-file-path">24.1.2. Function <A
+NAME="compile-file-path"
+></A
+>24.1.2. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file-pathname.html"
 TARGET="_top"
 ><TT
@@ -655,7 +724,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="require">24.1.3. Function <A
+NAME="require"
+></A
+>24.1.3. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
 TARGET="_top"
 ><TT
@@ -672,9 +743,37 @@ TARGET="_top"
 CLASS="function"
 >REQUIRE</TT
 ></A
-> receives as the optional argument either a
- pathname or a list of pathnames: files to be loaded if the required
- module is not already loaded.</P
+> receives as the optional argument either
+ a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PATHNAME</TT
+></A
+> or a <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_list.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>LIST</TT
+></A
+> of <A
+HREF="http://www.lisp.org/HyperSpec/Body/syscla_pathname.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>PATHNAME</TT
+></A
+>s: files to be <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+>ed
+ if the required module is not already present.</P
 ><P
 ALIGN="justify"
 >At compile time, <TT
@@ -691,7 +790,7 @@ CLASS="filename"
 >#P"foo"</TT
 >)</TT
 >
-forms are treated specially:  <A
+forms are treated specially: <A
 HREF="system.html#load-paths"
 ><TT
 CLASS="varname"
@@ -718,8 +817,10 @@ HREF="system.html#require"
 CLASS="filename"
 >#P".lib"</TT
 ></A
-> is loaded.
-The <A
+> is loaded.</P
+><P
+ALIGN="justify"
+>The <A
 HREF="system.html#require"
 ><TT
 CLASS="filename"
@@ -742,31 +843,30 @@ definitions and calls that are not necessary for that.
 Thus it is <I
 CLASS="emphasis"
 >not</I
-> necessary to either enclose
-<A
+> necessary to either enclose <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >REQUIRE</TT
 ></A
-> forms in <A
+> forms in
+<A
 HREF="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html"
 TARGET="_top"
 ><TT
 CLASS="function"
 >EVAL-WHEN</TT
 ></A
-> or to load the required files in the
-makefiles: if you have two files, <TT
+> or to load the required files in the makefiles: if you have
+two files, <TT
 CLASS="filename"
 >#P"foo.lisp"</TT
->
-and <TT
+> and <TT
 CLASS="filename"
 >#P"bar.lisp"</TT
->, and the latter requires the
-former, you can write in your <TT
+>, and the
+latter requires the former, you can write in your <TT
 CLASS="filename"
 >#P"Makefile"</TT
 >:
@@ -863,7 +963,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="loadfile">24.1.4. Function <A
+NAME="loadfile"
+></A
+>24.1.4. Function <A
 HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
 TARGET="_top"
 ><TT
@@ -880,16 +982,19 @@ TARGET="_top"
 CLASS="function"
 >LOAD</TT
 ></A
-> has three additional keywords <TT
+> has four additional keywords <TT
 CLASS="constant"
 >:ECHO</TT
 >, <TT
 CLASS="constant"
 >:COMPILING</TT
->, and
+>,
  <TT
 CLASS="constant"
 >:EXTRA-FILE-TYPES</TT
+>, and <TT
+CLASS="constant"
+>:OBSOLETE-ACTION</TT
 >.</P
 ><P
 ALIGN="justify"
@@ -934,6 +1039,9 @@ CLASS="constant"
  <TT
 CLASS="constant"
 >:EXTRA-FILE-TYPES</TT
+> <TT
+CLASS="constant"
+>:OBSOLETE-ACTION</TT
 >)</TT
 ></P
 ><P
@@ -1046,12 +1154,18 @@ CLASS="varname"
 ></A
 > (normally to the screen).  Should
   there be an error in the file, you can see at one glance where it is.
-  The default is <B
-CLASS="emphasis"
+  The default is <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="system.html#loadfile"
 ><TT
 CLASS="varname"
 >CUSTOM:*LOAD-ECHO*</TT
-></B
+></A
+></I
+></STRONG
 >, which is
   initially <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
@@ -1085,12 +1199,19 @@ CLASS="function"
 >COMPILE-FILE</TT
 ></A
 > - not
-  written to a file.  The default is <B
-CLASS="emphasis"
+  written to a file.
+  The default is <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="system.html#loadfile"
 ><TT
 CLASS="varname"
 >CUSTOM:*LOAD-COMPILING*</TT
-></B
+></A
+></I
+></STRONG
 >,
   which is initially <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
@@ -1117,23 +1238,35 @@ CLASS="classname"
 ><P
 ALIGN="justify"
 >Specifies the additional file types considered for
-  loading, in addition to <B
-CLASS="emphasis"
+  loading, in addition to <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="system.html#loadfile"
 ><TT
 CLASS="varname"
 >CUSTOM:*SOURCE-FILE-TYPES*</TT
-></B
+></A
+></I
+></STRONG
 >
   (which is initially <TT
 CLASS="sexp"
 >("lisp" "lsp" "cl")</TT
 >)
-  and <B
-CLASS="emphasis"
+  and <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="system.html#loadfile"
 ><TT
 CLASS="varname"
 >CUSTOM:*COMPILED-FILE-TYPES*</TT
-></B
+></A
+></I
+></STRONG
 >
   (which is initially <TT
 CLASS="sexp"
@@ -1176,13 +1309,209 @@ CLASS="emphasis"
 > file is loaded.
  </P
 ></DD
+><DT
+><TT
+CLASS="constant"
+>:OBSOLETE-ACTION</TT
+> <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+></DT
+><DD
+><P
+ALIGN="justify"
+>Specifies the action to take when loading a
+   <TT
+CLASS="filename"
+>#P".fas"</TT
+> with a different <A
+HREF="bytecode.html"
+>bytecode</A
+>
+   version from the one supported by this <A
+HREF="http://clisp.cons.org"
+TARGET="_top"
+><B
+CLASS="command"
+>CLISP</B
+></A
+> version.
+   The possible actions are <TT
+CLASS="constant"
+>:DELETE</TT
+> to delete the
+   <TT
+CLASS="filename"
+>#P".fas"</TT
+> and <TT
+CLASS="constant"
+>:ERROR</TT
+> to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+> an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+>.
+   The default action is to <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_warn.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>WARN</TT
+></A
+> and <A
+HREF="system.html#load-paths"
+>look
+   for another matching file</A
+>.
+   If no file can be loaded and <TT
+CLASS="constant"
+>:IF-DOES-NOT-EXIST</TT
+> is non-<A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>,
+   an <A
+HREF="http://www.lisp.org/HyperSpec/Body/contyp_error.html"
+TARGET="_top"
+><TT
+CLASS="classname"
+>ERROR</TT
+></A
+> is <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_signal.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>SIGNAL</TT
+></A
+>ed.
+   The default is <STRONG
+CLASS="FIRST"
+><I
+CLASS="firstterm"
+><A
+HREF="system.html#loadfile"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-OBSOLETE-ACTION*</TT
+></A
+></I
+></STRONG
+>,
+   which is initially <A
+HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
+TARGET="_top"
+><TT
+CLASS="constant"
+>NIL</TT
+></A
+>.</P
+></DD
 ></DL
 ></DIV
+><P
+ALIGN="justify"
+>The variables <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stload-pr_ad-verbosest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*LOAD-VERBOSE*</TT
+></A
+>, <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stload-pr_ad-verbosest.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*LOAD-PRINT*</TT
+></A
+>,
+<A
+HREF="system.html#loadfile"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-OBSOLETE-ACTION*</TT
+></A
+>, <A
+HREF="system.html#loadfile"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-COMPILING*</TT
+></A
+>, and <A
+HREF="system.html#loadfile"
+><TT
+CLASS="varname"
+>CUSTOM:*LOAD-ECHO*</TT
+></A
+> are bound by <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_load.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>LOAD</TT
+></A
+> when it
+receives a corresponding keyword argument (<TT
+CLASS="constant"
+>:VERBOSE</TT
+>, <TT
+CLASS="constant"
+>:PRINT</TT
+>,
+<TT
+CLASS="constant"
+>:OBSOLETE-ACTION</TT
+>, <TT
+CLASS="constant"
+>:COMPILING</TT
+>, and <TT
+CLASS="constant"
+>:ECHO</TT
+>), i.e., these arguments
+are recursive, just like the arguments <TT
+CLASS="constant"
+>:WARNINGS</TT
+>, <TT
+CLASS="constant"
+>:VERBOSE</TT
+>, and
+<TT
+CLASS="constant"
+>:PRINT</TT
+> for <A
+HREF="http://www.lisp.org/HyperSpec/Body/fun_compile-file.html"
+TARGET="_top"
+><TT
+CLASS="function"
+>COMPILE-FILE</TT
+></A
+>.</P
 ><DIV
 CLASS="formalpara"
 ><P
 ><A
-NAME="load-paths"><B
+NAME="load-paths"
+></A
+><B
 >Variable <A
 HREF="system.html#load-paths"
 ><TT
@@ -1235,7 +1564,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="features">24.1.5. Variable <A
+NAME="features"
+></A
+>24.1.5. Variable <A
 HREF="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html"
 TARGET="_top"
 ><TT
@@ -1256,9 +1587,18 @@ CLASS="varname"
 <DIV
 CLASS="table"
 ><A
-NAME="features-table"><P
+NAME="features-table"
+></A
+><P
 ><B
->Table 24-2. </B
+>Table 24-1. <A
+HREF="http://www.lisp.org/HyperSpec/Body/var_stfeaturesst.html"
+TARGET="_top"
+><TT
+CLASS="varname"
+>*FEATURES*</TT
+></A
+> content</B
 ></P
 ><TABLE
 BORDER="1"
@@ -1389,7 +1729,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >see <A
-HREF="syscalls.html"
+HREF="modules.html#syscalls"
 >System Calls</A
 ></TD
 ></TR
@@ -1405,7 +1745,7 @@ CLASS="constant"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 >see <A
-HREF="dir-key.html"
+HREF="modules.html#dir-key"
 >Directory Access</A
 ></TD
 ></TR
@@ -1435,9 +1775,12 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >if a foreign function interface (see <A
 HREF="dffi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"FFI"</SPAN
+></STRONG
 ></A
 >) is supported
      <I
@@ -1458,8 +1801,7 @@ CLASS="emphasis"
 ></A
 > platforms
      only)</I
->
-    </TD
+></TD
 ></TR
 ><TR
 ><TD
@@ -1474,9 +1816,12 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 >if internationalization (see <A
 HREF="i18n.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"I18N"</SPAN
+></STRONG
 ></A
 >) using the <A
 HREF="http://www.gnu.org"
@@ -1512,12 +1857,22 @@ CLASS="constant"
 ><TD
 ALIGN="CENTER"
 VALIGN="MIDDLE"
->if Unicode (ISO 10646) characters are supported (see
+>if <A
+HREF="http://www.unicode.org/"
+TARGET="_top"
+><B
+CLASS="emphasis"
+>UNICODE</B
+></A
+> (ISO 10646) characters are supported (see
      <A
 HREF="encoding.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"CHARSET"</SPAN
+></STRONG
 ></A
 >)</TD
 ></TR
@@ -1749,7 +2104,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="read-byte.html"
+HREF="rt-case.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -1778,11 +2133,11 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 >Function <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_read-byte.html"
+HREF="http://www.lisp.org/HyperSpec/Body/acc_readtable-case.html"
 TARGET="_top"
 ><TT
 CLASS="function"
->READ-BYTE</TT
+>READTABLE-CASE</TT
 ></A
 ></TD
 ><TD

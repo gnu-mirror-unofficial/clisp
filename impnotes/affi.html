@@ -61,7 +61,7 @@ TARGET="_top"
 CLASS="command"
 >CLISP</B
 ></A
-> version 2.30.</TH
+> version 2.31.</TH
 ></TR
 ><TR
 ><TD
@@ -97,7 +97,9 @@ CLASS="section"
 ><H1
 CLASS="section"
 ><A
-NAME="affi">30.4. Extensions-2.4. The Amiga Foreign Function Call Facility</H1
+NAME="affi"
+></A
+>30.4. Extensions-2.4. The Amiga Foreign Function Call Facility</H1
 ><FONT
 COLOR="RED"
 >Platform dependent: <A
@@ -116,9 +118,12 @@ CLASS="formalpara"
 >All symbols relating to the simple foreign function interface are
  exported from the package <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 >. To use them,
  <TT
@@ -138,14 +143,19 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-design">30.4.1. Design issues</H2
+NAME="affi-design"
+></A
+>30.4.1. Design issues</H2
 ><P
 ALIGN="justify"
 ><A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > was designed to be small in size but powerful enough to
 use most library functions.  Lisp files may be compiled to <TT
@@ -170,9 +180,12 @@ opened at run-time.</P
 ALIGN="justify"
 >Therefore, <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > supports only primitive <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
@@ -181,17 +194,21 @@ TARGET="_top"
 CLASS="command"
 >C</B
 ></A
-> types (integers
-8, 16 and 32 bits wide, signed or unsigned, pointers) and defines no new
-types or classes.  Foreign functions are not first-class objects (you
-can define a lambda yourself), name spaces are separate.</P
+> types
+(integers 8, 16 and 32 bits wide, signed or unsigned, pointers) and
+defines no new types or classes.  Foreign functions are not first-class
+objects (you can define a &#955; yourself), name spaces are
+separate.</P
 ><P
 ALIGN="justify"
 >The <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > does no tracking of resources.  Use <A
 HREF="final.html"
@@ -206,14 +223,19 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-overview">30.4.2. Overview</H2
+NAME="affi-overview"
+></A
+>30.4.2. Overview</H2
 ><P
 ALIGN="justify"
 >These are the <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > forms:</P
 ><P
@@ -268,7 +290,7 @@ CLASS="replaceable"
 ALIGN="justify"
 ><TT
 CLASS="sexp"
->(clos-library
+>(close-library
  <TT
 CLASS="replaceable"
 ><I
@@ -502,20 +524,23 @@ ALIGN="justify"
 >A library contains a collection of functions.  The library is
 referred to by a symbol referred as library-base at the <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 >
-level.  This symbol is created in the package <SPAN
-CLASS="QUOTE"
->"<A
+level.  This symbol is created in the package <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
->'AFFI'</SPAN
+>"AFFI"</SPAN
+></STRONG
 ></A
->"</SPAN
 >.
 The link between this symbol and the OS-level library name is
 established by <TT
@@ -526,9 +551,12 @@ multiple package conflicts, this and only this function requires the
 symbol-name to be in the <A
 HREF="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-3.html"
 TARGET="_top"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"KEYWORD"</SPAN
+></STRONG
 ></A
 > package. The function returns the
 library-base.</P
@@ -574,17 +602,17 @@ CLASS="function"
 >require-library-functions</TT
 > loads
 the complete set of functions defined in a library file. Symbols are
-created in the package <SPAN
-CLASS="QUOTE"
->"<A
+created in the package <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
->'AFFI'</SPAN
+>"AFFI"</SPAN
+></STRONG
 ></A
->"</SPAN
-> and imported into the
-current package.</P
+> and imported into the current
+package.</P
 ><P
 ALIGN="justify"
 ><TT
@@ -627,7 +655,7 @@ CLASS="classname"
 >STRING</TT
 ></A
 > or <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"
@@ -668,9 +696,12 @@ TARGET="_top"
 CLASS="classname"
 >UNSIGNED-BYTE</TT
 ></A
-> and <TT
+> and <A
+HREF="dffi.html#fptr"
+><TT
 CLASS="classname"
 >FFI:FOREIGN-POINTER</TT
+></A
 >).</P
 ></DIV
 ><DIV
@@ -678,7 +709,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-libs">30.4.3. Foreign Libraries</H2
+NAME="affi-libs"
+></A
+>30.4.3. Foreign Libraries</H2
 ><P
 ALIGN="justify"
 ><TT
@@ -743,9 +776,12 @@ CLASS="command"
 > will not close libraries for you at program exit.  [A
 previous version did so but now <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > is a module and there are no
 module exit functions.]  Programmers, watch
@@ -759,7 +795,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-types">30.4.4. (Foreign) <A
+NAME="affi-types"
+></A
+>30.4.4. (Foreign) <A
 HREF="http://www.eskimo.com/~scs/C-faq/top.html"
 TARGET="_top"
 ><B
@@ -778,9 +816,12 @@ CLASS="command"
 ></A
 > types are used in <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 >.
 They are <I
@@ -796,27 +837,13 @@ CLASS="command"
 > types or <B
 CLASS="command"
 >CLOS</B
->
-classes.</P
-><DIV
-CLASS="table"
+> classes.
+<DIV
+CLASS="informaltable"
 ><A
-NAME="affi-types-tab"><P
-><B
->Table 30-6. foreign <A
-HREF="http://www.eskimo.com/~scs/C-faq/top.html"
-TARGET="_top"
-><B
-CLASS="command"
->C</B
+NAME="affi-types-tab"
 ></A
-> types used in <A
-HREF="affi.html"
-><SPAN
-CLASS="QUOTE"
->"AFFI"</SPAN
-></A
-></B
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -828,9 +855,12 @@ ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > name</TH
 ><TH
@@ -906,7 +936,7 @@ CLASS="type"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -942,7 +972,7 @@ CLASS="type"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -978,7 +1008,7 @@ CLASS="type"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html"
 TARGET="_top"
@@ -1014,7 +1044,7 @@ CLASS="type"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -1050,7 +1080,7 @@ CLASS="type"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -1086,7 +1116,7 @@ CLASS="type"
 ALIGN="CENTER"
 VALIGN="MIDDLE"
 ><TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html"
 TARGET="_top"
@@ -1281,7 +1311,10 @@ VALIGN="MIDDLE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
+></P
 ><P
 ALIGN="justify"
 >Objects of type <A
@@ -1309,11 +1342,11 @@ CLASS="constant"
 >NULL</TT
 >-terminated!
 This is useful for functions like like <A
-HREF="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html"
+HREF="http://www.opengroup.org/onlinepubs/007904975/functions/read.html"
 TARGET="_top"
 ><TT
 CLASS="function"
->READ</TT
+>read</TT
 ></A
 > which
 do not need an array at a constant address longer than the dynamic
@@ -1336,9 +1369,12 @@ TARGET="_top"
 CLASS="classname"
 >INTEGER</TT
 ></A
-> and <TT
+> and <A
+HREF="dffi.html#fptr"
+><TT
 CLASS="classname"
 >FFI:FOREIGN-POINTER</TT
+></A
 > are always
 acceptable where a <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_string.html"
@@ -1364,9 +1400,12 @@ CLASS="varname"
 ALIGN="justify"
 >To meet the design goals, predefined types and objects were
 used. As such, pointers were represented as integers. Now that there is
-the <TT
+the <A
+HREF="dffi.html#fptr"
+><TT
 CLASS="classname"
 >FFI:FOREIGN-POINTER</TT
+></A
 > type, both representations may be used on input.
 The pointer type should be therefore considered as opaque.
 Use <TT
@@ -1382,7 +1421,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-functions">30.4.5. Foreign functions</H2
+NAME="affi-functions"
+></A
+>30.4.5. Foreign functions</H2
 ><P
 ALIGN="justify"
 >Foreign Functions are declared either through
@@ -1397,9 +1438,12 @@ CLASS="function"
 the low-level implementation of the interface, the latter is closer to
 the other <A
 HREF="dffi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"FFI"</SPAN
+></STRONG
 ></A
 >.</P
 ><P
@@ -1438,9 +1482,12 @@ stack-based calls (unimplemented).</P
 ALIGN="justify"
 >The <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > type <TT
 CLASS="literal"
@@ -1475,9 +1522,12 @@ CLASS="function"
 CLASS="constant"
 >:EXTERNAL</TT
 > uses
-<TT
+<A
+HREF="dffi.html#fptr"
+><TT
 CLASS="classname"
 >FFI:FOREIGN-POINTER</TT
+></A
 > as function result-type (except from <A
 HREF="http://www.lisp.org/HyperSpec/Body/convar_nil.html"
 TARGET="_top"
@@ -1498,7 +1548,7 @@ CLASS="classname"
 ></A
 > or
 <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"
@@ -1563,11 +1613,11 @@ CLASS="replaceable"
 > ::==</DT
 ><DD
 ><DIV
-CLASS="table"
+CLASS="informaltable"
 ><A
-NAME="affi-dec-lib-fun-opt-bnf"><P
-><B
->Table 30-7. </B
+NAME="affi-dec-lib-fun-opt-bnf"
+></A
+><P
 ></P
 ><TABLE
 BORDER="1"
@@ -1611,22 +1661,24 @@ CLASS="constant"
     {(<TT
 CLASS="replaceable"
 ><I
->arg-name</I
+>argument</I
 ></TT
->
-    <TT
+> <TT
 CLASS="replaceable"
 ><I
 ><A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 >-type</I
 ></TT
 >
-    <TT
+      <TT
 CLASS="replaceable"
 ><I
 >register</I
@@ -1652,9 +1704,12 @@ CLASS="replaceable"
 ><I
 ><A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 >-type</I
 ></TT
@@ -1665,6 +1720,8 @@ CLASS="QUOTE"
 ></TR
 ></TBODY
 ></TABLE
+><P
+></P
 ></DIV
 ></DD
 ><DT
@@ -1723,7 +1780,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-memory-access">30.4.6. Memory access</H2
+NAME="affi-memory-access"
+></A
+>30.4.6. Memory access</H2
 ><P
 ALIGN="justify"
 ><TT
@@ -1749,9 +1808,12 @@ CLASS="replaceable"
 > can read 8, 16 and 32 bit
 signed or unsigned integers (<A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > types <SPAN
 CLASS="type"
@@ -1792,7 +1854,7 @@ CLASS="classname"
 >STRING</TT
 ></A
 > or <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"
@@ -1846,9 +1908,12 @@ CLASS="replaceable"
 >])</TT
 > writes integers (<A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 >
 type <SPAN
@@ -1906,7 +1971,7 @@ CLASS="classname"
 >STRING</TT
 ></A
 > or <TT
-CLASS="literal"
+CLASS="type"
 >(<A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_vector.html"
 TARGET="_top"
@@ -1929,7 +1994,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-func-def">30.4.7. Function Definition Files</H2
+NAME="affi-func-def"
+></A
+>30.4.7. Function Definition Files</H2
 ><P
 ALIGN="justify"
 ><TT
@@ -2035,7 +2102,9 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-hints">30.4.8. Hints</H2
+NAME="affi-hints"
+></A
+>30.4.8. Hints</H2
 ><P
 ALIGN="justify"
 >By using appropriate <A
@@ -2093,15 +2162,20 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-caveats">30.4.9. Caveats</H2
+NAME="affi-caveats"
+></A
+>30.4.9. Caveats</H2
 ><P
 ALIGN="justify"
 >You can consider the library bases being symbols in need of being
 imported from the package <A
 HREF="affi.html"
+><STRONG
+CLASS="package"
 ><SPAN
 CLASS="QUOTE"
 >"AFFI"</SPAN
+></STRONG
 ></A
 > originating from a brain-damage, causing
 the usual symbol headaches when using foreign functions calls within
@@ -2121,9 +2195,12 @@ TARGET="_top"
 CLASS="classname"
 >INTEGER</TT
 ></A
->s and <TT
+>s and <A
+HREF="dffi.html#fptr"
+><TT
 CLASS="classname"
 >FFI:FOREIGN-POINTER</TT
+></A
 >s, no <A
 HREF="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html"
 TARGET="_top"
@@ -2140,16 +2217,20 @@ CLASS="section"
 ><H2
 CLASS="section"
 ><A
-NAME="affi-examples">30.4.10. Examples</H2
+NAME="affi-examples"
+></A
+>30.4.10. Examples</H2
 ><FONT
 COLOR="RED"
 >NB: These examples are somewhat specific to the Amiga.</FONT
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-1-predefined"><P
+NAME="affi-ex-1-predefined"
+></A
+><P
 ><B
->Example 30-8. Using a predefined library function file</B
+>Example 30-9. Using a predefined library function file</B
 ></P
 ><P
 ALIGN="justify"
@@ -2203,9 +2284,11 @@ Compiled, it will have inlined the library function calls.
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-2-flibcall"><P
+NAME="affi-ex-2-flibcall"
+></A
+><P
 ><B
->Example 30-9. Using flibcall</B
+>Example 30-10. Using flibcall</B
 ></P
 ><TABLE
 BORDER="0"
@@ -2251,9 +2334,11 @@ CLASS="function"
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-3-dynamic"><P
+NAME="affi-ex-3-dynamic"
+></A
+><P
 ><B
->Example 30-10. Be fully dynamic, defining library bases ourselves</B
+>Example 30-11. Be fully dynamic, defining library bases ourselves</B
 ></P
 ><TABLE
 BORDER="0"
@@ -2298,9 +2383,11 @@ CLASS="function"
 ><DIV
 CLASS="example"
 ><A
-NAME="affi-ex-4-sample"><P
+NAME="affi-ex-4-sample"
+></A
+><P
 ><B
->Example 30-11. Some sample function definitions</B
+>Example 30-12. Some sample function definitions</B
 ></P
 ><TABLE
 BORDER="0"
