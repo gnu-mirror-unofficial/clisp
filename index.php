@@ -135,6 +135,8 @@
            >Red Hat Linux</a></li>
     <li><a href="http://www.gentoo.org/packages/dev-lisp/clisp.html"
            >Gentoo Linux</a></li>
+    <li><a href="http://www.altlinux.com/?module=sisyphus&package=clisp"
+           >ALT Linux</a></li>
    </ul></dd>
  <dt><strong>*BSD ports</strong></dt>
   <dd><ul>
