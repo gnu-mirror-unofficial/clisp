@@ -73,7 +73,7 @@
           >bug reports</a></li>
    <li><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/clisp/"
           >CVS browsing</a>
-    [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.gz"
+    [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.bz2"
      >tarball</a>]</li>
    <!-- li><a href="http://sourceforge.net/people/?group_id=1355">help
         wanted</a></li -->
