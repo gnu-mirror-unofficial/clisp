@@ -308,7 +308,7 @@ Free Documentation License</a></p>
  <a href="http://clisp.cons.org"><img src="clisp.png" width="48"
     height="48" alt="[CLISP home]"/></a></td>
  <td align="right"><a href="http://sourceforge.net"><img
-     src="http://sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
+     src="http://sflogo.sourceforge.net/sflogo.php?group_id=1355&amp;type=2"
      width="125" height="37" alt="SourceForge Logo"/></a></td>
  <td align="right"><a href="http://validator.w3.org/check/referer"><img
      src="http://www.w3.org/Icons/valid-xhtml10"
