@@ -120,6 +120,8 @@
    <input type="submit" name="sa" value="Search"/>
    <input type="hidden" name="sitesearch" value="clisp.cons.org"/>
    </ins></form></dd>
+ <dt><strong>How are <a href="http://sourceforge.net/survey/survey.php?group_id=1355&survey_id=12508">you</a> using CLISP?</strong></dt>
+  <dd>Tell us your story!</dd>
  </dl>
 </td>
 <td><strong>Related <a href="http://sourceforge.net">SourceForge</a>
