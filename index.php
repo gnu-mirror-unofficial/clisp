@@ -107,7 +107,7 @@
    <li><a href="http://www.gnu.org">GNU</a>
        <a href="http://www.gnu.org/directory/">Free Software Directory</a>
      - <a href="http://www.gnu.org/directory/clisp.html">CLISP</a> and
-       <a href="http://www.gnu.org/directory/lisp.html">Lisp</a></li>
+       <a href="http://www.gnu.org/search/fsd-search.py?q=lisp">Lisp</a></li>
    <li><a href="http://www.gnu.org/software/clisp/">CLISP Home Pages
     Mirrored at GNU</a></li>
    <li><a href="http://freshmeat.net/projects/clisp/">FreshMeat</a></li>
