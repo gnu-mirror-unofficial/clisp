@@ -155,7 +155,7 @@
     <li><a href="ftp://sunsite.unc.edu/pub/Linux/devel/lang/lisp/"
                 >ftp://sunsite.unc.edu/pub/Linux/devel/lang/lisp/</a></li>
   </ul></dd>
- <dt><strong>Linux packages</strong></dt>
+ <dt><strong><a href="http://www.linux.org">Linux</a> packages</strong></dt>
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
            >Debian GNU/Linux</a></li>
@@ -165,9 +165,9 @@
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
            >ALT Linux</a></li>
     <li><a href="http://archlinux.org/packages.php?id=4178">Arch Linux</a></li>
-    <li><a href="http://www.slackware.com/pb/searchpkg.php?v=current&string=clisp">Slackware</a></li>
+    <li><a href="http://www.slackware.com/pb/searchpkg.php?v=current&amp;string=clisp">Slackware</a></li>
    </ul></dd>
- <dt><strong>*BSD ports</strong></dt>
+ <dt><strong><a href="http://www.bsd.org/">*BSD</a> ports</strong></dt>
   <dd><ul>
     <li><a href="http://www.freshports.org/lang/clisp/">FreeBSD</a></li>
     <li><a href="http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/lang/clisp/">NetBSD</a></li>
@@ -180,9 +180,6 @@
  <dt><strong><a href="http://cygwin.com/">Cygwin</a> -
    Unix environment for Windows</strong></dt>
  <dd><a href="http://www.cygwin.com/packages/clisp/">CLISP Package</a></dd>
- <dt><strong>AIX binaries</strong></dt>
-  <dd><a href="http://aixpdslib.seas.ucla.edu/packages/clisp.html"
-              >UCLA School of Engineering &amp; Applied Science</a></dd>
 </dl></td></tr>
 <tr><th colspan="2">Search</th></tr>
 <tr><td colspan="2">
@@ -282,7 +279,7 @@
        alt="FFII: Software Patents in Europe"/></a>
  <!-- a href="http://www.freepatents.org">
   <img src="http://www.freepatents.org/Logo" width="117" height="85"
-       alt="Free Patents -- Protecting Innovation and Competition in the
+       alt="Free Patents - Protecting Innovation and Competition in the
             IT Industry"/></a-->
  <a href="http://lpf.ai.mit.edu/">
   <img src="http://lpf.ai.mit.edu/Images/liberty.jpg" width="77"
