@@ -369,7 +369,7 @@ head (reasonably recent).</p>
  <a href="impnotes.html#included-modules">included</a> with
  CLISP, pass <code>--with-module=...</code> to <code>configure</code>
  to build them and use the <a href="#modules"><code>full</code></a>
- linking set.</dd>
+ <a href="impnotes.html#linkset">linking set</a>.</dd>
 <dt><strong>3rd party</strong></dt>
  <dd>See the <em>incomplete</em> list of
   <a href="resources.html#software">"Common
@@ -392,22 +392,23 @@ head (reasonably recent).</p>
  </ul>
   <p>Both <a href="http://allegroserve.sourceforge.net/">AllegroServe</a>
   and <a href="http://www.ai.mit.edu/projects/iiip/doc/cl-http/">CL-HTTP</a>
-  require multithreading and do not work with CLISP.</p></dd></dl>
+  require multithreading and do not work with CLISP yet.</p></dd></dl>
 
 <p><a href="#run">back to Running</a></p><hr/>
 
 <h3 id="rc">Where is the init file on my platform?</h3>
 
 <p>Read the file <code>&lt;clisp.html#opt-norc&gt;</code> in your build
- directory or binary distribution (this is the version of the <a
- href="clisp.html">user manual</a> for your platform).</p>
+ directory or binary distribution (this is the version of the
+ <a href="clisp.html">user manual</a> for your platform).</p>
 
 <p><a href="#run">back to Running</a></p><hr/>
 
 <h3 id="modules">Where are the modules with which I built CLISP?</h3>
 
-<p>In the <code>full</code> linking set.  Run CLISP like this:
-<code>clisp <a href="clisp.html#opt-link-set">-K</a> full</code>.</p>
+<p>In the <code>full</code> <a href="impnotes.html#linkset">linking set</a>.
+ Run CLISP like this: <code>clisp
+  <a href="clisp.html#opt-link-set">-K</a> full</code>.</p>
 
 <p>The reasons for <code>base</code> being the default are explained
  <a href="http://article.gmane.org/gmane.lisp.clisp.general:8691">here</a>.</p>
