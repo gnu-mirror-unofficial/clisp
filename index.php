@@ -35,7 +35,7 @@
  Haible was one of the finalists for the 2002 Free Software Awards!</a></p>
 
 <table cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.30 (2002-09-15)</th></tr></table>
+<tr><th>Current version:</th><th>2.31 (2003-09-01)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
  <col width="70%"/><col width="30%"/>
