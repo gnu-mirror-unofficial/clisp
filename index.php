@@ -84,6 +84,11 @@
     wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
   </ul></dd>
+ <dt><strong>FTP mirrors</strong></dt>
+  <dd><ul>
+   <li><a href="ftp://ftp.ntnu.no/pub/languages/common_lisp/clisp/"
+    >Norway</a></li>
+  </ul></dd>
  </dl>
 </td>
 <td><strong>Related Sourceforge Projects</strong>
