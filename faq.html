@@ -190,6 +190,7 @@ moved it here.</p>
  <li><a href="#opt">what are the command line arguments?</a></li>
  <li><a href="#enc-err">invalid byte #x94 in CHARSET:ASCII conversion</a></li>
  <li><a href="#rl-tab">Display all 1259 possibilities? (y or n)</a></li>
+ <li><a href="#stack">stack overflow</a></li>
  <li><a href="#ext">What CLISP extensions are available?</a></li>
 </ol>
 <hr/>
@@ -234,6 +235,33 @@ moved it here.</p>
  many screens of symbols) when you hit <code>TAB</code> too many times.
  <a href="clisp.html#opt-ilisp">You can turn this feature off</a>
  if you are using Emacs.</p>
+
+<p><a href="#run">back to Running</a></p><hr/>
+
+<h3 id="stack">stack overflow</h3>
+
+<dl><dt><strong>generic</strong></dt>
+ <dd><ul>
+   <li>You will always get a lisp stack overflow when you try to print a
+    circular object (list or structure) and <code>*PRINT-CIRCLE*</code>
+    is <code>NIL</code>.
+    Just set <code>*PRINT-CIRCLE*</code> to <code>T</code></li>
+   <li>You will always get a stack overflow on infinite recursion.
+    Some simple functions (like Ackerman's) recurse more than you
+    expect and can run out of stack on relatively small inputs.</li></ul></dd>
+<dt><strong>win32</strong></dt>
+ <dd>answered
+  <a href="http://sourceforge.net/mailarchive/message.php?msg_id=1785942"
+     >here</a> and
+  <a href="http://sourceforge.net/mailarchive/message.php?msg_id=1662294"
+     >here</a> on
+  <a href="http://lists.sourceforge.net/lists/listinfo/clisp-list"
+     >&lt;clisp-list&gt;</a></dd>
+<dt><strong>unix</strong></dt>
+ <dd>Increase program stack with <code>ulimit -s</code> (or <code>limit
+   stacksize</code> if you are using
+  <a href="http://www.faqs.org/faqs/unix-faq/shell/csh-whynot/"
+     ><code>csh</code></a>) to at least 8 MB.</dd></dl>
 
 <p><a href="#run">back to Running</a></p><hr/>
 
