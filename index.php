@@ -91,41 +91,9 @@
        >Open Source Directory</a></li>
    <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
- <dt><strong>Search</strong></dt>
-  <dd><form method="get" action="http://www.google.com/custom">
-    <fieldset><legend><a href="http://www.google.com/search"
-                         ><img src="http://www.google.com/logos/Logo_40wht.gif"
-                               alt="Google"/></a></legend>
-     <select name="sitesearch">
-      <option value="clisp.cons.org">clisp.cons.org</option>
-      <option value="cons.org">cons.org</option>
-      <option value="gnu.org">gnu.org</option>
-      <option value="sourceforge.net">sourceforge.net</option>
-      <option value="">the whole web</option>
-     </select>
-     <input type="text" name="q" size="31" maxlength="255" value=""/>
-     <input type="submit" name="sa" value="go"/>
-   </fieldset></form>
-   <form method="post" action="http://sourceforge.net/search/">
-    <fieldset>
-     <legend><a href="http://sourceforge.net/mail/?group_id=1355"
-                >mailing list</a> archives</legend>
-     <select name="forum_id">
-      <option value="6767">clisp-list</option>
-      <option value="6768">clisp-devel</option>
-      <option value="6769">clisp-announce</option>
-     </select>
-     <input type="hidden" name="type_of_search" value="mlists"/>
-     <input type="hidden" name="group_id" value="1355"/>
-     <input type="text" size="31" name="words" value=""/>
-     <input type="submit" name="search" value="go"/><br/>
-     <input type="checkbox" name="exact" value="1" checked="checked"/>
-     Require all words?
-  </fieldset></form></dd>
  <dt><strong>How are <a href="http://sourceforge.net/survey/survey.php?group_id=1355&amp;survey_id=12508">you</a> using CLISP?</strong></dt>
   <dd>Tell us your story!</dd>
- </dl>
-</td>
+ </dl></td>
 <td><dl>
  <dt><strong>Home</strong></dt>
   <dd><ul>
@@ -179,7 +147,58 @@
  <dt><strong>AIX binaries</strong></dt>
   <dd><a href="http://aixpdslib.seas.ucla.edu/packages/clisp.html"
               >UCLA School of Engineering &amp; Applied Science</a></dd>
-</dl></td></tr></table>
+</dl></td></tr>
+<tr><th colspan="2">Search</th></tr>
+<tr><td colspan="2">
+  <form method="get" action="http://www.google.com/custom">
+   <fieldset><legend><a href="http://www.google.com/search"
+                        ><img src="http://www.google.com/logos/Logo_40wht.gif"
+                              width="128" height="53" alt="Google"/></a></legend>
+    <select name="sitesearch">
+     <option value="clisp.cons.org">clisp.cons.org</option>
+     <option value="cons.org">cons.org</option>
+     <option value="gnu.org">gnu.org</option>
+     <option value="sourceforge.net">sourceforge.net</option>
+     <option value="">the whole web</option>
+    </select>
+    <input type="text" name="q" size="64" maxlength="255" value=""/>
+    <input type="submit" name="sa" value="go"/>
+  </fieldset></form>
+  <form method="post" action="http://sourceforge.net/search/">
+   <fieldset>
+    <legend><a href="http://sourceforge.net/mail/?group_id=1355"
+               >mailing list</a> archives</legend>
+    <select name="forum_id">
+     <option value="6767">clisp-list</option>
+     <option value="6768">clisp-devel</option>
+     <option value="6769">clisp-announce</option>
+    </select>
+    <input type="hidden" name="type_of_search" value="mlists"/>
+    <input type="hidden" name="group_id" value="1355"/>
+    <input type="text" size="64" name="words" value=""/>
+    <input type="submit" name="search" value="go"/><br/>
+    <input type="checkbox" name="exact" value="1" checked="checked"/>
+    Require all words?
+  </fieldset></form>
+  <form method="get" action="http://search.gmane.org/search.php">
+   <fieldset>
+    <legend><a href="http://gmane.org/"
+               ><img src="http://gmane.org/img/gmane-50.png"
+                     width="51" height="50" alt="Gmane"/></a></legend>
+    <select name="group">
+     <option value="gmane.lisp.clisp.general">clisp-list</option>
+     <option value="gmane.lisp.clisp.devel">clisp-devel</option>
+     <option value="gmane.lisp.clisp.announce">clisp-announce</option>
+    </select>
+    <input type="text" size="64" name="query" value=""/>
+    <input type="submit" value="go"/><br/>
+    <select name="sort">
+     <option value="">Sort by...</option>
+     <option value="date">Date</option>
+     <option value="relevance">Relevance</option>
+    </select>
+ </fieldset></form></td></tr>
+</table>
 
 <table cellpadding="2" border="5">
 <tr><th colspan="2">Currently active developers:</th></tr>
