@@ -418,6 +418,7 @@ head (reasonably recent).</p>
 character #\u00B3 cannot be represented in the character set CHARSET:ASCII</a></li>
  <li><a href="#rl-tab">Display all 1259 possibilities? (y or n)</a></li>
  <li><a href="#stack">stack overflow</a></li>
+ <li><a href="#self-mod">self-modifying code</a></li>
 </ol>
 <hr/>
 
@@ -489,6 +490,32 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</h3>
    stacksize</code> if you are using
   <a href="http://www.faqs.org/faqs/unix-faq/shell/csh-whynot/"
      ><code>csh</code></a>) to at least 8 MB.</dd></dl>
+
+<p><a href="#trouble">back to Troubles</a></p><hr/>
+
+<p><a href="#index">index</a></p><hr/>
+
+<h3 id="self-mod">self-modifying code</h3>
+
+<p>The following code modifies itself:</p>
+<pre>(let ((var '(a b c)))
+   (nconc var '(1 2 3)))</pre>
+<p>and will not work as one would naively expect.
+(on the first invocation, it will return <code>(a b c 1 2 3)</code>,
+the second invocation will produce a circular list, the third will hang
+trying to <a href="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
+             ><code>NCONC</code></a> a circular list).</p>
+
+<p>Instead you must do</p>
+<pre>(let ((var (list 'a 'b 'c)))
+   (nconc var (list 1 2 3)))</pre>
+
+<p><a href="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
+      ><code>DISASSEMBLE</code></a> will show the constants in your
+ compiled functions.</p>
+
+<p>See <a href="http://www.lisp.org/table/style.htm">Lisp Programming
+  Style</a> for more useful information.</p>
 
 <p><a href="#trouble">back to Troubles</a></p><hr/>
 
