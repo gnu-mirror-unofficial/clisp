@@ -504,7 +504,7 @@ character #\u00B3 cannot be represented in the character set CHARSET:ASCII</h3>
 
 <p>The following code modifies itself:</p>
 <pre>(let ((var '(a b c)))
-   (nconc var '(1 2 3)))</pre>
+  (nconc var '(1 2 3)))</pre>
 <p>and will not work as one would naively expect.
 (on the first invocation, it will return <code>(a b c 1 2 3)</code>,
 the second invocation will produce a circular list, the third will hang
@@ -512,8 +512,8 @@ trying to <a href="http://www.lisp.org/HyperSpec/Body/fun_nconc.html"
              ><code>NCONC</code></a> a circular list).</p>
 
 <p>Instead you must do</p>
-<pre>(let ((var (list 'a 'b 'c)))
-   (nconc var (list 1 2 3)))</pre>
+<pre>(let ((var (copy-list '(a b c))))
+  (nconc var (copy-list '(1 2 3))))</pre>
 
 <p><a href="http://www.lisp.org/HyperSpec/Body/fun_disassemble.html"
       ><code>DISASSEMBLE</code></a> will show the constants in your
