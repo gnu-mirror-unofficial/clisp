@@ -147,6 +147,12 @@
     <li><a href="http://packages.debian.org/stable/interpreters/clisp.html"
            >stable</a> (obsolete)</li>
    </ul></dd>
+ <dt><strong>*BSD ports</strong></dt>
+  <dd><ul>
+    <li><a href="http://www.freshports.org/lang/clisp/">FreeBSD</a></li>
+    <li><a href="ftp://ftp.netbsd.org/pub/NetBSD/packages/pkgsrc/lang/clisp/README.html">NetBSD</a></li>
+    <li><a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/lang/clisp/">OpenBSD</a></li>
+   </ul></dd>
  <dt><strong><a href="http://fink.sourceforge.net/">Fink</a> -
    Unix software for your Mac</strong></dt>
   <dd><a href="http://fink.sourceforge.net/pdb/package.php/clisp"
