@@ -341,6 +341,7 @@ $ gdb full/lisp.run                       ;; or lisp.exe on windows and cygwin
 
 <h2 id="run">Running CLISP</h2>
 <ol>
+ <li><a href="#defun">Where is <code>DEFUN</code>?</a></li>
  <li><a href="#ide">Where is the IDE?</a></li>
  <li><a href="#opt">What are the command line arguments?</a></li>
  <li><a href="#debugger">How do I get out of the debugger?</a></li>
@@ -350,6 +351,15 @@ $ gdb full/lisp.run                       ;; or lisp.exe on windows and cygwin
  <li><a href="#gui">How do I create a GUI for my CLISP program?</a></li>
 </ol>
 <hr/>
+
+<h3 id="defun">Where is <code>DEFUN</code>?</h3>
+
+<p>Pass <a href="clisp.html#opt-memfile">-M</a> to the runtime
+ (<code>lisp.run</code> or <code>lisp.exe</code>).
+ Use the driver <code>clisp</code> (or <code>clisp.exe</code>) instead
+ of invoking the runtime directly.</p>
+
+<p><a href="#run">back to Running</a></p><hr/>
 
 <h3 id="ide">Where is the IDE?</h3>
 
