@@ -28,9 +28,9 @@ and the USENET newsgroup
 CLISP documentation (<a href="impnotes/">implementation notes</a>,
 <a href="clisp.html">man page</a>, etc), and for such questions this
 list provides a link into the docs.
-The frequently asked political questions are answered here in
-<strong>full</strong> detail (meaning that no further explanations
-of the issues will be provided).</p>
+The frequently asked <a href="#meta">political</a> questions are
+answered here in <strong>full</strong> detail (meaning that no further
+explanations of the issues will be provided).</p>
 
 <p>Please <a href="mailto:clisp-list@lists.sf.net?subject=FAQ">submit</a>
 more questions (and answers!)</p>
@@ -56,6 +56,7 @@ more questions (and answers!)</p>
  <li><a href="#gpl">License - why GNU GPL?</a></li>
  <li><a href="#menorah">Why is CLISP using menorah as the logo?</a></li>
  <li><a href="#help">How do I ask for help?</a></li>
+ <li><a href="#ansi">What about ANSI compliance?</a></li>
  <li><a href="#mailing-lists">Which mailing lists should I subscribe
    to?</a></li>
  <li><a href="#bugs">How do I report bugs?</a></li>
@@ -154,6 +155,32 @@ moved it here.</p>
    as well as for the benefit of the other CLISP users,
    since the mailing lists are publicly archived.</dd>
 </dl>
+
+<p><a href="#meta">back to Meta</a></p><hr/>
+
+<h3 id="ansi">What about ANSI compliance?</h3>
+
+<p><a href="http://clisp.cons.org">CLISP</a>
+<a href="http://www.lisp.org/HyperSpec/Body/glo_p.html#purports_to_conform"
+ ><em>purports to conform</em></a> to the ANSI Common Lisp specification,
+so all deviations in <code>clisp
+ <a href="clisp.html#opt-ansi">-ansi</a></code> from the ANSI standard
+are bugs and are not (yet) fixed only due to lack of resources.</p>
+
+<p>On the other hand, some decisions made by the ANSI X3J13 committee
+were not as justified from the <em>technical</em> point of view as were
+most of them, and some of those questionable decisions were made
+<em>after</em> the alternative behavior have already been implemented in
+CLISP.  The CLISP developers took pains to modify CLISP to
+unconditionally comply with the ANSI spec in all cases
+<a href="impnotes.html#ansi">except those 6 situations where they
+ believed that the committee made a mistake</a>,
+in which cases the committee behavior is still optionally available.</p>
+
+<p>CLISP does not start in the <code>ANSI</code> mode by default for
+historical reasons and this is not about to change.
+<a href="impnotes.html#image">Dumping an image</a> or passing a command
+line argument is easy enough.</p>
 
 <p><a href="#meta">back to Meta</a></p><hr/>
 
