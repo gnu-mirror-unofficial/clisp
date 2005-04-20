@@ -33,7 +33,8 @@
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table cellspacing="5" border="15">
-<tr><th>Current version:</th><th>2.33.2 (2004-06-02)</th></tr></table>
+<tr><th><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/clisp/src/NEWS?rev=clisp_2_33_2-2004-06-02">Current version</a>:</th>
+ <th>2.33.2 (2004-06-02)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
  <col width="70%"/><col width="30%"/>
@@ -50,7 +51,7 @@
  <dt><strong><a href="impnotes.html">CLISP Implementation
    Notes</a> <a href="impnotes/">[TOC]</a></strong></dt>
   <dd>How CLISP implements the <a href="http://www.ansi.org/">ANSI</a>
-   standard <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+X3%2E226%2D1994">X3.226-1994</a>
+   standard <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+INCITS+226%2D1994+%28R1999%29">INCITS 226-1994 (R1999)</a>
    <cite>"Information Technology - Programming Language - Common
     Lisp"</cite>, available as the
    <a href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
@@ -73,7 +74,7 @@
    <li><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/"
           >CVS browsing</a>
     [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.bz2"
-     >tarball</a>]</li>
+     >tarball</a>] <strong><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/clisp/src/NEWS?rev=HEAD">development NEWS</a></strong></li>
    <li><a href="https://savannah.gnu.org/people/?group=clisp">help</a>
     <a href="wanted.html">wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
