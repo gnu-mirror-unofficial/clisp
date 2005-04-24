@@ -183,6 +183,9 @@
  <dt><strong><a href="http://cygwin.com/">Cygwin</a> -
    Unix environment for Windows</strong></dt>
  <dd><a href="http://www.cygwin.com/packages/clisp/">CLISP Package</a></dd>
+ <dt><strong><a href="http://www.UNIX-systems.org/">Unix</a></strong></dt>
+ <dd><ul><li><a href="http://riemann.solnetworks.net/~dlewis/packages/clisp/"
+                >Solaris - x86 and Sparc</a></li></ul></dd>
 </dl></td></tr>
 <tr><th colspan="2">Search</th></tr>
 <tr><td colspan="2">
