@@ -169,7 +169,7 @@
     <li><a href="http://archlinux.org/packages.php?id=4178">Arch</a></li>
     <li><a href="http://www.mandrakesoft.com/products/101/powerpack-plus/packagesDVD?p=media-main-clisp-2.33.2-1mdk.i586.rpm.html">Mandrake</a></li>
     <li><a href="http://www.slackware.com/pb/searchpkg.php?v=current&amp;string=clisp">Slackware</a></li>
-   </ul></dd>
+    <li><a href="http://packages.ubuntu.com/hoary/interpreters/clisp">Ubuntu</a></li></ul></dd>
  <dt><strong><a href="http://www.bsd.org/">*BSD</a> ports</strong></dt>
   <dd><ul>
     <li><a href="http://www.freshports.org/lang/clisp/">FreeBSD</a></li>
@@ -185,7 +185,9 @@
  <dd><a href="http://www.cygwin.com/packages/clisp/">CLISP Package</a></dd>
  <dt><strong><a href="http://www.UNIX-systems.org/">Unix</a></strong></dt>
  <dd><ul><li><a href="http://riemann.solnetworks.net/~dlewis/packages/clisp/"
-                >Solaris - x86 and Sparc</a></li></ul></dd>
+                >Solaris - x86 and Sparc</a></li>
+   <li><a href="http://aixpdslib.seas.ucla.edu/packages/clisp.html">AIX</a></li>
+ </ul></dd>
 </dl></td></tr>
 <tr><th colspan="2">Search</th></tr>
 <tr><td colspan="2">
