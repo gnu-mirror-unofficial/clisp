@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cf="http://docbook.sourceforge.net/xmlns/chunkfast/1.0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>32.2. Netica Interface</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V2005-07-12_04:47_snapshot" /><link rel="start" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="ext-modules.html" title="Chapter 32. Extensions Implemented as Modules" /><link rel="prev" href="matlab.html" title="32.1. Matlab Interface" /><link rel="next" href="dir-key.html" title="32.3. Directory Access" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">32.2. Netica Interface</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="matlab.html">Prev</a> </td><th width="60%" align="center">Chapter 32. Extensions Implemented as Modules</th><td width="20%" align="right"> <a accesskey="n" href="dir-key.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="netica"></a>32.2. Netica Interface</h2></div></div></div><p>This is an interface to the <a href="http://norsys.com/netica_c_api.htm" target="_top">Netica C API</a> for working with
+ Bayesian belief networks and influence diagrams.</p><p>The package <strong class="package">“<span class="quote">NETICA</span>”</strong> is
+ <a href="package-case.html" title="11.4. Package Case-Sensitivity">case-sensitive</a>, you would write
+ <code class="code">(netica:GetNodeExpectedUtils_bn ...)</code>
+ when you need to call
+ <a href="http://norsys.com/onLineAPIManual/functions/GetNodeExpectedUtils_bn.html" target="_top"><code class="function">GetNodeExpectedUtils_bn()</code></a>
+</p><p>Additionally, some higher level functionality is available
+ (see <code class="filename">modules/netica/demo.lisp</code> for a sample usage):</p><div class="variablelist"><dl><dt><code class="code">(netica:start-netica <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+   :license :verbose)</code></dt><dd>Call
+   <a href="http://norsys.com/onLineAPIManual/functions/NewNeticaEnviron_ns.html" target="_top"><code class="function">NewNeticaEnviron_ns()</code></a> and
+   <a href="http://norsys.com/onLineAPIManual/functions/InitNetica_bn.html" target="_top"><code class="function">InitNetica_bn()</code></a>
+   and print some statistics; initialize
+   <code class="varname">netica:*env*</code>.</dd><dt><code class="code">(netica:check-errors <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+   :env :clear :severity)</code></dt><dd>Show and, optionally,
+   <a href="http://norsys.com/onLineAPIManual/functions/ClearError_ns.html" target="_top">clear</a>, the errors of
+   the given <a href="http://norsys.com/onLineAPIManual/functions/ErrorSeverity_ns.html" target="_top">severity</a>
+   and above.  You should call this function
+   after <span class="emphasis"><em>every</em></span> call to a Netica function.
+   Every wrapper function in this list calls it, so you do <span class="strong"><strong>not</strong></span> need to
+   call it after a call to a wrapper function.
+</dd><dt><code class="code">(netica:error-message error)</code></dt><dd>Convert netica error to a <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> containing
+   <a href="http://norsys.com/onLineAPIManual/functions/ErrorCategory_ns.html" target="_top">error category</a>,
+   <a href="http://norsys.com/onLineAPIManual/functions/ErrorSeverity_ns.html" target="_top">error severity</a>,
+   <a href="http://norsys.com/onLineAPIManual/functions/ErrorNumber_ns.html" target="_top">error number</a>,
+   <a href="http://norsys.com/onLineAPIManual/functions/ErrorMessage_ns.html" target="_top">error message</a>.
+</dd><dt><code class="code">(netica:close-netica <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+   :env :verbose)</code></dt><dd>Terminate the netica session.
+   Sets <code class="varname">netica:*env*</code> to <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a> when it was closed.
+</dd><dt><code class="code">(netica:make-net <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> :name
+   :comment :title :env :verbose)</code></dt><dd>Make a <a href="http://norsys.com/onLineAPIManual/functions/NewNet_bn.html" target="_top">new
+    network</a> with a given name,
+   <a href="http://norsys.com/onLineAPIManual/functions/SetNetTitle_bn.html" target="_top">title</a> and
+   <a href="http://norsys.com/onLineAPIManual/functions/SetNetComment_bn.html" target="_top">comment</a>
+   and return it.</dd><dt><code class="code">(netica:net-info net)</code></dt><dd>Print some information about the net
+   (<a href="http://norsys.com/onLineAPIManual/functions/GetNetName_bn.html" target="_top">name</a>,
+    <a href="http://norsys.com/onLineAPIManual/functions/GetNetTitle_bn.html" target="_top">title</a>,
+    <a href="http://norsys.com/onLineAPIManual/functions/GetNetComment_bn.html" target="_top">comment</a>,
+    <a href="http://norsys.com/onLineAPIManual/functions/GetNetFileName_bn.html" target="_top">file name</a> and
+    <a href="http://norsys.com/onLineAPIManual/functions/GetNetNodes_bn.html" target="_top">nodes</a>).
+</dd><dt><code class="code">(netica:make-node <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+   :name :net :kind :levels :states :num-states :title :comment :parents
+   :cpt :x :y :env :verbose)</code></dt><dd>Make a <a href="http://norsys.com/onLineAPIManual/functions/NewNode_bn.html" target="_top">new
+    node</a> with the given name and many other parameters.
+</dd><dt><code class="code">(netica:node-info node
+   <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> :header)</code></dt><dd>Print some information about the node, preceded by
+   the header.</dd><dt><code class="code">(netica:get-beliefs node
+   <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> :env :verbose)</code></dt><dd><a href="http://norsys.com/onLineAPIManual/functions/GetNodeBeliefs_bn.html" target="_top">Get
+    the belief vector</a> for the node.
+</dd><dt><code class="code">(netica:enter-finding net node
+   state <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> :env :verbose)</code></dt><dd><a href="http://norsys.com/onLineAPIManual/functions/EnterFinding_bn.html" target="_top">Enter a
+    finding</a> by
+   <a href="http://norsys.com/onLineAPIManual/functions/NodeNamed_bn.html" target="_top">node</a>
+   and <a href="http://norsys.com/onLineAPIManual/functions/StateNamed_bn.html" target="_top">state</a>
+   names.</dd><dt><code class="code">(netica:save-net net <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+   :file :env :verbose)</code></dt><dd><a href="http://norsys.com/onLineAPIManual/functions/WriteNet_bn.html" target="_top">Write</a>
+   a network to a file.</dd><dt><code class="code">(netica:read-net file <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+   :env :verbose)</code></dt><dd><a href="http://norsys.com/onLineAPIManual/functions/ReadNet_bn.html" target="_top">Read</a>
+   a network from a file.</dd><dt><code class="code">(netica:with-open-dne-file (var
+   file <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;REST</code></a> opts) <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html" target="_top"><code class="literal">&amp;BODY</code></a> body)</code></dt><dd><a href="http://norsys.com/onLineAPIManual/functions/NewStreamFile_ns.html" target="_top">Open
+    a netica stream</a>, execute <em class="replaceable"><code>body</code></em>,
+   <a href="http://norsys.com/onLineAPIManual/functions/DeleteStream_ns.html" target="_top">close the stream</a>
+   - just like <a href="http://www.lisp.org/HyperSpec/Body/mac_with-open-file.html" target="_top"><code class="function">WITH-OPEN-FILE</code></a>.</dd><dt><code class="varname">netica:*verbose*</code></dt><dd>The log <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a>; the default value for
+   the <code class="constant">:VERBOSE</code> argument.</dd><dt><code class="varname">netica:*license*</code></dt><dd>The license key provided by
+   <a href="http://norsys.com/" target="_top">Norsys</a>; the default value
+   for the <code class="literal">:LICENSE</code> argument.
+</dd><dt><code class="varname">netica:*env*</code></dt><dd>The Netica environment object; the default value
+   for the <code class="literal">:ENV</code> argument.
+</dd></dl></div></div><div class="bookinfo"><hr width="100%" /><table width="100%" summary="impnotes meta info"><th><td align="left">These notes document <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> version 2.34.</td><td align="right">Last modified: 2005-07-20</td></th></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img width="125" height="37" alt="[SourceForge]" src="http://sflogo.sourceforge.net/sflogo.php?group_id=1355&amp;type=2&amp;page=netica" /></a></td></tr></table></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="matlab.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ext-modules.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="dir-key.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">32.1. Matlab Interface </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 32.3. Directory Access</td></tr></table></div></body></html>

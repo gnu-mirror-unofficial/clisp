@@ -1,174 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>29.3. Extensions-1.3. Internationalization</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="p-indep.html" title="Chapter 29. Extensions-1: Platform independent Extensions" /><link rel="previous" href="quit.html" title="29.2. Extensions-1.2. Quitting CLISP" /><link rel="next" href="encoding.html" title="29.4. Extensions-1.4. Encodings" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">29.3. Extensions-1.3. Internationalization</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="quit.html">Prev</a> </td><th width="60%" align="center">Chapter 29. Extensions-1: Platform independent Extensions</th><td width="20%" align="right"> <a accesskey="n" href="encoding.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="i18n"></a>29.3. Extensions-1.3. Internationalization</h2></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="i18n.html#ggettext">29.3.1. The GNU gettext</a></span></dt><dt><span class="section"><a href="i18n.html#language">29.3.2. The Language</a></span></dt></dl></div><p>"Internationalization" means to prepare a program so that it can
-use multiple national languages and national cultural conventions
-without requiring further source code changes.  Localization means
-providing the data - mostly textual translations - necessary for an
-internationalized program to work in a particular language and with
-particular cultural conventions.</p><p><a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> is internationalized, and is localized for the languages
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cf="http://docbook.sourceforge.net/xmlns/chunkfast/1.0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>30.4. Internationalization of CLISP</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V2005-07-12_04:47_snapshot" /><link rel="start" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="ext-p-indep.html" title="Chapter 30. Platform Independent Extensions" /><link rel="prev" href="quit.html" title="30.3. Quitting CLISP" /><link rel="next" href="encoding.html" title="30.5. Encodings" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">30.4. Internationalization of <span><strong class="command">CLISP</strong></span></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="quit.html">Prev</a> </td><th width="60%" align="center">Chapter 30. Platform Independent Extensions</th><td width="20%" align="right"> <a accesskey="n" href="encoding.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="i18n"></a>30.4. Internationalization of <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="i18n.html#language">30.4.1. The Language</a></span></dt></dl></div><div class="variablelist"><dl><dt>Internationalization
+   (“<span class="quote">i18n</span>”)</dt><dd>preparing a program so that it can use multiple
+    national languages and national cultural conventions without requiring
+    further source code changes.</dd><dt>Localization (“<span class="quote">l10n</span>”)</dt><dd>providing the data - mostly textual translations -
+   necessary for an internationalized program to work in a particular
+   language and with particular cultural conventions.
+</dd></dl></div><p><a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> is internationalized, and is localized for the languages
 English, German, French, Spanish, Dutch and Russian.
-<a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> also supports internationalized Lisp programs, through
-<a href="http://www.gnu.org" target="_top">GNU</a> <a href="http://www.gnu.org/software/gettext/gettext.html" target="_top">gettext</a>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="ggettext"></a>29.3.1. The <a href="http://www.gnu.org" target="_top">GNU</a> <a href="http://www.gnu.org/software/gettext/gettext.html" target="_top">gettext</a></h3></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="i18n.html#domain">29.3.1.1. Domain</a></span></dt><dt><span class="section"><a href="i18n.html#category">29.3.1.2. Category</a></span></dt><dt><span class="section"><a href="i18n.html#i18n-example">29.3.1.3. Example</a></span></dt></dl></div><p><a href="http://www.gnu.org" target="_top">GNU</a> <a href="http://www.gnu.org/software/gettext/gettext.html" target="_top">gettext</a> is a set of functions, included in <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> or the
-<a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> library, which permit looking up translations of strings
-through message catalogs. It is also a set of tools which makes the
-translation maintenance easy for the translator and the program
-maintainer.</p><p>The <a href="http://www.gnu.org" target="_top">GNU</a> <a href="http://www.gnu.org/software/gettext/gettext.html" target="_top">gettext</a> functions are available in <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> in the
-<a href="i18n.html" title="29.3. Extensions-1.3. Internationalization"><strong class="package">“<span class="quote">I18N</span>”</strong></a> package, which is <a href="pack-dict.html#re-export" title="11.4.2. Function EXT:RE-EXPORT"><tt class="function">EXT:RE-EXPORT</tt></a>ed from the <a href="imppack.html#ext-pac"><strong class="package">“<span class="quote">EXT</span>”</strong></a>
-package.</p><div class="variablelist"><dl><dt><a id="gettext"></a><tt class="sexp">(<a href="i18n.html#gettext"><tt class="function">I18N:GETTEXT</tt></a>
-  <i class="replaceable"><tt>MSGID</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a> <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a> <a href="i18n.html#category" title="29.3.1.2. Category"><i class="replaceable"><tt>CATEGORY</tt></i></a>)</tt></dt><dd>returns the translation of the message <i class="replaceable"><tt>MSGID</tt></i>,
-  in the given <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a>, depending on the given <a href="i18n.html#category" title="29.3.1.2. Category"><i class="replaceable"><tt>CATEGORY</tt></i></a>.
-  <i class="replaceable"><tt>MSGID</tt></i> should be an <a href="http://www.cplusplus.com/doc/papers/ascii.html" target="_top"><strong>ASCII</strong></a> string, and is normally the English message.
-  </dd><dt><a id="ngettext"></a><tt class="sexp">(<a href="i18n.html#ngettext"><tt class="function">I18N:NGETTEXT</tt></a>
-  <i class="replaceable"><tt>MSGID</tt></i> <i class="replaceable"><tt>msgid_plural</tt></i>
-  <i class="replaceable"><tt>n</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a> <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a> <a href="i18n.html#category" title="29.3.1.2. Category"><i class="replaceable"><tt>CATEGORY</tt></i></a>)</tt></dt><dd>returns the plural form of the translation for of
-   <i class="replaceable"><tt>MSGID</tt></i> and <i class="replaceable"><tt>n</tt></i> in the given <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a>, depending on the given
-   <a href="i18n.html#category" title="29.3.1.2. Category"><i class="replaceable"><tt>CATEGORY</tt></i></a>.  <i class="replaceable"><tt>MSGID</tt></i> and <i class="replaceable"><tt>msgid_plural</tt></i>
-   should be <a href="http://www.cplusplus.com/doc/papers/ascii.html" target="_top"><strong>ASCII</strong></a> strings, and are normally the English singular and
-   English plural variant of the message, respectively.
-   </dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="domain"></a>29.3.1.1. Domain</h4></div></div><div></div></div><p>The <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a> is a string identifier denoting the program that
-is requesting the translation.  The pathname of the message catalog
-depends on the <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a>: usually it is located at
-<tt class="filename">TEXTDOMAINDIR/l/LC_MESSAGES/domain.mo</tt>, where
-<i class="replaceable"><tt>l</tt></i> is the ISO 639 code of the language.
-The notion of <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a> allows several Lisp programs running in the same
-image to request translations independently of each other.</p><p><a id="textdomain"></a><b>Function <a href="i18n.html#textdomain"><tt class="function">I18N:TEXTDOMAIN</tt></a>. </b><tt class="sexp">(<a href="i18n.html#textdomain"><tt class="function">I18N:TEXTDOMAIN</tt></a>)</tt> is a
-<a href="http://www.lisp.org/HyperSpec/Body/glo_p.html#place" target="_top">place</a> that returns the default <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a>, used when no <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a>
-argument is passed to the <a href="i18n.html#gettext"><tt class="function">I18N:GETTEXT</tt></a> and <a href="i18n.html#ngettext"><tt class="function">I18N:NGETTEXT</tt></a> functions.
-It is <a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a>able.
-<tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a> <a href="i18n.html#textdomain"><tt class="function">I18N:TEXTDOMAIN</tt></a>)</tt> is usually used
-during the startup phase of a program.
-Note that the default <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a> is not saved in a <a href="image.html" title="29.1. Extensions-1.1. Saving an Image">memory image</a>.
-The use of <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a> <a href="i18n.html#textdomain"><tt class="function">I18N:TEXTDOMAIN</tt></a>)</tt> is
-recommended only for programs that are so simple that they will never
-need more than one <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a>.</p><p><a id="textdomaindir"></a><b>Function <a href="i18n.html#textdomaindir"><tt class="function">I18N:TEXTDOMAINDIR</tt></a>. </b><tt class="sexp">(<a href="i18n.html#textdomaindir"><tt class="function">I18N:TEXTDOMAINDIR</tt></a> <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a>)</tt>
-is a <a href="http://www.lisp.org/HyperSpec/Body/glo_p.html#place" target="_top">place</a> that returns the base directory, called
-<tt class="filename">TEXTDOMAINDIR</tt> above, where the message
-catalogs for the given <a href="i18n.html#domain" title="29.3.1.1. Domain"><i class="replaceable"><tt>DOMAIN</tt></i></a> are assumed to be installed.
-It is <a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a>able.
-<tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><tt class="function">SETF</tt></a> <a href="i18n.html#textdomaindir"><tt class="function">I18N:TEXTDOMAINDIR</tt></a>)</tt> is usually used
-during the startup phase of a program, and should be used because only
-the program knows where its message catalogs are installed.
-Note that the <tt class="filename">TEXTDOMAINDIR</tt>s
-are not saved in a <a href="image.html" title="29.1. Extensions-1.1. Saving an Image">memory image</a>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="category"></a>29.3.1.2. Category</h4></div></div><div></div></div><p>The <a href="i18n.html#category" title="29.3.1.2. Category"><i class="replaceable"><tt>CATEGORY</tt></i></a> argument of the <a href="i18n.html#gettext"><tt class="function">I18N:GETTEXT</tt></a> and <a href="i18n.html#ngettext"><tt class="function">I18N:NGETTEXT</tt></a>
-functions denotes which locale facet the result should depend on.
-The default value is <tt class="constant">:LC_MESSAGES</tt>.
-Other possible values are <tt class="constant">:LC_CTYPE</tt>,
-<tt class="constant">:LC_TIME</tt>, <tt class="constant">:LC_COLLATE</tt>,
-<tt class="constant">:LC_MONETARY</tt>.
-The use of these values is useful for users who have a
-character/time/collation/money handling set differently from the usual
-message handling.
-Note that when a <a href="i18n.html#category" title="29.3.1.2. Category"><i class="replaceable"><tt>CATEGORY</tt></i></a> argument is used, the message catalog
-location depends on the <a href="i18n.html#category" title="29.3.1.2. Category"><i class="replaceable"><tt>CATEGORY</tt></i></a>: it will be expected at
-<tt class="filename">TEXTDOMAINDIR/ll/category/domain.mo</tt>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="i18n-example"></a>29.3.1.3. Example</h4></div></div><div></div></div><p>A non-internationalized program simulating a restaurant dialogue
-might look as follows.</p><div class="example"><a id="i18n-non-i"></a><p class="title"><b>Example 29.1. prog.lisp</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(setq n (parse-integer (first <a href="quickstart.html#script-exec"><tt class="varname">EXT:*ARGS*</tt></a>)))
-
-(format t "~A~%" "'Your command, please?', asked the waiter.")
-
-(format t "~@?~%"
-          (if (= n 1) "a piece of cake" "~D pieces of cake")
-          n)
-</pre></td></tr></table></div><p>After being internationalized, all strings are wrapped in
-<a href="i18n.html#gettext"><tt class="function">I18N:GETTEXT</tt></a> calls, and <a href="i18n.html#ngettext"><tt class="function">I18N:NGETTEXT</tt></a> is used for plurals.
-Also, <a href="i18n.html#textdomaindir"><tt class="function">I18N:TEXTDOMAINDIR</tt></a> is assigned a value; in our case, for simplicity,
-the current directory.</p><div class="example"><a id="i18n-i"></a><p class="title"><b>Example 29.2. prog.lisp</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(setf (textdomain) "prog")
-(setf (textdomaindir "prog") "./")
-
-(setq n (parse-integer (first <a href="quickstart.html#script-exec"><tt class="varname">EXT:*ARGS*</tt></a>)))
-
-(format t "~A~%"
-          (gettext "'Your command, please?', asked the waiter."))
-
-(format t "~@?~%"
-          (ngettext "a piece of cake" "~D pieces of cake" n)
-          n)
-</pre></td></tr></table></div><p>For ease of reading, it is customary to define an abbreviation
-for the <a href="i18n.html#gettext"><tt class="function">I18N:GETTEXT</tt></a> function.  An underscore is customary.</p><div class="example"><a id="i18n-i-abbrev"></a><p class="title"><b>Example 29.3. prog.lisp</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(setf (textdomaindir "prog") "./")
-(defun _ (msgid) (gettext msgid "prog"))
-
-(setq n (parse-integer (first <a href="quickstart.html#script-exec"><tt class="varname">EXT:*ARGS*</tt></a>)))
-
-(format t "~A~%"
-          (_"'Your command, please?', asked the waiter."))
-
-(format t "~@?~%"
-          (ngettext "a piece of cake" "~D pieces of cake" n "prog")
-          n)
-</pre></td></tr></table></div><p>Now the program's maintainer creates a message catalog template
-through the command
-</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="screen">
-bash$ xgettext -o prog.pot prog.lisp
-</pre></td></tr></table><p>
-</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>xgettext version 0.11 or higher is required here.</p></div><p>The message catalog template looks roughly like this.</p><div class="example"><a id="i18n-pot"></a><p class="title"><b>Example 29.4. prog.pot</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-msgid "'Your command, please?', asked the waiter."
-msgstr ""
-
-msgid "a piece of cake"
-msgid_plural "%d pieces of cake"
-msgstr[0] ""
-msgstr[1] ""
-</pre></td></tr></table></div><p>Then a French translator creates a French message catalog</p><div class="example"><a id="i18n-fr-po"></a><p class="title"><b>Example 29.5. prog.fr.po</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-msgid ""
-msgstr ""
-"Content-Type: text/plain; charset=ISO-8859-1\n"
-"Plural-Forms: nplurals=2; plural=(n &gt; 1);\n"
-
-msgid "'Your command, please?', asked the waiter."
-msgstr "«Votre commande, s'il vous plait», dit le garçon."
-
-# Les gateaux allemands sont les meilleurs du monde.
-msgid "a piece of cake"
-msgid_plural "%d pieces of cake"
-msgstr[0] "un morceau de gateau"
-msgstr[1] "%d morceaux de gateau"
-</pre></td></tr></table></div><p>and sends it to the program's maintainer.</p><p>The program's maintainer compiles the catalog as follows:
-
-</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="screen">
-bash$ mkdir -p ./fr/LC_MESSAGES
-bash$ msgfmt -o ./fr/LC_MESSAGES/prog.mo prog.fr.po
-</pre></td></tr></table><p>When a user in a french locale then runs the program
-
-</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="screen">
-bash$ clisp prog.lisp 2
-</pre></td></tr></table><p>
-
-she will get the output
-
-</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="screen">
-    «Votre commande, s'il vous plait», dit le garçon.
-    2 morceaux de gateau
-</pre></td></tr></table><p>
-</p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="language"></a>29.3.2. The Language</h3></div></div><div></div></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>Note that the facilities described in this section will
-  work only for the languages for which <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> itself is already
-  localized.</p></div><p>The language <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> uses to communicate with the user can be one of
-</p><table class="simplelist" border="0" summary="Simple list"><tr><td><tt class="constant">ENGLISH</tt></td></tr><tr><td><tt class="constant">DEUTSCH</tt> (i.e., German)</td></tr><tr><td><tt class="constant">FRANÇAIS</tt> (i.e., French)</td></tr><tr><td><tt class="constant">ESPAÑOL</tt> (i.e., Spanish)</td></tr><tr><td><tt class="constant">NEDERLANDS</tt> (i.e., Dutch)</td></tr><tr><td><tt class="constant">РУССКИЙ</tt>
-  (i.e. Russian)</td></tr></table><p>This is controlled by the <a href="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html" target="_top"><tt class="classname">SYMBOL-MACRO</tt></a>
- <strong class="first"><i class="firstterm"><a href="i18n.html#language" title="29.3.2. The Language"><tt class="varname">CUSTOM:*CURRENT-LANGUAGE*</tt></a><a id="curr-lang" class="indexterm"></a></i></strong>,
- which can be set at run time as well as using <a href="clisp.html#opt-lang"><tt class="option">-L</tt></a> start-up option.
+<a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> also supports internationalized Lisp programs, through
+<a href="http://www.gnu.org" target="_top">GNU</a> <a href="http://www.gnu.org/software/gettext/gettext.html" target="_top">gettext</a>, see <a href="i18n-mod.html" title="32.9. Internationalization of User Programs">Section 32.9, “Internationalization of User Programs”</a>.</p><p>User programs can also be internationalized,
+ see <a href="i18n-mod.html" title="32.9. Internationalization of User Programs">Section 32.9, “Internationalization of User Programs”</a>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="language"></a>30.4.1. The Language</h3></div></div></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>The facilities described in this section will
+  work only for the languages for which <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> itself is already
+  localized.</p></div><p>The language <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> uses to communicate with the user can be one of
+</p><table class="simplelist" border="0" summary="Simple list"><tr><td><code class="constant">ENGLISH</code></td></tr><tr><td><code class="constant">DEUTSCH</code> (i.e., German)</td></tr><tr><td><code class="constant">FRANÇAIS</code> (i.e., French)</td></tr><tr><td><code class="constant">ESPAÑOL</code> (i.e., Spanish)</td></tr><tr><td><code class="constant">NEDERLANDS</code> (i.e., Dutch)</td></tr><tr><td><code class="constant">РУССКИЙ</code>
+  (i.e. Russian)</td></tr></table><p>This is controlled by the <a href="http://www.lisp.org/HyperSpec/Body/mac_define-symbol-macro.html" target="_top"><code class="classname">SYMBOL-MACRO</code></a>
+ <strong class="first"><em class="firstterm"><a href="i18n.html#language" class="olink"><code class="varname">CUSTOM:*CURRENT-LANGUAGE*</code></a><a id="curr-lang" class="indexterm"></a></em></strong>,
+ which can be set at run time as well as using the <code class="option"><a href="clisp.html#opt-lang" class="olink">-L</a></code> start-up option.
  If you wish to change the
- <a href="clisp.html#opt-locale">locale directory</a>
- at run time too, you can do that by setting <a href="i18n.html#language" title="29.3.2. The Language"><tt class="varname">CUSTOM:*CURRENT-LANGUAGE*</tt></a> to a <a href="http://www.lisp.org/HyperSpec/Body/syscla_cons.html" target="_top"><tt class="classname">CONS</tt></a>
- cell, whose <a href="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html" target="_top"><tt class="function">CAR</tt></a> is the language (a <a href="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html" target="_top"><tt class="classname">SYMBOL</tt></a>, one of the above),
- and whose <a href="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html" target="_top"><tt class="function">CDR</tt></a> is the new locale directory.</p><p>More languages can be defined through the macro
- <strong class="first"><i class="firstterm"><a href="i18n.html#deflang"><tt class="function">I18N:DEFLANGUAGE</tt></a><a id="deflang" class="indexterm"></a></i></strong>:
- <tt class="sexp">(<a href="i18n.html#deflang"><tt class="function">I18N:DEFLANGUAGE</tt></a> <i class="replaceable"><tt>language</tt></i>)</tt>.
+ <a href="clisp.html#opt-locale" class="olink">locale directory</a>
+ at run time too, you can do that by setting <a href="i18n.html#language" class="olink"><code class="varname">CUSTOM:*CURRENT-LANGUAGE*</code></a> to a <a href="http://www.lisp.org/HyperSpec/Body/syscla_cons.html" target="_top"><code class="classname">CONS</code></a>
+ cell, whose <a href="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html" target="_top"><code class="function">CAR</code></a> is the language (a <a href="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html" target="_top"><code class="classname">SYMBOL</code></a>, one of the above),
+ and whose <a href="http://www.lisp.org/HyperSpec/Body/acc_carcm_cdr_darcm_cddddr.html" target="_top"><code class="function">CDR</code></a> is the new locale directory.</p><p>More languages can be defined through the macro
+ <strong class="first"><em class="firstterm"><a href="i18n.html#deflang"><code class="function">I18N:DEFLANGUAGE</code></a><a id="deflang" class="indexterm"></a></em></strong>:
+ <code class="code">(<a href="i18n.html#deflang"><code class="function">I18N:DEFLANGUAGE</code></a> <em class="replaceable"><code>language</code></em>)</code>.
  For such an additional language to take effect, you must install the
  corresponding message catalog, or translate the messages yourself,
  using <a href="http://www.gnu.org" target="_top">GNU</a> <a href="http://www.gnu.org/software/gettext/gettext.html" target="_top">gettext</a> and <a href="http://www.gnu.org/software/emacs/" target="_top">Emacs</a> (or <a href="http://www.xemacs.org" target="_top">XEmacs</a>) po-mode.</p><p>This works only for strings.  For arbitrary language-dependent
  Lisp objects, you define one through the macro
- <strong class="first"><i class="firstterm"><a href="i18n.html#def-i-l"><tt class="function">I18N:DEFINTERNATIONAL</tt></a><a id="def-i-l" class="indexterm"></a></i></strong>:
- <tt class="sexp">(<a href="i18n.html#def-i-l"><tt class="function">I18N:DEFINTERNATIONAL</tt></a> <i class="replaceable"><tt>symbol</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a>
- (<i class="replaceable"><tt>default-language</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><tt class="constant">T</tt></a>))</tt> and add
+ <strong class="first"><em class="firstterm"><a href="i18n.html#def-i-l"><code class="function">I18N:DEFINTERNATIONAL</code></a><a id="def-i-l" class="indexterm"></a></em></strong>:
+ <code class="code">(<a href="i18n.html#def-i-l"><code class="function">I18N:DEFINTERNATIONAL</code></a> <em class="replaceable"><code>symbol</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;OPTIONAL</code></a>
+ (<em class="replaceable"><code>default-language</code></em> <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><code class="constant">T</code></a>))</code> and add
  language-dependent values through the macro
- <strong class="first"><i class="firstterm"><a href="i18n.html#defloc"><tt class="function">I18N:DEFLOCALIZED</tt></a><a id="defloc" class="indexterm"></a></i></strong>:
- <tt class="sexp">(<a href="i18n.html#defloc"><tt class="function">I18N:DEFLOCALIZED</tt></a> <i class="replaceable"><tt>symbol</tt></i> <i class="replaceable"><tt>language</tt></i>
-  <i class="replaceable"><tt>value-form</tt></i>)</tt>
+ <strong class="first"><em class="firstterm"><a href="i18n.html#defloc"><code class="function">I18N:DEFLOCALIZED</code></a><a id="defloc" class="indexterm"></a></em></strong>:
+ <code class="code">(<a href="i18n.html#defloc"><code class="function">I18N:DEFLOCALIZED</code></a> <em class="replaceable"><code>symbol</code></em> <em class="replaceable"><code>language</code></em>
+  <em class="replaceable"><code>value-form</code></em>)</code>
  (One such form for each language.  Languages without an assigned
  value will be treated like the default-language.)
  You can then access the localized value by calling
- <strong class="first"><i class="firstterm"><a href="i18n.html#localized"><tt class="function">I18N:LOCALIZED</tt></a><a id="localized" class="indexterm"></a></i></strong>:
- <tt class="sexp">(<a href="i18n.html#localized"><tt class="function">I18N:LOCALIZED</tt></a> <i class="replaceable"><tt>symbol</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;OPTIONAL</tt></a>
-  <i class="replaceable"><tt>language</tt></i>)</tt></p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="quit.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="p-indep.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">29.2. Extensions-1.2. Quitting <span><b class="command">CLISP</b></span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 29.4. Extensions-1.4. Encodings</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>
+ <strong class="first"><em class="firstterm"><a href="i18n.html#localized"><code class="function">I18N:LOCALIZED</code></a><a id="localized" class="indexterm"></a></em></strong>:
+ <code class="code">(<a href="i18n.html#localized"><code class="function">I18N:LOCALIZED</code></a> <em class="replaceable"><code>symbol</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;OPTIONAL</code></a> <em class="replaceable"><code>language</code></em>)</code></p></div></div><div class="bookinfo"><hr width="100%" /><table width="100%" summary="impnotes meta info"><th><td align="left">These notes document <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> version 2.34.</td><td align="right">Last modified: 2005-07-20</td></th></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img width="125" height="37" alt="[SourceForge]" src="http://sflogo.sourceforge.net/sflogo.php?group_id=1355&amp;type=2&amp;page=i18n" /></a></td></tr></table></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="quit.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ext-p-indep.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">30.3. Quitting <span><strong class="command">CLISP</strong></span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 30.5. Encodings</td></tr></table></div></body></html>

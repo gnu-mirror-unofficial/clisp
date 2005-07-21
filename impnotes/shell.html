@@ -1,109 +1,117 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>30.8. Extensions-2.8. Shell, Pipes and Printing</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="platform.html" title="Chapter 30. Extensions-2: Platform specific Extensions" /><link rel="previous" href="app-dev.html" title="30.7. Extensions-2.7. Application delivery with CLISP" /><link rel="next" href="getenv.html" title="30.9. Extensions-2.9. Operating System&#10;  Environment." /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">30.8. Extensions-2.8. Shell, Pipes and Printing</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="app-dev.html">Prev</a> </td><th width="60%" align="center">Chapter 30. Extensions-2: Platform specific Extensions</th><td width="20%" align="right"> <a accesskey="n" href="getenv.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="shell"></a>30.8. Extensions-2.8. Shell, Pipes and Printing</h2></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="shell.html#exec">30.8.1. Shell</a></span></dt><dt><span class="section"><a href="shell.html#pipe">30.8.2. Pipes</a></span></dt><dt><span class="section"><a href="shell.html#hardcopy">30.8.3. Printing</a></span></dt></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="exec"></a>30.8.1. Shell</h3></div></div><div></div></div><div class="variablelist">
-<!--#ifdef UNIX--><dl><dt>Platform dependent: <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> platforms only.</dt><dd><tt class="sexp">(<a href="shell.html#exec" title="30.8.1. Shell"><tt class="function">EXT:EXECUTE</tt></a> <i class="replaceable"><tt>program</tt></i>
-       <i class="replaceable"><tt>arg<sub>1</sub></tt></i>
-       <i class="replaceable"><tt>arg<sub>2</sub></tt></i> ...)</tt>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cf="http://docbook.sourceforge.net/xmlns/chunkfast/1.0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>31.8. Shell, Pipes and Printing</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V2005-07-12_04:47_snapshot" /><link rel="start" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="ext-platform.html" title="Chapter 31. Platform Specific Extensions" /><link rel="prev" href="app-dev.html" title="31.7. Application delivery with CLISP" /><link rel="next" href="getenv.html" title="31.9. Operating System Environment." /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">31.8. Shell, Pipes and Printing</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="app-dev.html">Prev</a> </td><th width="60%" align="center">Chapter 31. Platform Specific Extensions</th><td width="20%" align="right"> <a accesskey="n" href="getenv.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="shell"></a>31.8. Shell, Pipes and Printing</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="shell.html#exec">31.8.1. Shell</a></span></dt><dt><span class="section"><a href="shell.html#pipe">31.8.2. Pipes</a></span></dt><dt><span class="section"><a href="shell.html#hardcopy">31.8.3. Printing</a></span></dt></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="exec"></a>31.8.1. Shell</h3></div></div></div><div class="variablelist">
+<!--#ifdef UNIX-->
+<dl><dt><span class="plat-dep">Platform Dependent: <span class="plat-dep"><a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a> platform only.</span></span></dt><dd><code class="code">(<a href="shell.html#exec" title="31.8.1. Shell"><code class="function">EXT:EXECUTE</code></a> <em class="replaceable"><code>program</code></em>
+       <em class="replaceable"><code>arg<sub>1</sub></code></em>
+       <em class="replaceable"><code>arg<sub>2</sub></code></em> ...)</code>
    executes an external program.
-   Its name is <i class="replaceable"><tt>program</tt></i> (a full pathname).
-   It is given the strings <i class="replaceable"><tt>arg<sub>1</sub></tt></i>,
-   <i class="replaceable"><tt>arg<sub>2</sub></tt></i>, ... as arguments.
+   Its name is <em class="replaceable"><code>program</code></em> (a full pathname).
+   It is given the <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a>s <em class="replaceable"><code>arg<sub>1</sub></code></em>,
+   <em class="replaceable"><code>arg<sub>2</sub></code></em>, ... as arguments.
  </dd>
 <!--#endif-->
-<!--#ifdef HAVE_SHELL--><dt>Platform dependent: <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a>, <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a> platforms only.</dt><dd><tt class="sexp">(<a href="shell.html#exec" title="30.8.1. Shell"><tt class="function">EXT:SHELL</tt></a> [<i class="replaceable"><tt>command</tt></i>])</tt>
+<!--#ifdef HAVE_SHELL-->
+<dt><span class="plat-dep">Platform Dependent: <span class="plat-dep"><a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a>, <a href="http://winehq.com/" target="_top"><span class="strong"><strong>Win32</strong></span></a> platforms only.</span></span></dt><dd><code class="code">(<a href="shell.html#exec" class="olink"><code class="function">EXT:SHELL</code></a> [<em class="replaceable"><code>command</code></em>])</code>
    calls the operating system's shell, the value of the <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html" target="_top">environment variable</a>
-   <tt class="envar">SHELL</tt> on <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> and <tt class="envar">COMSPEC</tt> on <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>.
-   <tt class="sexp">(<a href="shell.html#exec" title="30.8.1. Shell"><tt class="function">EXT:SHELL</tt></a>)</tt> calls the shell
-   for interactive use.
-   <tt class="sexp">(<a href="shell.html#exec" title="30.8.1. Shell"><tt class="function">EXT:SHELL</tt></a> <i class="replaceable"><tt>command</tt></i>)</tt> calls the shell
-   only for execution of the one given <i class="replaceable"><tt>command</tt></i>.
+   <code class="envar">SHELL</code> on <a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a> and <code class="envar">COMSPEC</code> on <a href="http://winehq.com/" target="_top"><span class="strong"><strong>Win32</strong></span></a>.
+   <code class="code">(<a href="shell.html#exec" class="olink"><code class="function">EXT:SHELL</code></a>)</code> calls the shell for interactive use.
+   <code class="code">(<a href="shell.html#exec" class="olink"><code class="function">EXT:SHELL</code></a> <em class="replaceable"><code>command</code></em>)</code> calls the shell
+   only for execution of the one given <em class="replaceable"><code>command</code></em>.
  </dd>
 <!--#endif-->
-<!--#ifdef PIPES2--><dt><a id="run-prog"></a>Platform dependent: <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a>, <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>
-   platforms only.</dt><dd><p>The functions <a href="shell.html#run-prog"><tt class="function">EXT:RUN-SHELL-COMMAND</tt></a> and <a href="shell.html#run-prog"><tt class="function">EXT:RUN-PROGRAM</tt></a> are the
-   general interface to <a href="shell.html#exec" title="30.8.1. Shell"><tt class="function">EXT:SHELL</tt></a> and the above:</p><p><tt class="sexp">(<a href="shell.html#run-prog"><tt class="function">EXT:RUN-SHELL-COMMAND</tt></a> <i class="replaceable"><tt>command</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
-    <tt class="constant">:INPUT</tt> <tt class="constant">:OUTPUT</tt> <tt class="constant">:IF-OUTPUT-EXISTS</tt> <tt class="constant">:WAIT</tt>)</tt>
+<!--#ifdef PIPES2-->
+<dt><a id="run-prog"></a><span class="plat-dep">Platform Dependent: <span class="plat-dep"><a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a>, <a href="http://winehq.com/" target="_top"><span class="strong"><strong>Win32</strong></span></a> platforms only.</span></span></dt><dd><p>The functions <a href="shell.html#run-prog"><code class="function">EXT:RUN-SHELL-COMMAND</code></a> and <a href="shell.html#run-prog"><code class="function">EXT:RUN-PROGRAM</code></a> are the
+   general interface to <a href="shell.html#exec" class="olink"><code class="function">EXT:SHELL</code></a> and the above:</p><p><code class="code">(<a href="shell.html#run-prog"><code class="function">EXT:RUN-SHELL-COMMAND</code></a> <em class="replaceable"><code>command</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+    <code class="constant">:MAY-EXEC</code> <code class="constant">:INDIRECTP</code>
+    <code class="constant">:INPUT</code> <code class="constant">:OUTPUT</code> <code class="constant">:IF-OUTPUT-EXISTS</code> <code class="constant">:WAIT</code>)</code>
    runs a shell command (including shell built-in commands,
-   like <span><b class="command">DIR</b></span> on <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a>
-   and <span><b class="command">for/do/done</b></span> on <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a>).</p><p><tt class="sexp">(<a href="shell.html#run-prog"><tt class="function">EXT:RUN-PROGRAM</tt></a> <i class="replaceable"><tt>program</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a>
-    <tt class="constant">:ARGUMENTS</tt> <tt class="constant">:INPUT</tt> <tt class="constant">:OUTPUT</tt> <tt class="constant">:IF-OUTPUT-EXISTS</tt> <tt class="constant">:WAIT</tt>)</tt>
-   runs an external program.</p><div class="variablelist"><dl><dt><i class="replaceable"><tt>command</tt></i></dt><dd><p>the shell command.</p>
-<!--#ifdef UNIX--><div class="variablelist"><dl><dt>Platform dependent: <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> platforms only.</dt><dd>The shell the command is passed to is the value
-       of the <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html" target="_top">environment variable</a> <tt class="envar">SHELL</tt>, which normally is <a href="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html" target="_top"><span><b class="command">/bin/sh</b></span></a>.
+   like <span><strong class="command">DIR</strong></span> on <a href="http://winehq.com/" target="_top"><span class="strong"><strong>Win32</strong></span></a>
+   and <span><strong class="command">for/do/done</strong></span> on <a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a>).</p><p><code class="code">(<a href="shell.html#run-prog"><code class="function">EXT:RUN-PROGRAM</code></a> <em class="replaceable"><code>program</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a>
+    <code class="constant">:MAY-EXEC</code> <code class="constant">:INDIRECTP</code>
+    <code class="constant">:ARGUMENTS</code> <code class="constant">:INPUT</code> <code class="constant">:OUTPUT</code> <code class="constant">:IF-OUTPUT-EXISTS</code> <code class="constant">:WAIT</code>)</code>
+   runs an external program.</p><div class="variablelist"><dl><dt><em class="replaceable"><code>command</code></em></dt><dd><p>the shell command.</p>
+<!--#ifdef UNIX-->
+<div class="variablelist"><dl><dt><span class="plat-dep">Platform Dependent: <span class="plat-dep"><a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a> platform only.</span></span></dt><dd>The shell the command is passed to is the value
+       of the <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html" target="_top">environment variable</a> <code class="envar">SHELL</code>, which normally is <a href="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html" target="_top"><span><strong class="command">/bin/sh</strong></span></a>.
        The command should be a “<span class="quote">simple command</span>”;
        a “<span class="quote">command list</span>” should be enclosed in "{
-       ... ; }" (for <a href="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html" target="_top"><span><b class="command">/bin/sh</b></span></a>) or "( ... )" (for <tt class="filename">/bin/csh</tt>).
+       ... ; }" (for <a href="http://www.opengroup.org/onlinepubs/007904975/utilities/sh.html" target="_top"><span><strong class="command">/bin/sh</strong></span></a>) or "( ... )" (for <code class="filename">/bin/csh</code>).
      </dd></dl></div>
 <!--#endif-->
-</dd><dt><i class="replaceable"><tt>program</tt></i></dt><dd>the program.  The directories listed in the
-     <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html" target="_top">environment variable</a> <tt class="envar">PATH</tt> will be searched for it.
-    </dd><dt><tt class="constant">:ARGUMENTS</tt></dt><dd>a list of arguments (strings) that are given to the
-     program.</dd><dt><tt class="constant">:INPUT</tt></dt><dd>where the program's input is to come from: either
-     <tt class="constant">:TERMINAL</tt> (the standard input, default) or
-     <tt class="constant">:STREAM</tt> (a Lisp stream to be created) or
-     a pathname (an input file) or
-     <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> (no input at all).</dd><dt><tt class="constant">:OUTPUT</tt></dt><dd>where the program's output is to be sent to: either
-     <tt class="constant">:TERMINAL</tt> (the standard output, default) or
-     <tt class="constant">:STREAM</tt> (a Lisp stream to be created) or
-     a pathname (an output file) or
-     <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> (ignore the output).</dd><dt><tt class="constant">:IF-OUTPUT-EXISTS</tt></dt><dd>what to do if the <tt class="constant">:OUTPUT</tt> file already exists.
-     The possible values are <tt class="constant">:OVERWRITE</tt>, <tt class="constant">:APPEND</tt>, <tt class="constant">:ERROR</tt>,
-     with the same meaning as for <a href="http://www.lisp.org/HyperSpec/Body/fun_open.html" target="_top"><tt class="function">OPEN</tt></a>. The default is <tt class="constant">:OVERWRITE</tt>.
-    </dd><dt><tt class="constant">:WAIT</tt></dt><dd>whether to wait for program termination or not
+</dd><dt><em class="replaceable"><code>program</code></em></dt><dd>the program.  The directories listed in the
+     <a href="http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap08.html" target="_top">environment variable</a> <code class="envar">PATH</code> will be searched for it.
+    </dd><dt><code class="constant">:ARGUMENTS</code></dt><dd>a list of arguments (<a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a>s) that are given
+      to the program.</dd><dt><code class="constant">:INPUT</code></dt><dd>where the program's input is to come from: either
+     <code class="constant">:TERMINAL</code> (the standard input, default) or
+     <code class="constant">:STREAM</code> (a Lisp <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> to be created) or
+     a <a href="filename-dict.html#path-des">pathname designator</a> (an input file) or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a> (no input at all).
+   </dd><dt><code class="constant">:OUTPUT</code></dt><dd>where the program's output is to be sent to: either
+     <code class="constant">:TERMINAL</code> (the standard output, default) or
+     <code class="constant">:STREAM</code> (a Lisp <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> to be created) or
+     a <a href="filename-dict.html#path-des">pathname designator</a> (an output file) or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a> (ignore the output).
+   </dd><dt><code class="constant">:IF-OUTPUT-EXISTS</code></dt><dd>what to do if the <code class="constant">:OUTPUT</code> file already exists.
+     The possible values are <code class="constant">:OVERWRITE</code>, <code class="constant">:APPEND</code>, <code class="constant">:ERROR</code>,
+     with the same meaning as for <a href="http://www.lisp.org/HyperSpec/Body/fun_open.html" target="_top"><code class="function">OPEN</code></a>. The default is <code class="constant">:OVERWRITE</code>.
+    </dd><dt><code class="constant">:WAIT</code></dt><dd>whether to wait for program termination or not
      (this is useful when no i/o to the process is needed);
-     the default is <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><tt class="constant">T</tt></a>, i.e., synchronous execution.
+     the default is <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><code class="constant">T</code></a>, i.e., synchronous execution.
     </dd>
-<!--#ifdef UNIX--><dt><tt class="constant">:MAY-EXEC</tt></dt><dd>pass <span><b class="command">exec</b></span> to the underlying
-    shell (<a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a> only).</dd>
+<!--#ifdef UNIX-->
+<dt><code class="constant">:MAY-EXEC</code></dt><dd>pass <span><strong class="command">exec</strong></span> to the underlying
+    shell (<a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a> only).</dd>
 <!--#endif-->
-<!--#ifdef WIN32--><dt><tt class="constant">:INDIRECTP</tt></dt><dd>use a shell to run the command, e.g.,
-    <tt class="sexp">(<a href="shell.html#run-prog"><tt class="function">EXT:RUN-PROGRAM</tt></a> "dir" :indirectp <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><tt class="constant">T</tt></a>)</tt>
-    will run the shell built-in command <span><b class="command">DIR</b></span>.
-    (<a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a> only).</dd>
+<!--#ifdef WIN32-->
+<dt><code class="constant">:INDIRECTP</code></dt><dd>use a shell to run the command, e.g.,
+    <code class="code">(<a href="shell.html#run-prog"><code class="function">EXT:RUN-PROGRAM</code></a> "dir" :indirectp <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><code class="constant">T</code></a>)</code>
+    will run the shell built-in command <span><strong class="command">DIR</strong></span>.
+    This argument defaults to <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><code class="constant">T</code></a> for <a href="shell.html#run-prog"><code class="function">EXT:RUN-SHELL-COMMAND</code></a> and to <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a> for <a href="shell.html#run-prog"><code class="function">EXT:RUN-PROGRAM</code></a>.
+    (<a href="http://winehq.com/" target="_top"><span class="strong"><strong>Win32</strong></span></a> only).</dd>
 <!--#endif-->
-</dl></div><p>If <tt class="constant">:STREAM</tt> was specified for <tt class="constant">:INPUT</tt> or <tt class="constant">:OUTPUT</tt>, a Lisp
- <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> is returned.
- If <tt class="constant">:STREAM</tt> was specified for both <tt class="constant">:INPUT</tt> and <tt class="constant">:OUTPUT</tt>, three
- Lisp <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a>s are returned, as for the function <a href="shell.html#pipe" title="30.8.2. Pipes"><tt class="function">EXT:MAKE-PIPE-IO-STREAM</tt></a>.
- This use of <a href="shell.html#run-prog"><tt class="function">EXT:RUN-PROGRAM</tt></a> can cause
- <a href="shell.html#deadlock">deadlocks</a>, see <a href="shell.html#pipe" title="30.8.2. Pipes"><tt class="function">EXT:MAKE-PIPE-IO-STREAM</tt></a>.</p></dd>
+</dl></div><p>If <code class="constant">:STREAM</code> was specified for <code class="constant">:INPUT</code> or <code class="constant">:OUTPUT</code>, a Lisp
+ <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> is returned.
+ If <code class="constant">:STREAM</code> was specified for both <code class="constant">:INPUT</code> and <code class="constant">:OUTPUT</code>, three
+ Lisp <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a>s are returned, as for the function <a href="shell.html#pipe" title="31.8.2. Pipes"><code class="function">EXT:MAKE-PIPE-IO-STREAM</code></a>.
+ This use of <a href="shell.html#run-prog"><code class="function">EXT:RUN-PROGRAM</code></a> can cause
+ <a href="shell.html#deadlock">deadlocks</a>, see <a href="shell.html#pipe" title="31.8.2. Pipes"><code class="function">EXT:MAKE-PIPE-IO-STREAM</code></a>.</p></dd>
 <!--#endif-->
-</dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="pipe"></a>30.8.2. Pipes</h3></div></div><div></div></div>
-<!--#ifdef PIPES--><div class="variablelist"><dl><dt>Platform dependent: <a href="http://www.UNIX-systems.org/online.html" target="_top"><strong>UNIX</strong></a>, <a href="http://www.willows.com/" target="_top"><strong>Win32</strong></a> platforms only.</dt><dd><div class="variablelist"><dl><dt><tt class="sexp">(<a href="shell.html#pipe" title="30.8.2. Pipes"><tt class="function">EXT:MAKE-PIPE-INPUT-STREAM</tt></a>
-    <i class="replaceable"><tt>command</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a> <a href="stream-dict.html#eltype"><tt class="constant">:ELEMENT-TYPE</tt></a> <a href="stream-dict.html#extfmt"><tt class="constant">:EXTERNAL-FORMAT</tt></a> <a href="stream-dict.html#buffered"><tt class="constant">:BUFFERED</tt></a>)</tt></dt><dd>returns an <a href="http://www.lisp.org/HyperSpec/Body/glo_i.html#input" target="_top">input</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> that will supply the output
+</dl></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="pipe"></a>31.8.2. Pipes</h3></div></div></div>
+<!--#ifdef PIPES-->
+<div class="variablelist"><dl><dt><span class="plat-dep">Platform Dependent: <span class="plat-dep"><a href="http://www.UNIX-systems.org/online.html" target="_top"><span class="strong"><strong>UNIX</strong></span></a>, <a href="http://winehq.com/" target="_top"><span class="strong"><strong>Win32</strong></span></a> platforms only.</span></span></dt><dd><div class="variablelist"><dl><dt><code class="code">(<a href="shell.html#pipe" title="31.8.2. Pipes"><code class="function">EXT:MAKE-PIPE-INPUT-STREAM</code></a> <em class="replaceable"><code>command</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> <a href="stream-dict.html#eltype"><code class="constant">:ELEMENT-TYPE</code></a>
+    <a href="stream-dict.html#extfmt"><code class="constant">:EXTERNAL-FORMAT</code></a> <a href="stream-dict.html#buffered"><code class="constant">:BUFFERED</code></a>)</code></dt><dd>returns an <a href="http://www.lisp.org/HyperSpec/Body/glo_i.html#input" target="_top">input</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> that will supply the output
   from the execution of the given operating system command.
-  </dd><dt><tt class="sexp">(<a href="shell.html#pipe" title="30.8.2. Pipes"><tt class="function">EXT:MAKE-PIPE-OUTPUT-STREAM</tt></a>
-   <i class="replaceable"><tt>command</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a> <a href="stream-dict.html#eltype"><tt class="constant">:ELEMENT-TYPE</tt></a> <a href="stream-dict.html#extfmt"><tt class="constant">:EXTERNAL-FORMAT</tt></a> <a href="stream-dict.html#buffered"><tt class="constant">:BUFFERED</tt></a>)</tt></dt><dd>returns an <a href="http://www.lisp.org/HyperSpec/Body/glo_o.html#output" target="_top">output</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> that will pass its output as
+  </dd><dt><code class="code">(<a href="shell.html#pipe" title="31.8.2. Pipes"><code class="function">EXT:MAKE-PIPE-OUTPUT-STREAM</code></a> <em class="replaceable"><code>command</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> <a href="stream-dict.html#eltype"><code class="constant">:ELEMENT-TYPE</code></a>
+   <a href="stream-dict.html#extfmt"><code class="constant">:EXTERNAL-FORMAT</code></a> <a href="stream-dict.html#buffered"><code class="constant">:BUFFERED</code></a>)</code></dt><dd>returns an <a href="http://www.lisp.org/HyperSpec/Body/glo_o.html#output" target="_top">output</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> that will pass its output as
    input to the execution of the given operating system command.
   </dd>
-<!--#ifdef PIPES2--><dt><tt class="sexp">(<a href="shell.html#pipe" title="30.8.2. Pipes"><tt class="function">EXT:MAKE-PIPE-IO-STREAM</tt></a>
-   <i class="replaceable"><tt>command</tt></i> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><tt class="literal">&amp;KEY</tt></a> <a href="stream-dict.html#eltype"><tt class="constant">:ELEMENT-TYPE</tt></a> <a href="stream-dict.html#extfmt"><tt class="constant">:EXTERNAL-FORMAT</tt></a> <a href="stream-dict.html#buffered"><tt class="constant">:BUFFERED</tt></a>)</tt></dt><dd><p>returns three values.
-  The first value is a <a href="http://www.lisp.org/HyperSpec/Body/glo_b.html#bidirectional" target="_top">bidirectional</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> that will simultaneously pass its output
+<!--#ifdef PIPES2-->
+<dt><code class="code">(<a href="shell.html#pipe" title="31.8.2. Pipes"><code class="function">EXT:MAKE-PIPE-IO-STREAM</code></a> <em class="replaceable"><code>command</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> <a href="stream-dict.html#eltype"><code class="constant">:ELEMENT-TYPE</code></a>
+   <a href="stream-dict.html#extfmt"><code class="constant">:EXTERNAL-FORMAT</code></a> <a href="stream-dict.html#buffered"><code class="constant">:BUFFERED</code></a>)</code></dt><dd><p>returns three values.
+  The <a href="http://www.lisp.org/HyperSpec/Body/glo_p.html#primary_value" target="_top">primary value</a> is a <a href="http://www.lisp.org/HyperSpec/Body/glo_b.html#bidirectional" target="_top">bidirectional</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> that will simultaneously pass its output
   as input to the execution of the given operating system command and
   supply the output from this command as input.
-  The second and third value will be the <a href="http://www.lisp.org/HyperSpec/Body/glo_i.html#input" target="_top">input</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> and the <a href="http://www.lisp.org/HyperSpec/Body/glo_o.html#output" target="_top">output</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a> that
-  make up the <a href="http://www.lisp.org/HyperSpec/Body/glo_b.html#bidirectional" target="_top">bidirectional</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a>, respectively.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>Note that these three streams must be closed
-   individually.</p></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title"><a id="deadlock"></a>Warning</h3><p>Note that improper use of this function
+  The second and third value are the <a href="http://www.lisp.org/HyperSpec/Body/glo_i.html#input" target="_top">input</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> and the <a href="http://www.lisp.org/HyperSpec/Body/glo_o.html#output" target="_top">output</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a> that
+  make up the <a href="http://www.lisp.org/HyperSpec/Body/glo_b.html#bidirectional" target="_top">bidirectional</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a>, respectively.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>These three streams must be closed
+   individually.</p></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title"><a id="deadlock"></a>Warning</h3><p>Improper use of this function
    can lead to <span class="emphasis"><em>deadlocks</em></span>.
    Use it at your own risk!</p><p>A deadlock occurs if the command and your Lisp program either
    both try to read from each other at the same time or both try to
    write to each other at the same time.</p><p>To avoid deadlocks, it is recommended that you fix a
    protocol between the command and your program and avoid any hidden
-   buffering: use <a href="http://www.lisp.org/HyperSpec/Body/fun_read-char.html" target="_top"><tt class="function">READ-CHAR</tt></a>, <a href="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html" target="_top"><tt class="function">READ-CHAR-NO-HANG</tt></a>, <a href="http://www.lisp.org/HyperSpec/Body/fun_listen.html" target="_top"><tt class="function">LISTEN</tt></a>,
-   <a href="socket.html#so-status"><tt class="function">SOCKET:SOCKET-STATUS</tt></a> instead of <a href="http://www.lisp.org/HyperSpec/Body/fun_read-line.html" target="_top"><tt class="function">READ-LINE</tt></a> and <a href="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html" target="_top"><tt class="function">READ</tt></a> on the input side, and
-   complete every output operation by a <a href="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html" target="_top"><tt class="function">FINISH-OUTPUT</tt></a>.
+   buffering: use <a href="http://www.lisp.org/HyperSpec/Body/fun_read-char.html" target="_top"><code class="function">READ-CHAR</code></a>, <a href="http://www.lisp.org/HyperSpec/Body/fun_read-char-no-hang.html" target="_top"><code class="function">READ-CHAR-NO-HANG</code></a>, <a href="http://www.lisp.org/HyperSpec/Body/fun_listen.html" target="_top"><code class="function">LISTEN</code></a>,
+   <a href="socket.html#so-status"><code class="function">SOCKET:SOCKET-STATUS</code></a> instead of <a href="http://www.lisp.org/HyperSpec/Body/fun_read-line.html" target="_top"><code class="function">READ-LINE</code></a> and <a href="http://www.lisp.org/HyperSpec/Body/fun_readcm_re_g-whitespace.html" target="_top"><code class="function">READ</code></a> on the input side, and
+   complete every output operation by a <a href="http://www.lisp.org/HyperSpec/Body/fun_finish-ou_clear-output.html" target="_top"><code class="function">FINISH-OUTPUT</code></a>.
    The same precautions must apply to the called command as well.
 </p></div></dd>
 <!--#endif-->
 </dl></div></dd></dl></div>
 <!--#endif-->
-</div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="hardcopy"></a>30.8.3. Printing</h3></div></div><div></div></div><p>The macro
- <strong class="first"><i class="firstterm"><a href="shell.html#hardcopy" title="30.8.3. Printing"><tt class="function">EXT:WITH-OUTPUT-TO-PRINTER</tt></a><a id="with-print" class="indexterm"></a></i></strong>:
-</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(<a href="shell.html#hardcopy" title="30.8.3. Printing"><tt class="function">EXT:WITH-OUTPUT-TO-PRINTER</tt></a> (<i class="replaceable"><tt>variable</tt></i> [<a href="stream-dict.html#extfmt"><tt class="constant">:EXTERNAL-FORMAT</tt></a>])
-  {<i class="replaceable"><tt>declaration</tt></i>}*
-  {<i class="replaceable"><tt>form</tt></i>}*)
-</pre></td></tr></table><p>
- binds the variable <i class="replaceable"><tt>variable</tt></i> to an <a href="http://www.lisp.org/HyperSpec/Body/glo_o.html#output" target="_top">output</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><tt class="classname">STREAM</tt></a>
- that sends its output to the printer.</p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="app-dev.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="platform.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="getenv.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">30.7. Extensions-2.7. Application delivery with <span><b class="command">CLISP</b></span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 30.9. Extensions-2.9. Operating System
-  Environment.</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>
+</div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="hardcopy"></a>31.8.3. Printing</h3></div></div></div><p>The macro
+ <strong class="first"><em class="firstterm"><a href="shell.html#hardcopy" title="31.8.3. Printing"><code class="function">EXT:WITH-OUTPUT-TO-PRINTER</code></a><a id="with-print" class="indexterm"></a></em></strong>:
+</p><pre class="programlisting">
+(<a href="shell.html#hardcopy" title="31.8.3. Printing"><code class="function">EXT:WITH-OUTPUT-TO-PRINTER</code></a> (<em class="replaceable"><code>variable</code></em> [<a href="stream-dict.html#extfmt"><code class="constant">:EXTERNAL-FORMAT</code></a>])
+  {<em class="replaceable"><code>declaration</code></em>}*
+  {<em class="replaceable"><code>form</code></em>}*)
+</pre><p>
+ binds the variable <em class="replaceable"><code>variable</code></em> to an <a href="http://www.lisp.org/HyperSpec/Body/glo_o.html#output" target="_top">output</a> <a href="http://www.lisp.org/HyperSpec/Body/syscla_stream.html" target="_top"><code class="classname">STREAM</code></a>
+ that sends its output to the printer.</p></div></div><div class="bookinfo"><hr width="100%" /><table width="100%" summary="impnotes meta info"><th><td align="left">These notes document <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> version 2.34.</td><td align="right">Last modified: 2005-07-20</td></th></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img width="125" height="37" alt="[SourceForge]" src="http://sflogo.sourceforge.net/sflogo.php?group_id=1355&amp;type=2&amp;page=shell" /></a></td></tr></table></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="app-dev.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ext-platform.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="getenv.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">31.7. Application delivery with <span><strong class="command">CLISP</strong></span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 31.9. Operating System Environment.</td></tr></table></div></body></html>

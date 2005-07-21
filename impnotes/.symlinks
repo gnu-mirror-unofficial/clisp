@@ -2,4 +2,11 @@
 ../clisp.png clisp.png
 ../impnotes.css impnotes.css
 ../regexp.html regexp.html
-../wildcard.html wildcard.html
+../mop-classes-all.png mop-classes-all.png
+../mop-classes-class.png mop-classes-class.png
+../mop-classes-genfun.png mop-classes-genfun.png
+../mop-classes-methcomb.png mop-classes-methcomb.png
+../mop-classes-method.png mop-classes-method.png
+../mop-classes-slotdef.png mop-classes-slotdef.png
+../mop-classes-specializer.png mop-classes-specializer.png
+impnotes-top.html index.html

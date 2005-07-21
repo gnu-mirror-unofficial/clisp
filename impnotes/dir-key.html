@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cf="http://docbook.sourceforge.net/xmlns/chunkfast/1.0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>32.3. Directory Access</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V2005-07-12_04:47_snapshot" /><link rel="start" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="ext-modules.html" title="Chapter 32. Extensions Implemented as Modules" /><link rel="prev" href="netica.html" title="32.2. Netica Interface" /><link rel="next" href="berkeley-db.html" title="32.4. Berkeley DB access." /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">32.3. Directory Access</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="netica.html">Prev</a> </td><th width="60%" align="center">Chapter 32. Extensions Implemented as Modules</th><td width="20%" align="right"> <a accesskey="n" href="berkeley-db.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="dir-key"></a>32.3. Directory Access</h2></div></div></div><p>This module provides some directory access from lisp,
+ in package <a href="dir-key.html" title="32.3. Directory Access"><strong class="package">“<span class="quote">LDAP</span>”</strong></a>.  3 types of directory keys
+ may exist, depending on the compilation environment.</p><div class="variablelist"><a id="dir-key-type"></a><p class="title"><b>valid directory key types</b></p><dl><dt>:win32</dt><dd><a href="http://winehq.com/" target="_top"><span class="strong"><strong>Win32</strong></span></a> registry access
+  </dd><dt>:gnome</dt><dd><a href="http://developer.gnome.org/doc/API/libgnome/gnome-gnome-config.html" target="_top">gnome-config</a> access
+  </dd><dt>:ldap</dt><dd>LDAP interface via
+   <a href="http://www.openldap.org" target="_top">OpenLDAP</a> or compatible
+  </dd></dl></div><p>The following functions and macros are exported (please note that
+these features are experimental and the API may be modified in the
+future).</p><div class="variablelist"><dl><dt><a id="dir-key-open"></a><code class="code">(<a href="dir-key.html#dir-key-open"><code class="function">LDAP:DIR-KEY-OPEN</code></a>
+   <em class="replaceable"><code>dkey</code></em> <em class="replaceable"><code>pathname</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> (<code class="constant">:DIRECTION</code> <code class="constant">:INPUT</code>)
+   <code class="constant">:IF-DOES-NOT-EXIST</code>)</code></dt><dd>Open the directory key under <em class="replaceable"><code>dkey</code></em>, which should
+   be either an open directory key or a valid <a href="dir-key.html#dir-key-type">directory key type</a>.
+   The meaning of the <code class="constant">:DIRECTION</code> and <code class="constant">:IF-DOES-NOT-EXIST</code> keyword
+   arguments is the same as for <a href="http://www.lisp.org/HyperSpec/Body/fun_open.html" target="_top"><code class="function">OPEN</code></a>.</dd><dt><a id="dir-key-close"></a><code class="code">(<a href="dir-key.html#dir-key-close"><code class="function">LDAP:DIR-KEY-CLOSE</code></a>
+    <em class="replaceable"><code>dkey</code></em>)</code></dt><dd>Close the directory key.  The preferred way is to
+   use the <a href="dir-key.html#with-dir-key-open"><code class="function">LDAP:WITH-DIR-KEY-OPEN</code></a> macro.</dd><dt><a id="with-dir-key-open"></a><code class="code">(<a href="dir-key.html#with-dir-key-open"><code class="function">LDAP:WITH-DIR-KEY-OPEN</code></a> (<em class="replaceable"><code>variable</code></em>
+    <em class="replaceable"><code>dkey</code></em> <em class="replaceable"><code>pathname</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;REST</code></a> {<em class="replaceable"><code>option</code></em>}*) <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html" target="_top"><code class="literal">&amp;BODY</code></a>
+    <em class="replaceable"><code>body</code></em>)</code></dt><dd>Open the directory key (by calling <a href="dir-key.html#dir-key-open"><code class="function">LDAP:DIR-KEY-OPEN</code></a>
+   on <em class="replaceable"><code>dkey</code></em>, <em class="replaceable"><code>pathname</code></em> and <em class="replaceable"><code>option</code></em>s), bind it to <em class="replaceable"><code>variable</code></em>,
+   execute <em class="replaceable"><code>body</code></em>, then close it with <a href="dir-key.html#dir-key-close"><code class="function">LDAP:DIR-KEY-CLOSE</code></a>.
+ </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-TYPE</code>
+    <em class="replaceable"><code>dkey</code></em>)</code></dt><dd>Return the <a href="dir-key.html#dir-key-type">directory key type</a> of the directory key
+  </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-PATH</code>
+                <em class="replaceable"><code>dkey</code></em>)</code></dt><dd>Return the path of this directory key, which is the
+   <em class="replaceable"><code>pathname</code></em> argument of <a href="dir-key.html#dir-key-open"><code class="function">LDAP:DIR-KEY-OPEN</code></a> if <em class="replaceable"><code>dkey</code></em> was a <a href="dir-key.html#dir-key-type">directory key type</a> or the
+   concatenation of the <em class="replaceable"><code>pathname</code></em> argument and the
+   <code class="function">ldap:dir-key-path</code> of <em class="replaceable"><code>dkey</code></em>.
+   </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-DIRECTION</code>
+    <em class="replaceable"><code>dkey</code></em>)</code></dt><dd>One of <code class="constant">:INPUT</code>, <code class="constant">:OUTPUT</code> and <code class="constant">:IO</code>, indicating
+   the permitted operation on this key and its derivatives.
+   </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-CLOSED-P</code>
+    <em class="replaceable"><code>dkey</code></em>)</code></dt><dd>Check whether the key has been closed.
+   It is not an error to close a closed key.
+   </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-SUBKEY-DELETE</code>
+     <em class="replaceable"><code>dkey</code></em> <em class="replaceable"><code>subkey</code></em>)</code>
+   <code class="code">(<code class="function">LDAP:DIR-KEY-VALUE-DELETE</code>
+     <em class="replaceable"><code>dkey</code></em> <em class="replaceable"><code>attribute</code></em>)</code></dt><dd>Delete the specified subkey or attribute.
+  </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-SUBKEY</code>
+    <em class="replaceable"><code>dkey</code></em>)</code>
+  <code class="code">(<code class="function">LDAP:DIR-KEY-ATTRIBUTES</code> <em class="replaceable"><code>dkey</code></em>)</code></dt><dd>Return the list of the subkeys or attributes.
+  </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-VALUE</code> <em class="replaceable"><code>dkey</code></em>
+    <em class="replaceable"><code>attribute</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;OPTIONAL</code></a>
+    <em class="replaceable"><code>default</code></em>)</code></dt><dd>Return the value of the specified attribute,
+   similar to <a href="http://www.lisp.org/HyperSpec/Body/acc_gethash.html" target="_top"><code class="function">GETHASH</code></a> and <a href="http://www.lisp.org/HyperSpec/Body/mac_setfcm_psetf.html" target="_top"><code class="function">SETF</code></a>able just like <a href="http://www.lisp.org/HyperSpec/Body/acc_gethash.html" target="_top"><code class="function">GETHASH</code></a>.
+   </dd><dt><code class="code">(<code class="function">LDAP:DIR-KEY-INFO</code>
+    <em class="replaceable"><code>dkey</code></em>)</code></dt><dd>Return some information about the directory key.
+   This is highly platform-dependent and will probably be removed or
+   replaced or modified in the future.</dd><dt><a id="with-dir-key-search"></a><code class="code">(<a href="dir-key.html#with-dir-key-search"><code class="function">LDAP:WITH-DIR-KEY-SEARCH</code></a>
+    (<em class="replaceable"><code>key-iter</code></em>
+    <em class="replaceable"><code>atribute-iter</code></em>
+    <em class="replaceable"><code>dkey</code></em> <em class="replaceable"><code>pathname</code></em> <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-1.html" target="_top"><code class="literal">&amp;KEY</code></a> <code class="constant">:scope</code>)
+    <a href="http://www.lisp.org/HyperSpec/Body/sec_3-4-4.html" target="_top"><code class="literal">&amp;BODY</code></a> <em class="replaceable"><code>body</code></em>)</code></dt><dd><p>This is the main way to iterate over the subtree
+   under the key <em class="replaceable"><code>dkey</code></em>+<em class="replaceable"><code>pathname</code></em>.</p><p><em class="replaceable"><code>key-iter</code></em> is a non-<a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a> symbol
+    and is bound via <a href="http://www.lisp.org/HyperSpec/Body/speope_fletcm_scm_macrolet.html" target="_top"><code class="function">MACROLET</code></a> to a macro, each call of which returns
+    the next subkey.</p><p><em class="replaceable"><code>atribute-iter</code></em> is a symbol and is
+    bound, when non-<a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a>, to a macro, each call of which returns two
+   values - the next attribute and its value.</p><p>The <code class="constant">:scope</code> keyword argument specifies the
+    scope of the search and can be
+   </p><div class="variablelist"><dl><dt><code class="constant">:self</code></dt><dd>iterate over the key itself
+     </dd><dt><code class="constant">:level</code></dt><dd>iterate over the children of the key
+     </dd><dt><code class="constant">:tree</code></dt><dd>iterate over the subtree
+     </dd></dl></div><p><a href="dir-key.html#with-dir-key-search"><code class="function">LDAP:WITH-DIR-KEY-SEARCH</code></a> is used to implement
+    <code class="function">LDAP:DIR-KEY-VALUES</code>,
+    <code class="function">LDAP:DIR-KEY-CHILDREN</code> and
+    <code class="function">LDAP:DIR-KEY-DUMP-TREE</code> in
+    <code class="filename">dirkey.lisp</code>.
+    </p></dd></dl></div></div><div class="bookinfo"><hr width="100%" /><table width="100%" summary="impnotes meta info"><th><td align="left">These notes document <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> version 2.34.</td><td align="right">Last modified: 2005-07-20</td></th></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img width="125" height="37" alt="[SourceForge]" src="http://sflogo.sourceforge.net/sflogo.php?group_id=1355&amp;type=2&amp;page=dir-key" /></a></td></tr></table></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="netica.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ext-modules.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="berkeley-db.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">32.2. Netica Interface </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 32.4. Berkeley DB access.</td></tr></table></div></body></html>

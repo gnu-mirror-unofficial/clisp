@@ -1,181 +1,179 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>30.4. Extensions-2.4. The Amiga Foreign Function Call Facility</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="platform.html" title="Chapter 30. Extensions-2: Platform specific Extensions" /><link rel="previous" href="dffi.html" title="30.3. Extensions-2.3. The Foreign Function Call Facility" /><link rel="next" href="socket.html" title="30.5. Extensions-2.5. Socket Streams" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">30.4. Extensions-2.4. The Amiga Foreign Function Call Facility</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dffi.html">Prev</a> </td><th width="60%" align="center">Chapter 30. Extensions-2: Platform specific Extensions</th><td width="20%" align="right"> <a accesskey="n" href="socket.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="affi"></a>30.4. Extensions-2.4. The Amiga Foreign Function Call Facility</h2></div><div><h3 class="subtitle">Platform dependent: no platform supports this currently.</h3></div></div><div></div></div><div class="toc"><dl><dt><span class="section"><a href="affi.html#affi-design">30.4.1. Design issues</a></span></dt><dt><span class="section"><a href="affi.html#affi-overview">30.4.2. Overview</a></span></dt><dt><span class="section"><a href="affi.html#affi-libs">30.4.3. Foreign Libraries</a></span></dt><dt><span class="section"><a href="affi.html#affi-types">30.4.4. (Foreign) <span><b class="command">C</b></span> types</a></span></dt><dt><span class="section"><a href="affi.html#affi-functions">30.4.5. Foreign functions</a></span></dt><dt><span class="section"><a href="affi.html#affi-memory-access">30.4.6. Memory access</a></span></dt><dt><span class="section"><a href="affi.html#affi-func-def">30.4.7. Function Definition Files</a></span></dt><dt><span class="section"><a href="affi.html#affi-hints">30.4.8. Hints</a></span></dt><dt><span class="section"><a href="affi.html#affi-caveats">30.4.9. Caveats</a></span></dt><dt><span class="section"><a href="affi.html#affi-examples">30.4.10. Examples</a></span></dt></dl></div><p><b>Another Foreign Function Interface. </b>All symbols relating to the simple foreign function interface are
- exported from the package <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>. To use them,
- <tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/fun_use-package.html" target="_top"><tt class="function">USE-PACKAGE</tt></a> "AFFI")</tt>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-design"></a>30.4.1. Design issues</h3></div></div><div></div></div><p><a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> was designed to be small in size but powerful enough to
-use most library functions.  Lisp files may be compiled to <tt class="filename">#P".fas"</tt>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cf="http://docbook.sourceforge.net/xmlns/chunkfast/1.0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>31.4. The Amiga Foreign Function Call Facility</title><link rel="stylesheet" href="impnotes.css" type="text/css" /><link rev="made" href="mailto:clisp-list@sf.net" /><meta name="generator" content="DocBook XSL Stylesheets V2005-07-12_04:47_snapshot" /><link rel="start" href="index.html" title="Implementation Notes for GNU CLISP." /><link rel="up" href="ext-platform.html" title="Chapter 31. Platform Specific Extensions" /><link rel="prev" href="dffi.html" title="31.3. The Foreign Function Call Facility" /><link rel="next" href="socket.html" title="31.5. Socket Streams" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">31.4. The Amiga Foreign Function Call Facility</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dffi.html">Prev</a> </td><th width="60%" align="center">Chapter 31. Platform Specific Extensions</th><td width="20%" align="right"> <a accesskey="n" href="socket.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="affi"></a>31.4. The Amiga Foreign Function Call Facility</h2></div><div><h3 class="subtitle"><span class="plat-dep">Platform Dependent: <span class="plat-dep">No platform supports this currently</span></span></h3></div></div></div><div class="toc"><dl><dt><span class="section"><a href="affi.html#affi-design">31.4.1. Design issues</a></span></dt><dt><span class="section"><a href="affi.html#affi-overview">31.4.2. Overview</a></span></dt><dt><span class="section"><a href="affi.html#affi-libs">31.4.3. Foreign Libraries</a></span></dt><dt><span class="section"><a href="affi.html#affi-types">31.4.4. (Foreign) <span><strong class="command">C</strong></span> types</a></span></dt><dt><span class="section"><a href="affi.html#affi-functions">31.4.5. Foreign functions</a></span></dt><dt><span class="section"><a href="affi.html#affi-memory-access">31.4.6. Memory access</a></span></dt><dt><span class="section"><a href="affi.html#affi-func-def">31.4.7. Function Definition Files</a></span></dt><dt><span class="section"><a href="affi.html#affi-hints">31.4.8. Hints</a></span></dt><dt><span class="section"><a href="affi.html#affi-caveats">31.4.9. Caveats</a></span></dt><dt><span class="section"><a href="affi.html#affi-examples">31.4.10. Examples</a></span></dt></dl></div><p><b>Another Foreign Function Interface. </b>All symbols relating to the simple foreign function interface are
+ exported from the package <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>. To use them,
+ <code class="code">(<a href="http://www.lisp.org/HyperSpec/Body/fun_use-package.html" target="_top"><code class="function">USE-PACKAGE</code></a> "AFFI")</code>.</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-design"></a>31.4.1. Design issues</h3></div></div></div><p><a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> was designed to be small in size but powerful enough to
+use most library functions.  Lisp files may be compiled to <code class="filename">#P".fas"</code>
 files without the need to load function definition files at run-time and
-without external <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> or linker support.
-<a href="image.html" title="29.1. Extensions-1.1. Saving an Image">memory image</a>s can be created, provided that the function libraries are
-opened at run-time.</p><p>Therefore, <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> supports only primitive <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> types
+without external <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><strong class="command">C</strong></span></a> or linker support.
+<a href="image.html" class="olink">memory image</a>s can be created, provided that the function libraries are
+opened at run-time.</p><p>Therefore, <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> supports only primitive <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><strong class="command">C</strong></span></a> types
 (integers 8, 16 and 32 bits wide, signed or unsigned, pointers) and
 defines no new types or classes.  Foreign functions are not first-class
-objects (you can define a λ yourself), name spaces are
-separate.</p><p>The <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> does no tracking of resources.  Use <a href="final.html" title="29.7. Extensions-1.7. Finalization"><tt class="function">EXT:FINALIZE</tt></a>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-overview"></a>30.4.2. Overview</h3></div></div><div></div></div><p>These are the <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> forms:</p><p><tt class="sexp">(declare-library-base
- <i class="replaceable"><tt>keyword-base</tt></i> <i class="replaceable"><tt>library-name</tt></i>)</tt></p><p><tt class="sexp">(require-library-functions <i class="replaceable"><tt>library-name</tt></i>
- [(:import {<i class="replaceable"><tt>string-name</tt></i>}*)])</tt></p><p><tt class="sexp">(open-library
- <i class="replaceable"><tt>base-symbol</tt></i>)</tt></p><p><tt class="sexp">(close-library
- <i class="replaceable"><tt>base-symbol</tt></i>)</tt></p><p><tt class="sexp">(with-open-library
- (<i class="replaceable"><tt>base-symbol</tt></i> |
- <i class="replaceable"><tt>library-name</tt></i>) {<i class="replaceable"><tt>form</tt></i>}*)</tt></p><p><tt class="sexp">(defflibfun
- <i class="replaceable"><tt>function-name</tt></i>
- <i class="replaceable"><tt>base-symbol</tt></i>
- <i class="replaceable"><tt>offset</tt></i> <i class="replaceable"><tt>mask</tt></i>
- <i class="replaceable"><tt>result-type</tt></i>
- {<i class="replaceable"><tt>argument-type</tt></i>}*)</tt></p><p><tt class="sexp">(declare-library-function
- <i class="replaceable"><tt>function-name</tt></i>
- <i class="replaceable"><tt>library-name</tt></i> {<i class="replaceable"><tt>option</tt></i>}*)</tt></p><p><tt class="sexp">(flibcall <i class="replaceable"><tt>function-name</tt></i>
- {<i class="replaceable"><tt>argument</tt></i>}*)</tt></p><p><tt class="sexp">(mlibcall <i class="replaceable"><tt>function-name</tt></i>
- {<i class="replaceable"><tt>argument</tt></i>}*)</tt></p><p><tt class="sexp">(mem-read <i class="replaceable"><tt>address</tt></i>
-  <i class="replaceable"><tt>result-type</tt></i> [<i class="replaceable"><tt>offset</tt></i>])</tt></p><p><tt class="sexp">(mem-write <i class="replaceable"><tt>address</tt></i>
- <i class="replaceable"><tt>type</tt></i> <i class="replaceable"><tt>value</tt></i> [<i class="replaceable"><tt>offset</tt></i>])</tt></p><p><tt class="sexp">(mem-write-vector <i class="replaceable"><tt>address</tt></i>
-  <i class="replaceable"><tt>vector</tt></i> [<i class="replaceable"><tt>offset</tt></i>])</tt></p><p><tt class="sexp">(nzero-pointer-p <i class="replaceable"><tt>value</tt></i>)</tt></p><p>Except for <tt class="function">with-open-library</tt>,
-<tt class="function">declare-library-function</tt> and
-<tt class="function">mlibcall</tt>, all of the above are functions.</p><p>A library contains a collection of functions.  The library is
-referred to by a symbol referred as library-base at the <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>
-level.  This symbol is created in the package <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>.
+objects (you can define a <a href="http://www.lisp.org/HyperSpec/Body/mac_lambda.html" target="_top"><code class="function">LAMBDA</code></a> yourself), name spaces are
+separate.</p><p>The <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> does no tracking of resources.  Use <a href="final.html" title="30.8. Finalization"><code class="function">EXT:FINALIZE</code></a>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-overview"></a>31.4.2. Overview</h3></div></div></div><p>These are the <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> forms:</p><p><code class="code">(declare-library-base
+ <em class="replaceable"><code>keyword-base</code></em> <em class="replaceable"><code>library-name</code></em>)</code></p><p><code class="code">(require-library-functions <em class="replaceable"><code>library-name</code></em>
+ [(:import {<em class="replaceable"><code>string-name</code></em>}*)])</code></p><p><code class="code">(open-library <em class="replaceable"><code>base-symbol</code></em>)</code></p><p><code class="code">(close-library <em class="replaceable"><code>base-symbol</code></em>)</code></p><p><code class="code">(with-open-library (<em class="replaceable"><code>base-symbol</code></em> |
+ <em class="replaceable"><code>library-name</code></em>) {<em class="replaceable"><code>form</code></em>}*)</code></p><p><code class="code">(defflibfun <em class="replaceable"><code>function-name</code></em>
+ <em class="replaceable"><code>base-symbol</code></em>
+ <em class="replaceable"><code>offset</code></em> <em class="replaceable"><code>mask</code></em>
+ <em class="replaceable"><code>result-type</code></em>
+ {<em class="replaceable"><code>argument-type</code></em>}*)</code></p><p><code class="code">(declare-library-function
+ <em class="replaceable"><code>function-name</code></em>
+ <em class="replaceable"><code>library-name</code></em> {<em class="replaceable"><code>option</code></em>}*)</code></p><p><code class="code">(flibcall <em class="replaceable"><code>function-name</code></em>
+ {<em class="replaceable"><code>argument</code></em>}*)</code></p><p><code class="code">(mlibcall <em class="replaceable"><code>function-name</code></em>
+ {<em class="replaceable"><code>argument</code></em>}*)</code></p><p><code class="code">(mem-read <em class="replaceable"><code>address</code></em>
+  <em class="replaceable"><code>result-type</code></em> [<em class="replaceable"><code>offset</code></em>])</code></p><p><code class="code">(mem-write <em class="replaceable"><code>address</code></em> <em class="replaceable"><code>type</code></em> <em class="replaceable"><code>value</code></em>
+ [<em class="replaceable"><code>offset</code></em>])</code></p><p><code class="code">(mem-write-vector <em class="replaceable"><code>address</code></em>
+  <em class="replaceable"><code>vector</code></em> [<em class="replaceable"><code>offset</code></em>])</code></p><p><code class="code">(nzero-pointer-p <em class="replaceable"><code>value</code></em>)</code></p><p>Except for <code class="function">with-open-library</code>,
+<code class="function">declare-library-function</code> and
+<code class="function">mlibcall</code>, all of the above are functions.</p><p>A library contains a collection of functions.  The library is
+referred to by a symbol referred as library-base at the <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>
+level.  This symbol is created in the package <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>.
 The link between this symbol and the OS-level library name is
-established by <tt class="function">declare-library-base</tt>.  To avoid
+established by <code class="function">declare-library-base</code>.  To avoid
 multiple package conflicts, this and only this function requires the
 symbol-name to be in the <a href="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-3.html" target="_top"><strong class="package">“<span class="quote">KEYWORD</span>”</strong></a> package. The function returns the
-library-base.</p><p>A library may be opened by <tt class="function">open-library</tt> and
- closed by <tt class="function">close-library</tt>. An opened library must be
- closed. <tt class="function">with-open-library</tt> is provided to
+library-base.</p><p>A library may be opened by <code class="function">open-library</code> and
+ closed by <code class="function">close-library</code>. An opened library must be
+ closed. <code class="function">with-open-library</code> is provided to
  automatically close the library for you, thus it is much safer to
  use.</p><p>A function is contained in a library.  Every function is referred
 to by a symbol.  A function is defined through
-<tt class="function">defflibfun</tt> or
-<tt class="function">declare-library-function</tt> by giving the function
-name, the library-base, an offset into the library, a mask (or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>)
+<code class="function">defflibfun</code> or
+<code class="function">declare-library-function</code> by giving the function
+name, the library-base, an offset into the library, a mask (or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a>)
 for register-based library calls, the result type and all
-parameter-types.  <tt class="function">require-library-functions</tt> loads
+parameter-types.  <code class="function">require-library-functions</code> loads
 the complete set of functions defined in a library file. Symbols are
-created in the package <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> and imported into the current
-package.</p><p><tt class="function">flibcall</tt> and <tt class="function">mlibcall</tt>
-call library functions. <tt class="function">mlibcall</tt> is a macro that
+created in the package <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> and imported into the current
+package.</p><p><code class="function">flibcall</code> and <code class="function">mlibcall</code>
+call library functions. <code class="function">mlibcall</code> is a macro that
 does a few checks at macroexpansion time and allows the compiler to
 inline the call, not requiring the foreign function to be defined again
 at load or execution time. The use of this macro is advertised wherever
-possible.</p><p><tt class="function">mem-read</tt> reads an arbitrary address (with
-offset for structure references) and returns the given type.</p><p><tt class="function">mem-write</tt> writes an arbitrary
-address. <tt class="function">mem-write-vector</tt> copies the content of a
-Lisp <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or <tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><tt class="classname">VECTOR</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 8))</tt> into memory.</p><p><tt class="function">nzero-pointer-p</tt> tests for
-non-<tt class="constant">NULL</tt> pointers in all recognized representations
-(<a href="http://www.lisp.org/HyperSpec/Body/syscla_null.html" target="_top"><tt class="classname">NULL</tt></a>, <a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> and <a href="dffi.html#fptr"><tt class="classname">FFI:FOREIGN-POINTER</tt></a>).</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-libs"></a>30.4.3. Foreign Libraries</h3></div></div><div></div></div><p><tt class="function">declare-library-base</tt> ought to be wrapped in an
-<tt class="sexp">(<a href="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html" target="_top"><tt class="function">EVAL-WHEN</tt></a> (compile eval load) ...)</tt>
+possible.</p><p><code class="function">mem-read</code> reads an arbitrary address (with
+offset for structure references) and returns the given type.</p><p><code class="function">mem-write</code> writes an arbitrary
+address. <code class="function">mem-write-vector</code> copies the content of a
+Lisp <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> or <span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><code class="classname">VECTOR</code></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> 8))</code></span> into memory.</p><p><code class="function">nzero-pointer-p</code> tests for
+non-<code class="constant">NULL</code> pointers in all recognized representations
+(<a href="http://www.lisp.org/HyperSpec/Body/syscla_null.html" target="_top"><code class="classname">NULL</code></a>, <a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> and <a href="dffi.html#fptr"><code class="classname">FFI:FOREIGN-POINTER</code></a>).</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-libs"></a>31.4.3. Foreign Libraries</h3></div></div></div><p><code class="function">declare-library-base</code> ought to be wrapped in an
+<code class="code">(<a href="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html" target="_top"><code class="function">EVAL-WHEN</code></a> (compile eval load) ...)</code>
 form and come before any function is referenced, because the library
-base symbol must be known.</p><p><tt class="function">open-library</tt> tries to open the library
+base symbol must be known.</p><p><code class="function">open-library</code> tries to open the library
 referenced by the base symbol.  Therefore it must have been preceded
-with <tt class="function">declare-library-base</tt>.  The call returns <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>
-on failure. <tt class="function">open-library</tt> calls nest.  Every
-successful call must be matched by <tt class="function">close-library</tt>.
-<tt class="function">with-open-library</tt> does this for you and also allows
+with <code class="function">declare-library-base</code>.  The call returns <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a>
+on failure. <code class="function">open-library</code> calls nest.  Every
+successful call must be matched by <code class="function">close-library</code>.
+<code class="function">with-open-library</code> does this for you and also allows
 you to specify the library by name, provided that its base has been
 declared.  It is recommended to use this macro and to reference the
-library by name.</p><p><a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a> will not close libraries for you at program exit.  [A
-previous version did so but now <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> is a module and there are no
-module exit functions.]  Programmers, watch
-<tt class="function">AFFI::*LIBRARIES-ALIST*</tt>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-types"></a>30.4.4. (Foreign) <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> types</h3></div></div><div></div></div><p>The following foreign <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> types are used in <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>.
-They are <span class="emphasis"><em>not</em></span> regular <a href="http://www.lisp.org" target="_top"><span><b class="command">Common Lisp</b></span></a> types or <span><b class="command">CLOS</b></span> classes.
-</p><div class="informaltable"><a id="affi-types-tab"></a><table border="1"><colgroup><col /><col /><col /><col /><col /></colgroup><thead><tr><th align="center"><a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> name</th><th align="center">Lisp equivalent</th><th align="center"><a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><b class="command">C</b></span></a> equivalent</th><th align="center">Comment</th><td class="auto-generated"> </td></tr></thead><tbody><tr><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a></td><td align="center"><span class="type">void</span></td><td align="center">as a result type for functions only</td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">4</span></td><td align="center"><tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 32)</tt></td><td align="center"><span class="type">unsigned long</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">2</span></td><td align="center"><tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 16)</tt></td><td align="center"><span class="type">unsigned short</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">1</span></td><td align="center"><tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 8)</tt></td><td align="center"><span class="type">unsigned char</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">-4</span></td><td align="center"><tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html" target="_top"><tt class="classname">SIGNED-BYTE</tt></a> 32)</tt></td><td align="center"><span class="type">long</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">-2</span></td><td align="center"><tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html" target="_top"><tt class="classname">SIGNED-BYTE</tt></a> 16)</tt></td><td align="center"><span class="type">short</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">-1</span></td><td align="center"><tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html" target="_top"><tt class="classname">SIGNED-BYTE</tt></a> 8)</tt></td><td align="center"><span class="type">signed char</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">0</span></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/typ_boolean.html" target="_top"><tt class="classname">BOOLEAN</tt></a></td><td align="center"><span class="type">BOOL</span></td><td align="center">as a result type for functions only</td><td class="auto-generated"> </td></tr><tr><td align="center"><span class="type">*</span></td><td align="center">opaque</td><td align="center"><span class="type">void*</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><tt class="constant">:EXTERNAL</tt></td><td align="center">opaque</td><td align="center"><span class="type">void*</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or <a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><tt class="classname">VECTOR</tt></a></td><td align="center"><span class="type">char*</span></td><td align="center"> </td><td class="auto-generated"> </td></tr><tr><td align="center"><tt class="constant">:IO</tt></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or <a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><tt class="classname">VECTOR</tt></a></td><td align="center"><span class="type">char*</span></td><td align="center"> </td><td class="auto-generated"> </td></tr></tbody></table></div><p>Objects of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> are copied and passed
-<tt class="constant">NULL</tt>-terminated on the execution stack.  On return, a Lisp string is
-allocated and filled from the address returned (unless <tt class="constant">NULL</tt>).
-Functions with <tt class="constant">:IO</tt> parameters are passed the address of the Lisp
-string or unsigned byte vector. These are not <tt class="constant">NULL</tt>-terminated!
-This is useful for functions like like <a href="http://www.opengroup.org/onlinepubs/007904975/functions/read.html" target="_top"><tt class="function">read</tt></a> which
-do not need an array at a constant address longer than the dynamic
-extent of the call (it is dangerous to define callback functions with
-<tt class="constant">:IO</tt> (or <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a>) type parameters).
-Arguments of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_integer.html" target="_top"><tt class="classname">INTEGER</tt></a> and <a href="dffi.html#fptr"><tt class="classname">FFI:FOREIGN-POINTER</tt></a> are always
-acceptable where a <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or <tt class="constant">:IO</tt> type is specified.</p>
-<!--#ifdef UNICODE--><p>See also <a href="encoding.html#foreign-enc"><tt class="varname">CUSTOM:*FOREIGN-ENCODING*</tt></a>.</p>
+library by name.</p><p><a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> will not close libraries for you at program exit.
+ See <a href="custom-init-fini.html" title="30.1. Customizing CLISP Process&#10;  Initialization and Termination.">Section 30.1, “Customizing <span><strong class="command">CLISP</strong></span> Process
+  Initialization and Termination.”</a> and watch
+ <code class="function">AFFI::*LIBRARIES-ALIST*</code>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-types"></a>31.4.4. (Foreign) <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><strong class="command">C</strong></span></a> types</h3></div></div></div><p>The following foreign <a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><strong class="command">C</strong></span></a> types are used in <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>.
+They are <span class="strong"><strong>not</strong></span> regular <a href="http://www.lisp.org" target="_top"><span><strong class="command">Common Lisp</strong></span></a> types or <a href="http://www.lisp.org/HyperSpec/Body/chap-7.html" target="_top"><span><strong class="command">CLOS</strong></span></a> classes.
+</p><div class="informaltable"><a id="affi-types-tab"></a><table border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th align="center"><a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> name</th><th align="center">Lisp equivalent</th><th align="center"><a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_top"><span><strong class="command">C</strong></span></a> equivalent</th><th align="center">Comment</th></tr></thead><tbody><tr><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a></td><td align="center"><span class="type">void</span></td><td align="center">as a result type for functions only</td></tr><tr><td align="center"><span class="type">4</span></td><td align="center"><span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> 32)</code></span></td><td align="center"><span class="type">unsigned long</span></td><td align="center"> </td></tr><tr><td align="center"><span class="type">2</span></td><td align="center"><span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> 16)</code></span></td><td align="center"><span class="type">unsigned short</span></td><td align="center"> </td></tr><tr><td align="center"><span class="type">1</span></td><td align="center"><span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> 8)</code></span></td><td align="center"><span class="type">unsigned char</span></td><td align="center"> </td></tr><tr><td align="center"><span class="type">-4</span></td><td align="center"><span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html" target="_top"><code class="classname">SIGNED-BYTE</code></a> 32)</code></span></td><td align="center"><span class="type">long</span></td><td align="center"> </td></tr><tr><td align="center"><span class="type">-2</span></td><td align="center"><span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html" target="_top"><code class="classname">SIGNED-BYTE</code></a> 16)</code></span></td><td align="center"><span class="type">short</span></td><td align="center"> </td></tr><tr><td align="center"><span class="type">-1</span></td><td align="center"><span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/typ_signed-byte.html" target="_top"><code class="classname">SIGNED-BYTE</code></a> 8)</code></span></td><td align="center"><span class="type">signed char</span></td><td align="center"> </td></tr><tr><td align="center"><span class="type">0</span></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/typ_boolean.html" target="_top"><code class="classname">BOOLEAN</code></a></td><td align="center"><span class="type">BOOL</span></td><td align="center">as a result type for functions only</td></tr><tr><td align="center"><span class="type">*</span></td><td align="center">opaque</td><td align="center"><span class="type">void*</span></td><td align="center"> </td></tr><tr><td align="center"><code class="constant">:EXTERNAL</code></td><td align="center">opaque</td><td align="center"><span class="type">void*</span></td><td align="center"> </td></tr><tr><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> or <a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><code class="classname">VECTOR</code></a></td><td align="center"><span class="type">char*</span></td><td align="center"> </td></tr><tr><td align="center"><code class="constant">:IO</code></td><td align="center"><a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> or <a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><code class="classname">VECTOR</code></a></td><td align="center"><span class="type">char*</span></td><td align="center"> </td></tr></tbody></table></div><p>Objects of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> are copied and passed
+<code class="constant">NULL</code>-terminated on the execution stack.  On return, a Lisp string is
+allocated and filled from the address returned (unless <code class="constant">NULL</code>).
+Functions with <code class="constant">:IO</code> parameters are passed the address of the Lisp
+string or unsigned byte vector. These are not <code class="constant">NULL</code>-terminated!
+This is useful for functions like like <a href="http://www.opengroup.org/onlinepubs/007904975/functions/read.html" target="_top"><code class="function">read</code></a> which do not need an
+array at a constant address longer than the dynamic extent of the call
+(it is dangerous to define callback functions with <code class="constant">:IO</code> - or
+<a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> - type parameters).
+Arguments of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_integer.html" target="_top"><code class="classname">INTEGER</code></a> and <a href="dffi.html#fptr"><code class="classname">FFI:FOREIGN-POINTER</code></a> are always
+acceptable where a <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> or <code class="constant">:IO</code> type is specified.</p>
+<!--#ifdef UNICODE-->
+<p>See also <a href="encoding.html#foreign-enc" class="olink"><code class="varname">CUSTOM:*FOREIGN-ENCODING*</code></a>.</p>
 <!--#endif-->
 <p>To meet the design goals, predefined types and objects were
 used. As such, pointers were represented as integers. Now that there is
-the <a href="dffi.html#fptr"><tt class="classname">FFI:FOREIGN-POINTER</tt></a> type, both representations may be used on input.
+the <a href="dffi.html#fptr"><code class="classname">FFI:FOREIGN-POINTER</code></a> type, both representations may be used on input.
 The pointer type should be therefore considered as opaque.
-Use <tt class="function">nzero-pointer-p</tt> for <tt class="constant">NULL</tt> tests.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-functions"></a>30.4.5. Foreign functions</h3></div></div><div></div></div><p>Foreign Functions are declared either through
-<tt class="function">defflibfun</tt> or
-<tt class="function">declare-library-function</tt>.  The former is closer to
+Use <code class="function">nzero-pointer-p</code> for <code class="constant">NULL</code> tests.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-functions"></a>31.4.5. Foreign functions</h3></div></div></div><p>Foreign Functions are declared either through
+<code class="function">defflibfun</code> or
+<code class="function">declare-library-function</code>.  The former is closer to
 the low-level implementation of the interface, the latter is closer to
-the other <a href="dffi.html" title="30.3. Extensions-2.3. The Foreign Function Call Facility"><strong class="package">“<span class="quote">FFI</span>”</strong></a>.</p><p><tt class="function">defflibfun</tt> requires the library base symbol
+the other <a href="dffi.html" title="31.3. The Foreign Function Call Facility"><strong class="package">“<span class="quote">FFI</span>”</strong></a>.</p><p><code class="function">defflibfun</code> requires the library base symbol
 and register mask to be specified,
-<tt class="function">declare-library-function</tt> requires the library name
-and computes the mask from the declaration of the arguments.</p><p>The value of mask is implementation-dependent.</p><p>The <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> type <tt class="literal">0</tt> is only acceptable as a
-function result type and yields either <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><tt class="constant">T</tt></a> or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a>. The difference
-between <tt class="function">*</tt> and <tt class="constant">:EXTERNAL</tt> is the following:
-<tt class="function">*</tt> uses integers, <tt class="constant">:EXTERNAL</tt> uses
-<a href="dffi.html#fptr"><tt class="classname">FFI:FOREIGN-POINTER</tt></a> as function result-type (except from <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><tt class="constant">NIL</tt></a> for a
-<tt class="constant">NULL</tt> pointer) and refuses objects of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or
-<tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><tt class="classname">VECTOR</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 8))</tt> as input.  Thus <tt class="constant">:EXTERNAL</tt> provides some security
-on the input and the ability to use <a href="final.html" title="29.7. Extensions-1.7. Finalization"><tt class="function">EXT:FINALIZE</tt></a> for resource-tracking on
-the output side.</p><p><tt class="sexp">(declare-library-function <i class="replaceable"><tt>name</tt></i>
- <i class="replaceable"><tt>library-name</tt></i> {<i class="replaceable"><tt>option</tt></i>}*)</tt>
+<code class="function">declare-library-function</code> requires the library name
+and computes the mask from the declaration of the arguments.</p><p>The value of mask is implementation-dependent.</p><p>The <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> type <code class="literal">0</code> is only acceptable as a
+function result type and yields either <a href="http://www.lisp.org/HyperSpec/Body/convar_t.html" target="_top"><code class="constant">T</code></a> or <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a>. The difference
+between <code class="function">*</code> and <code class="constant">:EXTERNAL</code> is the following:
+<code class="function">*</code> uses integers, <code class="constant">:EXTERNAL</code> uses
+<a href="dffi.html#fptr"><code class="classname">FFI:FOREIGN-POINTER</code></a> as function result-type (except from <a href="http://www.lisp.org/HyperSpec/Body/convar_nil.html" target="_top"><code class="constant">NIL</code></a> for a
+<code class="constant">NULL</code> pointer) and refuses objects of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> or
+<span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><code class="classname">VECTOR</code></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> 8))</code></span> as input.  Thus <code class="constant">:EXTERNAL</code> provides some security
+on the input and the ability to use <a href="final.html" title="30.8. Finalization"><code class="function">EXT:FINALIZE</code></a> for resource-tracking on
+the output side.</p><p><code class="code">(declare-library-function <em class="replaceable"><code>name</code></em> <em class="replaceable"><code>library-name</code></em>
+ {<em class="replaceable"><code>option</code></em>}*)</code>
 
-</p><div class="variablelist"><dl><dt><i class="replaceable"><tt>option</tt></i> ::==</dt><dd><div class="informaltable"><a id="affi-dec-lib-fun-opt-bnf"></a><table border="1"><colgroup><col /><col /></colgroup><tbody><tr><td align="left"> </td><td align="left"><tt class="sexp">(:offset
-    <i class="replaceable"><tt>library-offset</tt></i>)</tt></td></tr><tr><td align="left">|</td><td align="left"><tt class="sexp">(<tt class="constant">:ARGUMENTS</tt>
-    {(<i class="replaceable"><tt>argument</tt></i> <i class="replaceable"><tt><a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>-type</tt></i>
-      <i class="replaceable"><tt>register</tt></i>)}*)</tt></td></tr><tr><td align="left">|</td><td align="left"><tt class="sexp">(:return-type
-    <i class="replaceable"><tt><a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>-type</tt></i>)</tt></td></tr></tbody></table></div></dd><dt><i class="replaceable"><tt>register</tt></i> ::==</dt><dd><tt class="constant">:d0</tt> | <tt class="constant">:d1</tt>
- | ... | <tt class="constant">:d7</tt> | <tt class="constant">:a0</tt> | ... |
- <tt class="constant">:a6</tt></dd></dl></div><p>
+</p><div class="variablelist"><dl><dt><em class="replaceable"><code>option</code></em> ::==</dt><dd><div class="informaltable"><a id="affi-dec-lib-fun-opt-bnf"></a><table border="1"><colgroup><col /><col /></colgroup><tbody><tr><td align="left"> </td><td align="left"><code class="code">(:offset
+    <em class="replaceable"><code>library-offset</code></em>)</code></td></tr><tr><td align="left">|</td><td align="left"><code class="code">(<code class="constant">:ARGUMENTS</code>
+    {(<em class="replaceable"><code>argument</code></em> <em class="replaceable"><code><a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>-type</code></em>
+      <em class="replaceable"><code>register</code></em>)}*)</code></td></tr><tr><td align="left">|</td><td align="left"><code class="code">(:return-type
+    <em class="replaceable"><code><a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>-type</code></em>)</code></td></tr></tbody></table></div></dd><dt><em class="replaceable"><code>register</code></em> ::==</dt><dd><code class="constant">:d0</code> | <code class="constant">:d1</code>
+ | ... | <code class="constant">:d7</code> | <code class="constant">:a0</code> | ... |
+ <code class="constant">:a6</code></dd></dl></div><p>
 
 declares a named library function for further reference through
-<tt class="function">flibcall</tt> and <tt class="function">mlibcall</tt>.</p><p><tt class="function">mlibcall</tt> should be the preferred way of
+<code class="function">flibcall</code> and <code class="function">mlibcall</code>.</p><p><code class="function">mlibcall</code> should be the preferred way of
 calling foreign functions (when they are known at compile-time) as
 macroexpansion-time checks may be performed and the call can be sort of
-inlined.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-memory-access"></a>30.4.6. Memory access</h3></div></div><div></div></div><p><tt class="sexp">(affi:mem-read <i class="replaceable"><tt>address</tt></i> <i class="replaceable"><tt>type</tt></i>
-  <i class="replaceable"><tt>offset</tt></i>)</tt> can read 8, 16 and 32 bit
-signed or unsigned integers (<a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> types <span class="type">-4</span>,
+inlined.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-memory-access"></a>31.4.6. Memory access</h3></div></div></div><p><code class="code">(affi:mem-read <em class="replaceable"><code>address</code></em> <em class="replaceable"><code>type</code></em>
+  <em class="replaceable"><code>offset</code></em>)</code> can read 8, 16 and 32 bit
+signed or unsigned integers (<a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> types <span class="type">-4</span>,
 <span class="type">-2</span>, <span class="type">-1</span>, <span class="type">1</span>, <span class="type">2</span>,
-<span class="type">4</span>), a pointer (<span class="type">*</span>), a <tt class="constant">NULL</tt>-terminated
+<span class="type">4</span>), a pointer (<span class="type">*</span>), a <code class="constant">NULL</code>-terminated
 string (<span class="type">string</span>) or, if the type argument is of type
-<a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or <tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><tt class="classname">VECTOR</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 8))</tt>, it can fill this vector.
-<tt class="constant">:EXTERNAL</tt> is not an acceptable type as no object can be created by
-using <tt class="function">affi:mem-read</tt>.</p><p><tt class="sexp">(affi:mem-write <i class="replaceable"><tt>address</tt></i> <i class="replaceable"><tt>type</tt></i> <i class="replaceable"><tt>value</tt></i>
-[<i class="replaceable"><tt>offset</tt></i>])</tt> writes integers (<a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>
+<a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> or <span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><code class="classname">VECTOR</code></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> 8))</code></span>, it can fill this vector.
+<code class="constant">:EXTERNAL</code> is not an acceptable type as no object can be created by
+using <code class="function">affi:mem-read</code>.</p><p><code class="code">(affi:mem-write <em class="replaceable"><code>address</code></em> <em class="replaceable"><code>type</code></em> <em class="replaceable"><code>value</code></em>
+[<em class="replaceable"><code>offset</code></em>])</code> writes integers (<a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a>
 type <span class="type">-4</span>, <span class="type">-2</span>, <span class="type">-1</span>, <span class="type">1</span>,
 <span class="type">2</span> and <span class="type">4</span>) or pointer values (type
-<span class="type">*</span>), but not vectors to the specified memory address.</p><p><tt class="sexp">(affi:mem-write-vector <i class="replaceable"><tt>address</tt></i>
-  <i class="replaceable"><tt>vector</tt></i> [<i class="replaceable"><tt>offset</tt></i>])</tt> can write
-memory from the given vector (of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><tt class="classname">STRING</tt></a> or <tt class="type">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><tt class="classname">VECTOR</tt></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><tt class="classname">UNSIGNED-BYTE</tt></a> 8))</tt>).
-</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-func-def"></a>30.4.7. Function Definition Files</h3></div></div><div></div></div><p><tt class="function">affi:require-library-functions</tt> will <a href="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html" target="_top"><tt class="function">REQUIRE</tt></a> a
-file of name derived from thelibrary name and with type
-<tt class="filename">affi</tt>. It may be used to import all names into the
+<span class="type">*</span>), but not vectors to the specified memory address.</p><p><code class="code">(affi:mem-write-vector <em class="replaceable"><code>address</code></em>
+  <em class="replaceable"><code>vector</code></em> [<em class="replaceable"><code>offset</code></em>])</code> can write
+memory from the given vector (of type <a href="http://www.lisp.org/HyperSpec/Body/syscla_string.html" target="_top"><code class="classname">STRING</code></a> or <span class="type"><code class="literal">(<a href="http://www.lisp.org/HyperSpec/Body/syscla_vector.html" target="_top"><code class="classname">VECTOR</code></a> (<a href="http://www.lisp.org/HyperSpec/Body/typ_unsigned-byte.html" target="_top"><code class="classname">UNSIGNED-BYTE</code></a> 8))</code></span>).
+</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-func-def"></a>31.4.7. Function Definition Files</h3></div></div></div><p><code class="function">affi:require-library-functions</code> will <a href="http://www.lisp.org/HyperSpec/Body/fun_providecm_require.html" target="_top"><code class="function">REQUIRE</code></a> a
+file of name derived from the library name and with type
+<code class="filename">affi</code>. It may be used to import all names into the
 current package or only a given subset identified by string names, using
-the <tt class="constant">:import</tt> keyword (recommended use).
+the <code class="constant">:import</code> keyword (recommended use).
 Some definition files for standard Amiga libraries are provided.
-See <a href="affi.html#affi-ex-1-predefined" title="Example 30.13. Using a predefined library function file">Example 30.13, “Using a predefined library function file”</a> below.</p><p>As <tt class="function">affi:require-library-functions</tt> loads a
+See <a href="affi.html#affi-ex-1-predefined" title="Example 31.11. Using a predefined library function file">Example 31.11, “Using a predefined library function file”</a> below.</p><p>As <code class="function">affi:require-library-functions</code> loads a
 global file which you, the programmer, may have not defined, you may
 consider declaring every function yourself to be certain what the return
 and argument types are.
-See <a href="affi.html#affi-ex-4-sample" title="Example 30.16. Some sample function definitions">Example 30.16, “Some sample function definitions”</a> below.</p><p>The file <tt class="filename">read-fd.lisp</tt> defines the function
-<tt class="function">make-partial-fd-file</tt> with which the provided
-<tt class="filename">.affi</tt> files have been prepared from the original
-Amiga FD files (located in the directory <tt class="filename">FD:</tt>).
+See <a href="affi.html#affi-ex-4-sample" title="Example 31.14. Some sample function definitions">Example 31.14, “Some sample function definitions”</a> below.</p><p>The file <code class="filename">read-fd.lisp</code> defines the function
+<code class="function">make-partial-fd-file</code> with which the provided
+<code class="filename">.affi</code> files have been prepared from the original
+Amiga FD files (located in the directory <code class="filename">FD:</code>).
 They must still be edited as the function cannot know whether a function
-accepts a <tt class="function">*</tt>, <tt class="constant">:IO</tt>,
-<tt class="function">string</tt> or <tt class="constant">:EXTERNAL</tt> argument and because files
-in <tt class="filename">FD:</tt> only contain a register specification, not
-the width of integer arguments (<tt class="literal">-4</tt>,
-<tt class="literal">-2</tt>, <tt class="literal">-1</tt>, <tt class="literal">1</tt>,
-<tt class="literal">2</tt>, or <tt class="literal">4</tt>).</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-hints"></a>30.4.8. Hints</h3></div></div><div></div></div><p>By using appropriate <a href="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html" target="_top"><tt class="function">EVAL-WHEN</tt></a> forms for
-<tt class="function">affi:declare-library-base</tt> and
-<tt class="function">affi:require-library-functions</tt> and not using
-<tt class="function">affi:flibcall</tt>, it is possible to write code that
+accepts a <code class="function">*</code>, <code class="constant">:IO</code>,
+<code class="function">string</code> or <code class="constant">:EXTERNAL</code> argument and because files
+in <code class="filename">FD:</code> only contain a register specification, not
+the width of integer arguments (<code class="literal">-4</code>,
+<code class="literal">-2</code>, <code class="literal">-1</code>, <code class="literal">1</code>,
+<code class="literal">2</code>, or <code class="literal">4</code>).</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-hints"></a>31.4.8. Hints</h3></div></div></div><p>By using appropriate <a href="http://www.lisp.org/HyperSpec/Body/speope_eval-when.html" target="_top"><code class="function">EVAL-WHEN</code></a> forms for
+<code class="function">affi:declare-library-base</code> and
+<code class="function">affi:require-library-functions</code> and not using
+<code class="function">affi:flibcall</code>, it is possible to write code that
 only loads library function definition files at compile-time.
-See <a href="affi.html#affi-ex-1-predefined" title="Example 30.13. Using a predefined library function file">Example 30.13, “Using a predefined library function file”</a> below.</p><p>Do not rely on <a href="final.html" title="29.7. Extensions-1.7. Finalization"><tt class="function">EXT:FINALIZE</tt></a> to free resources for you, as <a href="http://clisp.cons.org" target="_top"><span><b class="command">CLISP</b></span></a>
-does not call finalizers when it exits, use <a href="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html" target="_top"><tt class="function">UNWIND-PROTECT</tt></a>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-caveats"></a>30.4.9. Caveats</h3></div></div><div></div></div><p>You can consider the library bases being symbols in need of being
-imported from the package <a href="affi.html" title="30.4. Extensions-2.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> originating from a brain-damage, causing
+See <a href="affi.html#affi-ex-1-predefined" title="Example 31.11. Using a predefined library function file">Example 31.11, “Using a predefined library function file”</a> below.</p><p>Do not rely on <a href="final.html" title="30.8. Finalization"><code class="function">EXT:FINALIZE</code></a> to free resources for you, as <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a>
+does not call finalizers when it exits, use <a href="http://www.lisp.org/HyperSpec/Body/speope_unwind-protect.html" target="_top"><code class="function">UNWIND-PROTECT</code></a>.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-caveats"></a>31.4.9. Caveats</h3></div></div></div><p>You can consider the library bases being symbols in need of being
+imported from the package <a href="affi.html" title="31.4. The Amiga Foreign Function Call Facility"><strong class="package">“<span class="quote">AFFI</span>”</strong></a> originating from a brain-damage, causing
 the usual symbol headaches when using foreign functions calls within
 macros.  Luckily, even if the high-level interface (or its
-implementation in <tt class="filename">affi1.lisp</tt>) were to change, the
-low-level part (<tt class="filename">affi.d</tt>) should remain untouched as
-all it knows are <a href="http://www.lisp.org/HyperSpec/Body/syscla_integer.html" target="_top"><tt class="classname">INTEGER</tt></a>s and <a href="dffi.html#fptr"><tt class="classname">FFI:FOREIGN-POINTER</tt></a>s, no <a href="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html" target="_top"><tt class="classname">SYMBOL</tt></a>s.
+implementation in <code class="filename">affi1.lisp</code>) were to change, the
+low-level part (<code class="filename">affi.d</code>) should remain untouched as
+all it knows are <a href="http://www.lisp.org/HyperSpec/Body/syscla_integer.html" target="_top"><code class="classname">INTEGER</code></a>s and <a href="dffi.html#fptr"><code class="classname">FFI:FOREIGN-POINTER</code></a>s, no <a href="http://www.lisp.org/HyperSpec/Body/syscla_symbol.html" target="_top"><code class="classname">SYMBOL</code></a>s.
 The difficulty is just to get the library base value at run-time.
-Feel free to suggest enhancements to this facility!</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-examples"></a>30.4.10. Examples</h3></div><div><h4 class="subtitle">NB: These examples are somewhat specific to the Amiga.</h4></div></div><div></div></div><div class="example"><a id="affi-ex-1-predefined"></a><p class="title"><b>Example 30.13. Using a predefined library function file</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target="_top"><tt class="function">DEFPACKAGE</tt></a> "AFFI-TEST" (:use "LISP" "AFFI"))
-(<a href="http://www.lisp.org/HyperSpec/Body/mac_in-package.html" target="_top"><tt class="function">IN-PACKAGE</tt></a> "AFFI-TEST")
+Feel free to suggest enhancements to this facility!</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="affi-examples"></a>31.4.10. Examples</h3></div></div></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>These examples are somewhat specific to the
+  Amiga.</p></div><div class="example"><a id="affi-ex-1-predefined"></a><p class="title"><b>Example 31.11. Using a predefined library function file</b></p><pre class="programlisting">
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target="_top"><code class="function">DEFPACKAGE</code></a> "AFFI-TEST" (:use <a href="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html" target="_top"><strong class="package">“<span class="quote">COMMON-LISP</span>”</strong></a> "AFFI"))
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_in-package.html" target="_top"><code class="function">IN-PACKAGE</code></a> "AFFI-TEST")
 
 ;; SysBase is the conventional name for exec.library
 ;; It is only enforced by the file loaded by REQUIRE-LIBRARY-FUNCTIONS
@@ -184,18 +182,17 @@ Feel free to suggest enhancements to this facility!</p></div><div class="section
 
 ;; using only MLIBCALL allows not to load definitions at load-time
 (eval-when (compile eval)
-  (require-library-functions "exec.library"
-    :import '("FindTask")))
+  (require-library-functions "exec.library" :import '("FindTask")))
 
 (with-open-library ("exec.library")
   (print (mlibcall FindTask 0)))
-</pre></td></tr></table><p>
+</pre><p>
 
 This file can be used in interpreted and compiled mode.
 Compiled, it will have inlined the library function calls.
-</p></div><div class="example"><a id="affi-ex-2-flibcall"></a><p class="title"><b>Example 30.14. Using flibcall</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target="_top"><tt class="function">DEFPACKAGE</tt></a> "AFFI-TEST" (:use "LISP" "AFFI"))
-(<a href="http://www.lisp.org/HyperSpec/Body/mac_in-package.html" target="_top"><tt class="function">IN-PACKAGE</tt></a> "AFFI-TEST")
+</p></div><div class="example"><a id="affi-ex-2-flibcall"></a><p class="title"><b>Example 31.12. Using flibcall</b></p><pre class="programlisting">
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target="_top"><code class="function">DEFPACKAGE</code></a> "AFFI-TEST" (:use <a href="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html" target="_top"><strong class="package">“<span class="quote">COMMON-LISP</span>”</strong></a> "AFFI"))
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_in-package.html" target="_top"><code class="function">IN-PACKAGE</code></a> "AFFI-TEST")
 
 (eval-when (compile eval load)
   ;; keyword avoids name conflicts
@@ -208,9 +205,9 @@ Compiled, it will have inlined the library function calls.
 (unless (open-library 'SysBase) (error "No library for SysBase"))
 (flibcall (if t 'FindTask 'Debug) 0)
 (close-library 'SysBase)
-</pre></td></tr></table></div><div class="example"><a id="affi-ex-3-dynamic"></a><p class="title"><b>Example 30.15. Be fully dynamic, defining library bases ourselves</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
-(<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target="_top"><tt class="function">DEFPACKAGE</tt></a> "AFFI-TEST" (:use "LISP" "AFFI"))
-(<a href="http://www.lisp.org/HyperSpec/Body/mac_in-package.html" target="_top"><tt class="function">IN-PACKAGE</tt></a> "AFFI-TEST")
+</pre></div><div class="example"><a id="affi-ex-3-dynamic"></a><p class="title"><b>Example 31.13. Be fully dynamic, defining library bases ourselves</b></p><pre class="programlisting">
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_defpackage.html" target="_top"><code class="function">DEFPACKAGE</code></a> "AFFI-TEST" (:use <a href="http://www.lisp.org/HyperSpec/Body/sec_11-1-2-1.html" target="_top"><strong class="package">“<span class="quote">COMMON-LISP</span>”</strong></a> "AFFI"))
+(<a href="http://www.lisp.org/HyperSpec/Body/mac_in-package.html" target="_top"><code class="function">IN-PACKAGE</code></a> "AFFI-TEST")
 
 (eval-when (compile eval load)
   (defvar mylib (declare-library-base :foobase "foo.library")))
@@ -222,7 +219,7 @@ Compiled, it will have inlined the library function calls.
   (when (open-library mylib)
     (list (mlibcall foo1 name) (flibcall 'foo2 name 123213))
     (close-library mylib)))
-</pre></td></tr></table></div><div class="example"><a id="affi-ex-4-sample"></a><p class="title"><b>Example 30.16. Some sample function definitions</b></p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+</pre></div><div class="example"><a id="affi-ex-4-sample"></a><p class="title"><b>Example 31.14. Some sample function definitions</b></p><pre class="programlisting">
 (defflibfun 'FindTask 'SysBase -294 #xA '* 'string)
 (eval-library-function FindTask "exec.library"
   (:offset -294)
@@ -242,6 +239,6 @@ Compiled, it will have inlined the library function calls.
   (defflibfun 'SetVar 'DosBase -900 #x5432 0 'string 'string -4 4))
 (defun setvar (name value)
   (with-open-library (DosBase)
-    ;; length of -1 means find length of <tt class="constant">NULL</tt>-terminated-string
+    ;; length of -1 means find length of <code class="constant">NULL</code>-terminated-string
     (mlibcall SetVar name value -1 GVF_LOCAL_ONLY)))
-</pre></td></tr></table></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dffi.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="platform.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="socket.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">30.3. Extensions-2.3. The Foreign Function Call Facility </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 30.5. Extensions-2.5. Socket Streams</td></tr></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=1355&amp;amp;type=2" width="125" height="37" alt="[SourceForge]" /></a></td></tr></table></div></body></html>
+</pre></div></div></div><div class="bookinfo"><hr width="100%" /><table width="100%" summary="impnotes meta info"><th><td align="left">These notes document <a href="http://clisp.cons.org" target="_top"><span><strong class="command">CLISP</strong></span></a> version 2.34.</td><td align="right">Last modified: 2005-07-20</td></th></table></div><div class="custom-footer"><hr width="100%" /><table width="100%"><tr><td align="left"><a href="http://clisp.cons.org"><img src="clisp.png" width="48" height="48" alt="[CLISP home]" /></a></td><td align="center"><a href="http://www.gnu.org"><img src="http://www.gnu.org/graphics/gnubanner.jpg" width="468" height="60" alt="[Come and see what GNU creates for YOU]" /></a></td><td align="right"><a href="http://sourceforge.net"><img width="125" height="37" alt="[SourceForge]" src="http://sflogo.sourceforge.net/sflogo.php?group_id=1355&amp;type=2&amp;page=affi" /></a></td></tr></table></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dffi.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ext-platform.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="socket.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">31.3. The Foreign Function Call Facility </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 31.5. Socket Streams</td></tr></table></div></body></html>
