@@ -95,6 +95,13 @@ members to recruit new members, with the following incentives:</p>
  <li>Bring the CLISP build infrastructure up to the latest autoconf.
   Specifically, eliminate the annoying warnings produced by the top-level
   <code>make -f Makefile.devel check-configures</code><p><br/></p></li>
+ <li>Use <code>libtool</code> to produce <code>lisp.so</code>
+  (<code>lisp.dll</code> on woe32) instead of <code>lisp.run</code>
+  (<code>lisp.exe</code> on woe32).<p><br/></p></li>
+ <li>Use <code>dlopen</code> (<code>LoadLibrary</code> on woe32)
+  instead of <code>exec</code> (<code>CreateProcess</code> on woe32)
+  to start a linking set in <code>clisp</code> (<code>clisp.exe</code>
+  on woe32).<p><br/></p></li>
 </ol>
 
 
