@@ -160,8 +160,8 @@
   <dd><ul>
     <li><a href="http://packages.debian.org/unstable/interpreters/clisp.html"
            >Debian</a></li>
-    <li><a href="http://atrpms.net/name/clisp/">Red Hat</a>,
-     <a href="https://bugzilla.fedora.us/show_bug.cgi?id=843">Fedora</a></li>
+    <li><a href="http://cvs.fedora.redhat.com/lxr/extras/source/devel/clisp/"
+           >Fedora/Extras</a></li>
     <li><a href="http://www.novell.com/products/linuxpackages/professional/clisp.html">SuSE</a></li>
     <li><a href="http://packages.gentoo.org/packages/?category=dev-lisp;name=clisp">Gentoo</a></li>
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
