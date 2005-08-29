@@ -34,7 +34,7 @@
 
 <table cellspacing="5" border="15">
 <tr><th><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/clisp/src/NEWS?rev=clisp_2_34-2005-07-20">Current version</a>:</th>
- <th>2.34 (2005-07-20)</th></tr></table>
+ <th>2.35 (2005-08-29)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
  <col width="70%"/><col width="30%"/>
@@ -62,7 +62,7 @@
    <a href="http://www.tcsh.org/">tcsh</a>!</dd>
  <dt><strong><a href="resources.html">Common Lisp on the Web</a></strong></dt>
   <dd>information and software</dd>
- <dt><strong><a href="faq.html">CLISP FAQ list</a></strong></dt>
+ <dt><strong><a href="impnotes/faq.html">CLISP FAQ list</a></strong></dt>
   <dd>Frequently Asked Questions about CLISP, with answers.</dd>
  <dt><strong><a href="http://sourceforge.net/projects/clisp"
                 >SourceForge Project Home</a></strong></dt>
@@ -272,7 +272,7 @@
  <td align="center">
   <a href=""></a>
 </td></tr>
-<tr><th colspan="2"><a href="faq.html#help">Please direct all
+<tr><th colspan="2"><a href="impnotes/faq.html#faq-help">Please direct all
    CLISP-related issues to an appropriate place and <em>not</em> to the
    developers.</a>
 </th></tr></table>
