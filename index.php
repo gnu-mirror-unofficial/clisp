@@ -85,9 +85,9 @@
  <dt><strong><a href="http://clisp.cons.org">CLISP</a> elsewhere</strong></dt>
   <dd><ul>
    <li><a href="http://www.gnu.org">GNU</a>
-       <a href="http://www.gnu.org/directory/">Free Software Directory</a>
-     - <a href="http://www.gnu.org/directory/CLISP.html">CLISP</a> and
-       <a href="http://www.gnu.org/search/fsd-search.py?q=lisp">Lisp</a></li>
+       <a href="http://directory.gnu.org/">Free Software Directory</a>
+     - <a href="http://directory.gnu.org/CLISP.html">CLISP</a> and
+       <a href="http://directory.fsf.org/devel/prog/LISP/">Lisp</a></li>
    <li><a href="http://www-2.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/0.html">CMU Artificial Intelligence Repository</a>
     (very old but still valuable)
     - <a href="http://www-2.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/lisp/impl/clisp/0.html">CLISP</a> and
@@ -96,7 +96,7 @@
    <li><a href="http://ceu.fi.udc.es/SAL/">Scientific Applications on Linux</a>
     - <a href="http://ceu.fi.udc.es/SAL/F/1/CLISP.html">CLISP</a> and
     <a href="http://ceu.fi.udc.es/SAL/F/1/index.shtml#LISP">Lisp</a></li>
-   <li><a href="http://www2.iro.umontreal.ca/~pinard/po/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
+   <li><a href="http://www.iro.umontreal.ca/translation/registry.cgi?domain=clisp">Help translate CLISP messages into your language!</a></li>
   </ul></dd>
  <dt><strong>Rate CLISP!</strong></dt>
  <dd><table><tr><td>
