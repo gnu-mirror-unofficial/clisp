@@ -115,7 +115,7 @@
       <img src="http://www.programmingpages.com/images/progppages10030.gif"
            alt="vote for CLISP at the Programming Pages"/></a></td>
     <td><form method="post" action="http://www.osdir.com/modules.php?op=modload&amp;name=Downloads&amp;file=index">
-      <fieldset><legend><a href="http://www.osdir.com/Downloads-req-viewdownloaddetails-lid-449-ttitle-CLISP.html">OSDir</a></legend>
+      <fieldset><legend><a href="http://osdir.com/Downloads+index-req-viewdownloaddetails-lid-449-ttitle-CLISP.phtml">OSDir</a></legend>
        <input type="hidden" name="ratinglid" value="449"/>
        <input type="hidden" name="ratinguser" value="outside"/>
        <input type="hidden" name="req" value="addrating"/>
