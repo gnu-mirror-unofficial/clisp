@@ -167,7 +167,7 @@
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
            >ALT</a></li>
     <li><a href="http://archlinux.org/packages.php?id=4178">Arch</a></li>
-    <li><a href="http://www.mandrakesoft.com/products/101/powerpack-plus/packagesDVD?p=media-main-clisp-2.33.2-1mdk.i586.rpm.html">Mandrake</a></li>
+    <li><a href="http://wwwnew.mandriva.com/en/individuals/products/powerpack/packages?p=media-main5-clisp-2.33.2-1mdk.i586.rpm.html">Mandrake</a></li>
     <li><a href="http://www.slackware.com/pb/searchpkg.php?v=current&amp;string=clisp">Slackware</a></li>
     <li><a href="http://packages.ubuntu.com/hoary/interpreters/clisp">Ubuntu</a></li></ul></dd>
  <dt><strong><a href="http://www.bsd.org/">*BSD</a> ports</strong></dt>
