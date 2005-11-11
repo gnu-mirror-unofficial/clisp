@@ -45,7 +45,8 @@
  <dt><strong><a href="propaganda.html">The benefits of Common Lisp and
    CLISP</a></strong></dt>
   <dd>why is ANSI Common Lisp such a great programming environment?</dd>
- <dt><strong><a href="clisp.html">CLISP manual page for UN*X</a></strong></dt>
+ <dt><strong><a href="impnotes/clisp.html">CLISP manual page for
+    UN*X</a></strong></dt>
   <dd>command line options for other platforms are very similar (see
    <code>clisp.html</code> in your build directory or binary distribution)</dd>
  <dt><strong><a href="impnotes.html">CLISP Implementation
