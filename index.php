@@ -316,7 +316,10 @@ Free Documentation License</a></p>
     height="48" alt="[CLISP home]"/></a></td>
  <td align="right"><a href="http://sourceforge.net"><img
      src="http://sflogo.sourceforge.net/sflogo.php?group_id=1355&amp;type=2&amp;page=index"
-     width="125" height="37" alt="SourceForge Logo"/></a></td>
+     width="125" height="37" alt="[SourceForge Logo]"/></a>
+  <a href="http://sourceforge.net/donate/index.php?group_id=1355"><img
+     src="http://images.sourceforge.net/images/project-support.jpg"
+     width="88" height="32" border="0" alt="[Support This Project]"/></a></td>
  <td align="right"><a href="http://validator.w3.org/check/referer"><img
      src="http://www.w3.org/Icons/valid-xhtml10"
      alt="Valid XHTML" height="31" width="88"/></a>
