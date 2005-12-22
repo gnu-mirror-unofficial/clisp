@@ -1,1 +1,5 @@
+# serve lisp files with Content-Encoding of UTF-8
 AddCharset UTF-8 .lisp
+
+# do not treat .map as an IMAP file
+RemoveHandler .map
