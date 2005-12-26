@@ -197,9 +197,10 @@
     <legend><a href="http://www.google.com/search"
                ><img src="http://www.google.com/logos/Logo_40wht.gif"
                      width="128" height="53" alt="Google"/></a></legend>
-    <select name="sitesearch">
+    <select name="sitesearch"><option value="clisp.cons.org/impnotes/">CLISP
+      Implementation Notes</option>
+     <option value="www.lisp.org/HyperSpec/">Common Lisp HyperSpec</option>
      <option value="clisp.cons.org">clisp.cons.org</option>
-     <option value="cons.org">cons.org</option>
      <option value="gnu.org">gnu.org</option>
      <option value="sourceforge.net">sourceforge.net</option>
      <option value="">the whole web</option>
