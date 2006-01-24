@@ -33,8 +33,8 @@
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table cellspacing="5" border="15">
-<tr><th><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/clisp/src/NEWS?rev=clisp_2_37-2006-01-02">Current version</a>:</th>
- <th>2.37 (2006-01-02)</th></tr></table>
+<tr><th><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/clisp/src/NEWS?rev=clisp_2_38-2006-01-24">Current version</a>:</th>
+ <th>2.38 (2006-01-24)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
  <col width="70%"/><col width="30%"/>
