@@ -51,7 +51,7 @@ members to recruit new members, with the following incentives:</p>
 <h3 id="segfault">Segmentation faults</h3>
 
 <p>Any hard crash (segmentation fault, bus error etc) is a bug in CLISP.
- There are no known bugs of this kind at this time.</p>
+ See <a href="http://sourceforge.net/tracker/?group_id=1355&atid=101355&group=segfault">CLISP bug tracker</a>.</p>
 
 
 <h3 id="new">New features</h3>
@@ -96,13 +96,16 @@ members to recruit new members, with the following incentives:</p>
  <li>Bring the CLISP build infrastructure up to the latest autoconf.
   Specifically, eliminate the annoying warnings produced by the top-level
   <code>make -f Makefile.devel check-configures</code><p><br/></p></li>
+ <li>Bring the CLISP build infrastructure up to the latest GNU conventions.
+  Specifically, see <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1467976&group_id=1355&atid=101355">bug report [ 1467976 ]: clisp's configure file does not follow GNU conventions</a>.<p><br/></p></li>
  <li>Use <code>libtool</code> to produce <code>lisp.so</code>
   (<code>lisp.dll</code> on woe32) instead of <code>lisp.run</code>
   (<code>lisp.exe</code> on woe32).<p><br/></p></li>
  <li>Use <code>dlopen</code> (<code>LoadLibrary</code> on woe32)
   instead of <code>exec</code> (<code>CreateProcess</code> on woe32)
   to start a linking set in <code>clisp</code> (<code>clisp.exe</code>
-  on woe32).<p><br/></p></li>
+  on woe32).
+  See also <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=423264&group_id=1355&atid=351355">feature request [ 423264 ]: Embeddable CLISP</a>.<p><br/></p></li>
 </ol>
 
 
