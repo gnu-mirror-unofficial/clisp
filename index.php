@@ -33,7 +33,7 @@
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table cellspacing="5" border="15">
-<tr><th><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/clisp/src/NEWS?rev=clisp_2_38-2006-01-24">Current version</a>:</th>
+<tr><th><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS?revision=clisp_2_38-2006-01-24">Current version</a>:</th>
  <th>2.38 (2006-01-24)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
@@ -72,10 +72,8 @@
         >mailing lists</a></li -->
    <li><a href="http://sourceforge.net/tracker/?group_id=1355&amp;atid=101355"
           >bug reports</a></li>
-   <li><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/"
-          >CVS browsing</a>
-    [<a href="http://cvs.sourceforge.net/cvstarballs/clisp-cvsroot.tar.bz2"
-     >tarball</a>] <strong><a href="http://cvs.sourceforge.net/viewcvs.py/clisp/clisp/src/NEWS?rev=HEAD">development NEWS</a></strong></li>
+   <li><a href="http://clisp.cvs.sourceforge.net/clisp/clisp/">CVS browsing</a>
+    <strong><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">development NEWS</a></strong></li>
    <li><a href="https://savannah.gnu.org/people/?group=clisp">help</a>
     <a href="wanted.html">wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
