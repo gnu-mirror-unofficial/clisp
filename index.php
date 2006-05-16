@@ -50,13 +50,15 @@
   <dd>command line options for other platforms are very similar (see
    <code>clisp.html</code> in your build directory or binary distribution)</dd>
  <dt><strong><a href="impnotes.html">CLISP Implementation
-   Notes</a> <a href="impnotes/">[TOC]</a></strong></dt>
-  <dd>How CLISP implements the <a href="http://www.ansi.org/">ANSI</a>
-   standard <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+INCITS+226%2D1994+%28R1999%29">INCITS 226-1994 (R1999)</a>
-   <cite>"Information Technology - Programming Language - Common
-    Lisp"</cite>, available as the
-   <a href="http://www.lisp.org/HyperSpec/FrontMatter/">Common Lisp
-    HyperSpec</a>.</dd>
+    Notes</a><a href="impnotes/">[TOC]</a></strong></dt>
+ <dd>How CLISP implements the
+  <a href="http://www.ansi.org/"
+     ><acronym title="The American National Standards Institute"
+               >ANSI</acronym></a> standard
+  <a href="http://webstore.ansi.org/ansidocstore/product.asp?sku=ANSI+INCITS+226%2D1994+%28R1999%29">INCITS 226-1994 (R1999)</a>
+  <cite>"Information Technology - Programming Language - Common Lisp"</cite>,
+  available as the <a href="http://www.lisp.org/HyperSpec/FrontMatter/">Common
+   Lisp HyperSpec</a>.</dd>
  <dt><strong><a href="clash.html">CLISP as a login shell</a></strong></dt>
   <dd>You can use CLISP instead of
    <a href="http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html">bash</a> or
@@ -73,7 +75,7 @@
    <li><a href="http://sourceforge.net/tracker/?group_id=1355&amp;atid=101355"
           >bug reports</a></li>
    <li><a href="http://clisp.cvs.sourceforge.net/clisp/clisp/">CVS browsing</a>
-    <strong><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">development NEWS</a></strong></li>
+    [<strong><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">development NEWS</a></strong>]</li>
    <li><a href="https://savannah.gnu.org/people/?group=clisp">help</a>
     <a href="wanted.html">wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
