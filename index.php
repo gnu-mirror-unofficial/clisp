@@ -74,7 +74,7 @@
         >mailing lists</a></li -->
    <li><a href="http://sourceforge.net/tracker/?group_id=1355&amp;atid=101355"
           >bug reports</a></li>
-   <li><a href="http://clisp.cvs.sourceforge.net/clisp/clisp/">CVS browsing</a>
+   <li><a href="http://sourceforge.net/cvs/?group_id=1355">CVS</a>
     [<a href="http://sourceforge.net/docs/E04/#rsync">rsync</a>]
     <strong><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">development NEWS</a></strong></li>
    <li><a href="wanted.html">help wanted</a></li>
