@@ -37,7 +37,7 @@
  <th>2.38 (2006-01-24)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
- <col width="70%"/><col width="30%"/>
+ <!-- col width="70%"/--><!--col width="30%"/-->
  <thead><tr><th>About CLISP</th><th>Get CLISP</th></tr></thead>
 <tr valign="top"><td><dl>
  <dt><strong><a href="summary.html">What is CLISP?</a></strong></dt>
@@ -74,11 +74,10 @@
         >mailing lists</a></li -->
    <li><a href="http://sourceforge.net/tracker/?group_id=1355&amp;atid=101355"
           >bug reports</a></li>
-   <li><a href="http://sourceforge.net/cvs/?group_id=1355">CVS</a>
-    [<a href="http://sourceforge.net/docs/E04/#rsync">rsync</a>]
-    <strong><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">development NEWS</a></strong></li>
    <li><a href="wanted.html">help wanted</a></li>
    <li><a href="http://sourceforge.net/pm/?group_id=1355">tasks</a></li>
+   <li><a href="http://sourceforge.net/tracker/?group_id=1355&amp;atid=351355"
+          >RFEs</a></li>
    <li><a href="https://sourceforge.net/donate/?group_id=1355"
           ><strong>donate</strong></a> -
     <a href=" http://sourceforge.net/export/html_projdonors.php?group_id=1355&amp;show_comments=1">recent donors</a></li>
@@ -189,6 +188,15 @@
                 >Solaris - x86 and Sparc</a></li>
    <li><a href="http://aixpdslib.seas.ucla.edu/packages/clisp.html">AIX</a></li>
  </ul></dd>
+ <dt><strong><a href="http://www.nongnu.org/cvs/">CVS</a>
+   - when you cannot wait for the next release</strong></dt>
+ <dd><ul><li><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">development NEWS</a></li>
+   <li><a href="http://sourceforge.net/cvs/?group_id=1355">check out
+     CLISP source tree from the CVS</a></li>
+   <li><a href="http://clisp.cvs.sourceforge.net/clisp/">Browse CLISP
+     CVS Repository</a></li>
+  <li><a href="http://sourceforge.net/docs/E04/">General SourceForge
+    CVS documentation (rsync, permissions, notification etc)</a></li></ul></dd>
 </dl></td></tr>
 <tr><th colspan="2">Search</th></tr>
 <tr><td colspan="2">
