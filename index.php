@@ -190,8 +190,8 @@
  </ul></dd>
  <dt><strong><a href="http://www.nongnu.org/cvs/">CVS</a>
    - when you cannot wait for the next release</strong></dt>
- <dd><ul><li><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">development NEWS</a></li>
-   <li><a href="http://sourceforge.net/cvs/?group_id=1355">check out
+ <dd><ul><li><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS">Development NEWS</a></li>
+   <li><a href="http://sourceforge.net/cvs/?group_id=1355">Check out
      CLISP source tree from the CVS</a></li>
    <li><a href="http://clisp.cvs.sourceforge.net/clisp/">Browse CLISP
      CVS Repository</a></li>
