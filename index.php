@@ -66,7 +66,10 @@
  <dt><strong><a href="resources.html">Common Lisp on the Web</a></strong></dt>
   <dd>information and software</dd>
  <dt><strong><a href="impnotes/faq.html">CLISP FAQ list</a></strong></dt>
-  <dd>Frequently Asked Questions about CLISP, with answers.</dd>
+ <dd>Frequently Asked Questions about CLISP, with answers, including<ul>
+   <li><a href="impnotes/faq.html#faq-help">How do I ask for help?</a></li>
+   <li><a href="impnotes/faq.html#faq-bugs">How do I report bugs?</a></li>
+ </ul></dd>
  <dt><strong><a href="http://sourceforge.net/projects/clisp"
                 >SourceForge Project Home</a></strong></dt>
   <dd><ul>
