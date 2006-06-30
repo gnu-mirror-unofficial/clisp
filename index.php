@@ -173,8 +173,10 @@
  <dt><strong><a href="http://www.bsd.org/">*BSD</a> ports</strong></dt>
   <dd><ul>
     <li><a href="http://www.freshports.org/lang/clisp/">FreeBSD</a></li>
-    <li><a href="http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/lang/clisp/">NetBSD</a></li>
-    <li><a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/lang/clisp/">OpenBSD</a></li>
+    <li><a href="http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/lang/clisp/">NetBSD
+      and DragonFly BSD</a></li>
+    <li><a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/lang/clisp/"
+           >OpenBSD</a></li>
    </ul></dd>
  <dt><strong><a href="http://fink.sourceforge.net/">Fink</a> -
    Unix software for Mac</strong></dt>
