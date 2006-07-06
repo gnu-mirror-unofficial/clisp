@@ -176,8 +176,9 @@
  <dt><strong><a href="http://www.bsd.org/">*BSD</a> ports</strong></dt>
   <dd><ul>
     <li><a href="http://www.freshports.org/lang/clisp/">FreeBSD</a></li>
-    <li><a href="http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/lang/clisp/">NetBSD
-      and DragonFly BSD</a></li>
+    <li><a href="http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/lang/clisp/"
+           >pkgsrc</a> (<a href="http://www.netbsd.org/">NetBSD</a>
+     and <a href="http://www.dragonflybsd.org/">DragonFly BSD</a>)</li>
     <li><a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/lang/clisp/"
            >OpenBSD</a></li>
    </ul></dd>
@@ -333,7 +334,7 @@ Free Documentation License</a></p>
      width="125" height="37" alt="[SourceForge Logo]"/></a>
   <a href="http://sourceforge.net/donate/index.php?group_id=1355"><img
      src="http://images.sourceforge.net/images/project-support.jpg"
-     width="88" height="32" border="0" alt="[Support This Project]"/></a></td>
+     width="88" height="32" alt="[Support This Project]"/></a></td>
  <td align="right"><a href="http://validator.w3.org/check/referer"><img
      src="http://www.w3.org/Icons/valid-xhtml10"
      alt="Valid XHTML" height="31" width="88"/></a>
