@@ -165,11 +165,11 @@
            >Debian</a></li>
     <li><a href="http://cvs.fedora.redhat.com/lxr/extras/source/devel/clisp/"
            >Fedora/Extras</a></li>
-    <li><a href="http://www.novell.com/products/linuxpackages/professional/clisp.html">SuSE</a></li>
+    <li><a href="http://www.novell.com/products/linuxpackages/suselinux/clisp.html">SuSE</a></li>
     <li><a href="http://packages.gentoo.org/packages/?category=dev-lisp;name=clisp">Gentoo</a></li>
     <li><a href="http://www.altlinux.com/?module=sisyphus&amp;package=clisp"
            >ALT</a></li>
-    <li><a href="http://archlinux.org/packages.php?id=4178">Arch</a></li>
+    <li><a href="http://archlinux.org/packages/search/?q=clisp">Arch</a></li>
     <li><a href="http://wwwnew.mandriva.com/en/individuals/products/powerpack/packages?p=media-main5-clisp-2.33.2-1mdk.i586.rpm.html">Mandrake</a></li>
     <li><a href="http://www.slackware.com/pb/searchpkg.php?v=current&amp;string=clisp">Slackware</a></li>
     <li><a href="http://packages.ubuntu.com/clisp">Ubuntu</a></li></ul></dd>
