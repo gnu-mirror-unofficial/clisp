@@ -33,7 +33,7 @@
 <img src="clisp.png" width="48" height="48" alt="[CLISP Logo]"/></p>
 
 <table cellspacing="5" border="15">
-<tr><th><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS?revision=clisp_2_39-2006-7-16">Current version</a>:</th>
+<tr><th><a href="http://clisp.cvs.sourceforge.net/*checkout*/clisp/clisp/src/NEWS?revision=clisp_2_39-2006-07-16">Current version</a>:</th>
  <th>2.39 (2006-07-16)</th></tr></table>
 
 <table width="100%" cellspacing="5" border="5">
