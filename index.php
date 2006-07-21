@@ -186,6 +186,10 @@
    Unix software for Mac</strong></dt>
  <dd><a href="http://fink.sourceforge.net/pdb/package.php/clisp"
         >CLISP Package</a></dd>
+ <dt><strong><a href="http://www.darwinports.org/">DarwinPorts: open-source
+    software products for the Darwin OS family</a></strong></dt>
+ <dd><a href="http://www.darwinports.org/darwinports/dports/lang/clisp/"
+        >CLISP Package</a></dd>
  <dt><strong><a href="http://cygwin.com/">Cygwin</a> -
    Unix environment for Windows</strong></dt>
  <dd><a href="http://www.cygwin.com/packages/clisp/">CLISP Package</a></dd>
