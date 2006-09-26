@@ -50,7 +50,7 @@
   <dd>command line options for other platforms are very similar (see
    <code>clisp.html</code> in your build directory or binary distribution)</dd>
  <dt><strong><a href="impnotes.html">CLISP Implementation
-    Notes</a><a href="impnotes/">[TOC]</a></strong></dt>
+    Notes</a> <a href="impnotes/">[TOC]</a></strong></dt>
  <dd>How CLISP implements and extends the
   <a href="http://www.ansi.org/"
      ><acronym title="The American National Standards Institute"
