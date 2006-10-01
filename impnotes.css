@@ -1,6 +1,6 @@
 /*      -*- C -*-
  * CLISP implementation notes stylesheets
- * Copyright (C) 2001-2005 by Sam Steingold <sds@gnu.org>
+ * Copyright (C) 2001-2006 by Sam Steingold <sds@gnu.org>
  * Covered by the GNU GPL <http://www.gnu.org/copyleft/gpl.html>
  */
 
@@ -55,9 +55,10 @@ h6 { font-size: 110%; }
 
 /* platform dependencies */
 .plat-dep { background-color: lightcyan; color: darkred; }
+.platform { font-weight: bold; }
 
 /* highlight the FAQ questions */
 .question { background-color: lightyellow; }
 
 /* term in table */
-td, dt span.term { font-weight: bold; }
+td span.term, dt span.term { font-weight: bold; }
